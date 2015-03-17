@@ -16,9 +16,11 @@ public:
 	~CFurnance();
 
 	void Init(int _Number, bool _loaded = false);
+	void Quit();
 	void Render();
 	void CheckThings();
 	SItem Take(SItem _item);     //takes an item and returns the item that had to leave the melting menu (if no item was placed it returns NULL)
+	vector<SItem> GetContent();
 
 
 

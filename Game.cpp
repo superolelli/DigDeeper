@@ -251,6 +251,8 @@ void CGame::CheckMusic()
 			song_played[newMusic] = true;
 
 			g_pTextures->m_musicGame[m_music].play();
+
+			cout << "Now playing music number: " << m_music << endl;
 		}
 	}
 }

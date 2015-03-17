@@ -98,6 +98,7 @@ void TextureLoading::LoadTextures()
 	t_buildingInfo_sword.loadFromFile("Data/Sprites/Building/building_info_sword.png");
 	t_buildingInfo_lantern.loadFromFile("Data/Sprites/Building/building_info_lantern.png");
 	t_buildingInfo_candle.loadFromFile("Data/Sprites/Building/building_info_candle.png");
+	t_buildingInfo_marblewall.loadFromFile("Data/Sprites/Building/building_info_marble_wall.png");
 
 	t_blockTextures_dirt.loadFromFile("Data/Sprites/Objects/Blocks/blocks_texture.png", IntRect(104, 2, 100, 100));
 	t_blockTextures_stone.loadFromFile("Data/Sprites/Objects/Blocks/blocks_texture.png", IntRect(614, 2, 100, 100));
@@ -117,6 +118,7 @@ void TextureLoading::LoadTextures()
 	t_blockTextures_table.loadFromFile("Data/Sprites/Objects/Blocks/table.png");
 	t_blockTextures_lantern.loadFromFile("Data/Sprites/Objects/Blocks/lantern.png");
 	t_blockTextures_marble.loadFromFile("Data/Sprites/Objects/Blocks/marble.png");
+	t_blockTextures_marblewall.loadFromFile("Data/Sprites/Objects/Blocks/marble_wall.png");
 
 	t_blockInventoryTexture_dirt.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/inventory_sprites.png", IntRect(200, 2, 97, 97));
 	t_blockInventoryTexture_stone.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/inventory_sprites.png", IntRect(992, 2, 97, 97));
@@ -156,6 +158,7 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_candle.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/candle_inventory.png");
 	t_blockInventoryTexture_wax.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/wax_inventory.png");
 	t_blockInventoryTexture_marble.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/marble_inventory.png");
+	t_blockInventoryTexture_marblewall.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/marble_wall_inventory.png");
 
 	t_blockLittleTexture_dirt.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(86, 2, 40, 40));
 	t_blockLittleTexture_stone.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(464, 2, 40, 40));
@@ -195,6 +198,7 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_candle.loadFromFile("Data/Sprites/Objects/LittleItems/candle_little.png");
 	t_blockLittleTexture_wax.loadFromFile("Data/Sprites/Objects/LittleItems/wax_little.png");
 	t_blockLittleTexture_marble.loadFromFile("Data/Sprites/Objects/LittleItems/marble_little.png");
+	t_blockLittleTexture_marblewall.loadFromFile("Data/Sprites/Objects/LittleItems/marble_wall_little.png");
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");
 	t_tool_sword.loadFromFile("Data/Sprites/Objects/Tools/sword_carried.png");
@@ -226,6 +230,9 @@ void TextureLoading::LoadTextures()
 	m_musicGame[6].openFromFile("Data/Music/Music8.ogg");
 	m_musicGame[7].openFromFile("Data/Music/Music9.ogg");
 	m_musicGame[8].openFromFile("Data/Music/Music10.ogg");
+
+	for(int i = 0; i < 9; i++)
+		m_musicGame[i].setVolume(50);
 
 	m_goldSound[0].loadFromFile("Data/Sounds/gold1.ogg");
 	m_goldSound[1].loadFromFile("Data/Sounds/gold2.ogg");

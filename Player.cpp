@@ -348,11 +348,11 @@ Vector2f CPlayer::CheckMovement()
 				if(m_fYVel > 0)
 				{
 					m_State.jumping = false;
-					cout <<"Reached ground" << endl;
+				//	cout <<"Reached ground" << endl;
 				}
 
 				m_fYVel = 0;
-				cout <<"Collided in y direction" << endl;
+				//cout <<"Collided in y direction" << endl;
 			}
 		}
 	}
@@ -360,7 +360,7 @@ Vector2f CPlayer::CheckMovement()
 	else
 	{
 		m_State.jumping = true;
-		cout <<"Didn't collide in y direction" << endl;
+		//cout <<"Didn't collide in y direction" << endl;
 	}
 
 

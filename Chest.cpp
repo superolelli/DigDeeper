@@ -6,17 +6,27 @@
 
 CChest::CChest()
 {
-	m_pPanel = NULL;
+	m_pPanel = NULL;	
 }
 
 
 
 CChest::~CChest()
 {
-	SAFE_DELETE(m_pPanel);
+
 }
 
 
+void CChest::Quit()
+{
+	for(int y = 0; y < 5; y++)
+		{
+			for(int x = 0; x < 5; x++)
+			{
+				SAFE_DELETE(m_chest[x][y].thing);
+			}
+		}	
+}
 
 
 void CChest::Init(int _Number, bool _loaded)
@@ -222,6 +232,7 @@ SItem CChest::Take(SItem _item)
 			temp = m_chest[xItem/100][yItem/100];
 
 			m_chest[xItem/100][yItem/100].amount = 0;
+			m_chest[xItem/100][yItem/100].thing = NULL;
 		}
 		else
 		{
@@ -282,4 +293,23 @@ void CChest::TakeThing(SItem _item)
 			}
 		}
 	}
+}
+
+
+
+//returns the content of the chest
+vector<SItem> CChest::GetContent()
+{
+	vector<SItem> items;
+	items.clear();
+
+	for(int y = 0; y < 5; y++)
+	{
+		for(int x = 0; x < 5; x++)
+		{
+			if(m_chest[x][y].amount > 0)
+				items.push_back(m_chest[x][y]);
+		}
+	}
+	return items;
 }

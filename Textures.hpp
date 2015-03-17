@@ -114,6 +114,7 @@ public:
 	Texture t_buildingInfo_sword;
 	Texture t_buildingInfo_lantern;
 	Texture t_buildingInfo_candle;
+	Texture t_buildingInfo_marblewall;
 
 	Texture t_blockTextures_dirt;                     //the dirt textures
 	Texture t_blockTextures_stone;                      //the stone texture
@@ -132,6 +133,7 @@ public:
 	Texture t_blockTextures_table;
 	Texture t_blockTextures_lantern;
 	Texture t_blockTextures_marble;                   //the marble texture
+	Texture t_blockTextures_marblewall;
 	Texture t_blockTextures_noTexture;               //the no_texture texture
 
 	//The inventory pictures of the things
@@ -173,6 +175,7 @@ public:
 	Texture t_blockInventoryTexture_candle;
 	Texture t_blockInventoryTexture_wax;
 	Texture t_blockInventoryTexture_marble;
+	Texture t_blockInventoryTexture_marblewall;
 
 	//the little item pictures of the things
 	Texture t_blockLittleTexture_dirt;
@@ -213,6 +216,7 @@ public:
 	Texture t_blockLittleTexture_candle;
 	Texture t_blockLittleTexture_wax;
 	Texture t_blockLittleTexture_marble;
+	Texture t_blockLittleTexture_marblewall;
 
 
 	//the "carried" texture of the tools

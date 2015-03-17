@@ -16,9 +16,11 @@ public:
 	IntRect GetRect(){return m_pPanel->GetRect();}
 
 	virtual void Init(int _Number, bool _loaded = false) = 0;
+	virtual void Quit() = 0;
 	virtual void Render() = 0;
 	virtual void CheckThings() = 0;
 	virtual SItem Take(SItem _item) = 0;
+	virtual vector<SItem> GetContent() = 0;
 
 
 protected:

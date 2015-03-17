@@ -15,10 +15,11 @@ void CBee::Init(int _x, int _y, CWorld *_world, bool _loaded)
 	m_YVel = 0;
 
 	//Init the attributes
-	m_Attributes.maxHealth = 10;
+	m_Attributes.maxHealth = 20;
 	m_Attributes.armour = 0;
 	m_Attributes.speed = 100;
 	m_Attributes.strength = 0;
+	m_Attributes.exp = 1;
 
 	//Init the state
 	m_State.attacking = false;
@@ -115,6 +116,11 @@ void CBee::NewPointToGo()
 		{
 			m_PointToGo.x /= 2;
 		}
+
+		if(m_PointToGo.x < m_pNpcSprite->GetRect().left)
+			m_left = true;
+		else
+			m_left = false;
 		
 		//get new y distance
 		m_PointToGo.y = m_pNpcSprite->GetRect().top + rand()%200 + 100;

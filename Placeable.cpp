@@ -192,6 +192,15 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_is_passable = false;
 			m_is_visible = true;
 		}break;
+	case MARBLEWALL:
+		{
+			m_pThingSprite->Load(&g_pTextures->t_blockTextures_marblewall);
+			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_marblewall);
+			m_Name = "Marmorwand";
+			m_Hardness = 3;
+			m_is_passable = true;
+			m_is_visible = true;
+		}break;
 	default:
 		{
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_noTexture);

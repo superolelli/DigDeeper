@@ -7,12 +7,15 @@ CFurnance::CFurnance(int _x, int _y)
 	m_BurningMaterial.amount = 0;
 	m_BurningMaterial.is_clicked = false;
 	m_BurningMaterial.position = -1;
+	m_BurningMaterial.thing = NULL;
 	m_ThingToBurn.amount = 0;
 	m_ThingToBurn.is_clicked = false;
 	m_ThingToBurn.position = -1;
+	m_ThingToBurn.thing = NULL;
 	m_Product.amount = 0;
 	m_Product.is_clicked = false;
 	m_Product.position = -1;
+	m_Product.thing = NULL;
 
 	m_FurnanceX = _x;
 	m_FurnanceY = _y;
@@ -21,12 +24,15 @@ CFurnance::CFurnance(int _x, int _y)
 
 CFurnance::~CFurnance()
 {
+}
+
+
+void CFurnance::Quit()
+{
 	SAFE_DELETE(m_BurningMaterial.thing);
 	SAFE_DELETE(m_Product.thing);
 	SAFE_DELETE(m_ThingToBurn.thing);
-
 }
-
 
 void CFurnance::Init(int _Number, bool _loaded)
 {
@@ -273,4 +279,24 @@ void CFurnance::ChangeBurningThings()
 	//if the thing to burn is empty: delete it
 	if(m_ThingToBurn.amount == 0)
 		SAFE_DELETE(m_ThingToBurn.thing);
+}
+
+
+
+
+vector<SItem> CFurnance::GetContent()
+{
+	vector<SItem> items;
+	items.clear();
+
+	if(m_BurningMaterial.amount > 0)
+		items.push_back(m_BurningMaterial);
+
+	if(m_Product.amount > 0)
+		items.push_back(m_Product);
+
+	if(m_ThingToBurn.amount > 0)
+		items.push_back(m_ThingToBurn);
+
+	return items;
 }

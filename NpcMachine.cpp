@@ -115,6 +115,9 @@ void CNpcMachine::CheckAllNpcs()
 						m_pWorld->AddLittleItem(loot[a].thing->getID(), (*i)->GetRect().left, (*i)->GetRect().top, loot[a].amount);
 					}
 
+					//adds the experience
+					m_pPlayer->AddExp((*i)->GetAttributes()->exp);
+
 					(*i)->Quit();
 					SAFE_DELETE((*i));
 					i = m_Npcs.erase(i);
@@ -166,8 +169,11 @@ void CNpcMachine::SpawnNpcs()
 		//get a random spawn place
 		int newPlace = rand()%spawnPlaces.size();
 
-		//spawn new npc
-		AddNpc(BEE, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y + 50);
+		if(spawnPlaces.size() > 0)
+		{
+			//spawn new npc
+			AddNpc(BEE, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y + 50);
+		}
 
 		//get new spawn time
 		m_spawnTime = rand()%40 + 20;

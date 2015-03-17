@@ -261,6 +261,12 @@ void CBuildingMenu::InitRecipe(SBuildingItem *_recipe)
 				_recipe->resources[IRON] = 3;
 				_recipe->resources[CANDLE] = 1;
 			}break;
+		case(MARBLEWALL):
+			{
+				_recipe->Name = "Marmorwand";
+				_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_marblewall);
+				_recipe->resources[MARBLE] = 2;
+			}break;
 		}
 
 		_recipe->m_pInfoSprite->SetPos(m_pBuildingMenu->GetRect().left + 250, m_pBuildingMenu->GetRect().top + 4);
@@ -330,6 +336,10 @@ void CBuildingMenu::FillRecipeList()
 	candle.ID = CANDLE;
 	InitRecipe(&candle);
 
+	SBuildingItem marblewall;
+	marblewall.ID = MARBLEWALL;
+	InitRecipe(&marblewall);
+
 
 	//m_recipes.push_back(arcanus_ring);
 	//m_recipes.push_back(iron_helmet);
@@ -340,6 +350,7 @@ void CBuildingMenu::FillRecipeList()
 	m_recipes.push_back(candle);
 	m_recipes.push_back(glue);
 	m_recipes.push_back(ladder);
+	m_recipes.push_back(marblewall);
 	m_recipes.push_back(furnance);
 	m_recipes.push_back(cupboard);
 	m_recipes.push_back(sword);

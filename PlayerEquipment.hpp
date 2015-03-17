@@ -26,8 +26,11 @@ public:
 	//returns the id of the helmet
 	int GetHelmetID();
 
-	//does nothing
+	//they do nothing
 	void CheckThings();
+	void Quit(){return;}
+	vector<SItem> GetContent();
+
 	void SetPos(int _x, int _y);
 	SItem Take(SItem _item); 
 
@@ -55,6 +58,14 @@ private:
 	SItem m_ring2;        //the second ring
 
 	CPlayer *m_pPlayer;
+
+	Font m_tooltipFont;                              //the font for tooltips
+	Text m_tooltipText;                             //the tooltip text
+	RectangleShape m_tooltipBackground;                 //the background for the tooltips
+	stringstream m_stream;
+	bool m_showTooltip;                        
+
+	void SetTooltip(CThing *_thing);
 };
 
 

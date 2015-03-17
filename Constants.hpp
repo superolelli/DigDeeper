@@ -35,20 +35,21 @@ const int PWBREAK = 50;            //the Placeable-Wall-Break shows, where the w
 
 const int STONEWALL = 51;
 const int WOODWALL = 52;
+const int MARBLEWALL = 53;
 
-const int PIBREAK = 53;            //the Placeable-Item-Break shows, where the item section begins
+const int PIBREAK = 55;            //the Placeable-Item-Break shows, where the item section begins
 
-const int COAL = 54;
-const int WOODSTAFF = 55;
-const int IRONORE = 56;
-const int IRON = 57;
-const int GOLDORE = 58;
-const int GOLD = 59;
-const int GLUE = 60;
-const int ARCANUS = 61;
-const int SLIME = 62;
-const int RECIPE = 63;
-const int WAX = 64;
+const int COAL = 56;
+const int WOODSTAFF = 57;
+const int IRONORE = 58;
+const int IRON = 59;
+const int GOLDORE = 60;
+const int GOLD = 61;
+const int GLUE = 62;
+const int ARCANUS = 63;
+const int SLIME = 64;
+const int RECIPE = 65;
+const int WAX = 66;
 
 const int ITBREAK = 100;             //the Item-Tool-Break shows, where the tool section begins
 

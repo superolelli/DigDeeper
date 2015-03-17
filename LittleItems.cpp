@@ -6,6 +6,7 @@
 CLittleItem::CLittleItem()
 {
 	m_pLittleItemSprite = NULL;
+	m_pThing = false;
 	m_loaded = false;
 }
 
@@ -17,20 +18,25 @@ CLittleItem::~CLittleItem()
 }
 
 
-void CLittleItem::Quit()
+void CLittleItem::Quit(bool _forever)
 {
 	SAFE_DELETE(m_pLittleItemSprite);
+
+	if(_forever)
+		SAFE_DELETE(m_pThing);
 }
 
 
 
 //Loads the sprite for the little item
-void CLittleItem::Init(int _ID, int _x, int _y)
+void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 {
 	m_pLittleItemSprite = new CSprite;
-	m_ID = _ID;
 
-	switch(m_ID)
+	if(!_loaded)
+		m_pThing = _thing;
+
+	switch(m_pThing->getID())
 	{
 	case(DIRT):
 		{
@@ -183,6 +189,10 @@ void CLittleItem::Init(int _ID, int _x, int _y)
 	case(MARBLE):
 		{
 			m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_marble);
+		}break;
+	case(MARBLEWALL):
+		{
+			m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_marblewall);
 		}break;
 	}
 

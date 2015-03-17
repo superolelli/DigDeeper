@@ -60,13 +60,14 @@ CWorld::~CWorld()
 
 	for(i = m_LittleItemList.begin(); i != m_LittleItemList.end(); i++)
 	{
-		(i)->Quit();
+		(i)->Quit(true);
 	}
 		m_LittleItemList.clear();
 
 	list<CPanel*>::iterator p;
 	for(p = m_PanelList.begin(); p != m_PanelList.end(); p++)
 	{
+		(*p)->Quit();
 		SAFE_DELETE(*p);
 	}
 	m_PanelList.clear();
@@ -421,7 +422,7 @@ void CWorld::Render(Vector2f _viewSize, Vector2f _viewCenter)
 				m_pBlocks[x][y]->Render();		
 
 				if(m_pBlocks[x][y]->getID() == FURNANCE)
-					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2 - 100, m_pBlocks[x][y]->GetRect().top -80, 100, Color(230, 0,0));
+					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2 - 100, m_pBlocks[x][y]->GetRect().top - 15, 100, Color(230, 0,0));
 				else if(m_pBlocks[x][y]->getID() == LANTERNP)
 					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left -100 , m_pBlocks[x][y]->GetRect().top - 60, 150, Color::Yellow);
 				
@@ -587,7 +588,7 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player, float _xView
 					if(m_pBlocks[x][y]->IsBroken(_player->m_modifications.breaking_speed))
 					{
 						//set the sound
-						if(m_pBlocks[x][y]->getID() == GOLD)
+						if(m_pBlocks[x][y]->getID() == GOLDBLOCK)
 						{
 							int soundNumber = rand()%3;
 
@@ -602,11 +603,7 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player, float _xView
 					
 						do
 						{
-							//if the placeable is broken: a little item is placed
-							CLittleItem item;
-							item.Init(m_pBlocks[x][y]->GetLittleID(), m_pBlocks[x][y]->GetRect().left + 23 + (rand()%50 -25), m_pBlocks[x][y]->GetRect().top - 20 + (rand()%50 -25));
-							item.SetVel(Vector2f(0, -350.0f));
-							m_LittleItemList.push_back(item);
+							AddLittleItem(m_pBlocks[x][y]->GetLittleID(), m_pBlocks[x][y]->GetRect().left + 23, m_pBlocks[x][y]->GetRect().top + 20);
 
 							//check for luck
 							int randomNumber = rand()%100 +1;
@@ -618,14 +615,38 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player, float _xView
 						//if a furnance was destroyed: delete the panel
 						if(m_pBlocks[x][y]->getID() == FURNANCE || m_pBlocks[x][y]->getID() == CHEST)
 						{
+							vector<SItem> droppedItems;
+
 							//seek for the panel
 							for(p = m_PanelList.begin(); p != m_PanelList.end(); p++)
 							{
 								//if found: delete it
 								if(m_pBlocks[x][y]->GetSpecialID() == (*p)->GetNumber())
 								{
+									droppedItems = (*p)->GetContent();
+									SAFE_DELETE(*p);
 									m_PanelList.erase(p);
 									break;
+								}
+							}
+
+							//add the content as little items
+							BOOST_FOREACH(SItem s, droppedItems)
+							{
+								for(int amount = 0; amount < s.amount; amount++)
+								{
+							
+									if(amount > 0)
+									{
+										AddLittleItem(s.thing->getID(), m_pBlocks[x][y]->GetRect().left + 23, m_pBlocks[x][y]->GetRect().top - 20);
+									}
+									else
+									{
+										CLittleItem item;
+										item.Init(s.thing, m_pBlocks[x][y]->GetRect().left + 23 + (rand()%50 -25), m_pBlocks[x][y]->GetRect().top - 20 + (rand()%50 -25));
+										item.SetVel(Vector2f(0, -150.0f));
+										m_LittleItemList.push_back(item);
+									}
 								}
 							}
 						}
@@ -663,11 +684,11 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player, float _xView
 					{
 						//if the placeable is broken: a little item is placed
 						CLittleItem item;
-						item.Init(m_pWalls[x][y]->GetLittleID(), m_pWalls[x][y]->GetRect().left + 23 + (rand()%50 -25), m_pWalls[x][y]->GetRect().top - 20 + (rand()%50 -25));
+						item.Init(m_pWalls[x][y], m_pWalls[x][y]->GetRect().left + 23 + (rand()%50 -25), m_pWalls[x][y]->GetRect().top - 20 + (rand()%50 -25));
 						item.SetVel(Vector2f(0, -350.0f));
 						m_LittleItemList.push_back(item);
 
-						SAFE_DELETE(m_pWalls[x][y]);
+						m_pWalls[x][y] = NULL;
 					}
 				}
 				else
@@ -686,39 +707,7 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player, float _xView
 
 		if(_playerRect.intersects(i->GetRect()))
 		{
-			//if thing is a placeable
-			if(i->GetID() < PIBREAK)
-			{
-				CPlaceable *thing = new CPlaceable;
-				thing->Init(i->GetID());
-
-				_player->Take(thing,1);		
-			}
-			//if thing is an item
-			else if(i->GetID() > PIBREAK && i->GetID() < ITBREAK)
-			{
-				CItem *thing = new CItem;
-				thing->Init(i->GetID());
-
-				_player->Take(thing, 1);	
-			}
-			//if thing is a tool
-			else if(i->GetID() > ITBREAK && i->GetID() < TEBREAK)
-			{
-				CTool *thing = new CTool;
-				thing->InitTool(i->GetID());
-
-				_player->Take(thing, 1);
-			}
-			//if thing is equipment
-			else
-			{
-				CEquipment *thing = new CEquipment;
-				thing->InitEquipment(i->GetID());
-
-				_player->Take(thing, 1);
-			}
-
+			_player->Take(i->GetThing(),1);			
 			i->Quit();
 			m_LittleItemList.erase(i);
 			return;
@@ -737,7 +726,36 @@ void CWorld::AddLittleItem(int _ID, int _x, int _y, int _amount)
 	for(int i = 0; i < _amount; i++)
 	{
 		CLittleItem item;
-		item.Init(_ID, _x + (rand()%50 -25), _y + (rand()%20));
+
+		//if thing is a placeable
+			if(_ID < PIBREAK)
+			{
+				CPlaceable *thing = new CPlaceable;
+				thing->Init(_ID);
+				item.Init(thing, _x + (rand()%50 -25), _y + (rand()%20));
+			}
+			//if thing is an item
+			else if(_ID > PIBREAK && _ID < ITBREAK)
+			{
+				CItem *thing = new CItem;
+				thing->Init(_ID);
+				item.Init(thing, _x + (rand()%50 -25), _y + (rand()%20));	
+			}
+			//if thing is a tool
+			else if(_ID > ITBREAK && _ID < TEBREAK)
+			{
+				CTool *thing = new CTool;
+				thing->InitTool(_ID);
+				item.Init(thing, _x + (rand()%50 -25), _y + (rand()%20));
+			}
+			//if thing is equipment
+			else
+			{
+				CEquipment *thing = new CEquipment;
+				thing->InitEquipment(_ID);
+				item.Init(thing, _x + (rand()%50 -25), _y + (rand()%20));
+			}
+
 		item.SetVel(Vector2f(0, -350.0f));
 		m_LittleItemList.push_back(item);
 	}

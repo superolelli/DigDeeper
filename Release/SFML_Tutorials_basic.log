@@ -1,7 +1,7 @@
-﻿Der Buildvorgang wurde am 08.03.2015 16:59:38 gestartet.
+﻿Der Buildvorgang wurde am 09.03.2015 13:21:48 gestartet.
      1>Projekt "C:\Users\Ole\Desktop\Projekte\Dig Deeper dev\Dig Deeper rewritten\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML\SFML-2.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Bee.cpp BuildingMenu.cpp Button.cpp CharacterInfo.cpp Chest.cpp Equipment.cpp Framework.cpp Furnance.cpp Game.cpp GameChoose.cpp Inventory.cpp Items.cpp LightMachine.cpp LittleItems.cpp Living3Part.cpp LoadGame.cpp Menu.cpp NPC.cpp NewGame.cpp NpcMachine.cpp Options.cpp Panel.cpp Placeable.cpp Player.cpp PlayerEquipment.cpp SignMachine.cpp StringInput.cpp Textures.cpp Tool.cpp World.cpp main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML\SFML-2.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Bee.cpp Game.cpp Inventory.cpp LittleItems.cpp main.cpp NPC.cpp NpcMachine.cpp Player.cpp World.cpp
          Bee.cpp
      1>Bee.cpp(62): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
      1>Bee.cpp(64): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
@@ -10,65 +10,23 @@
      1>Bee.cpp(84): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
      1>Bee.cpp(140): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
      1>Bee.cpp(141): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
-         BuildingMenu.cpp
-     1>BuildingMenu.cpp(458): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
-         Button.cpp
-         CharacterInfo.cpp
-         Chest.cpp
-         Equipment.cpp
-         Framework.cpp
-         Furnance.cpp
          Game.cpp
-         GameChoose.cpp
          Inventory.cpp
-         Items.cpp
-         LightMachine.cpp
-     1>LightMachine.cpp(23): warning C4244: 'Argument': Konvertierung von 'const float' in 'unsigned int', möglicher Datenverlust
-     1>LightMachine.cpp(28): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>LightMachine.cpp(41): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>LightMachine.cpp(43): warning C4244: 'Argument': Konvertierung von 'const float' in 'unsigned int', möglicher Datenverlust
-     1>LightMachine.cpp(49): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>LightMachine.cpp(50): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>LightMachine.cpp(60): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>LightMachine.cpp(71): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>LightMachine.cpp(74): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>LightMachine.cpp(80): warning C4244: 'Argument': Konvertierung von 'double' in 'sf::Uint8', möglicher Datenverlust
          LittleItems.cpp
-         Living3Part.cpp
-         LoadGame.cpp
-     1>LoadGame.cpp(63): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
-     1>LoadGame.cpp(187): warning C4018: '>': Konflikt zwischen 'signed' und 'unsigned'
-     1>LoadGame.cpp(209): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-         Menu.cpp
+         main.cpp
          NPC.cpp
-         NewGame.cpp
-     1>NewGame.cpp(65): warning C4244: 'Argument': Konvertierung von 'double' in 'float', möglicher Datenverlust
          NpcMachine.cpp
      1>NpcMachine.cpp(158): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
      1>NpcMachine.cpp(159): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
      1>NpcMachine.cpp(160): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
      1>NpcMachine.cpp(161): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
      1>NpcMachine.cpp(173): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
-         Kompilieren...
-         Options.cpp
-         Panel.cpp
-         Placeable.cpp
          Player.cpp
      1>Player.cpp(231): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
      1>Player.cpp(371): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-         PlayerEquipment.cpp
-         SignMachine.cpp
-     1>SignMachine.cpp(34): warning C4244: '+=': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>SignMachine.cpp(39): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-         StringInput.cpp
-     1>StringInput.cpp(19): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>StringInput.cpp(50): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-         Textures.cpp
-         Tool.cpp
          World.cpp
      1>World.cpp(378): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
      1>World.cpp(379): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
-         main.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ole\Desktop\Projekte\Dig Deeper dev\Dig Deeper rewritten\Release\Dig Deeper rewritten.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML\SFML-2.1\lib" "sfml-audio.lib" "sfml-graphics.lib" "sfml-network.lib" "sfml-system.lib" "sfml-window.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Ole\Desktop\Projekte\Dig Deeper dev\Dig Deeper rewritten\Release\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ole\Desktop\Projekte\Dig Deeper dev\Dig Deeper rewritten\Release\Dig Deeper rewritten.lib" /MACHINE:X86 /SAFESEH Release\Beam.obj
          Release\Bee.obj
@@ -104,3 +62,12 @@
          Release\Time.obj
          Release\Tool.obj
          Release\World.obj
+            Bibliothek "C:\Users\Ole\Desktop\Projekte\Dig Deeper dev\Dig Deeper rewritten\Release\Dig Deeper rewritten.lib" und Objekt "C:\Users\Ole\Desktop\Projekte\Dig Deeper dev\Dig Deeper rewritten\Release\Dig Deeper rewritten.exp" werden erstellt.
+         Code wird generiert.
+         Codegenerierung ist abgeschlossen.
+         SFML_Tutorials_basic.vcxproj -> C:\Users\Ole\Desktop\Projekte\Dig Deeper dev\Dig Deeper rewritten\Release\Dig Deeper rewritten.exe
+     1>Die Erstellung des Projekts "C:\Users\Ole\Desktop\Projekte\Dig Deeper dev\Dig Deeper rewritten\SFML_Tutorials_basic.vcxproj" ist abgeschlossen, Build Ziel(e).
+
+Build erfolgreich.
+
+Verstrichene Zeit 00:01:58.82

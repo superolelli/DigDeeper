@@ -46,6 +46,14 @@ void CPlayerEquipment::InitPlayerEquipment(int _Number, CPlayer *_player)
 	m_pPlayer = _player;
 
 	m_Number = _Number;
+
+	//loads everything for the tooltips
+	m_tooltipFont.loadFromFile("Data/Fonts/coolsville.ttf");
+	m_tooltipText.setFont(m_tooltipFont);
+	m_tooltipText.setString("");
+	m_tooltipText.setCharacterSize(15);
+	m_tooltipText.setColor(Color::Yellow);
+	m_showTooltip = false;
 }
 
 
@@ -189,26 +197,49 @@ void CPlayerEquipment::Render()
 	if(m_helmet.amount != 0)
 	{
 		m_helmet.thing->RenderInventorySprite();
+
+		if(m_helmet.thing->GetInventorySprite()->GetRect().contains(Mouse::getPosition()) && !Mouse::isButtonPressed(Mouse::Left))
+			SetTooltip(m_helmet.thing);
 	}
 
 	if(m_body.amount != 0)
 	{
 		m_body.thing->RenderInventorySprite();
+
+		if(m_body.thing->GetInventorySprite()->GetRect().contains(Mouse::getPosition()) && !Mouse::isButtonPressed(Mouse::Left))
+			SetTooltip(m_body.thing);
 	}
 
 	if(m_trousers.amount != 0)
 	{
 		m_trousers.thing->RenderInventorySprite();
+
+		if(m_trousers.thing->GetInventorySprite()->GetRect().contains(Mouse::getPosition()) && !Mouse::isButtonPressed(Mouse::Left))
+			SetTooltip(m_trousers.thing);
 	}
 
 	if(m_ring1.amount != 0)
 	{
 		m_ring1.thing->RenderInventorySprite();
+
+		if(m_ring1.thing->GetInventorySprite()->GetRect().contains(Mouse::getPosition()) && !Mouse::isButtonPressed(Mouse::Left))
+			SetTooltip(m_ring1.thing);
 	}
 	
 	if(m_ring2.amount != 0)
 	{
 		m_ring2.thing->RenderInventorySprite();
+
+		if(m_ring2.thing->GetInventorySprite()->GetRect().contains(Mouse::getPosition()) && !Mouse::isButtonPressed(Mouse::Left))
+			SetTooltip(m_ring2.thing);
+	}
+
+	//render the tooltip
+	if(m_showTooltip)
+	{
+		g_pFramework->GetWindow()->draw(m_tooltipBackground, m_tooltipText.getTransform());
+		g_pFramework->GetWindow()->draw(m_tooltipText);	
+		m_showTooltip = false;
 	}
 }
 
@@ -338,4 +369,72 @@ void CPlayerEquipment::RenderEquipment(int _x, int _y, bool _left)
 
 
 	equipment = NULL;
+}
+
+
+
+
+
+vector<SItem> CPlayerEquipment::GetContent()
+{
+	vector<SItem> items;
+
+	return items;
+}
+
+
+
+void CPlayerEquipment::SetTooltip(CThing *_thing)
+{
+	m_stream.str("");
+	m_stream << (_thing->GetName());
+
+	int rarity = 1;
+
+	CEquipment *equipment = (CEquipment*)_thing;
+	rarity = equipment->GetRarity();
+
+	//show the additional attributes
+	if(equipment->GetAttributes().armour != 0)
+		m_stream << "\nRüstung: " << equipment->GetAttributes().armour;
+	if(equipment->GetAttributes().breaking_speed != 0)
+		m_stream << "\nAbbaugeschwindigkeit: " << equipment->GetAttributes().breaking_speed;
+	if(equipment->GetAttributes().luck != 0)
+		m_stream << "\nGlück: " << equipment->GetAttributes().luck;
+	if(equipment->GetAttributes().maxHealth != 0)
+		m_stream << "\nLeben " << equipment->GetAttributes().maxHealth;
+	if(equipment->GetAttributes().maxMana != 0)
+		m_stream << "\nMana " << equipment->GetAttributes().maxMana;
+	if(equipment->GetAttributes().speed != 0)
+		m_stream << "\nGeschwindigkeit " << equipment->GetAttributes().speed;
+	if(equipment->GetAttributes().strength != 0)
+		m_stream << "\nStärke " << equipment->GetAttributes().strength;
+
+		//sets the color
+	switch(rarity)
+	{
+		case(2):
+			m_tooltipText.setColor(Color::Magenta);
+			break;
+		case(3):
+			m_tooltipText.setColor(Color::Red);
+			break;
+		case(4):
+			m_tooltipText.setColor(Color::Blue);
+			break;
+		case(5):
+			m_tooltipText.setColor(Color::Cyan);
+			break;
+		default:
+			m_tooltipText.setColor(Color::Yellow);
+	}
+
+	m_tooltipText.setString(m_stream.str().c_str());
+	m_tooltipText.setPosition((float)(Mouse::getPosition().x + 13), (float)(Mouse::getPosition().y));
+
+	FloatRect backgroundRect = m_tooltipText.getLocalBounds();
+	m_tooltipBackground = RectangleShape(Vector2f(backgroundRect.width, backgroundRect.height + 5));
+	m_tooltipBackground.setFillColor(Color::Black);
+
+	m_showTooltip = true;
 }

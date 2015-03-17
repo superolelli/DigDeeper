@@ -1,0 +1,985 @@
+-Am 22.02.2014 wurde das Projekt "Dig Deeper" gestartet-
+--------------------------------------------------------
+22.02.2014
+
+-Ordner angelegt
+-Projekt in Visual Studio angelegt und eingerichtet
+
+--------------------------------------------------------
+03.03.2014
+
+-Neue Klassen eingebunden: 
+                          -Framework
+                          -Singleton
+                          -Time
+                          -StringInput
+                          -Button
+
+-Button Klasse modifiziert: Es gibt jetzt 4 Typen von Buttons(Up, Down, Motion_Up, Motion_Down)
+
+--------------------------------------------------------
+08.03.2014
+
+-Sprite Klasse eingebunden
+-Menü Klasse geschrieben
+-Button Klasse gefixt
+
+-Ersten Hintergrund fertiggestellt
+-Menü gezeichnet
+-Beenden Knopf gezeichnet
+
+--------------------------------------------------------
+09.03.2014
+
+-Optimieren der Performance durch umschreiben der Sprite Klasse
+-Erweiteren der Menü Klasse
+-Nochmaliges Reparieren der Button Klasse
+-Optionen Klasse geschrieben-> Es ist nun möglich zwischen drei verschiedenen Bildschirmauflösungen zu wählen(1600:900, 1280:720 oder 1024:768)
+                            -> Man kann nun zwischen Vollbildschirm und Fenster umschalten
+
+--------------------------------------------------------
+10.03.2014
+
+-Erstellen der leeren GameChoose Klasse
+
+--------------------------------------------------------
+13.03.2014
+
+-Schreiben der GameChoose Klasse
+-Einbinden der GameChoose Klasse in das Menü
+-Drei Knöpfe gezeichnet(Neues Spiel, Spiel laden, Mehrspieler)
+
+--------------------------------------------------------
+17.03.2014
+
+-Erstellen der Game Klasse
+-Erstellen der World Klasse
+-Wenn man auf "Neues Spiel" im Menü drückt startet nun das Spiel und die Welt wird gerendert
+-Kamera eingefügt, die den jeweiligen Ausschnitt des Levels zeigen wird
+
+--------------------------------------------------------
+18.03.2014
+
+-Erstellen der Player Klasse mit provisorischem "Strichmännchen-Sprite"
+(noch Probleme mit der Kamera)
+
+--------------------------------------------------------
+21.03.2014
+
+-Umstrukturieren der Game und World Klassen
+-Die Kamera funktioniert jetzt
+-Hintergrund bewegt sich nun mit
+-kleiner Bug: Männchen "zittert" beim laufen (sieht man später vielleicht nicht)
+
+--------------------------------------------------------
+29.03.2014
+
+-Zwerg sprite gezeichnet und anstelle des Strichmännchens eingefügt (3 Animationsphasen: links, mitte, rechts)
+-Zwerg kann sich nun nicht mehr aus der Welt hinausbewegen
+-Bug behoben: Männchen zittert nicht mehr
+
+--------------------------------------------------------
+30.03.2014
+
+-Zwerg Sprite Lauf-Animation gezeichnet
+-In der Player-Klasse animiert
+-Bewegungen noch ein bisschen unbeholfen
+
+--------------------------------------------------------
+31.03.2014
+
+-Zwerg Animation flüssiger gezeichnet
+
+--------------------------------------------------------
+02.04.2014
+
+-Thing und Block- Klassen geschrieben
+-Es gibt nun Erdblöcke
+-Es wird nun beim Rendern der Welt immer nur der Ausschnitt gerendert, der im Sichtfeld des Spielers ist (Performance enorm verbessert)
+-Kollisions Überprüfungsfunktion angefangen zu schreiben -> Der Zwerg kann nicht mehr von oben durch solide Blöcke gehen ( von unten und den Seite aus geht es noch)
+
+--------------------------------------------------------
+05.04.2014
+
+-Der Zwerg kann nicht mehr durch solide Blöcke gehen
+-Der Zwerg kann jetzt springen
+
+--------------------------------------------------------
+09.04.2014
+
+-Man kann durch Klicken Blöcke entfernen
+-Problem: Zwerg fällt nicht in die entstehenden Löcher, sondern schwebt darüber
+
+--------------------------------------------------------
+12.04.2014
+
+-Ladebildschirm hinzugefügt
+-Problem mit "schwebendem Zwerg" behoben
+-Wichtig: Breite des Zwergensprites muss noch auf 95 geändert werden!  (Ergänzung: Breite geändert)
+-Problem: Zwerg fällt ans Ende der Welt, wenn er nach unten fällt
+
+--------------------------------------------------------
+13.04.2014
+
+-Bewegungs- und Kollisionsfunktionen komplett neu geschrieben -> Kollision funktioniert nun einwandfrei
+
+--------------------------------------------------------
+14.04.2014
+
+-Zwergensprite verändert (Sprites sind jetzt nicht mehr so breit-> sieht echter bei kollision aus)
+-Hintergrund verändert   (Erdkante stimmt jetzt mit der Kante der obersten Blöcke überein)
+-Kollisionsfunktion leicht abgeändert -> Der Zwerg passt nun durch Öffnungen hindurch
+-Sprungfunktion abgeändert ->Sprünge sind nun realistischer
+
+--------------------------------------------------------
+16.04.2014
+
+-Performance verbessert durch besseres Hintergrundrendern (noch einige Fehler)
+-Hintergrund bewegt sich nun nicht mehr mit dem Spieler mit
+
+--------------------------------------------------------
+19.04.2014
+
+-Hintergrund kleiner gezeichnet, dass nicht so viel laden muss und weniger Speicher verbraucht wird
+-Hintergrund wird jetzt "schöner" gerendert
+-Ein Versuch die Performance zu verbessern, indem nur der Hintergrund gerendert wird, der in der Kamera ist, ist gescheitert
+
+--------------------------------------------------------
+21.04.2014
+
+-Ein zweiter Versuch, die Performance auf oben genannte Weise zu verbessern ist teilweise geglückt (Es treten noch einige Probleme auf, die aber wahrscheinlich behoben werden können)
+
+--------------------------------------------------------
+22.04.2014
+
+-Die Probleme sind bis auf ein kleines vollständig behoben (ab 3600px Tiefe wird der Hintergrund wieder von vorne gerendert)
+-Die Performance hat sich signifikant gebessert
+-Durch inline deklarieren einiger Funktionen weitere Steigerung der Performance
+
+--------------------------------------------------------
+28.04.2014
+
+-Erdblocksprite animiert gezeichnet
+-Das abbauen von Blöcken dauert nun entsprechend der Härte und dabei wird die Abbauanimation abgespielt
+
+--------------------------------------------------------
+19.05.2014
+
+-Die Abbauanimation des Zwergs wurde verbessert und sieht jetzt schöner aus
+
+--------------------------------------------------------
+21.05.2014
+
+-Die Klasse CInventory wurde hinzugefügt, ist aber noch nicht fertig gestellt
+-Es wurden Sprites für das Inventar gemalt
+
+--------------------------------------------------------
+31.05.2014
+
+-Die CInventory Klasse wurde weiter geschrieben, ist aber noch nicht fertig
+-Eine Art Panel-Klasse ist in Planung
+
+--------------------------------------------------------
+07.06.2014
+
+-Die Panel Klasse wurde angelegt, ist aber bis jetzt noch nicht in Verwendung
+-Die Inventory Klasse wurde weitergeschrieben: Man kann jetzt den Inventarbalken im Spiel sehen und durch Drücken der Taste "e" das Inventarfenster öffnen
+-Das Verwalten der Gegenstände soll wahrscheinlich über eine Map geschehen
+
+--------------------------------------------------------
+09.06.2014
+
+-Das Inventarsystem ist in Arbeit (Die Map zum Speichern der Gegenstände und einige Funktionen sind jetzt angelegt)
+
+--------------------------------------------------------
+13.02.1024
+
+-Das Inventar zeigt nun die Gegenstände an, die man besitzt
+
+--------------------------------------------------------
+15.02.2014
+
+-Im Inventar wird nun die Anzahl eines Gegenstandes mit angezeigt
+-Stein wurde hinzugefügt
+-Sprites für Kohle und Kohleblock wurden gezeichnet, aber noch nicht hinzugefügt
+
+--------------------------------------------------------
+18.06.2014
+
+-Das Inventarsystem wurde intern geändert und so für kommende Aufgaben vorbereitet
+-Es treten nun aber Probleme mit der Kollisionserkennung auf(zwerg fällt durch solide Blöcke etc.)
+
+--------------------------------------------------------
+TODO:
+-----
+
+-Kollisionserkennung reparieren
+-Logfile einbauen!!!
+-Inventarsystem ausbauen
+-Kommentieren und Code umbauen möglicherweise
+
+-----
+--------------------------------------------------------
+19.06.2014
+
+-Begonnen ein Logfile einzubauen (Überprüft bis jetzt noch nicht viel)
+-Kollisionserkennung gefixt
+
+--------------------------------------------------------
+27.06.2014
+
+-Inventarsystem umgeschrieben (nun einfacher umzuschreiben, zu erweitern und zu lesen)
+-Kohleblöcke hinzugefügt
+
+--------------------------------------------------------
+28.06.2014
+
+-Inventar weitergeschrieben (Durch Klick auf Item kann man es mit der Maus umher bewegen, funktioniert noch nicht zu 100%)
+
+--------------------------------------------------------
+04.07.2014
+
+-Items im Inventar werden jetzt richtig bewegt 
+
+--------------------------------------------------------
+05.07.2014
+
+-Items können im Inventar nun neu sortiert werden
+-Items können gelöscht werden, indem man sie außerhalb des Inventars ablegt
+-Es wurde begonnen eine Klasse für die kleinen Items zu schreiben, die in der Welt herumliegen, wenn man etwas abbaut
+--------------------------------------------------------
+06.07.2014
+
+-Itemklasse fertiggestellt
+-Wenn man einen Block abbaut, kommt nun ein kleiner Block raus
+
+--------------------------------------------------------
+09.07.2014
+
+-Man kann abgebaute Blöcke nun einsammeln (Die Funktion ist noch etwas umständlich geschrieben aufgrund von Problemen mit der "erase"-Funktion)
+-Es wurde Kohle hinzugefügt (Sie entsteht, wenn man Kohleblöcke abbaut)
+-Bug behoben: Die Debugversion konnte nicht compiliert werden
+-Geplant: Code komplett neu (schöner) schreiben und SDL 2 verwenden
+
+--------------------------------------------------------
+13.07.2014
+
+-Das Inventarsystem wurde komplett umgeschrieben und vereinfacht
+-Die Inventarleiste funktioniert nun und man kann Gegenstände zwischen ihr und dem Inventar bewegen
+
+--------------------------------------------------------
+25.07.2014
+
+-Man kann nun durch drücken der Zahlentasten oder bewegen des Mausrades ein Item auf der Inventarleiste auswählen (Beim Mausrad noch kleines Problem: überspringt manchmal Item)
+
+--------------------------------------------------------
+30.07.2014
+
+-Das Problem mit dem Mausrad wurde behoben
+-Die Funktionen für das Setzen von Blöcken wurden begonnen (man kann durch rechtsklick nun die Anzahl des ausgewählten Items verringern, jedoch ohne einen Block zu platzieren)
+
+--------------------------------------------------------
+31.07.2014
+
+-Man kann nun Blöcke setzen
+
+--------------------------------------------------------
+01.08.2014
+
+-Man kann Blöcke nun nur noch angrenzend an andere Blöcke setzen
+-Ein kleiner Bug wurde behoben (Manchmal wurde ein nicht ausgewählter Block gesetzt)
+
+--------------------------------------------------------
+03.08.2014
+
+-Es wurden passierbare Steinwände hinzugefügt
+
+--------------------------------------------------------
+05.08.2014
+
+-Es wurden Leitern hinzugefügt
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+ES WURDE ENTSCHIEDEN, DAS SPIEL NEU ZU SCHREIBEN UM ES ÜBERSICHTLICHER, ERWEITERBAR, UND SCHNELLER ZU MACHEN.
+ANSTATT SDL SOLL SFML VERWENDET WERDEN.
+
+--------------------------------------------------------
+--------------------------------------------------------
+23.08.2014
+
+-Das Projekt für die neue, verbesserte Version wurde eingerichtet und es soll demnächst mit dem Schreiben begonnen werden
+
+--------------------------------------------------------
+24.08.2014
+
+-Das Framework und der Timer wurden eingefügt
+
+--------------------------------------------------------
+27.08.2014
+
+-Die Sprite Klasse wurde geschrieben
+
+--------------------------------------------------------
+31.08.2014
+
+-Die Button Klasse wurde geschrieben
+-Die drei Menübuttons sind nun implementiert
+
+--------------------------------------------------------
+02.09.2014
+
+-GameChoose Klasse geschrieben
+-Noch Probleme mit der Sprite Klasse, bei animierten Sprites
+
+--------------------------------------------------------
+04.09.2014
+
+-GameChoose Klasse gebugfixt
+-Button Klasse gefixt
+-Sprite Klasse gefixt
+-Options Klasse geschrieben (bietet aber noch keine Einstellungen, die man verändern kann...)
+
+--------------------------------------------------------
+05.09.2014
+
+-Game Klasse soweit als möglich geschrieben
+--------------------------------------------------------
+06.09.2014
+
+-Thing Klasse geschrieben
+-Placeable Klasse soweit als möglich geschrieben
+-Neuen Ladebildschirm eingefügt
+
+--------------------------------------------------------
+09.09.2014
+
+-World Klasse geschrieben
+-Es wird nun eine Welt aus Erdblöcken generiert und gerendert(Das Rendern ist noch schlecht und langsam, wird noch verbessert)
+
+--------------------------------------------------------
+10.09.2014
+
+-Player Klasse geschrieben (noch nicht fertig)
+-Strukturen für den Player (Attributes und State) geschrieben
+
+--------------------------------------------------------
+11.09.2014
+
+-Living3Part Klasse geschrieben, die ein Wesen, bestehend aus drei Teilen (Körper, Arm, Beine) kapselt
+-Player Klasse weitergeschrieben und testweise in Game Klasse eingebunden
+
+--------------------------------------------------------
+12.09.2014
+
+-Living3Part Klasse leicht geändert
+-Player wird nun gerendert
+-Man kann(in der Luft) nach links und rechts laufen(Die Lauf-Animation muss noch verbessert werden!)
+
+--------------------------------------------------------
+15.09.2014
+
+-Man kann nun laufen
+-Die Kamera bewegt sich mit
+-Der Hintergrund wird richtig(aber noch nicht Ressourcenschonend) gerendert
+
+--------------------------------------------------------
+16.09.2014
+
+-Man kann nun springen und fallen
+-Kollisionserkennungsfunktionen implementiert
+-Zwerg zittert noch beim laufen
+
+--------------------------------------------------------
+20.09.2014
+
+-Inventory Klasse hinzugefügt
+-man kann durch das Drücken der 'e' Taste das Inventar öffnen und schließen
+-offenbar noch einige Bugs in der Living3Part Klasse (Zittern, Verschieben von Parts...)
+
+--------------------------------------------------------
+23.09.2014
+
+-Items im Inventar werden nun angezeigt 
+
+--------------------------------------------------------
+28.09.2014
+
+-Es wird nun die Anzahl des jeweiligen Items im Inventar angezeigt
+
+--------------------------------------------------------
+29.09.2014
+
+-Man kann nun die Items verschieben und löschen (noch kleiner Bug, da auf Left down überprüft wird)
+
+--------------------------------------------------------
+30.09.2014
+
+-Bug bei Item verschieben behoben
+-Framework::ProcessEvents Optimiert
+
+--------------------------------------------------------
+07.10.2014
+
+-Hintergrundrendering wurde performancefreundlich optimiert
+
+--------------------------------------------------------
+09.10.2014
+
+-Man kann Blöcke nun durch Drücken der linken Maustaste löschen
+-Bug mit zitterndem Mänchen behoben
+
+--------------------------------------------------------
+10.10.2014
+
+-Blöcke abbauen dauert nun entsprechend der Härte des Blocks
+-Dabei wird die "Zerbrech-Animation" abgespielt
+
+--------------------------------------------------------
+12.10.2014
+
+-Bug behoben, dass man bestimmte Blöcke nicht abbauen kann
+-LittleItem Klasse angelegt
+
+--------------------------------------------------------
+14.10.2014
+
+-LittleItem Klasse geschrieben
+
+--------------------------------------------------------
+15.10.2014
+
+-Wenn man Blöcke abbaut kommen nun "kleine Blöcke" heraus, die man einsammeln kann
+-CItem Klasse geschrieben
+
+--------------------------------------------------------
+16.10.2014
+
+-Markier-Rahmen in der Inventarleiste hinzugefügt
+-Rahmen lässt sich durch Zahlentasten oder das Mausrad verschieben
+
+--------------------------------------------------------
+18.10.2014
+
+-Der Zwerg bewegt nun seinen Arm beim Drücken der linken Maustaste (z.B. beim Abbauen von Blöcken)
+-Man kann nun auch mit W A S D laufen
+
+--------------------------------------------------------
+19.10.2014
+
+-Man kann nun Blöcke setzen (Rechtsklick)
+-Der Zwerg passt nun wieder durch Öffnungen
+-Durch Druck auf die S bzw. unten Taste kann man die maximale Fallbeschleunigung erzielen
+
+--------------------------------------------------------
+20.10.2014
+
+-Man kann nun keine Blöcke mehr an Stellen setzen, an denen man steht
+-Einige Casting-Warnungen behoben
+-Inventar neu gezeichnet
+--------------------------------------------------------
+21.10.2014
+
+-Es wurden Steinwände hinzugefügt
+-Es wurden Leitern hinzugefügt, an denen man nach oben steigen kann
+
+--------------------------------------------------------
+ES WURDE NUN DER ALTE STAND ERREICHT
+--------------------------------------------------------
+ZUKÜNFITGE ÄNDERUNGEN:
+
+-Einfügen eines Double-Layers, damit man z.B. Leitern auf bereits gesetzte Blöcke setzen kann (Erledigt)
+-Einfügen von Items z.B. Spitzhacke, die getragen werden können (Erledigt)
+-Einfügen eines Baumenüs, in dem man neue Gegenstände bauen kann, sowie ein System mit Bauplänen (Ersten Teil Erledigt)
+-Einfügen von neuen Materialien
+-Einfügen eines Level-Systems mit EXP und Stufen, sowie Verbesserungen der Eigenschaften (Erledigt)
+-und vieles mehr...
+--------------------------------------------------------
+--------------------------------------------------------
+22.12.2014
+
+-Das Double-Layer wurde eingefügt und funktioniert so weit
+-ABER: Performance wird schlechter, je mehr man gebaut hat...
+
+--------------------------------------------------------
+23.10.2014
+
+-Es wurde Holz eingefügt
+
+--------------------------------------------------------
+24.10.2014
+
+-Das Aussehen der Holzblöcke wurde verbessert
+-Es wurden Holzstäbe eingefügt
+
+--------------------------------------------------------
+25.10.2014
+
+-Es wurden Holzwände hinzugefügt
+-Es wurden Eisenblöcke hinzugefügt
+-Es wurde Eisenerz hinzugefügt
+-Es wurde Eisen hinzugefügt
+-Die Steinwände wurden neu gemalt
+
+-------------------------------------------------------
+27.10.2014
+
+-Es wurden Eisenspitzhacken hinzugefügt
+
+-------------------------------------------------------
+28.10.2014
+
+-Die Klasse CTools wurde geschrieben
+-Werkzeuge werden jetzt gerendert, wenn man sie in der Inventarleiste ausgewählt hat(aber noch nicht mit den Handbewegungen mitbewegt...)
+
+-------------------------------------------------------
+29.10.2014
+
+-Rendern der Werkzeuge wurde verbessert (sie werden jetzt immer in der Hand des Spielers gerendert, aber noch nicht mitbewegt)
+
+-------------------------------------------------------
+02.11.2014
+
+-Werkzeuge in der Hand des Spielers werden jetzt mitbewegt, aber noch nicht mitrotiert 
+
+-------------------------------------------------------
+03.11.2014
+
+-Werkzeuge werden jetzt mitrotiert und bringen einen Bonus
+
+-------------------------------------------------------
+05.11.2014
+
+-Building Menu hinzugefügt
+-Durch Druck auf die B-Taste öffnet es sich, aber man kann noch nichts machen
+
+-------------------------------------------------------
+06.11.2014
+
+-Man kann nun, wenn man die Materialien dafür hat, neue Dinge bauen (bis jetzt nur Spitzhacken)
+
+-------------------------------------------------------
+07.11.2014
+
+-Man kann nun auch Holzstäbe, Holzwände und Steinwände bauen
+-Die Textausgabe des Building-Menus wurde geschrieben
+-Der Weltgenerator wurde umgeschrieben und generiert nun zufällige Welten (nicht mehr reine Erd-Welten)
+
+-------------------------------------------------------
+08.11.2014
+
+-Es wurden die Bau-Informationen im Building-Menu hinzugefügt
+
+-------------------------------------------------------
+09.11.2014
+
+-Man kann nun auch Leitern bauen
+-Es wurden Öfen hinzugefügt
+-Bug gefixt: Beim erhalten neuer Gegenstände wurden diese, wenn die Leiste voll war immer am gleichen Platz im Inventar abgelegt, auch wenn dieser bereits voll war
+
+------------------------------------------------------
+10.11.2014
+
+-Inventar wurde neu gezeichnet und überarbeitet
+
+------------------------------------------------------
+16.11.2014
+
+-Aufgrund eines Bugs musste eine alte Version vom 4.11.2014 wiederhergestellt und die Neuerungen eingefügt werden
+-Alles ist (ohne Bug) wieder vorhanden, bis auf das überarbeitete Inventar
+
+------------------------------------------------------
+17.11.2014
+
+-Die Klassen CPanel und CFurnance wurden hinzugefügt, finden aber noch keine Verwendung
+
+------------------------------------------------------
+18.11.2014
+
+-Man kann nun indem man mit rechts auf den Ofen klickt dessen Menü aufrufen 
+-Bug: Spiel stürzt ab, wenn man einen Ofen zerstört
+
+------------------------------------------------------
+19.11.2014
+
+-Bug behoben: Spiel stürzt nun bei zerstören von Öfen nicht mehr ab
+-Neues Inventar (ohne Equipment Sektion) hinzugefügt
+-Bau Information für Öfen hinzugefügt
+
+------------------------------------------------------
+21.11.2014
+
+-Man kann nun Dinge im Ofen-Menü platzieren
+-Dinge im Ofen werden (wenn möglich) automatisch weiterverarbeitet
+
+------------------------------------------------------
+25.11.2014
+
+-Der Ofen wurde überarbeitet und verbessert (Anzahl wird nun angezeigt und ein Produkt-Feld wurde hinzugefügt)
+
+------------------------------------------------------
+26.11.2014
+
+-Man kann im Inventar nun gleiche Items aufeinander stapeln
+-Wenn man im Ofen sachen schmilzt oder brät kommt Rauch aus dem Schornstein
+
+------------------------------------------------------
+28.11.2014
+
+-Der Rauch wurde neu gezeichnet
+
+------------------------------------------------------
+30.11.2014
+
+-Es wurden Tooltips für das Inventar hinzugefügt
+-Gold wurde hinzugefügt
+
+------------------------------------------------------
+01.12.2014
+
+-Es wurden Schränke hinzugefügt
+
+------------------------------------------------------
+03.12.2014
+
+-Es wurden Türen hinzugefügt
+
+------------------------------------------------------
+07.12.2014
+
+-Es wurden Truhen hinzugefügt (man kann noch nichts in ihnen lagern, wird noch eingebaut...)
+
+------------------------------------------------------
+09.12.2014
+
+-Die Truhen wurden weitergeschrieben (man kann nun Dinge hineintun, aber noch nicht wieder herausnehmen...)
+
+------------------------------------------------------
+11.12.2014
+
+-Truhen funktionieren nun einwandfrei
+
+------------------------------------------------------
+12.12.2014
+
+-Es wurden unterirdische Räume hinzugefügt, die verschiedene Objekte, wie Truhen, Öfen oder Schränke enthalten können
+
+------------------------------------------------------
+13.12.2014
+
+-Die Truhen in unterirdischen Räumen können nun zufällig Dinge enthalten
+
+------------------------------------------------------
+14.12.2014
+
+-Es gibt nun ein "Pause-Menü", das durch drücken der ESC Taste erscheint
+-Es sind noch einige Bugs bei den unterirdischen Räumen vorhanden, die aber nur manchmal auftreten
+
+------------------------------------------------------
+16.12.2014
+
+-Die Seite zum Laden von Spielen wurde hinzugefügt (LoadGame-Klasse)
+
+------------------------------------------------------
+19.12.2014
+
+-Man kann nun zoomen, um seine Bauwerke/Umgebung besser zu sehen, kann währenddessen aber nichts abbauen
+-Bug gefixt, dass das Spiel beim Erstellen der Welt aufgrund der Räume abstürzt
+
+------------------------------------------------------
+28.12.2014
+
+-Es wurden Sprites für das Charakterfenster und Level-Ups gezeichnet
+-Die Klasse CharacterInfo wurde hinzugefügt
+
+------------------------------------------------------
+29.12.2014
+
+-Durch Druck auf die C-Taste kann man nun das Characterfenster öffnen
+
+------------------------------------------------------
+30.12.2014
+
+-Man kann nun Stufen aufsteigen und seine Werte verbessern
+
+------------------------------------------------------
+04.01.2015
+
+-Die Skills beim Stufenaufstieg sind nun zufällig
+-Die Abbaugeschwindigkeit wirkt sich nun aus
+
+------------------------------------------------------
+05.01.2015
+
+-Die Klasse CBeam wurde hinzugefügt
+-Es wird nun ein Exp-Balken angezeigt
+-Es wird nun ein Lebens-Balken angezeigt
+-Die benötigten Exp erhöhen sich bei jedem Levelaufstieg
+
+------------------------------------------------------
+06.01.2015
+
+-Es wird nun ein Mana-Balken angezeigt
+-Die Balken können nun mit zugehörigen Werten angezeigt werden
+-Der Lebens- und Erfahrungsbalken wurde überarbeitet
+
+------------------------------------------------------
+07.01.2015
+
+-Es wurde Klebstoff hinzugefügt
+-Es wurden Eisenhelme hinzugefügt (als Items, noch nicht als Equipment)
+-Das Equipment-Fenster wurde gezeichnet (2 Versionen)
+
+------------------------------------------------------
+08.01.2015
+
+-Die Equipment Klasse wurde hinzugefügt
+-Die PlayerEquipment Klasse wurde begonnen
+
+------------------------------------------------------
+11.01.2015
+
+-Beim Öffnen des Inventars öffnet sich nun das Equipmentfenster mit
+-Es gibt noch irgendwelche Bugs beim Beenden des Spiels (Absturz beim Spieler löschen...)
+
+-------------------------------------------------------
+12.01.2015
+
+-Bugfix: Das Spiel wird nun korrekt beendet
+-Man kann nun Equipment in das Equipmentfenster legen (Diese wirken sich aber noch nicht aus)
+
+-------------------------------------------------------
+17.01.2015
+
+-Das Equipment wirkt sich nun aus
+-Im Characterfenster werden nun die insgesamten Werte angezeigt (Grundattribute + Modifikationen durch Tools oder Equipment)
+
+-------------------------------------------------------
+18.01.2015
+
+-Das Equipment wird nun auch am Zwerg angezeigt
+-Es kann nun zufällig seltene Items mit besonderen Attributen geben
+-Seltene Items werden durch andersfarbige Schrift im Inventar angezeigt
+-Es werden im Inventar nun auch die Attribute von Tools und Equipment angezeigt
+
+-------------------------------------------------------
+19.01.2015
+
+-Es wurden Eisenrüstungen hinzugefügt
+-Rüstungen werden nun in der Welt angezeigt
+-Bug gefixt, der das Spiel beim Beenden abstürzen ließ, wenn man Equipment, das man einmal ausgerüstet hatte im Inventar trug
+
+-------------------------------------------------------
+20.01.2015
+
+-Es wurden Eisenringe eingefügt, die eine Zufallseigenschaft haben
+-Man kann im Baumenü nun nach oben und unten scrollen
+
+-------------------------------------------------------
+21.01.2015
+-Es wurden Eisenleggins eingefügt
+-Es wurde eingefügt: Arcanusblock, Arcanusgestein, Arcanusring
+-Es werden nun alle Attribute von Tools und Equipment angezeigt
+-Kleine Bugfixes an Lebens- bzw. Mana-Balken, Charactermenü, Tools und Equipment
+-Das Truhen-Befüllungs-System wurde neu geschrieben: In Truhen sind nun nur noch Items, Tools oder Equipment
+
+-------------------------------------------------------
+22.01.2015
+
+-Es wurden Tooltips in Truhen hinzugefügt
+-Es wurden die Skills Glück und Mana hinzugefügt
+-Glück bringt nun etwas (manchmal können mehrere Erze o.ä. aus einem Block kommen)
+
+-------------------------------------------------------
+23.01.2015
+
+-Es wurden Schleim und Rezpte eingefügt (nur als Items)
+-Rezeptesystem hinzugefügt (man kann Rezepte nur in Truhen finden)
+-Beim Level-Up kann man nun auch ein zufälliges Rezept erhalten
+
+-------------------------------------------------------
+24.01.2015
+
+-Das zufällige Rezept beim Level-Up ist nun auf jedenfall ein noch nicht vorhandenes
+
+-------------------------------------------------------
+25.01.2015
+
+-Beim Level-Up ist nun auf jeden Fall das Rezept dabei (falls es noch welche gibt)
+-Man kann Stacks mit rechtsklick aufteilen
+-Bugfix: Spiel stürzte manchmal beim generieren von Räumen ab, oder wenn man es beendete
+-Bouncing Box von Türen geändert (man läuft jetzt nicht schon einen Block vorher gegen eine Tür)
+
+-------------------------------------------------------
+30.01.2015
+
+-Wenn man speichert wird nun ein entsprechender (aber noch leerer) Ordner erstellt
+
+-------------------------------------------------------
+31.01.2015
+
+-Ring des Vollseltenseins hinzugefügt (kann nur gefunden werden)
+-Man kann nun die Attribute und Rezepte des Spielers speichern (nur ein Spielstand möglich)
+-Man kann den Spielstand laden
+
+-------------------------------------------------------
+01.02.2015
+
+- Beim Versuch das Inventar speichern zu können gescheitert (Testen, was gespeichert wird per .txt Datei)
+
+-------------------------------------------------------
+02.02.2015
+
+-Man kann nun das Inventar auch speichern
+-Man kann nun auch das Equipment speichern
+
+-------------------------------------------------------
+03.02.2015
+
+-Bug gefixt, der das Spiel am Anfang manchmal abstürzen ließ
+-Veränderung in der World-Klasse fürs Speichern dieser 
+
+-------------------------------------------------------
+04.02.2015
+
+-Man kann nun bis auf die Panels (Truhen und Öfen) die komplette Welt speichern
+
+-------------------------------------------------------
+05.02.2015
+
+-Man kann nun einen Spielstand komplett speichern (bei dem Inhalt von Truhen gibt es noch kleine Probleme)
+
+-------------------------------------------------------
+06.02.2015
+
+-Man kann eine Spielstand nun auch mit Truheninhalt speichern (möglicherweise noch Bug, dass LittleItems beim Speichern verschwinden)
+
+-------------------------------------------------------
+07.02.2015
+
+-Klasse StringInput hinzugefügt (Eingabefenster)
+
+-------------------------------------------------------
+08.02.2015
+
+-Menü zum erstellen eines neuen Spiels eingefügt(Weltgröße, Name und Klasse in Zukunft wählbar)
+
+-------------------------------------------------------
+09.02.2015
+
+-Man kann nun Weltgröße, Name und Klasse wählen (Klassen noch nicht ganz fertig)
+
+-------------------------------------------------------
+10.02.2015
+
+-Das Laden von gespeicherten Spielen mit eigenem Name ist nun möglich
+
+------------------------------------------------------
+15.02.2015
+
+-Das Scrollen im Ladebildschirm ist nun möglich
+
+------------------------------------------------------
+17.02.2015
+
+-Zauberhut hinzugefügt 
+-Schwert hinzugefügt
+-Kompatibilität mit anderen Geräten getestet: Funktioniert bis auf folgende Probleme:
+ ~ Im Menü sind die Hintergründe nicht gr0ß genug
+ ~ Beim Laden eines Spielstandes, der auf einem anderen Gerät gespeichert wurde kann es zu Verschiebungen im Inventar kommen
+ ~ Panels sind im Spiel verschoben (behoben)
+
+------------------------------------------------------
+22.02.2015
+
+-Lichtmaschine begonnen 
+
+------------------------------------------------------
+23.02.2015
+
+-Lichtmaschine grundsätzlich fertig gestellt
+-Es gibt nun eine Tag-Nacht-Zyklus
+-Öfen geben nun Licht in der Nacht
+
+------------------------------------------------------
+24.02.2015
+
+-Es wurden Kerzen hinzugefügt, die man auf dem Kopf tragen kann (geben Licht)
+-Es wurden Laternen hinzugefügt, die man tragen oder abstellen kann (geben Licht)
+-Der Verlauf der Nacht wird nun auch gespeichert und geladen
+
+------------------------------------------------------
+25.02.2015
+
+-Lichtmaschine umgeschrieben für deutlich bessere Performance
+-Es wurde Wachs eingefügt
+
+------------------------------------------------------
+27.02.2015
+
+-Man kann Spielstände nun löschen
+
+------------------------------------------------------
+01.03.2015
+
+-Es wurde ein Menü für die Panels eingefügt (Inventar, Baumenü, Characterfenster)
+
+------------------------------------------------------
+02.03.2015
+
+-Es wurde Marmor eingefügt
+-Es wurden diverse Bugs bei der Generierung der Welt behoben
+
+------------------------------------------------------
+03.03.2015
+
+-Es wurde eine Npc-Maschine eingefügt, die alle Npcs verwaltet
+-Es wurden Bienen eingefügt (noch einige Bugs: fliegen immer in rechte obere Ecke, zittern, fliegen durch Blöcke...)
+
+------------------------------------------------------
+04.03.2015
+
+-Bienen können nun nicht mehr durch Blöcke fliegen
+-Man kann Bienen nun töten, sie droppen Wachs
+
+------------------------------------------------------
+05.03.2015
+
+-Angriff durch den Spieler verbessert (man trifft nun einmal pro Armbewegung und nicht permanent)
+
+------------------------------------------------------
+07.03.2015
+
+-Schadensindikator hinzugefügt (Rote Zahlen zeigen den zugefügten Schaden an)
+-Bienen werden nun mit gespeichert
+-Bug behoben, dass Bienen nach dem Speichern oder Laden plötzlich woanders sind
+
+------------------------------------------------------
+08.03.2015
+
+-Bienen despawnen nun, wenn sie aus der Welt hinausfliegen
+-Bienen spawnen nun nach einer zufälligen Zeit
+-Bug beim Musikabspielen behoben (es konnte mehrmals hintereinander die gleiche Musik gespielt werden)
+-Mehr Musik eingefügt
+-Sounds beim Abbau von Gold eingefügt (sind nur Probesounds, werden noch ersetzt)
+
+------------------------------------------------------
+09.03.2015
+
+-LittleItems umgeschrieben
+-Truhen und Öfen geben beim Zerstören nun deren Inhalt
+
+------------------------------------------------------
+10.03.2015
+
+-Es wurden Tooltips im Equipmentmenü hinzugefügt
+-Kleinen Bug beim spawnen von Bienen behoben (Spielabsturz)
+
+------------------------------------------------------
+12.03.2015
+
+-Marmorwände hinzugefügt
+-Kriegerklassentafel beim Startmenü geändert
+
+------------------------------------------------------

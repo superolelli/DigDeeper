@@ -44,6 +44,7 @@ struct SNpcAttributes
 	int armour;
 	int strength;
 	int speed;
+	int exp;
 };
 
 struct SNpcState
