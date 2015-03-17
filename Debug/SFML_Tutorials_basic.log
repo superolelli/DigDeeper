@@ -1,0 +1,53 @@
+﻿Der Buildvorgang wurde am 17.03.2015 16:13:23 gestartet.
+     1>Projekt "F:\Dig Deeper rewritten\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
+     1>ClCompile:
+         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.1\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Bee.cpp
+         Bee.cpp
+     1>f:\dig deeper rewritten\bee.cpp(62): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\bee.cpp(64): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\bee.cpp(74): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\bee.cpp(76): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\bee.cpp(84): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\bee.cpp(140): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\bee.cpp(141): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+       Link:
+         F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\Debug\Dig Deeper rewritten.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.1\lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-network-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\Debug\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\Debug\Dig Deeper rewritten.lib" /MACHINE:X86 Debug\Beam.obj
+         Debug\Bee.obj
+         Debug\BuildingMenu.obj
+         Debug\Button.obj
+         Debug\CharacterInfo.obj
+         Debug\Chest.obj
+         Debug\Equipment.obj
+         Debug\Framework.obj
+         Debug\Furnance.obj
+         Debug\Game.obj
+         Debug\GameChoose.obj
+         Debug\Inventory.obj
+         Debug\Items.obj
+         Debug\LightMachine.obj
+         Debug\LittleItems.obj
+         Debug\Living3Part.obj
+         Debug\LoadGame.obj
+         Debug\main.obj
+         Debug\Menu.obj
+         Debug\NewGame.obj
+         Debug\NPC.obj
+         Debug\NpcMachine.obj
+         Debug\Options.obj
+         Debug\Panel.obj
+         Debug\Placeable.obj
+         Debug\Player.obj
+         Debug\PlayerEquipment.obj
+         Debug\SignMachine.obj
+         Debug\Sprite.obj
+         Debug\StringInput.obj
+         Debug\Textures.obj
+         Debug\Time.obj
+         Debug\Tool.obj
+         Debug\World.obj
+         SFML_Tutorials_basic.vcxproj -> F:\Dig Deeper rewritten\Debug\Dig Deeper rewritten.exe
+     1>Die Erstellung des Projekts "F:\Dig Deeper rewritten\SFML_Tutorials_basic.vcxproj" ist abgeschlossen, Build Ziel(e).
+
+Build erfolgreich.
+
+Verstrichene Zeit 00:00:02.10
