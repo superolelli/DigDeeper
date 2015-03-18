@@ -983,3 +983,8 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Kriegerklassentafel beim Startmenü geändert
 
 ------------------------------------------------------
+18.03.2015
+
+-Goblin gezeichnet
+
+------------------------------------------------------
