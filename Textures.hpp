@@ -240,6 +240,10 @@ public:
 
 	Texture t_bee;                                      //a bee
 
+	Texture t_goblin_body;                       //a goblin
+	Texture t_goblin_legs;
+	Texture t_goblin_arm;
+
 	Music m_musicMenu;
 	Music m_musicGame[9];
 

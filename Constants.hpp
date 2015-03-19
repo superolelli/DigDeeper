@@ -74,6 +74,7 @@ const int VERYRARERING = 200;
 #pragma region Npcs
 
 const int BEE = 1;
+const int GOBLIN = 2;
 
 #pragma endregion
 

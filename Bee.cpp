@@ -8,8 +8,8 @@ void CBee::Init(int _x, int _y, CWorld *_world, bool _loaded)
 	m_ID = BEE;
 
 	//Init the sprite
-	m_pNpcSprite = new CSprite;
-	m_pNpcSprite->Load(&g_pTextures->t_bee, 4, 10, 10);
+	m_pBeeSprite = new CSprite;
+	m_pBeeSprite->Load(&g_pTextures->t_bee, 4, 10, 10);
 
 	m_XVel = 0;
 	m_YVel = 0;
@@ -28,11 +28,11 @@ void CBee::Init(int _x, int _y, CWorld *_world, bool _loaded)
 
 	if(_loaded)
 	{
-		m_pNpcSprite->SetPos(m_xPos, m_yPos);
+		m_pBeeSprite->SetPos(m_xPos, m_yPos);
 	}
 	else
 	{
-		m_pNpcSprite->SetPos(_x, _y);
+		m_pBeeSprite->SetPos(_x, _y);
 		m_PointToGo.x = _x;
 		m_PointToGo.y = _y;
 		m_xPos = _x;
@@ -47,7 +47,7 @@ void CBee::Init(int _x, int _y, CWorld *_world, bool _loaded)
 
 void CBee::Quit()
 {
-	SAFE_DELETE(m_pNpcSprite);
+	SAFE_DELETE(m_pBeeSprite);
 }
 
 
@@ -55,8 +55,8 @@ void CBee::Quit()
 bool CBee::CheckNpc()
 {
 	Vector2i beePos;
-	beePos.x = m_pNpcSprite->GetRect().left;
-	beePos.y = m_pNpcSprite->GetRect().top;
+	beePos.x = m_pBeeSprite->GetRect().left;
+	beePos.y = m_pBeeSprite->GetRect().top;
 
 	//get the x velocity
 	if(beePos.x < m_PointToGo.x)
@@ -82,12 +82,12 @@ bool CBee::CheckNpc()
 		NewPointToGo();
 	}
 
-	m_pNpcSprite->Move(m_XVel, m_YVel);
-	m_xPos = m_pNpcSprite->GetRect().left;
-	m_yPos = m_pNpcSprite->GetRect().top;
+	m_pBeeSprite->Move(m_XVel, m_YVel);
+	m_xPos = m_pBeeSprite->GetRect().left;
+	m_yPos = m_pBeeSprite->GetRect().top;
 
 	//if bee is outside the world: return false
-	if(m_xPos < 0 - m_pNpcSprite->GetRect().width || m_yPos < 0 - m_pNpcSprite->GetRect().height || m_xPos > m_pWorld->GetDimensions().x*100)
+	if(m_xPos < 0 - m_pBeeSprite->GetRect().width || m_yPos < 0 - m_pBeeSprite->GetRect().height || m_xPos > m_pWorld->GetDimensions().x*100)
 		return false;
 
 	//if the bee reached its destiny: get a new destiny
@@ -105,7 +105,7 @@ bool CBee::CheckNpc()
 void CBee::NewPointToGo()
 {
 	//get new x distance
-	m_PointToGo.x = m_pNpcSprite->GetRect().left + rand()%200 + 100;
+	m_PointToGo.x = m_pBeeSprite->GetRect().left + rand()%200 + 100;
 
 		//get the pointing way
 		if(rand()%2 == 0)
@@ -117,13 +117,13 @@ void CBee::NewPointToGo()
 			m_PointToGo.x /= 2;
 		}
 
-		if(m_PointToGo.x < m_pNpcSprite->GetRect().left)
+		if(m_PointToGo.x < m_pBeeSprite->GetRect().left)
 			m_left = true;
 		else
 			m_left = false;
 		
 		//get new y distance
-		m_PointToGo.y = m_pNpcSprite->GetRect().top + rand()%200 + 100;
+		m_PointToGo.y = m_pBeeSprite->GetRect().top + rand()%200 + 100;
 
 		//get the pointing way
 		if(rand()%2 == 0)
@@ -143,10 +143,10 @@ bool CBee::CheckCollisions()
 {
 	//the rect, the bee would have, if he moved
 	FloatRect newPosition;
-	newPosition.left   = m_pNpcSprite->GetRect().left + m_XVel;
-	newPosition.top    = m_pNpcSprite->GetRect().top + m_YVel;
-	newPosition.width  = (float)m_pNpcSprite->GetRect().width;
-	newPosition.height = (float)m_pNpcSprite->GetRect().height;
+	newPosition.left   = m_pBeeSprite->GetRect().left + m_XVel;
+	newPosition.top    = m_pBeeSprite->GetRect().top + m_YVel;
+	newPosition.width  = (float)m_pBeeSprite->GetRect().width;
+	newPosition.height = (float)m_pBeeSprite->GetRect().height;
 
 	return(m_pWorld->CheckLivingCollision(newPosition));
 }
@@ -155,9 +155,9 @@ bool CBee::CheckCollisions()
 void CBee::Render()
 {
 	if(m_left)
-		m_pNpcSprite->Render(g_pFramework->GetWindow(), 0.0f);
+		m_pBeeSprite->Render(g_pFramework->GetWindow(), 0.0f);
 	else
-		m_pNpcSprite->Render(g_pFramework->GetWindow(), 2.0f);
+		m_pBeeSprite->Render(g_pFramework->GetWindow(), 2.0f);
 }
 
 

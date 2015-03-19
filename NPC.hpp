@@ -15,8 +15,8 @@ public:
 	virtual vector<SItem> GetLoot() = 0;
 	virtual void Render() = 0;
 	virtual void Quit() = 0;
+	virtual IntRect GetRect() = 0;
 
-	IntRect GetRect(){return m_pNpcSprite->GetRect();}
 	SNpcAttributes* GetAttributes(){return &m_Attributes;}
 	int GetID(){return m_ID;}
 
@@ -35,7 +35,6 @@ protected:
 		ar & m_Attributes.currentHealth;
 	}
 
-	CSprite *m_pNpcSprite;              //the sprite
 	SNpcAttributes m_Attributes;           //the npc's attributes
 	SNpcState m_State;                     //the npc's state
 	int m_ID;                              //the npc's id

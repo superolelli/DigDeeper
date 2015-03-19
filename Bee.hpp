@@ -12,6 +12,7 @@ public:
 	bool CheckNpc();
 	void Render();
 	void Quit();
+	IntRect GetRect(){ return m_pBeeSprite->GetRect();}
 
 	vector<SItem> GetLoot();
 
@@ -28,6 +29,7 @@ private:
 		ar & m_PointToGo.y;
 	}
 
+	CSprite *m_pBeeSprite;              //the sprite
 
 	bool m_left;                   //is the bee looking to the left
 	Vector2i m_PointToGo;          //the point where the bee should go

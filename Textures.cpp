@@ -218,6 +218,10 @@ void TextureLoading::LoadTextures()
 	t_dwarf_arm.loadFromFile("Data/Sprites/Living/Dwarf_animated.png", IntRect(2, 2, 232, 38));
 
 	t_bee.loadFromFile("Data/Sprites/Living/bee.png");
+
+	t_goblin_body.loadFromFile("Data/Sprites/Living/goblin_upper_body.png");
+	t_goblin_legs.loadFromFile("Data/Sprites/Living/goblin_legs.png");
+	t_goblin_arm.loadFromFile("Data/Sprites/Living/goblin_arm.png");
 	
 	m_musicMenu.openFromFile("Data/Music/Music1.ogg");
 	m_musicMenu.setLoop(true);

@@ -117,6 +117,9 @@
     <ClCompile Include="SignMachine.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Goblin.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.hpp">
@@ -231,6 +234,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="SignMachine.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Goblin.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -98,6 +98,7 @@
     <ClCompile Include="Furnance.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameChoose.cpp" />
+    <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Items.cpp" />
     <ClCompile Include="LightMachine.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="CharacterInfo.hpp" />
     <ClInclude Include="Chest.hpp" />
     <ClInclude Include="Constants.hpp" />
+    <ClInclude Include="Goblin.hpp" />
     <ClInclude Include="SignMachine.hpp" />
     <ClInclude Include="Equipment.hpp" />
     <ClInclude Include="Framework.hpp" />
