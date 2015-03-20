@@ -34,6 +34,7 @@ private:
 	bool m_left;                   //is the goblin looking to the left
 	Vector2i m_PointToGo;          //the point where the goblin should go
 	float m_fXVel, m_fYVel;             //the velocity
+	float m_fLegsAnimState;           //the animation state of the legs
 };
 
 

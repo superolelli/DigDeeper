@@ -51,11 +51,21 @@ void CNpcMachine::AddNpc(int _ID, int _x, int _y)
 {
 	switch(_ID)
 	{
-	case(BEE):
-		CBee *bee = new CBee;
-		bee->Init(_x, _y, m_pWorld);
-		m_Npcs.push_back(bee);
-		break;
+		//if the new npc is a bee:
+		case(BEE):
+		{
+			CBee *bee = new CBee;
+			bee->Init(_x, _y, m_pWorld);
+			m_Npcs.push_back(bee);
+		}break;
+
+		//if the new npc is a goblin:
+		case(GOBLIN):
+		{
+			CGoblin *goblin = new CGoblin;
+			goblin->Init(_x, _y, m_pWorld);
+			m_Npcs.push_back(goblin);
+		}break;
 	}
 }
 

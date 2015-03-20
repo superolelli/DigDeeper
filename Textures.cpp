@@ -219,9 +219,9 @@ void TextureLoading::LoadTextures()
 
 	t_bee.loadFromFile("Data/Sprites/Living/bee.png");
 
-	t_goblin_body.loadFromFile("Data/Sprites/Living/goblin_upper_body.png");
-	t_goblin_legs.loadFromFile("Data/Sprites/Living/goblin_legs.png");
-	t_goblin_arm.loadFromFile("Data/Sprites/Living/goblin_arm.png");
+	t_goblin_body.loadFromFile("Data/Sprites/Living/goblin_upper_body2.png");
+	t_goblin_legs.loadFromFile("Data/Sprites/Living/goblin_legs2.png");
+	t_goblin_arm.loadFromFile("Data/Sprites/Living/goblin_arm2.png");
 	
 	m_musicMenu.openFromFile("Data/Music/Music1.ogg");
 	m_musicMenu.setLoop(true);

@@ -28,14 +28,31 @@ public:
 	//loads the old legs
 	void LoadNewLegs(Texture *_legs, int _legsFrameWidth, int _legsFrameHeight, int _legsFrameNumber);
 
+	//renders everything besides the arm
 	void Render(float _bodyFrame, float _legsFrame);
+
+	//renders the arm
 	void RenderSecondPart(int _frame);
+
+	//sets a new position
 	void SetPos(float _x, float _y);
+
+	//moves the living3part
 	void Move(float _x, float _y);
+
+	//sets the relative position of legs and arms to the body
 	void SetPartsPos(float _armXLeft, float _armXRight, float _armY, float _legsXLeft, float _legsXRight, float _legsY);
+
+	//sets the rotating point of the arm
 	void SetArmRotatingPoint(float _x, float _y);
+
+	//sets the position of the hand
 	void SetHandPosition(float _x, float _y) {m_HandXLeft = _x; m_HandYLeft = _y;}
+
+	//rotates the arm
 	void RotateArm(float _angle);
+
+	//resets the rotation of the arm
 	void ResetArmRotation();
 
 	IntRect GetRect();

@@ -988,3 +988,8 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Goblin gezeichnet
 
 ------------------------------------------------------
+20.03.2015
+
+-Goblin hinzugefügt (kann bis jetzt noch nichts und ist zu klein :))
+
+------------------------------------------------------

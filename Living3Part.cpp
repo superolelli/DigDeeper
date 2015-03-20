@@ -38,6 +38,8 @@ void CLiving3Part::Load(Texture *_body, int _bodyFrameWidth, int _bodyFrameHeigh
 
 	m_Rect.left = _xPos;
 	m_Rect.top = _yPos;
+
+	m_RotatingAngleLeft = 0;
 }
 
 
@@ -183,6 +185,7 @@ void CLiving3Part::Render(float _bodyFrame,  float _legsFrame)
 }
 
 
+//Renders the arm
 void CLiving3Part::RenderSecondPart(int _frame)
 {
 	m_pArm->Render(g_pFramework->GetWindow(), (float)(_frame));

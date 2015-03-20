@@ -3,6 +3,7 @@
 
 #include "Framework.hpp"
 #include "Bee.hpp"
+#include "Goblin.hpp"
 #include "World.hpp"
 #include "SignMachine.hpp"
 
@@ -45,6 +46,13 @@ private:
 				ar & a;
 				ar & bee;
 			}
+			else if (n->GetID() == GOBLIN)
+			{
+				CGoblin* goblin = (CGoblin*)n;
+				a = goblin->GetID();
+				ar & a;
+				ar & goblin;
+			}
 		}
 
 		a = 1000;
@@ -64,6 +72,12 @@ private:
 				CBee *bee = new CBee;
 				ar & bee;
 				m_Npcs.push_back(bee);
+			}
+			else if (a == GOBLIN)
+			{
+				CGoblin *goblin = new CGoblin;
+				ar & goblin;
+				m_Npcs.push_back(goblin);
 			}
 		}while(a != 1000);
 	}

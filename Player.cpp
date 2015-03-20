@@ -84,7 +84,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 
 	m_Attributes.currentHealth = 100;
 	m_Attributes.maxHealth = 100;
-	m_Attributes.armour = 10;
+	m_Attributes.armour = 0;
 	m_Attributes.strength = 5;
 	m_Attributes.luck = 0;
 	m_Attributes.breakingSpeed = 1.0f;
