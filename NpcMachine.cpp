@@ -143,6 +143,8 @@ void CNpcMachine::CheckAllNpcs()
 
 
 	m_LastArmUp = m_pPlayer->GetArmGoingUp();
+
+	g_pProfiler->SetProfilingValue(NPCAMOUNT, (int)m_Npcs.size());
 }
 
 

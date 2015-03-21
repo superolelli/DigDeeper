@@ -459,6 +459,7 @@ void CWorld::Render(Vector2f _viewSize, Vector2f _viewCenter)
 void CWorld::RenderLight()
 {
 	m_lightMachine.Render();
+	g_pProfiler->SetProfilingValue(NIGHTLEVEL, m_fNightTimer);
 }
 
 

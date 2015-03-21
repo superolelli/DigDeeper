@@ -7,6 +7,7 @@
 #include "Player.hpp"
 #include "Placeable.hpp"
 #include "NpcMachine.hpp"
+#include "Profiler.hpp"
 
 
 class CGame
@@ -23,6 +24,7 @@ public:
 private:
 
 	int m_frame;                          //the frames per second
+	int m_currentFPS;                        //the current FPS rate
 	int m_music;                             //the current music
 	float m_seconds;                     //the timer for the frame checking
 	float m_zoom;                          //the zoom factor

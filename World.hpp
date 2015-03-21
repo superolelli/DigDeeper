@@ -13,6 +13,7 @@
 #include "Panel.hpp"
 #include "Furnance.hpp"
 #include "Chest.hpp"
+#include "Profiler.hpp"
 
 //static const int m_BlocksX = 100;
 //static const int m_BlocksY = 54;

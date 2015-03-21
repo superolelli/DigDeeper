@@ -993,3 +993,9 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Goblin hinzugefügt (kann bis jetzt noch nichts und ist zu klein :))
 
 ------------------------------------------------------
+21.03.2015
+
+-Goblins laufen jetzt zufällig hin und her oder stehen (in x-Richtung)
+-Profiler eingefügt
+
+------------------------------------------------------

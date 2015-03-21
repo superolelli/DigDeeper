@@ -6,6 +6,7 @@
 #include "Goblin.hpp"
 #include "World.hpp"
 #include "SignMachine.hpp"
+#include "Profiler.hpp"
 
 class CNpcMachine
 {

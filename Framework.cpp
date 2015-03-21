@@ -95,6 +95,9 @@ void CFramework::ProcessEvents()
 
 					if(event.key.code == Keyboard::BackSpace)
 						keyStates.backspace = true;
+
+					if (event.key.code == Keyboard::F3)
+						keyStates.f3 = true;
 					
 				}break;
 
@@ -140,6 +143,7 @@ void CFramework::ClearKeyStates()
 	keyStates.add = false;
 	keyStates.subtract = false;
 	keyStates.backspace = false;
+	keyStates.f3 = false;
 
 	keyStates.text_entered = false;
 	keyStates.text_input = 'a';

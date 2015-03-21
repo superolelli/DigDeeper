@@ -26,6 +26,9 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	//applies the view to the window
 	g_pFramework->GetWindow()->setView(m_View);
 
+	//Inits the profiler
+	g_pProfiler->Init();
+
 	//Loads the background
 	m_pBackground = new CSprite;
 	m_pBackground->Load(&g_pTextures->t_gameBackground);
@@ -73,6 +76,7 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 
 	//sets the fps counter and the fps timer to zero
 	m_frame = 0;
+	m_currentFPS = 0;
 	m_seconds = 0;
 
 	//select the first music
@@ -110,6 +114,8 @@ void CGame::Quit()
 
 	g_pTextures->m_musicGame[m_music].stop();
 
+	g_pProfiler->Quit();
+
 	//Sets the default view
 	g_pFramework->GetWindow()->setView(g_pFramework->GetWindow()->getDefaultView());
 }
@@ -126,6 +132,9 @@ void CGame::Run()
 	{
 		g_pFramework->Update();
 		g_pFramework->Clear();
+
+		//clear the profiler
+		g_pProfiler->ClearProfiler();
 
 	//if(Keyboard::isKeyPressed(Keyboard::Add))
 	//{
@@ -186,6 +195,15 @@ void CGame::Run()
 		g_pFramework->GetWindow()->setView(g_pFramework->GetWindow()->getDefaultView());
 
 		m_pPlayer->RenderInventory();
+
+		//sets the fps value
+		g_pProfiler->SetProfilingValue(FPS, m_currentFPS);
+		g_pProfiler->SetProfilingValue(XPOS, m_pPlayer->GetRect().left);
+		g_pProfiler->SetProfilingValue(YPOS, m_pPlayer->GetRect().top);
+		g_pProfiler->SetProfilingValue(MUSICNUMBER, m_music);
+
+		//show the profiler
+		g_pProfiler->ShowProfiler();
 
 		g_pFramework->Flip();
 
@@ -272,6 +290,7 @@ void CGame::CheckFps()
 	{
 		//write the frames per second and set the frame counter and the frame timer to zero
 		cout << "Fps: " << m_frame << endl;
+		m_currentFPS = m_frame;
 		m_frame = 0;
 		m_seconds = 0;
 	}
