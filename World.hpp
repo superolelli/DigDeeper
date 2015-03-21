@@ -42,7 +42,7 @@ public:
 	//returns the current alpah value
 	int GetNightAlpha(){return m_NightAlpha;}
 
-	//returns the world's dimensions
+	//returns the world's dimensions in Blocks
 	Vector2i GetDimensions(){return Vector2i(m_BlocksX, m_BlocksY);}
 
 	//places a new thing in the world

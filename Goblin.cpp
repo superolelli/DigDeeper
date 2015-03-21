@@ -29,10 +29,8 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, bool _loaded)
 	m_Attributes.exp = 5;
 
 	//Init the state
-	m_State.attacking = false;
-	m_State.going = false;
-	m_State.idle = true;
-
+	m_State = IDLE;
+	m_fStateTime = 8;
 
 	if (_loaded)
 	{
@@ -64,44 +62,128 @@ void CGoblin::Quit()
 
 bool CGoblin::CheckNpc()
 {
-	if (m_left)
-	{
-		m_fXVel = -g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
-		m_fLegsAnimState -= 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
+	//Checks/sets the current state
+	CheckState();
 
-		//start the animation new if it has reached it's end
-		if (m_fLegsAnimState < 0 || m_fLegsAnimState > 6)
-			m_fLegsAnimState = 5.99f;
+	//checks the movement in x-direction
+	CheckXMovement();
+	
+	if (m_pWorld->CheckLivingCollision((FloatRect)m_pGoblin->GetRect()))
+		m_fXVel = 0;
 
-		if (m_pGoblin->GetRect().left < 200)
-		{
-			m_left = false;
-			m_fLegsAnimState = 6;
-		}
-		
-	}
-	else
-	{
-		m_fXVel = g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
-		m_fLegsAnimState += 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
-
-		//start the animation new if it has reached it's end
-		if (m_fLegsAnimState < 6 || m_fLegsAnimState > 12)
-			m_fLegsAnimState = 6;
-
-		if (m_pGoblin->GetRect().left > 1200)
-		{
-			m_left = true;
-			m_fLegsAnimState = 5;
-		}
-	}
 	m_pGoblin->Move(m_fXVel, m_fYVel);
 
-
-	return true;
+	//return false if the goblin is outside the world
+	if (m_pGoblin->GetRect().left + m_pGoblin->GetRect().width < 0 || m_pGoblin->GetRect().left > m_pWorld->GetDimensions().x*100)
+		return false;
+	else
+		return true;
 }
 
 
+
+
+void CGoblin::CheckXMovement()
+{
+	//is the goblin looking to the left?
+	if (m_left)
+	{
+		//is the goblin going?
+		if (m_State == WALKING)
+		{
+			m_fXVel = -g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
+			m_fLegsAnimState -= 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
+
+			//start the animation new if it has reached it's end
+			if (m_fLegsAnimState < 0 || m_fLegsAnimState > 6)
+				m_fLegsAnimState = 5.99f;
+
+			//if the goblin reached it's destination: wait for a few seconds
+			if (m_pGoblin->GetRect().left <= m_PointToGo.x)
+			{
+				m_fStateTime = rand() % 15 + 5;
+				m_State = IDLE;
+			}
+		}
+		//is the goblin doing nothing?
+		else if (m_State == IDLE)
+		{
+			m_fXVel = 0.0f;
+			m_fLegsAnimState = 5;
+		}
+
+	}
+	//is the goblin looking to the right
+	else
+	{
+		//is the goblin going?
+		if (m_State == WALKING)
+		{
+			m_fXVel = g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
+			m_fLegsAnimState += 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
+
+			//start the animation new if it has reached it's end
+			if (m_fLegsAnimState < 6 || m_fLegsAnimState > 12)
+				m_fLegsAnimState = 6;
+
+			if (m_pGoblin->GetRect().left + m_pGoblin->GetRect().width >= m_PointToGo.x)
+			{
+				m_fStateTime = rand() % 15 + 5;
+				m_State = IDLE;
+			}
+		}
+		//is the goblin doing nothing?
+		else if (m_State == IDLE)
+		{
+			m_fXVel = 0.0f;
+			m_fLegsAnimState = 6;
+		}
+	}
+}
+
+
+void CGoblin::CheckState()
+{
+	switch (m_State)
+	{
+		//if the goblin is idle: check if he should start walking
+		case(IDLE) :
+		{
+			m_fStateTime -= g_pTimer->GetElapsedTime().asSeconds();
+
+			//if the time for being idle is up: seek a new point and start walking towards it
+			if (m_fStateTime <= 0)
+			{
+				m_State = WALKING;
+
+				//get new x distance
+				m_PointToGo.x = m_pGoblin->GetRect().left + rand() % 400 + 300;
+
+				//get the pointing way
+				if (rand() % 2 == 0)
+					m_PointToGo.x *= -1;
+
+				//the point can't be outside the world
+				if (m_PointToGo.x < 0)
+				{
+					m_PointToGo.x /= 2;
+				}
+
+				//set the direction
+				if (m_PointToGo.x < m_pGoblin->GetRect().left)
+				{
+					m_left = true;
+					m_fLegsAnimState = 5;
+				}
+				else
+				{
+					m_left = false;
+					m_fLegsAnimState = 6;
+				}
+			}
+		}break;
+	}
+}
 
 
 

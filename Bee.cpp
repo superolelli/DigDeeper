@@ -22,9 +22,7 @@ void CBee::Init(int _x, int _y, CWorld *_world, bool _loaded)
 	m_Attributes.exp = 1;
 
 	//Init the state
-	m_State.attacking = false;
-	m_State.going = false;
-	m_State.idle = true;
+	m_State = IDLE;
 
 	if(_loaded)
 	{

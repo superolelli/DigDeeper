@@ -36,7 +36,7 @@ protected:
 	}
 
 	SNpcAttributes m_Attributes;           //the npc's attributes
-	SNpcState m_State;                     //the npc's state
+	int m_State;                           //the current state
 	int m_ID;                              //the npc's id
 	int m_xPos;
 	int m_yPos; 

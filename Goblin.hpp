@@ -35,6 +35,12 @@ private:
 	Vector2i m_PointToGo;          //the point where the goblin should go
 	float m_fXVel, m_fYVel;             //the velocity
 	float m_fLegsAnimState;           //the animation state of the legs
+
+	float m_fStateTime;               //how long does the current state last?
+
+	void CheckState();                 //checks the state
+	void CheckXMovement();                //checks the movement in x-direction
+	void CheckYMovement();                //checks the movement in y-direction
 };
 
 

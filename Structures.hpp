@@ -47,12 +47,6 @@ struct SNpcAttributes
 	int exp;
 };
 
-struct SNpcState
-{
-	bool idle;
-	bool attacking;
-	bool going;
-};
 
 struct SToolAttributes
 {

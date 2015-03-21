@@ -79,6 +79,15 @@ const int GOBLIN = 2;
 #pragma endregion
 
 
+#pragma region NpcStates
+
+const int IDLE = 1;
+const int WALKING = 2;
+const int ATTACKING = 3;
+
+#pragma endregion
+
+
 
 #pragma region Skills
 
