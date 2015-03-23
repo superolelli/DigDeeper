@@ -1,36 +1,19 @@
-﻿Der Buildvorgang wurde am 21.03.2015 17:25:16 gestartet.
+﻿Der Buildvorgang wurde am 23.03.2015 16:17:35 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Bee.cpp Game.cpp Goblin.cpp Inventory.cpp NPC.cpp NpcMachine.cpp Player.cpp Profiler.cpp World.cpp main.cpp
-         Bee.cpp
-     1>Bee.cpp(61): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>Bee.cpp(63): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>Bee.cpp(73): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>Bee.cpp(75): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>Bee.cpp(83): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>Bee.cpp(144): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>Bee.cpp(145): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp Goblin.cpp NpcMachine.cpp main.cpp
          Game.cpp
          Goblin.cpp
-     1>Goblin.cpp(37): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>Goblin.cpp(41): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>Goblin.cpp(104): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>Goblin.cpp(131): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
-         Inventory.cpp
-         NPC.cpp
+     1>Goblin.cpp(39): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>Goblin.cpp(43): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>Goblin.cpp(124): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>Goblin.cpp(151): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
          NpcMachine.cpp
      1>NpcMachine.cpp(173): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
      1>NpcMachine.cpp(174): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
      1>NpcMachine.cpp(175): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
      1>NpcMachine.cpp(176): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
      1>NpcMachine.cpp(191): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
-         Player.cpp
-     1>Player.cpp(231): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>Player.cpp(371): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-         Profiler.cpp
-         World.cpp
-     1>World.cpp(379): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>World.cpp(380): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
          main.cpp
        Link:
          F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.1\lib" "sfml-audio.lib" "sfml-graphics.lib" "sfml-network.lib" "sfml-system.lib" "sfml-window.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.lib" /MACHINE:X86 /SAFESEH Release\Beam.obj
@@ -77,4 +60,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:18.75
+Verstrichene Zeit 00:00:12.95

@@ -21,6 +21,8 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, bool _loaded)
 
 	m_fLegsAnimState = 5;
 
+	m_fallingSpeed = 0;
+
 	//Init the attributes
 	m_Attributes.maxHealth = 40;
 	m_Attributes.armour = 0;
@@ -68,9 +70,27 @@ bool CGoblin::CheckNpc()
 	//checks the movement in x-direction
 	CheckXMovement();
 	
-	if (m_pWorld->CheckLivingCollision((FloatRect)m_pGoblin->GetRect()))
+	//if the goblin would collide: set the x-velocity to 0
+	if (CheckCollision())
 		m_fXVel = 0;
 
+	//checks the movement in y-direction
+	CheckYMovement();
+
+	//if the goblin would collide: set the y-velocity to 0
+	if (CheckCollision())
+	{
+		m_fYVel = m_fYVel / 2;
+		if (CheckCollision())
+		{
+			m_fYVel = m_fYVel / 2;
+			if (CheckCollision())
+			{
+				m_fYVel = 0;
+			}
+		}
+
+	}
 	m_pGoblin->Move(m_fXVel, m_fYVel);
 
 	//return false if the goblin is outside the world
@@ -139,6 +159,39 @@ void CGoblin::CheckXMovement()
 			m_fLegsAnimState = 6;
 		}
 	}
+}
+
+
+
+
+void CGoblin::CheckYMovement()
+{
+	//add something to the falling speed if it hasn't reached it's limit
+	if (m_fallingSpeed < 200)
+	{
+		m_fallingSpeed += static_cast<int>(400 * g_pTimer->GetElapsedTime().asSeconds());
+
+		//the normal falling speed is 200
+		if (m_fallingSpeed > 200)
+			m_fallingSpeed = 200;
+	}
+
+	//imitates gravity
+	m_fYVel = m_fallingSpeed * g_pTimer->GetElapsedTime().asSeconds();
+}
+
+
+
+bool CGoblin::CheckCollision()
+{
+	//the rect, the dwarf would have, if he moved
+	FloatRect newPosition;
+	newPosition.left = m_pGoblin->GetRect().left + m_fXVel;
+	newPosition.top = m_pGoblin->GetRect().top + m_fYVel;
+	newPosition.width = (float)m_pGoblin->GetRect().width;
+	newPosition.height = (float)m_pGoblin->GetRect().height;
+
+	return m_pWorld->CheckLivingCollision(newPosition);
 }
 
 

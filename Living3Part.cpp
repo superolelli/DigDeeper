@@ -104,7 +104,6 @@ void CLiving3Part::SetPartsPos(float _armXLeft, float _armXRight, float _armY, f
 
 	m_Rect.width = m_pBody->GetRect().width;
 	m_Rect.height =  m_pLegs->GetRect().top + m_pLegs->GetRect().height - m_pBody->GetRect().top;
-
 }
 
 

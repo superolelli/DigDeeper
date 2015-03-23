@@ -37,10 +37,12 @@ private:
 	float m_fLegsAnimState;           //the animation state of the legs
 
 	float m_fStateTime;               //how long does the current state last?
+	int m_fallingSpeed;               //the speed with which the goblin falls
 
 	void CheckState();                 //checks the state
 	void CheckXMovement();                //checks the movement in x-direction
 	void CheckYMovement();                //checks the movement in y-direction
+	bool CheckCollision();                //Checks, if the goblin collided with anything
 };
 
 

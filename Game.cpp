@@ -58,7 +58,7 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 		m_NpcMachine.AddNpc(BEE, 700, 300);
 		m_NpcMachine.AddNpc(BEE, 800, 200);
 		m_NpcMachine.AddNpc(BEE, 600, 300);
-		m_NpcMachine.AddNpc(GOBLIN, 900, 300);
+		m_NpcMachine.AddNpc(GOBLIN, 900, 270);
 	}
 
 	m_pPauseMenu = new CSprite;
