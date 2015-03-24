@@ -344,16 +344,17 @@ Vector2f CPlayer::CheckMovement()
 			m_fYVel = m_fYVel/2;
 			if(CheckCollisions())
 			{
-				//If he reaches the ground he doesn't jump anymore
-				if(m_fYVel > 0)
-				{
-					m_State.jumping = false;
-				//	cout <<"Reached ground" << endl;
-				}
-
 				m_fYVel = 0;
 				//cout <<"Collided in y direction" << endl;
 			}
+		}
+
+
+		//If he reaches the ground he doesn't jump anymore
+		if (m_fYVel > 0)
+		{
+			m_State.jumping = false;
+			//	cout <<"Reached ground" << endl;
 		}
 	}
 	//If he hasn't collide with anything he must be falling and you can't jump, while falling ;)

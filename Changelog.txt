@@ -999,3 +999,8 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Profiler eingefügt
 
 ------------------------------------------------------
+23.03.2015
+
+-Kollisionsfunktion für Goblins in y-Richtung eingefügt (Goblins fallen nun in Löcher)
+
+------------------------------------------------------
