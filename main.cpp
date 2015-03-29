@@ -21,7 +21,7 @@ void load_textures(bool *is_loading)
 void loading_screen(bool *is_loading)
 {
 	Texture texture;
-	texture.loadFromFile("Data/Sprites/Loading_screen.png");
+	texture.loadFromFile("Data/Sprites/Loading_screen2.png");
 
 	CSprite Loading_screen;
 	Loading_screen.Load(&texture);

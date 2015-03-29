@@ -8,7 +8,7 @@
 //loads all textures
 void TextureLoading::LoadTextures()
 {
-	t_menuBackground.loadFromFile("Data/Sprites/Menu.png");
+	t_menuBackground.loadFromFile("Data/Sprites/Menu2.png");
 	t_menuButtonPlay.loadFromFile("Data/Sprites/Buttons/menuButtons.png", IntRect(2, 308, 600, 100));
 	t_menuButtonOptions.loadFromFile("Data/Sprites/Buttons/menuButtons.png", IntRect(904, 206, 600, 100));
 	t_menuButtonQuit.loadFromFile("Data/Sprites/Buttons/menuButtons.png", IntRect(604, 308, 600, 100));
@@ -234,8 +234,9 @@ void TextureLoading::LoadTextures()
 	m_musicGame[6].openFromFile("Data/Music/Music8.ogg");
 	m_musicGame[7].openFromFile("Data/Music/Music9.ogg");
 	m_musicGame[8].openFromFile("Data/Music/Music10.ogg");
+	m_musicGame[9].openFromFile("Data/Music/Music11.ogg");
 
-	for(int i = 0; i < 9; i++)
+	for(int i = 0; i < 10; i++)
 		m_musicGame[i].setVolume(50);
 
 	m_goldSound[0].loadFromFile("Data/Sounds/gold1.ogg");

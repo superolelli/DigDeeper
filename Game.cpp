@@ -80,10 +80,12 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	m_seconds = 0;
 
 	//select the first music
-	m_music = rand()%9;
+	m_music = rand()%10;
 
-	BOOST_FOREACH(bool b, song_played)
-		b = false;
+	for (int i = 0; i < 10; i++)
+	{
+		song_played[i] = false;
+	}
 
 	song_played[m_music] = true;
 
@@ -248,7 +250,7 @@ void CGame::CheckMusic()
 	if(g_pTextures->m_musicGame[m_music].getStatus() == Music::Stopped)
 	{
 		//play random new music
-		int newMusic = rand()%9;
+		int newMusic = rand()%10;
 		if(song_played[newMusic] == false)
 		{
 			m_music = newMusic;

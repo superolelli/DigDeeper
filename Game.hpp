@@ -31,7 +31,7 @@ private:
 	string m_Name;                         //the name of the game
 
 	bool is_running;                   //is the game still running?
-	bool song_played[9];                //has this song already been played?
+	bool song_played[10];                //has this song already been played?
 	View m_View;                       //the view(camera)
 	vector<int> eventtype;             //the eventtype vector
 

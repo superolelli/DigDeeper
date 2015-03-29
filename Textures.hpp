@@ -245,7 +245,7 @@ public:
 	Texture t_goblin_arm;
 
 	Music m_musicMenu;
-	Music m_musicGame[9];
+	Music m_musicGame[10];
 
 	SoundBuffer m_goldSound[3];        
 };
