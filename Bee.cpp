@@ -2,9 +2,11 @@
 
 
 
-void CBee::Init(int _x, int _y, CWorld *_world, bool _loaded)
+void CBee::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, bool _loaded)
 {
 	m_pWorld = _world;
+	m_pPlayer = _player;
+	m_pView = _view;
 	m_ID = BEE;
 
 	//Init the sprite

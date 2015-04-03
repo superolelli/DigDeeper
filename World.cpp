@@ -1310,3 +1310,63 @@ vector<Vector2i> CWorld::GetSpawnPlaces(IntRect _view)
 
 	return spawnPlaces;
 }
+
+
+
+
+vector < vector <SWorldPlace> > CWorld::GetWorldMatrix(IntRect _view)
+{
+	vector< vector <SWorldPlace> > worldMatrix;
+	int xMatrix = 0;
+	int yMatrix = 0;
+
+	//get the blocks in the view
+	int xStart = (int)(_view.left / 100) - 2;
+	if (xStart < 0)
+		xStart = 0;
+
+	int yStart = (int)(_view.top / 100) - 2;
+	if (yStart < 0)
+		yStart = 0;
+
+	int xEnd = (_view.left / 100) + _view.width / 100 + 2;
+	if (xEnd > m_BlocksX)
+		xEnd = m_BlocksX;
+
+	int yEnd = (_view.top / 100) + _view.height / 100 + 2;
+	if (yEnd > m_BlocksY)
+		yEnd = m_BlocksY;
+
+	//resize the matrix
+	worldMatrix.resize(xEnd+1);
+	for (int i = 0; i < xEnd + 1; i++)
+		worldMatrix[i].resize(yEnd + 1);
+
+	for (int y = yStart; y <= yEnd; y++)
+	{
+		for (int x = xStart; x <= xEnd; x++)
+		{
+			worldMatrix[xMatrix][yMatrix].xPos = x * 100;
+			worldMatrix[xMatrix][yMatrix].yPos = y * 100;
+			worldMatrix[xMatrix][yMatrix].matrixXPos = xMatrix;
+			worldMatrix[xMatrix][yMatrix].matrixYPos = yMatrix;
+			worldMatrix[xMatrix][yMatrix].parentX = 0;
+			worldMatrix[xMatrix][yMatrix].parentY = 0;
+			worldMatrix[xMatrix][yMatrix].pathValue = 0;
+			worldMatrix[xMatrix][yMatrix].cost = 0;
+
+			//if there is no block or the block is passable: add passable worldPlace
+			if (m_pBlocks[x][y] == NULL || m_pBlocks[x][y]->IsPassable())
+				worldMatrix[xMatrix][yMatrix].passable = true;
+			else
+				worldMatrix[xMatrix][yMatrix].passable = false;
+
+			xMatrix++;
+		}
+
+		xMatrix = 0;
+		yMatrix++;
+	}
+
+	return worldMatrix;
+}

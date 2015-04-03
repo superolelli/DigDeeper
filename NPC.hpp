@@ -10,7 +10,7 @@ class CNpc
 public:
 	CNpc();
 
-	virtual void Init(int _x, int _y, CWorld *_world, bool _loaded = false) = 0;
+	virtual void Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, bool _loaded = false) = 0;
 	virtual bool CheckNpc() = 0;
 	virtual vector<SItem> GetLoot() = 0;
 	virtual void Render() = 0;
@@ -35,6 +35,9 @@ protected:
 		ar & m_Attributes.currentHealth;
 	}
 
+	//finds the shortest path to a destination
+	Vector2i findPath(int _xDest, int _yDest);
+
 	SNpcAttributes m_Attributes;           //the npc's attributes
 	int m_State;                           //the current state
 	int m_ID;                              //the npc's id
@@ -42,6 +45,8 @@ protected:
 	int m_yPos; 
 
 	CWorld *m_pWorld;                         //a pointer to the world
+	CPlayer *m_pPlayer;
+	View *m_pView;
 
 };
 

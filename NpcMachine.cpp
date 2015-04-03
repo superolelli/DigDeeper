@@ -25,7 +25,7 @@ void CNpcMachine::Init(CWorld *_world, CPlayer *_player, View *_view, bool _load
 	{
 		list<CNpc*>::iterator i;
 		for(i = m_Npcs.begin(); i != m_Npcs.end(); i++)
-			(*i)->Init(0, 0, m_pWorld, true);
+			(*i)->Init(0, 0, m_pWorld, m_pPlayer, m_pView, true);
 	}
 }
 
@@ -55,7 +55,7 @@ void CNpcMachine::AddNpc(int _ID, int _x, int _y)
 		case(BEE):
 		{
 			CBee *bee = new CBee;
-			bee->Init(_x, _y, m_pWorld);
+			bee->Init(_x, _y, m_pWorld, m_pPlayer, m_pView);
 			m_Npcs.push_back(bee);
 		}break;
 
@@ -63,7 +63,7 @@ void CNpcMachine::AddNpc(int _ID, int _x, int _y)
 		case(GOBLIN):
 		{
 			CGoblin *goblin = new CGoblin;
-			goblin->Init(_x, _y, m_pWorld);
+			goblin->Init(_x, _y, m_pWorld, m_pPlayer, m_pView);
 			m_Npcs.push_back(goblin);
 		}break;
 	}

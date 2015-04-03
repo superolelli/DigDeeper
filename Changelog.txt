@@ -1004,3 +1004,10 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Kollisionsfunktion für Goblins in y-Richtung eingefügt (Goblins fallen nun in Löcher)
 
 ------------------------------------------------------
+29.03.2015
+
+-Bugfix: Musik wird nun richtig abgespielt
+-Größere Sprites für den Hintergrund eingefügt
+-Pathfinding begonnen
+
+------------------------------------------------------

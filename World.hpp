@@ -52,6 +52,9 @@ public:
 	//returns all places, where a npc could spawn
 	vector<Vector2i> GetSpawnPlaces(IntRect _view);
 
+	//returns a simple matrix of the current view of the blocks
+	vector < vector<SWorldPlace> > GetWorldMatrix(IntRect _view);
+
 private:
 	friend class boost::serialization::access;
 
@@ -215,9 +218,7 @@ private:
 	int m_NightAlpha;											//the current darkness
 	float m_fNightTimer;                                          //the timer for one day-night-cycle
 	float m_fSecondTimer;                                         //this timer counts to one second
-	//CPlaceable *m_pBlocks[m_BlocksX][m_BlocksY];           //the block matrix
 	vector < vector<CPlaceable*> > m_pBlocks;
-	//CPlaceable *m_pWalls[m_BlocksX][m_BlocksY];               //the second layer wall matrix
 	vector < vector<CPlaceable*> > m_pWalls;
 	list<CLittleItem> m_LittleItemList;                                //the list with all little items
 

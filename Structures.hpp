@@ -80,6 +80,21 @@ struct SNewWorldAttributes
 	string GameName;
 };
 
+
+
+struct SWorldPlace
+{
+	bool passable;
+	int xPos;
+	int yPos;
+	int matrixXPos;
+	int matrixYPos;
+	int parentX;
+	int parentY;
+	int pathValue;
+	int cost;
+};
+
 //const SToolAttributes operator+(SToolAttributes const &lhs, SToolAttributes const &rhs)
 //{
 //	SToolAttributes temp(lhs);
