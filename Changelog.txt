@@ -1011,3 +1011,20 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Pathfinding begonnen
 
 ------------------------------------------------------
+03.04.2015
+
+-Pathfinding funktioniert nun grob
+
+------------------------------------------------------
+04.04.2015
+
+-Bugfix: spiel stürzt nun nicht mehr ab, wenn der goblin an den rand der Welt kommt
+-Bugfix: goblin wird bei stürzen nicht mehr deformiert
+-Goblin attackiert Spieler nun (aber ohne Schaden)
+
+------------------------------------------------------
+05.04.2015
+
+-Goblin macht dem Spieler nun Schaden (Spieler stirbt noch nicht)
+
+------------------------------------------------------

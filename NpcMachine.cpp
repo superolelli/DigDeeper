@@ -94,6 +94,8 @@ void CNpcMachine::CheckAllNpcs()
 		if(m_LastArmUp != m_pPlayer->GetArmGoingUp())
 			(*i)->m_wasHit = false;
 
+
+
 		//if the npc was hit by the player
 		if(m_pPlayer->GetWeaponRect().intersects((*i)->GetRect()) && Mouse::isButtonPressed(Mouse::Left))
 		{
@@ -138,6 +140,28 @@ void CNpcMachine::CheckAllNpcs()
 		else
 			(*i)->m_wasHit = false;
 
+
+		//if the player was hit by the npc
+		if ((*i)->GetState() == ATTACKING && (*i)->GetWeaponRect().intersects(m_pPlayer->GetRect()))
+		{	
+			if ((*i)->IsHitting())
+			{
+
+				//calculate the damage
+				int damage = (*i)->GetAttributes()->strength;
+
+				//subtract the lost health
+				m_pPlayer->DoDamage(damage);
+
+				//put the damage into a stringstream
+				stream.str("");
+				stream << damage;
+
+				//shows the damage
+				m_signMachine.AddString(stream.str(), 1, m_pPlayer->GetRect().left, m_pPlayer->GetRect().top);
+			}
+		}
+
 		i++;
 	}
 
@@ -164,6 +188,8 @@ void CNpcMachine::RenderAllNpcs()
 
 void CNpcMachine::SpawnNpcs()
 {
+	int newNPC = 0;
+
 	m_spawnTime -= g_pTimer->GetElapsedTime().asSeconds();
 
 	if(m_spawnTime <= 0)
@@ -183,8 +209,18 @@ void CNpcMachine::SpawnNpcs()
 
 		if(spawnPlaces.size() > 0)
 		{
-			//spawn new npc
-			AddNpc(BEE, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y + 50);
+			newNPC = rand() % 2 + 1;
+
+			if (newNPC == BEE)
+			{
+				//spawn new npc
+				AddNpc(newNPC, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y + 50);
+			}
+			else
+			{
+				//spawn new npc
+				AddNpc(newNPC, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
+			}
 		}
 
 		//get new spawn time

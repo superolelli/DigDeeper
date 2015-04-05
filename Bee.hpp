@@ -13,6 +13,8 @@ public:
 	void Render();
 	void Quit();
 	IntRect GetRect(){ return m_pBeeSprite->GetRect();}
+	IntRect GetWeaponRect(){ return m_pBeeSprite->GetRect(); }
+	bool IsHitting(){ return false; }
 
 	vector<SItem> GetLoot();
 

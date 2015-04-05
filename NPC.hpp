@@ -16,9 +16,12 @@ public:
 	virtual void Render() = 0;
 	virtual void Quit() = 0;
 	virtual IntRect GetRect() = 0;
+	virtual IntRect GetWeaponRect() = 0;
+	virtual bool IsHitting() = 0;
 
 	SNpcAttributes* GetAttributes(){return &m_Attributes;}
 	int GetID(){return m_ID;}
+	int GetState(){return m_State;}
 
 	bool m_wasHit;                          //was the npc hit?
 

@@ -305,6 +305,9 @@ Vector2f CPlayer::CheckMovement()
 {
 	CalculateAttributes();
 
+	if (m_Attributes.currentHealth <= 0)
+		m_Attributes.currentHealth = 0;
+
 	m_fXVel = 0;
 	m_fYVel = 0;
 

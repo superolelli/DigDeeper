@@ -31,6 +31,7 @@ public:
 	void RenderInventory();
 	void Take(CThing *_thing, int amount);
 	void AddExp(int _exp){m_Attributes.currentExp += _exp;}
+	void DoDamage(int _damage){ m_Attributes.currentHealth -= _damage; }
 	bool AddRecipe(int _ID){return m_pBuildingMenu->NewRecipe(_ID);}
 	list<int> GetNotAvailableRecipesList(){return m_pBuildingMenu->GetNotAvailableRecipes();}
 	inline IntRect GetRect(){return m_pDwarf->GetRect();}
