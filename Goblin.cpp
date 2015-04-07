@@ -26,6 +26,7 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 
 	m_fWaitToBeat = 0;
 	m_is_hitting = false;
+	m_jumping = false;
 
 	m_fallingSpeed = 0;
 
@@ -70,6 +71,12 @@ void CGoblin::Quit()
 
 bool CGoblin::CheckNpc()
 {
+	if (g_pFramework->keyStates.cUp)
+	{
+		m_fXVel = 0;
+		m_fYVel = 0;
+	}
+
 	//Checks/sets the current state
 	CheckState();
 
@@ -78,7 +85,15 @@ bool CGoblin::CheckNpc()
 	
 	//if the goblin would collide: set the x-velocity to 0
 	if (CheckCollision())
+	{
 		m_fXVel = 0;
+		//if there is a block in the way: jump
+		if (m_pWorld->CheckForBarrier(m_pGoblin->GetRect(), m_left) && m_pWorld->CheckCanJump(m_pGoblin->GetRect(), m_left))
+		{
+			m_fallingSpeed = -350;
+			m_jumping = true;
+		}
+	}
 
 	//checks the movement in y-direction
 	CheckYMovement();
@@ -93,6 +108,7 @@ bool CGoblin::CheckNpc()
 			if (CheckCollision())
 			{
 				m_fYVel = 0;
+				m_jumping = false;
 			}
 		}
 
@@ -120,6 +136,13 @@ void CGoblin::CheckXMovement()
 		//is the goblin going?
 		if (m_State == WALKING || m_State == FOLLOWING)
 		{
+			//if the goblin reached it's destination: wait for a few seconds
+			if (m_pGoblin->GetRect().left <= m_PointToGo.x && m_State != FOLLOWING)
+			{
+				m_fStateTime = rand() % 15 + 5;
+				m_State = IDLE;
+			}
+
 			m_fXVel = -g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
 			m_fLegsAnimState -= 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
 
@@ -127,12 +150,6 @@ void CGoblin::CheckXMovement()
 			if (m_fLegsAnimState < 0 || m_fLegsAnimState > 6)
 				m_fLegsAnimState = 5.99f;
 
-			//if the goblin reached it's destination: wait for a few seconds
-			if (m_pGoblin->GetRect().left <= m_PointToGo.x && m_State != FOLLOWING)
-			{
-				m_fStateTime = rand() % 15 + 5;
-				m_State = IDLE;
-			}
 		}
 		//is the goblin doing nothing?
 		else if (m_State == IDLE || m_State == ATTACKING)
@@ -149,18 +166,19 @@ void CGoblin::CheckXMovement()
 		//is the goblin going?
 		if (m_State == WALKING || m_State == FOLLOWING)
 		{
+			if (m_pGoblin->GetRect().left >= m_PointToGo.x && m_State != FOLLOWING)
+			{
+				m_fStateTime = rand() % 15 + 5;
+				m_State = IDLE;
+			}
+
 			m_fXVel = g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
 			m_fLegsAnimState += 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
 
 			//start the animation new if it has reached it's end
 			if (m_fLegsAnimState < 6 || m_fLegsAnimState > 12)
 				m_fLegsAnimState = 6;
-
-			if (m_pGoblin->GetRect().left + m_pGoblin->GetRect().width >= m_PointToGo.x && m_State != FOLLOWING)
-			{
-				m_fStateTime = rand() % 15 + 5;
-				m_State = IDLE;
-			}
+		
 		}
 		//is the goblin doing nothing?
 		else if (m_State == IDLE || m_State == ATTACKING)
@@ -176,6 +194,13 @@ void CGoblin::CheckXMovement()
 
 void CGoblin::CheckYMovement()
 {
+	//jump if needed
+	if (m_PointToGo.y < m_pGoblin->GetRect().top && m_pWorld->CheckForBarrier(m_pGoblin->GetRect(), m_left) && m_jumping == false)
+	{
+		m_jumping = true;
+		m_fallingSpeed = -350;
+	}
+
 	//add something to the falling speed if it hasn't reached it's limit
 	if (m_fallingSpeed < 200)
 	{
@@ -265,7 +290,7 @@ void CGoblin::CheckState()
 					m_left = true;
 					m_fLegsAnimState = 5;
 				}
-				else
+				else if (m_PointToGo.x > m_pGoblin->GetRect().left + m_pGoblin->GetRect().width/2)
 				{
 					m_left = false;
 					m_fLegsAnimState = 6;
@@ -288,8 +313,10 @@ void CGoblin::CheckState()
 
 				cout << "New X: " << m_PointToGo.x << endl;
 
-				if (m_PointToGo.x == -1)
+				if (m_PointToGo.x == -1 || m_PointToGo.x/ 100 == m_pGoblin->GetRect().left/100)
+				{
 					m_State = IDLE;
+				}
 
 				//set the direction
 				if (m_PointToGo.x < m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2 && m_left == false)

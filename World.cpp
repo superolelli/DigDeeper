@@ -1370,3 +1370,69 @@ vector < vector <SWorldPlace> > CWorld::GetWorldMatrix(IntRect _view)
 
 	return worldMatrix;
 }
+
+
+
+
+
+bool CWorld::CheckCanJump(IntRect _living, bool _left)
+{
+	int x = _living.left / 100;
+	int y = _living.top / 100;
+
+	//if the living thing wants to jump to the left side
+	if (_left)
+	{
+		//end of world?
+		if (y - 1 >= 0 && x - 1 >= 0)
+		{
+			//is there space to jump?
+			if ((m_pBlocks[x][y - 1] == NULL || m_pBlocks[x][y - 1]->IsPassable()) && (m_pBlocks[x -1][y - 1] == NULL || m_pBlocks[x-1][y - 1]->IsPassable()))
+				return true;
+		}
+	}
+	//if the living thing wants to jump to the right side
+	else
+	{
+		//end of world?
+		if (y - 1 >= 0 && x + 1 <= m_BlocksX)
+		{
+			//is there space to jump?
+			if ((m_pBlocks[x][y - 1] == NULL || m_pBlocks[x][y - 1]->IsPassable()) && (m_pBlocks[x + 1][y - 1] == NULL || m_pBlocks[x + 1][y - 1]->IsPassable()))
+				return true;
+		}
+	}
+
+
+	return false;
+}
+
+
+
+
+//checks for barriers in x-direction
+bool CWorld::CheckForBarrier(IntRect _living, bool _left)
+{
+	int x = _living.left / 100;
+	int y = _living.top / 100;
+
+	if (_left)
+	{
+		if (x - 1 >= 0)
+		{
+			if (m_pBlocks[x - 1][y] == NULL || m_pBlocks[x - 1][y]->IsPassable())
+				return false;
+		}
+	}
+	else
+	{
+		if (x + 1 <= m_BlocksX)
+		{
+			if (m_pBlocks[x + 1][y] == NULL || m_pBlocks[x + 1][y]->IsPassable())
+				return false;
+		}
+	}
+
+
+	return true;
+}

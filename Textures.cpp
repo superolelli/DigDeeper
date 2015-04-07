@@ -23,7 +23,7 @@ void TextureLoading::LoadTextures()
 	t_menuButtonDown.loadFromFile("Data/Sprites/Buttons/button_down.png");
 	t_menuButtonBlank.loadFromFile("Data/Sprites/Buttons/button_blank.png");
 
-	t_newGameBackground.loadFromFile("Data/Sprites/NewGame/background_NewGame.png");
+	t_newGameBackground.loadFromFile("Data/Sprites/NewGame/background_NewGame2.png");
 	t_newGameButtonLeft.loadFromFile("Data/Sprites/NewGame/button_left.png");
 	t_newGameButtonRight.loadFromFile("Data/Sprites/NewGame/button_right.png");
 	t_newGameSmallWorld.loadFromFile("Data/Sprites/NewGame/small_world.png");
@@ -38,6 +38,8 @@ void TextureLoading::LoadTextures()
 	t_pauseMenuContinueButton.loadFromFile("Data/Sprites/Buttons/continue_button.png");
 	t_pauseMenuSaveButton.loadFromFile("Data/Sprites/Buttons/save_button.png");
 	t_pauseMenuQuitButton.loadFromFile("Data/Sprites/Buttons/quit_button.png");
+
+	t_BackgroundDead.loadFromFile("Data/Sprites/background_dead.png");
 
 	t_gameBackground.loadFromFile("Data/Sprites/Background.png");
 	t_gameNightSky.loadFromFile("Data/Sprites/nightsky.png");

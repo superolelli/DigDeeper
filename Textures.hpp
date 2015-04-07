@@ -52,6 +52,8 @@ public:
 	Texture t_pauseMenuSaveButton;
 	Texture t_pauseMenuQuitButton;       
 
+	Texture t_BackgroundDead;
+
 	Texture t_gameBackground;                      //the ingame background
 	Texture t_gameNightSky;                          //the sky at night
 

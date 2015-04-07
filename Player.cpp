@@ -165,6 +165,11 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 			sword = new CTool;
 			sword->InitTool(SWORD);
 			m_pInventory->Take(sword);
+
+			CTool *lantern;
+			lantern = new CTool;
+			lantern->InitTool(LANTERN);
+			m_pInventory->Take(lantern);
 		}break;
 	case MAGE:
 		{
@@ -305,8 +310,8 @@ Vector2f CPlayer::CheckMovement()
 {
 	CalculateAttributes();
 
-	if (m_Attributes.currentHealth <= 0)
-		m_Attributes.currentHealth = 0;
+	/*if (m_Attributes.currentHealth <= 0)
+		m_Attributes.currentHealth = 0;*/
 
 	m_fXVel = 0;
 	m_fYVel = 0;

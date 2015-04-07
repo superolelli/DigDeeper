@@ -1028,3 +1028,9 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Goblin macht dem Spieler nun Schaden (Spieler stirbt noch nicht)
 
 ------------------------------------------------------
+07.04.2015
+
+-Der Spieler kann nun sterben
+-Goblins können nun springen
+
+------------------------------------------------------

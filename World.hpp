@@ -33,6 +33,12 @@ public:
 	//checks wether the player would collide with the world
 	bool CheckLivingCollision(FloatRect _player);
 	int CheckCollisionWithPassable(FloatRect _player);
+
+	//can a living object jump in the given direction?
+	bool CheckCanJump(IntRect _living, bool _left);
+
+	//is there a barrier blocking the way?
+	bool CheckForBarrier(IntRect _living, bool _left);
 	
 	//returns the panel on which was clicked
 	CPanel* GetPanel(View *_view);

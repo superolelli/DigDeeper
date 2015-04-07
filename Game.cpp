@@ -207,6 +207,18 @@ void CGame::Run()
 		//show the profiler
 		g_pProfiler->ShowProfiler();
 
+		if (m_pPlayer->GetHealth() <= 0)
+		{
+			Sprite sprite;
+			sprite.setTexture(g_pTextures->t_BackgroundDead);
+			g_pFramework->GetWindow()->draw(sprite);
+			g_pFramework->Flip();
+
+			sleep(seconds(5));
+
+			is_running = false;
+		}
+
 		g_pFramework->Flip();
 
 	    CheckFps();
