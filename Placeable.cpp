@@ -28,6 +28,11 @@ void CPlaceable::Init(int _ID, bool _loaded)
 	m_fBreakingTime = 0;
 	m_fBreakFrame = -1;
 
+	m_OverlappingID[0] = rand() % 3;
+	m_OverlappingID[1] = rand() % 3;
+	m_OverlappingID[2] = rand() % 3;
+	m_OverlappingID[3] = rand() % 3;
+
 	m_pThingSprite = new CSprite;
 	m_pInventorySprite = new CSprite;
 
@@ -45,6 +50,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_dirt);
 			m_Name = "Erde";
 			m_Hardness = 2;
+			m_Priority = 5;
 			m_is_passable = false;
 			m_is_visible = true;
 		}break;
@@ -54,6 +60,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_stone);
 			m_Name = "Stein";
 			m_Hardness = 5;
+			m_Priority = 1;
 			m_is_passable = false;
 			m_is_visible = true;
 		}break;
@@ -63,6 +70,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_wood);
 			m_Name = "Holz";
 			m_Hardness = 2;
+			m_Priority = 0;
 			m_is_passable = false;
 			m_is_visible = true;
 		}break;
@@ -72,6 +80,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_coalBlock);
 			m_Name = "Block mit Kohle";
 			m_Hardness = 3;
+			m_Priority = 1;
 			m_is_passable = false;
 			m_is_visible = true;
 		}break;
@@ -81,6 +90,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_stoneWall);
 			m_Name = "Steinwand";
 			m_Hardness = 3;
+			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
 		}break;
@@ -90,6 +100,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_woodWall);
 			m_Name = "Holzwand";
 			m_Hardness = 2;
+			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
 		}break;
@@ -99,6 +110,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_ladder);
 			m_Name = "Leiter";
 			m_Hardness = 2;
+			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
 		}break;
@@ -108,6 +120,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_furnance);
 			m_Name = "Ofen";
 			m_Hardness = 2;
+			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
 		}break;
@@ -117,6 +130,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_chest);
 			m_Name = "Truhe";
 			m_Hardness = 2;
+			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
 		}break;
@@ -126,6 +140,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_cupboard);
 			m_Name = "Schrank";
 			m_Hardness = 2;
+			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
 		}break;
@@ -135,6 +150,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_door);
 			m_Name = "Tür";
 			m_Hardness = 2;
+			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
 		}break;
@@ -144,6 +160,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_ironBlock);
 			m_Name = "Block mit Eisen";
 			m_Hardness = 5;
+			m_Priority = 1;
 			m_is_passable = false;
 			m_is_visible = true;
 		}break;
@@ -153,6 +170,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_goldBlock);
 			m_Name = "Block mit Gold";
 			m_Hardness = 5;
+			m_Priority = 1;
 			m_is_passable = false;
 			m_is_visible = true;
 		}break;
@@ -162,6 +180,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_arcanusBlock);
 			m_Name = "Block mit Arcanus";
 			m_Hardness = 7;
+			m_Priority = 1;
 			m_is_passable = false;
 			m_is_visible = true;
 		}break;
@@ -171,6 +190,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_table);
 			m_Name = "Tisch";
 			m_Hardness = 2;
+			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
 		}break;
@@ -180,6 +200,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_lantern);
 			m_Name = "Laterne";
 			m_Hardness = 0;
+			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
 		}break;
@@ -189,6 +210,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_marble);
 			m_Name = "Marmor";
 			m_Hardness = 5;
+			m_Priority = 0;
 			m_is_passable = false;
 			m_is_visible = true;
 		}break;
@@ -198,6 +220,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_marblewall);
 			m_Name = "Marmorwand";
 			m_Hardness = 3;
+			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
 		}break;
@@ -205,6 +228,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		{
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_noTexture);
 			m_Hardness = 100;
+			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
 		}
@@ -344,3 +368,7 @@ void CPlaceable::SetSpecialID(int _SID)
 		}
 	}
 }
+
+
+
+

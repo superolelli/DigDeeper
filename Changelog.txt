@@ -1034,3 +1034,13 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Goblins können nun springen
 
 ------------------------------------------------------
+08.04.2015
+
+-Einige Bugs in der Goblinklasse behoben
+
+------------------------------------------------------
+09.04.2015
+
+-Übergänge zwischen einzelnen Blöcken wurden eingefügt
+
+------------------------------------------------------

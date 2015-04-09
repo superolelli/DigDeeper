@@ -84,7 +84,6 @@ const int GOBLIN = 2;
 const int IDLE = 1;
 const int WALKING = 2;
 const int ATTACKING = 3;
-const int FOLLOWING = 4;
 
 #pragma endregion
 

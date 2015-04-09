@@ -12,6 +12,7 @@ void load_textures(bool *is_loading)
 	
 		//Load all textures
 	g_pTextures->LoadTextures();
+	g_pRims->LoadRims();
 
 	*is_loading = false;
 	

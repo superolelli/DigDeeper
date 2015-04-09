@@ -116,6 +116,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerEquipment.cpp" />
     <ClCompile Include="Profiler.cpp" />
+    <ClCompile Include="Rims.cpp" />
     <ClCompile Include="SignMachine.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="StringInput.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="Constants.hpp" />
     <ClInclude Include="Goblin.hpp" />
     <ClInclude Include="Profiler.hpp" />
+    <ClInclude Include="Rims.hpp" />
     <ClInclude Include="SignMachine.hpp" />
     <ClInclude Include="Equipment.hpp" />
     <ClInclude Include="Framework.hpp" />

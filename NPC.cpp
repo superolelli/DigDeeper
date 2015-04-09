@@ -258,6 +258,11 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 
 
 
+		//if no way could be found: return -1
+		if (openList.size() <= 0 && currentX != destinationX)
+			return Vector2i(-1, -1);
+
+
 		firstIt = openList.begin();
 		currentX = (*firstIt)->matrixXPos;
 		currentY = (*firstIt)->matrixYPos;
@@ -277,22 +282,19 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 		//add this place to the closed list and delete it in the open list
 		closedList.push_back(&worldMatrix[currentX][currentY]);
 		firstIt = openList.erase(firstIt);		
-
-		//if no way could be found: return -1
-		if (openList.size() <= 0 && currentX != destinationX)
-			return Vector2i(-1, -1);
 	}
 
 
-
+	
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//					the destination was reached: get the final path											//
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	Vector2i nextStep;
+	Vector2i nextStep(-1, -1);
 	
-	int nextX, nextY;
+	int nextX = -1;
+	int nextY = -1;
 
 	while (currentX != startX || currentY != startY)
 	{
@@ -313,7 +315,7 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 		currentX = nextX;
 		currentY = nextY;
 	}
-	
+
 
 	return nextStep;
 }

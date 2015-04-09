@@ -419,7 +419,72 @@ void CWorld::Render(Vector2f _viewSize, Vector2f _viewCenter)
 		{	
 			if(m_pBlocks[x][y] != NULL)
 			{
-				m_pBlocks[x][y]->Render();		
+
+				m_pBlocks[x][y]->Render();	
+
+				int neighbourID = -1;
+
+				//check for overlapping top
+				if (y - 1 >= 0)
+				{
+					if (m_pBlocks[x][y-1] != NULL && m_pBlocks[x][y -1]->GetPriority() > m_pBlocks[x][y]->GetPriority() && m_pBlocks[x][y]->GetPriority() != -1)
+					{
+						neighbourID = m_pBlocks[x][y - 1]->getID();
+						if (neighbourID == COALBLOCK || neighbourID == GOLDBLOCK || neighbourID == IRONBLOCK || neighbourID == ARCANUSBLOCK)
+							neighbourID = STONE;
+
+						g_pRims->TopRims[neighbourID - 1][m_pBlocks[x][y-1]->GetOverlappingID(0)].SetPos(x * 100, y * 100);
+						g_pRims->TopRims[neighbourID - 1][m_pBlocks[x][y-1]->GetOverlappingID(0)].Render(g_pFramework->GetWindow());
+					}
+
+				}
+
+				//check for overlapping bottom
+				if (y + 1 < m_BlocksY)
+				{
+					if (m_pBlocks[x][y + 1] != NULL && m_pBlocks[x][y + 1]->GetPriority() > m_pBlocks[x][y]->GetPriority() && m_pBlocks[x][y]->GetPriority() != -1)
+					{
+						neighbourID = m_pBlocks[x][y + 1]->getID();
+						if (neighbourID == COALBLOCK || neighbourID == GOLDBLOCK || neighbourID == IRONBLOCK || neighbourID == ARCANUSBLOCK)
+							neighbourID = STONE;
+
+						g_pRims->BottomRims[neighbourID - 1][m_pBlocks[x][y + 1]->GetOverlappingID(1)].SetPos(x * 100, y * 100 + 100 - g_pRims->BottomRims[0][0].GetRect().height);
+						g_pRims->BottomRims[neighbourID - 1][m_pBlocks[x][y + 1]->GetOverlappingID(1)].Render(g_pFramework->GetWindow());
+					}
+
+				}
+
+				//check for overlapping left
+				if (x - 1 >= 0)
+				{
+					if (m_pBlocks[x - 1][y] != NULL && m_pBlocks[x - 1][y]->GetPriority() > m_pBlocks[x][y]->GetPriority() && m_pBlocks[x][y]->GetPriority() != -1)
+					{
+						neighbourID = m_pBlocks[x - 1][y]->getID();
+						if (neighbourID == COALBLOCK || neighbourID == GOLDBLOCK || neighbourID == IRONBLOCK || neighbourID == ARCANUSBLOCK)
+							neighbourID = STONE;
+
+						g_pRims->LeftRims[neighbourID - 1][m_pBlocks[x - 1][y]->GetOverlappingID(2)].SetPos(x * 100, y * 100);
+						g_pRims->LeftRims[neighbourID - 1][m_pBlocks[x - 1][y]->GetOverlappingID(2)].Render(g_pFramework->GetWindow());
+					}
+
+				}
+
+				//check for overlapping right
+				if (x + 1 < m_BlocksX)
+				{
+					if (m_pBlocks[x + 1][y] != NULL && m_pBlocks[x + 1][y]->GetPriority() > m_pBlocks[x][y]->GetPriority() && m_pBlocks[x][y]->GetPriority() != -1)
+					{
+						neighbourID = m_pBlocks[x + 1][y]->getID();
+						if (neighbourID == COALBLOCK || neighbourID == GOLDBLOCK || neighbourID == IRONBLOCK || neighbourID == ARCANUSBLOCK)
+							neighbourID = STONE;
+
+						g_pRims->RightRims[neighbourID - 1][m_pBlocks[x + 1][y]->GetOverlappingID(3)].SetPos(x * 100 + 100 - g_pRims->RightRims[0][0].GetRect().width, y * 100);
+						g_pRims->RightRims[neighbourID - 1][m_pBlocks[x + 1][y]->GetOverlappingID(3)].Render(g_pFramework->GetWindow());
+					}
+
+				}
+
+
 
 				if(m_pBlocks[x][y]->getID() == FURNANCE)
 					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2 - 100, m_pBlocks[x][y]->GetRect().top - 15, 100, Color(230, 0,0));
@@ -482,9 +547,9 @@ bool CWorld::CheckLivingCollision(FloatRect _player)
 	if(yEnd > m_BlocksY)
 		yEnd = m_BlocksY;
 
-	for(int y = yStart; y <= yEnd; y++)
+	for(int y = yStart; y < yEnd; y++)
 	{
-		for(int x = xStart; x <= xEnd; x++)
+		for(int x = xStart; x < xEnd; x++)
 		{
 			if(m_pBlocks[x][y] != NULL)
 			{

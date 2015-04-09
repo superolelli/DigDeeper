@@ -138,6 +138,16 @@ public:
 	Texture t_blockTextures_marblewall;
 	Texture t_blockTextures_noTexture;               //the no_texture texture
 
+	Texture t_dirtRimTop;
+	Texture t_dirtRimBottom;
+	Texture t_dirtRimLeft;
+	Texture t_dirtRimRight;
+	Texture t_stoneRimTop;
+	Texture t_stoneRimBottom;
+	Texture t_stoneRimLeft;
+	Texture t_stoneRimRight;
+
+
 	//The inventory pictures of the things
 	Texture t_blockInventoryTexture_dirt;      
 	Texture t_blockInventoryTexture_stone;

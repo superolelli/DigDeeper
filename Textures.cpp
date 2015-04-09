@@ -102,8 +102,8 @@ void TextureLoading::LoadTextures()
 	t_buildingInfo_candle.loadFromFile("Data/Sprites/Building/building_info_candle.png");
 	t_buildingInfo_marblewall.loadFromFile("Data/Sprites/Building/building_info_marble_wall.png");
 
-	t_blockTextures_dirt.loadFromFile("Data/Sprites/Objects/Blocks/blocks_texture.png", IntRect(104, 2, 100, 100));
-	t_blockTextures_stone.loadFromFile("Data/Sprites/Objects/Blocks/blocks_texture.png", IntRect(614, 2, 100, 100));
+	t_blockTextures_dirt.loadFromFile("Data/Sprites/Objects/Blocks/dirt.png");
+	t_blockTextures_stone.loadFromFile("Data/Sprites/Objects/Blocks/stone.png");
 	t_blockTextures_wood.loadFromFile("Data/Sprites/Objects/Blocks/blocks_texture.png", IntRect(818, 2, 100, 100));
 	t_blockTextures_coalBlock.loadFromFile("Data/Sprites/Objects/Blocks/blocks_texture.png", IntRect(2, 2, 100, 100));
 	t_blockTextures_ironBlock.loadFromFile("Data/Sprites/Objects/Blocks/blocks_texture.png", IntRect(308, 2, 100, 100));
@@ -121,6 +121,15 @@ void TextureLoading::LoadTextures()
 	t_blockTextures_lantern.loadFromFile("Data/Sprites/Objects/Blocks/lantern.png");
 	t_blockTextures_marble.loadFromFile("Data/Sprites/Objects/Blocks/marble.png");
 	t_blockTextures_marblewall.loadFromFile("Data/Sprites/Objects/Blocks/marble_wall.png");
+
+	t_dirtRimTop.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_top.png");
+	t_dirtRimBottom.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_bottom.png");
+	t_dirtRimLeft.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_left.png");
+	t_dirtRimRight.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_right.png");
+	t_stoneRimTop.loadFromFile("Data/Sprites/Objects/Blocks/stone_rim_top.png");
+	t_stoneRimBottom.loadFromFile("Data/Sprites/Objects/Blocks/stone_rim_bottom.png");
+	t_stoneRimLeft.loadFromFile("Data/Sprites/Objects/Blocks/stone_rim_left.png");
+	t_stoneRimRight.loadFromFile("Data/Sprites/Objects/Blocks/stone_rim_right.png");
 
 	t_blockInventoryTexture_dirt.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/inventory_sprites.png", IntRect(200, 2, 97, 97));
 	t_blockInventoryTexture_stone.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/inventory_sprites.png", IntRect(992, 2, 97, 97));

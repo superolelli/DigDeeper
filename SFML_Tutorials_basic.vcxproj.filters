@@ -123,6 +123,9 @@
     <ClCompile Include="Profiler.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Rims.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.hpp">
@@ -243,6 +246,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Profiler.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Rims.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

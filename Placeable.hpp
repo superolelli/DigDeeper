@@ -22,7 +22,8 @@ public:
 	IntRect GetRect();
 	int GetLittleID();
 	int GetSpecialID(){return m_SpecialID;}
-	
+	int GetPriority(){ return m_Priority; }
+	int GetOverlappingID(int _side){ return m_OverlappingID[_side]; }
 
 
 private:
@@ -50,6 +51,8 @@ private:
 
 	int m_Hardness;                                //the hardness of the placeable
 	int m_SpecialID;                                //a settable ID for different things (e.g. counting furnances, chests etc.) (doors: the frame)
+	int m_Priority;                               //the priority for overlapping
+	int m_OverlappingID[4];
 	float m_fBreakingTime;                        //how long has the player trying to break the placeable?
 	float m_fBreakFrame;                           //the frame of the breaking animation
 

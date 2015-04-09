@@ -69,62 +69,67 @@ void CGoblin::Quit()
 
 
 
+bool CGoblin::CheckCollision()
+{
+	//the rect, the dwarf would have, if he moved
+	FloatRect newPosition;
+	newPosition.left = m_pGoblin->GetRect().left + m_fXVel;
+	newPosition.top = m_pGoblin->GetRect().top + m_fYVel;
+	newPosition.width = (float)m_pGoblin->GetRect().width;
+	newPosition.height = (float)m_pGoblin->GetRect().height;
+
+	return m_pWorld->CheckLivingCollision(newPosition);
+}
+
+
+
+
 bool CGoblin::CheckNpc()
 {
-	if (g_pFramework->keyStates.cUp)
-	{
 		m_fXVel = 0;
 		m_fYVel = 0;
-	}
 
-	//Checks/sets the current state
-	CheckState();
-
-	//checks the movement in x-direction
-	CheckXMovement();
+		//Checks/sets the current state
+		CheckState();
 	
-	//if the goblin would collide: set the x-velocity to 0
-	if (CheckCollision())
-	{
-		m_fXVel = 0;
-		//if there is a block in the way: jump
-		if (m_pWorld->CheckForBarrier(m_pGoblin->GetRect(), m_left) && m_pWorld->CheckCanJump(m_pGoblin->GetRect(), m_left))
+		//checks the movement in x-direction
+		CheckXMovement();
+		
+		//if the goblin would collide: set the x-velocity to 0
+		if (CheckCollision())
 		{
-			m_fallingSpeed = -350;
-			m_jumping = true;
+			m_fXVel = 0;
 		}
-	}
-
-	//checks the movement in y-direction
-	CheckYMovement();
-
-	//if the goblin would collide: set the y-velocity to 0
-	if (CheckCollision())
-	{
-		m_fYVel = m_fYVel / 2;
+	
+		//checks the movement in y-direction
+		CheckYMovement();
+	
+		//if the goblin would collide: set the y-velocity to 0
 		if (CheckCollision())
 		{
 			m_fYVel = m_fYVel / 2;
 			if (CheckCollision())
 			{
-				m_fYVel = 0;
-				m_jumping = false;
+				m_fYVel = m_fYVel / 2;
+				if (CheckCollision())
+				{
+					m_fYVel = 0;
+					m_jumping = false;
+				}
 			}
+	
 		}
-
-	}
-	m_pGoblin->Move((int)m_fXVel, (int)m_fYVel);
-
-	m_xPos = m_pGoblin->GetRect().left;
-	m_yPos = m_pGoblin->GetRect().top;
-
-	//return false if the goblin is outside the world
-	if (m_pGoblin->GetRect().left + m_pGoblin->GetRect().width < 0 || m_pGoblin->GetRect().left > m_pWorld->GetDimensions().x*100)
-		return false;
-	else
-		return true;
+		m_pGoblin->Move((int)m_fXVel, (int)m_fYVel);
+	
+		m_xPos = m_pGoblin->GetRect().left;
+		m_yPos = m_pGoblin->GetRect().top;
+	
+		//return false if the goblin is outside the world
+		if (m_pGoblin->GetRect().left + m_pGoblin->GetRect().width < 0 || m_pGoblin->GetRect().left > m_pWorld->GetDimensions().x*100)
+			return false;
+		else
+			return true;
 }
-
 
 
 
@@ -134,15 +139,8 @@ void CGoblin::CheckXMovement()
 	if (m_left)
 	{
 		//is the goblin going?
-		if (m_State == WALKING || m_State == FOLLOWING)
+		if (m_State == WALKING && m_PointToGo.x != m_pGoblin->GetRect().left)
 		{
-			//if the goblin reached it's destination: wait for a few seconds
-			if (m_pGoblin->GetRect().left <= m_PointToGo.x && m_State != FOLLOWING)
-			{
-				m_fStateTime = rand() % 15 + 5;
-				m_State = IDLE;
-			}
-
 			m_fXVel = -g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
 			m_fLegsAnimState -= 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
 
@@ -151,27 +149,13 @@ void CGoblin::CheckXMovement()
 				m_fLegsAnimState = 5.99f;
 
 		}
-		//is the goblin doing nothing?
-		else if (m_State == IDLE || m_State == ATTACKING)
-		{
-			m_fXVel = 0.0f;
-			m_fLegsAnimState = 5;
-		}
-	
-
 	}
 	//is the goblin looking to the right
 	else
 	{
 		//is the goblin going?
-		if (m_State == WALKING || m_State == FOLLOWING)
+		if (m_State == WALKING && m_PointToGo.x != m_pGoblin->GetRect().left)
 		{
-			if (m_pGoblin->GetRect().left >= m_PointToGo.x && m_State != FOLLOWING)
-			{
-				m_fStateTime = rand() % 15 + 5;
-				m_State = IDLE;
-			}
-
 			m_fXVel = g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
 			m_fLegsAnimState += 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
 
@@ -179,12 +163,6 @@ void CGoblin::CheckXMovement()
 			if (m_fLegsAnimState < 6 || m_fLegsAnimState > 12)
 				m_fLegsAnimState = 6;
 		
-		}
-		//is the goblin doing nothing?
-		else if (m_State == IDLE || m_State == ATTACKING)
-		{
-			m_fXVel = 0.0f;
-			m_fLegsAnimState = 6;
 		}
 	}
 }
@@ -195,11 +173,12 @@ void CGoblin::CheckXMovement()
 void CGoblin::CheckYMovement()
 {
 	//jump if needed
-	if (m_PointToGo.y < m_pGoblin->GetRect().top && m_pWorld->CheckForBarrier(m_pGoblin->GetRect(), m_left) && m_jumping == false)
+	if (m_pWorld->CheckForBarrier(m_pGoblin->GetRect(), m_left) && m_pWorld->CheckCanJump(m_pGoblin->GetRect(), m_left) && m_jumping == false)
 	{
 		m_jumping = true;
 		m_fallingSpeed = -350;
 	}
+
 
 	//add something to the falling speed if it hasn't reached it's limit
 	if (m_fallingSpeed < 200)
@@ -217,18 +196,6 @@ void CGoblin::CheckYMovement()
 
 
 
-bool CGoblin::CheckCollision()
-{
-	//the rect, the dwarf would have, if he moved
-	FloatRect newPosition;
-	newPosition.left = m_pGoblin->GetRect().left + m_fXVel;
-	newPosition.top = m_pGoblin->GetRect().top + m_fYVel;
-	newPosition.width = (float)m_pGoblin->GetRect().width;
-	newPosition.height = (float)m_pGoblin->GetRect().height;
-
-	return m_pWorld->CheckLivingCollision(newPosition);
-}
-
 
 void CGoblin::CheckState()
 {
@@ -243,100 +210,83 @@ void CGoblin::CheckState()
 		//if the goblin is idle: check if he should start walking
 		case(IDLE) :
 		{
+			cout << "Idle" << endl;
+
 			m_fStateTime -= g_pTimer->GetElapsedTime().asSeconds();
-
-			//if the time for being idle is up: seek a new point and start walking towards it
-			if (m_fStateTime <= 0)
-			{
-				m_State = WALKING;
-
-				//get new x distance
-				m_PointToGo.x = m_pGoblin->GetRect().left + rand() % 400 + 300;
-
-				//get the pointing way
-				if (rand() % 2 == 0)
-					m_PointToGo.x *= -1;
-
-				//the point can't be outside the world
-				if (m_PointToGo.x < 0)
-				{
-					m_PointToGo.x /= 2;
-				}
-
-				//set the direction
-				if (m_PointToGo.x < m_pGoblin->GetRect().left)
-				{
-					m_left = true;
-					m_fLegsAnimState = 5;
-				}
-				else
-				{
-					m_left = false;
-					m_fLegsAnimState = 6;
-				}
-			}
 
 
 			//if the goblin spotted the player: calculate the path and set state to following
 			if (m_pGoblin->GetRect().intersects(viewRect))
 			{
-				m_PointToGo =  findPath(m_pPlayer->GetRect().left + m_pPlayer->GetRect().width/2, m_pPlayer->GetRect().top + m_pPlayer->GetRect().height/2);
-				if (m_PointToGo.x != -1)
-					m_State = FOLLOWING;		
+				m_PointToGo = findPath(m_pPlayer->GetRect().left + m_pPlayer->GetRect().width / 2, m_pPlayer->GetRect().top + m_pPlayer->GetRect().height / 2);
+				if (m_PointToGo.x != -1 && m_PointToGo.x != m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2)
+				{
+					m_State = WALKING;
 
-				//set the direction
-				if (m_PointToGo.x < m_pGoblin->GetRect().left + m_pGoblin->GetRect().width/2)
-				{
-					m_left = true;
-					m_fLegsAnimState = 5;
-				}
-				else if (m_PointToGo.x > m_pGoblin->GetRect().left + m_pGoblin->GetRect().width/2)
-				{
-					m_left = false;
-					m_fLegsAnimState = 6;
-				}
+					//set the direction
+					if (m_PointToGo.x < m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2)
+					{
+						m_left = true;
+						m_fLegsAnimState = 5;
+					}
+					else if (m_PointToGo.x > m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2)
+					{
+						m_left = false;
+						m_fLegsAnimState = 6;
+					}
+				} 
+				
 			}
+			//if the time for being idle is up: seek a new point and start walking towards it
+			else if (m_fStateTime <= 0)
+			{
+				m_State = WALKING;
+				NewRandomDestination();		
+			}
+
 
 			//if the goblin is near the player: attack
 			if (abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 50 && abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 50)
-				m_State = ATTACKING;
-
-			
+				m_State = ATTACKING;		
 
 		}break;
-		case(FOLLOWING):
+		case(WALKING):
 		{
+
+			cout << "walking" << endl;
 			//if the goblin spotted the player: calculate the path and set state to following
 			if (m_pGoblin->GetRect().intersects(viewRect))
 			{
 				m_PointToGo = findPath(m_pPlayer->GetRect().left + m_pPlayer->GetRect().width / 2, m_pPlayer->GetRect().top + m_pPlayer->GetRect().height / 2);
 
-				cout << "New X: " << m_PointToGo.x << endl;
-
-				if (m_PointToGo.x == -1 || m_PointToGo.x/ 100 == m_pGoblin->GetRect().left/100)
+				if (m_PointToGo.x == -1)
+					m_State = IDLE;
+				else if (m_PointToGo.x == m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2)
 				{
 					m_State = IDLE;
+					if (m_left)
+						m_fLegsAnimState = 5;
+					else
+						m_fLegsAnimState = 6;
 				}
+				else
+				{
+					cout << "XPoint: " << m_PointToGo.x << endl;
 
-				//set the direction
-				if (m_PointToGo.x < m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2 && m_left == false)
-				{
-					m_left = true;
-					m_fLegsAnimState = 5;
-				}
-				else if (m_PointToGo.x > m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2 && m_left == true)
-				{
-					m_left = false;
-					m_fLegsAnimState = 6;
-				}
+					//set the direction if it has changed
+					if (m_PointToGo.x < m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2 && m_left == false)
+					{
+						m_left = true;
+						m_fLegsAnimState = 5;
+					}
+					else if (m_PointToGo.x > m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2 && m_left == true)
+					{
+						m_left = false;
+						m_fLegsAnimState = 6;
+					}
+				}	
 
 			}
-			else
-			{
-				m_State = IDLE;
-				m_fStateTime = rand() % 15 + 5;
-			}
-
 
 			//if the goblin is near the player: attack
 			if (abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 50 && abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 50)
@@ -345,6 +295,7 @@ void CGoblin::CheckState()
 
 		case(ATTACKING) :
 		{
+			cout << "attacking" << endl;
 			//if the goblin is near the player: attack
 			if (abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 50 && abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 50)
 			{
@@ -358,6 +309,31 @@ void CGoblin::CheckState()
 			}
 
 		}break;
+	}
+}
+
+
+
+
+void CGoblin::NewRandomDestination()
+{
+	//get new x distance
+	m_PointToGo.x = m_pGoblin->GetRect().left + rand() % 400 + 300;
+
+	//get the pointing way
+	if (rand() % 2 == 0)
+		m_PointToGo.x *= -1;
+
+	//set the direction
+	if (m_PointToGo.x < m_pGoblin->GetRect().left)
+	{
+		m_left = true;
+		m_fLegsAnimState = 5;
+	}
+	else
+	{
+		m_left = false;
+		m_fLegsAnimState = 6;
 	}
 }
 
