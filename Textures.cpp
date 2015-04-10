@@ -105,8 +105,8 @@ void TextureLoading::LoadTextures()
 	t_blockTextures_dirt.loadFromFile("Data/Sprites/Objects/Blocks/dirt.png");
 	t_blockTextures_stone.loadFromFile("Data/Sprites/Objects/Blocks/stone.png");
 	t_blockTextures_wood.loadFromFile("Data/Sprites/Objects/Blocks/blocks_texture.png", IntRect(818, 2, 100, 100));
-	t_blockTextures_coalBlock.loadFromFile("Data/Sprites/Objects/Blocks/blocks_texture.png", IntRect(2, 2, 100, 100));
-	t_blockTextures_ironBlock.loadFromFile("Data/Sprites/Objects/Blocks/blocks_texture.png", IntRect(308, 2, 100, 100));
+	t_blockTextures_coalBlock.loadFromFile("Data/Sprites/Objects/Blocks/coal_block.png");
+	t_blockTextures_ironBlock.loadFromFile("Data/Sprites/Objects/Blocks/iron_block.png");
 	t_blockTextures_goldBlock.loadFromFile("Data/Sprites/Objects/Blocks/gold_block.png");
 	t_blockTextures_arcanusBlock.loadFromFile("Data/Sprites/Objects/Blocks/arcanus_block.png");
 	t_blockTextures_stoneWall.loadFromFile("Data/Sprites/Objects/Blocks/blocks_texture.png", IntRect(716, 2, 100, 100));

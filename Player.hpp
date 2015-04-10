@@ -127,6 +127,7 @@ private:
 	float m_fXVel, m_fYVel;                             //the x and y velocity
 	float m_fAnimState;                                //the current anim state
 	float m_fArmAnimState;                              //the current arm animation state
+	float m_fWaitToBeat;
 
 	int m_FallingSpeed;                                 //the speed with wich the dwarf is falling
 

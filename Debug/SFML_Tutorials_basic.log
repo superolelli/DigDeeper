@@ -1,8 +1,16 @@
-﻿Der Buildvorgang wurde am 09.04.2015 17:10:55 gestartet.
+﻿Der Buildvorgang wurde am 10.04.2015 18:04:43 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.1\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Placeable.cpp
-         Placeable.cpp
+         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.1\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Goblin.cpp
+         Goblin.cpp
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(46): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(50): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(122): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(203): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(204): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(205): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(206): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(387): warning C4305: '=': Verkürzung von 'double' in 'float'
        Link:
          F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.1\lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-network-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.lib" /MACHINE:X86 Debug\Beam.obj
          Debug\Bee.obj
@@ -46,4 +54,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:01.91
+Verstrichene Zeit 00:00:01.70

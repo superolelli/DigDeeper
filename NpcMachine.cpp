@@ -105,7 +105,7 @@ void CNpcMachine::CheckAllNpcs()
 				(*i)->m_wasHit = true;
 
 				//calculate the damage
-				int damage = m_pPlayer->GetPlayerAttributes().strength;
+				int damage = m_pPlayer->GetPlayerAttributes().strength - (m_pPlayer->GetPlayerAttributes().strength * ((*i)->GetAttributes()->armour/100));
 
 				//subtract the lost health
 				(*i)->GetAttributes()->currentHealth -= damage;
@@ -148,7 +148,7 @@ void CNpcMachine::CheckAllNpcs()
 			{
 
 				//calculate the damage
-				int damage = (*i)->GetAttributes()->strength;
+				int damage = (*i)->GetAttributes()->strength - ((*i)->GetAttributes()->strength * (m_pPlayer->GetPlayerAttributes().armour/100));
 
 				//subtract the lost health
 				m_pPlayer->DoDamage(damage);

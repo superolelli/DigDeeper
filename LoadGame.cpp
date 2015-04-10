@@ -135,6 +135,7 @@ void CLoadGame::RenderButtons()
 {
 	list<CSprite*>::iterator ib;
 	list<Savegame>::iterator is;
+	list<Savegame>::iterator forIs;
 
 	if(m_pLoadGameButton->Render(m_ButtonEventtype) == true)
 	{
@@ -220,8 +221,8 @@ void CLoadGame::RenderButtons()
 			{
 				m_GamePath = (*is).m_path.filename().string().c_str();		
 
-				BOOST_FOREACH(Savegame s, m_GameNameList)
-					s.m_clicked = false;
+				for (forIs = m_GameNameList.begin(); forIs != m_GameNameList.end(); forIs++)
+					forIs->m_clicked = false;
 				
 				(*is).m_clicked = true;
 			}

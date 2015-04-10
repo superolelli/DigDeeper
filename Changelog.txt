@@ -1044,3 +1044,9 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Übergänge zwischen einzelnen Blöcken wurden eingefügt
 
 ------------------------------------------------------
+10.04.2015
+
+-Kanten bei Blöcken mit Stein (Kohle, Gold, Eisen, Arcanus) entfernt
+-Bugfix: geladene Spiele wurden alle unter "Neue Welt" bei erneutem speichern gespeichert
+
+------------------------------------------------------

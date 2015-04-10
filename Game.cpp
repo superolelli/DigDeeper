@@ -532,7 +532,7 @@ void CGame::SaveGame()
 void CGame::Load(string _path)
 {
 	SNewWorldAttributes attributes;
-	attributes.GameName = "Neue Welt";
+	attributes.GameName = _path;
 	attributes.PlayerClass = MINER;
 	attributes.WorldSize = SMALL;
 

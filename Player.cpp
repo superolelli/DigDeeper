@@ -216,6 +216,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 	m_armGoingUp = true;
 
 	m_fAnimState = 6;
+	m_fWaitToBeat = 0;
 
 }
 
@@ -745,18 +746,41 @@ void CPlayer::CheckArmAnimation()
 {
 	if(Mouse::isButtonPressed(Mouse::Left))
 	{
-		if(m_fArmAnimState >= 90)
-			m_armGoingUp = false;
-		if(m_fArmAnimState <= -40)
-			m_armGoingUp = true;
+		//if dwarf carries sword
+		//CThing *thing = m_pInventory->GetCarriedThing();
+		//if (thing != NULL && thing->getID() == SWORD)
+		//{
+		//	if (m_fWaitToBeat <= 0)
+		//	{
+		//		//if arm reached lowest point: set arm to highest point
+		//		if (m_fArmAnimState <= -40)
+		//		{
+		//			m_fArmAnimState = 110;
+		//			m_fWaitToBeat = 0.6;
+		//		}
 
-		if(m_armGoingUp)
-			m_fArmAnimState += g_pTimer->GetElapsedTime().asSeconds() * 300;
-		else
-			m_fArmAnimState -= g_pTimer->GetElapsedTime().asSeconds() * 300;		
+		//		m_fArmAnimState -= g_pTimer->GetElapsedTime().asSeconds() * 500;
+		//	}
+		//	else
+		//		m_fWaitToBeat -= g_pTimer->GetElapsedTime().asSeconds();
+		//}
+		//else
+		//{
+			if (m_fArmAnimState >= 90)
+				m_armGoingUp = false;
+			if (m_fArmAnimState <= -40)
+				m_armGoingUp = true;
+
+			if (m_armGoingUp)
+				m_fArmAnimState += g_pTimer->GetElapsedTime().asSeconds() * 300;
+			else
+				m_fArmAnimState -= g_pTimer->GetElapsedTime().asSeconds() * 300;
+		//}
 	}
 	else
+	{
 		m_fArmAnimState = 0;
+	}
 
 	m_pDwarf->RotateArm(m_fArmAnimState);
 }

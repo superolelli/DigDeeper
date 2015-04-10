@@ -34,7 +34,7 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 	m_Attributes.maxHealth = 40;
 	m_Attributes.armour = 0;
 	m_Attributes.speed = 150;
-	m_Attributes.strength = 5;
+	m_Attributes.strength = 10;
 	m_Attributes.exp = 5;
 
 	//Init the state
