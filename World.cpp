@@ -121,7 +121,7 @@ void CWorld::Init(int _width, int _height, View* _view, bool _loaded)
 	}
 
 	//m_lightMachine.Init(m_BlocksX*100, m_BlocksY*100);
-	m_lightMachine.Init(_view);
+	m_lightMachine.Init(_view, this);
 
 	m_WorldHeight = m_BlocksY *100;
 	m_WorldWidth = m_BlocksX *100;
@@ -381,6 +381,7 @@ void CWorld::Render(Vector2f _viewSize, Vector2f _viewCenter)
 
 	//clear the light machine
 	m_lightMachine.Clear(Color(0, 0, 0, m_NightAlpha));
+	//m_lightMachine.Clear(Color::Black);
 
 
 
@@ -486,10 +487,15 @@ void CWorld::Render(Vector2f _viewSize, Vector2f _viewCenter)
 
 
 
-				if(m_pBlocks[x][y]->getID() == FURNANCE)
+				/*if(m_pBlocks[x][y]->getID() == FURNANCE)
 					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2 - 100, m_pBlocks[x][y]->GetRect().top - 15, 100, Color(230, 0,0));
 				else if(m_pBlocks[x][y]->getID() == LANTERNP)
-					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left -100 , m_pBlocks[x][y]->GetRect().top - 60, 150, Color::Yellow);
+					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left -100 , m_pBlocks[x][y]->GetRect().top - 60, 150, Color::Yellow);*/
+
+				if(m_pBlocks[x][y]->getID() == FURNANCE)
+				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2, m_pBlocks[x][y]->GetRect().top + 50, 100, Color(230, 0,0));
+				else if(m_pBlocks[x][y]->getID() == LANTERNP)
+				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left, m_pBlocks[x][y]->GetRect().top, 150, Color::Yellow);
 				
 			}
 		}
@@ -1498,6 +1504,23 @@ bool CWorld::CheckForBarrier(IntRect _living, bool _left)
 		}
 	}
 
+
+	return true;
+}
+
+
+
+
+
+bool CWorld::isBlockPassable(int _x, int _y)
+{
+	if (_x >= 0 && _y >= 0)
+	{
+		if (m_pBlocks[_x][_y] != NULL && !m_pBlocks[_x][_y]->IsPassable())
+			return false;
+		else
+			return true;
+	}
 
 	return true;
 }

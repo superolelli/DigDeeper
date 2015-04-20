@@ -249,6 +249,9 @@ void CGame::CheckView()
 	//sets the view
 	m_View.setCenter(dwarfCenter);
 
+
+	cout << "XView :" << m_View.getCenter().x - m_View.getSize().x / 2 << endl;
+
 	//applies the view to the window
     g_pFramework->GetWindow()->setView(m_View);
 }

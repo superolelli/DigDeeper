@@ -2,6 +2,9 @@
 #define LIGHTMACHINE_HPP
 
 #include "Framework.hpp"
+#include "Structures.hpp"
+
+class CWorld;
 
 
 class CLightMachine
@@ -9,7 +12,7 @@ class CLightMachine
 public:
 	CLightMachine();
 	//Inits the light machine
-	void Init(View* _view);
+	void Init(View* _view, CWorld *_world);
 
 	//Quits the light machine
 	void Quit();
@@ -31,9 +34,14 @@ private:
 
 	RenderTexture m_lightTexture;
 	View *m_View;
+	CWorld *m_pWorld;
+
 	int m_ViewX, m_ViewY;
 	int m_ViewLastWidth;                          //the last width of the view
 	int m_currentAlpha;
+
+
+	Vector2f IsLineIntersecting(Vertex _firstPoint, Vertex _secondPoint, int _angle, int _radius);               //checks, wether a line intersects with a block
 
 
 };

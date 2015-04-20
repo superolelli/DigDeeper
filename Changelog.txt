@@ -1047,6 +1047,12 @@ ZUKÜNFITGE ÄNDERUNGEN:
 10.04.2015
 
 -Kanten bei Blöcken mit Stein (Kohle, Gold, Eisen, Arcanus) entfernt
+-Neue Lichtmaschine gestartet (sieht um einiges besser aus, braucht aber sehr viele Ressourcen)
 -Bugfix: geladene Spiele wurden alle unter "Neue Welt" bei erneutem speichern gespeichert
+
+------------------------------------------------------
+14.04.2015
+
+-Performance von neuer Lichtmaschine massiv verbessert
 
 ------------------------------------------------------

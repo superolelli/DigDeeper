@@ -61,6 +61,8 @@ public:
 	//returns a simple matrix of the current view of the blocks
 	vector < vector<SWorldPlace> > GetWorldMatrix(IntRect _view);
 
+	bool isBlockPassable(int _x, int _y);
+
 private:
 	friend class boost::serialization::access;
 
