@@ -1,4 +1,4 @@
-﻿Der Buildvorgang wurde am 20.04.2015 14:35:31 gestartet.
+﻿Der Buildvorgang wurde am 21.04.2015 16:25:33 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
          F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.1\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
@@ -48,4 +48,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:01.68
+Verstrichene Zeit 00:00:01.70

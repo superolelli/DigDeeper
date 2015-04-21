@@ -526,7 +526,7 @@ void CPlayer::Render()
 
 		//if the player carries a lantern: render a light circle
 		if(tool->getID() == LANTERN)
-			m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetHandPos(m_turned_left).x, m_pDwarf->GetHandPos(m_turned_left).y, 150, Color::Yellow);
+			m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetHandPos(m_turned_left).x, m_pDwarf->GetHandPos(m_turned_left).y, 300, Color::Yellow);
 
 		if(m_turned_left)
 		{
@@ -564,7 +564,7 @@ void CPlayer::Render()
 
 	//if the player is wearing a candle: render a light circle
 	if(m_pInventory->GetHelmetID() == CANDLE)
-		m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetRect().left + m_pDwarf->GetRect().width/2, m_pDwarf->GetRect().top, 300, Color::Yellow);
+		m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetRect().left + m_pDwarf->GetRect().width/2, m_pDwarf->GetRect().top, 250, Color::Yellow);
 }
 
 

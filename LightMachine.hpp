@@ -12,7 +12,7 @@ class CLightMachine
 public:
 	CLightMachine();
 	//Inits the light machine
-	void Init(View* _view, CWorld *_world);
+	void Init(View* _view, CWorld *_world, bool _fastLight);
 
 	//Quits the light machine
 	void Quit();
@@ -40,6 +40,7 @@ private:
 	int m_ViewLastWidth;                          //the last width of the view
 	int m_currentAlpha;
 
+	bool m_fastLight;
 
 	Vector2f IsLineIntersecting(Vertex _firstPoint, Vertex _secondPoint, int _angle, int _radius);               //checks, wether a line intersects with a block
 
