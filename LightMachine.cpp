@@ -73,21 +73,64 @@ void CLightMachine::Render()
 
 void CLightMachine::AddLightCircle(int _x, int _y, int _radius, Color _color)
 {
-	VertexArray circle(TrianglesFan, 182);
+	VertexArray circle(TrianglesFan, 92);
 	circle[0].position.x = _x - m_ViewX + 10;
 	circle[0].position.y = _y - m_ViewY + 10;
 	circle[0].color = Color(255, 255, 255, 0);
 
-	for (int angle = 1; angle <= 181; angle++)
+	for (int angle = 1; angle <= 91; angle++)
 	{
-		circle[angle].position = Vector2f((_x - m_ViewX + 10) + _radius * cos(angle*2*3.1415926535 / 180), (_y - m_ViewY + 10) + _radius * sin(angle*2*3.1415926535 / 180));
+		circle[angle].position = Vector2f((_x - m_ViewX + 10) + _radius * cos(angle*4*3.1415926535 / 180), (_y - m_ViewY + 10) + _radius * sin(angle*4*3.1415926535 / 180));
 
-		circle[angle].position = IsLineIntersecting(circle[0], circle[angle], angle*2, _radius);
+		circle[angle].position = IsLineIntersecting(circle[0], circle[angle], angle*4, _radius);
 
 		circle[angle].color = Color(_color.r, _color.g, _color.b, 255);
 	}
 
 	m_lightTexture.draw(circle, BlendMultiply);
+}
+
+
+
+
+void CLightMachine::AddLightBeam(int _x, int _y, int _length, int _width, Color _color)
+{
+	VertexArray lightRect(Quads, 4);
+	lightRect[0].position.x = _x - m_ViewX + 10;
+	lightRect[0].position.y = _y - m_ViewY + 10;
+	lightRect[0].color = _color;
+
+	lightRect[1].position.x = _x - m_ViewX + 10 + _width;
+	lightRect[1].position.y = lightRect[0].position.y;
+	lightRect[1].color = lightRect[0].color;
+
+	lightRect[3].position.x = lightRect[0].position.x;
+	lightRect[3].position.y = _y - m_ViewY + 10 + (_length - 0.15*_length);
+	lightRect[3].color = Color(255, 255, 255, 100);
+
+	lightRect[2].position.x = lightRect[1].position.x;
+	lightRect[2].position.y = lightRect[3].position.y;
+	lightRect[2].color = lightRect[3].color;
+
+	m_lightTexture.draw(lightRect, BlendMultiply);
+
+	lightRect[0].position.x = _x - m_ViewX + 10;
+	lightRect[0].position.y = _y - m_ViewY + 10 + (_length - 0.15*_length);
+	lightRect[0].color = Color(255, 255, 255, 100);
+
+	lightRect[1].position.x = _x - m_ViewX + 10 + _width;
+	lightRect[1].position.y = lightRect[0].position.y;
+	lightRect[1].color = lightRect[0].color;
+
+	lightRect[3].position.x = lightRect[0].position.x;
+	lightRect[3].position.y = _y - m_ViewY + 10 + _length;
+	lightRect[3].color = Color(255, 255, 255, 255);
+
+	lightRect[2].position.x = lightRect[1].position.x;
+	lightRect[2].position.y = lightRect[3].position.y;
+	lightRect[2].color = lightRect[3].color;
+
+	m_lightTexture.draw(lightRect, BlendMultiply);
 }
 
 

@@ -26,6 +26,9 @@ public:
 	//adds a lightcircle
 	void AddLightCircle(int _x, int _y, int _radius, Color _color);
 
+	//adds a light beam
+	void AddLightBeam(int _x, int _y, int _length, int _width, Color _color);
+
 	//adds a half lightcircle
 	//void AddLightHalfCircle(int _x, int _y, int radius, Color _color);
 

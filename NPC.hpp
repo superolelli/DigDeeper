@@ -18,6 +18,7 @@ public:
 	virtual IntRect GetRect() = 0;
 	virtual IntRect GetWeaponRect() = 0;
 	virtual bool IsHitting() = 0;
+	virtual void ThrowNpc(bool _left, int _strength) = 0;
 
 	SNpcAttributes* GetAttributes(){return &m_Attributes;}
 	int GetID(){return m_ID;}

@@ -29,6 +29,7 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 	m_jumping = false;
 
 	m_fallingSpeed = 0;
+	m_sideSpeed = 0;
 
 	//Init the attributes
 	m_Attributes.maxHealth = 40;
@@ -135,39 +136,62 @@ bool CGoblin::CheckNpc()
 
 void CGoblin::CheckXMovement()
 {
-	//is the goblin looking to the left?
-	if (m_left)
+	//regulate the side speed
+	if (m_sideSpeed > 0)
+		m_sideSpeed -= 200 * g_pTimer->GetElapsedTime().asSeconds();
+	else if (m_sideSpeed < 0)
+		m_sideSpeed += 200 * g_pTimer->GetElapsedTime().asSeconds();
+
+	if (abs(m_sideSpeed) < 50)
 	{
-		//is the goblin going?
-		if (m_State == WALKING && m_PointToGo.x != m_pGoblin->GetRect().left)
+		//is the goblin looking to the left?
+		if (m_left)
 		{
-			m_fXVel = -g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
-			m_fLegsAnimState -= 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
+			//is the goblin going?
+			if (m_State == WALKING && m_PointToGo.x != m_pGoblin->GetRect().left)
+			{
+				m_fXVel = -g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
+				m_fLegsAnimState -= 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
 
-			//start the animation new if it has reached it's end
-			if (m_fLegsAnimState < 0 || m_fLegsAnimState > 6)
-				m_fLegsAnimState = 5.99f;
+				//start the animation new if it has reached it's end
+				if (m_fLegsAnimState < 0 || m_fLegsAnimState > 6)
+					m_fLegsAnimState = 5.99f;
 
+			}
+		}
+		//is the goblin looking to the right
+		else
+		{
+			//is the goblin going?
+			if (m_State == WALKING && m_PointToGo.x != m_pGoblin->GetRect().left)
+			{
+				m_fXVel = g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
+				m_fLegsAnimState += 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
+
+				//start the animation new if it has reached it's end
+				if (m_fLegsAnimState < 6 || m_fLegsAnimState > 12)
+					m_fLegsAnimState = 6;
+
+			}
 		}
 	}
-	//is the goblin looking to the right
-	else
-	{
-		//is the goblin going?
-		if (m_State == WALKING && m_PointToGo.x != m_pGoblin->GetRect().left)
-		{
-			m_fXVel = g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
-			m_fLegsAnimState += 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
 
-			//start the animation new if it has reached it's end
-			if (m_fLegsAnimState < 6 || m_fLegsAnimState > 12)
-				m_fLegsAnimState = 6;
-		
-		}
-	}
+
+	if (m_sideSpeed != 0)
+		m_fXVel += m_sideSpeed * g_pTimer->GetElapsedTime().asSeconds();
 }
 
 
+
+void CGoblin::ThrowNpc(bool _left, int _strength)
+{
+	if (_left)
+		m_sideSpeed = -_strength;
+	else
+		m_sideSpeed = _strength;
+
+	m_fallingSpeed = -200;
+}
 
 
 void CGoblin::CheckYMovement()

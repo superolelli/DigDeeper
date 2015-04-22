@@ -207,6 +207,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 	m_modifications.breaking_speed = 1;
 
 	m_FallingSpeed = 0;
+	m_SideSpeed = 0;
 
 	m_State.breaking = false;
 	m_State.climbing = false;
@@ -286,6 +287,7 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view)
 	m_modifications.breaking_speed = 1;
 
 	m_FallingSpeed = 0;
+	m_SideSpeed = 0;
 
 	m_State.breaking = false;
 	m_State.climbing = false;
@@ -394,45 +396,66 @@ Vector2f CPlayer::CheckMovement()
 
 void CPlayer::CheckXMovement()
 {
-	//if the left key is pressed
-	if(Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))
+	//regulate the side speed
+	if (m_SideSpeed > 0)
+		m_SideSpeed -= 200 * g_pTimer->GetElapsedTime().asSeconds();
+	else if (m_SideSpeed < 0)
+		m_SideSpeed += 200 * g_pTimer->GetElapsedTime().asSeconds();
+	
+	if (abs(m_SideSpeed) < 50)
 	{
-		m_turned_left = true;
+		//if the left key is pressed
+		if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))
+		{
+			m_turned_left = true;
 
-		m_fXVel = (float)-m_modifications.speed * g_pTimer->GetElapsedTime().asSeconds();
-		m_fAnimState -= 8.0f * (m_modifications.speed/150) * g_pTimer->GetElapsedTime().asSeconds();
+			m_fXVel = (float)-m_modifications.speed * g_pTimer->GetElapsedTime().asSeconds();
+			m_fAnimState -= 8.0f * (m_modifications.speed / 150) * g_pTimer->GetElapsedTime().asSeconds();
 
-		//start the animation new if it has reached it's end
-		if(m_fAnimState < 0 || m_fAnimState > 7)
-			m_fAnimState = 6.99f;
-		
-	}
-	//if the right key is pressed
-	else if(Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))
-	{
-		m_turned_left = false;
+			//start the animation new if it has reached it's end
+			if (m_fAnimState < 0 || m_fAnimState > 7)
+				m_fAnimState = 6.99f;
 
-		m_fXVel = (float)m_modifications.speed * g_pTimer->GetElapsedTime().asSeconds();
-		m_fAnimState += 8.0f * (m_modifications.speed/150)* g_pTimer->GetElapsedTime().asSeconds();
+		}
+		//if the right key is pressed
+		else if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))
+		{
+			m_turned_left = false;
 
-		//start the animation new if it has reached it's end
-		if(m_fAnimState < 7 || m_fAnimState > 14)
-			m_fAnimState = 7;
-	}
-	else
-	{
-		if(m_turned_left)
-			m_fAnimState = 6;
+			m_fXVel = (float)m_modifications.speed * g_pTimer->GetElapsedTime().asSeconds();
+			m_fAnimState += 8.0f * (m_modifications.speed / 150)* g_pTimer->GetElapsedTime().asSeconds();
+
+			//start the animation new if it has reached it's end
+			if (m_fAnimState < 7 || m_fAnimState > 14)
+				m_fAnimState = 7;
+		}
 		else
-			m_fAnimState = 7;
+		{
+			if (m_turned_left)
+				m_fAnimState = 6;
+			else
+				m_fAnimState = 7;
+		}
 	}
 
+	if (m_SideSpeed != 0)
+		m_fXVel += m_SideSpeed * g_pTimer->GetElapsedTime().asSeconds();
 
 	//Check if the dwarf is out of the world
 	if(m_pDwarf->GetRect().left + m_fXVel < 0 || m_pDwarf->GetRect().left + m_pDwarf->GetRect().width + m_fXVel > m_pWorld->GetDimensions().x*100)
 		m_fXVel = 0;
 }
 
+
+void CPlayer::ThrowPlayer(bool _left, int _strength)
+{
+	if (_left)
+		m_SideSpeed = -_strength;
+	else
+		m_SideSpeed = _strength;
+
+	m_FallingSpeed = -200;
+}
 
 
 void CPlayer::CheckYMovement()

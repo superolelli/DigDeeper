@@ -32,6 +32,7 @@ public:
 	void Take(CThing *_thing, int amount);
 	void AddExp(int _exp){m_Attributes.currentExp += _exp;}
 	void DoDamage(int _damage){ m_Attributes.currentHealth -= _damage; }
+	void ThrowPlayer(bool _left, int _strength);
 	int GetHealth(){ return m_Attributes.currentHealth; }
 	bool AddRecipe(int _ID){return m_pBuildingMenu->NewRecipe(_ID);}
 	list<int> GetNotAvailableRecipesList(){return m_pBuildingMenu->GetNotAvailableRecipes();}
@@ -130,6 +131,7 @@ private:
 	float m_fWaitToBeat;
 
 	int m_FallingSpeed;                                 //the speed with wich the dwarf is falling
+	int m_SideSpeed;                                    //the speed to one side (e.g. by being hitted)
 
 	bool m_turned_left;                                //is the player turned to the left side?
 	bool m_armGoingUp;                                  //is the arm moved up?

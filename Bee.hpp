@@ -15,6 +15,7 @@ public:
 	IntRect GetRect(){ return m_pBeeSprite->GetRect();}
 	IntRect GetWeaponRect(){ return m_pBeeSprite->GetRect(); }
 	bool IsHitting(){ return false; }
+	void ThrowNpc(bool _left, int _strength){}
 
 	vector<SItem> GetLoot();
 

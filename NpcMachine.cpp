@@ -110,6 +110,12 @@ void CNpcMachine::CheckAllNpcs()
 				//subtract the lost health
 				(*i)->GetAttributes()->currentHealth -= damage;
 
+				//throw the npc if hitted
+				if (m_pPlayer->GetRect().left > (*i)->GetRect().left)
+					(*i)->ThrowNpc(true, 300);
+				else
+					(*i)->ThrowNpc(false, 300);
+
 				//put the damage into a stringstream
 				stream.str("");
 				stream << damage;
@@ -152,6 +158,11 @@ void CNpcMachine::CheckAllNpcs()
 
 				//subtract the lost health
 				m_pPlayer->DoDamage(damage);
+
+				if (m_pPlayer->GetRect().left < (*i)->GetRect().left)
+					m_pPlayer->ThrowPlayer(true, 300);
+				else
+					m_pPlayer->ThrowPlayer(false, 300);
 
 				//put the damage into a stringstream
 				stream.str("");

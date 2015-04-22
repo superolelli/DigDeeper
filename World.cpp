@@ -378,11 +378,21 @@ void CWorld::Render(Vector2f _viewSize, Vector2f _viewCenter)
 
 	int viewX = _viewCenter.x - _viewSize.x/2;
 	int viewY = _viewCenter.y - _viewSize.y/2;
+	int viewFirstBlock = viewX - viewX % 100;
 
 	//clear the light machine
 	//m_lightMachine.Clear(Color(0, 0, 0, m_NightAlpha));
 	m_lightMachine.Clear(Color::Black);
 
+
+	if (viewY < 1000)
+	{
+		//add the "sun"
+		for (int i = viewFirstBlock - 100; i <= viewFirstBlock + _viewSize.x + 100; i += 100)
+		{
+			m_lightMachine.AddLightBeam(i, 0, 700, 100, Color(255, 255, 255, m_NightAlpha));
+		}
+	}
 
 
 	//get all the blocks, which are within the view
@@ -495,11 +505,12 @@ void CWorld::Render(Vector2f _viewSize, Vector2f _viewCenter)
 				if(m_pBlocks[x][y]->getID() == FURNANCE)
 				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2, m_pBlocks[x][y]->GetRect().top + 50, 200, Color(230, 0,0));
 				else if(m_pBlocks[x][y]->getID() == LANTERNP)
-				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left, m_pBlocks[x][y]->GetRect().top, 350, Color::Yellow);
-				
+				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left, m_pBlocks[x][y]->GetRect().top, 350, Color::Yellow);		
 			}
 		}
 	}
+
+
 
 
 	//checks the panels on their special rendering
@@ -1497,7 +1508,7 @@ bool CWorld::CheckForBarrier(IntRect _living, bool _left)
 	}
 	else
 	{
-		if (x + 1 <= m_BlocksX)
+		if (x + 1 < m_BlocksX)
 		{
 			if (m_pBlocks[x + 1][y] == NULL || m_pBlocks[x + 1][y]->IsPassable())
 				return false;

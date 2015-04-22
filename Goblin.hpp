@@ -15,6 +15,7 @@ public:
 	IntRect GetRect(){ return m_pGoblin->GetRect(); }
 	IntRect GetWeaponRect(){ return IntRect(m_pGoblin->GetHandPos(m_left).x - 5, m_pGoblin->GetHandPos(m_left).y - 5, 10, 10); }
 	bool IsHitting();
+	void ThrowNpc(bool _left, int _strength);
 
 	vector<SItem> GetLoot();
 
@@ -44,6 +45,7 @@ private:
 
 	float m_fStateTime;               //how long does the current state last?
 	int m_fallingSpeed;               //the speed with which the goblin falls
+	int m_sideSpeed;
 
 	void CheckState();                 //checks the state
 	void NewRandomDestination();        //gets a new random destination
