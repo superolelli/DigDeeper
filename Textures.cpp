@@ -68,7 +68,7 @@ void TextureLoading::LoadTextures()
 	t_arrowDown.loadFromFile("Data/Sprites/Building/arrow_down.png");
 	t_buildThingBackground.loadFromFile("Data/Sprites/Building/building_menu_background_things.png");
 
-	t_skillPage.loadFromFile("Data/Sprites/Skills/character_info.png");
+	t_skillPage.loadFromFile("Data/Sprites/Skills/character_info2.png");
 	t_levelUp.loadFromFile("Data/Sprites/Skills/levelUp.png");
 	t_newSkillSpeed.loadFromFile("Data/Sprites/Skills/levelUp_speed.png");
 	t_newSkillStrength.loadFromFile("Data/Sprites/Skills/levelUp_strength.png");
@@ -77,6 +77,10 @@ void TextureLoading::LoadTextures()
 	t_newSkillArmour.loadFromFile("Data/Sprites/Skills/levelUp_armour.png");
 	t_newSkillLuck.loadFromFile("Data/Sprites/Skills/levelUp_luck.png");
 	t_newSkillMana.loadFromFile("Data/Sprites/Skills/levelUp_mana.png");
+	t_newSkillHealthRegeneration.loadFromFile("Data/Sprites/Skills/levelUp_healthRegeneration.png");
+	t_newSkillManaRegeneration.loadFromFile("Data/Sprites/Skills/levelUp_manaRegeneration.png");
+	t_newSkillCriticalChance.loadFromFile("Data/Sprites/Skills/levelUp_criticalChance.png");
+	t_newSkillCriticalDamage.loadFromFile("Data/Sprites/Skills/levelUp_criticalDamage.png");
 	t_newSkillRecipe.loadFromFile("Data/Sprites/Skills/levelUp_recipe.png");
 
 	t_furnanceMenu.loadFromFile("Data/Sprites/Inventory/furnance_menu2.png");

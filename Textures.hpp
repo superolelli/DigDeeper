@@ -92,6 +92,10 @@ public:
 	Texture t_newSkillArmour;
 	Texture t_newSkillLuck;
 	Texture t_newSkillMana;
+	Texture t_newSkillHealthRegeneration;
+	Texture t_newSkillManaRegeneration;
+	Texture t_newSkillCriticalChance;
+	Texture t_newSkillCriticalDamage;
 	Texture t_newSkillRecipe;
 
 	Texture t_furnanceMenu;                                //the melting menu

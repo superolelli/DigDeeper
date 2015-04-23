@@ -91,7 +91,7 @@ const int ATTACKING = 3;
 
 #pragma region Skills
 
-const int NUMBER_OF_SKILLS = 7;
+const int NUMBER_OF_SKILLS = 11;
 
 const int RECIPESKILL = 0;
 const int SPEED = 1;
@@ -101,6 +101,10 @@ const int STRENGTH = 4;
 const int ARMOUR = 5;
 const int LUCK = 6;
 const int MANA = 7;
+const int HEALTHREGENERATION = 8;
+const int MANAREGENERATION = 9;
+const int CRITICALCHANCE = 10;
+const int CRITICALDAMAGE = 11;
 
 #pragma endregion
 

@@ -1056,3 +1056,16 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Performance von neuer Lichtmaschine massiv verbessert
 
 ------------------------------------------------------
+22.04.2015
+
+-Licht orientiert sich nun an der Umgebung
+-Es ist nun nicht immer überall Tag oder Nacht
+-Spieler und Kreaturen werden von Treffern nun zurückgestoßen
+
+------------------------------------------------------
+23.04.2015
+
+-Es wurden die Werte Lebens- und Manaregeneration sowie kritische Chance und kritischer Schaden eingefügt
+-Charakterinfo wurde überarbeitet
+
+------------------------------------------------------

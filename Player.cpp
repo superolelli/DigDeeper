@@ -84,6 +84,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 
 	m_Attributes.currentHealth = 100;
 	m_Attributes.maxHealth = 100;
+	m_Attributes.healthRegeneration = 0;
 	m_Attributes.armour = 0;
 	m_Attributes.strength = 5;
 	m_Attributes.luck = 0;
@@ -91,6 +92,9 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 	m_Attributes.speed = 150;
 	m_Attributes.currentMana = 10;
 	m_Attributes.maxMana = 10;
+	m_Attributes.manaRegeneration = 0;
+	m_Attributes.criticalChance = 0;
+	m_Attributes.criticalDamage = 0;
 
 	m_Attributes.currentExp = 0;
 	m_Attributes.maxExp = 10;
@@ -828,6 +832,10 @@ void CPlayer::CalculateAttributes()
 		m_modifications.maxMana += tool->GetAttributes().maxMana + m_Attributes.maxMana;
 		m_modifications.speed += tool->GetAttributes().speed + m_Attributes.speed;
 		m_modifications.strength += tool->GetAttributes().strength + m_Attributes.strength;
+		m_modifications.healthRegeneration += tool->GetAttributes().healthRegeneration + m_Attributes.healthRegeneration;
+		m_modifications.manaRegeneration += tool->GetAttributes().manaRegeneration + m_Attributes.manaRegeneration;
+		m_modifications.criticalChance += tool->GetAttributes().criticalChance + m_Attributes.criticalChance;
+		m_modifications.criticalDamage += tool->GetAttributes().criticalDamage + m_Attributes.criticalDamage;
 
 	}
 	else
@@ -839,6 +847,10 @@ void CPlayer::CalculateAttributes()
 		m_modifications.maxMana += m_Attributes.maxMana;
 		m_modifications.speed += m_Attributes.speed;
 		m_modifications.strength += m_Attributes.strength;
+		m_modifications.healthRegeneration += m_Attributes.healthRegeneration;
+		m_modifications.manaRegeneration += m_Attributes.manaRegeneration;
+		m_modifications.criticalChance += m_Attributes.criticalChance;
+		m_modifications.criticalDamage += m_Attributes.criticalDamage;
 	}
 
 }

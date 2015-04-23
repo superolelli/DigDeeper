@@ -8,13 +8,17 @@ struct SPlayerAttributes
 	//the attributes
 	int currentHealth;
 	int maxHealth;
+	int healthRegeneration;
 	int armour;
 	int strength;
+	int criticalChance;
+	int criticalDamage;
 	int luck;
 	float breakingSpeed;
 	int speed;
 	int currentMana;
 	int maxMana;
+	int manaRegeneration;
 
 	//the experience
 	int currentExp;
@@ -54,6 +58,10 @@ struct SToolAttributes
 	int armour;
 	int maxHealth;
 	int maxMana;
+	int healthRegeneration;
+	int manaRegeneration;
+	int criticalChance;
+	int criticalDamage;
 	int strength;
 	int luck;
 	int speed;
@@ -68,6 +76,10 @@ struct SToolAttributes
 		ar & strength;
 		ar & luck;
 		ar & speed;
+		ar & healthRegeneration;
+		ar & manaRegeneration;
+		ar & criticalChance;
+		ar & criticalDamage;
 	}
 };
 

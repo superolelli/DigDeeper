@@ -11,6 +11,10 @@ CTool::CTool()
 	m_Attributes.maxMana = 0;
 	m_Attributes.speed = 0;
 	m_Attributes.strength = 0;
+	m_Attributes.healthRegeneration = 0;
+	m_Attributes.manaRegeneration = 0;
+	m_Attributes.criticalChance = 0;
+	m_Attributes.criticalDamage = 0;
 }
 
 
@@ -130,6 +134,30 @@ void CTool::InitToolRandomly(int _ID)
 				m_Attributes.maxMana += rand()%10 +1;
 				if(i == 1)
 					m_Name.append(" des Magiers");
+			}break;
+		case HEALTHREGENERATION:
+			{
+				m_Attributes.healthRegeneration += rand() % 3 + 1;
+				if (i == 1)
+					m_Name.append(" der Regeneration");
+			}break;
+		case MANAREGENERATION:
+			{
+				m_Attributes.manaRegeneration += rand() % 3 + 1;
+				if (i == 1)
+					m_Name.append(" der arkanen Macht");
+			}break;
+		case CRITICALCHANCE:
+			{
+				m_Attributes.criticalChance += rand() % 3 + 1;
+				if (i == 1)
+					m_Name.append(" des Zufalls");
+			}break;
+		case CRITICALDAMAGE:
+			{
+				m_Attributes.criticalDamage += rand() % 10 + 1;
+				if (i == 1)
+					m_Name.append(" des Vernichtens");
 			}break;
 		default:
 			{

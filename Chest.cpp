@@ -131,12 +131,20 @@ void CChest::Render()
 								number << "\nGlück: " << equipment->GetAttributes().luck;
 							if(equipment->GetAttributes().maxHealth != 0)
 								number << "\nLeben " << equipment->GetAttributes().maxHealth;
+							if (equipment->GetAttributes().healthRegeneration != 0)
+								number << "\nLebensregeneration " << equipment->GetAttributes().healthRegeneration;
 							if(equipment->GetAttributes().maxMana != 0)
 								number << "\nMana " << equipment->GetAttributes().maxMana;
+							if (equipment->GetAttributes().manaRegeneration != 0)
+								number << "\nManaregeneration " << equipment->GetAttributes().manaRegeneration;
 							if(equipment->GetAttributes().speed != 0)
 								number << "\nGeschwindigkeit " << equipment->GetAttributes().speed;
 							if(equipment->GetAttributes().strength != 0)
 								number << "\nStärke " << equipment->GetAttributes().strength;
+							if (equipment->GetAttributes().criticalChance != 0)
+								number << "\nKritische Chance " << equipment->GetAttributes().criticalChance;
+							if (equipment->GetAttributes().criticalDamage != 0)
+								number << "\nKritischer Schaden " << equipment->GetAttributes().criticalDamage;
 						}
 						//if it is a tool
 						else
@@ -152,12 +160,20 @@ void CChest::Render()
 								number << "\nGlück: " << tool->GetAttributes().luck;
 							if(tool->GetAttributes().maxHealth != 0)
 								number << "\nLeben " << tool->GetAttributes().maxHealth;
+							if (tool->GetAttributes().healthRegeneration != 0)
+								number << "\nLebensregeneration " << tool->GetAttributes().healthRegeneration;
 							if(tool->GetAttributes().maxMana != 0)
 								number << "\nMana " << tool->GetAttributes().maxMana;
+							if (tool->GetAttributes().manaRegeneration != 0)
+								number << "\nManaregeneration " << tool->GetAttributes().manaRegeneration;
 							if(tool->GetAttributes().speed != 0)
 								number << "\nGeschwindigkeit " << tool->GetAttributes().speed;
 							if(tool->GetAttributes().strength != 0)
 								number << "\nStärke " << tool->GetAttributes().strength;
+							if (tool->GetAttributes().criticalChance != 0)
+								number << "\nKritische Chance " << tool->GetAttributes().criticalChance;
+							if (tool->GetAttributes().criticalDamage != 0)
+								number << "\nKritischer Schaden " << tool->GetAttributes().criticalDamage;
 						}
 
 						//sets the color

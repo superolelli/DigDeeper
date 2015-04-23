@@ -64,6 +64,10 @@ private:
 		ar & m_Attributes.maxMana;
 		ar & m_Attributes.speed;
 		ar & m_Attributes.strength;
+		ar & m_Attributes.criticalChance;
+		ar & m_Attributes.criticalDamage;
+		ar & m_Attributes.healthRegeneration;
+		ar & m_Attributes.manaRegeneration;
 		int x = m_pDwarf->GetRect().left;
 		int y = m_pDwarf->GetRect().top;
 		ar & x;
@@ -86,6 +90,10 @@ private:
 		ar & m_Attributes.maxMana;
 		ar & m_Attributes.speed;
 		ar & m_Attributes.strength;
+		ar & m_Attributes.criticalChance;
+		ar & m_Attributes.criticalDamage;
+		ar & m_Attributes.healthRegeneration;
+		ar & m_Attributes.manaRegeneration;
 		ar & m_loadedPosX;
 		ar & m_loadedPosY;
 	}

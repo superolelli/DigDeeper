@@ -272,9 +272,13 @@ const SToolAttributes operator+(SToolAttributes const &lhs, SToolAttributes cons
 	temp.breaking_speed += rhs.breaking_speed;
 	temp.luck += rhs.luck;
 	temp.maxHealth += rhs.maxHealth;
+	temp.healthRegeneration += rhs.healthRegeneration;
 	temp.maxMana += rhs.maxMana;
+	temp.manaRegeneration += rhs.manaRegeneration;
 	temp.speed += rhs.speed;
 	temp.strength += rhs.strength;
+	temp.criticalChance += rhs.criticalChance;
+	temp.criticalDamage += rhs.criticalDamage;
 
 	return temp;
 }
@@ -290,9 +294,13 @@ SToolAttributes CPlayerEquipment::GetAttributes()
 	attributes.breaking_speed = 0.0f;
 	attributes.luck = 0;
 	attributes.maxHealth = 0;
+	attributes.healthRegeneration = 0;
 	attributes.maxMana = 0;
+	attributes.manaRegeneration = 0;
 	attributes.speed = 0;
 	attributes.strength = 0;
+	attributes.criticalChance = 0;
+	attributes.criticalDamage = 0;
 
 	equipment = (CEquipment*)(m_helmet.thing);
 	if(equipment != NULL && m_helmet.amount > 0)
@@ -403,12 +411,20 @@ void CPlayerEquipment::SetTooltip(CThing *_thing)
 		m_stream << "\nGlück: " << equipment->GetAttributes().luck;
 	if(equipment->GetAttributes().maxHealth != 0)
 		m_stream << "\nLeben " << equipment->GetAttributes().maxHealth;
+	if (equipment->GetAttributes().healthRegeneration != 0)
+		m_stream << "\nLebensregeneration " << equipment->GetAttributes().healthRegeneration;
 	if(equipment->GetAttributes().maxMana != 0)
 		m_stream << "\nMana " << equipment->GetAttributes().maxMana;
+	if (equipment->GetAttributes().manaRegeneration != 0)
+		m_stream << "\nManaregeneration " << equipment->GetAttributes().manaRegeneration;
 	if(equipment->GetAttributes().speed != 0)
 		m_stream << "\nGeschwindigkeit " << equipment->GetAttributes().speed;
 	if(equipment->GetAttributes().strength != 0)
 		m_stream << "\nStärke " << equipment->GetAttributes().strength;
+	if (equipment->GetAttributes().criticalChance != 0)
+		m_stream << "\nKritische Chance " << equipment->GetAttributes().criticalChance;
+	if (equipment->GetAttributes().criticalDamage != 0)
+		m_stream << "\nKritischer Schaden " << equipment->GetAttributes().criticalDamage;
 
 		//sets the color
 	switch(rarity)

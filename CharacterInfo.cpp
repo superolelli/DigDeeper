@@ -48,7 +48,7 @@ void CCharacterInfo::Init(SPlayerAttributes *_attributes, SToolAttributes *_modi
 	//loads the font and applies it to the text
 	m_font.loadFromFile("Data/Fonts/18cents.ttf");
 	m_text.setFont(m_font);
-	m_text.setCharacterSize(50);
+	m_text.setCharacterSize(30);
 	m_text.setColor(Color::Black);
 
 	m_levelUpTime = 0.0f;
@@ -92,49 +92,77 @@ void CCharacterInfo::Render()
 		stream.str("");
 		stream << m_pModifications->maxHealth;
 		m_text.setString(stream.str());
-		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 500), (float)(m_pCharacterWindow->GetRect().top + 50));
+		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 99));
+		g_pFramework->GetWindow()->draw(m_text);
+
+		//show the healthregeneration
+		stream.str("");
+		stream << m_pModifications->healthRegeneration;
+		m_text.setString(stream.str());
+		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 126));
 		g_pFramework->GetWindow()->draw(m_text);
 
 		//show the armour
 		stream.str("");
 		stream << m_pModifications->armour;
 		m_text.setString(stream.str());
-		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 500), (float)(m_pCharacterWindow->GetRect().top + 107));
+		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 158));
 		g_pFramework->GetWindow()->draw(m_text);
 
 		//show the strength
 		stream.str("");
 		stream << m_pModifications->strength;
 		m_text.setString(stream.str());
-		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 500), (float)(m_pCharacterWindow->GetRect().top + 164));
+		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 228));
+		g_pFramework->GetWindow()->draw(m_text);
+		
+		//show the critical chance
+		stream.str("");
+		stream << m_pModifications->criticalChance;
+		m_text.setString(stream.str());
+		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 254));
+		g_pFramework->GetWindow()->draw(m_text);
+		
+		//show the critical damage
+		stream.str("");
+		stream << m_pModifications->criticalDamage;
+		m_text.setString(stream.str());
+		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 287));
 		g_pFramework->GetWindow()->draw(m_text);
 
 		//show the luck
 		stream.str("");
 		stream << m_pModifications->luck;
 		m_text.setString(stream.str());
-		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 500), (float)(m_pCharacterWindow->GetRect().top + 221));
+		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 352));
 		g_pFramework->GetWindow()->draw(m_text);
 
 		//show the breakingSpeed
 		stream.str("");
 		stream << m_pModifications->breaking_speed;
 		m_text.setString(stream.str());
-		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 500), (float)(m_pCharacterWindow->GetRect().top + 278));
+		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 380));
 		g_pFramework->GetWindow()->draw(m_text);
 
 		//show the speed
 		stream.str("");
 		stream << m_pModifications->speed;
 		m_text.setString(stream.str());
-		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 500), (float)(m_pCharacterWindow->GetRect().top + 335));
+		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 412));
 		g_pFramework->GetWindow()->draw(m_text);
 
 		//show the mana
 		stream.str("");
 		stream << m_pModifications->maxMana;
 		m_text.setString(stream.str());
-		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 500), (float)(m_pCharacterWindow->GetRect().top + 392));
+		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 595), (float)(m_pCharacterWindow->GetRect().top + 100));
+		g_pFramework->GetWindow()->draw(m_text);
+
+		//show the manaregeneration
+		stream.str("");
+		stream << m_pModifications->manaRegeneration;
+		m_text.setString(stream.str());
+		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 595), (float)(m_pCharacterWindow->GetRect().top + 125));
 		g_pFramework->GetWindow()->draw(m_text);
 	
 	}
@@ -300,6 +328,22 @@ CButton* CCharacterInfo::RandomSkill(int _skillNumber)
 		{
 				newButton->Load(&g_pTextures->t_newSkillMana, 0, 0, 1);
 		}break;
+	case HEALTHREGENERATION:
+		{
+			newButton->Load(&g_pTextures->t_newSkillHealthRegeneration, 0, 0, 1);
+		}break;
+	case MANAREGENERATION:
+		{
+			newButton->Load(&g_pTextures->t_newSkillManaRegeneration, 0, 0, 1);
+		}break;
+	case CRITICALCHANCE:
+		{
+			newButton->Load(&g_pTextures->t_newSkillCriticalChance, 0, 0, 1);
+		}break;
+	case CRITICALDAMAGE:
+		{
+			newButton->Load(&g_pTextures->t_newSkillCriticalDamage, 0, 0, 1);
+		}break;
 	default:
 		{
 			cout <<"Couldn't load Skill button!" << endl;
@@ -347,6 +391,22 @@ void CCharacterInfo::AddSkill(int _skill)
 		{
 			m_pAttributes->maxMana += 10;
 			m_pAttributes->currentMana += 10;
+		}break;
+	case HEALTHREGENERATION:
+		{
+			m_pAttributes->healthRegeneration += 3;
+		}break;
+	case MANAREGENERATION:
+		{
+			m_pAttributes->manaRegeneration += 3;
+		}break;
+	case CRITICALCHANCE:
+		{
+			m_pAttributes->criticalChance += 2;
+		}break;
+	case CRITICALDAMAGE:
+		{
+			m_pAttributes->criticalDamage += 2;
 		}break;
 	case RECIPESKILL:
 		{
