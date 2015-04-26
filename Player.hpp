@@ -137,6 +137,7 @@ private:
 	float m_fAnimState;                                //the current anim state
 	float m_fArmAnimState;                              //the current arm animation state
 	float m_fWaitToBeat;
+	float m_fRegenerationTime;                       
 
 	int m_FallingSpeed;                                 //the speed with wich the dwarf is falling
 	int m_SideSpeed;                                    //the speed to one side (e.g. by being hitted)

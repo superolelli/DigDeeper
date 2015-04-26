@@ -237,6 +237,8 @@ void TextureLoading::LoadTextures()
 	t_goblin_body.loadFromFile("Data/Sprites/Living/goblin_upper_body2.png");
 	t_goblin_legs.loadFromFile("Data/Sprites/Living/goblin_legs2.png");
 	t_goblin_arm.loadFromFile("Data/Sprites/Living/goblin_arm2.png");
+	t_goblin_body2.loadFromFile("Data/Sprites/Living/goblin_upper_body3.png");
+	t_goblin_arm2.loadFromFile("Data/Sprites/Living/goblin_arm3.png");
 	
 	m_musicMenu.openFromFile("Data/Music/Music1.ogg");
 	m_musicMenu.setLoop(true);

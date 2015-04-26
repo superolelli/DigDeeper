@@ -30,9 +30,12 @@ private:
 		ar & m_left;
 		ar & m_PointToGo.x;
 		ar & m_PointToGo.y;
+		ar & m_goblinType;
 	}
 
 	CLiving3Part *m_pGoblin;          //the goblin
+
+	int m_goblinType;                   //the goblin type
 
 	bool m_left;                   //is the goblin looking to the left
 	bool m_is_hitting;

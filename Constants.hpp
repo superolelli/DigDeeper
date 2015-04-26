@@ -79,6 +79,15 @@ const int GOBLIN = 2;
 #pragma endregion
 
 
+
+#pragma region Goblins
+
+const int NORMALGOBLIN = 1;
+const int WARRIORGOBLIN = 2;
+
+#pragma endregion
+
+
 #pragma region NpcStates
 
 const int IDLE = 1;
@@ -130,7 +139,7 @@ const int PANEL_FURNANCE = 2;
 
 #pragma region Classes
 
-const int NORMAL = 0;
+const int TEST = 0;
 const int MINER = 1;
 const int BUILDER = 2;
 const int WARRIOR = 3;

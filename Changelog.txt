@@ -1069,3 +1069,13 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Charakterinfo wurde überarbeitet
 
 ------------------------------------------------------
+25.04.2015
+
+-Der Spieler kann nun kritische Treffer landen und regeneriert Mana und Leben
+
+------------------------------------------------------
+26.04.2015
+
+-Goblinkrieger hinzugefügt
+
+------------------------------------------------------

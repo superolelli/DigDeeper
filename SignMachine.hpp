@@ -22,6 +22,7 @@ private:
 		float time;
 		int xPos;
 		int yPos;
+		Color color;
 	};
 
 	list<SSign> m_signs;               //all the signs to render

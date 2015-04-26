@@ -37,6 +37,7 @@ void CSignMachine::Render()
 		//sets string and position
 		m_text.setString((*i).str);
 		m_text.setPosition((*i).xPos, (*i).yPos);
+		m_text.setColor((*i).color);
 
 		//renders the text
 		g_pFramework->GetWindow()->draw(m_text);
@@ -64,6 +65,7 @@ void CSignMachine::AddString(string _str, float _time, int _x, int _y, Color _co
 	sign.time = _time;
 	sign.xPos = _x;
 	sign.yPos = _y;
+	sign.color = _color;
 
 	m_signs.push_back(sign);
 }

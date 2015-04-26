@@ -139,6 +139,13 @@ int CNewGame::Run()
 		//If an event happened, important for the buttons, save it (Left mouse up)
 		if(g_pFramework->keyStates.leftMouseUp)
 				m_ButtonEventtype = MOUSE_LEFT_UP;
+		else if (g_pFramework->keyStates.f3)
+		{
+			m_class = TEST - 1;
+
+			is_running = false;
+			return 2;
+		}
 
 		
 		m_GameName.HandleInput();

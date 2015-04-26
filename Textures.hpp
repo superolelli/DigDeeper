@@ -257,8 +257,10 @@ public:
 	Texture t_bee;                                      //a bee
 
 	Texture t_goblin_body;                       //a goblin
+	Texture t_goblin_body2;
 	Texture t_goblin_legs;
 	Texture t_goblin_arm;
+	Texture t_goblin_arm2;
 
 	Music m_musicMenu;
 	Music m_musicGame[10];

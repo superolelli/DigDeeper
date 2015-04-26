@@ -185,6 +185,28 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 			hat->InitEquipment(MAGICHAT);
 			m_pInventory->Take(hat);
 		}break;
+	case TEST:
+	{
+		CTool *lantern;
+		lantern = new CTool;
+		lantern->InitTool(LANTERN);
+		m_pInventory->Take(lantern);
+
+		CTool *pickaxe;
+		pickaxe = new CTool;
+		pickaxe->InitTool(PICKAXE);
+		m_pInventory->Take(pickaxe);
+
+		CEquipment *candle;
+		candle = new CEquipment;
+		candle->InitEquipment(CANDLE);
+		m_pInventory->Take(candle);
+
+		m_Attributes.criticalChance = 5;
+		m_Attributes.criticalDamage = 4;
+		m_Attributes.manaRegeneration = 1;
+
+	}break;
 	default:
 		{
 		}break;
@@ -222,6 +244,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 
 	m_fAnimState = 6;
 	m_fWaitToBeat = 0;
+	m_fRegenerationTime = 0;
 
 }
 
@@ -301,6 +324,8 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view)
 	m_armGoingUp = true;
 
 	m_fAnimState = 6;
+	m_fRegenerationTime = 0;
+	m_fWaitToBeat = 0;
 }
 
 
@@ -545,6 +570,26 @@ int CPlayer::CheckCollisionPassable()
 
 void CPlayer::Render()
 {
+	//check health and mana
+	m_fRegenerationTime -= g_pTimer->GetElapsedTime().asSeconds();
+
+	//refresh health and mana
+	if (m_fRegenerationTime <= 0)
+	{
+		m_Attributes.currentHealth += m_modifications.healthRegeneration;
+
+		if (m_Attributes.currentHealth > m_modifications.maxHealth)
+			m_Attributes.currentHealth = m_modifications.maxHealth;
+
+		m_Attributes.currentMana += m_modifications.manaRegeneration;
+
+		if (m_Attributes.currentMana > m_modifications.maxMana)
+			m_Attributes.currentMana = m_modifications.maxMana;
+
+		m_fRegenerationTime = 3;
+	}
+
+
 	//if the player is carrying a tool: render it
 	CThing *thing = m_pInventory->GetCarriedThing();
 	if(thing != NULL && thing->getID() > ITBREAK && thing->getID() < TEBREAK)

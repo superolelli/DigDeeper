@@ -107,6 +107,23 @@ void CNpcMachine::CheckAllNpcs()
 				//calculate the damage
 				int damage = m_pPlayer->GetPlayerAttributes().strength - (m_pPlayer->GetPlayerAttributes().strength * ((*i)->GetAttributes()->armour/100));
 
+				stream.str("");
+
+				if (rand() % 100 < m_pPlayer->GetPlayerAttributes().criticalChance)
+				{
+					damage += damage * m_pPlayer->GetPlayerAttributes().criticalDamage / 10;
+					
+					//put the damage into a stringstream	
+					stream << damage;
+					m_signMachine.AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top, Color(150, 0, 0));
+				}
+				else
+				{
+					//put the damage into a stringstream	
+					stream << damage;
+					m_signMachine.AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top);
+				}
+
 				//subtract the lost health
 				(*i)->GetAttributes()->currentHealth -= damage;
 
@@ -116,12 +133,10 @@ void CNpcMachine::CheckAllNpcs()
 				else
 					(*i)->ThrowNpc(false, 300);
 
-				//put the damage into a stringstream
-				stream.str("");
-				stream << damage;
+				
 
 				//shows the damage
-				m_signMachine.AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top);
+				
 
 				//if the npc died: delete it 
 				if((*i)->GetAttributes()->currentHealth <= 0)

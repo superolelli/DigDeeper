@@ -9,11 +9,35 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 	m_pView = _view;
 	m_ID = GOBLIN;
 
+	if (!_loaded)
+		m_goblinType = rand() % 2 + 1;
+
 	//Init the sprite
 	m_pGoblin = new CLiving3Part;
-	//m_pGoblin->Load(&g_pTextures->t_goblin_body, 44, 52, 2, 0, &g_pTextures->t_goblin_arm, 38, 24, 2, &g_pTextures->t_goblin_legs, 40, 35, 12, _x, _y);
-	//m_pGoblin->SetPartsPos(-3.0f, 9.0f, 17.0f, 5.0f, -3.0f, 40.0f);
-	m_pGoblin->Load(&g_pTextures->t_goblin_body, 50, 64, 2, 0, &g_pTextures->t_goblin_arm, 43, 30, 2, &g_pTextures->t_goblin_legs, 48, 58, 12, _x, _y);
+	if (m_goblinType == NORMALGOBLIN)
+	{
+		m_pGoblin->Load(&g_pTextures->t_goblin_body, 50, 64, 2, 0, &g_pTextures->t_goblin_arm, 43, 30, 2, &g_pTextures->t_goblin_legs, 48, 58, 12, _x, _y);
+
+		//Init the attributes
+		m_Attributes.maxHealth = 40;
+		m_Attributes.armour = 0;
+		m_Attributes.speed = 150;
+		m_Attributes.strength = 10;
+		m_Attributes.exp = 5;
+
+	}
+	else
+	{
+		m_pGoblin->Load(&g_pTextures->t_goblin_body2, 50, 64, 2, 0, &g_pTextures->t_goblin_arm2, 43, 35, 2, &g_pTextures->t_goblin_legs, 48, 58, 12, _x, _y);
+
+		//Init the attributes
+		m_Attributes.maxHealth = 60;
+		m_Attributes.armour = 2;
+		m_Attributes.speed = 170;
+		m_Attributes.strength = 15;
+		m_Attributes.exp = 10;
+	}
+
 	m_pGoblin->SetPartsPos(-4.0f, 16.0f, 22.0f, 6.5f, -3.0f, 40.0f);
 	m_pGoblin->SetArmRotatingPoint(38.0f, 5.0f);
 	m_pGoblin->SetHandPosition(8.0f, 16.0f);
@@ -30,13 +54,6 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 
 	m_fallingSpeed = 0;
 	m_sideSpeed = 0;
-
-	//Init the attributes
-	m_Attributes.maxHealth = 40;
-	m_Attributes.armour = 0;
-	m_Attributes.speed = 150;
-	m_Attributes.strength = 10;
-	m_Attributes.exp = 5;
 
 	//Init the state
 	m_State = IDLE;
@@ -55,7 +72,7 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 		m_yPos = _y;
 
 		m_left = true;
-		m_Attributes.currentHealth = 40;
+		m_Attributes.currentHealth = m_Attributes.maxHealth;
 	}
 }
 
