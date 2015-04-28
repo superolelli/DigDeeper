@@ -276,4 +276,13 @@ struct SItem
 
 
 
+struct SHoldingButtons
+{
+	CSprite *m_Sprite;
+	bool m_isClicked;
+};
+
+
+
+
 #endif

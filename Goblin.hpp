@@ -13,7 +13,7 @@ public:
 	void Render();
 	void Quit();
 	IntRect GetRect(){ return m_pGoblin->GetRect(); }
-	IntRect GetWeaponRect(){ return IntRect(m_pGoblin->GetHandPos(m_left).x - 5, m_pGoblin->GetHandPos(m_left).y - 5, 10, 10); }
+	IntRect GetWeaponRect();
 	bool IsHitting();
 	void ThrowNpc(bool _left, int _strength);
 

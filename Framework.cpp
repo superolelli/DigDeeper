@@ -84,6 +84,9 @@ void CFramework::ProcessEvents()
 					if(event.key.code == Keyboard::B)
 						keyStates.bUp = true;
 
+					if (event.key.code == Keyboard::M)
+						keyStates.mUp = true;
+
 					if(event.key.code == Keyboard::C)
 						keyStates.cUp = true;
 
@@ -116,6 +119,9 @@ void CFramework::ProcessEvents()
 				{
 					if(event.key.code == Mouse::Left)
 						keyStates.leftMouseUp = true;
+
+					if (event.key.code == Mouse::Right)
+						keyStates.rightMouseUp = true;
 				}break;
 
 			case Event::MouseWheelMoved:
@@ -136,9 +142,11 @@ void CFramework::ClearKeyStates()
 	keyStates.leftMouseDown = false;
 	keyStates.leftMouseUp = false;
 	keyStates.rightMouseDown = false;
+	keyStates.rightMouseUp = false;
 	keyStates.escapeDown = false;
 	keyStates.eUp = false;
 	keyStates.bUp = false;
+	keyStates.mUp = false;
 	keyStates.cUp = false;
 	keyStates.add = false;
 	keyStates.subtract = false;

@@ -1079,3 +1079,14 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Goblinkrieger hinzugefügt
 
 ------------------------------------------------------
+27.04.2015
+
+-Goblinritter hinzugefügt
+
+------------------------------------------------------
+28.04.2015
+
+-Magie-Menü wurde hinzgefügt
+-Man kann nun Zaubersprüche verwenden (bis jetzt noch ohne Funktionalität)
+
+------------------------------------------------------

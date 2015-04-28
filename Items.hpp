@@ -39,6 +39,7 @@ private:
 	int m_specialID;        //for recipes
 
 	void InitRecipe();
+	void InitSpell();
 
 
 };

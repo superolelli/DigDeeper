@@ -9,6 +9,7 @@ class CWorld;
 #include "Inventory.hpp"
 #include "BuildingMenu.hpp"
 #include "CharacterInfo.hpp"
+#include "MagicMenu.hpp"
 #include "Beam.hpp"
 
 
@@ -32,6 +33,7 @@ public:
 	void Take(CThing *_thing, int amount);
 	void AddExp(int _exp){m_Attributes.currentExp += _exp;}
 	void DoDamage(int _damage){ m_Attributes.currentHealth -= _damage; }
+	void CastSpell(int _ID){ m_pMagicMenu->CastSpell(_ID); }
 	void ThrowPlayer(bool _left, int _strength);
 	int GetHealth(){ return m_Attributes.currentHealth; }
 	bool AddRecipe(int _ID){return m_pBuildingMenu->NewRecipe(_ID);}
@@ -99,12 +101,6 @@ private:
 	}
 	BOOST_SERIALIZATION_SPLIT_MEMBER();
 
-	struct SHoldingButtons
-	{
-		CSprite *m_Sprite;
-		bool m_isClicked;
-	};
-
 	void CalculateAttributes();
 
 	RenderTarget *m_pTarget;                         //the render target
@@ -114,6 +110,7 @@ private:
 	CInventory *m_pInventory;                            //the inventory
 	CBuildingMenu *m_pBuildingMenu;                        //the building menu
 	CCharacterInfo *m_pCharacterInfo;                        //the character info
+	CMagicMenu *m_pMagicMenu;                              //the magic menu
 
 	CSprite *m_pPanelBeam;                                  //this is all for the inventory/building/character/magic menu
 	SHoldingButtons m_PanelInventory;

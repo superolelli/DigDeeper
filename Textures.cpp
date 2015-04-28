@@ -85,6 +85,10 @@ void TextureLoading::LoadTextures()
 
 	t_furnanceMenu.loadFromFile("Data/Sprites/Inventory/furnance_menu2.png");
 
+	t_magicMenu.loadFromFile("Data/Sprites/Magic/magic_menu.png");
+	t_buttonPlus.loadFromFile("Data/Sprites/Magic/plus.png");
+	t_spell[0].loadFromFile("Data/Sprites/Magic/spell_fireball.png");
+
 	t_buildingInfo_woodwall.loadFromFile("Data/Sprites/Building/building_info_woodwall.png");
 	t_buildingInfo_stonewall.loadFromFile("Data/Sprites/Building/building_info_stonewall.png");
 	t_buildingInfo_woodstaff.loadFromFile("Data/Sprites/Building/building_info_woodstaff.png");
@@ -174,6 +178,7 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_wax.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/wax_inventory.png");
 	t_blockInventoryTexture_marble.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/marble_inventory.png");
 	t_blockInventoryTexture_marblewall.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/marble_wall_inventory.png");
+	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 
 	t_blockLittleTexture_dirt.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(86, 2, 40, 40));
 	t_blockLittleTexture_stone.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(464, 2, 40, 40));
@@ -236,10 +241,17 @@ void TextureLoading::LoadTextures()
 
 	t_goblin_body.loadFromFile("Data/Sprites/Living/goblin_upper_body2.png");
 	t_goblin_legs.loadFromFile("Data/Sprites/Living/goblin_legs2.png");
+	t_goblin_legs2.loadFromFile("Data/Sprites/Living/goblin_legs3.png");
 	t_goblin_arm.loadFromFile("Data/Sprites/Living/goblin_arm2.png");
 	t_goblin_body2.loadFromFile("Data/Sprites/Living/goblin_upper_body3.png");
 	t_goblin_arm2.loadFromFile("Data/Sprites/Living/goblin_arm3.png");
-	
+	t_goblin_body3.loadFromFile("Data/Sprites/Living/goblin_upper_body4.png");
+	t_goblin_arm3.loadFromFile("Data/Sprites/Living/goblin_arm4.png");
+
+	f_coolsville.loadFromFile("Data/Fonts/coolsville.ttf");
+	f_ltromatic.loadFromFile("Data/Fonts/ltromatic.ttf");
+	f_cents18.loadFromFile("Data/Fonts/18cents.ttf");
+
 	m_musicMenu.openFromFile("Data/Music/Music1.ogg");
 	m_musicMenu.setLoop(true);
 	m_musicGame[0].openFromFile("Data/Music/Music2.ogg");

@@ -162,6 +162,10 @@ void CInventory::Take(CThing *_thing, int _amount)
 	{
 		if(i->thing->getID() == _thing->getID() && i->thing->getID() < ITBREAK && i->thing->getID() != RECIPE)
 		{
+			//if the spell is already in the inventory: return
+			if (i->thing->getID() == SPELL)
+				return;
+
 			//if it is, add the amount to it and delete the added thing
 			i->amount += _amount;
 			SAFE_DELETE(_thing);
@@ -189,6 +193,9 @@ void CInventory::Take(CThing *_thing, int _amount)
 		}
 	}
 
+	//if there was no place in the beam: return
+	if (i->thing->getID() == SPELL)
+		return;
 
 	//Look for a free place in the inventory
 	for(int y = 0; y < 5; y++)
@@ -796,6 +803,16 @@ void CInventory::Render(IntRect &_playerRect)
 						}
 					}
 				}
+				//if the player wants to cast a spell
+				else if (CarriedObjectFramePos == i->position && Mouse::isButtonPressed(Mouse::Right) && i->thing->getID() == SPELL)
+				{
+					CItem *spell;
+					spell = (CItem*)(i->thing);
+
+					//cast the spell
+					m_pPlayer->CastSpell(spell->GetSpecialID());
+				}
+
 				i->thing->RenderInventorySprite();
 
 				number.str("");

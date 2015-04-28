@@ -100,6 +100,11 @@ public:
 
 	Texture t_furnanceMenu;                                //the melting menu
 
+	Texture t_magicMenu;
+	Texture t_buttonPlus;
+	Texture t_spell[1];
+
+
 	//the information for the things
 	Texture t_buildingInfo_woodwall;
 	Texture t_buildingInfo_stonewall;
@@ -192,6 +197,7 @@ public:
 	Texture t_blockInventoryTexture_wax;
 	Texture t_blockInventoryTexture_marble;
 	Texture t_blockInventoryTexture_marblewall;
+	Texture t_spellInventoryTexture_fireball;
 
 	//the little item pictures of the things
 	Texture t_blockLittleTexture_dirt;
@@ -258,9 +264,16 @@ public:
 
 	Texture t_goblin_body;                       //a goblin
 	Texture t_goblin_body2;
+	Texture t_goblin_body3;
 	Texture t_goblin_legs;
+	Texture t_goblin_legs2;
 	Texture t_goblin_arm;
 	Texture t_goblin_arm2;
+	Texture t_goblin_arm3;
+
+	Font f_coolsville;
+	Font f_ltromatic;
+	Font f_cents18;
 
 	Music m_musicMenu;
 	Music m_musicGame[10];

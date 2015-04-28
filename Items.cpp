@@ -165,6 +165,10 @@ void CItem::Init(int _ID, bool _loaded)
 			if(!_loaded)
 				m_Name = "Wachs";
 		}break;
+	case(SPELL) :
+	{
+		InitSpell();
+	}break;
 	}
 }
 
@@ -231,5 +235,21 @@ void CItem::SetSpecialID(int _ID)
 	case(LANTERN):
 		m_Name.append("(Laterne)");
 		break;
+	}
+}
+
+
+
+void CItem::InitSpell()
+{
+	switch (m_specialID)
+	{
+	case(FIREBALL):
+		m_pInventorySprite->Load(&g_pTextures->t_spellInventoryTexture_fireball);
+		m_Name = "Feuerball";
+		break;
+
+	default:
+		m_Name = "Error";
 	}
 }

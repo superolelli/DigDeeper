@@ -10,13 +10,16 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 	m_ID = GOBLIN;
 
 	if (!_loaded)
-		m_goblinType = rand() % 2 + 1;
+		m_goblinType = rand() % 3 + 1;
 
 	//Init the sprite
 	m_pGoblin = new CLiving3Part;
 	if (m_goblinType == NORMALGOBLIN)
 	{
 		m_pGoblin->Load(&g_pTextures->t_goblin_body, 50, 64, 2, 0, &g_pTextures->t_goblin_arm, 43, 30, 2, &g_pTextures->t_goblin_legs, 48, 58, 12, _x, _y);
+		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 22.0f, 6.5f, -3.0f, 40.0f);
+		m_pGoblin->SetArmRotatingPoint(38.0f, 5.0f);
+		m_pGoblin->SetHandPosition(8.0f, 16.0f);
 
 		//Init the attributes
 		m_Attributes.maxHealth = 40;
@@ -26,21 +29,34 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 		m_Attributes.exp = 5;
 
 	}
-	else
+	else if (m_goblinType == WARRIORGOBLIN)
 	{
 		m_pGoblin->Load(&g_pTextures->t_goblin_body2, 50, 64, 2, 0, &g_pTextures->t_goblin_arm2, 43, 35, 2, &g_pTextures->t_goblin_legs, 48, 58, 12, _x, _y);
+		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 22.0f, 6.5f, -3.0f, 40.0f);
+		m_pGoblin->SetArmRotatingPoint(38.0f, 5.0f);
+		m_pGoblin->SetHandPosition(10.0f, 17.0f);
 
 		//Init the attributes
-		m_Attributes.maxHealth = 60;
-		m_Attributes.armour = 2;
-		m_Attributes.speed = 170;
-		m_Attributes.strength = 15;
-		m_Attributes.exp = 10;
+		m_Attributes.maxHealth = 40;
+		m_Attributes.armour = 0;
+		m_Attributes.speed = 180;
+		m_Attributes.strength = 20;
+		m_Attributes.exp = 15;
 	}
+	else
+	{
+		m_pGoblin->Load(&g_pTextures->t_goblin_body3, 53, 68, 2, 0, &g_pTextures->t_goblin_arm3, 39, 54, 2, &g_pTextures->t_goblin_legs2, 48, 53, 12, _x, _y);
+		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 0.0f, 3.0f, 1.0f, 45.0f);
+		m_pGoblin->SetArmRotatingPoint(33.0f, 29.0f);
+		m_pGoblin->SetHandPosition(6.0f, 42.0f);
 
-	m_pGoblin->SetPartsPos(-4.0f, 16.0f, 22.0f, 6.5f, -3.0f, 40.0f);
-	m_pGoblin->SetArmRotatingPoint(38.0f, 5.0f);
-	m_pGoblin->SetHandPosition(8.0f, 16.0f);
+		//Init the attributes
+		m_Attributes.maxHealth = 70;
+		m_Attributes.armour = 10;
+		m_Attributes.speed = 130;
+		m_Attributes.strength = 15;
+		m_Attributes.exp = 15;
+	}
 
 	m_fXVel = 0;
 	m_fYVel = 0;
@@ -448,4 +464,23 @@ bool CGoblin::IsHitting()
 	m_is_hitting = false;
 
 	return temp;
+}
+
+
+
+
+IntRect CGoblin::GetWeaponRect()
+{
+	switch (m_goblinType)
+	{
+	case(NORMALGOBLIN):
+		return IntRect(m_pGoblin->GetHandPos(m_left).x - 5, m_pGoblin->GetHandPos(m_left).y - 5, 10, 10);
+		break;
+	case(WARRIORGOBLIN) :
+		return IntRect(m_pGoblin->GetHandPos(m_left).x - 5, m_pGoblin->GetHandPos(m_left).y, 10, 17);
+		break;
+	case(KNIGHTGOBLIN) :
+		return IntRect(m_pGoblin->GetHandPos(m_left).x + 3, m_pGoblin->GetHandPos(m_left).y - 42, 20, 17);
+		break;
+	}
 }

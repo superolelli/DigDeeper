@@ -51,6 +51,8 @@ const int SLIME = 64;
 const int RECIPE = 65;
 const int WAX = 66;
 
+const int SPELL = 99;
+
 const int ITBREAK = 100;             //the Item-Tool-Break shows, where the tool section begins
 
 const int PICKAXE = 101;
@@ -84,6 +86,7 @@ const int GOBLIN = 2;
 
 const int NORMALGOBLIN = 1;
 const int WARRIORGOBLIN = 2;
+const int KNIGHTGOBLIN = 3;
 
 #pragma endregion
 
@@ -153,6 +156,16 @@ const int MAGE = 4;
 const int SMALL = 1;
 const int MEDIUM = 2;
 const int BIG = 3;
+#pragma endregion
+
+
+
+#pragma region Spells
+
+const int AMOUNTOFSPELLS = 1;
+
+const int FIREBALL = 0;
+
 #pragma endregion
 
 

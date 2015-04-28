@@ -11,6 +11,7 @@ CPlayer::CPlayer()
 	m_pInventory = NULL;
 	m_pBuildingMenu = NULL;
 	m_pCharacterInfo = NULL;
+	m_pMagicMenu = NULL;
 	m_pPanelBeam = NULL;
 	m_pExpBeam = NULL;
 	m_pLifeBeam = NULL;
@@ -25,6 +26,7 @@ CPlayer::~CPlayer()
 	SAFE_DELETE(m_pInventory);
 	SAFE_DELETE(m_pBuildingMenu);
 	SAFE_DELETE(m_pCharacterInfo);
+	SAFE_DELETE(m_pMagicMenu);
 	SAFE_DELETE(m_pPanelBeam);
 	SAFE_DELETE(m_PanelInventory.m_Sprite);
 	SAFE_DELETE(m_PanelBuilding.m_Sprite);
@@ -57,6 +59,9 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 
 	m_pCharacterInfo = new CCharacterInfo;
 	m_pCharacterInfo->Init(&m_Attributes, &m_modifications, this);
+
+	m_pMagicMenu = new CMagicMenu;
+	m_pMagicMenu->Init(m_pInventory);
 
 	m_pPanelBeam = new CSprite;
 	m_pPanelBeam->Load(&g_pTextures->t_panelBeam);
@@ -271,6 +276,8 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view)
 
 	m_pCharacterInfo = new CCharacterInfo;
 	m_pCharacterInfo->Init(&m_Attributes, &m_modifications, this);
+
+	m_pMagicMenu->Init(m_pInventory, true);
 
 	m_pPanelBeam = new CSprite;
 	m_pPanelBeam->Load(&g_pTextures->t_panelBeam);
@@ -704,6 +711,7 @@ void CPlayer::RenderInventory()
 
 			m_pBuildingMenu->SetOpen(false);
 			m_pCharacterInfo->SetOpen(false);
+			m_pMagicMenu->SetOpen(false);
 	}
 	else if(g_pFramework->keyStates.bUp && !m_pBuildingMenu->GetOpen())
 	{
@@ -714,6 +722,7 @@ void CPlayer::RenderInventory()
 
 			m_pInventory->SetOpen(false);
 			m_pCharacterInfo->SetOpen(false);
+			m_pMagicMenu->SetOpen(false);
 	}
 	else if(g_pFramework->keyStates.cUp && !m_pCharacterInfo->GetOpen())
 	{
@@ -724,9 +733,22 @@ void CPlayer::RenderInventory()
 
 			m_pInventory->SetOpen(false);
 			m_pBuildingMenu->SetOpen(false);
+			m_pMagicMenu->SetOpen(false);
+	}
+	else if (g_pFramework->keyStates.mUp && !m_pMagicMenu->GetOpen())
+	{
+		m_PanelInventory.m_isClicked = false;
+		m_PanelAttributes.m_isClicked = false;
+		m_PanelBuilding.m_isClicked = false;
+		m_PanelMagic.m_isClicked = true;
+
+		m_pInventory->SetOpen(false);
+		m_pBuildingMenu->SetOpen(false);
+		m_pCharacterInfo->SetOpen(false);
 	}
 
-	if(m_pInventory->GetOpen() || m_pBuildingMenu->GetOpen() || m_pCharacterInfo->GetOpen())
+
+	if(m_pInventory->GetOpen() || m_pBuildingMenu->GetOpen() || m_pCharacterInfo->GetOpen() || m_pMagicMenu->GetOpen())
 	{
 		//render the panels
 		m_pPanelBeam->Render(g_pFramework->GetWindow());
@@ -744,6 +766,7 @@ void CPlayer::RenderInventory()
 				m_pInventory->SetOpen(true);
 				m_pBuildingMenu->SetOpen(false);
 				m_pCharacterInfo->SetOpen(false);
+				m_pMagicMenu->SetOpen(false);
 			}
 		}
 		//was the building button clicked?
@@ -759,6 +782,7 @@ void CPlayer::RenderInventory()
 				m_pInventory->SetOpen(false);
 				m_pBuildingMenu->SetOpen(true);
 				m_pCharacterInfo->SetOpen(false);
+				m_pMagicMenu->SetOpen(false);
 			}
 		}
 		//was the attributes button clicked?
@@ -774,6 +798,7 @@ void CPlayer::RenderInventory()
 				m_pInventory->SetOpen(false);
 				m_pBuildingMenu->SetOpen(false);
 				m_pCharacterInfo->SetOpen(true);
+				m_pMagicMenu->SetOpen(false);
 			}
 		}
 		//was the magic button clicked?
@@ -789,6 +814,7 @@ void CPlayer::RenderInventory()
 				m_pInventory->SetOpen(false);
 				m_pBuildingMenu->SetOpen(false);
 				m_pCharacterInfo->SetOpen(false);
+				m_pMagicMenu->SetOpen(true);
 			}
 		}
 
@@ -803,6 +829,7 @@ void CPlayer::RenderInventory()
 	m_pInventory->Render(m_pDwarf->GetRect());
 	m_pBuildingMenu->Render();
 	m_pCharacterInfo->Render();
+	m_pMagicMenu->Render();
 }
 
 

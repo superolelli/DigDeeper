@@ -126,6 +126,9 @@
     <ClCompile Include="Rims.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="MagicMenu.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.hpp">
@@ -249,6 +252,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Rims.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicMenu.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

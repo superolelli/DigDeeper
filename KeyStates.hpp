@@ -8,9 +8,11 @@ struct KeyStates
 	bool leftMouseDown;
 	bool leftMouseUp;
 	bool rightMouseDown;
+	bool rightMouseUp;
 	bool escapeDown;
 	bool eUp;
 	bool bUp;
+	bool mUp;
 	bool cUp;
 	bool add;
 	bool subtract;

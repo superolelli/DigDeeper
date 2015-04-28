@@ -105,6 +105,7 @@
     <ClCompile Include="LittleItems.cpp" />
     <ClCompile Include="Living3Part.cpp" />
     <ClCompile Include="LoadGame.cpp" />
+    <ClCompile Include="MagicMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="NewGame.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="Chest.hpp" />
     <ClInclude Include="Constants.hpp" />
     <ClInclude Include="Goblin.hpp" />
+    <ClInclude Include="MagicMenu.hpp" />
     <ClInclude Include="Profiler.hpp" />
     <ClInclude Include="Rims.hpp" />
     <ClInclude Include="SignMachine.hpp" />
