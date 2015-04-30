@@ -61,6 +61,8 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 		m_NpcMachine.AddNpc(GOBLIN, 900, 270);
 	}
 
+	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);
+
 	m_pPauseMenu = new CSprite;
 	m_pPauseMenu->Load(&g_pTextures->t_pauseMenu);
 	m_pPauseMenu->SetPos((int)(g_pFramework->GetWindow()->getSize().x/2 - m_pPauseMenu->GetRect().width/2), (int)(g_pFramework->GetWindow()->getSize().y/2 - m_pPauseMenu->GetRect().height/2));
@@ -117,6 +119,8 @@ void CGame::Quit()
 	g_pTextures->m_musicGame[m_music].stop();
 
 	g_pProfiler->Quit();
+
+	g_pProjectiles->Quit();
 
 	//Sets the default view
 	g_pFramework->GetWindow()->setView(g_pFramework->GetWindow()->getDefaultView());
@@ -175,6 +179,8 @@ void CGame::Run()
 		//Checks all npcs
 		m_NpcMachine.CheckAllNpcs();
 
+		g_pProjectiles->CheckProjectiles();
+
 		RenderBackground();
 		m_pWorld->Render(m_View.getSize(), m_View.getCenter());
 
@@ -185,6 +191,8 @@ void CGame::Run()
 
 		//renders the npcs
 		m_NpcMachine.RenderAllNpcs();
+
+		g_pProjectiles->Render();
 
 		//renders darkness and light
 		m_pWorld->RenderLight();

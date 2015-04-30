@@ -129,6 +129,9 @@
     <ClCompile Include="MagicMenu.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Projectiles.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.hpp">
@@ -255,6 +258,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="MagicMenu.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectiles.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

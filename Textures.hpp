@@ -103,6 +103,8 @@ public:
 	Texture t_magicMenu;
 	Texture t_buttonPlus;
 	Texture t_spell[1];
+	Texture t_fireballLeft;
+	Texture t_fireballRight;
 
 
 	//the information for the things

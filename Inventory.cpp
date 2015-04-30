@@ -804,7 +804,7 @@ void CInventory::Render(IntRect &_playerRect)
 					}
 				}
 				//if the player wants to cast a spell
-				else if (CarriedObjectFramePos == i->position && Mouse::isButtonPressed(Mouse::Right) && i->thing->getID() == SPELL)
+				else if (CarriedObjectFramePos == i->position && g_pFramework->keyStates.rightMouseUp && i->thing->getID() == SPELL)
 				{
 					CItem *spell;
 					spell = (CItem*)(i->thing);

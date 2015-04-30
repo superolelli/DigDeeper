@@ -61,7 +61,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 	m_pCharacterInfo->Init(&m_Attributes, &m_modifications, this);
 
 	m_pMagicMenu = new CMagicMenu;
-	m_pMagicMenu->Init(m_pInventory);
+	m_pMagicMenu->Init(m_pInventory, this);
 
 	m_pPanelBeam = new CSprite;
 	m_pPanelBeam->Load(&g_pTextures->t_panelBeam);
@@ -182,8 +182,11 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 		}break;
 	case MAGE:
 		{
-			m_Attributes.maxMana = 20;
-			m_Attributes.currentMana = 20;
+			m_Attributes.maxMana = 50;
+			m_Attributes.currentMana = 50;
+			m_Attributes.manaRegeneration = 1;
+
+			m_pMagicMenu->AddMagicPoints(3);
 
 			CEquipment *hat;
 			hat = new CEquipment;
@@ -207,9 +210,13 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 		candle->InitEquipment(CANDLE);
 		m_pInventory->Take(candle);
 
+		m_pMagicMenu->AddMagicPoints(10);
+
 		m_Attributes.criticalChance = 5;
 		m_Attributes.criticalDamage = 4;
-		m_Attributes.manaRegeneration = 1;
+		m_Attributes.maxMana = 300;
+		m_Attributes.currentMana = 300;
+		m_Attributes.manaRegeneration = 5;
 
 	}break;
 	default:
@@ -277,7 +284,7 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view)
 	m_pCharacterInfo = new CCharacterInfo;
 	m_pCharacterInfo->Init(&m_Attributes, &m_modifications, this);
 
-	m_pMagicMenu->Init(m_pInventory, true);
+	m_pMagicMenu->Init(m_pInventory, this, true);
 
 	m_pPanelBeam = new CSprite;
 	m_pPanelBeam->Load(&g_pTextures->t_panelBeam);

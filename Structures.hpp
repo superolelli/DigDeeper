@@ -283,6 +283,19 @@ struct SHoldingButtons
 };
 
 
+struct SProjectile
+{
+	CSprite *m_Sprite;
+	int m_ID;
+	bool m_fromPlayer;
+	int m_Damage;
+	float m_fFlown;
+	int m_flightLength;
+	float m_fXVel;
+	float m_fYVel;
+};
+
+
 
 
 #endif

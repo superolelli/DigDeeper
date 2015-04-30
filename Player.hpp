@@ -36,11 +36,14 @@ public:
 	void CastSpell(int _ID){ m_pMagicMenu->CastSpell(_ID); }
 	void ThrowPlayer(bool _left, int _strength);
 	int GetHealth(){ return m_Attributes.currentHealth; }
+	int GetMana(){ return m_Attributes.currentMana; }
 	bool AddRecipe(int _ID){return m_pBuildingMenu->NewRecipe(_ID);}
 	list<int> GetNotAvailableRecipesList(){return m_pBuildingMenu->GetNotAvailableRecipes();}
 	inline IntRect GetRect(){return m_pDwarf->GetRect();}
 	IntRect GetWeaponRect();
 	bool GetArmGoingUp(){return m_armGoingUp;}
+	bool IsLeft(){ return m_turned_left; }
+	void SubstractMana(int _mana){ m_Attributes.currentMana -= _mana; if (m_Attributes.currentMana < 0){ m_Attributes.currentMana = 0; } }
 
 	SToolAttributes GetPlayerAttributes();
 

@@ -1090,3 +1090,8 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Man kann nun Zaubersprüche verwenden (bis jetzt noch ohne Funktionalität)
 
 ------------------------------------------------------
+30.04.2015
+
+-Feuerbälle wurden eingefügt
+
+------------------------------------------------------

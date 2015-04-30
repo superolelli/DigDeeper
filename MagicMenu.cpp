@@ -1,5 +1,5 @@
 #include "MagicMenu.hpp"
-
+#include "Projectiles.hpp"
 
 
 CMagicMenu::CMagicMenu()
@@ -23,9 +23,10 @@ CMagicMenu::~CMagicMenu()
 
 
 
-void CMagicMenu::Init(CInventory *_inventory, bool _loaded)
+void CMagicMenu::Init(CInventory *_inventory, CPlayer *_player, bool _loaded)
 {
 	m_pInventory = _inventory;
+	m_pPlayer = _player;
 
 	m_pMagicMenu = new CSprite;
 	m_pMagicMenu->Load(&g_pTextures->t_magicMenu);
@@ -136,7 +137,39 @@ void CMagicMenu::CastSpell(int _ID)
 	{
 		case(FIREBALL) :
 		{
-			m_pInventory->SetOpen(true);
+			if (m_pPlayer->GetMana() >= m_SpellLevel[FIREBALL] * 5)
+			{
+				SProjectile projectile;
+
+				//add a projectile
+				CSprite *sprite = new CSprite;
+
+				if (m_pPlayer->IsLeft())
+				{
+					projectile.m_fXVel = -200;
+					sprite->Load(&g_pTextures->t_fireballLeft);
+				}
+				else
+				{
+					projectile.m_fXVel = 200;
+					sprite->Load(&g_pTextures->t_fireballRight);
+				}
+				
+				sprite->SetPos(m_pPlayer->GetWeaponRect().left - sprite->GetRect().left / 2, m_pPlayer->GetWeaponRect().top - sprite->GetRect().top / 2);
+	
+				projectile.m_ID = FIREBALLPROJECTILE;
+				projectile.m_Damage = m_SpellLevel[FIREBALL] * 3;
+				projectile.m_fFlown = 0.0f;
+				projectile.m_flightLength = 400;
+				projectile.m_fromPlayer = true;
+				projectile.m_fYVel = 0.0f;
+				projectile.m_Sprite = sprite;
+
+				g_pProjectiles->NewProjectile(projectile);
+
+				//substract mana
+				m_pPlayer->SubstractMana(m_SpellLevel[FIREBALL] * 5);
+			}
 		}
 	}
 }

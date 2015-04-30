@@ -88,6 +88,8 @@ void TextureLoading::LoadTextures()
 	t_magicMenu.loadFromFile("Data/Sprites/Magic/magic_menu.png");
 	t_buttonPlus.loadFromFile("Data/Sprites/Magic/plus.png");
 	t_spell[0].loadFromFile("Data/Sprites/Magic/spell_fireball.png");
+	t_fireballLeft.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(80, 0, 80, 30));
+	t_fireballRight.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(0, 0, 80, 30));
 
 	t_buildingInfo_woodwall.loadFromFile("Data/Sprites/Building/building_info_woodwall.png");
 	t_buildingInfo_stonewall.loadFromFile("Data/Sprites/Building/building_info_stonewall.png");

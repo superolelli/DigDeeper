@@ -6,12 +6,13 @@
 #include "Inventory.hpp"
 #include "Button.hpp"
 
+
 class CMagicMenu
 {
 public:
 	CMagicMenu();
 	~CMagicMenu();
-	void Init(CInventory * _inventory, bool _loaded = false);
+	void Init(CInventory * _inventory, CPlayer *_player, bool _loaded = false);
 	void Render();
 
 	//opens or closes the building menu
@@ -23,12 +24,16 @@ public:
 	//cast a spell
 	void CastSpell(int _ID);
 
+	//adds magic points
+	void AddMagicPoints(int _points){ m_MagicPoints += _points; }
+
 
 private:
 
 	bool is_open;
 
 	CInventory *m_pInventory;
+	CPlayer *m_pPlayer;
 
 	CSprite *m_pMagicMenu;
 	CButton *m_pPlus;

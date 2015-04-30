@@ -19,6 +19,9 @@ public:
 	//checks all npcs
 	void CheckAllNpcs();
 
+	//checks if a npc was hit by a projectile
+	bool CheckProjectile(SProjectile *_projectile);
+
 	//Renders all npcs
 	void RenderAllNpcs();
 

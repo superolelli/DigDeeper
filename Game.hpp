@@ -8,6 +8,7 @@
 #include "Placeable.hpp"
 #include "NpcMachine.hpp"
 #include "Profiler.hpp"
+#include "Projectiles.hpp"
 
 
 class CGame

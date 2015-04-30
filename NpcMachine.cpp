@@ -105,7 +105,7 @@ void CNpcMachine::CheckAllNpcs()
 				(*i)->m_wasHit = true;
 
 				//calculate the damage
-				int damage = m_pPlayer->GetPlayerAttributes().strength - (m_pPlayer->GetPlayerAttributes().strength * ((*i)->GetAttributes()->armour/100));
+				int damage = m_pPlayer->GetPlayerAttributes().strength - ((float)m_pPlayer->GetPlayerAttributes().strength * ((float)(*i)->GetAttributes()->armour/100.0f));
 
 				stream.str("");
 
@@ -169,7 +169,7 @@ void CNpcMachine::CheckAllNpcs()
 			{
 
 				//calculate the damage
-				int damage = (*i)->GetAttributes()->strength - ((*i)->GetAttributes()->strength * (m_pPlayer->GetPlayerAttributes().armour/100));
+				int damage = (*i)->GetAttributes()->strength - ((float)(*i)->GetAttributes()->strength * ((float)m_pPlayer->GetPlayerAttributes().armour/100.0f));
 
 				//subtract the lost health
 				m_pPlayer->DoDamage(damage);
@@ -253,3 +253,67 @@ void CNpcMachine::SpawnNpcs()
 		m_spawnTime = rand()%40 + 20;
 	}
 }
+
+
+
+bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
+{
+	stringstream stream;
+
+	list<CNpc*>::iterator i;
+	for (i = m_Npcs.begin(); i != m_Npcs.end(); i++)
+	{
+		//if projectile hits npcs: do damage
+		if (_projectile->m_Sprite->GetRect().intersects((*i)->GetRect()))
+		{
+			//calculate the damage
+			int damage = _projectile->m_Damage - ((float)_projectile->m_Damage * ((float)(*i)->GetAttributes()->armour / 100.0f));
+
+			stream.str("");
+
+			//put the damage into a stringstream	
+			stream << damage;
+			m_signMachine.AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top);
+			
+
+			//subtract the lost health
+			(*i)->GetAttributes()->currentHealth -= damage;
+
+			//throw the npc if hitted
+			if (m_pPlayer->GetRect().left > (*i)->GetRect().left)
+				(*i)->ThrowNpc(true, 200);
+			else
+				(*i)->ThrowNpc(false, 200);
+
+
+
+			//if the npc died: delete it 
+			if ((*i)->GetAttributes()->currentHealth <= 0)
+			{
+				//give loot
+				vector<SItem> loot = (*i)->GetLoot();
+				for (int a = 0; a != loot.size(); a++)
+				{
+					m_pWorld->AddLittleItem(loot[a].thing->getID(), (*i)->GetRect().left, (*i)->GetRect().top, loot[a].amount);
+				}
+
+				//adds the experience
+				m_pPlayer->AddExp((*i)->GetAttributes()->exp);
+
+				(*i)->Quit();
+				SAFE_DELETE((*i));
+				i = m_Npcs.erase(i);
+				continue;
+			}
+
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+
+
