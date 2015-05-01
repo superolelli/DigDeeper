@@ -293,6 +293,7 @@ struct SProjectile
 	int m_flightLength;
 	float m_fXVel;
 	float m_fYVel;
+	float m_fAnimState;
 };
 
 

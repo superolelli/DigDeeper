@@ -164,6 +164,7 @@ void CMagicMenu::CastSpell(int _ID)
 				projectile.m_fromPlayer = true;
 				projectile.m_fYVel = 0.0f;
 				projectile.m_Sprite = sprite;
+				projectile.m_fAnimState = -1;
 
 				g_pProjectiles->NewProjectile(projectile);
 

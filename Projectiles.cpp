@@ -46,7 +46,10 @@ void CProjectiles::Render()
 		if (i->m_ID == FIREBALLPROJECTILE)
 			m_pWorld->GetLightMachine()->AddLightCircle(i->m_Sprite->GetRect().left + i->m_Sprite->GetRect().width / 2, i->m_Sprite->GetRect().top + i->m_Sprite->GetRect().height / 2, 100, Color::White);
 
-		i->m_Sprite->Render(g_pFramework->GetWindow());
+		if (i->m_fAnimState == -1)
+			i->m_Sprite->Render(g_pFramework->GetWindow());
+		else
+			i->m_Sprite->Render(g_pFramework->GetWindow(), i->m_fAnimState);
 	}
 }
 
@@ -62,34 +65,113 @@ void CProjectiles::NewProjectile(SProjectile _projectile)
 void CProjectiles::CheckProjectiles()
 {
 	float moveX, moveY;
+	bool collided = false;
 	list<SProjectile>::iterator i;
 	for (i = m_Projectiles.begin(); i != m_Projectiles.end();)
 	{
-		//check if projectile collides with block
-		if (m_pWorld->isBlockPassable(i->m_Sprite->GetRect().left / 100, i->m_Sprite->GetRect().top / 100))
+		collided = false;
+		if (i->m_ID == EXPLOSION)
 		{
-			moveX = i->m_fXVel * g_pTimer->GetElapsedTime().asSeconds();
-			moveY = i->m_fYVel* g_pTimer->GetElapsedTime().asSeconds();
-			i->m_Sprite->Move(moveX, moveY);
-			i->m_fFlown += abs(moveX) + abs(moveY);
+			i->m_fAnimState += 20 * g_pTimer->GetElapsedTime().asSeconds();
 
-			if (i->m_fFlown >= i->m_flightLength)
+			if (i->m_fAnimState >= 5)
 			{
 				i = m_Projectiles.erase(i);
 				continue;
 			}
-		}
-		else
-		{
-			i = m_Projectiles.erase(i);
+
+			i++;
 			continue;
 		}
+
+		if (i->m_fXVel < 0)
+			collided = m_pWorld->isBlockPassable(i->m_Sprite->GetRect().left / 100, i->m_Sprite->GetRect().top / 100);
+		else
+			collided = m_pWorld->isBlockPassable((i->m_Sprite->GetRect().left+70) / 100, (i->m_Sprite->GetRect().top +15) / 100);
+
+			//check if projectile collides with block
+			if (collided)
+			{
+				moveX = i->m_fXVel * g_pTimer->GetElapsedTime().asSeconds();
+				moveY = i->m_fYVel* g_pTimer->GetElapsedTime().asSeconds();
+				i->m_Sprite->Move(moveX, moveY);
+				i->m_fFlown += abs(moveX) + abs(moveY);
+
+				if (i->m_fFlown >= i->m_flightLength)
+				{
+					if (i->m_ID == FIREBALLPROJECTILE)
+					{
+						int x = i->m_Sprite->GetRect().left;
+						int y = i->m_Sprite->GetRect().top;
+						SAFE_DELETE(i->m_Sprite);
+						i->m_Sprite = new CSprite;
+						i->m_ID = EXPLOSION;
+						i->m_fAnimState = 0;
+						i->m_Sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
+
+						if (i->m_fXVel < 0)
+							i->m_Sprite->SetPos(x - 40, y - 40);
+						else
+							i->m_Sprite->SetPos(x + 20, y - 40);
+
+						i++;
+					}
+					else
+						i = m_Projectiles.erase(i);
+
+					continue;
+				}
+			}
+			else
+			{
+				if (i->m_ID == FIREBALLPROJECTILE)
+				{
+					int x = i->m_Sprite->GetRect().left;
+					int y = i->m_Sprite->GetRect().top;
+					SAFE_DELETE(i->m_Sprite);
+					i->m_Sprite = new CSprite;
+					i->m_ID = EXPLOSION;
+					i->m_fAnimState = 0;
+					i->m_Sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
+
+					if (i->m_fXVel < 0)
+						i->m_Sprite->SetPos(x - 40, y - 40);
+					else
+						i->m_Sprite->SetPos(x + 20, y - 40);
+
+					i++;
+				}
+				else
+					i = m_Projectiles.erase(i);
+
+				continue;
+			}
 
 		//check if projectile collides with player 
 		if (m_pPlayer->GetRect().intersects(i->m_Sprite->GetRect()) && !i->m_fromPlayer)
 		{
 			m_pPlayer->DoDamage(i->m_Damage - (i->m_Damage * (m_pPlayer->GetPlayerAttributes().armour / 100)));
-			i = m_Projectiles.erase(i);
+
+			if (i->m_ID == FIREBALLPROJECTILE)
+			{
+				int x = i->m_Sprite->GetRect().left;
+				int y = i->m_Sprite->GetRect().top;
+				SAFE_DELETE(i->m_Sprite);
+				i->m_Sprite = new CSprite;
+				i->m_ID = EXPLOSION;
+				i->m_fAnimState = 0;
+				i->m_Sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
+
+				if (i->m_fXVel < 0)
+					i->m_Sprite->SetPos(x - 40, y - 40);
+				else
+					i->m_Sprite->SetPos(x + 20, y - 40);
+
+				i++;
+			}
+			else
+				i = m_Projectiles.erase(i);
+
 			continue;
 		}
 			
@@ -98,7 +180,26 @@ void CProjectiles::CheckProjectiles()
 		{
 			if (m_pNpcs->CheckProjectile(&*i))
 			{
-				i = m_Projectiles.erase(i);
+				if (i->m_ID == FIREBALLPROJECTILE)
+				{
+					int x = i->m_Sprite->GetRect().left;
+					int y = i->m_Sprite->GetRect().top;
+					SAFE_DELETE(i->m_Sprite);
+					i->m_Sprite = new CSprite;
+					i->m_ID = EXPLOSION;
+					i->m_fAnimState = 0;
+					i->m_Sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
+
+					if (i->m_fXVel < 0)
+						i->m_Sprite->SetPos(x - 40, y - 40);
+					else
+						i->m_Sprite->SetPos(x + 20, y - 40);
+
+					i++;
+				}
+				else
+					i = m_Projectiles.erase(i);
+
 				continue;
 			}
 		}

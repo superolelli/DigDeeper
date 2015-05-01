@@ -1095,3 +1095,8 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Feuerbälle wurden eingefügt
 
 ------------------------------------------------------
+01.05.2015
+
+-Feuerbälle explodieren nun beim Aufprall (gibt noch einen Bug, der behoben werden muss)
+
+------------------------------------------------------

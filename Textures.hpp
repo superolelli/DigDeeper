@@ -105,6 +105,7 @@ public:
 	Texture t_spell[1];
 	Texture t_fireballLeft;
 	Texture t_fireballRight;
+	Texture t_explosion;
 
 
 	//the information for the things

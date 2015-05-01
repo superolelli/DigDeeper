@@ -173,6 +173,7 @@ const int FIREBALL = 0;
 #pragma region Projectiles
 
 const int FIREBALLPROJECTILE = 1;
+const int EXPLOSION = 2;
 
 #pragma endregion
 
