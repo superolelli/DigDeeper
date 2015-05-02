@@ -261,7 +261,7 @@ bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
 	stringstream stream;
 
 	list<CNpc*>::iterator i;
-	for (i = m_Npcs.begin(); i != m_Npcs.end(); i++)
+	for (i = m_Npcs.begin(); i != m_Npcs.end();)
 	{
 		//if projectile hits npcs: do damage
 		if (_projectile->m_Sprite->GetRect().intersects((*i)->GetRect()))
@@ -309,6 +309,8 @@ bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
 
 			return true;
 		}
+
+		i++;
 	}
 
 	return false;

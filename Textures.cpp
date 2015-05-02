@@ -81,6 +81,7 @@ void TextureLoading::LoadTextures()
 	t_newSkillManaRegeneration.loadFromFile("Data/Sprites/Skills/levelUp_manaRegeneration.png");
 	t_newSkillCriticalChance.loadFromFile("Data/Sprites/Skills/levelUp_criticalChance.png");
 	t_newSkillCriticalDamage.loadFromFile("Data/Sprites/Skills/levelUp_criticalDamage.png");
+	t_newSkillMagicPoints.loadFromFile("Data/Sprites/Skills/levelUp_magicPoints.png");
 	t_newSkillRecipe.loadFromFile("Data/Sprites/Skills/levelUp_recipe.png");
 
 	t_furnanceMenu.loadFromFile("Data/Sprites/Inventory/furnance_menu2.png");
@@ -88,9 +89,11 @@ void TextureLoading::LoadTextures()
 	t_magicMenu.loadFromFile("Data/Sprites/Magic/magic_menu.png");
 	t_buttonPlus.loadFromFile("Data/Sprites/Magic/plus.png");
 	t_spell[0].loadFromFile("Data/Sprites/Magic/spell_fireball.png");
+	t_spell[1].loadFromFile("Data/Sprites/Magic/spell_heal.png");
 	t_fireballLeft.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(80, 0, 80, 30));
 	t_fireballRight.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(0, 0, 80, 30));
 	t_explosion.loadFromFile("Data/Sprites/Magic/explosion.png");
+	t_healing.loadFromFile("Data/Sprites/Magic/heal_animation.png");
 
 	t_buildingInfo_woodwall.loadFromFile("Data/Sprites/Building/building_info_woodwall.png");
 	t_buildingInfo_stonewall.loadFromFile("Data/Sprites/Building/building_info_stonewall.png");
@@ -182,6 +185,7 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_marble.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/marble_inventory.png");
 	t_blockInventoryTexture_marblewall.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/marble_wall_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
+	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 
 	t_blockLittleTexture_dirt.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(86, 2, 40, 40));
 	t_blockLittleTexture_stone.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(464, 2, 40, 40));

@@ -103,7 +103,7 @@ const int ATTACKING = 3;
 
 #pragma region Skills
 
-const int NUMBER_OF_SKILLS = 11;
+const int NUMBER_OF_SKILLS = 12;
 
 const int RECIPESKILL = 0;
 const int SPEED = 1;
@@ -117,6 +117,7 @@ const int HEALTHREGENERATION = 8;
 const int MANAREGENERATION = 9;
 const int CRITICALCHANCE = 10;
 const int CRITICALDAMAGE = 11;
+const int MAGICPOINTS = 12;
 
 #pragma endregion
 
@@ -162,9 +163,10 @@ const int BIG = 3;
 
 #pragma region Spells
 
-const int AMOUNTOFSPELLS = 1;
+const int AMOUNTOFSPELLS = 2;
 
 const int FIREBALL = 0;
+const int HEAL = 1;
 
 #pragma endregion
 
@@ -174,6 +176,7 @@ const int FIREBALL = 0;
 
 const int FIREBALLPROJECTILE = 1;
 const int EXPLOSION = 2;
+const int HEALING = 3;
 
 #pragma endregion
 

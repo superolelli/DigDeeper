@@ -164,12 +164,21 @@ void CInventory::Take(CThing *_thing, int _amount)
 		{
 			//if the spell is already in the inventory: return
 			if (i->thing->getID() == SPELL)
-				return;
+			{
+				CItem *newItem = (CItem*)_thing;
+				CItem *currentItem = (CItem*)(*i).thing;
 
-			//if it is, add the amount to it and delete the added thing
-			i->amount += _amount;
-			SAFE_DELETE(_thing);
-			return;
+				if (newItem->GetSpecialID() == currentItem->GetSpecialID())
+					return;
+			}
+
+			if (i->thing->getID() != SPELL)
+			{
+				//if it is, add the amount to it and delete the added thing
+				i->amount += _amount;
+				SAFE_DELETE(_thing);
+				return;
+			}
 		}
 	}
 

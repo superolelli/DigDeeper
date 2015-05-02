@@ -70,9 +70,14 @@ void CProjectiles::CheckProjectiles()
 	for (i = m_Projectiles.begin(); i != m_Projectiles.end();)
 	{
 		collided = false;
-		if (i->m_ID == EXPLOSION)
+
+		//check for explosions and healing
+		if (i->m_ID == EXPLOSION || i->m_ID == HEALING)
 		{
 			i->m_fAnimState += 20 * g_pTimer->GetElapsedTime().asSeconds();
+
+			if (i->m_ID == HEALING)
+				i->m_Sprite->SetPos(m_pPlayer->GetRect().left - 30, m_pPlayer->GetRect().top);
 
 			if (i->m_fAnimState >= 5)
 			{
@@ -84,12 +89,13 @@ void CProjectiles::CheckProjectiles()
 			continue;
 		}
 
+		//check for collisions
 		if (i->m_fXVel < 0)
 			collided = m_pWorld->isBlockPassable(i->m_Sprite->GetRect().left / 100, i->m_Sprite->GetRect().top / 100);
 		else
 			collided = m_pWorld->isBlockPassable((i->m_Sprite->GetRect().left+70) / 100, (i->m_Sprite->GetRect().top +15) / 100);
 
-			//check if projectile collides with block
+			//if collided: erase projectile
 			if (collided)
 			{
 				moveX = i->m_fXVel * g_pTimer->GetElapsedTime().asSeconds();
@@ -180,6 +186,7 @@ void CProjectiles::CheckProjectiles()
 		{
 			if (m_pNpcs->CheckProjectile(&*i))
 			{
+				cout << "Projectile collided with npc" << endl;
 				if (i->m_ID == FIREBALLPROJECTILE)
 				{
 					int x = i->m_Sprite->GetRect().left;

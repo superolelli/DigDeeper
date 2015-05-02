@@ -13,6 +13,7 @@ public:
 	void Init(int _ID, bool _loaded = false);
 	int GetSpecialID(){return m_specialID;}
 	void SetSpecialID(int _ID);
+	void SetSpecialIDSpell(int _ID);
 
 private:
 	friend class boost::serialization::access;

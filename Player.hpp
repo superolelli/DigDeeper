@@ -32,6 +32,8 @@ public:
 	void RenderInventory();
 	void Take(CThing *_thing, int amount);
 	void AddExp(int _exp){m_Attributes.currentExp += _exp;}
+	void Heal(int _life);
+	void AddMagicPoints(int _points){ m_pMagicMenu->AddMagicPoints(_points); }
 	void DoDamage(int _damage){ m_Attributes.currentHealth -= _damage; }
 	void CastSpell(int _ID){ m_pMagicMenu->CastSpell(_ID); }
 	void ThrowPlayer(bool _left, int _strength);

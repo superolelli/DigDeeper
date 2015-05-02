@@ -344,6 +344,10 @@ CButton* CCharacterInfo::RandomSkill(int _skillNumber)
 		{
 			newButton->Load(&g_pTextures->t_newSkillCriticalDamage, 0, 0, 1);
 		}break;
+	case MAGICPOINTS:
+	{
+		newButton->Load(&g_pTextures->t_newSkillMagicPoints, 0, 0, 1);
+	}break;
 	default:
 		{
 			cout <<"Couldn't load Skill button!" << endl;
@@ -408,6 +412,10 @@ void CCharacterInfo::AddSkill(int _skill)
 		{
 			m_pAttributes->criticalDamage += 2;
 		}break;
+	case MAGICPOINTS:
+	{
+		m_pPlayer->AddMagicPoints(2);
+	}break;
 	case RECIPESKILL:
 		{
 			//get a needed recipe

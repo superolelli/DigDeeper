@@ -96,16 +96,18 @@ public:
 	Texture t_newSkillManaRegeneration;
 	Texture t_newSkillCriticalChance;
 	Texture t_newSkillCriticalDamage;
+	Texture t_newSkillMagicPoints;
 	Texture t_newSkillRecipe;
 
 	Texture t_furnanceMenu;                                //the melting menu
 
 	Texture t_magicMenu;
 	Texture t_buttonPlus;
-	Texture t_spell[1];
+	Texture t_spell[2];
 	Texture t_fireballLeft;
 	Texture t_fireballRight;
 	Texture t_explosion;
+	Texture t_healing;
 
 
 	//the information for the things
@@ -201,6 +203,7 @@ public:
 	Texture t_blockInventoryTexture_marble;
 	Texture t_blockInventoryTexture_marblewall;
 	Texture t_spellInventoryTexture_fireball;
+	Texture t_spellInventoryTexture_heal;
 
 	//the little item pictures of the things
 	Texture t_blockLittleTexture_dirt;

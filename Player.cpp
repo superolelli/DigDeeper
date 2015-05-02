@@ -939,3 +939,13 @@ SToolAttributes CPlayer::GetPlayerAttributes()
 {
 	return m_modifications;
 }
+
+
+
+void CPlayer::Heal(int _life)
+{
+	if (m_Attributes.currentHealth + _life > m_modifications.maxHealth)
+		m_Attributes.currentHealth = m_modifications.maxHealth;
+	else
+		m_Attributes.currentHealth += _life;
+}

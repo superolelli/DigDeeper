@@ -167,7 +167,7 @@ void CItem::Init(int _ID, bool _loaded)
 		}break;
 	case(SPELL) :
 	{
-		InitSpell();
+		
 	}break;
 	}
 }
@@ -240,6 +240,13 @@ void CItem::SetSpecialID(int _ID)
 
 
 
+void CItem::SetSpecialIDSpell(int _ID)
+{
+	m_specialID = _ID;
+	InitSpell();
+}
+
+
 void CItem::InitSpell()
 {
 	switch (m_specialID)
@@ -247,6 +254,11 @@ void CItem::InitSpell()
 	case(FIREBALL):
 		m_pInventorySprite->Load(&g_pTextures->t_spellInventoryTexture_fireball);
 		m_Name = "Feuerball";
+		break;
+
+	case(HEAL):
+		m_pInventorySprite->Load(&g_pTextures->t_spellInventoryTexture_heal);
+		m_Name = "Heilung";
 		break;
 
 	default:
