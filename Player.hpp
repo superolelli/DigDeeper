@@ -60,6 +60,7 @@ private:
 	{
 		ar & m_pInventory;
 		ar & m_pBuildingMenu;
+		ar & m_pMagicMenu;
 		ar & m_Attributes.armour;
 		ar & m_Attributes.breakingSpeed;
 		ar & m_Attributes.currentExp;
@@ -86,6 +87,7 @@ private:
 	{
 		ar & m_pInventory;
 		ar & m_pBuildingMenu;
+		ar & m_pMagicMenu;
 		ar & m_Attributes.armour;
 		ar & m_Attributes.breakingSpeed;
 		ar & m_Attributes.currentExp;

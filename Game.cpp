@@ -584,4 +584,5 @@ void CGame::Load(string _path)
 	m_pPlayer->InitLoaded(500, 300, m_pWorld, &m_View);
 	m_pWorld->Init(0,0, &m_View, true);
 	m_NpcMachine.Init(m_pWorld, m_pPlayer, &m_View, true);
+	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);
 }

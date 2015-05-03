@@ -33,6 +33,7 @@ private:
 	}
 
 	CSprite *m_pBeeSprite;              //the sprite
+	CSprite m_frozenSprite;
 
 	bool m_left;                   //is the bee looking to the left
 	Vector2i m_PointToGo;          //the point where the bee should go

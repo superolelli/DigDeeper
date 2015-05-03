@@ -333,7 +333,7 @@ void CInventory::Render(IntRect &_playerRect)
 					if(i->is_clicked == false)
 					{
 						//if the clicked item is the same as this one: add the amounts
-						if(c != m_inventoryList.end() && c->thing->getID() == i->thing->getID() && i->thing->getID() < ITBREAK && i->thing->getID() != RECIPE)
+						if(c != m_inventoryList.end() && c->thing->getID() == i->thing->getID() && i->thing->getID() < ITBREAK && i->thing->getID() != RECIPE && i->thing->getID() != SPELL)
 						{
 							//add the amount and delete the clicked thing
 							i->amount += c->amount;

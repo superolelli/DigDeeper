@@ -35,6 +35,8 @@ private:
 
 	CLiving3Part *m_pGoblin;          //the goblin
 
+	CSprite m_frozenSprite;
+
 	int m_goblinType;                   //the goblin type
 
 	bool m_left;                   //is the goblin looking to the left

@@ -13,8 +13,12 @@ void CBee::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, b
 	m_pBeeSprite = new CSprite;
 	m_pBeeSprite->Load(&g_pTextures->t_bee, 4, 10, 10);
 
+	m_frozenSprite.Load(&g_pTextures->t_ice_bee);
+
 	m_XVel = 0;
 	m_YVel = 0;
+
+	m_fFrozenTimer = 0;
 
 	//Init the attributes
 	m_Attributes.maxHealth = 20;
@@ -54,46 +58,56 @@ void CBee::Quit()
 
 bool CBee::CheckNpc()
 {
-	Vector2i beePos;
-	beePos.x = m_pBeeSprite->GetRect().left;
-	beePos.y = m_pBeeSprite->GetRect().top;
-
-	//get the x velocity
-	if(beePos.x < m_PointToGo.x)
-		m_XVel = g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
-	else
-		m_XVel = - g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
-
-	if(CheckCollisions())
+	if (m_State != FROZEN)
 	{
-		m_XVel = 0;
-		NewPointToGo();
+		Vector2i beePos;
+		beePos.x = m_pBeeSprite->GetRect().left;
+		beePos.y = m_pBeeSprite->GetRect().top;
+
+		//get the x velocity
+		if (beePos.x < m_PointToGo.x)
+			m_XVel = g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
+		else
+			m_XVel = -g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
+
+		if (CheckCollisions())
+		{
+			m_XVel = 0;
+			NewPointToGo();
+		}
+
+		//get the y velocity
+		if (beePos.y < m_PointToGo.y)
+			m_YVel = g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
+		else
+			m_YVel = -g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
+
+		if (CheckCollisions())
+		{
+			m_YVel = 0;
+			NewPointToGo();
+		}
+
+		m_pBeeSprite->Move(m_XVel, m_YVel);
+		m_xPos = m_pBeeSprite->GetRect().left;
+		m_yPos = m_pBeeSprite->GetRect().top;
+
+		//if bee is outside the world: return false
+		if (m_xPos < 0 - m_pBeeSprite->GetRect().width || m_yPos < 0 - m_pBeeSprite->GetRect().height || m_xPos > m_pWorld->GetDimensions().x * 100)
+			return false;
+
+		//if the bee reached its destiny: get a new destiny
+		if (beePos.x - m_PointToGo.x < 2 && beePos.x - m_PointToGo.x > -2 && beePos.y - m_PointToGo.y < 2 && beePos.y - m_PointToGo.y > -2)
+		{
+			NewPointToGo();
+		}
 	}
-
-	//get the y velocity
-	if(beePos.y < m_PointToGo.y)
-		m_YVel = g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
 	else
-		m_YVel = - g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
-
-	if(CheckCollisions())
 	{
-		m_YVel = 0;
-		NewPointToGo();
-	}
+		m_fFrozenTimer -= g_pTimer->GetElapsedTime().asSeconds();
 
-	m_pBeeSprite->Move(m_XVel, m_YVel);
-	m_xPos = m_pBeeSprite->GetRect().left;
-	m_yPos = m_pBeeSprite->GetRect().top;
-
-	//if bee is outside the world: return false
-	if(m_xPos < 0 - m_pBeeSprite->GetRect().width || m_yPos < 0 - m_pBeeSprite->GetRect().height || m_xPos > m_pWorld->GetDimensions().x*100)
-		return false;
-
-	//if the bee reached its destiny: get a new destiny
-	if(beePos.x - m_PointToGo.x < 2 && beePos.x - m_PointToGo.x > -2 && beePos.y - m_PointToGo.y < 2 && beePos.y - m_PointToGo.y > -2)
-	{
-		NewPointToGo();
+		if (m_fFrozenTimer <= 0)
+			m_State = IDLE;
 	}
 
 	return true;
@@ -158,6 +172,12 @@ void CBee::Render()
 		m_pBeeSprite->Render(g_pFramework->GetWindow(), 0.0f);
 	else
 		m_pBeeSprite->Render(g_pFramework->GetWindow(), 2.0f);
+
+	if (m_State == FROZEN)
+	{
+		m_frozenSprite.SetPos(m_pBeeSprite->GetRect().left, m_pBeeSprite->GetRect().top);
+		m_frozenSprite.Render(g_pFramework->GetWindow());
+	}
 }
 
 

@@ -6,7 +6,6 @@ CMagicMenu::CMagicMenu()
 {
 	m_pMagicMenu = NULL;
 	m_pInventory = NULL;
-	m_pPlus = NULL;
 }
 
 
@@ -15,7 +14,6 @@ CMagicMenu::~CMagicMenu()
 	m_pInventory = NULL;
 
 	SAFE_DELETE(m_pMagicMenu);
-	SAFE_DELETE(m_pPlus);
 
 	for (int i = 0; i < AMOUNTOFSPELLS; i++)
 		SAFE_DELETE(m_Spells[i].m_Sprite);
@@ -32,9 +30,6 @@ void CMagicMenu::Init(CInventory *_inventory, CPlayer *_player, bool _loaded)
 	m_pMagicMenu->Load(&g_pTextures->t_magicMenu);
 	m_pMagicMenu->SetPos((int)(g_pFramework->GetWindow()->getSize().x / 2 - m_pMagicMenu->GetRect().width / 2), (int)(g_pFramework->GetWindow()->getSize().y / 2 - m_pMagicMenu->GetRect().height / 2));
 
-	m_pPlus = new CButton;
-	m_pPlus->Load(&g_pTextures->t_buttonPlus, 0, 0, 1);
-
 	//init the spells
 	for (int i = 0; i < AMOUNTOFSPELLS; i++)
 	{
@@ -47,6 +42,7 @@ void CMagicMenu::Init(CInventory *_inventory, CPlayer *_player, bool _loaded)
 
 	//set position of the spells
 	m_Spells[FIREBALL].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 41, m_pMagicMenu->GetRect().top + 91);
+	m_Spells[ICE].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 186, m_pMagicMenu->GetRect().top + 91);
 	m_Spells[HEAL].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 374, m_pMagicMenu->GetRect().top + 91);
 
 	m_text.setFont(g_pTextures->f_coolsville);
@@ -58,7 +54,8 @@ void CMagicMenu::Init(CInventory *_inventory, CPlayer *_player, bool _loaded)
 	m_levelText.setCharacterSize(18);
 	m_levelText.setColor(Color::Black);
 
-	m_MagicPoints = 2;
+	if (!_loaded)
+		m_MagicPoints = 2;
 
 	is_open = false;
 }
@@ -171,6 +168,44 @@ void CMagicMenu::CastSpell(int _ID)
 
 				//substract mana
 				m_pPlayer->SubstractMana(m_SpellLevel[FIREBALL] * 5);
+			}
+		}break;
+
+		case(ICE) :
+		{
+			if (m_pPlayer->GetMana() >= m_SpellLevel[ICE] * 5)
+			{
+				SProjectile projectile;
+
+				//add a projectile
+				CSprite *sprite = new CSprite;
+
+				if (m_pPlayer->IsLeft())
+				{
+					projectile.m_fXVel = -200;
+					sprite->Load(&g_pTextures->t_iceballLeft);
+				}
+				else
+				{
+					projectile.m_fXVel = 200;
+					sprite->Load(&g_pTextures->t_iceballRight);
+				}
+
+				sprite->SetPos(m_pPlayer->GetWeaponRect().left - sprite->GetRect().left / 2, m_pPlayer->GetWeaponRect().top - sprite->GetRect().top / 2);
+
+				projectile.m_ID = ICEBALLPROJECTILE;
+				projectile.m_Damage = m_SpellLevel[ICE] * 1;
+				projectile.m_fFlown = 0.0f;
+				projectile.m_flightLength = 400;
+				projectile.m_fromPlayer = true;
+				projectile.m_fYVel = 0.0f;
+				projectile.m_Sprite = sprite;
+				projectile.m_fAnimState = -1;
+
+				g_pProjectiles->NewProjectile(projectile);
+
+				//substract mana
+				m_pPlayer->SubstractMana(m_SpellLevel[ICE] * 5);
 			}
 		}break;
 

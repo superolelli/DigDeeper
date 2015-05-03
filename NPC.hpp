@@ -23,6 +23,7 @@ public:
 	SNpcAttributes* GetAttributes(){return &m_Attributes;}
 	int GetID(){return m_ID;}
 	int GetState(){return m_State;}
+	void SetFrozen(float _frozenTime){ m_State = FROZEN; m_fFrozenTimer = _frozenTime; }
 
 	bool m_wasHit;                          //was the npc hit?
 
@@ -47,6 +48,8 @@ protected:
 	int m_ID;                              //the npc's id
 	int m_xPos;
 	int m_yPos; 
+
+	float m_fFrozenTimer;
 
 	CWorld *m_pWorld;                         //a pointer to the world
 	CPlayer *m_pPlayer;

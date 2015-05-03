@@ -96,6 +96,7 @@ const int KNIGHTGOBLIN = 3;
 const int IDLE = 1;
 const int WALKING = 2;
 const int ATTACKING = 3;
+const int FROZEN = 4;
 
 #pragma endregion
 
@@ -163,10 +164,11 @@ const int BIG = 3;
 
 #pragma region Spells
 
-const int AMOUNTOFSPELLS = 2;
+const int AMOUNTOFSPELLS = 3;
 
 const int FIREBALL = 0;
 const int HEAL = 1;
+const int ICE = 2;
 
 #pragma endregion
 
@@ -177,6 +179,7 @@ const int HEAL = 1;
 const int FIREBALLPROJECTILE = 1;
 const int EXPLOSION = 2;
 const int HEALING = 3;
+const int ICEBALLPROJECTILE = 4;
 
 #pragma endregion
 

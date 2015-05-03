@@ -1101,3 +1101,15 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Heilzauber eingebaut
 
 ------------------------------------------------------
+02.05.2015
+
+-Feuerballbug behoben
+-Heilanimation eingebaut
+-Eisball hinzugefügt (friert noch nicht ein)
+
+------------------------------------------------------
+03.05.2015
+
+-Eisbälle frieren nun den Gegner ein
+
+------------------------------------------------------

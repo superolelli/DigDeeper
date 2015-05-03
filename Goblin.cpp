@@ -61,6 +61,10 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 	m_fXVel = 0;
 	m_fYVel = 0;
 
+	m_fFrozenTimer = 0;
+
+	m_frozenSprite.Load(&g_pTextures->t_ice_goblin);
+
 	m_fLegsAnimState = 5;
 	m_fArmAnimState = 0;
 
@@ -126,34 +130,40 @@ bool CGoblin::CheckNpc()
 		//Checks/sets the current state
 		CheckState();
 	
-		//checks the movement in x-direction
-		CheckXMovement();
-		
-		//if the goblin would collide: set the x-velocity to 0
-		if (CheckCollision())
+		//if goblin isn't frozen: check movement
+		if (m_State != FROZEN)
 		{
-			m_fXVel = 0;
-		}
-	
-		//checks the movement in y-direction
-		CheckYMovement();
-	
-		//if the goblin would collide: set the y-velocity to 0
-		if (CheckCollision())
-		{
-			m_fYVel = m_fYVel / 2;
+			//checks the movement in x-direction
+			CheckXMovement();
+
+			//if the goblin would collide: set the x-velocity to 0
+			if (CheckCollision())
+			{
+				m_fXVel = 0;
+			}
+
+			//checks the movement in y-direction
+			CheckYMovement();
+
+			//if the goblin would collide: set the y-velocity to 0
 			if (CheckCollision())
 			{
 				m_fYVel = m_fYVel / 2;
 				if (CheckCollision())
 				{
-					m_fYVel = 0;
-					m_jumping = false;
+					m_fYVel = m_fYVel / 2;
+					if (CheckCollision())
+					{
+						m_fYVel = 0;
+						m_jumping = false;
+					}
 				}
+
 			}
-	
+			m_pGoblin->Move((int)m_fXVel, (int)m_fYVel);
 		}
-		m_pGoblin->Move((int)m_fXVel, (int)m_fYVel);
+		else
+			m_sideSpeed = 0;
 	
 		m_xPos = m_pGoblin->GetRect().left;
 		m_yPos = m_pGoblin->GetRect().top;
@@ -292,6 +302,10 @@ void CGoblin::CheckState()
 						m_fLegsAnimState = 6;
 					}
 				} 
+				else if (abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) > 50 && abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 120 && abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 80)
+				{
+					m_State = WALKING;
+				}
 				
 			}
 			//if the time for being idle is up: seek a new point and start walking towards it
@@ -317,7 +331,15 @@ void CGoblin::CheckState()
 				m_PointToGo = findPath(m_pPlayer->GetRect().left + m_pPlayer->GetRect().width / 2, m_pPlayer->GetRect().top + m_pPlayer->GetRect().height / 2);
 
 				if (m_PointToGo.x == -1)
-					m_State = IDLE;
+				{
+					//if player wasn't reached
+					if (abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) > 50 && abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 120 && abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 80)
+					{
+						m_State = WALKING;
+					}
+					else
+						m_State = IDLE;
+				}
 				else if (m_PointToGo.x == m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2)
 				{
 					m_State = IDLE;
@@ -366,6 +388,14 @@ void CGoblin::CheckState()
 			}
 
 		}break;
+
+		case(FROZEN):
+		{
+			m_fFrozenTimer -= g_pTimer->GetElapsedTime().asSeconds();
+
+			if (m_fFrozenTimer <= 0)
+				m_State = IDLE;
+		}break;
 	}
 }
 
@@ -407,6 +437,12 @@ void CGoblin::Render()
 	{
 		m_pGoblin->Render(1, m_fLegsAnimState);
 		m_pGoblin->RenderSecondPart(1);
+	}
+
+	if (m_State == FROZEN)
+	{
+		m_frozenSprite.SetPos(m_pGoblin->GetRect().left - 5, m_pGoblin->GetRect().top);
+		m_frozenSprite.Render(g_pFramework->GetWindow());
 	}
 }
 

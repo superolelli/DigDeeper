@@ -29,6 +29,24 @@ public:
 
 
 private:
+	friend class boost::serialization::access;
+
+	//saves the magic menu
+	template<class Archive>
+	void save(Archive & ar, const unsigned int version) const
+	{
+		ar & m_MagicPoints;
+		ar & m_SpellLevel;
+	}
+
+	//load the magic menu
+	template<class Archive>
+	void load(Archive & ar, const unsigned int version)
+	{
+		ar & m_MagicPoints;
+		ar & m_SpellLevel;
+	}
+	BOOST_SERIALIZATION_SPLIT_MEMBER();
 
 	bool is_open;
 
@@ -36,7 +54,6 @@ private:
 	CPlayer *m_pPlayer;
 
 	CSprite *m_pMagicMenu;
-	CButton *m_pPlus;
 	SHoldingButtons m_Spells[AMOUNTOFSPELLS];
 	int m_SpellLevel[AMOUNTOFSPELLS];
 

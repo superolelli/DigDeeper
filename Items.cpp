@@ -167,7 +167,8 @@ void CItem::Init(int _ID, bool _loaded)
 		}break;
 	case(SPELL) :
 	{
-		
+		if (_loaded)
+			InitSpell();
 	}break;
 	}
 }
@@ -259,6 +260,11 @@ void CItem::InitSpell()
 	case(HEAL):
 		m_pInventorySprite->Load(&g_pTextures->t_spellInventoryTexture_heal);
 		m_Name = "Heilung";
+		break;
+
+	case(ICE):
+		m_pInventorySprite->Load(&g_pTextures->t_spellInventoryTexture_ice);
+		m_Name = "Eispfeil";
 		break;
 
 	default:
