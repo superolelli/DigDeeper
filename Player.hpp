@@ -42,10 +42,11 @@ public:
 	bool AddRecipe(int _ID){return m_pBuildingMenu->NewRecipe(_ID);}
 	list<int> GetNotAvailableRecipesList(){return m_pBuildingMenu->GetNotAvailableRecipes();}
 	inline IntRect GetRect(){return m_pDwarf->GetRect();}
-	IntRect GetWeaponRect();
-	bool GetArmGoingUp(){return m_armGoingUp;}
-	bool IsLeft(){ return m_turned_left; }
-	void SubstractMana(int _mana){ m_Attributes.currentMana -= _mana; if (m_Attributes.currentMana < 0){ m_Attributes.currentMana = 0; } }
+	IntRect GetWeaponRect();                                       //gets the rect of the weapon
+	bool GetArmGoingUp(){return m_armGoingUp;}                    //is the arm going up?
+	bool IsLeft(){ return m_turned_left; }                   //is the player turned left?
+	void SubstractMana(int _mana){ m_Attributes.currentMana -= _mana; if (m_Attributes.currentMana < 0){ m_Attributes.currentMana = 0; } } //substracts the amount of mana
+	void DoAlchemy(int _level);   //tries alchemy
 
 	SToolAttributes GetPlayerAttributes();
 

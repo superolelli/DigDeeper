@@ -26,6 +26,7 @@ void loading_screen(bool *is_loading)
 
 	CSprite Loading_screen;
 	Loading_screen.Load(&texture);
+	Loading_screen.setScale((float)g_pFramework->GetWindow()->getSize().x / (float)Loading_screen.GetRect().width, (float)g_pFramework->GetWindow()->getSize().y / (float)Loading_screen.GetRect().height);
 
 	while(*is_loading == true)
 	{

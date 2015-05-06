@@ -99,7 +99,7 @@ void CNpcMachine::CheckAllNpcs()
 		//if the npc was hit by the player
 		if(m_pPlayer->GetWeaponRect().intersects((*i)->GetRect()) && Mouse::isButtonPressed(Mouse::Left))
 		{
-			if(!(*i)->m_wasHit && (*i)->GetState() != FROZEN)
+			if(!(*i)->m_wasHit)
 			{
 				//set was hit to true
 				(*i)->m_wasHit = true;
@@ -126,6 +126,9 @@ void CNpcMachine::CheckAllNpcs()
 
 				//subtract the lost health
 				(*i)->GetAttributes()->currentHealth -= damage;
+
+				//reset if npc was frozen
+				(*i)->SetFrozen(0.0f);
 
 				//throw the npc if hitted
 				if (m_pPlayer->GetRect().left > (*i)->GetRect().left)
@@ -287,7 +290,7 @@ bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
 
 			//if projectile was iceball: freeze npc
 			if (_projectile->m_ID == ICEBALLPROJECTILE)
-				(*i)->SetFrozen(3);
+				(*i)->SetFrozen(_projectile->m_Damage*0.5f);
 
 			//if the npc died: delete it 
 			if ((*i)->GetAttributes()->currentHealth <= 0)

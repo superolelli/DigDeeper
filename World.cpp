@@ -123,6 +123,8 @@ void CWorld::Init(int _width, int _height, View* _view, bool _loaded)
 	//m_lightMachine.Init(m_BlocksX*100, m_BlocksY*100);
 	m_lightMachine.Init(_view, this, false);
 
+	m_pView = _view;
+
 	m_WorldHeight = m_BlocksY *100;
 	m_WorldWidth = m_BlocksX *100;
 }
@@ -1534,4 +1536,117 @@ bool CWorld::isBlockPassable(int _x, int _y)
 	}
 
 	return true;
+}
+
+
+
+
+
+void CWorld::DoAlchemy(int _level)
+{
+	int newID = 0;
+
+	//set the block values
+	int blockValues[8];
+	blockValues[DIRT - 1] = 1;
+	blockValues[STONE - 1] = 2;
+	blockValues[COALBLOCK - 1] = 2;
+	blockValues[IRONBLOCK - 1] = 3;
+	blockValues[GOLDBLOCK - 1] = 3;
+	blockValues[ARCANUSBLOCK - 1] = 4;
+	blockValues[MARBLE - 1] = 2;
+	blockValues[WOOD - 1] = 2;
+
+
+	//get the mouse position
+	int x = Mouse::getPosition().x + (m_pView->getCenter().x - m_pView->getSize().x/2);
+	int y = Mouse::getPosition().y + (m_pView->getCenter().y - m_pView->getSize().y/2);
+
+	//get the position in the world matrix
+	x /= 100;
+	y /= 100;
+
+	if (m_pBlocks[x][y] != NULL)
+	{
+		int newValue = rand() % 100 + 1;
+
+		//calculate the new block value
+		if (newValue <= 100*((float)_level / 100.0f))
+		{
+			newValue = blockValues[m_pBlocks[x][y]->getID() - 1] + 1;
+			if (newValue > 4)
+				newValue = 4;
+		}
+		else if (newValue >= 95)
+		{
+			newValue = blockValues[m_pBlocks[x][y]->getID() - 1] - 1;
+			if (newValue < 1)
+				newValue = 1;
+		}
+		else
+			newValue = blockValues[m_pBlocks[x][y]->getID() - 1];
+
+		//get a new block id
+		switch (newValue)
+		{
+		case(1) :
+		{
+			newID = DIRT;
+		}break;
+
+		case(2):
+		{
+			newID = rand() % 4;
+
+			if (newID == 0)
+				newID = STONE;
+			else if (newID == 1)
+				newID = COALBLOCK;
+			else if (newID == 2)
+				newID = MARBLE;
+			else if (newID == 3)
+				newID = WOOD;
+		}break;
+
+		case(3) :
+		{
+			newID = rand() % 2;
+
+			if (newID == 0)
+				newID = IRONBLOCK;
+			else
+				newID = GOLDBLOCK;
+		}break;
+
+		case(4):
+		{
+			newID = ARCANUSBLOCK;
+		}break;
+		}
+
+		//init the new block
+		SAFE_DELETE(m_pBlocks[x][y]);
+		m_pBlocks[x][y] = new CPlaceable;
+		m_pBlocks[x][y]->Init(newID);
+		m_pBlocks[x][y]->SetPos(x * 100, y * 100);
+
+		//show alchemy animation
+		SProjectile projectile;
+
+		//add a projectile
+		CSprite *sprite = new CSprite;
+
+		sprite->Load(&g_pTextures->t_alchemy, 5, 100, 100);
+		sprite->SetPos(x*100, y*100);
+
+		projectile.m_ID = ALCHEMYANIMATION;
+		projectile.m_Damage = 0;
+		projectile.m_fFlown = 0.0f;
+		projectile.m_flightLength = 0;
+		projectile.m_fromPlayer = true;
+		projectile.m_fYVel = 0.0f;
+		projectile.m_Sprite = sprite;
+		projectile.m_fAnimState = 0;
+		g_pProjectiles->NewProjectile(projectile);
+	}
 }

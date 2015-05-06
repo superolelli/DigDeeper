@@ -20,11 +20,12 @@ public:
 	void Update();
 
 	//gives the time since the start of the game
-	Time GetCurrentTime(){return m_current;}
+	Time GetCurrentTime(){ return m_current; }
 
 	//gives the time since the last frame
 	Time GetElapsedTime(){return m_elapsed;}
-	
+
+	Time GetElapsedTimeThisFrame();
 
 
 private:
@@ -32,6 +33,7 @@ private:
 	Clock m_clock;
 	Time m_current;
 	Time m_elapsed;
+	Time m_lastTime;
 };
 
 

@@ -1113,3 +1113,16 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Eisbälle frieren nun den Gegner ein
 
 ------------------------------------------------------
+05.05.2015
+
+-Alchemiezauber hinzugefügt
+
+------------------------------------------------------
+06.05.2015
+
+-Alchemieanimation hinzugefügt
+-Bug beim Alchemiezauber behoben (es konnte keine Verbesserung erreicht werden)
+-Eiszauber friert nun abhängig von der Stufe ein
+-Eingefrorene Gegner tauen bei einem Treffer nun wieder auf
+
+------------------------------------------------------

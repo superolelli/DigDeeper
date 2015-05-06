@@ -136,6 +136,7 @@ void CGame::Run()
 	g_pFramework->Update();
 	while(is_running)
 	{
+		cout << "New frame" << endl;
 		g_pFramework->Update();
 		g_pFramework->Clear();
 
@@ -156,6 +157,7 @@ void CGame::Run()
 
 		g_pFramework->ProcessEvents();
 
+		cout << "Time for processing events etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
 
 		Zoom();
 		
@@ -170,32 +172,59 @@ void CGame::Run()
 
 			g_pFramework->ProcessEvents();
 		}
+		cout << "Check music" << endl;
 
 		CheckMusic();
 
+		cout << "Time for checking music etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
+
+		cout << "Check placeables" << endl;
 		if(m_zoom == 1)
 			m_pWorld->CheckPlaceables(m_pPlayer->GetRect(), m_pPlayer, m_View.getCenter().x - m_View.getSize().x/2, m_View.getCenter().y - m_View.getSize().y/2);
 
+		cout << "Time for checking placeables etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
+
+		cout << "check npcs" << endl;
 		//Checks all npcs
 		m_NpcMachine.CheckAllNpcs();
 
+		cout << "Time for checking npcs etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
+
+		cout << "check projectiles" << endl;
 		g_pProjectiles->CheckProjectiles();
 
+		cout << "Time for checking projectiles etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
+
+		cout << "render world" << endl;
 		RenderBackground();
 		m_pWorld->Render(m_View.getSize(), m_View.getCenter());
 
+		cout << "Time for rendering world etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
+
 		CheckView();
 
+		cout << "render player" << endl;
 		//renders the player
 		m_pPlayer->Render();
 
+		cout << "Time for rendering player etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
+
+		cout << "render npcs" << endl;
 		//renders the npcs
 		m_NpcMachine.RenderAllNpcs();
 
+		cout << "Time for rendering npcs etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
+
+		cout << "render projectiles" << endl;
 		g_pProjectiles->Render();
 
+		cout << "Time for rendering projectiles etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
+
+		cout << "render light" << endl;
 		//renders darkness and light
 		m_pWorld->RenderLight();
+
+		cout << "Time for rendering light etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
 
 		//Renders the damage indicator
 		m_NpcMachine.RenderDamageIndicator();
@@ -204,6 +233,7 @@ void CGame::Run()
 		//Sets the default view for rendering the panels
 		g_pFramework->GetWindow()->setView(g_pFramework->GetWindow()->getDefaultView());
 
+		cout << "render inventory" << endl;
 		m_pPlayer->RenderInventory();
 
 		//sets the fps value
@@ -219,6 +249,8 @@ void CGame::Run()
 		{
 			Sprite sprite;
 			sprite.setTexture(g_pTextures->t_BackgroundDead);
+			sprite.setScale((float)g_pFramework->GetWindow()->getSize().x / (float)sprite.getLocalBounds().width, (float)g_pFramework->GetWindow()->getSize().y / (float)sprite.getLocalBounds().height);
+
 			g_pFramework->GetWindow()->draw(sprite);
 			g_pFramework->Flip();
 
@@ -230,6 +262,8 @@ void CGame::Run()
 		g_pFramework->Flip();
 
 	    CheckFps();
+
+		cout << "Time needed: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
 
 	}
 }

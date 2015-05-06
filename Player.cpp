@@ -949,3 +949,11 @@ void CPlayer::Heal(int _life)
 	else
 		m_Attributes.currentHealth += _life;
 }
+
+
+
+
+void CPlayer::DoAlchemy(int _level)
+{
+	m_pWorld->DoAlchemy(_level);
+}

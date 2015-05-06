@@ -14,6 +14,7 @@
 #include "Furnance.hpp"
 #include "Chest.hpp"
 #include "Profiler.hpp"
+#include "Projectiles.hpp"
 
 //static const int m_BlocksX = 100;
 //static const int m_BlocksY = 54;
@@ -61,7 +62,11 @@ public:
 	//returns a simple matrix of the current view of the blocks
 	vector < vector<SWorldPlace> > GetWorldMatrix(IntRect _view);
 
+	//is this block passable?
 	bool isBlockPassable(int _x, int _y);
+
+	//tries alchemy
+	void DoAlchemy(int _level);
 
 private:
 	friend class boost::serialization::access;
@@ -233,6 +238,7 @@ private:
 	list<CPanel*> m_PanelList;                                          //the list with all the existing panels
 
 	CLightMachine m_lightMachine;                                        //the light machine
+	View *m_pView;
 
 	Sound m_sound;                                                        //the sound played
 

@@ -137,6 +137,12 @@ void CSprite::resetRotation()
 	m_Sprite.setRotation(0.0f);
 }
 
+
+void CSprite::setScale(float _x, float _y)
+{
+	m_Sprite.setScale(_x, _y);
+}
+
 //render "normal" sprites
 void CSprite::Render(RenderTarget *_target, IntRect *clip)
 {

@@ -44,6 +44,7 @@ void CMagicMenu::Init(CInventory *_inventory, CPlayer *_player, bool _loaded)
 	m_Spells[FIREBALL].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 41, m_pMagicMenu->GetRect().top + 91);
 	m_Spells[ICE].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 186, m_pMagicMenu->GetRect().top + 91);
 	m_Spells[HEAL].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 374, m_pMagicMenu->GetRect().top + 91);
+	m_Spells[ALCHEMY].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 707, m_pMagicMenu->GetRect().top + 91);
 
 	m_text.setFont(g_pTextures->f_coolsville);
 	m_text.setCharacterSize(25);
@@ -237,6 +238,18 @@ void CMagicMenu::CastSpell(int _ID)
 				//substract mana
 				m_pPlayer->SubstractMana(m_SpellLevel[HEAL] * 10);
 			}
+		}break;
+
+		case(ALCHEMY) :
+		{
+			if (m_pPlayer->GetMana() >= m_SpellLevel[ALCHEMY] * 5)
+			{
+				m_pPlayer->DoAlchemy(m_SpellLevel[ALCHEMY]);
+
+				//substract mana
+				m_pPlayer->SubstractMana(m_SpellLevel[ALCHEMY] * 5);
+			}
+
 		}break;
 	}
 }

@@ -91,10 +91,12 @@ void TextureLoading::LoadTextures()
 	t_spell[0].loadFromFile("Data/Sprites/Magic/spell_fireball.png");
 	t_spell[1].loadFromFile("Data/Sprites/Magic/spell_heal.png");
 	t_spell[2].loadFromFile("Data/Sprites/Magic/spell_ice.png");
+	t_spell[3].loadFromFile("Data/Sprites/Magic/spell_alchemy.png");
 	t_fireballLeft.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(80, 0, 80, 30));
 	t_fireballRight.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(0, 0, 80, 30));
 	t_explosion.loadFromFile("Data/Sprites/Magic/explosion.png");
 	t_healing.loadFromFile("Data/Sprites/Magic/heal_animation.png");
+	t_alchemy.loadFromFile("Data/Sprites/Magic/alchemy.png");
 	t_iceballLeft.loadFromFile("Data/Sprites/Magic/iceball.png", IntRect(80, 0, 80, 30));
 	t_iceballRight.loadFromFile("Data/Sprites/Magic/iceball.png", IntRect(0, 0, 80, 30));
 	t_ice_goblin.loadFromFile("Data/Sprites/Magic/ice_goblin.png");
@@ -192,6 +194,7 @@ void TextureLoading::LoadTextures()
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
+	t_spellInventoryTexture_alchemy.loadFromFile("Data/Sprites/Magic/spell_alchemy.png", IntRect(0, 0, 97, 97));
 
 	t_blockLittleTexture_dirt.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(86, 2, 40, 40));
 	t_blockLittleTexture_stone.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(464, 2, 40, 40));

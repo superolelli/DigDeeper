@@ -54,6 +54,9 @@ public:
 	//sets the rotation to 0
 	void resetRotation();
 
+	//sets the scale
+	void setScale(float _x, float _y);
+
     //sets the sprite's colour
 	void SetColor(int R, int G, int B, int A = 255);
 

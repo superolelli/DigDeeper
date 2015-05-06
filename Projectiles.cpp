@@ -72,7 +72,7 @@ void CProjectiles::CheckProjectiles()
 		collided = false;
 
 		//check for explosions and healing
-		if (i->m_ID == EXPLOSION || i->m_ID == HEALING)
+		if (i->m_ID == EXPLOSION || i->m_ID == HEALING || i->m_ID == ALCHEMYANIMATION)
 		{
 			i->m_fAnimState += 20 * g_pTimer->GetElapsedTime().asSeconds();
 

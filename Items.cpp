@@ -267,6 +267,11 @@ void CItem::InitSpell()
 		m_Name = "Eispfeil";
 		break;
 
+	case(ALCHEMY) :
+		m_pInventorySprite->Load(&g_pTextures->t_spellInventoryTexture_alchemy);
+		m_Name = "Alchemie";
+		break;
+
 	default:
 		m_Name = "Error";
 	}
