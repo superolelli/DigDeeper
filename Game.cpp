@@ -180,7 +180,7 @@ void CGame::Run()
 
 		cout << "Check placeables" << endl;
 		if(m_zoom == 1)
-			m_pWorld->CheckPlaceables(m_pPlayer->GetRect(), m_pPlayer, m_View.getCenter().x - m_View.getSize().x/2, m_View.getCenter().y - m_View.getSize().y/2);
+			m_pWorld->CheckPlaceables(m_pPlayer->GetRect(), m_pPlayer);
 
 		cout << "Time for checking placeables etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
 
@@ -197,7 +197,7 @@ void CGame::Run()
 
 		cout << "render world" << endl;
 		RenderBackground();
-		m_pWorld->Render(m_View.getSize(), m_View.getCenter());
+		m_pWorld->Render();
 
 		cout << "Time for rendering world etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
 

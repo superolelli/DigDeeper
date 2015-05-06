@@ -273,7 +273,7 @@ void CInventory::Render(IntRect &_playerRect)
 	bool is_one_clicked = false;
 
 	//get the current panel
-	CPanel *temp = m_world->GetPanel(m_view);
+	CPanel *temp = m_world->GetPanel();
 	if(temp != NULL)
 	{
 		m_pCurrentPanel = temp;

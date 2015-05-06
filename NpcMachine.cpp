@@ -223,15 +223,8 @@ void CNpcMachine::SpawnNpcs()
 
 	if(m_spawnTime <= 0)
 	{
-		//get the rect of the view
-		IntRect viewRect;
-		viewRect.left = m_pView->getCenter().x - m_pView->getSize().x/2;
-		viewRect.top = m_pView->getCenter().y - m_pView->getSize().y/2;
-		viewRect.width = m_pView->getSize().x;
-		viewRect.height = m_pView->getSize().y;
-
 		//get all places, where npcs could spawn
-		vector<Vector2i> spawnPlaces = m_pWorld->GetSpawnPlaces(viewRect);
+		vector<Vector2i> spawnPlaces = m_pWorld->GetSpawnPlaces();
 
 		//get a random spawn place
 		int newPlace = rand()%spawnPlaces.size();

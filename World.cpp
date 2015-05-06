@@ -333,7 +333,7 @@ void CWorld::GenerateRoom(int _x, int _y)
 
 
 
-void CWorld::Render(Vector2f _viewSize, Vector2f _viewCenter)
+void CWorld::Render()
 {
 	//add time to the night timers
 	m_fNightTimer += g_pTimer->GetElapsedTime().asSeconds();
@@ -378,8 +378,8 @@ void CWorld::Render(Vector2f _viewSize, Vector2f _viewCenter)
 	if(m_fSecondTimer >= 0.5f)
 		m_fSecondTimer = 0.0f;
 
-	int viewX = _viewCenter.x - _viewSize.x/2;
-	int viewY = _viewCenter.y - _viewSize.y/2;
+	int viewX = m_pView->getCenter().x - m_pView->getSize().x/2;
+	int viewY = m_pView->getCenter().y - m_pView->getSize().y/2;
 	int viewFirstBlock = viewX - viewX % 100;
 
 	//clear the light machine
@@ -390,9 +390,14 @@ void CWorld::Render(Vector2f _viewSize, Vector2f _viewCenter)
 	if (viewY < 1000)
 	{
 		//add the "sun"
-		for (int i = viewFirstBlock - 100; i <= viewFirstBlock + _viewSize.x + 100; i += 100)
+	/*	for (int i = viewFirstBlock - 100; i <= viewFirstBlock + m_pView->getSize().x + 100; i += 100)
 		{
-			m_lightMachine.AddLightBeam(i, 0, 700, 100, Color(255, 255, 255, m_NightAlpha));
+			m_lightMachine.AddLightBeam(i, 0, 800, 100, Color(255, 255, 255, m_NightAlpha));
+		}
+*/
+		for (int i = viewFirstBlock - 100; i <= viewFirstBlock + m_pView->getSize().x + 100; i += 100)
+		{
+			m_lightMachine.AddLightCircle(i, 0, 1000, Color(255, 255, 255, m_NightAlpha));
 		}
 	}
 
@@ -406,11 +411,11 @@ void CWorld::Render(Vector2f _viewSize, Vector2f _viewCenter)
 	if(yStart < 0)
 		yStart = 0;
 
-	int xEnd = (int)(xStart + _viewSize.x/100) +6;
+	int xEnd = (int)(xStart + m_pView->getSize().x/100) +6;
 	if(xEnd > m_BlocksX)
 		xEnd = m_BlocksX;
 
-	int yEnd = (int)(yStart + _viewSize.y/100)+6;
+	int yEnd = (int)(yStart + m_pView->getSize().y/100)+6;
 	if(yEnd > m_BlocksY)
 	yEnd = m_BlocksY;
 
@@ -629,11 +634,14 @@ int CWorld::CheckCollisionWithPassable(FloatRect _player)
 
 
 //Checks wether placeables are broken by the player and deletes them and checks the little items
-void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player, float _xView, float _yView)
+void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 {
 
 	IntRect rectP;
 	list<CPanel*>::iterator p;
+
+	int xView = m_pView->getCenter().x - m_pView->getSize().x / 2;
+	int yView = m_pView->getCenter().y - m_pView->getSize().y / 2;
 	
 
 	CheckLittle();
@@ -664,8 +672,8 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player, float _xView
 			if(m_pBlocks[x][y] != NULL)
 			{
 				rectP = m_pBlocks[x][y]->GetRect();
-				rectP.left = (m_pBlocks[x][y]->GetRect().left - (int)_xView);
-				rectP.top = (m_pBlocks[x][y]->GetRect().top - (int)_yView);
+				rectP.left = (m_pBlocks[x][y]->GetRect().left - (int)xView);
+				rectP.top = (m_pBlocks[x][y]->GetRect().top - (int)yView);
 		
 
 				if(rectP.contains(Mouse::getPosition()) && Mouse::isButtonPressed(Mouse::Left))
@@ -759,8 +767,8 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player, float _xView
 			if(m_pWalls[x][y] != NULL)
 			{
 				rectP = m_pWalls[x][y]->GetRect();
-				rectP.left = m_pWalls[x][y]->GetRect().left - (int)_xView;
-				rectP.top = m_pWalls[x][y]->GetRect().top - (int)_yView;
+				rectP.left = m_pWalls[x][y]->GetRect().left - (int)xView;
+				rectP.top = m_pWalls[x][y]->GetRect().top - (int)yView;
 		
 
 				if(rectP.contains(Mouse::getPosition()) && Mouse::isButtonPressed(Mouse::Left))
@@ -845,6 +853,7 @@ void CWorld::AddLittleItem(int _ID, int _x, int _y, int _amount)
 		m_LittleItemList.push_back(item);
 	}
 }
+
 
 
 //checks the little thing's movement
@@ -1226,14 +1235,14 @@ int CWorld::AddPanel(int _ID, int _x, int _y)
 
 
 //returns the panel on which was clicked
-CPanel* CWorld::GetPanel(View *_view)
+CPanel* CWorld::GetPanel()
 {
 	int x, y, number = -1;
 	list<CPanel*>::iterator p;
 
 	//calculate the chosen block's x and y
-	x = Mouse::getPosition().x + (int)(_view->getCenter().x - _view->getSize().x/2);
-	y = Mouse::getPosition().y + (int)(_view->getCenter().y - _view->getSize().y/2);
+	x = Mouse::getPosition().x + (int)(m_pView->getCenter().x - m_pView->getSize().x/2);
+	y = Mouse::getPosition().y + (int)(m_pView->getCenter().y - m_pView->getSize().y/2);
 	x = (x - x%100)/100; 
 	y = (y -y%100)/100;
 
@@ -1344,24 +1353,30 @@ void CWorld::FillChestRandomly(int _chestID)
 
 
 
-vector<Vector2i> CWorld::GetSpawnPlaces(IntRect _view)
+vector<Vector2i> CWorld::GetSpawnPlaces()
 {
 	vector<Vector2i> spawnPlaces;
 	spawnPlaces.clear();
 
-	int xStart = (int)(_view.left/100) - 5;
+	IntRect viewRect;
+	viewRect.left = m_pView->getCenter().x - m_pView->getSize().x / 2;
+	viewRect.top = m_pView->getCenter().y - m_pView->getSize().y / 2;
+	viewRect.width = m_pView->getSize().x;
+	viewRect.height = m_pView->getSize().y;
+
+	int xStart = (int)(viewRect.left/100) - 5;
 	if(xStart < 0)
 		xStart = 0;
 
-	int yStart = (int)(_view.top/100)- 5;
+	int yStart = (int)(viewRect.top/100)- 5;
 	if(yStart < 0)
 		yStart = 0;
 
-	int xEnd = (_view.left/100) + _view.width/100 + 5;
+	int xEnd = (viewRect.left/100) + viewRect.width/100 + 5;
 	if(xEnd > m_BlocksX)
 		xEnd = m_BlocksX;
 
-	int yEnd = (_view.top/100) + _view.height/100 + 5;
+	int yEnd = (viewRect.top/100) + viewRect.height/100 + 5;
 	if(yEnd > m_BlocksY)
 		yEnd = m_BlocksY;
 
@@ -1375,7 +1390,7 @@ vector<Vector2i> CWorld::GetSpawnPlaces(IntRect _view)
 			if(m_pBlocks[x][y] == NULL)
 			{
 				//outside the view?
-				if(!IntRect(x*100, y*100, 100, 100).intersects(_view))
+				if(!IntRect(x*100, y*100, 100, 100).intersects(viewRect))
 				{
 					spawnPlaces.push_back(Vector2i(x*100, y*100));
 				}
@@ -1384,7 +1399,7 @@ vector<Vector2i> CWorld::GetSpawnPlaces(IntRect _view)
 			else
 			{
 				//if the block is passable and is outside the view
-				if(m_pBlocks[x][y]->IsPassable() && !IntRect(x*100, y*100, 100, 100).intersects(_view))
+				if(m_pBlocks[x][y]->IsPassable() && !IntRect(x*100, y*100, 100, 100).intersects(viewRect))
 				{
 					spawnPlaces.push_back(Vector2i(x*100, y*100));
 				}
@@ -1398,26 +1413,32 @@ vector<Vector2i> CWorld::GetSpawnPlaces(IntRect _view)
 
 
 
-vector < vector <SWorldPlace> > CWorld::GetWorldMatrix(IntRect _view)
+vector < vector <SWorldPlace> > CWorld::GetWorldMatrix()
 {
+	IntRect viewRect;
+	viewRect.left = m_pView->getCenter().x - m_pView->getSize().x / 2;
+	viewRect.top = m_pView->getCenter().y - m_pView->getSize().y / 2;
+	viewRect.width = m_pView->getSize().x;
+	viewRect.height = m_pView->getSize().y;
+
 	vector< vector <SWorldPlace> > worldMatrix;
 	int xMatrix = 0;
 	int yMatrix = 0;
 
 	//get the blocks in the view
-	int xStart = (int)(_view.left / 100) - 2;
+	int xStart = (int)(viewRect.left / 100) - 2;
 	if (xStart < 0)
 		xStart = 0;
 
-	int yStart = (int)(_view.top / 100) - 2;
+	int yStart = (int)(viewRect.top / 100) - 2;
 	if (yStart < 0)
 		yStart = 0;
 
-	int xEnd = (_view.left / 100) + _view.width / 100 + 2;
+	int xEnd = (viewRect.left / 100) + viewRect.width / 100 + 2;
 	if (xEnd > m_BlocksX)
 		xEnd = m_BlocksX;
 
-	int yEnd = (_view.top / 100) + _view.height / 100 + 2;
+	int yEnd = (viewRect.top / 100) + viewRect.height / 100 + 2;
 	if (yEnd > m_BlocksY)
 		yEnd = m_BlocksY;
 

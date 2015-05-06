@@ -1,6 +1,132 @@
-﻿Der Buildvorgang wurde am 04.05.2015 10:37:32 gestartet.
+﻿Der Buildvorgang wurde am 06.05.2015 15:25:22 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
-     1>Link:
+     1>ClCompile:
+         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.1\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Bee.cpp BuildingMenu.cpp Button.cpp CharacterInfo.cpp Chest.cpp Equipment.cpp Framework.cpp Furnance.cpp Game.cpp GameChoose.cpp Goblin.cpp Inventory.cpp Items.cpp LightMachine.cpp LittleItems.cpp Living3Part.cpp LoadGame.cpp MagicMenu.cpp Menu.cpp NPC.cpp NewGame.cpp NpcMachine.cpp Options.cpp Panel.cpp Placeable.cpp Player.cpp PlayerEquipment.cpp Profiler.cpp Projectiles.cpp Rims.cpp SignMachine.cpp StringInput.cpp Textures.cpp Time.cpp Tool.cpp World.cpp main.cpp
+         main.cpp
+         World.cpp
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(381): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(382): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(638): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(639): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1357): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1358): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1359): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1360): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1414): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1415): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1416): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1417): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1578): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1579): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+         Time.cpp
+         Textures.cpp
+         Projectiles.cpp
+         Player.cpp
+     1>f:\dig deeper rewritten\digdeeper\player.cpp(277): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\player.cpp(426): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\player.cpp(444): warning C4244: '-=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\player.cpp(446): warning C4244: '+=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+         NpcMachine.cpp
+     1>f:\dig deeper rewritten\digdeeper\npcmachine.cpp(108): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\npcmachine.cpp(175): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\npcmachine.cpp(249): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\npcmachine.cpp(266): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
+         NPC.cpp
+     1>f:\dig deeper rewritten\digdeeper\npc.cpp(44): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+     1>f:\dig deeper rewritten\digdeeper\npc.cpp(46): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+     1>f:\dig deeper rewritten\digdeeper\npc.cpp(108): warning C4018: '>=': Konflikt zwischen 'signed' und 'unsigned'
+     1>f:\dig deeper rewritten\digdeeper\npc.cpp(112): warning C4018: '>=': Konflikt zwischen 'signed' und 'unsigned'
+         MagicMenu.cpp
+     1>f:\dig deeper rewritten\digdeeper\magicmenu.cpp(52): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\magicmenu.cpp(124): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         Items.cpp
+         Inventory.cpp
+         Game.cpp
+         Code wird generiert...
+         Kompilieren...
+         Tool.cpp
+         StringInput.cpp
+     1>f:\dig deeper rewritten\digdeeper\stringinput.cpp(19): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\stringinput.cpp(50): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         SignMachine.cpp
+     1>f:\dig deeper rewritten\digdeeper\signmachine.cpp(34): warning C4244: '+=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\signmachine.cpp(39): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         Rims.cpp
+         Profiler.cpp
+         PlayerEquipment.cpp
+         Placeable.cpp
+         Panel.cpp
+         Options.cpp
+         NewGame.cpp
+     1>f:\dig deeper rewritten\digdeeper\newgame.cpp(65): warning C4244: 'Argument': Konvertierung von 'double' in 'float', möglicher Datenverlust
+         Menu.cpp
+         LoadGame.cpp
+     1>f:\dig deeper rewritten\digdeeper\loadgame.cpp(63): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+     1>f:\dig deeper rewritten\digdeeper\loadgame.cpp(188): warning C4018: '>': Konflikt zwischen 'signed' und 'unsigned'
+     1>f:\dig deeper rewritten\digdeeper\loadgame.cpp(210): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         Living3Part.cpp
+         LittleItems.cpp
+         LightMachine.cpp
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(23): warning C4244: 'Argument': Konvertierung von 'const float' in 'unsigned int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(31): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(33): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(34): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(47): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(49): warning C4244: 'Argument': Konvertierung von 'const float' in 'unsigned int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(55): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(56): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(67): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(77): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(78): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(83): warning C4244: 'Argument': Konvertierung von 'double' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(99): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(100): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(103): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(108): warning C4244: '=': Konvertierung von 'double' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(117): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(118): warning C4244: '=': Konvertierung von 'double' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(121): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(126): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(151): warning C4244: 'Argument': Konvertierung von 'double' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(154): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(155): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(163): warning C4244: '=': Konvertierung von 'double' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(165): warning C4244: '=': Konvertierung von 'double' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(169): warning C4244: 'Argument': Konvertierung von 'double' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\lightmachine.cpp(171): warning C4244: 'Argument': Konvertierung von 'double' in 'float', möglicher Datenverlust
+         Goblin.cpp
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(84): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(88): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(163): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(184): warning C4244: '-=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(186): warning C4244: '+=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(270): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(271): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(272): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(273): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(480): warning C4305: '=': Verkürzung von 'double' in 'float'
+         GameChoose.cpp
+         Furnance.cpp
+         Framework.cpp
+         Equipment.cpp
+         Code wird generiert...
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(522): warning C4715: "CGoblin::GetWeaponRect": Nicht alle Steuerelementpfade geben einen Wert zurück.
+         Kompilieren...
+         Chest.cpp
+         CharacterInfo.cpp
+         Button.cpp
+         BuildingMenu.cpp
+     1>f:\dig deeper rewritten\digdeeper\buildingmenu.cpp(469): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+         Bee.cpp
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(69): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(71): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(81): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(83): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(91): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(160): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(161): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         Code wird generiert...
+       Link:
          F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.1\lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-network-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.lib" /MACHINE:X86 Debug\Beam.obj
          Debug\Bee.obj
          Debug\BuildingMenu.obj
@@ -46,4 +172,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:00.78
+Verstrichene Zeit 00:00:44.58

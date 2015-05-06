@@ -15,7 +15,7 @@ CNpc::CNpc()
 Vector2i CNpc::findPath(int _xDest, int _yDest)
 {
 	//get the world matrix
-	vector <vector <SWorldPlace> > worldMatrix = m_pWorld->GetWorldMatrix(IntRect(m_pView->getCenter().x - m_pView->getSize().x/2, m_pView->getCenter().y - m_pView->getSize().y/2, m_pView->getSize().x, m_pView->getSize().y));
+	vector <vector <SWorldPlace> > worldMatrix = m_pWorld->GetWorldMatrix();
 	
 	//make the lists
 	list<SWorldPlace*> openList;

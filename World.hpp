@@ -26,9 +26,9 @@ public:
 	~CWorld();
 
 	void Init(int _width, int _height, View* _view, bool _loaded = false);
-	void Render(Vector2f _viewSize, Vector2f _viewCenter);
+	void Render();
 	void RenderLight();
-	void CheckPlaceables(IntRect _playerRect, CPlayer *_player, float _xView, float _yView);
+	void CheckPlaceables(IntRect _playerRect, CPlayer *_player);
 	void AddLittleItem(int _ID, int _x, int _y, int _amount = 1);
 
 	//checks wether the player would collide with the world
@@ -42,7 +42,7 @@ public:
 	bool CheckForBarrier(IntRect _living, bool _left);
 	
 	//returns the panel on which was clicked
-	CPanel* GetPanel(View *_view);
+	CPanel* GetPanel();
 
 	//returns a pointer to the light machine
 	CLightMachine* GetLightMachine(){return &m_lightMachine;}
@@ -57,10 +57,10 @@ public:
 	bool PlaceNewThing(int _x, int _y, int _ID, IntRect &_playerRect);
 
 	//returns all places, where a npc could spawn
-	vector<Vector2i> GetSpawnPlaces(IntRect _view);
+	vector<Vector2i> GetSpawnPlaces();
 
 	//returns a simple matrix of the current view of the blocks
-	vector < vector<SWorldPlace> > GetWorldMatrix(IntRect _view);
+	vector < vector<SWorldPlace> > GetWorldMatrix();
 
 	//is this block passable?
 	bool isBlockPassable(int _x, int _y);

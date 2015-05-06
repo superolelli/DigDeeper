@@ -95,6 +95,10 @@ void CLightMachine::AddLightCircle(int _x, int _y, int _radius, Color _color)
 
 void CLightMachine::AddLightBeam(int _x, int _y, int _length, int _width, Color _color)
 {
+	Vector2f newPosition = IsBeamIntersecting(Vector2f(_x, _y),Vector2f(_x, _y + _length));
+	int newLength = newPosition.y - _y;
+	
+	
 	VertexArray lightRect(Quads, 4);
 	lightRect[0].position.x = _x - m_ViewX + 10;
 	lightRect[0].position.y = _y - m_ViewY + 10;
@@ -105,8 +109,8 @@ void CLightMachine::AddLightBeam(int _x, int _y, int _length, int _width, Color 
 	lightRect[1].color = lightRect[0].color;
 
 	lightRect[3].position.x = lightRect[0].position.x;
-	lightRect[3].position.y = _y - m_ViewY + 10 + (_length - 0.15*_length);
-	lightRect[3].color = Color(255, 255, 255, 100);
+	lightRect[3].position.y = _y - m_ViewY + 10 + (newLength - 0.15*newLength);
+	lightRect[3].color = Color(255, 255, 255, _color.a);
 
 	lightRect[2].position.x = lightRect[1].position.x;
 	lightRect[2].position.y = lightRect[3].position.y;
@@ -115,15 +119,15 @@ void CLightMachine::AddLightBeam(int _x, int _y, int _length, int _width, Color 
 	m_lightTexture.draw(lightRect, BlendMultiply);
 
 	lightRect[0].position.x = _x - m_ViewX + 10;
-	lightRect[0].position.y = _y - m_ViewY + 10 + (_length - 0.15*_length);
-	lightRect[0].color = Color(255, 255, 255, 100);
+	lightRect[0].position.y = _y - m_ViewY + 10 + (newLength - 0.15*newLength);
+	lightRect[0].color = Color(255, 255, 255, _color.a);
 
 	lightRect[1].position.x = _x - m_ViewX + 10 + _width;
 	lightRect[1].position.y = lightRect[0].position.y;
 	lightRect[1].color = lightRect[0].color;
 
 	lightRect[3].position.x = lightRect[0].position.x;
-	lightRect[3].position.y = _y - m_ViewY + 10 + _length;
+	lightRect[3].position.y = _y - m_ViewY + 10 + newLength;
 	lightRect[3].color = Color(255, 255, 255, 255);
 
 	lightRect[2].position.x = lightRect[1].position.x;
@@ -140,6 +144,9 @@ void CLightMachine::AddLightBeam(int _x, int _y, int _length, int _width, Color 
 
 Vector2f CLightMachine::IsLineIntersecting(Vertex _firstPoint, Vertex _secondPoint, int _angle, int _radius)
 {
+	if (_firstPoint.position.y <= 0 && _secondPoint.position.y < _firstPoint.position.y)
+		return Vector2f(0, 0);
+
 
 	int currentRadius = 5;
 	int x, y;
@@ -185,4 +192,24 @@ Vector2f CLightMachine::IsLineIntersecting(Vertex _firstPoint, Vertex _secondPoi
 	}
 
 	return _secondPoint.position;
+}
+
+
+
+
+
+Vector2f CLightMachine::IsBeamIntersecting(Vector2f _firstPoint, Vector2f _lastPoint)
+{
+	int xBlock = _firstPoint.x / 100;
+	int yBlock = _firstPoint.y / 100;
+
+	while (m_pWorld->isBlockPassable(xBlock, yBlock))
+	{
+		yBlock++;
+
+		if (yBlock == _lastPoint.y / 100)
+			break;
+	}
+
+	return Vector2f(_firstPoint.x, (yBlock+1) * 100);
 }

@@ -1124,5 +1124,8 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Bug beim Alchemiezauber behoben (es konnte keine Verbesserung erreicht werden)
 -Eiszauber friert nun abhängig von der Stufe ein
 -Eingefrorene Gegner tauen bei einem Treffer nun wieder auf
+-World-Klasse im Hinblick auf die View aufgeräumt
+-Licht von oben (Sonne) orientiert sich nun an Blöcken und sieht deutlich besser aus
+ ->ABER: starke Performanceprobleme
 
 ------------------------------------------------------
