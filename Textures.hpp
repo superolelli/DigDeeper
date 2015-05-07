@@ -155,6 +155,8 @@ public:
 	Texture t_blockTextures_lantern;
 	Texture t_blockTextures_marble;                   //the marble texture
 	Texture t_blockTextures_marblewall;
+	Texture t_blockTextures_treetrunk;
+	Texture t_blockTextures_treecrown;
 	Texture t_blockTextures_noTexture;               //the no_texture texture
 
 	Texture t_dirtRimTop;
@@ -165,6 +167,7 @@ public:
 	Texture t_stoneRimBottom;
 	Texture t_stoneRimLeft;
 	Texture t_stoneRimRight;
+	Texture t_treeRim;
 
 
 	//The inventory pictures of the things
@@ -207,6 +210,8 @@ public:
 	Texture t_blockInventoryTexture_wax;
 	Texture t_blockInventoryTexture_marble;
 	Texture t_blockInventoryTexture_marblewall;
+	Texture t_blockInventoryTexture_treetrunk;
+	Texture t_blockInventoryTexture_treecrown;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;

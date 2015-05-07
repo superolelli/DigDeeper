@@ -248,6 +248,9 @@ private:
 	//generates a random room
 	void GenerateRoom(int _x, int _y);
 
+	//sets a tree
+	void SetTree(int _x, int _y);
+
 	//fills a given chest with random items
 	void FillChestRandomly(int _chestID);
 

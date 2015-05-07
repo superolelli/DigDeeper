@@ -224,6 +224,26 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_is_passable = true;
 			m_is_visible = true;
 		}break;
+	case TREETRUNK:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_treetrunk);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_treetrunk);
+		m_Name = "Baumstamm";
+		m_Hardness = 2;
+		m_Priority = 2;
+		m_is_passable = true;
+		m_is_visible = true;
+	}break;
+	case TREECROWN:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_treecrown);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_treecrown);
+		m_Name = "Baumkrone";
+		m_Hardness = 2;
+		m_Priority = -1;
+		m_is_passable = true;
+		m_is_visible = true;
+	}break;
 	default:
 		{
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_noTexture);
@@ -313,6 +333,10 @@ int CPlaceable::GetLittleID()
 		break;
 	case(LANTERNP):
 		return LANTERN;
+		break;
+	case(TREETRUNK) :
+	case(TREECROWN):
+		return WOOD;
 		break;
 
 	default:

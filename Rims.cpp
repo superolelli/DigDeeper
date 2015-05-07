@@ -80,4 +80,13 @@ void CRims::LoadRims()
 
 	RightRims[1][2].Load(&g_pTextures->t_stoneRimRight);
 	RightRims[1][2].setTextureRect(IntRect(0, 200, 18, 100));
+
+	TreeRims[0].Load(&g_pTextures->t_treeRim);
+	TreeRims[0].setTextureRect(IntRect(0, 0, 100, 18));
+
+	TreeRims[1].Load(&g_pTextures->t_treeRim);
+	TreeRims[1].setTextureRect(IntRect(100, 0, 100, 18));
+
+	TreeRims[2].Load(&g_pTextures->t_treeRim);
+	TreeRims[2].setTextureRect(IntRect(200, 0, 100, 18));
 }

@@ -23,6 +23,8 @@ public:
 	CSprite BottomRims[2][3];
 	CSprite LeftRims[2][3];
 	CSprite RightRims[2][3];
+
+	CSprite TreeRims[3];
 };
 
 

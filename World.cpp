@@ -182,6 +182,7 @@ void CWorld::GenerateWorld()
 				else
 					possibility[7] = 0;
 
+
 				//if a near placeable is a specific type: greater chance, that this placeable will be the same type
 				if(y > 4 && x > 0)
 				{
@@ -245,6 +246,16 @@ void CWorld::GenerateWorld()
 					SAFE_DELETE(m_pBlocks[x][y]);
 			}
 		}
+	}
+
+
+
+
+	//set trees
+	for (int x = 0; x < m_BlocksX; x++)
+	{
+		if (rand() % 5 == 0)
+			SetTree(x, 3);
 	}
 }
 						
@@ -329,6 +340,53 @@ void CWorld::GenerateRoom(int _x, int _y)
 		}
 
 	
+}
+
+
+
+
+void CWorld::SetTree(int _x, int _y)
+{
+	int height = 1;
+
+	//place the first trunk
+	m_pBlocks[_x][_y] = new CPlaceable;
+	m_pBlocks[_x][_y]->Init(TREETRUNK);
+	m_pBlocks[_x][_y]->SetPos(_x * 100, _y * 100);
+
+	bool grow = true;
+	while (grow && rand()%2 == 0)
+	{
+		if (_y - 1 > 0)
+		{
+			if (m_pBlocks[_x][_y - 1] == NULL)
+			{
+				//place another trunk
+				m_pBlocks[_x][_y - 1] = new CPlaceable;
+				m_pBlocks[_x][_y - 1]->Init(TREETRUNK);
+				m_pBlocks[_x][_y - 1]->SetPos(_x * 100, (_y - 1) * 100);
+
+				height++;
+				_y--;
+			}
+			else
+				grow = false;
+		}
+		else
+			grow = false;
+
+		if (height == 3)
+			grow = false;
+	}
+
+
+	if (m_pBlocks[_x][_y - 1] == NULL)
+	{
+		//place the crown
+		m_pBlocks[_x][_y-1] = new CPlaceable;
+		m_pBlocks[_x][_y-1]->Init(TREECROWN);
+		m_pBlocks[_x][_y-1]->SetPos(_x * 100, (_y-1) * 100);
+	}
 }
 
 
@@ -450,9 +508,17 @@ void CWorld::Render()
 						neighbourID = m_pBlocks[x][y - 1]->getID();
 						if (neighbourID == COALBLOCK || neighbourID == GOLDBLOCK || neighbourID == IRONBLOCK || neighbourID == ARCANUSBLOCK)
 							neighbourID = STONE;
-
-						g_pRims->TopRims[neighbourID - 1][m_pBlocks[x][y-1]->GetOverlappingID(0)].SetPos(x * 100, y * 100);
-						g_pRims->TopRims[neighbourID - 1][m_pBlocks[x][y-1]->GetOverlappingID(0)].Render(g_pFramework->GetWindow());
+						
+						if (neighbourID == TREETRUNK)
+						{
+							g_pRims->TreeRims[m_pBlocks[x][y - 1]->GetOverlappingID(0)].SetPos(x * 100, y * 100);
+							g_pRims->TreeRims[m_pBlocks[x][y - 1]->GetOverlappingID(0)].Render(g_pFramework->GetWindow());
+						}
+						else
+						{
+							g_pRims->TopRims[neighbourID - 1][m_pBlocks[x][y - 1]->GetOverlappingID(0)].SetPos(x * 100, y * 100);
+							g_pRims->TopRims[neighbourID - 1][m_pBlocks[x][y - 1]->GetOverlappingID(0)].Render(g_pFramework->GetWindow());
+						}
 					}
 
 				}
@@ -466,8 +532,11 @@ void CWorld::Render()
 						if (neighbourID == COALBLOCK || neighbourID == GOLDBLOCK || neighbourID == IRONBLOCK || neighbourID == ARCANUSBLOCK)
 							neighbourID = STONE;
 
-						g_pRims->BottomRims[neighbourID - 1][m_pBlocks[x][y + 1]->GetOverlappingID(1)].SetPos(x * 100, y * 100 + 100 - g_pRims->BottomRims[0][0].GetRect().height);
-						g_pRims->BottomRims[neighbourID - 1][m_pBlocks[x][y + 1]->GetOverlappingID(1)].Render(g_pFramework->GetWindow());
+						if (neighbourID != TREETRUNK)
+						{
+							g_pRims->BottomRims[neighbourID - 1][m_pBlocks[x][y + 1]->GetOverlappingID(1)].SetPos(x * 100, y * 100 + 100 - g_pRims->BottomRims[0][0].GetRect().height);
+							g_pRims->BottomRims[neighbourID - 1][m_pBlocks[x][y + 1]->GetOverlappingID(1)].Render(g_pFramework->GetWindow());
+						}
 					}
 
 				}
@@ -481,8 +550,11 @@ void CWorld::Render()
 						if (neighbourID == COALBLOCK || neighbourID == GOLDBLOCK || neighbourID == IRONBLOCK || neighbourID == ARCANUSBLOCK)
 							neighbourID = STONE;
 
-						g_pRims->LeftRims[neighbourID - 1][m_pBlocks[x - 1][y]->GetOverlappingID(2)].SetPos(x * 100, y * 100);
-						g_pRims->LeftRims[neighbourID - 1][m_pBlocks[x - 1][y]->GetOverlappingID(2)].Render(g_pFramework->GetWindow());
+						if (neighbourID != TREETRUNK)
+						{
+							g_pRims->LeftRims[neighbourID - 1][m_pBlocks[x - 1][y]->GetOverlappingID(2)].SetPos(x * 100, y * 100);
+							g_pRims->LeftRims[neighbourID - 1][m_pBlocks[x - 1][y]->GetOverlappingID(2)].Render(g_pFramework->GetWindow());
+						}
 					}
 
 				}
@@ -496,8 +568,11 @@ void CWorld::Render()
 						if (neighbourID == COALBLOCK || neighbourID == GOLDBLOCK || neighbourID == IRONBLOCK || neighbourID == ARCANUSBLOCK)
 							neighbourID = STONE;
 
-						g_pRims->RightRims[neighbourID - 1][m_pBlocks[x + 1][y]->GetOverlappingID(3)].SetPos(x * 100 + 100 - g_pRims->RightRims[0][0].GetRect().width, y * 100);
-						g_pRims->RightRims[neighbourID - 1][m_pBlocks[x + 1][y]->GetOverlappingID(3)].Render(g_pFramework->GetWindow());
+						if (neighbourID != TREETRUNK)
+						{
+							g_pRims->RightRims[neighbourID - 1][m_pBlocks[x + 1][y]->GetOverlappingID(3)].SetPos(x * 100 + 100 - g_pRims->RightRims[0][0].GetRect().width, y * 100);
+							g_pRims->RightRims[neighbourID - 1][m_pBlocks[x + 1][y]->GetOverlappingID(3)].Render(g_pFramework->GetWindow());
+						}
 					}
 
 				}
@@ -689,6 +764,33 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 							m_sound.play();
 						}
 
+						//check if the broken placeable was a tree
+						if (m_pBlocks[x][y]->getID() == TREETRUNK)
+						{
+							bool is_tree = true;
+							int oldY = y;
+							while (is_tree)
+							{
+								if (y - 1 >= 0)
+								{
+									//if another tree part is above: break it too
+									if (m_pBlocks[x][y - 1] != NULL && (m_pBlocks[x][y - 1]->getID() == TREETRUNK || m_pBlocks[x][y - 1]->getID() == TREECROWN))
+									{
+										AddLittleItem(WOOD, m_pBlocks[x][y - 1]->GetRect().left + 23, m_pBlocks[x][y - 1]->GetRect().top + 20);
+										SAFE_DELETE(m_pBlocks[x][y - 1]);
+										y--;
+									}
+									else
+										is_tree = false;
+								}
+								else
+									is_tree = false;
+							}
+							y = oldY;
+						}
+
+
+						//check if the player could have luck
 						bool lucky = false;
 
 						if(m_pBlocks[x][y]->getID() >=3 && m_pBlocks[x][y]->getID() <= 6)

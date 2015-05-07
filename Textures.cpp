@@ -141,6 +141,8 @@ void TextureLoading::LoadTextures()
 	t_blockTextures_table.loadFromFile("Data/Sprites/Objects/Blocks/table.png");
 	t_blockTextures_lantern.loadFromFile("Data/Sprites/Objects/Blocks/lantern.png");
 	t_blockTextures_marble.loadFromFile("Data/Sprites/Objects/Blocks/marble.png");
+	t_blockTextures_treetrunk.loadFromFile("Data/Sprites/Objects/Blocks/tree_trunk.png");
+	t_blockTextures_treecrown.loadFromFile("Data/Sprites/Objects/Blocks/tree_crown.png");
 	t_blockTextures_marblewall.loadFromFile("Data/Sprites/Objects/Blocks/marble_wall.png");
 
 	t_dirtRimTop.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_top.png");
@@ -151,6 +153,7 @@ void TextureLoading::LoadTextures()
 	t_stoneRimBottom.loadFromFile("Data/Sprites/Objects/Blocks/stone_rim_bottom.png");
 	t_stoneRimLeft.loadFromFile("Data/Sprites/Objects/Blocks/stone_rim_left.png");
 	t_stoneRimRight.loadFromFile("Data/Sprites/Objects/Blocks/stone_rim_right.png");
+	t_treeRim.loadFromFile("Data/Sprites/Objects/Blocks/tree_rim.png");
 
 	t_blockInventoryTexture_dirt.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/inventory_sprites.png", IntRect(200, 2, 97, 97));
 	t_blockInventoryTexture_stone.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/inventory_sprites.png", IntRect(992, 2, 97, 97));
@@ -191,6 +194,8 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_wax.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/wax_inventory.png");
 	t_blockInventoryTexture_marble.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/marble_inventory.png");
 	t_blockInventoryTexture_marblewall.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/marble_wall_inventory.png");
+	t_blockInventoryTexture_treetrunk.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/tree_trunk_inventory.png");
+	t_blockInventoryTexture_treecrown.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/tree_crown_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));

@@ -1,4 +1,4 @@
-﻿Der Buildvorgang wurde am 06.05.2015 16:08:04 gestartet.
+﻿Der Buildvorgang wurde am 07.05.2015 17:41:50 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
          F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt LightMachine.cpp
@@ -84,4 +84,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:08.86
+Verstrichene Zeit 00:00:09.14

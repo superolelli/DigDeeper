@@ -76,7 +76,7 @@ void CLightMachine::AddLightCircle(int _x, int _y, int _radius, Color _color)
 	VertexArray circle(TrianglesFan, 92);
 	circle[0].position.x = _x - m_ViewX + 10;
 	circle[0].position.y = _y - m_ViewY + 10;
-	circle[0].color = Color(255, 255, 255, 0);
+	circle[0].color = Color(255, 255, 255, _color.a);
 
 	for (int angle = 1; angle <= 91; angle++)
 	{

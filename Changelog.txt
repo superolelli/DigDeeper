@@ -1129,3 +1129,9 @@ ZUKÜNFITGE ÄNDERUNGEN:
  ->ABER: starke Performanceprobleme
 
 ------------------------------------------------------
+07.05.2015
+
+-Bäume hinzugefügt
+-Beleuchtungsbug in der Nacht gefixt
+
+------------------------------------------------------
