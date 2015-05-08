@@ -585,9 +585,9 @@ void CWorld::Render()
 					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left -100 , m_pBlocks[x][y]->GetRect().top - 60, 150, Color::Yellow);*/
 
 				if(m_pBlocks[x][y]->getID() == FURNANCE)
-				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2, m_pBlocks[x][y]->GetRect().top + 50, 200, Color(230, 0,0));
+				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2, m_pBlocks[x][y]->GetRect().top + 50, 200, Color(230, 0,0, 0));
 				else if(m_pBlocks[x][y]->getID() == LANTERNP)
-				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left, m_pBlocks[x][y]->GetRect().top, 350, Color::Yellow);		
+				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left, m_pBlocks[x][y]->GetRect().top, 350, Color(0,0,0,0));		
 			}
 		}
 	}

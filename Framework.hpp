@@ -26,6 +26,7 @@
 #include "Sprite.hpp"
 #include "Constants.hpp"
 #include "KeyStates.hpp"
+#include "Filelogger.hpp"
 
 
 using namespace std;
@@ -71,6 +72,9 @@ public:
 	//returns a pointer to the window
 	inline RenderWindow *GetWindow(){return m_pWindow;}
 
+	//writes an log entry
+	void WriteToLog(int _ID, string _message);
+
 private:
 
 	//the window to render on
@@ -78,6 +82,9 @@ private:
 
 	//sets all states to false
 	void ClearKeyStates();
+
+	//the logfile
+	ige::FileLogger *m_pMyLog;
 
 };
 

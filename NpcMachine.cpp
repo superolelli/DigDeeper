@@ -90,6 +90,15 @@ void CNpcMachine::CheckAllNpcs()
 			continue;
 		}
 
+		//if npc is out of range: despawn it
+		if (abs((*i)->GetRect().left - m_pPlayer->GetRect().left) > 2500 || abs((*i)->GetRect().top - m_pPlayer->GetRect().top) > 2500)
+		{
+			(*i)->Quit();
+			SAFE_DELETE((*i));
+			i = m_Npcs.erase(i);
+			continue;
+		}
+
 		//if the arm changed direction the npc is hittable
 		if(m_LastArmUp != m_pPlayer->GetArmGoingUp())
 			(*i)->m_wasHit = false;

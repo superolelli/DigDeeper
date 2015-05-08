@@ -3,6 +3,13 @@
 
 
 
+#pragma region LogIDs
+const int INFO = 0;
+const int ERROR = 1;
+const int WARNING = 2;
+#pragma endregion
+
+
 #pragma region Eventtypes
 const int MOUSE_LEFT_UP = 1;
 const int MOUSE_RIGHT_UP = 2;

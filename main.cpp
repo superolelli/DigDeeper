@@ -42,6 +42,7 @@ int main()
 {
 	//Init the framework
 	g_pFramework->Init();
+	g_pFramework->WriteToLog(INFO, "Init mainframe...");
 
 	bool is_loading = true;
 

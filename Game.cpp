@@ -98,6 +98,8 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 
 	//the game is now running
 	is_running = true;
+
+	g_pFramework->WriteToLog(INFO, "Initialized Game...");
 }
 
 

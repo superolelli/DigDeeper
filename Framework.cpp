@@ -9,6 +9,14 @@ void CFramework::Init()
     m_pWindow->create(VideoMode::getDesktopMode(), "Dig Deeper", Style::None | Style::Fullscreen);
 	m_pWindow->setVerticalSyncEnabled(true);
 	m_pWindow->setKeyRepeatEnabled(false);
+
+	// Create object
+	m_pMyLog = new ige::FileLogger("0.2", "logfile.txt");
+
+	// Writing warnings or errors to file is very easy and C++ style
+	//myLog << ige::FileLogger::e_logType::LOG_WARNING << "Hey! ... This is a warning message!";
+	//myLog << ige::FileLogger::e_logType::LOG_ERROR << "WOW! Something really wrong is happening here!";
+	//myLog << "This is just a simple text";
 }
 
 
@@ -19,6 +27,7 @@ void CFramework::Quit()
 {
 	m_pWindow->close();
 	SAFE_DELETE(m_pWindow);
+	SAFE_DELETE(m_pMyLog);
 }
 
 
@@ -157,4 +166,23 @@ void CFramework::ClearKeyStates()
 	keyStates.text_input = 'a';
 
 	keyStates.mouseWheelMovement = 0;
+}
+
+
+
+
+void CFramework::WriteToLog(int _ID, string _message)
+{
+	switch (_ID)
+	{
+	case(ERROR) :
+		*m_pMyLog << ige::FileLogger::e_logType::LOG_ERROR << _message.c_str();
+		break;
+	case(WARNING):
+		*m_pMyLog << ige::FileLogger::e_logType::LOG_WARNING << _message.c_str();
+		break;
+	default:	
+		*m_pMyLog << _message.c_str();
+		break;
+	}
 }

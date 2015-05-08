@@ -135,6 +135,7 @@
     <ClInclude Include="CharacterInfo.hpp" />
     <ClInclude Include="Chest.hpp" />
     <ClInclude Include="Constants.hpp" />
+    <ClInclude Include="Filelogger.hpp" />
     <ClInclude Include="Goblin.hpp" />
     <ClInclude Include="MagicMenu.hpp" />
     <ClInclude Include="Profiler.hpp" />
