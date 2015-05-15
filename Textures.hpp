@@ -159,8 +159,6 @@ public:
 	Texture t_blockTextures_treecrown;
 	Texture t_blockTextures_noTexture;               //the no_texture texture
 
-	Texture t_blockSpriteSheet;
-
 	Texture t_dirtRimTop;
 	Texture t_dirtRimBottom;
 	Texture t_dirtRimLeft;

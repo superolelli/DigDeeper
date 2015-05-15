@@ -140,7 +140,6 @@
     <ClInclude Include="MagicMenu.hpp" />
     <ClInclude Include="Profiler.hpp" />
     <ClInclude Include="Projectiles.hpp" />
-    <ClInclude Include="RenderWorld.hpp" />
     <ClInclude Include="Rims.hpp" />
     <ClInclude Include="SignMachine.hpp" />
     <ClInclude Include="Equipment.hpp" />

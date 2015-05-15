@@ -28,7 +28,6 @@
 #include "KeyStates.hpp"
 #include "Filelogger.hpp"
 
-
 using namespace std;
 using namespace sf;
 using namespace boost::filesystem;
@@ -80,11 +79,11 @@ private:
 	//the window to render on
 	RenderWindow *m_pWindow;
 
-	//sets all states to false
-	void ClearKeyStates();
-
 	//the logfile
 	ige::FileLogger *m_pMyLog;
+
+	//sets all states to false
+	void ClearKeyStates();
 
 };
 

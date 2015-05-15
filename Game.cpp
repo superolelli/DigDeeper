@@ -138,6 +138,7 @@ void CGame::Run()
 	g_pFramework->Update();
 	while(is_running)
 	{
+		cout << "New frame" << endl;
 		g_pFramework->Update();
 		g_pFramework->Clear();
 
@@ -180,6 +181,7 @@ void CGame::Run()
 		if(m_zoom == 1)
 			m_pWorld->CheckPlaceables(m_pPlayer->GetRect(), m_pPlayer);
 
+
 		cout << "check npcs" << endl;
 		//Checks all npcs
 		m_NpcMachine.CheckAllNpcs();
@@ -199,6 +201,7 @@ void CGame::Run()
 		cout << "render player" << endl;
 		//renders the player
 		m_pPlayer->Render();
+
 
 		cout << "render npcs" << endl;
 		//renders the npcs

@@ -25,6 +25,7 @@ public:
 	//gives the time since the last frame
 	Time GetElapsedTime(){return m_elapsed;}
 
+
 private:
 
 	Clock m_clock;

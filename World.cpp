@@ -122,8 +122,6 @@ void CWorld::Init(int _width, int _height, View* _view, bool _loaded)
 
 	//m_lightMachine.Init(m_BlocksX*100, m_BlocksY*100);
 	m_lightMachine.Init(_view, this, false);
-	
-	m_RenderWorld.load(&g_pTextures->t_blockSpriteSheet);
 
 	m_pView = _view;
 
@@ -490,7 +488,6 @@ void CWorld::Render()
 		}
 	}
 
-
 	//render the placeables
 	for(int y = yStart; y < yEnd; y++)
 	{
@@ -588,7 +585,7 @@ void CWorld::Render()
 					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left -100 , m_pBlocks[x][y]->GetRect().top - 60, 150, Color::Yellow);*/
 
 				if(m_pBlocks[x][y]->getID() == FURNANCE)
-				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2, m_pBlocks[x][y]->GetRect().top + 50, 200, Color(230, 0,0, 0));
+				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2, m_pBlocks[x][y]->GetRect().top + 50, 200, Color(230, 0,0,0));
 				else if(m_pBlocks[x][y]->getID() == LANTERNP)
 				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left, m_pBlocks[x][y]->GetRect().top, 350, Color(0,0,0,0));		
 			}

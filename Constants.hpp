@@ -3,13 +3,6 @@
 
 
 
-#pragma region LogIDs
-const int INFO = 0;
-const int ERROR = 1;
-const int WARNING = 2;
-#pragma endregion
-
-
 #pragma region Eventtypes
 const int MOUSE_LEFT_UP = 1;
 const int MOUSE_RIGHT_UP = 2;
@@ -17,6 +10,15 @@ const int MOUSE_LEFT_DOWN = 3;
 const int MOUSE_RIGHT_DOWN = 4;
 const int E_UP = 5;
 #pragma endregion
+
+
+
+#pragma region LogIDs
+const int INFO = 0;
+const int ERROR = 1;
+const int WARNING = 2;
+#pragma endregion
+
 
 
 #pragma region IDs
@@ -81,6 +83,9 @@ const int VERYRARERING = 200;
 
 #pragma endregion
 
+
+#pragma region Sprite Sheet IDs
+
 const int SHEET_CHEST_CLOSED = 0;
 const int SHEET_CHEST_OPEN = 1;
 const int SHEET_ARCANUS = 2;
@@ -106,11 +111,8 @@ const int SHEET_STONEWALL2 = 21;
 const int SHEET_TREETRUNK = 22;
 const int SHEET_WOOD = 23;
 
-#pragma region Sprite Sheet IDs
-
-
-
 #pragma endregion
+
 
 
 #pragma region Npcs

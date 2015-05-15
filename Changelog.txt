@@ -1135,9 +1135,3 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Beleuchtungsbug in der Nacht gefixt
 
 ------------------------------------------------------
-08.05.2015
-
--Beleuchtungsbug von Laternen und Kerzen gefixt
--Logfile implementiert
-
-------------------------------------------------------

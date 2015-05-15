@@ -44,7 +44,7 @@ void CProjectiles::Render()
 	for (i = m_Projectiles.begin(); i != m_Projectiles.end(); i++)
 	{
 		if (i->m_ID == FIREBALLPROJECTILE)
-			m_pWorld->GetLightMachine()->AddLightCircle(i->m_Sprite->GetRect().left + i->m_Sprite->GetRect().width / 2, i->m_Sprite->GetRect().top + i->m_Sprite->GetRect().height / 2, 100, Color(255,255,255,0));
+			m_pWorld->GetLightMachine()->AddLightCircle(i->m_Sprite->GetRect().left + i->m_Sprite->GetRect().width / 2, i->m_Sprite->GetRect().top + i->m_Sprite->GetRect().height / 2, 100, Color(0,0,0,0));
 
 		if (i->m_fAnimState == -1)
 			i->m_Sprite->Render(g_pFramework->GetWindow());

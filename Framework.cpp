@@ -10,13 +10,7 @@ void CFramework::Init()
 	m_pWindow->setVerticalSyncEnabled(true);
 	m_pWindow->setKeyRepeatEnabled(false);
 
-	// Create object
 	m_pMyLog = new ige::FileLogger("0.2", "logfile.txt");
-
-	// Writing warnings or errors to file is very easy and C++ style
-	//myLog << ige::FileLogger::e_logType::LOG_WARNING << "Hey! ... This is a warning message!";
-	//myLog << ige::FileLogger::e_logType::LOG_ERROR << "WOW! Something really wrong is happening here!";
-	//myLog << "This is just a simple text";
 }
 
 
@@ -178,10 +172,10 @@ void CFramework::WriteToLog(int _ID, string _message)
 	case(ERROR) :
 		*m_pMyLog << ige::FileLogger::e_logType::LOG_ERROR << _message.c_str();
 		break;
-	case(WARNING):
+	case(WARNING) :
 		*m_pMyLog << ige::FileLogger::e_logType::LOG_WARNING << _message.c_str();
 		break;
-	default:	
+	default:
 		*m_pMyLog << _message.c_str();
 		break;
 	}
