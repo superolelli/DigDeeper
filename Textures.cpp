@@ -145,6 +145,8 @@ void TextureLoading::LoadTextures()
 	t_blockTextures_treecrown.loadFromFile("Data/Sprites/Objects/Blocks/tree_crown.png");
 	t_blockTextures_marblewall.loadFromFile("Data/Sprites/Objects/Blocks/marble_wall.png");
 
+	t_blockSpriteSheet.loadFromFile("Data/Sprites/Objects/Blocks/Blocks_spritesheet.png");
+
 	t_dirtRimTop.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_top.png");
 	t_dirtRimBottom.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_bottom.png");
 	t_dirtRimLeft.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_left.png");

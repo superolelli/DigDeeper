@@ -23,7 +23,7 @@ public:
 	SNpcAttributes* GetAttributes(){return &m_Attributes;}
 	int GetID(){return m_ID;}
 	int GetState(){return m_State;}
-	void SetFrozen(float _frozenTime){ m_State = FROZEN; m_fFrozenTimer = _frozenTime; }
+	void SetFrozen(float _frozenTime);
 
 	bool m_wasHit;                          //was the npc hit?
 

@@ -319,3 +319,14 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 
 	return nextStep;
 }
+
+
+
+
+void CNpc::SetFrozen(float _frozenTime)
+{
+	m_fFrozenTimer = _frozenTime;
+
+	if (m_fFrozenTimer > 0)
+		m_State = FROZEN;
+}

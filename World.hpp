@@ -15,6 +15,7 @@
 #include "Chest.hpp"
 #include "Profiler.hpp"
 #include "Projectiles.hpp"
+#include "RenderWorld.hpp"
 
 //static const int m_BlocksX = 100;
 //static const int m_BlocksY = 54;
@@ -238,6 +239,7 @@ private:
 	list<CPanel*> m_PanelList;                                          //the list with all the existing panels
 
 	CLightMachine m_lightMachine;                                        //the light machine
+	CRenderWorld m_RenderWorld;
 	View *m_pView;
 
 	Sound m_sound;                                                        //the sound played

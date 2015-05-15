@@ -266,5 +266,8 @@
     <ClInclude Include="Filelogger.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="RenderWorld.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

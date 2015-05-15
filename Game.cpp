@@ -138,7 +138,6 @@ void CGame::Run()
 	g_pFramework->Update();
 	while(is_running)
 	{
-		cout << "New frame" << endl;
 		g_pFramework->Update();
 		g_pFramework->Clear();
 
@@ -159,8 +158,6 @@ void CGame::Run()
 
 		g_pFramework->ProcessEvents();
 
-		cout << "Time for processing events etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
-
 		Zoom();
 		
 		if(g_pFramework->keyStates.escapeDown)
@@ -178,30 +175,24 @@ void CGame::Run()
 
 		CheckMusic();
 
-		cout << "Time for checking music etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
 
 		cout << "Check placeables" << endl;
 		if(m_zoom == 1)
 			m_pWorld->CheckPlaceables(m_pPlayer->GetRect(), m_pPlayer);
 
-		cout << "Time for checking placeables etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
-
 		cout << "check npcs" << endl;
 		//Checks all npcs
 		m_NpcMachine.CheckAllNpcs();
 
-		cout << "Time for checking npcs etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
 
 		cout << "check projectiles" << endl;
 		g_pProjectiles->CheckProjectiles();
 
-		cout << "Time for checking projectiles etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
 
 		cout << "render world" << endl;
 		RenderBackground();
 		m_pWorld->Render();
 
-		cout << "Time for rendering world etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
 
 		CheckView();
 
@@ -209,24 +200,19 @@ void CGame::Run()
 		//renders the player
 		m_pPlayer->Render();
 
-		cout << "Time for rendering player etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
-
 		cout << "render npcs" << endl;
 		//renders the npcs
 		m_NpcMachine.RenderAllNpcs();
 
-		cout << "Time for rendering npcs etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
 
 		cout << "render projectiles" << endl;
 		g_pProjectiles->Render();
 
-		cout << "Time for rendering projectiles etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
 
 		cout << "render light" << endl;
 		//renders darkness and light
 		m_pWorld->RenderLight();
 
-		cout << "Time for rendering light etc: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
 
 		//Renders the damage indicator
 		m_NpcMachine.RenderDamageIndicator();
@@ -264,8 +250,6 @@ void CGame::Run()
 		g_pFramework->Flip();
 
 	    CheckFps();
-
-		cout << "Time needed: " << g_pTimer->GetElapsedTimeThisFrame().asMicroseconds() << endl;
 
 	}
 }

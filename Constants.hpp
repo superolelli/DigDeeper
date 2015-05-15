@@ -81,6 +81,37 @@ const int VERYRARERING = 200;
 
 #pragma endregion
 
+const int SHEET_CHEST_CLOSED = 0;
+const int SHEET_CHEST_OPEN = 1;
+const int SHEET_ARCANUS = 2;
+const int SHEET_CUPBOARD = 3;
+const int SHEET_FURNANCE = 4;
+const int SHEET_DOOR_OPEN = 5;
+const int SHEET_DOOR_CLOSED = 6;
+const int SHEET_COAL = 7;
+const int SHEET_DIRT = 8;
+const int SHEET_GOLD = 9;
+const int SHEET_IRON = 10;
+const int SHEET_LADDER = 11;
+const int SHEET_MARBLE = 12;
+const int SHEET_STONEWALL1 = 13;
+const int SHEET_TABLE = 14;
+const int SHEET_LANTERN = 15;
+const int SHEET_MARBLEWALL = 16;
+const int SHEET_STONE = 17;
+const int SHEET_TREECROWN = 18;
+const int SHEET_WOODWALL = 19;
+const int SHEET_NOTEXTURE = 20;
+const int SHEET_STONEWALL2 = 21;
+const int SHEET_TREETRUNK = 22;
+const int SHEET_WOOD = 23;
+
+#pragma region Sprite Sheet IDs
+
+
+
+#pragma endregion
+
 
 #pragma region Npcs
 

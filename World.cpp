@@ -122,6 +122,8 @@ void CWorld::Init(int _width, int _height, View* _view, bool _loaded)
 
 	//m_lightMachine.Init(m_BlocksX*100, m_BlocksY*100);
 	m_lightMachine.Init(_view, this, false);
+	
+	m_RenderWorld.load(&g_pTextures->t_blockSpriteSheet);
 
 	m_pView = _view;
 
@@ -487,6 +489,7 @@ void CWorld::Render()
 				m_pWalls[x][y]->Render();			
 		}
 	}
+
 
 	//render the placeables
 	for(int y = yStart; y < yEnd; y++)
