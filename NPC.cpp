@@ -1,5 +1,5 @@
 #include "NPC.hpp"
-
+#include "World.hpp"
 
 
 CNpc::CNpc()

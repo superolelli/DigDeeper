@@ -15,6 +15,7 @@
 #include "Chest.hpp"
 #include "Profiler.hpp"
 #include "Projectiles.hpp"
+#include "NpcMachine.hpp"
 
 //static const int m_BlocksX = 100;
 //static const int m_BlocksY = 54;
@@ -25,7 +26,7 @@ public:
 	CWorld();
 	~CWorld();
 
-	void Init(int _width, int _height, View* _view, bool _loaded = false);
+	void Init(int _width, int _height, View* _view, CNpcMachine* _npcs, bool _loaded = false);
 	void Render();
 	void RenderLight();
 	void CheckPlaceables(IntRect _playerRect, CPlayer *_player);
@@ -239,6 +240,7 @@ private:
 
 	CLightMachine m_lightMachine;                                        //the light machine
 	View *m_pView;
+	CNpcMachine *m_pNpcMachine;
 
 	Sound m_sound;                                                        //the sound played
 

@@ -244,6 +244,19 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_is_passable = true;
 		m_is_visible = true;
 	}break;
+	case BEEHIVEP:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_beehive_left);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_beehive);
+		m_Name = "Bienenkorb";
+		m_Hardness = 1;
+		m_Priority = -1;
+		m_is_passable = true;
+		m_is_visible = true;
+
+		if (_loaded)
+			SetSpecialID(m_SpecialID);
+	}break;
 	default:
 		{
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_noTexture);
@@ -338,6 +351,9 @@ int CPlaceable::GetLittleID()
 	case(TREECROWN):
 		return WOOD;
 		break;
+	case(BEEHIVEP) :
+		return BEEHIVE;
+		break;
 
 	default:
 		return m_ID;
@@ -371,6 +387,7 @@ int CPlaceable::GetLittleID()
 //Used for:
 //Furnances: the Panel ID
 //doors: the frame number (set any SID, it is going to be handled inside the function)
+ //beehives: the direction of the hive
 void CPlaceable::SetSpecialID(int _SID)
 {
 	//set the special ID
@@ -390,6 +407,13 @@ void CPlaceable::SetSpecialID(int _SID)
 			m_is_passable = true;
 			m_SpecialID = 0;
 		}
+	}
+	else if (m_ID == BEEHIVEP)
+	{
+		if (m_SpecialID == 0)
+			m_pThingSprite->Load(&g_pTextures->t_blockTextures_beehive_left);
+		else
+			m_pThingSprite->Load(&g_pTextures->t_blockTextures_beehive_right);
 	}
 }
 

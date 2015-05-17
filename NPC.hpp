@@ -3,7 +3,9 @@
 
 #include "Framework.hpp"
 #include "Structures.hpp"
-#include "World.hpp"
+#include "Player.hpp"
+
+class CWorld;
 
 class CNpc
 {

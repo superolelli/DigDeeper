@@ -157,6 +157,8 @@ public:
 	Texture t_blockTextures_marblewall;
 	Texture t_blockTextures_treetrunk;
 	Texture t_blockTextures_treecrown;
+	Texture t_blockTextures_beehive_left;
+	Texture t_blockTextures_beehive_right;
 	Texture t_blockTextures_noTexture;               //the no_texture texture
 
 	Texture t_dirtRimTop;
@@ -212,6 +214,7 @@ public:
 	Texture t_blockInventoryTexture_marblewall;
 	Texture t_blockInventoryTexture_treetrunk;
 	Texture t_blockInventoryTexture_treecrown;
+	Texture t_blockInventoryTexture_beehive;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -257,6 +260,7 @@ public:
 	Texture t_blockLittleTexture_wax;
 	Texture t_blockLittleTexture_marble;
 	Texture t_blockLittleTexture_marblewall;
+	Texture t_blockLittleTexture_beehive;
 
 
 	//the "carried" texture of the tools

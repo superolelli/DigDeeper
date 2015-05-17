@@ -4,9 +4,10 @@
 #include "Framework.hpp"
 #include "Bee.hpp"
 #include "Goblin.hpp"
-#include "World.hpp"
 #include "SignMachine.hpp"
 #include "Profiler.hpp"
+
+class CWorld;
 
 class CNpcMachine
 {

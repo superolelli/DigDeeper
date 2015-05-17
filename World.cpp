@@ -80,7 +80,7 @@ CWorld::~CWorld()
 
 
 
-void CWorld::Init(int _width, int _height, View* _view, bool _loaded)
+void CWorld::Init(int _width, int _height, View* _view, CNpcMachine* _npcs, bool _loaded)
 {
 	if(!_loaded)
 	{
@@ -124,6 +124,7 @@ void CWorld::Init(int _width, int _height, View* _view, bool _loaded)
 	m_lightMachine.Init(_view, this, false);
 
 	m_pView = _view;
+	m_pNpcMachine = _npcs;
 
 	m_WorldHeight = m_BlocksY *100;
 	m_WorldWidth = m_BlocksX *100;
@@ -140,6 +141,7 @@ void CWorld::GenerateWorld()
 	int randomNumber;
 	int possibilitySum = 0;
 	srand((int)time(0));
+
 
 	//generates the blocks
 	for(int y = 4; y < m_BlocksY; y++)
@@ -348,44 +350,83 @@ void CWorld::GenerateRoom(int _x, int _y)
 void CWorld::SetTree(int _x, int _y)
 {
 	int height = 1;
+	bool beehive = false;
 
-	//place the first trunk
-	m_pBlocks[_x][_y] = new CPlaceable;
-	m_pBlocks[_x][_y]->Init(TREETRUNK);
-	m_pBlocks[_x][_y]->SetPos(_x * 100, _y * 100);
-
-	bool grow = true;
-	while (grow && rand()%2 == 0)
+	if (m_pBlocks[_x][_y] == NULL)
 	{
-		if (_y - 1 > 0)
-		{
-			if (m_pBlocks[_x][_y - 1] == NULL)
-			{
-				//place another trunk
-				m_pBlocks[_x][_y - 1] = new CPlaceable;
-				m_pBlocks[_x][_y - 1]->Init(TREETRUNK);
-				m_pBlocks[_x][_y - 1]->SetPos(_x * 100, (_y - 1) * 100);
+		//place the first trunk
+		m_pBlocks[_x][_y] = new CPlaceable;
+		m_pBlocks[_x][_y]->Init(TREETRUNK);
+		m_pBlocks[_x][_y]->SetPos(_x * 100, _y * 100);
 
-				height++;
-				_y--;
+		bool grow = true;
+		while (grow && rand() % 2 == 0)
+		{
+			//if not out of world
+			if (_y - 1 > 0)
+			{
+				//if there's no block already
+				if (m_pBlocks[_x][_y - 1] == NULL)
+				{
+					//place another trunk
+					m_pBlocks[_x][_y - 1] = new CPlaceable;
+					m_pBlocks[_x][_y - 1]->Init(TREETRUNK);
+					m_pBlocks[_x][_y - 1]->SetPos(_x * 100, (_y - 1) * 100);
+
+					//if theres no beehive at the tree: add one randomly
+					if (rand() % 4 == 0 && beehive == false)
+					{
+						//place a hive left
+						if (rand() % 2 == 0 && _x - 1 >= 0)
+						{
+							if (m_pBlocks[_x - 1][_y - 1] == NULL)
+							{
+								//place the hive
+								m_pBlocks[_x - 1][_y - 1] = new CPlaceable;
+								m_pBlocks[_x - 1][_y - 1]->Init(BEEHIVEP);
+								m_pBlocks[_x - 1][_y - 1]->SetSpecialID(0);
+								m_pBlocks[_x - 1][_y - 1]->SetPos((_x - 1) * 100, (_y - 1) * 100);
+
+								beehive = true;
+							}
+						}
+						//place a hive right
+						else if (_x + 1 < m_BlocksX)
+						{
+							if (m_pBlocks[_x + 1][_y - 1] == NULL)
+							{
+								//place the hive
+								m_pBlocks[_x + 1][_y - 1] = new CPlaceable;
+								m_pBlocks[_x + 1][_y - 1]->Init(BEEHIVEP);
+								m_pBlocks[_x + 1][_y - 1]->SetSpecialID(1);
+								m_pBlocks[_x + 1][_y - 1]->SetPos(((_x + 1) * 100) - 17, (_y - 1) * 100);
+
+								beehive = true;
+							}
+						}
+					}
+
+					height++;
+					_y--;
+				}
+				else
+					grow = false;
 			}
 			else
 				grow = false;
+
+			if (height == 3)
+				grow = false;
 		}
-		else
-			grow = false;
-
-		if (height == 3)
-			grow = false;
-	}
 
 
-	if (m_pBlocks[_x][_y - 1] == NULL)
-	{
-		//place the crown
-		m_pBlocks[_x][_y-1] = new CPlaceable;
-		m_pBlocks[_x][_y-1]->Init(TREECROWN);
-		m_pBlocks[_x][_y-1]->SetPos(_x * 100, (_y-1) * 100);
+		if (m_pBlocks[_x][_y - 1] == NULL && m_pBlocks[_x][_y]->getID() == TREETRUNK)
+		{
+			//place the crown
+			m_pBlocks[_x][_y - 1] = new CPlaceable;
+			m_pBlocks[_x][_y - 1]->Init(TREECROWN);
+			m_pBlocks[_x][_y - 1]->SetPos(_x * 100, (_y - 1) * 100);
+		}
 	}
 }
 
@@ -579,15 +620,16 @@ void CWorld::Render()
 
 
 
-				/*if(m_pBlocks[x][y]->getID() == FURNANCE)
-					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2 - 100, m_pBlocks[x][y]->GetRect().top - 15, 100, Color(230, 0,0));
-				else if(m_pBlocks[x][y]->getID() == LANTERNP)
-					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left -100 , m_pBlocks[x][y]->GetRect().top - 60, 150, Color::Yellow);*/
-
+				//check various blocks for light or npcs etc.
 				if(m_pBlocks[x][y]->getID() == FURNANCE)
 				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2, m_pBlocks[x][y]->GetRect().top + 50, 200, Color(230, 0,0,0));
 				else if(m_pBlocks[x][y]->getID() == LANTERNP)
-				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left, m_pBlocks[x][y]->GetRect().top, 350, Color(0,0,0,0));		
+				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left, m_pBlocks[x][y]->GetRect().top, 350, Color(0,0,0,0));	
+				else if (m_pBlocks[x][y]->getID() == BEEHIVEP)
+				{
+					if (rand() % 120 == 0)
+						m_pNpcMachine->AddNpc(BEE, x * 100 + 50, y * 100 + 50);
+				}
 			}
 		}
 	}
@@ -771,6 +813,7 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 							int oldY = y;
 							while (is_tree)
 							{
+								//check for other treeparts
 								if (y - 1 >= 0)
 								{
 									//if another tree part is above: break it too
@@ -785,6 +828,31 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 								}
 								else
 									is_tree = false;
+
+
+
+								//check for hives left
+								if (x - 1 >= 0)
+								{
+									if (m_pBlocks[x - 1][y] != NULL && m_pBlocks[x - 1][y]->getID() == BEEHIVEP)
+									{
+										AddLittleItem(BEEHIVE, m_pBlocks[x-1][y]->GetRect().left + 23, m_pBlocks[x-1][y]->GetRect().top + 20);
+										SAFE_DELETE(m_pBlocks[x-1][y]);
+									}
+								}
+
+								//check for hives right
+								if (x + 1 < m_BlocksX)
+								{
+									if (m_pBlocks[x + 1][y] != NULL && m_pBlocks[x + 1][y]->getID() == BEEHIVEP)
+									{
+										AddLittleItem(BEEHIVE, m_pBlocks[x + 1][y]->GetRect().left + 23, m_pBlocks[x + 1][y]->GetRect().top + 20);
+										SAFE_DELETE(m_pBlocks[x + 1][y]);
+									}
+								}
+
+
+
 							}
 							y = oldY;
 						}

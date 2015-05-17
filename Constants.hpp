@@ -34,6 +34,7 @@ const int MARBLE = 7;
 const int WOOD = 8;
 const int TREETRUNK = 9;
 const int TREECROWN = 10;
+const int BEEHIVEP = 11;
 const int FURNANCE = 13;
 const int CUPBOARD = 14;
 const int DOOR = 15;
@@ -61,6 +62,7 @@ const int ARCANUS = 63;
 const int SLIME = 64;
 const int RECIPE = 65;
 const int WAX = 66;
+const int BEEHIVE = 67;
 
 const int SPELL = 99;
 

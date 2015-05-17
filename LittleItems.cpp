@@ -194,6 +194,10 @@ void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 		{
 			m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_marblewall);
 		}break;
+	case(BEEHIVE) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_beehive);
+	}break;
 	}
 
 

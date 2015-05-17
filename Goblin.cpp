@@ -1,5 +1,5 @@
 #include "Goblin.hpp"
-
+#include "World.hpp"
 
 
 void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, bool _loaded)

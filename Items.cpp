@@ -165,6 +165,12 @@ void CItem::Init(int _ID, bool _loaded)
 			if(!_loaded)
 				m_Name = "Wachs";
 		}break;
+	case(BEEHIVE) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_beehive);
+		if (!_loaded)
+			m_Name = "Bienenkorb";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)
