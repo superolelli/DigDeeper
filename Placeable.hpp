@@ -19,6 +19,7 @@ public:
 	void SetSpecialID(int _SID);
 	bool IsPassable(){return m_is_passable;}
 	bool IsBroken(float _modificator);
+	bool IsPlaceableReady();                   //for beehouses
 	IntRect GetRect();
 	int GetLittleID();
 	int GetSpecialID(){return m_SpecialID;}
@@ -36,6 +37,7 @@ private:
 	{
 		ar & boost::serialization::base_object<CThing>(*this);
 		ar & m_SpecialID;
+		ar & m_fPlaceableTimer;
 	}
 
 	//load the building menu
@@ -44,6 +46,7 @@ private:
 	{
 		ar & boost::serialization::base_object<CThing>(*this);
 		ar & m_SpecialID;
+		ar & m_fPlaceableTimer;
 	}
 	BOOST_SERIALIZATION_SPLIT_MEMBER();
 
@@ -55,6 +58,8 @@ private:
 	int m_OverlappingID[4];
 	float m_fBreakingTime;                        //how long has the player trying to break the placeable?
 	float m_fBreakFrame;                           //the frame of the breaking animation
+
+	float m_fPlaceableTimer;                       //for beehouses
 
 	bool m_is_visible;                          //is the placeable visible?
 	bool m_is_passable;                         //is the placealbe passable?

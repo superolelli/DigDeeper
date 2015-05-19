@@ -132,7 +132,7 @@ void CEquipment::InitEquipmentRandomly(int _ID)
 	//add the skills
 	for(int i = 1; i < m_rarity; i++)
 	{
-		number = rand()%NUMBER_OF_SKILLS + 1;
+		number = rand()%11 + 1;
 
 		switch(number)
 		{
@@ -244,7 +244,7 @@ void CEquipment::InitRing()
 	//add the skills
 	for(i; i < m_rarity; i++)
 	{
-		number = rand()%NUMBER_OF_SKILLS + 1;
+		number = rand()%11 + 1;
 
 		switch(number)
 		{

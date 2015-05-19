@@ -171,6 +171,12 @@ void CItem::Init(int _ID, bool _loaded)
 		if (!_loaded)
 			m_Name = "Bienenkorb";
 	}break;
+	case(HONEY) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_honey);
+		if (!_loaded)
+			m_Name = "Honig";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)
@@ -184,7 +190,7 @@ void CItem::Init(int _ID, bool _loaded)
 
 void CItem::InitRecipe()
 {
-	m_specialID = rand()%6 + 131;
+	m_specialID = rand()%7 + 131;
 
 	switch(m_specialID)
 	{
@@ -203,12 +209,17 @@ void CItem::InitRecipe()
 	case(ARCANUSRING):
 		m_Name.append("(Arcanusring)");
 		break;
-	/*case(MAGICHAT):
-		m_Name.append("(Zauberhut)");
-		break;*/
-	/*case(LANTERN):
+	//case(MAGICHAT):
+	//	m_Name.append("(Zauberhut)");
+	//	break;
+	case(136):
 		m_Name.append("(Laterne)");
-		break;*/
+		m_specialID = LANTERN;
+		break;
+	case(137) :
+		m_Name.append("(Bienenkiste)");
+		m_specialID = BEEHOUSE;
+		break;
 	}
 }
 
@@ -241,6 +252,9 @@ void CItem::SetSpecialID(int _ID)
 		break;
 	case(LANTERN):
 		m_Name.append("(Laterne)");
+		break;
+	case(BEEHOUSE) :
+		m_Name.append("(Bienenkiste)");
 		break;
 	}
 }

@@ -239,24 +239,38 @@ void CNpcMachine::SpawnNpcs()
 		//get a random spawn place
 		int newPlace = rand()%spawnPlaces.size();
 
-		if(spawnPlaces.size() > 0)
+		if (spawnPlaces.size() > 0)
 		{
-			newNPC = rand() % 2 + 1;
-
-			if (newNPC == BEE)
+			//if it is day:
+			if (m_pWorld->GetNightAlpha() < 200)
 			{
-				//spawn new npc
-				AddNpc(newNPC, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y + 50);
+				newNPC = rand() % 2 + 1;
+
+				if (newNPC == BEE)
+				{
+					//spawn new npc
+					AddNpc(newNPC, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y + 50);
+				}
+				else
+				{
+					//spawn new npc
+					AddNpc(newNPC, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
+				}
+
+
+				//get new spawn time
+				m_spawnTime = rand() % 80 + 20;
 			}
+			//if it is night
 			else
 			{
-				//spawn new npc
-				AddNpc(newNPC, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
+				//spawn new goblin
+				AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
+
+				//get new spawn time
+				m_spawnTime = rand() % 20 + 1;
 			}
 		}
-
-		//get new spawn time
-		m_spawnTime = rand()%40 + 20;
 	}
 }
 

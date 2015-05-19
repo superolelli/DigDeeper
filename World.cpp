@@ -88,7 +88,7 @@ void CWorld::Init(int _width, int _height, View* _view, CNpcMachine* _npcs, bool
 		m_BlocksY = _height;
 
 		m_NightAlpha = 0;
-		m_fNightTimer = 500.0f;
+		m_fNightTimer = 480.0f;
 		m_fSecondTimer = 0.0f;
 
 		//set the world's size
@@ -819,7 +819,7 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 									//if another tree part is above: break it too
 									if (m_pBlocks[x][y - 1] != NULL && (m_pBlocks[x][y - 1]->getID() == TREETRUNK || m_pBlocks[x][y - 1]->getID() == TREECROWN))
 									{
-										AddLittleItem(WOOD, m_pBlocks[x][y - 1]->GetRect().left + 23, m_pBlocks[x][y - 1]->GetRect().top + 20);
+										AddLittleItem(WOOD, m_pBlocks[x][y - 1]->GetRect().left + 23, m_pBlocks[x][y - 1]->GetRect().top + 20, 2);
 										SAFE_DELETE(m_pBlocks[x][y - 1]);
 										y--;
 									}
@@ -860,13 +860,17 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 
 						//check if the player could have luck
 						bool lucky = false;
+						int amount = 1;
+
+						if (m_pBlocks[x][y]->getID() == TREETRUNK || m_pBlocks[x][y]->getID() == TREECROWN)
+							amount = 2;
 
 						if(m_pBlocks[x][y]->getID() >=3 && m_pBlocks[x][y]->getID() <= 6)
 							lucky = true;
 					
 						do
 						{
-							AddLittleItem(m_pBlocks[x][y]->GetLittleID(), m_pBlocks[x][y]->GetRect().left + 23, m_pBlocks[x][y]->GetRect().top + 20);
+							AddLittleItem(m_pBlocks[x][y]->GetLittleID(), m_pBlocks[x][y]->GetRect().left + 23, m_pBlocks[x][y]->GetRect().top + 20, amount);
 
 							//check for luck
 							int randomNumber = rand()%100 +1;
@@ -928,8 +932,15 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 				//if the right mouse button was pressed
 				if(rectP.contains(Mouse::getPosition()) && g_pFramework->keyStates.rightMouseDown)
 				{
+					//if it was a door: close/open the door
 					if(m_pBlocks[x][y]->getID() == DOOR)
 						m_pBlocks[x][y]->SetSpecialID(1);
+
+					//it it was a beehouse: give honey
+					if (m_pBlocks[x][y]->getID() == BEEHOUSE &&  m_pBlocks[x][y]->IsPlaceableReady())
+					{
+						AddLittleItem(HONEY, m_pBlocks[x][y]->GetRect().left + 23, m_pBlocks[x][y]->GetRect().top - 20);
+					}
 				}
 			}
 
@@ -1458,7 +1469,7 @@ void CWorld::FillChestRandomly(int _chestID)
 			while(is_filled == false)
 			{
 				//get a random ID
-				randomNumber = rand()%85 + 54;
+				randomNumber = rand()%86 + 54;
 
 				//very rare ring has currently the id 200
 				if(randomNumber == 138)
@@ -1467,7 +1478,7 @@ void CWorld::FillChestRandomly(int _chestID)
 				CThing *thing = NULL;
 
 				//if thing is an item
-				if(randomNumber > PIBREAK && randomNumber < 65)
+				if(randomNumber > PIBREAK && randomNumber < 69)
 				{
 					thing = new CItem;
 					((CItem*)thing)->Init(randomNumber);	

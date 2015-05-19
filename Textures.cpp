@@ -122,6 +122,7 @@ void TextureLoading::LoadTextures()
 	t_buildingInfo_lantern.loadFromFile("Data/Sprites/Building/building_info_lantern.png");
 	t_buildingInfo_candle.loadFromFile("Data/Sprites/Building/building_info_candle.png");
 	t_buildingInfo_marblewall.loadFromFile("Data/Sprites/Building/building_info_marble_wall.png");
+	t_buildingInfo_beehouse.loadFromFile("Data/Sprites/Building/building_info_bee_house.png");
 
 	t_blockTextures_dirt.loadFromFile("Data/Sprites/Objects/Blocks/dirt.png");
 	t_blockTextures_stone.loadFromFile("Data/Sprites/Objects/Blocks/stone.png");
@@ -144,6 +145,7 @@ void TextureLoading::LoadTextures()
 	t_blockTextures_treetrunk.loadFromFile("Data/Sprites/Objects/Blocks/tree_trunk.png");
 	t_blockTextures_treecrown.loadFromFile("Data/Sprites/Objects/Blocks/tree_crown.png");
 	t_blockTextures_marblewall.loadFromFile("Data/Sprites/Objects/Blocks/marble_wall.png");
+	t_blockTextures_beehouse.loadFromFile("Data/Sprites/Objects/Blocks/bee_house.png");
 	t_blockTextures_beehive_left.loadFromFile("Data/Sprites/Objects/Blocks/beehive.png", IntRect(0,0,117,100));
 	t_blockTextures_beehive_right.loadFromFile("Data/Sprites/Objects/Blocks/beehive.png", IntRect(117, 0, 117, 100));
 
@@ -199,6 +201,8 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_treetrunk.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/tree_trunk_inventory.png");
 	t_blockInventoryTexture_treecrown.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/tree_crown_inventory.png");
 	t_blockInventoryTexture_beehive.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/beehive_inventory.png");
+	t_blockInventoryTexture_beehouse.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/bee_house_inventory.png");
+	t_blockInventoryTexture_honey.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/honey_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
@@ -244,6 +248,8 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_marble.loadFromFile("Data/Sprites/Objects/LittleItems/marble_little.png");
 	t_blockLittleTexture_marblewall.loadFromFile("Data/Sprites/Objects/LittleItems/marble_wall_little.png");
 	t_blockLittleTexture_beehive.loadFromFile("Data/Sprites/Objects/LittleItems/beehive_little.png");
+	t_blockLittleTexture_beehouse.loadFromFile("Data/Sprites/Objects/LittleItems/bee_house_little.png");
+	t_blockLittleTexture_honey.loadFromFile("Data/Sprites/Objects/LittleItems/honey_little.png");
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");
 	t_tool_sword.loadFromFile("Data/Sprites/Objects/Tools/sword_carried.png");

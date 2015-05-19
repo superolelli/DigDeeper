@@ -35,12 +35,14 @@ const int WOOD = 8;
 const int TREETRUNK = 9;
 const int TREECROWN = 10;
 const int BEEHIVEP = 11;
+
 const int FURNANCE = 13;
 const int CUPBOARD = 14;
 const int DOOR = 15;
 const int CHEST = 16;
 const int TABLE = 17;
 const int LANTERNP = 18;
+const int BEEHOUSE = 19;
 const int LADDER = 49;
 
 const int PWBREAK = 50;            //the Placeable-Wall-Break shows, where the wall section begins
@@ -63,6 +65,7 @@ const int SLIME = 64;
 const int RECIPE = 65;
 const int WAX = 66;
 const int BEEHIVE = 67;
+const int HONEY = 68;
 
 const int SPELL = 99;
 

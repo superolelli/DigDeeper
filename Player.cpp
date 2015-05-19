@@ -174,11 +174,6 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 			sword = new CTool;
 			sword->InitTool(SWORD);
 			m_pInventory->Take(sword);
-
-			CTool *lantern;
-			lantern = new CTool;
-			lantern->InitTool(LANTERN);
-			m_pInventory->Take(lantern);
 		}break;
 	case MAGE:
 		{
@@ -209,6 +204,12 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 		candle = new CEquipment;
 		candle->InitEquipment(CANDLE);
 		m_pInventory->Take(candle);
+
+		CPlaceable *beehouse;
+		beehouse = new CPlaceable;
+		beehouse->Init(BEEHOUSE);
+		m_pInventory->Take(beehouse);
+
 
 		m_pMagicMenu->AddMagicPoints(10);
 
@@ -612,7 +613,7 @@ void CPlayer::Render()
 
 		//if the player carries a lantern: render a light circle
 		if(tool->getID() == LANTERN)
-			m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetHandPos(m_turned_left).x, m_pDwarf->GetHandPos(m_turned_left).y, 300, Color(0,0,0,0));
+			m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetHandPos(m_turned_left).x, m_pDwarf->GetHandPos(m_turned_left).y, 350, Color(0,0,0,0));
 
 		if(m_turned_left)
 		{

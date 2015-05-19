@@ -1135,3 +1135,25 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Beleuchtungsbug in der Nacht gefixt
 
 ------------------------------------------------------
+08.05.2015
+
+-Beleuchtungsbug von Laternen und Kerzen gefixt
+-Logfile implementiert
+
+------------------------------------------------------
+17.05.2015
+
+-Bienenkörbe hinzugefügt
+
+------------------------------------------------------
+18.05.2015
+
+-Bienenkisten hinzugefügt
+
+------------------------------------------------------
+19.05.2015
+
+-Honig hinzugefügt
+-Bienenkisten produzieren nun Honig
+
+------------------------------------------------------

@@ -267,6 +267,13 @@ void CBuildingMenu::InitRecipe(SBuildingItem *_recipe)
 				_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_marblewall);
 				_recipe->resources[MARBLE] = 2;
 			}break;
+		case(BEEHOUSE) :
+		{
+			_recipe->Name = "Bienenkiste";
+			_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_beehouse);
+			_recipe->resources[WOOD] = 4;
+			_recipe->resources[BEEHIVE] = 1;
+		}break;
 		}
 
 		_recipe->m_pInfoSprite->SetPos(m_pBuildingMenu->GetRect().left + 250, m_pBuildingMenu->GetRect().top + 4);
@@ -341,9 +348,6 @@ void CBuildingMenu::FillRecipeList()
 	InitRecipe(&marblewall);
 
 
-	//m_recipes.push_back(arcanus_ring);
-	//m_recipes.push_back(iron_helmet);
-	//m_recipes.push_back(iron_trousers);
 	m_recipes.push_back(iron_ring);
 	m_recipes.push_back(iron_armour);
 	m_recipes.push_back(woodwall);
@@ -366,7 +370,8 @@ void CBuildingMenu::FillRecipeList()
 	m_notAvailableRecipes.push_back(IRONHELMET);
 	m_notAvailableRecipes.push_back(IRONTROUSERS);
 	m_notAvailableRecipes.push_back(LANTERN);
-	//m_notAvailableRecipes.push_back(SWORD);
+	//m_notAvailableRecipes.push_back(MAGICHAT);
+	m_notAvailableRecipes.push_back(BEEHOUSE);
 
 
 	m_chosenItem = pickaxe;

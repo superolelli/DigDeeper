@@ -24,6 +24,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 	{
 		m_ID = _ID;
 		m_SpecialID = 0;
+		m_fPlaceableTimer = 60.0f;
 	}
 	m_fBreakingTime = 0;
 	m_fBreakFrame = -1;
@@ -257,6 +258,16 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		if (_loaded)
 			SetSpecialID(m_SpecialID);
 	}break;
+	case BEEHOUSE:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_beehouse);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_beehouse);
+		m_Name = "Bienenkiste";
+		m_Hardness = 2;
+		m_Priority = -1;
+		m_is_passable = true;
+		m_is_visible = true;
+	}break;
 	default:
 		{
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_noTexture);
@@ -293,6 +304,15 @@ void CPlaceable::Render()
 	else
 		//else: just render it
 		m_pThingSprite->Render(g_pFramework->GetWindow());
+
+	//if the thing is a beehouse: check the timer
+	if (m_ID == BEEHOUSE)
+	{
+		m_fPlaceableTimer -= g_pTimer->GetElapsedTime().asSeconds();
+
+		if (m_fPlaceableTimer < 0)
+			m_fPlaceableTimer = 0;
+	}
 
 	//check if the thing should be breaked and show the breaking animation
 	if(m_fBreakFrame >= 0)
@@ -420,3 +440,17 @@ void CPlaceable::SetSpecialID(int _SID)
 
 
 
+bool CPlaceable::IsPlaceableReady()
+{
+	if (m_ID == BEEHOUSE)
+	{
+		if (m_fPlaceableTimer <= 0)
+		{
+			m_fPlaceableTimer = 60.0f;
+			return true;
+		}
+	}
+	
+
+	return false;
+}
