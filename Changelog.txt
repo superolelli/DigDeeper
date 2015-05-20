@@ -1155,5 +1155,12 @@ ZUKÜNFITGE ÄNDERUNGEN:
 
 -Honig hinzugefügt
 -Bienenkisten produzieren nun Honig
+-Bug behoben: Spiel stürzte ab, wenn die Inventarleiste voll war
+
+------------------------------------------------------
+20.05.2015
+
+-Fackeln wurden hinzugefügt
+-Von SFML 2.1 auf SFML 2.3 umgestiegen
 
 ------------------------------------------------------

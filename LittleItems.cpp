@@ -206,6 +206,10 @@ void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 	{
 		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_honey);
 	}break;
+	case(TORCH) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_torch);
+	}break;
 	}
 
 

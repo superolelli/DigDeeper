@@ -274,6 +274,13 @@ void CBuildingMenu::InitRecipe(SBuildingItem *_recipe)
 			_recipe->resources[WOOD] = 4;
 			_recipe->resources[BEEHIVE] = 1;
 		}break;
+		case(TORCH) :
+		{
+			_recipe->Name = "Fackel";
+			_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_torch);
+			_recipe->resources[WOODSTAFF] = 1;
+			_recipe->resources[WAX] = 1;
+		}break;
 		}
 
 		_recipe->m_pInfoSprite->SetPos(m_pBuildingMenu->GetRect().left + 250, m_pBuildingMenu->GetRect().top + 4);
@@ -348,8 +355,14 @@ void CBuildingMenu::FillRecipeList()
 	InitRecipe(&marblewall);
 
 
+	SBuildingItem torch;
+	torch.ID = TORCH;
+	InitRecipe(&torch);
+
+
 	m_recipes.push_back(iron_ring);
 	m_recipes.push_back(iron_armour);
+	m_recipes.push_back(torch);
 	m_recipes.push_back(woodwall);
 	m_recipes.push_back(candle);
 	m_recipes.push_back(glue);

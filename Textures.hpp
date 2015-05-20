@@ -137,6 +137,7 @@ public:
 	Texture t_buildingInfo_candle;
 	Texture t_buildingInfo_marblewall;
 	Texture t_buildingInfo_beehouse;
+	Texture t_buildingInfo_torch;
 
 	Texture t_blockTextures_dirt;                     //the dirt textures
 	Texture t_blockTextures_stone;                      //the stone texture
@@ -161,6 +162,8 @@ public:
 	Texture t_blockTextures_beehive_left;
 	Texture t_blockTextures_beehive_right;
 	Texture t_blockTextures_beehouse;
+	Texture t_blockTextures_torch_ground;
+	Texture t_blockTextures_torch_wall;
 	Texture t_blockTextures_noTexture;               //the no_texture texture
 
 	Texture t_dirtRimTop;
@@ -219,6 +222,7 @@ public:
 	Texture t_blockInventoryTexture_beehive;
 	Texture t_blockInventoryTexture_beehouse;
 	Texture t_blockInventoryTexture_honey;
+	Texture t_blockInventoryTexture_torch;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -268,6 +272,7 @@ public:
 	Texture t_blockLittleTexture_beehive;
 	Texture t_blockLittleTexture_beehouse;
 	Texture t_blockLittleTexture_honey;
+	Texture t_blockLittleTexture_torch;
 
 
 	//the "carried" texture of the tools

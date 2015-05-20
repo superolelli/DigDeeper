@@ -43,6 +43,7 @@ const int CHEST = 16;
 const int TABLE = 17;
 const int LANTERNP = 18;
 const int BEEHOUSE = 19;
+const int TORCH = 20;
 const int LADDER = 49;
 
 const int PWBREAK = 50;            //the Placeable-Wall-Break shows, where the wall section begins

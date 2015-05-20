@@ -622,9 +622,11 @@ void CWorld::Render()
 
 				//check various blocks for light or npcs etc.
 				if(m_pBlocks[x][y]->getID() == FURNANCE)
-				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2, m_pBlocks[x][y]->GetRect().top + 50, 200, Color(230, 0,0,0));
+					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width/2, m_pBlocks[x][y]->GetRect().top + 50, 200, Color(230, 0,0,0));
 				else if(m_pBlocks[x][y]->getID() == LANTERNP)
-				m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left, m_pBlocks[x][y]->GetRect().top, 350, Color(0,0,0,0));	
+					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left, m_pBlocks[x][y]->GetRect().top, 350, Color(0,0,0,0));	
+				else if (m_pBlocks[x][y]->getID() == TORCH)
+					m_lightMachine.AddLightCircle(m_pBlocks[x][y]->GetRect().left + m_pBlocks[x][y]->GetRect().width / 2, m_pBlocks[x][y]->GetRect().top + 50, 500, Color(0, 0, 0, 0));
 				else if (m_pBlocks[x][y]->getID() == BEEHIVEP)
 				{
 					if (rand() % 120 == 0)
@@ -1153,19 +1155,39 @@ bool CWorld::PlaceNewThing(int x, int y, int ID, IntRect &_playerRect)
 				if(m_pBlocks[x/100 -1][y/100] != NULL || m_pBlocks[x/100 +1][y/100] != NULL || m_pBlocks[x/100][y/100 -1] != NULL || m_pBlocks[x/100][y/100 +1] != NULL)
 				{
 					//some things must be placed on top of another
-					if(ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN)
+					if(ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN || ID == TORCH)
 					{
+						//if there is a block below
 						if(m_pBlocks[x/100][y/100+1] != NULL)
 						{
+							//creates a new block
 							m_pBlocks[x/100][y/100] = new CPlaceable;
+
+							//checks for some special placeables
 							if(ID == LANTERN)
 								m_pBlocks[x/100][y/100]->Init(LANTERNP);
 							else
 								m_pBlocks[x/100][y/100]->Init(ID);
-							m_pBlocks[x/100][y/100]->SetPos(x, y);
+
+							if (ID == TORCH)
+								m_pBlocks[x / 100][y / 100]->SetSpecialID(0);
+
+							//sets the position
+							m_pBlocks[x / 100][y / 100]->SetPos(x, y);
 						}
 						else
-							return false;
+						{
+							//torches can be placed on walls too
+							if (ID == TORCH && m_pWalls[x/100][y/100] != NULL)
+							{
+								m_pBlocks[x / 100][y / 100] = new CPlaceable;
+								m_pBlocks[x / 100][y / 100]->Init(ID);
+								m_pBlocks[x / 100][y / 100]->SetSpecialID(1);
+								m_pBlocks[x / 100][y / 100]->SetPos(x, y);
+							}
+							else
+								return false;
+						}
 					}
 					//others not
 					else
@@ -1183,26 +1205,51 @@ bool CWorld::PlaceNewThing(int x, int y, int ID, IntRect &_playerRect)
 					return true;
 				}
 				else
-					return false;
+				{
+					if (ID == TORCH && m_pWalls[x / 100][y / 100] != NULL)
+					{
+						m_pBlocks[x / 100][y / 100] = new CPlaceable;
+						m_pBlocks[x / 100][y / 100]->Init(ID);
+						m_pBlocks[x / 100][y / 100]->SetSpecialID(1);
+						m_pBlocks[x / 100][y / 100]->SetPos(x, y);
+					}
+					else
+						return false;
+				}
 			}
 			else if(y == 0 && x!= 0)
 			{
 				if(m_pBlocks[x/100 -1][y/100] != NULL || m_pBlocks[x/100 +1][y/100] != NULL || m_pBlocks[x/100][y/100 +1] != NULL)
 				{
-					//some things must be placed on top of another
-					if(ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN)
+					if (ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN || ID == TORCH)
 					{
-						if(m_pBlocks[x/100][y/100+1] != NULL)
+						//if there is a block below
+						if (m_pBlocks[x / 100][y / 100 + 1] != NULL)
 						{
-							m_pBlocks[x/100][y/100] = new CPlaceable;
-							if(ID == LANTERN)
-								m_pBlocks[x/100][y/100]->Init(LANTERNP);
+							m_pBlocks[x / 100][y / 100] = new CPlaceable;
+							if (ID == LANTERN)
+								m_pBlocks[x / 100][y / 100]->Init(LANTERNP);
 							else
-								m_pBlocks[x/100][y/100]->Init(ID);
-							m_pBlocks[x/100][y/100]->SetPos(x, y);
+								m_pBlocks[x / 100][y / 100]->Init(ID);
+
+							if (ID == TORCH)
+								m_pBlocks[x / 100][y / 100]->SetSpecialID(0);
+
+							m_pBlocks[x / 100][y / 100]->SetPos(x, y);
 						}
 						else
-							return false;
+						{
+							//torches can be placed on walls too
+							if (ID == TORCH && m_pWalls[x / 100][y / 100] != NULL)
+							{
+								m_pBlocks[x / 100][y / 100] = new CPlaceable;
+								m_pBlocks[x / 100][y / 100]->Init(ID);
+								m_pBlocks[x / 100][y / 100]->SetSpecialID(1);
+								m_pBlocks[x / 100][y / 100]->SetPos(x, y);
+							}
+							else
+								return false;
+						}
 					}
 					//others not
 					else
@@ -1220,26 +1267,52 @@ bool CWorld::PlaceNewThing(int x, int y, int ID, IntRect &_playerRect)
 					return true;
 				}
 				else
-					return false;
+				{
+					if (ID == TORCH && m_pWalls[x / 100][y / 100] != NULL)
+					{
+						m_pBlocks[x / 100][y / 100] = new CPlaceable;
+						m_pBlocks[x / 100][y / 100]->Init(ID);
+						m_pBlocks[x / 100][y / 100]->SetSpecialID(1);
+						m_pBlocks[x / 100][y / 100]->SetPos(x, y);
+					}
+					else
+						return false;
+				}
 			}
 			else if(y != 0 && x == 0)
 			{
 				if(m_pBlocks[x/100 +1][y/100] != NULL || m_pBlocks[x/100][y/100 -1] != NULL || m_pBlocks[x/100][y/100 +1] != NULL)
 				{
 					//some things must be placed on top of another
-					if(ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN)
+					if (ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN || ID == TORCH)
 					{
-						if(m_pBlocks[x/100][y/100+1] != NULL)
+						//if there is a block below
+						if (m_pBlocks[x / 100][y / 100 + 1] != NULL)
 						{
-							m_pBlocks[x/100][y/100] = new CPlaceable;
-							if(ID == LANTERN)
-								m_pBlocks[x/100][y/100]->Init(LANTERNP);
+							m_pBlocks[x / 100][y / 100] = new CPlaceable;
+							if (ID == LANTERN)
+								m_pBlocks[x / 100][y / 100]->Init(LANTERNP);
 							else
-								m_pBlocks[x/100][y/100]->Init(ID);
-							m_pBlocks[x/100][y/100]->SetPos(x, y);
+								m_pBlocks[x / 100][y / 100]->Init(ID);
+
+							if (ID == TORCH)
+								m_pBlocks[x / 100][y / 100]->SetSpecialID(0);
+
+							m_pBlocks[x / 100][y / 100]->SetPos(x, y);
 						}
 						else
-							return false;
+						{
+							//torches can be placed on walls too
+							if (ID == TORCH && m_pWalls[x / 100][y / 100] != NULL)
+							{
+								m_pBlocks[x / 100][y / 100] = new CPlaceable;
+								m_pBlocks[x / 100][y / 100]->Init(ID);
+								m_pBlocks[x / 100][y / 100]->SetSpecialID(1);
+								m_pBlocks[x / 100][y / 100]->SetPos(x, y);
+							}
+							else
+								return false;
+						}
 					}
 					//others not
 					else
@@ -1258,26 +1331,52 @@ bool CWorld::PlaceNewThing(int x, int y, int ID, IntRect &_playerRect)
 					return true;
 				}
 				else
-					return false;
+				{
+					if (ID == TORCH && m_pWalls[x / 100][y / 100] != NULL)
+					{
+						m_pBlocks[x / 100][y / 100] = new CPlaceable;
+						m_pBlocks[x / 100][y / 100]->Init(ID);
+						m_pBlocks[x / 100][y / 100]->SetSpecialID(1);
+						m_pBlocks[x / 100][y / 100]->SetPos(x, y);
+					}
+					else
+						return false;
+				}
 			}
 			else
 			{
 				if(m_pBlocks[x/100 +1][y/100] != NULL || m_pBlocks[x/100][y/100 +1] != NULL)
 				{
 					//some things must be placed on top of another
-					if(ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN)
+					if (ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN || ID == TORCH)
 					{
-						if(m_pBlocks[x/100][y/100+1] != NULL)
+						//if there is a block below
+						if (m_pBlocks[x / 100][y / 100 + 1] != NULL)
 						{
-							m_pBlocks[x/100][y/100] = new CPlaceable;
-							if(ID == LANTERN)
-								m_pBlocks[x/100][y/100]->Init(LANTERNP);
+							m_pBlocks[x / 100][y / 100] = new CPlaceable;
+							if (ID == LANTERN)
+								m_pBlocks[x / 100][y / 100]->Init(LANTERNP);
 							else
-								m_pBlocks[x/100][y/100]->Init(ID);
-							m_pBlocks[x/100][y/100]->SetPos(x, y);
+								m_pBlocks[x / 100][y / 100]->Init(ID);
+
+							if (ID == TORCH)
+								m_pBlocks[x / 100][y / 100]->SetSpecialID(0);
+
+							m_pBlocks[x / 100][y / 100]->SetPos(x, y);
 						}
 						else
-							return false;
+						{
+							//torches can be placed on walls too
+							if (ID == TORCH && m_pWalls[x / 100][y / 100] != NULL)
+							{
+								m_pBlocks[x / 100][y / 100] = new CPlaceable;
+								m_pBlocks[x / 100][y / 100]->Init(ID);
+								m_pBlocks[x / 100][y / 100]->SetSpecialID(1);
+								m_pBlocks[x / 100][y / 100]->SetPos(x, y);
+							}
+							else
+								return false;
+						}
 					}
 					//others not
 					else
@@ -1296,7 +1395,17 @@ bool CWorld::PlaceNewThing(int x, int y, int ID, IntRect &_playerRect)
 					return true;
 				}
 				else
-					return false;
+				{
+					if (ID == TORCH && m_pWalls[x / 100][y / 100] != NULL)
+					{
+						m_pBlocks[x / 100][y / 100] = new CPlaceable;
+						m_pBlocks[x / 100][y / 100]->Init(ID);
+						m_pBlocks[x / 100][y / 100]->SetSpecialID(1);
+						m_pBlocks[x / 100][y / 100]->SetPos(x, y);
+					}
+					else
+						return false;
+				}
 			}
 		
 	}

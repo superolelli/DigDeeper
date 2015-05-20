@@ -203,7 +203,7 @@ void CInventory::Take(CThing *_thing, int _amount)
 	}
 
 	//if there was no place in the beam: return
-	if (i->thing->getID() == SPELL)
+	if (_thing->getID() == SPELL)
 		return;
 
 	//Look for a free place in the inventory

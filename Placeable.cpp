@@ -268,6 +268,20 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_is_passable = true;
 		m_is_visible = true;
 	}break;
+	case TORCH:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_torch_ground);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_torch);
+		m_Name = "Fackel";
+		m_Hardness = 0;
+		m_Priority = -1;
+		m_is_passable = true;
+		m_is_visible = true;
+
+		if (_loaded)
+			SetSpecialID(m_SpecialID);
+
+	}break;
 	default:
 		{
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_noTexture);
@@ -428,12 +442,21 @@ void CPlaceable::SetSpecialID(int _SID)
 			m_SpecialID = 0;
 		}
 	}
+	//if thing is a hive
 	else if (m_ID == BEEHIVEP)
 	{
 		if (m_SpecialID == 0)
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_beehive_left);
 		else
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_beehive_right);
+	}
+	//if thing is a torch
+	else if (m_ID == TORCH)
+	{
+		if (m_SpecialID == 0)
+			m_pThingSprite->Load(&g_pTextures->t_blockTextures_torch_ground);
+		else
+			m_pThingSprite->Load(&g_pTextures->t_blockTextures_torch_wall);
 	}
 }
 
