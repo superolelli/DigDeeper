@@ -54,6 +54,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = 5;
 			m_is_passable = false;
 			m_is_visible = true;
+			m_can_place_on = true;
 		}break;
 	case STONE:
 		{
@@ -64,6 +65,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = 1;
 			m_is_passable = false;
 			m_is_visible = true;
+			m_can_place_on = true;
 		}break;
 	case WOOD:
 		{
@@ -74,6 +76,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = 0;
 			m_is_passable = false;
 			m_is_visible = true;
+			m_can_place_on = true;
 		}break;
 	case COALBLOCK:
 		{
@@ -84,6 +87,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = 1;
 			m_is_passable = false;
 			m_is_visible = true;
+			m_can_place_on = true;
 		}break;
 	case STONEWALL:
 		{
@@ -94,6 +98,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
+			m_can_place_on = true;
 		}break;
 	case WOODWALL:
 		{
@@ -104,6 +109,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
+			m_can_place_on = true;
 		}break;
 	case LADDER:
 		{
@@ -114,6 +120,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
+			m_can_place_on = false;
 		}break;
 	case FURNANCE:
 		{
@@ -124,6 +131,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
+			m_can_place_on = false;
 		}break;
 	case CHEST:
 		{
@@ -134,6 +142,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
+			m_can_place_on = false;
 		}break;
 	case CUPBOARD:
 		{
@@ -144,6 +153,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
+			m_can_place_on = true;
 		}break;
 	case DOOR:
 		{
@@ -154,6 +164,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
+			m_can_place_on = false;
 		}break;
 	case IRONBLOCK:
 		{
@@ -164,6 +175,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = 1;
 			m_is_passable = false;
 			m_is_visible = true;
+			m_can_place_on = true;
 		}break;
 	case GOLDBLOCK:
 		{
@@ -174,6 +186,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = 1;
 			m_is_passable = false;
 			m_is_visible = true;
+			m_can_place_on = true;
 		}break;
 	case ARCANUSBLOCK:
 		{
@@ -184,6 +197,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = 1;
 			m_is_passable = false;
 			m_is_visible = true;
+			m_can_place_on = true;
 		}break;
 	case TABLE:
 		{
@@ -194,6 +208,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
+			m_can_place_on = false;
 		}break;
 	case LANTERNP:
 		{
@@ -204,6 +219,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
+			m_can_place_on = false;
 		}break;
 	case MARBLE:
 		{
@@ -214,6 +230,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = 0;
 			m_is_passable = false;
 			m_is_visible = true;
+			m_can_place_on = true;
 		}break;
 	case MARBLEWALL:
 		{
@@ -224,6 +241,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Priority = -1;
 			m_is_passable = true;
 			m_is_visible = true;
+			m_can_place_on = true;
 		}break;
 	case TREETRUNK:
 	{
@@ -234,6 +252,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_Priority = 2;
 		m_is_passable = true;
 		m_is_visible = true;
+		m_can_place_on = true;
 	}break;
 	case TREECROWN:
 	{
@@ -244,6 +263,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_Priority = -1;
 		m_is_passable = true;
 		m_is_visible = true;
+		m_can_place_on = true;
 	}break;
 	case BEEHIVEP:
 	{
@@ -254,6 +274,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_Priority = -1;
 		m_is_passable = true;
 		m_is_visible = true;
+		m_can_place_on = false;
 
 		if (_loaded)
 			SetSpecialID(m_SpecialID);
@@ -267,6 +288,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_Priority = -1;
 		m_is_passable = true;
 		m_is_visible = true;
+		m_can_place_on = true;
 	}break;
 	case TORCH:
 	{
@@ -277,6 +299,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_Priority = -1;
 		m_is_passable = true;
 		m_is_visible = true;
+		m_can_place_on = false;
 
 		if (_loaded)
 			SetSpecialID(m_SpecialID);
@@ -455,8 +478,12 @@ void CPlaceable::SetSpecialID(int _SID)
 	{
 		if (m_SpecialID == 0)
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_torch_ground);
-		else
+		else if (m_SpecialID == 1)
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_torch_wall);
+		else if (m_SpecialID == 2)
+			m_pThingSprite->Load(&g_pTextures->t_blockTextures_torch_right);
+		else 
+			m_pThingSprite->Load(&g_pTextures->t_blockTextures_torch_left);
 	}
 }
 

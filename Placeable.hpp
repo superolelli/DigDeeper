@@ -18,6 +18,7 @@ public:
 	void SetBreakingFalse(){m_fBreakingTime = 0.0f; m_fBreakFrame = -1;}
 	void SetSpecialID(int _SID);
 	bool IsPassable(){return m_is_passable;}
+	bool CanBePlacedOn(){ return m_can_place_on; }
 	bool IsBroken(float _modificator);
 	bool IsPlaceableReady();                   //for beehouses
 	IntRect GetRect();
@@ -63,6 +64,7 @@ private:
 
 	bool m_is_visible;                          //is the placeable visible?
 	bool m_is_passable;                         //is the placealbe passable?
+	bool m_can_place_on;                        //can be something placed upon this?
 
 	 CSprite m_BreakingAnimation;
 };

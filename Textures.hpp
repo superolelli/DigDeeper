@@ -164,6 +164,8 @@ public:
 	Texture t_blockTextures_beehouse;
 	Texture t_blockTextures_torch_ground;
 	Texture t_blockTextures_torch_wall;
+	Texture t_blockTextures_torch_left;
+	Texture t_blockTextures_torch_right;
 	Texture t_blockTextures_noTexture;               //the no_texture texture
 
 	Texture t_dirtRimTop;

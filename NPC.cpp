@@ -95,7 +95,6 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 	//while the destination wasn't reached
 	while (currentX != destinationX || currentY != destinationY)
 	{
-
 		//usually every block should be checked
 		checkTop = true;
 		checkBottom = true;

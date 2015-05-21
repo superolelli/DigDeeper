@@ -1164,3 +1164,9 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Von SFML 2.1 auf SFML 2.3 umgestiegen
 
 ------------------------------------------------------
+21.05.2015
+
+-Fackeln können nun auch seitlich an Blöcken angebracht werden
+-Sprite des Himmels bei Nacht geändert
+
+------------------------------------------------------

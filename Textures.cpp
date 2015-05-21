@@ -151,6 +151,8 @@ void TextureLoading::LoadTextures()
 	t_blockTextures_beehive_right.loadFromFile("Data/Sprites/Objects/Blocks/beehive.png", IntRect(117, 0, 117, 100));
 	t_blockTextures_torch_ground.loadFromFile("Data/Sprites/Objects/Blocks/torch.png", IntRect(0, 0, 100, 100));
 	t_blockTextures_torch_wall.loadFromFile("Data/Sprites/Objects/Blocks/torch.png", IntRect(100, 0, 100, 100));
+	t_blockTextures_torch_left.loadFromFile("Data/Sprites/Objects/Blocks/torch.png", IntRect(300, 0, 100, 100));
+	t_blockTextures_torch_right.loadFromFile("Data/Sprites/Objects/Blocks/torch.png", IntRect(200, 0, 100, 100));
 
 	t_dirtRimTop.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_top.png");
 	t_dirtRimBottom.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_bottom.png");

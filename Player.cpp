@@ -210,6 +210,11 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 		beehouse->Init(BEEHOUSE);
 		m_pInventory->Take(beehouse);
 
+		CPlaceable *torch;
+		torch = new CPlaceable;
+		torch->Init(TORCH);
+		m_pInventory->Take(torch, 10);
+
 
 		m_pMagicMenu->AddMagicPoints(10);
 
