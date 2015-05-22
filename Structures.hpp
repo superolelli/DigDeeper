@@ -85,6 +85,40 @@ struct SToolAttributes
 
 
 
+struct SConsumableAttributes
+{
+	float breaking_speed;
+	int armour;
+	int health;
+	int mana;
+	int healthRegeneration;
+	int manaRegeneration;
+	int criticalChance;
+	int criticalDamage;
+	int strength;
+	int luck;
+	int speed;
+	float duration;
+
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & breaking_speed;
+		ar & armour;
+		ar & health;
+		ar & mana;
+		ar & strength;
+		ar & luck;
+		ar & speed;
+		ar & healthRegeneration;
+		ar & manaRegeneration;
+		ar & criticalChance;
+		ar & criticalDamage;
+		ar & duration;
+	}
+};
+
+
 struct SNewWorldAttributes
 {
 	int PlayerClass;
@@ -156,7 +190,7 @@ struct SItem
 				CPlaceable* placeable = (CPlaceable*)thing;
 				ar & placeable;
 			}
-			else if(thing->getID() < ITBREAK)
+			else if(thing->getID() < CTBREAK)
 			{
 				CItem * item = (CItem*)thing;
 				ar & item;
@@ -215,7 +249,7 @@ struct SItem
 				//load the thing
 				thing = newThing;
 			}
-			else if(a < ITBREAK)
+			else if(a < CTBREAK)
 			{
 				//make a new thing with this ID
 				CItem *newThing;

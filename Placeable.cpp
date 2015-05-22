@@ -305,6 +305,17 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			SetSpecialID(m_SpecialID);
 
 	}break;
+	case CAULDRON:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_cauldron);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_cauldron);
+		m_Name = "Kessel";
+		m_Hardness = 1;
+		m_Priority = -1;
+		m_is_passable = true;
+		m_is_visible = true;
+		m_can_place_on = false;
+	}break;
 	default:
 		{
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_noTexture);

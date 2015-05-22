@@ -112,7 +112,7 @@ void CChest::Render()
 					number << m_chest[x][y].thing->GetName();
 
 					//if it is a tool or equipment: show possible rarity and additional attributes
-					if(m_chest[x][y].thing->getID() > ITBREAK)
+					if(m_chest[x][y].thing->getID() > CTBREAK)
 					{
 						int rarity = 1;
 
@@ -253,7 +253,7 @@ SItem CChest::Take(SItem _item)
 		else
 		{
 			//if the given item is the same as the current item: add the amount
-			if(_item.thing->getID() == m_chest[xItem/100][yItem/100].thing->getID() && _item.thing->getID() < ITBREAK && _item.thing->getID() != RECIPE)
+			if(_item.thing->getID() == m_chest[xItem/100][yItem/100].thing->getID() && _item.thing->getID() < CTBREAK && _item.thing->getID() != RECIPE)
 			{
 				m_chest[xItem/100][yItem/100].amount += _item.amount;
 				temp.amount = 0;

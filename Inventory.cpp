@@ -160,7 +160,7 @@ void CInventory::Take(CThing *_thing, int _amount)
 	//Check if the item is already in the inventory and no tool or equipment
 	for(i = m_inventoryList.begin(); i != m_inventoryList.end(); i++)
 	{
-		if(i->thing->getID() == _thing->getID() && i->thing->getID() < ITBREAK && i->thing->getID() != RECIPE)
+		if(i->thing->getID() == _thing->getID() && i->thing->getID() < CTBREAK && i->thing->getID() != RECIPE)
 		{
 			//if the spell is already in the inventory: return
 			if (i->thing->getID() == SPELL)
@@ -333,7 +333,7 @@ void CInventory::Render(IntRect &_playerRect)
 					if(i->is_clicked == false)
 					{
 						//if the clicked item is the same as this one: add the amounts
-						if(c != m_inventoryList.end() && c->thing->getID() == i->thing->getID() && i->thing->getID() < ITBREAK && i->thing->getID() != RECIPE && i->thing->getID() != SPELL)
+						if(c != m_inventoryList.end() && c->thing->getID() == i->thing->getID() && i->thing->getID() < CTBREAK && i->thing->getID() != RECIPE && i->thing->getID() != SPELL)
 						{
 							//add the amount and delete the clicked thing
 							i->amount += c->amount;
@@ -474,7 +474,7 @@ void CInventory::Render(IntRect &_playerRect)
 					if(i->is_clicked == false)
 					{
 						//if the clicked item is the same as this one: add the amounts
-						if(c != m_inventoryList.end() && c->thing->getID() == i->thing->getID() && i->thing->getID() < ITBREAK && i->thing->getID() != RECIPE)
+						if(c != m_inventoryList.end() && c->thing->getID() == i->thing->getID() && i->thing->getID() < CTBREAK && i->thing->getID() != RECIPE)
 						{
 							//add the amount and delete the clicked thing
 							i->amount ++;
@@ -487,7 +487,7 @@ void CInventory::Render(IntRect &_playerRect)
 							}
 						}
 					}
-					else if(i->thing->getID() < ITBREAK)
+					else if(i->thing->getID() < CTBREAK)
 					{
 							//if the mouse is inside the window: place the item
 						if(m_pInventoryWindow->GetRect().contains(mousePos))
@@ -510,7 +510,7 @@ void CInventory::Render(IntRect &_playerRect)
 									item.thing = new CPlaceable;
 									((CPlaceable*)item.thing)->Init(i->thing->getID());
 								}
-								else if(i->thing->getID() > PIBREAK && i->thing->getID() < ITBREAK)
+								else if(i->thing->getID() > PIBREAK && i->thing->getID() < CTBREAK)
 								{
 									item.thing = new CItem;
 									((CItem*)item.thing)->Init(i->thing->getID());	
@@ -551,7 +551,7 @@ void CInventory::Render(IntRect &_playerRect)
 									item.thing = new CPlaceable;
 									((CPlaceable*)item.thing)->Init(i->thing->getID());
 								}
-								else if(i->thing->getID() > PIBREAK && i->thing->getID() < ITBREAK)
+								else if(i->thing->getID() > PIBREAK && i->thing->getID() < CTBREAK)
 								{
 									item.thing = new CItem;
 									((CItem*)item.thing)->Init(i->thing->getID());	
@@ -583,7 +583,7 @@ void CInventory::Render(IntRect &_playerRect)
 								item.thing = new CPlaceable;
 								((CPlaceable*)item.thing)->Init(i->thing->getID());
 							}
-							else if(i->thing->getID() > PIBREAK && i->thing->getID() < ITBREAK)
+							else if(i->thing->getID() > PIBREAK && i->thing->getID() < CTBREAK)
 							{
 								item.thing = new CItem;
 								((CItem*)item.thing)->Init(i->thing->getID());	
@@ -633,7 +633,7 @@ void CInventory::Render(IntRect &_playerRect)
 					number << (i->thing->GetName());
 
 					//if the thing is equipment or a tool: change the coulor of the text
-					if(i->thing->getID() > ITBREAK)
+					if(i->thing->getID() > CTBREAK)
 					{
 						int rarity = 1;
 
@@ -820,6 +820,18 @@ void CInventory::Render(IntRect &_playerRect)
 
 					//cast the spell
 					m_pPlayer->CastSpell(spell->GetSpecialID());
+				}
+				//if the player wants to consum a consumable
+				else if (CarriedObjectFramePos == i->position && g_pFramework->keyStates.rightMouseUp && i->thing->getID() > ICBREAK && i->thing->getID() < CTBREAK)
+				{
+					CConsumable *con;
+					con = (CConsumable*)(i->thing);
+
+					m_pPlayer->AddEffect(con->GetAttributes());
+
+					SAFE_DELETE(i->thing);
+					i = m_inventoryList.erase(i);
+					continue;
 				}
 
 				i->thing->RenderInventorySprite();

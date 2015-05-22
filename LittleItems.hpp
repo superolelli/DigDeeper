@@ -48,7 +48,7 @@ private:
 			CPlaceable* placeable = (CPlaceable*)m_pThing;
 			ar & placeable;
 		}
-		else if(m_pThing->getID() < ITBREAK)
+		else if(m_pThing->getID() < CTBREAK)
 		{
 			CItem * item = (CItem*)m_pThing;
 			ar & item;
@@ -90,7 +90,7 @@ private:
 
 			m_pThing = thing;
 		}
-		else if(a < ITBREAK)
+		else if(a < CTBREAK)
 		{
 			CItem *thing;
 			ar & thing;

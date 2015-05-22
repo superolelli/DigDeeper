@@ -190,7 +190,7 @@ void CItem::Init(int _ID, bool _loaded)
 
 void CItem::InitRecipe()
 {
-	m_specialID = rand()%7 + 131;
+	m_specialID = rand()%8 + 131;
 
 	switch(m_specialID)
 	{
@@ -220,6 +220,9 @@ void CItem::InitRecipe()
 		m_Name.append("(Bienenkiste)");
 		m_specialID = BEEHOUSE;
 		break;
+	case(138) :
+		m_Name.append("(Kessel)");
+		m_specialID = CAULDRON;
 	}
 }
 
@@ -255,6 +258,9 @@ void CItem::SetSpecialID(int _ID)
 		break;
 	case(BEEHOUSE) :
 		m_Name.append("(Bienenkiste)");
+		break;
+	case(CAULDRON) :
+		m_Name.append("(Kessel)");
 		break;
 	}
 }

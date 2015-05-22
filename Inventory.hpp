@@ -9,6 +9,7 @@ class CWorld;
 #include "PlayerEquipment.hpp"
 #include "Panel.hpp"
 #include "Structures.hpp"
+#include "Consumable.hpp"
 
 
 class CInventory
@@ -75,7 +76,7 @@ private:
 				CPlaceable* placeable = (CPlaceable*)s.thing;
 				ar & placeable;
 			}
-			else if(s.thing->getID() < ITBREAK)
+			else if(s.thing->getID() < CTBREAK)
 			{
 				CItem * item = (CItem*)s.thing;
 				ar & item;
@@ -144,7 +145,7 @@ private:
 				item.thing->GetInventorySprite()->SetPos(x, y);
 				m_inventoryList.push_back(item);
 			}
-			else if(a < ITBREAK)
+			else if(a < CTBREAK)
 			{
 				CItem *thing;
 				ar & thing;

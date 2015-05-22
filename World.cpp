@@ -1011,14 +1011,20 @@ void CWorld::AddLittleItem(int _ID, int _x, int _y, int _amount)
 				item.Init(thing, _x + (rand()%50 -25), _y + (rand()%20));
 			}
 			//if thing is an item
-			else if(_ID > PIBREAK && _ID < ITBREAK)
+			else if(_ID > PIBREAK && _ID < ICBREAK)
 			{
 				CItem *thing = new CItem;
 				thing->Init(_ID);
 				item.Init(thing, _x + (rand()%50 -25), _y + (rand()%20));	
 			}
+			else if (_ID > ICBREAK && _ID < CTBREAK)
+			{
+				CConsumable *thing = new CConsumable;
+				thing->InitConsumable(_ID);
+				item.Init(thing, _x + (rand() % 50 - 25), _y + (rand() % 20));
+			}
 			//if thing is a tool
-			else if(_ID > ITBREAK && _ID < TEBREAK)
+			else if(_ID > CTBREAK && _ID < TEBREAK)
 			{
 				CTool *thing = new CTool;
 				thing->InitTool(_ID);
@@ -1643,13 +1649,19 @@ void CWorld::FillChestRandomly(int _chestID)
 				CThing *thing = NULL;
 
 				//if thing is an item
-				if(randomNumber > PIBREAK && randomNumber < 69)
+				if(randomNumber > PIBREAK && randomNumber < 68)
 				{
 					thing = new CItem;
 					((CItem*)thing)->Init(randomNumber);	
 				}
+				//if thing is a consumable
+				else if (randomNumber >ICBREAK && randomNumber < 82)
+				{
+					thing = new CConsumable;
+					((CConsumable*)thing)->InitConsumable(randomNumber);
+				}
 				//if thing is a tool
-				else if(randomNumber > ITBREAK && randomNumber < 103)
+				else if(randomNumber > CTBREAK && randomNumber < 103)
 				{
 					thing = new CTool;
 					((CTool*)thing)->InitToolRandomly(randomNumber);
@@ -1669,7 +1681,7 @@ void CWorld::FillChestRandomly(int _chestID)
 					newItem.thing = thing;
 
 					//all tools and equipment have the amount 1
-					if(randomNumber > ITBREAK || randomNumber == RECIPE)
+					if(randomNumber > CTBREAK || randomNumber == RECIPE)
 						newItem.amount = 1;
 					else
 						newItem.amount = rand()%5 +1;

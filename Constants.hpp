@@ -44,6 +44,7 @@ const int TABLE = 17;
 const int LANTERNP = 18;
 const int BEEHOUSE = 19;
 const int TORCH = 20;
+const int CAULDRON = 21;
 const int LADDER = 49;
 
 const int PWBREAK = 50;            //the Placeable-Wall-Break shows, where the wall section begins
@@ -66,11 +67,15 @@ const int SLIME = 64;
 const int RECIPE = 65;
 const int WAX = 66;
 const int BEEHIVE = 67;
-const int HONEY = 68;
 
-const int SPELL = 99;
+const int SPELL = 79;
 
-const int ITBREAK = 100;             //the Item-Tool-Break shows, where the tool section begins
+const int ICBREAK = 80;              //the Item-Consumable-Break shows, where the consumable section begins
+
+const int HONEY = 81;
+
+
+const int CTBREAK = 100;             //the Consumable-Tool-Break shows, where the tool section begins
 
 const int PICKAXE = 101;
 const int SWORD = 102;

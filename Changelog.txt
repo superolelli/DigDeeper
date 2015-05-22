@@ -1168,5 +1168,11 @@ ZUKÜNFITGE ÄNDERUNGEN:
 
 -Fackeln können nun auch seitlich an Blöcken angebracht werden
 -Sprite des Himmels bei Nacht geändert
+-Kessel hinzugefügt
+
+------------------------------------------------------
+22.05.2015
+
+-Konsumierbare Items hinzugefügt (Honig)
 
 ------------------------------------------------------

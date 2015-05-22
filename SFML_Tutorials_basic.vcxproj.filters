@@ -132,6 +132,9 @@
     <ClCompile Include="Projectiles.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Consumable.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.hpp">
@@ -264,6 +267,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Filelogger.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Consumable.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

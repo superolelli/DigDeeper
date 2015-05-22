@@ -32,6 +32,7 @@ public:
 	void RenderInventory();
 	void Take(CThing *_thing, int amount);
 	void AddExp(int _exp){m_Attributes.currentExp += _exp;}
+	void AddEffect(SConsumableAttributes _attributes);
 	void Heal(int _life);
 	void AddMagicPoints(int _points){ m_pMagicMenu->AddMagicPoints(_points); }
 	void DoDamage(int _damage){ m_Attributes.currentHealth -= _damage; }
@@ -129,6 +130,8 @@ private:
 
 	SPlayerAttributes m_Attributes;                  //the player's atttributes
 	SPlayerState m_State;                              //the player's current state
+
+	list<SConsumableAttributes> m_ActiveEffects;            //the active effects on the player
 
 	CBeam *m_pExpBeam;                                //the exp beam
 	CBeam *m_pLifeBeam;                                //the life beam

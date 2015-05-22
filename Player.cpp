@@ -15,6 +15,7 @@ CPlayer::CPlayer()
 	m_pPanelBeam = NULL;
 	m_pExpBeam = NULL;
 	m_pLifeBeam = NULL;
+	m_ActiveEffects.clear();
 }
 
 
@@ -34,6 +35,8 @@ CPlayer::~CPlayer()
 	SAFE_DELETE(m_PanelMagic.m_Sprite);
 	SAFE_DELETE(m_pExpBeam);
 	SAFE_DELETE(m_pLifeBeam);
+
+	m_ActiveEffects.clear();
 }
 
 
@@ -214,6 +217,11 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 		torch = new CPlaceable;
 		torch->Init(TORCH);
 		m_pInventory->Take(torch, 10);
+
+		CPlaceable *cauldron;
+		cauldron = new CPlaceable;
+		cauldron->Init(CAULDRON);
+		m_pInventory->Take(cauldron);
 
 
 		m_pMagicMenu->AddMagicPoints(10);
@@ -612,7 +620,7 @@ void CPlayer::Render()
 
 	//if the player is carrying a tool: render it
 	CThing *thing = m_pInventory->GetCarriedThing();
-	if(thing != NULL && thing->getID() > ITBREAK && thing->getID() < TEBREAK)
+	if(thing != NULL && thing->getID() > CTBREAK && thing->getID() < TEBREAK)
 	{
 		CTool *tool = (CTool *)thing;
 
@@ -664,7 +672,7 @@ void CPlayer::Render()
 IntRect CPlayer::GetWeaponRect()
 {
 	CThing *thing = m_pInventory->GetCarriedThing();
-	if(thing != NULL && thing->getID() > ITBREAK && thing->getID() < TEBREAK)
+	if(thing != NULL && thing->getID() > CTBREAK && thing->getID() < TEBREAK)
 	{
 		CTool *tool = (CTool *)thing;	
 		return tool->GetRect();
@@ -902,40 +910,84 @@ void CPlayer::CheckArmAnimation()
 
 void CPlayer::CalculateAttributes()
 {
+	list<SConsumableAttributes>::iterator i;
+
+	//add all active effects
+	SConsumableAttributes allEffects;
+	
+	allEffects.armour = 0;
+	allEffects.breaking_speed = 0;
+	allEffects.luck = 0;
+	allEffects.healthRegeneration = 0;
+	allEffects.manaRegeneration = 0;
+	allEffects.speed = 0;
+	allEffects.strength = 0;
+	allEffects.criticalChance = 0;
+	allEffects.criticalDamage = 0;
+
+	for (i = m_ActiveEffects.begin(); i != m_ActiveEffects.end();)
+	{
+		//add this effect to the overall effect
+		allEffects.armour += i->armour;
+		allEffects.breaking_speed += i->breaking_speed;
+		allEffects.luck += i->luck;
+		allEffects.health += i->health;
+		allEffects.healthRegeneration += i->healthRegeneration;
+		allEffects.mana += i->mana;
+		allEffects.manaRegeneration += i->manaRegeneration;
+		allEffects.speed += i->speed;
+		allEffects.strength += i->strength;
+		allEffects.criticalChance += i->criticalChance;
+		allEffects.criticalDamage += i->criticalDamage;
+
+		//check duration
+		i->duration -= g_pTimer->GetElapsedTime().asSeconds();
+
+		if (i->duration <= 0)
+		{
+			i = m_ActiveEffects.erase(i);
+			continue;
+		}
+
+
+		i++;
+	}
+
+
 	m_modifications = m_pInventory->GetEquipmentAttributes();
 
 	CThing *thing = m_pInventory->GetCarriedThing();
-	if(thing != NULL && thing->getID() > ITBREAK && thing->getID() < TEBREAK)
+	if(thing != NULL && thing->getID() > CTBREAK && thing->getID() < TEBREAK)
 	{
 		CTool *tool = (CTool *)thing;
 
 		//calculate the attributes
-		m_modifications.breaking_speed += tool->GetAttributes().breaking_speed + m_Attributes.breakingSpeed;    //add modification to the breaking speed
-		m_modifications.armour += tool->GetAttributes().armour + m_Attributes.armour;
-		m_modifications.luck += tool->GetAttributes().luck + m_Attributes.luck;
+		m_modifications.breaking_speed += tool->GetAttributes().breaking_speed + allEffects.breaking_speed + m_Attributes.breakingSpeed;    //add modification to the breaking speed
+		m_modifications.armour += tool->GetAttributes().armour + allEffects.armour + m_Attributes.armour;
+		m_modifications.luck += tool->GetAttributes().luck + allEffects.luck + m_Attributes.luck;
 		m_modifications.maxHealth += tool->GetAttributes().maxHealth + m_Attributes.maxHealth;
 		m_modifications.maxMana += tool->GetAttributes().maxMana + m_Attributes.maxMana;
-		m_modifications.speed += tool->GetAttributes().speed + m_Attributes.speed;
-		m_modifications.strength += tool->GetAttributes().strength + m_Attributes.strength;
-		m_modifications.healthRegeneration += tool->GetAttributes().healthRegeneration + m_Attributes.healthRegeneration;
-		m_modifications.manaRegeneration += tool->GetAttributes().manaRegeneration + m_Attributes.manaRegeneration;
-		m_modifications.criticalChance += tool->GetAttributes().criticalChance + m_Attributes.criticalChance;
-		m_modifications.criticalDamage += tool->GetAttributes().criticalDamage + m_Attributes.criticalDamage;
+		m_modifications.speed += tool->GetAttributes().speed + allEffects.speed + m_Attributes.speed;
+		m_modifications.strength += tool->GetAttributes().strength + allEffects.strength + m_Attributes.strength;
+		m_modifications.healthRegeneration += tool->GetAttributes().healthRegeneration + allEffects.healthRegeneration + m_Attributes.healthRegeneration;
+		m_modifications.manaRegeneration += tool->GetAttributes().manaRegeneration + allEffects.manaRegeneration + m_Attributes.manaRegeneration;
+		m_modifications.criticalChance += tool->GetAttributes().criticalChance + allEffects.criticalChance + m_Attributes.criticalChance;
+		m_modifications.criticalDamage += tool->GetAttributes().criticalDamage + allEffects.criticalDamage + m_Attributes.criticalDamage;
 
 	}
 	else
 	{
-		m_modifications.breaking_speed += m_Attributes.breakingSpeed;
-		m_modifications.armour += m_Attributes.armour;
-		m_modifications.luck += m_Attributes.luck;
+		m_modifications.breaking_speed += m_Attributes.breakingSpeed + allEffects.breaking_speed;
+		m_modifications.armour += m_Attributes.armour + allEffects.armour;
+		m_modifications.luck += m_Attributes.luck + allEffects.luck;
 		m_modifications.maxHealth += m_Attributes.maxHealth;
 		m_modifications.maxMana += m_Attributes.maxMana;
-		m_modifications.speed += m_Attributes.speed;
-		m_modifications.strength += m_Attributes.strength;
-		m_modifications.healthRegeneration += m_Attributes.healthRegeneration;
-		m_modifications.manaRegeneration += m_Attributes.manaRegeneration;
-		m_modifications.criticalChance += m_Attributes.criticalChance;
-		m_modifications.criticalDamage += m_Attributes.criticalDamage;
+		m_modifications.speed += m_Attributes.speed + allEffects.speed;
+		m_modifications.strength += m_Attributes.strength + allEffects.strength;
+		m_modifications.healthRegeneration += m_Attributes.healthRegeneration + allEffects.healthRegeneration;
+		m_modifications.manaRegeneration += m_Attributes.manaRegeneration + allEffects.manaRegeneration;
+		m_modifications.criticalChance += m_Attributes.criticalChance + allEffects.criticalChance;
+		m_modifications.criticalDamage += m_Attributes.criticalDamage + allEffects.criticalDamage;
 	}
 
 }
@@ -962,4 +1014,32 @@ void CPlayer::Heal(int _life)
 void CPlayer::DoAlchemy(int _level)
 {
 	m_pWorld->DoAlchemy(_level);
+}
+
+
+
+
+
+void CPlayer::AddEffect(SConsumableAttributes _attributes)
+{
+	//push the effect back
+	m_ActiveEffects.push_back(_attributes);
+
+	//if the effect heals instantly: do it
+	if (_attributes.health != 0)
+	{
+		m_Attributes.currentHealth += _attributes.health;
+
+		if (m_Attributes.currentHealth > m_Attributes.maxHealth)
+			m_Attributes.currentHealth = m_Attributes.maxHealth;
+	}
+
+
+	if (_attributes.mana != 0)
+	{
+		m_Attributes.currentMana += _attributes.mana;
+
+		if (m_Attributes.currentMana > m_Attributes.maxMana)
+			m_Attributes.currentMana = m_Attributes.maxMana;
+	}
 }

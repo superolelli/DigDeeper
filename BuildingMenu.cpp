@@ -281,6 +281,12 @@ void CBuildingMenu::InitRecipe(SBuildingItem *_recipe)
 			_recipe->resources[WOODSTAFF] = 1;
 			_recipe->resources[WAX] = 1;
 		}break;
+		case(CAULDRON) :
+		{
+			_recipe->Name = "Kessel";
+			_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_cauldron);
+			_recipe->resources[IRON] = 5;
+		}break;
 		}
 
 		_recipe->m_pInfoSprite->SetPos(m_pBuildingMenu->GetRect().left + 250, m_pBuildingMenu->GetRect().top + 4);
@@ -385,6 +391,7 @@ void CBuildingMenu::FillRecipeList()
 	m_notAvailableRecipes.push_back(LANTERN);
 	//m_notAvailableRecipes.push_back(MAGICHAT);
 	m_notAvailableRecipes.push_back(BEEHOUSE);
+	m_notAvailableRecipes.push_back(CAULDRON);
 
 
 	m_chosenItem = pickaxe;
@@ -442,14 +449,14 @@ void CBuildingMenu::Render()
 						thing->Init(m_chosenItem.ID);
 						m_pInventory->Take(thing, m_chosenItem.amountOfProducts);		
 					}
-					else if(m_chosenItem.ID > PIBREAK && m_chosenItem.ID < ITBREAK)
+					else if(m_chosenItem.ID > PIBREAK && m_chosenItem.ID < CTBREAK)
 					{
 						CItem *thing = new CItem;
 						thing->Init(m_chosenItem.ID);
 						m_pInventory->Take(thing, m_chosenItem.amountOfProducts);	
 					}
 					//if thing is a tool
-					else if(m_chosenItem.ID > ITBREAK && m_chosenItem.ID < TEBREAK)
+					else if(m_chosenItem.ID > CTBREAK && m_chosenItem.ID < TEBREAK)
 					{
 						CTool *thing = new CTool;
 						thing->InitToolRandomly(m_chosenItem.ID);

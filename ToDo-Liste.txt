@@ -1,0 +1,3 @@
+- Kochmenü einfügen
+- Sin- /Cos- Berechnungen umschreiben
+- Bugfixes!
