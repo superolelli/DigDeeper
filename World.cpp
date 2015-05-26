@@ -882,7 +882,7 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 						}while(lucky);
 
 						//if a furnance was destroyed: delete the panel
-						if(m_pBlocks[x][y]->getID() == FURNANCE || m_pBlocks[x][y]->getID() == CHEST)
+						if(m_pBlocks[x][y]->getID() == FURNANCE || m_pBlocks[x][y]->getID() == CHEST || m_pBlocks[x][y]->getID() == CAULDRON)
 						{
 							vector<SItem> droppedItems;
 
@@ -1161,7 +1161,7 @@ bool CWorld::PlaceNewThing(int x, int y, int ID, IntRect &_playerRect)
 				if(m_pBlocks[x/100 -1][y/100] != NULL || m_pBlocks[x/100 +1][y/100] != NULL || m_pBlocks[x/100][y/100 -1] != NULL || m_pBlocks[x/100][y/100 +1] != NULL)
 				{
 					//some things must be placed on top of another
-					if(ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN || ID == TORCH)
+					if (ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN || ID == TORCH || ID == CAULDRON)
 					{
 						//if there is a block below
 						if(m_pBlocks[x/100][y/100+1] != NULL && m_pBlocks[x/100][y/100+1]->CanBePlacedOn())
@@ -1222,7 +1222,7 @@ bool CWorld::PlaceNewThing(int x, int y, int ID, IntRect &_playerRect)
 						m_pBlocks[x/100][y/100]->SetPos(x, y);
 					}
 
-					if(ID == FURNANCE || ID == CHEST)
+					if(ID == FURNANCE || ID == CHEST || ID == CAULDRON)
 					{
 						m_pBlocks[x/100][y/100]->SetSpecialID(AddPanel(ID, x, y));
 					}
@@ -1246,7 +1246,7 @@ bool CWorld::PlaceNewThing(int x, int y, int ID, IntRect &_playerRect)
 			{
 				if(m_pBlocks[x/100 -1][y/100] != NULL || m_pBlocks[x/100 +1][y/100] != NULL || m_pBlocks[x/100][y/100 +1] != NULL)
 				{
-					if (ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN || ID == TORCH)
+					if (ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN || ID == TORCH || ID == CAULDRON)
 					{
 						//if there is a block below
 						if (m_pBlocks[x / 100][y / 100 + 1] != NULL &&  m_pBlocks[x / 100][y / 100 + 1]->CanBePlacedOn())
@@ -1301,7 +1301,7 @@ bool CWorld::PlaceNewThing(int x, int y, int ID, IntRect &_playerRect)
 						m_pBlocks[x/100][y/100]->SetPos(x, y);
 					}
 
-					if(ID == FURNANCE || ID == CHEST)
+					if (ID == FURNANCE || ID == CHEST || ID == CAULDRON)
 					{
 						m_pBlocks[x/100][y/100]->SetSpecialID(AddPanel(ID, x, y));
 					}
@@ -1326,7 +1326,7 @@ bool CWorld::PlaceNewThing(int x, int y, int ID, IntRect &_playerRect)
 				if(m_pBlocks[x/100 +1][y/100] != NULL || m_pBlocks[x/100][y/100 -1] != NULL || m_pBlocks[x/100][y/100 +1] != NULL)
 				{
 					//some things must be placed on top of another
-					if (ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN || ID == TORCH)
+					if (ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN || ID == TORCH || ID == CAULDRON)
 					{
 						//if there is a block below
 						if (m_pBlocks[x / 100][y / 100 + 1] != NULL && m_pBlocks[x / 100][y / 100 + 1]->CanBePlacedOn())
@@ -1375,7 +1375,7 @@ bool CWorld::PlaceNewThing(int x, int y, int ID, IntRect &_playerRect)
 					}
 
 
-					if(ID == FURNANCE || ID == CHEST)
+					if (ID == FURNANCE || ID == CHEST || ID == CAULDRON)
 					{
 						m_pBlocks[x/100][y/100]->SetSpecialID(AddPanel(ID, x, y));
 					}
@@ -1400,7 +1400,7 @@ bool CWorld::PlaceNewThing(int x, int y, int ID, IntRect &_playerRect)
 				if(m_pBlocks[x/100 +1][y/100] != NULL || m_pBlocks[x/100][y/100 +1] != NULL)
 				{
 					//some things must be placed on top of another
-					if (ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN || ID == TORCH)
+					if (ID == FURNANCE || ID == CHEST || ID == CUPBOARD || ID == LANTERN || ID == TORCH || ID == CAULDRON)
 					{
 						//if there is a block below
 						if (m_pBlocks[x / 100][y / 100 + 1] != NULL &&  m_pBlocks[x / 100][y / 100 + 1]->CanBePlacedOn())
@@ -1449,7 +1449,7 @@ bool CWorld::PlaceNewThing(int x, int y, int ID, IntRect &_playerRect)
 					}
 
 
-					if(ID == FURNANCE || ID == CHEST)
+					if (ID == FURNANCE || ID == CHEST || ID == CAULDRON)
 					{
 						m_pBlocks[x/100][y/100]->SetSpecialID(AddPanel(ID, x, y));
 					}
@@ -1579,6 +1579,13 @@ int CWorld::AddPanel(int _ID, int _x, int _y)
 
 		m_PanelList.insert(p, newPanel);
 	}
+	else if (_ID == CAULDRON)
+	{
+		newPanel = new CCauldron();
+		newPanel->Init(counter);
+
+		m_PanelList.insert(p, newPanel);
+	}
 
 
 	return counter;
@@ -1601,7 +1608,7 @@ CPanel* CWorld::GetPanel()
 	if(m_pBlocks[x][y] != NULL)
 	{
 		//if the thing is a furnance or a chest and the player clicked on it: get it's number
-		if(m_pBlocks[x][y]->getID() == FURNANCE || m_pBlocks[x][y]->getID() == CHEST)
+		if(m_pBlocks[x][y]->getID() == FURNANCE || m_pBlocks[x][y]->getID() == CHEST || m_pBlocks[x][y]->getID() == CAULDRON)
 		{
 			if(Mouse::isButtonPressed(Mouse::Right))
 				number = m_pBlocks[x][y]->GetSpecialID();

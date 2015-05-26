@@ -73,7 +73,7 @@ const int SPELL = 79;
 const int ICBREAK = 80;              //the Item-Consumable-Break shows, where the consumable section begins
 
 const int HONEY = 81;
-
+const int MEAD = 82;
 
 const int CTBREAK = 100;             //the Consumable-Tool-Break shows, where the tool section begins
 
@@ -176,6 +176,22 @@ const int MAGICPOINTS = 12;
 #pragma endregion
 
 
+#pragma region Effects
+
+const int NUMBER_OF_EFFECTS = 10;
+
+const int EFFECT_ARMOUR = 0;
+const int EFFECT_BREAKINGSPEED = 1;
+const int EFFECT_CRITICALCHANCE = 2;
+const int EFFECT_CRITICALDAMAGE = 3;
+const int EFFECT_DRUNK = 4;
+const int EFFECT_HEALTHREGENERATION = 5;
+const int EFFECT_LUCK = 6;
+const int EFFECT_MANAREGENERATION = 7;
+const int EFFECT_SPEED = 8;
+const int EFFECT_STRENGTH = 9;
+
+#pragma endregion
 
 #pragma region Equipment
 
@@ -191,6 +207,7 @@ const int HAND = 4;
 
 const int PANEL_CHEST = 1;
 const int PANEL_FURNANCE = 2;
+const int PANEL_CAULDRON = 3;
 
 #pragma endregion
 
@@ -238,6 +255,17 @@ const int ALCHEMYANIMATION = 5;
 
 #pragma endregion
 
+
+
+#pragma region ConsumableRecipes
+
+const int NUMBER_OF_CONRECIPES = 1;
+
+const int CONRECIPES[1][5] = {
+	{ HONEY, HONEY, -1, -1, MEAD }
+};
+
+#pragma endregion
 
 
 

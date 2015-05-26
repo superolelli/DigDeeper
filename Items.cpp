@@ -177,6 +177,12 @@ void CItem::Init(int _ID, bool _loaded)
 		if (!_loaded)
 			m_Name = "Honig";
 	}break;
+	case(MEAD) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_mead);
+		if (!_loaded)
+			m_Name = "Met";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)

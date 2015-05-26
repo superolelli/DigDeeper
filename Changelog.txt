@@ -1176,3 +1176,14 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Konsumierbare Items hinzugefügt (Honig)
 
 ------------------------------------------------------
+25.05.2015
+
+-Kochmenü hinzugefügt
+-Met hinzugefügt
+
+------------------------------------------------------
+26.05.2015
+
+-Man wird nun betrunken, wenn man zuviel Met trinkt
+
+------------------------------------------------------

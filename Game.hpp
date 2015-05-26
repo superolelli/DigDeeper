@@ -29,6 +29,7 @@ private:
 	int m_music;                             //the current music
 	float m_seconds;                     //the timer for the frame checking
 	float m_zoom;                          //the zoom factor
+	bool m_rotatingDown;                  //is the view rotating down?
 	string m_Name;                         //the name of the game
 
 	bool is_running;                   //is the game still running?

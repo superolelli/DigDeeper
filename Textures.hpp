@@ -75,6 +75,9 @@ public:
 	Texture t_lifeBeam;                              //the beam, which shows the current life
 	Texture t_manaBeam;                              //the beam, which shows the current mana
 
+	//the status symbols
+	Texture t_status[10];
+
 	Texture t_buildingWindow;                           //the building menu
 	Texture t_buildButton;                              //the "build" button
 	Texture t_arrowUp;                                   //the arrow up button
@@ -100,6 +103,8 @@ public:
 	Texture t_newSkillRecipe;
 
 	Texture t_furnanceMenu;                                //the melting menu
+	Texture t_cauldronMenu;                                 //the cooking menu
+	Texture t_cookingButton;
 
 	Texture t_magicMenu;                            //the magic menu
 	Texture t_buttonPlus;
@@ -228,6 +233,7 @@ public:
 	Texture t_blockInventoryTexture_honey;
 	Texture t_blockInventoryTexture_torch;
 	Texture t_blockInventoryTexture_cauldron;
+	Texture t_blockInventoryTexture_mead;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -279,6 +285,7 @@ public:
 	Texture t_blockLittleTexture_honey;
 	Texture t_blockLittleTexture_torch;
 	Texture t_blockLittleTexture_cauldron;
+	Texture t_blockLittleTexture_mead;
 
 
 	//the "carried" texture of the tools

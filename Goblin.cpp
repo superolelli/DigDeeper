@@ -518,5 +518,8 @@ IntRect CGoblin::GetWeaponRect()
 	case(KNIGHTGOBLIN) :
 		return IntRect(m_pGoblin->GetHandPos(m_left).x + 3, m_pGoblin->GetHandPos(m_left).y - 42, 20, 17);
 		break;
+	default:
+		return IntRect(0, 0, 0, 0);
+		break;
 	}
 }

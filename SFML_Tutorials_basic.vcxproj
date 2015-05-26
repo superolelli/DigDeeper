@@ -91,6 +91,7 @@
     <ClCompile Include="Bee.cpp" />
     <ClCompile Include="BuildingMenu.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Cauldron.cpp" />
     <ClCompile Include="CharacterInfo.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="Consumable.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="Bee.hpp" />
     <ClInclude Include="BuildingMenu.hpp" />
     <ClInclude Include="Button.hpp" />
+    <ClInclude Include="Cauldron.hpp" />
     <ClInclude Include="CharacterInfo.hpp" />
     <ClInclude Include="Chest.hpp" />
     <ClInclude Include="Constants.hpp" />

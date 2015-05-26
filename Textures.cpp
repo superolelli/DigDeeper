@@ -62,6 +62,17 @@ void TextureLoading::LoadTextures()
 	t_lifeBeam.loadFromFile("Data/Sprites/Panels/life_beam.png");
 	t_manaBeam.loadFromFile("Data/Sprites/Panels/mana_beam.png");
 
+	t_status[0].loadFromFile("Data/Sprites/Effects/status_armour.png");
+	t_status[1].loadFromFile("Data/Sprites/Effects/status_breaking_speed.png");
+	t_status[2].loadFromFile("Data/Sprites/Effects/status_critical_chance.png");
+	t_status[3].loadFromFile("Data/Sprites/Effects/status_critical_damage.png");
+	t_status[4].loadFromFile("Data/Sprites/Effects/status_drunk.png");
+	t_status[5].loadFromFile("Data/Sprites/Effects/status_healthregeneration.png");
+	t_status[6].loadFromFile("Data/Sprites/Effects/status_luck.png");
+	t_status[7].loadFromFile("Data/Sprites/Effects/status_manaregeneration.png");
+	t_status[8].loadFromFile("Data/Sprites/Effects/status_speed.png");
+	t_status[9].loadFromFile("Data/Sprites/Effects/status_strength.png");
+
 	t_buildingWindow.loadFromFile("Data/Sprites/Building/building_menu.png");
 	t_buildButton.loadFromFile("Data/Sprites/Building/build_button.png");
 	t_arrowUp.loadFromFile("Data/Sprites/Building/arrow_up.png");
@@ -85,6 +96,8 @@ void TextureLoading::LoadTextures()
 	t_newSkillRecipe.loadFromFile("Data/Sprites/Skills/levelUp_recipe.png");
 
 	t_furnanceMenu.loadFromFile("Data/Sprites/Inventory/furnance_menu2.png");
+	t_cauldronMenu.loadFromFile("Data/Sprites/Inventory/cooking_menu.png");
+	t_cookingButton.loadFromFile("Data/Sprites/Buttons/cooking_button.png");
 
 	t_magicMenu.loadFromFile("Data/Sprites/Magic/magic_menu.png");
 	t_buttonPlus.loadFromFile("Data/Sprites/Magic/plus.png");
@@ -212,6 +225,7 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_honey.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/honey_inventory.png");
 	t_blockInventoryTexture_torch.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/torch_inventory.png");
 	t_blockInventoryTexture_cauldron.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/cauldron_inventory.png");
+	t_blockInventoryTexture_mead.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/mead_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
@@ -261,6 +275,7 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_honey.loadFromFile("Data/Sprites/Objects/LittleItems/honey_little.png");
 	t_blockLittleTexture_torch.loadFromFile("Data/Sprites/Objects/LittleItems/torch_little.png");
 	t_blockLittleTexture_cauldron.loadFromFile("Data/Sprites/Objects/LittleItems/cauldron_little.png");
+	t_blockLittleTexture_mead.loadFromFile("Data/Sprites/Objects/LittleItems/mead_little.png");
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");
 	t_tool_sword.loadFromFile("Data/Sprites/Objects/Tools/sword_carried.png");

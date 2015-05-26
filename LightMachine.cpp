@@ -42,11 +42,8 @@ void CLightMachine::Clear(Color _color)
 	//if the user zoomed
 	if(m_ViewLastWidth != (int)(m_View->getSize().x))
 	{
-		cout <<"Last Width: " << m_ViewLastWidth << endl;
-		cout <<"New Width: " << m_View->getSize().x << endl;
 		m_ViewLastWidth = m_View->getSize().x;
-
-		m_lightTexture.create(m_View->getSize().x +20, m_View->getSize().y +20);
+		m_lightTexture.create(m_View->getSize().x + 20, m_View->getSize().y + 20);
 	}
 
 	m_lightTexture.clear(_color);
@@ -64,7 +61,8 @@ void CLightMachine::Render()
 	Sprite lights;
 	m_lightTexture.display();
 	lights.setTexture(m_lightTexture.getTexture());
-	lights.setPosition(m_ViewX -10, m_ViewY -10);
+	lights.setPosition(m_ViewX - 10, m_ViewY - 10);
+
 
 	g_pFramework->GetWindow()->draw(lights);
 }

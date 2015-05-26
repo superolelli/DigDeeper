@@ -785,7 +785,6 @@ void CInventory::Render(IntRect &_playerRect)
 			}
 		}
 
-
 	}
 	//if the inventory isn't open
 	else
@@ -827,11 +826,21 @@ void CInventory::Render(IntRect &_playerRect)
 					CConsumable *con;
 					con = (CConsumable*)(i->thing);
 
+					//add the effect
 					m_pPlayer->AddEffect(con->GetAttributes());
 
-					SAFE_DELETE(i->thing);
-					i = m_inventoryList.erase(i);
-					continue;
+					if (con->getID() == MEAD)
+						m_pPlayer->AddDrunkness(5.0f);
+
+					//reduce the amount of the consumable
+					i->amount--;
+
+					if (i->amount <= 0)
+					{
+						SAFE_DELETE(i->thing);
+						i = m_inventoryList.erase(i);
+						continue;
+					}
 				}
 
 				i->thing->RenderInventorySprite();

@@ -23,7 +23,8 @@ void CChest::Quit()
 		{
 			for(int x = 0; x < 5; x++)
 			{
-				SAFE_DELETE(m_chest[x][y].thing);
+				if (m_chest[x][y].amount > 0)
+					SAFE_DELETE(m_chest[x][y].thing);
 			}
 		}	
 }

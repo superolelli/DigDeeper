@@ -36,6 +36,11 @@ CPlayer::~CPlayer()
 	SAFE_DELETE(m_pExpBeam);
 	SAFE_DELETE(m_pLifeBeam);
 
+	for (int i = 0; i < NUMBER_OF_EFFECTS; i++)
+	{
+		SAFE_DELETE(m_StatusEffects[i].m_Sprite);
+	}
+
 	m_ActiveEffects.clear();
 }
 
@@ -90,6 +95,13 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 	m_PanelMagic.m_Sprite->SetPos(m_pPanelBeam->GetRect().left + 750, m_pPanelBeam->GetRect().top);
 	m_PanelMagic.m_isClicked = false;
 
+	for (int i = 0; i < NUMBER_OF_EFFECTS; i++)
+	{
+		m_StatusEffects[i].m_Sprite = new CSprite;
+		m_StatusEffects[i].m_Sprite->Load(&g_pTextures->t_status[i]);
+		m_StatusEffects[i].m_show = false;
+	}
+
 	m_Attributes.currentHealth = 100;
 	m_Attributes.maxHealth = 100;
 	m_Attributes.healthRegeneration = 0;
@@ -106,6 +118,8 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 
 	m_Attributes.currentExp = 0;
 	m_Attributes.maxExp = 10;
+
+	m_fDrunk = 0;
 
 	switch(_class)
 	{
@@ -223,6 +237,15 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 		cauldron->Init(CAULDRON);
 		m_pInventory->Take(cauldron);
 
+		CConsumable *honey;
+		honey = new CConsumable;
+		honey->InitConsumable(HONEY);
+		m_pInventory->Take(honey, 4);
+
+		CConsumable *mead;
+		mead = new CConsumable;
+		mead->InitConsumable(MEAD);
+		m_pInventory->Take(mead, 4);
 
 		m_pMagicMenu->AddMagicPoints(10);
 
@@ -336,6 +359,14 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view)
 	m_pExpBeam->Load(&g_pTextures->t_expBeam, &g_pTextures->t_expFrame, &m_Attributes.currentExp, &m_Attributes.maxExp);
 	m_pExpBeam->SetPos(20, 70);
 	m_pExpBeam->SetCharacterSize(10);
+
+
+	for (int i = 0; i < NUMBER_OF_EFFECTS; i++)
+	{
+		m_StatusEffects[i].m_Sprite = new CSprite;
+		m_StatusEffects[i].m_Sprite->Load(&g_pTextures->t_status[i]);
+		m_StatusEffects[i].m_show = false;
+	}
 
 	show_beam_numbers = false;
 
@@ -720,6 +751,19 @@ void CPlayer::RenderInventory()
 		m_pExpBeam->Render(g_pFramework->GetWindow());
 	}
 
+	//show the status effects
+	int x = 10;
+	int y = 95;
+	for (int i = 0; i < NUMBER_OF_EFFECTS; i++)
+	{
+		if (m_StatusEffects[i].m_show)
+		{
+			m_StatusEffects[i].m_Sprite->SetPos(x,y);
+			m_StatusEffects[i].m_Sprite->Render(g_pFramework->GetWindow());
+
+			x += 80;
+		}
+	}
 
 	
 	//check wether the player wants to open a panel
@@ -931,9 +975,7 @@ void CPlayer::CalculateAttributes()
 		allEffects.armour += i->armour;
 		allEffects.breaking_speed += i->breaking_speed;
 		allEffects.luck += i->luck;
-		allEffects.health += i->health;
 		allEffects.healthRegeneration += i->healthRegeneration;
-		allEffects.mana += i->mana;
 		allEffects.manaRegeneration += i->manaRegeneration;
 		allEffects.speed += i->speed;
 		allEffects.strength += i->strength;
@@ -952,6 +994,58 @@ void CPlayer::CalculateAttributes()
 
 		i++;
 	}
+
+	//set status symbols
+	if (allEffects.armour != 0)
+		m_StatusEffects[EFFECT_ARMOUR].m_show = true;
+	else
+		m_StatusEffects[EFFECT_ARMOUR].m_show = false;
+
+	if (allEffects.breaking_speed != 0)
+		m_StatusEffects[EFFECT_BREAKINGSPEED].m_show = true;
+	else
+		m_StatusEffects[EFFECT_BREAKINGSPEED].m_show = false;
+
+	if (allEffects.luck != 0)
+		m_StatusEffects[EFFECT_LUCK].m_show = true;
+	else
+		m_StatusEffects[EFFECT_LUCK].m_show = false;
+
+	if (allEffects.healthRegeneration != 0)
+		m_StatusEffects[EFFECT_HEALTHREGENERATION].m_show = true;
+	else
+		m_StatusEffects[EFFECT_HEALTHREGENERATION].m_show = false;
+
+	if (allEffects.manaRegeneration != 0)
+		m_StatusEffects[EFFECT_MANAREGENERATION].m_show = true;
+	else
+		m_StatusEffects[EFFECT_MANAREGENERATION].m_show = false;
+
+	if (allEffects.speed != 0)
+		m_StatusEffects[EFFECT_SPEED].m_show = true;
+	else
+		m_StatusEffects[EFFECT_SPEED].m_show = false;
+
+	if (allEffects.strength != 0)
+		m_StatusEffects[EFFECT_STRENGTH].m_show = true;
+	else
+		m_StatusEffects[EFFECT_STRENGTH].m_show = false;
+
+	if (allEffects.criticalChance != 0)
+		m_StatusEffects[EFFECT_CRITICALCHANCE].m_show = true;
+	else
+		m_StatusEffects[EFFECT_CRITICALCHANCE].m_show = false;
+
+	if (allEffects.criticalDamage != 0)
+		m_StatusEffects[EFFECT_CRITICALDAMAGE].m_show = true;
+	else
+		m_StatusEffects[EFFECT_CRITICALDAMAGE].m_show = false;
+
+	if (m_fDrunk > 0)
+		m_StatusEffects[EFFECT_DRUNK].m_show = true;
+	else
+		m_StatusEffects[EFFECT_DRUNK].m_show = false;
+
 
 
 	m_modifications = m_pInventory->GetEquipmentAttributes();
@@ -990,6 +1084,12 @@ void CPlayer::CalculateAttributes()
 		m_modifications.criticalDamage += m_Attributes.criticalDamage + allEffects.criticalDamage;
 	}
 
+
+	//reduce the drunkness
+	m_fDrunk = m_fDrunk - g_pTimer->GetElapsedTime().asSeconds();
+
+	if (m_fDrunk < 0)
+		m_fDrunk = 0;
 }
 
 //returns the player's attributes (with all modifications [equipment, tools etc])

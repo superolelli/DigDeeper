@@ -54,7 +54,7 @@ private:
 		ar & m_ThingToBurn;
 		ar & m_Product;
 
-		Init(m_Number);
+		Init(m_Number, true);
 	}
 	BOOST_SERIALIZATION_SPLIT_MEMBER();
 

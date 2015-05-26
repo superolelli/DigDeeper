@@ -1,29 +1,14 @@
-﻿Der Buildvorgang wurde am 22.05.2015 15:34:12 gestartet.
+﻿Der Buildvorgang wurde am 26.05.2015 13:19:56 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Consumable.cpp Items.cpp World.cpp
-         Consumable.cpp
-         Items.cpp
-         World.cpp
-     1>World.cpp(480): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(481): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(762): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(763): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1720): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1721): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1722): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1723): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1777): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1778): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1779): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1780): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1941): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1942): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
+         Game.cpp
        Link:
          F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.3\lib" "sfml-audio.lib" "sfml-graphics.lib" "sfml-network.lib" "sfml-system.lib" "sfml-window.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.lib" /MACHINE:X86 /SAFESEH Release\Beam.obj
          Release\Bee.obj
          Release\BuildingMenu.obj
          Release\Button.obj
+         Release\Cauldron.obj
          Release\CharacterInfo.obj
          Release\Chest.obj
          Release\Consumable.obj
@@ -62,12 +47,10 @@
          Release\World.obj
             Bibliothek "F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.lib" und Objekt "F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.exp" werden erstellt.
          Code wird generiert.
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(522): warning C4715: "CGoblin::GetWeaponRect": Nicht alle Steuerelementpfade geben einen Wert zurück.
-     1>f:\dig deeper rewritten\digdeeper\player.cpp(934): warning C4700: Die nicht initialisierte lokale Variable "allEffects" wurde verwendet.
          Codegenerierung ist abgeschlossen.
          SFML_Tutorials_basic.vcxproj -> F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.exe
      1>Die Erstellung des Projekts "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" ist abgeschlossen, Build Ziel(e).
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:11.50
+Verstrichene Zeit 00:00:11.77

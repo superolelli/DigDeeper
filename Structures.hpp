@@ -332,5 +332,11 @@ struct SProjectile
 
 
 
+struct SEffect
+{
+	CSprite *m_Sprite;
+	bool m_show;
+};
+
 
 #endif

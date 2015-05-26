@@ -12,6 +12,7 @@
 #include "Player.hpp"
 #include "Panel.hpp"
 #include "Furnance.hpp"
+#include "Cauldron.hpp"
 #include "Chest.hpp"
 #include "Profiler.hpp"
 #include "Projectiles.hpp"
@@ -136,6 +137,11 @@ private:
 				CFurnance* furnance = (CFurnance*)p;
 				ar & furnance;
 			}
+			else if (d == PANEL_CAULDRON)
+			{
+				CCauldron* cauldron = (CCauldron*)p;
+				ar & cauldron;
+			}
 		}
 
 		//save  1000 for checking
@@ -221,6 +227,13 @@ private:
 				furnance->Init(0, true);
 				m_PanelList.push_back(furnance);
 				cout <<"Loaded furnance" << endl;
+			}
+			else if (a == PANEL_CAULDRON)
+			{
+				CCauldron* cauldron;
+				ar >> cauldron;
+				cauldron->Init(0, true);
+				m_PanelList.push_back(cauldron);
 			}
 		}while(a != 1000);
 	}

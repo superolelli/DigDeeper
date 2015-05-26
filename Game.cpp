@@ -96,6 +96,8 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	//the zoom is normal
 	m_zoom = 1;
 
+	m_rotatingDown = true;
+
 	//the game is now running
 	is_running = true;
 
@@ -262,7 +264,29 @@ void CGame::Run()
 //Moves the view and the player
 void CGame::CheckView()
 {
-
+	//rotate the view if player is drunk
+	if (m_pPlayer->GetDrunkness() > 5.0f)
+	{
+		if (m_rotatingDown)
+		{
+			if (m_View.getRotation() < 20 || m_View.getRotation() >= 340)
+				m_View.rotate(0.25);
+			else
+				m_rotatingDown = false;		
+		}
+		else
+		{
+			if (m_View.getRotation() <= 20 || m_View.getRotation() > 340)
+				m_View.rotate(-0.25);
+			else
+				m_rotatingDown = true;
+		}
+	}
+	else
+	{
+		//reset the rotation
+		m_View.rotate(360 - m_View.getRotation());
+	}
 
 	//Moves the player
 	Vector2f dwarfCenter = m_pPlayer->CheckMovement();

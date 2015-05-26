@@ -14,7 +14,6 @@ class CWorld;
 
 
 
-
 class CPlayer
 {
 public:
@@ -32,6 +31,8 @@ public:
 	void RenderInventory();
 	void Take(CThing *_thing, int amount);
 	void AddExp(int _exp){m_Attributes.currentExp += _exp;}
+	void AddDrunkness(float _drunkness){ m_fDrunk += _drunkness; }
+	float GetDrunkness(){ return m_fDrunk; }
 	void AddEffect(SConsumableAttributes _attributes);
 	void Heal(int _life);
 	void AddMagicPoints(int _points){ m_pMagicMenu->AddMagicPoints(_points); }
@@ -127,6 +128,8 @@ private:
 	SHoldingButtons m_PanelAttributes;
 	SHoldingButtons m_PanelMagic;
 
+	SEffect m_StatusEffects[NUMBER_OF_EFFECTS];
+
 
 	SPlayerAttributes m_Attributes;                  //the player's atttributes
 	SPlayerState m_State;                              //the player's current state
@@ -149,6 +152,8 @@ private:
 
 	int m_FallingSpeed;                                 //the speed with wich the dwarf is falling
 	int m_SideSpeed;                                    //the speed to one side (e.g. by being hitted)
+
+	float m_fDrunk;                                           //how drunk is the dwarf?
 
 	bool m_turned_left;                                //is the player turned to the left side?
 	bool m_armGoingUp;                                  //is the arm moved up?

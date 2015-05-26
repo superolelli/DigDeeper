@@ -30,8 +30,11 @@ void CConsumable::InitConsumable(int _ID)
 	case(HONEY) :
 	{
 		m_Attributes.luck = 1;
-		m_Attributes.health = 5;
 		m_Attributes.duration = 10.0f;
+	}break;
+	case(MEAD) :
+	{
+		m_Attributes.health = 10;
 	}break;
 	}
 }

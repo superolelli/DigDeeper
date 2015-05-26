@@ -29,9 +29,14 @@ CFurnance::~CFurnance()
 
 void CFurnance::Quit()
 {
-	SAFE_DELETE(m_BurningMaterial.thing);
-	SAFE_DELETE(m_Product.thing);
-	SAFE_DELETE(m_ThingToBurn.thing);
+	if (m_BurningMaterial.amount > 0)
+		SAFE_DELETE(m_BurningMaterial.thing);
+
+	if (m_Product.amount > 0)
+		SAFE_DELETE(m_Product.thing);
+
+	if (m_ThingToBurn.amount > 0)
+		SAFE_DELETE(m_ThingToBurn.thing);
 }
 
 void CFurnance::Init(int _Number, bool _loaded)
