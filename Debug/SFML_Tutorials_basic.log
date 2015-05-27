@@ -1,8 +1,22 @@
-﻿Der Buildvorgang wurde am 25.05.2015 19:35:27 gestartet.
+﻿Der Buildvorgang wurde am 27.05.2015 15:08:31 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Inventory.cpp
-         Inventory.cpp
+         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt World.cpp
+         World.cpp
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(480): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(481): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(762): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(763): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1727): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1728): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1729): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1730): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1784): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1785): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1786): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1787): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1948): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(1949): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
        Link:
          F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.3\lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-network-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.lib" /MACHINE:X86 Debug\Beam.obj
          Debug\Bee.obj
@@ -50,4 +64,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:01.78
+Verstrichene Zeit 00:00:01.84

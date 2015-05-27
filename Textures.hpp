@@ -86,6 +86,7 @@ public:
 
 	Texture t_skillPage;                                //the character window
 	Texture t_levelUp;                                  //the level-Up window
+	Texture t_levelUp_button;                           //the level up button
 	
 	//the available skills
 	Texture t_newSkillSpeed;                            
@@ -317,6 +318,8 @@ public:
 	Texture t_goblin_arm;
 	Texture t_goblin_arm2;
 	Texture t_goblin_arm3;
+
+	Shader s_drunkShader;
 
 	Font f_coolsville;
 	Font f_ltromatic;

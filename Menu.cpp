@@ -29,13 +29,13 @@ void CMenu::Init()
 
 	//Load the three buttons
 	m_pPlay = new CButton;
-	m_pPlay->Load(&g_pTextures->t_menuButtonPlay, g_pFramework->GetWindow()->getSize().x/2 - 100, g_pFramework->GetWindow()->getSize().y/6, CButton::BUTTONTYPE_MOTION_UP); 
+	m_pPlay->Load(&g_pTextures->t_menuButtonPlay, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, g_pFramework->GetRenderWindow()->getSize().y/6, CButton::BUTTONTYPE_MOTION_UP); 
 
 	m_pOptions = new CButton;
-	m_pOptions->Load(&g_pTextures->t_menuButtonOptions, g_pFramework->GetWindow()->getSize().x/2 - 100, 100 + 2*(g_pFramework->GetWindow()->getSize().y/6), CButton::BUTTONTYPE_MOTION_UP); 
+	m_pOptions->Load(&g_pTextures->t_menuButtonOptions, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, 100 + 2*(g_pFramework->GetRenderWindow()->getSize().y/6), CButton::BUTTONTYPE_MOTION_UP); 
 
 	m_pQuit = new CButton;
-	m_pQuit->Load(&g_pTextures->t_menuButtonQuit, g_pFramework->GetWindow()->getSize().x/2 - 100, 200 + 3*(g_pFramework->GetWindow()->getSize().y/6), CButton::BUTTONTYPE_MOTION_UP); 
+	m_pQuit->Load(&g_pTextures->t_menuButtonQuit, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, 200 + 3*(g_pFramework->GetRenderWindow()->getSize().y/6), CButton::BUTTONTYPE_MOTION_UP); 
 }
 
 
@@ -71,7 +71,7 @@ int CMenu::Run()
 				m_ButtonEventtype = MOUSE_LEFT_UP;
 
 		//Render the background
-		m_pBackground->Render(g_pFramework->GetWindow());
+		m_pBackground->Render(g_pFramework->GetRenderWindow());
 
 		//Render the buttons
 		RenderButtons();

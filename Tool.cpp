@@ -173,7 +173,7 @@ void CTool::InitToolRandomly(int _ID)
 void CTool::RenderTool(int _x, int _y)
 {
 	m_pCarriedToolSprite->SetPos(_x, _y);
-	m_pCarriedToolSprite->Render(g_pFramework->GetWindow());
+	m_pCarriedToolSprite->Render(g_pFramework->GetRenderWindow());
 }
 
 

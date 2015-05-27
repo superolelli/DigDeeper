@@ -24,18 +24,18 @@ void CLoadGame::Init()
 	m_pBackground->Load(&g_pTextures->t_menuBackground);
 
 	m_pLoadGameButton = new CButton;
-	m_pLoadGameButton->Load(&g_pTextures->t_menuButtonLoadThisGame, g_pFramework->GetWindow()->getSize().x/2 - 350, g_pFramework->GetWindow()->getSize().y - g_pFramework->GetWindow()->getSize().y/4, 3);
+	m_pLoadGameButton->Load(&g_pTextures->t_menuButtonLoadThisGame, g_pFramework->GetRenderWindow()->getSize().x/2 - 350, g_pFramework->GetRenderWindow()->getSize().y - g_pFramework->GetRenderWindow()->getSize().y/4, 3);
 
 	m_pDeleteGameButton = new CButton;
-	m_pDeleteGameButton->Load(&g_pTextures->t_menuButtonDeleteThisGame, g_pFramework->GetWindow()->getSize().x/2 + 150, g_pFramework->GetWindow()->getSize().y - g_pFramework->GetWindow()->getSize().y/4, 3);
+	m_pDeleteGameButton->Load(&g_pTextures->t_menuButtonDeleteThisGame, g_pFramework->GetRenderWindow()->getSize().x/2 + 150, g_pFramework->GetRenderWindow()->getSize().y - g_pFramework->GetRenderWindow()->getSize().y/4, 3);
 
 	m_pReturnButton = new CButton;
-	m_pReturnButton->Load(&g_pTextures->t_menuButtonReturn, g_pFramework->GetWindow()->getSize().x/2 - 100, g_pFramework->GetWindow()->getSize().y - 150, 3);
+	m_pReturnButton->Load(&g_pTextures->t_menuButtonReturn, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, g_pFramework->GetRenderWindow()->getSize().y - 150, 3);
 
 	m_pButtonUp = new CButton;
-	m_pButtonUp->Load(&g_pTextures->t_menuButtonUp, g_pFramework->GetWindow()->getSize().x - 100, 200, 1);
+	m_pButtonUp->Load(&g_pTextures->t_menuButtonUp, g_pFramework->GetRenderWindow()->getSize().x - 100, 200, 1);
 	m_pButtonDown = new CButton;
-	m_pButtonDown->Load(&g_pTextures->t_menuButtonDown, g_pFramework->GetWindow()->getSize().x - 100 , g_pFramework->GetWindow()->getSize().y - 200, 1);
+	m_pButtonDown->Load(&g_pTextures->t_menuButtonDown, g_pFramework->GetRenderWindow()->getSize().x - 100 , g_pFramework->GetRenderWindow()->getSize().y - 200, 1);
 
 	m_font.loadFromFile("Data/Fonts/ltromatic.ttf");
 	m_text.setFont(m_font);
@@ -64,7 +64,7 @@ void CLoadGame::Init()
 	{
 		CSprite* sprite = new CSprite;
 		sprite->Load(&g_pTextures->t_menuButtonBlank, 2, 500, 100);
-		sprite->SetPos( g_pFramework->GetWindow()->getSize().x/2 - 250, y);
+		sprite->SetPos( g_pFramework->GetRenderWindow()->getSize().x/2 - 250, y);
 		m_pButtonList.push_back(sprite);
 
 		y += 130;
@@ -114,7 +114,7 @@ int CLoadGame::Run()
 
 
 		//Render the background
-		m_pBackground->Render(g_pFramework->GetWindow());
+		m_pBackground->Render(g_pFramework->GetRenderWindow());
 
 		//Render the buttons
 		RenderButtons();
@@ -204,7 +204,7 @@ void CLoadGame::RenderButtons()
 	//Iterate through the button list
 	for(ib = m_pButtonList.begin(); ib != m_pButtonList.end(); ib++)
 	{
-		(*ib)->SetPos( g_pFramework->GetWindow()->getSize().x/2 - 250, 30 + (counter*130));
+		(*ib)->SetPos( g_pFramework->GetRenderWindow()->getSize().x/2 - 250, 30 + (counter*130));
 		//sets the name of the saved directory as text
 		m_text.setString((*is).m_path.filename().c_str());
 		m_text.setPosition((*ib)->GetRect().left + (*ib)->GetRect().width/2 - m_text.getGlobalBounds().width/2, (*ib)->GetRect().top + 30);
@@ -230,12 +230,12 @@ void CLoadGame::RenderButtons()
 
 		//render the button
 		if((*is).m_clicked)
-			(*ib)->Render(g_pFramework->GetWindow(), 1.0f);
+			(*ib)->Render(g_pFramework->GetRenderWindow(), 1.0f);
 		else
-			(*ib)->Render(g_pFramework->GetWindow(), 0.0f);
+			(*ib)->Render(g_pFramework->GetRenderWindow(), 0.0f);
 		
 
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		is++;
 		counter++;

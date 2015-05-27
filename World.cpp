@@ -553,12 +553,12 @@ void CWorld::Render()
 						if (neighbourID == TREETRUNK)
 						{
 							g_pRims->TreeRims[m_pBlocks[x][y - 1]->GetOverlappingID(0)].SetPos(x * 100, y * 100);
-							g_pRims->TreeRims[m_pBlocks[x][y - 1]->GetOverlappingID(0)].Render(g_pFramework->GetWindow());
+							g_pRims->TreeRims[m_pBlocks[x][y - 1]->GetOverlappingID(0)].Render(g_pFramework->GetRenderWindow());
 						}
 						else
 						{
 							g_pRims->TopRims[neighbourID - 1][m_pBlocks[x][y - 1]->GetOverlappingID(0)].SetPos(x * 100, y * 100);
-							g_pRims->TopRims[neighbourID - 1][m_pBlocks[x][y - 1]->GetOverlappingID(0)].Render(g_pFramework->GetWindow());
+							g_pRims->TopRims[neighbourID - 1][m_pBlocks[x][y - 1]->GetOverlappingID(0)].Render(g_pFramework->GetRenderWindow());
 						}
 					}
 
@@ -576,7 +576,7 @@ void CWorld::Render()
 						if (neighbourID != TREETRUNK)
 						{
 							g_pRims->BottomRims[neighbourID - 1][m_pBlocks[x][y + 1]->GetOverlappingID(1)].SetPos(x * 100, y * 100 + 100 - g_pRims->BottomRims[0][0].GetRect().height);
-							g_pRims->BottomRims[neighbourID - 1][m_pBlocks[x][y + 1]->GetOverlappingID(1)].Render(g_pFramework->GetWindow());
+							g_pRims->BottomRims[neighbourID - 1][m_pBlocks[x][y + 1]->GetOverlappingID(1)].Render(g_pFramework->GetRenderWindow());
 						}
 					}
 
@@ -594,7 +594,7 @@ void CWorld::Render()
 						if (neighbourID != TREETRUNK)
 						{
 							g_pRims->LeftRims[neighbourID - 1][m_pBlocks[x - 1][y]->GetOverlappingID(2)].SetPos(x * 100, y * 100);
-							g_pRims->LeftRims[neighbourID - 1][m_pBlocks[x - 1][y]->GetOverlappingID(2)].Render(g_pFramework->GetWindow());
+							g_pRims->LeftRims[neighbourID - 1][m_pBlocks[x - 1][y]->GetOverlappingID(2)].Render(g_pFramework->GetRenderWindow());
 						}
 					}
 
@@ -612,7 +612,7 @@ void CWorld::Render()
 						if (neighbourID != TREETRUNK)
 						{
 							g_pRims->RightRims[neighbourID - 1][m_pBlocks[x + 1][y]->GetOverlappingID(3)].SetPos(x * 100 + 100 - g_pRims->RightRims[0][0].GetRect().width, y * 100);
-							g_pRims->RightRims[neighbourID - 1][m_pBlocks[x + 1][y]->GetOverlappingID(3)].Render(g_pFramework->GetWindow());
+							g_pRims->RightRims[neighbourID - 1][m_pBlocks[x + 1][y]->GetOverlappingID(3)].Render(g_pFramework->GetRenderWindow());
 						}
 					}
 
@@ -721,12 +721,12 @@ int CWorld::CheckCollisionWithPassable(FloatRect _player)
 		yStart = 0;
 
 	int xEnd = xStart +4;
-	if(xEnd > m_BlocksX)
-		xEnd = m_BlocksX;
+	if(xEnd >= m_BlocksX)
+		xEnd = m_BlocksX-1;
 
 	int yEnd = yStart +4;
-	if(yEnd > m_BlocksY)
-		yEnd = m_BlocksY;
+	if(yEnd >= m_BlocksY)
+		yEnd = m_BlocksY-1;
 
 
 	for(int y = yStart; y <= yEnd; y++)
@@ -774,12 +774,12 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 		yStart = 0;
 
 	int xEnd = (_playerRect.left/100) +1;
-	if(xEnd > m_BlocksX)
-		xEnd = m_BlocksX;
+	if(xEnd >= m_BlocksX)
+		xEnd = m_BlocksX - 1;
 
 	int yEnd = (_playerRect.top/100) +1;
-	if(yEnd > m_BlocksY)
-		yEnd = m_BlocksY;
+	if(yEnd >= m_BlocksY)
+		yEnd = m_BlocksY - 1;
 
 
 
@@ -1738,12 +1738,12 @@ vector<Vector2i> CWorld::GetSpawnPlaces()
 		yStart = 0;
 
 	int xEnd = (viewRect.left/100) + viewRect.width/100 + 5;
-	if(xEnd > m_BlocksX)
-		xEnd = m_BlocksX;
+	if(xEnd >= m_BlocksX)
+		xEnd = m_BlocksX - 1;
 
 	int yEnd = (viewRect.top/100) + viewRect.height/100 + 5;
-	if(yEnd > m_BlocksY)
-		yEnd = m_BlocksY;
+	if(yEnd >= m_BlocksY)
+		yEnd = m_BlocksY - 1;
 
 
 
@@ -1800,12 +1800,12 @@ vector < vector <SWorldPlace> > CWorld::GetWorldMatrix()
 		yStart = 0;
 
 	int xEnd = (viewRect.left / 100) + viewRect.width / 100 + 2;
-	if (xEnd > m_BlocksX)
-		xEnd = m_BlocksX;
+	if (xEnd >= m_BlocksX)
+		xEnd = m_BlocksX - 1;
 
 	int yEnd = (viewRect.top / 100) + viewRect.height / 100 + 2;
-	if (yEnd > m_BlocksY)
-		yEnd = m_BlocksY;
+	if (yEnd >= m_BlocksY)
+		yEnd = m_BlocksY - 1;
 
 	//resize the matrix
 	worldMatrix.resize(xEnd+1);
@@ -1913,7 +1913,7 @@ bool CWorld::CheckForBarrier(IntRect _living, bool _left)
 
 bool CWorld::isBlockPassable(int _x, int _y)
 {
-	if (_x >= 0 && _y >= 0)
+	if (_x >= 0 && _y >= 0 && _x < m_BlocksX && _y < m_BlocksY)
 	{
 		if (m_pBlocks[_x][_y] != NULL && !m_pBlocks[_x][_y]->IsPassable())
 			return false;

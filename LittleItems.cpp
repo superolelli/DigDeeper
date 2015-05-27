@@ -229,7 +229,7 @@ void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 //Renders the sprite
 void CLittleItem::Render()
 {
-	m_pLittleItemSprite->Render(g_pFramework->GetWindow());
+	m_pLittleItemSprite->Render(g_pFramework->GetRenderWindow());
 }
 
 

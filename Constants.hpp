@@ -12,6 +12,14 @@ const int E_UP = 5;
 #pragma endregion
 
 
+#pragma region Shaders
+
+const int NO_SHADER = 0;
+const int DRUNK = 1;
+
+#pragma endregion
+
+
 
 #pragma region LogIDs
 const int INFO = 0;

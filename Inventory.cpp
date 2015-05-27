@@ -49,11 +49,11 @@ void CInventory::Load(CWorld *_world, View *_view, CPlayer *_player, bool _loade
 
 	m_pInventoryWindow = new CSprite;
 	m_pInventoryWindow->Load(&g_pTextures->t_inventoryWindow);
-	m_pInventoryWindow->SetPos((int)(g_pFramework->GetWindow()->getSize().x/2 - m_pInventoryWindow->GetRect().width - 5), (int)(g_pFramework->GetWindow()->getSize().y/2 - m_pInventoryWindow->GetRect().height/2));
+	m_pInventoryWindow->SetPos((int)(g_pFramework->GetRenderWindow()->getSize().x/2 - m_pInventoryWindow->GetRect().width - 5), (int)(g_pFramework->GetRenderWindow()->getSize().y/2 - m_pInventoryWindow->GetRect().height/2));
 
 	m_pInventoryBeam = new CSprite;
 	m_pInventoryBeam->Load(&g_pTextures->t_inventoryBeam);
-	m_pInventoryBeam->SetPos((int)(g_pFramework->GetWindow()->getSize().x/2 - m_pInventoryBeam->GetRect().width/2), g_pFramework->GetWindow()->getSize().y - m_pInventoryBeam->GetRect().height - 5);
+	m_pInventoryBeam->SetPos((int)(g_pFramework->GetRenderWindow()->getSize().x/2 - m_pInventoryBeam->GetRect().width/2), g_pFramework->GetRenderWindow()->getSize().y - m_pInventoryBeam->GetRect().height - 5);
 
 	m_pCarriedObjectFrame = new CSprite;
 	m_pCarriedObjectFrame->Load(&g_pTextures->t_inventoryBeamFrame);
@@ -62,7 +62,7 @@ void CInventory::Load(CWorld *_world, View *_view, CPlayer *_player, bool _loade
 	if(!_loaded)
 		m_pEquipment = new CPlayerEquipment;
 	m_pEquipment->InitPlayerEquipment(0, _player);
-	m_pEquipment->SetPos(g_pFramework->GetWindow()->getSize().x/2 + 5, m_pInventoryWindow->GetRect().top);
+	m_pEquipment->SetPos(g_pFramework->GetRenderWindow()->getSize().x/2 + 5, m_pInventoryWindow->GetRect().top);
 
 	m_font.loadFromFile("Data/Fonts/ltromatic.ttf");
 	m_text.setFont(m_font);
@@ -300,7 +300,7 @@ void CInventory::Render(IntRect &_playerRect)
 	}
 
 	//Render the beam
-	m_pInventoryBeam->Render(g_pFramework->GetWindow());
+	m_pInventoryBeam->Render(g_pFramework->GetRenderWindow());
 
 	//get the clicked item
 	for(i = m_inventoryList.begin(); i != m_inventoryList.end(); i++)
@@ -316,7 +316,7 @@ void CInventory::Render(IntRect &_playerRect)
 	if(is_open)
 	{
 		//Renders the window
-		m_pInventoryWindow->Render(g_pFramework->GetWindow());
+		m_pInventoryWindow->Render(g_pFramework->GetRenderWindow());
 
 		//if there is a panel: render it
 		if(m_pCurrentPanel != NULL)
@@ -750,7 +750,7 @@ void CInventory::Render(IntRect &_playerRect)
 			number << (i->amount);
 			m_text.setString(number.str().c_str());
 			m_text.setPosition((float)(i->thing->GetInventorySprite()->GetRect().left + 70), (float)(i->thing->GetInventorySprite()->GetRect().top + 70));
-			g_pFramework->GetWindow()->draw(m_text);			
+			g_pFramework->GetRenderWindow()->draw(m_text);			
 
 			i++;
 		}
@@ -758,8 +758,8 @@ void CInventory::Render(IntRect &_playerRect)
 		//render the tooltip
 		if(show_tooltip)
 		{
-			g_pFramework->GetWindow()->draw(m_tooltipBackground, m_tooltipText.getTransform());
-			g_pFramework->GetWindow()->draw(m_tooltipText);	
+			g_pFramework->GetRenderWindow()->draw(m_tooltipBackground, m_tooltipText.getTransform());
+			g_pFramework->GetRenderWindow()->draw(m_tooltipText);	
 			show_tooltip = false;
 		}
 
@@ -849,7 +849,7 @@ void CInventory::Render(IntRect &_playerRect)
 				number << (i->amount);
 				m_text.setString(number.str().c_str());
 				m_text.setPosition((float)(i->thing->GetInventorySprite()->GetRect().left + 70), (float)(i->thing->GetInventorySprite()->GetRect().top + 70));
-				g_pFramework->GetWindow()->draw(m_text);
+				g_pFramework->GetRenderWindow()->draw(m_text);
 			}
 
 			i++;
@@ -892,7 +892,7 @@ void CInventory::Render(IntRect &_playerRect)
 	
 
 	m_pCarriedObjectFrame->SetPos(CarriedObjectFramePos*100 + m_pInventoryBeam->GetRect().left, m_pInventoryBeam->GetRect().top);
-	m_pCarriedObjectFrame->Render(g_pFramework->GetWindow());
+	m_pCarriedObjectFrame->Render(g_pFramework->GetRenderWindow());
 }
 
 

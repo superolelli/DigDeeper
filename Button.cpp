@@ -59,8 +59,6 @@ void CButton::SetPos(int _x, int _y)
 
 
 
-
-
 bool CButton::Render(int eventtype)
 {
 	 //if the mouse is at the button
@@ -73,22 +71,22 @@ bool CButton::Render(int eventtype)
 			switch(m_Buttontype)
 			{
 			case BUTTONTYPE_UP:
-				m_pButtonSprite->Render(m_pRenderWindow, 1.0f);
+				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 1.0f);
 				return true;
 				break;
 
 			case BUTTONTYPE_DOWN:
-				m_pButtonSprite->Render(m_pRenderWindow, 0.0f);
+				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 0.0f);
 				return false;
 				break;
 
 			case BUTTONTYPE_MOTION_UP:
-				m_pButtonSprite->Render(m_pRenderWindow, 2.0f);
+				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 2.0f);
 				return true;
 				break;
 
 			case BUTTONTYPE_MOTION_DOWN:
-				m_pButtonSprite->Render(m_pRenderWindow, 0.0f);
+				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 0.0f);
 				return false;
 				break;
 			}
@@ -100,22 +98,22 @@ bool CButton::Render(int eventtype)
 			switch(m_Buttontype)
 			{
 			case BUTTONTYPE_UP:
-				m_pButtonSprite->Render(m_pRenderWindow, 1.0f);
+				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 1.0f);
 				return false;
 				break;
 
 			case BUTTONTYPE_DOWN:
-				m_pButtonSprite->Render(m_pRenderWindow, 1.0f);
+				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 1.0f);
 				return true;
 				break;
 
 			case BUTTONTYPE_MOTION_UP:
-				m_pButtonSprite->Render(m_pRenderWindow, 2.0f);
+				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 2.0f);
 				return false;
 				break;
 
 			case BUTTONTYPE_MOTION_DOWN:
-				m_pButtonSprite->Render(m_pRenderWindow, 2.0f);
+				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 2.0f);
 				return true;
 				break;
 			}
@@ -124,17 +122,17 @@ bool CButton::Render(int eventtype)
 		{
 			if(m_Buttontype == BUTTONTYPE_UP || m_Buttontype == BUTTONTYPE_DOWN)
 			{
-				m_pButtonSprite->Render(m_pRenderWindow, 0.0f);
+				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 0.0f);
 			}
 			else
-				m_pButtonSprite->Render(m_pRenderWindow, 1.0f);
+				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 1.0f);
 
 			return false;
 		}
 	}
 
 
-	m_pButtonSprite->Render(m_pRenderWindow, 0.0f);
+	m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 0.0f);
 	return false;
 }
 

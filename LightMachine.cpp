@@ -64,7 +64,7 @@ void CLightMachine::Render()
 	lights.setPosition(m_ViewX - 10, m_ViewY - 10);
 
 
-	g_pFramework->GetWindow()->draw(lights);
+	g_pFramework->GetRenderWindow()->draw(lights);
 }
 
 

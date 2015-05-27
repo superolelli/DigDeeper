@@ -173,9 +173,9 @@ void CLiving3Part::Render(float _bodyFrame,  float _legsFrame)
 
 
 	//render the living 
-	    m_pLegs->Render(g_pFramework->GetWindow(), _legsFrame);
-		m_pBody->Render(g_pFramework->GetWindow(), _bodyFrame);
-	//	m_pArm->Render(g_pFramework->GetWindow(), _armFrame);		
+	    m_pLegs->Render(g_pFramework->GetRenderWindow(), _legsFrame);
+		m_pBody->Render(g_pFramework->GetRenderWindow(), _bodyFrame);
+	//	m_pArm->Render(g_pFramework->GetRenderWindow(), _armFrame);		
 
 		//the current frame becomes the last frame
 		m_LastBodyFrame = (int)_bodyFrame;
@@ -187,7 +187,7 @@ void CLiving3Part::Render(float _bodyFrame,  float _legsFrame)
 //Renders the arm
 void CLiving3Part::RenderSecondPart(int _frame)
 {
-	m_pArm->Render(g_pFramework->GetWindow(), (float)(_frame));
+	m_pArm->Render(g_pFramework->GetRenderWindow(), (float)(_frame));
 }
 
 

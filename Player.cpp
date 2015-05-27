@@ -50,7 +50,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 {
-	m_pTarget = g_pFramework->GetWindow();
+	m_pTarget = g_pFramework->GetRenderWindow();
 	m_pWorld = _world;
 
 	m_pDwarf = new CLiving3Part;
@@ -73,7 +73,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 
 	m_pPanelBeam = new CSprite;
 	m_pPanelBeam->Load(&g_pTextures->t_panelBeam);
-	m_pPanelBeam->SetPos(g_pFramework->GetWindow()->getSize().x/2 - m_pPanelBeam->GetRect().width/2, m_pInventory->GetRect().top - 75);
+	m_pPanelBeam->SetPos(g_pFramework->GetRenderWindow()->getSize().x/2 - m_pPanelBeam->GetRect().width/2, m_pInventory->GetRect().top - 75);
 
 	m_PanelInventory.m_Sprite = new CSprite;
 	m_PanelInventory.m_Sprite->Load(&g_pTextures->t_buttonInventory, 2, 250, 75);
@@ -302,7 +302,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 
 void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view)
 {
-	m_pTarget = g_pFramework->GetWindow();
+	m_pTarget = g_pFramework->GetRenderWindow();
 	m_pWorld = _world;
 
 	m_pDwarf = new CLiving3Part;
@@ -325,7 +325,7 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view)
 
 	m_pPanelBeam = new CSprite;
 	m_pPanelBeam->Load(&g_pTextures->t_panelBeam);
-	m_pPanelBeam->SetPos(g_pFramework->GetWindow()->getSize().x/2 - m_pPanelBeam->GetRect().width/2, m_pInventory->GetRect().top - 75);
+	m_pPanelBeam->SetPos(g_pFramework->GetRenderWindow()->getSize().x/2 - m_pPanelBeam->GetRect().width/2, m_pInventory->GetRect().top - 75);
 
 	m_PanelInventory.m_Sprite = new CSprite;
 	m_PanelInventory.m_Sprite->Load(&g_pTextures->t_buttonInventory, 2, 250, 75);
@@ -493,7 +493,7 @@ void CPlayer::CheckXMovement()
 	if (abs(m_SideSpeed) < 50)
 	{
 		//if the left key is pressed
-		if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))
+		if (((Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A)) && m_fDrunk <= 5.0f) || (m_fDrunk > 5.0f && (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))))
 		{
 			m_turned_left = true;
 
@@ -506,7 +506,7 @@ void CPlayer::CheckXMovement()
 
 		}
 		//if the right key is pressed
-		else if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))
+		else if (((Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D)) && m_fDrunk <= 5.0f) || (m_fDrunk > 5.0f && (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))))
 		{
 			m_turned_left = false;
 
@@ -740,15 +740,15 @@ void CPlayer::RenderInventory()
 	if(show_beam_numbers)
 	{
 		//renders beams with numbers
-		m_pLifeBeam->RenderWithNumbers(g_pFramework->GetWindow());
-		m_pManaBeam->RenderWithNumbers(g_pFramework->GetWindow());
-		m_pExpBeam->RenderWithNumbers(g_pFramework->GetWindow());
+		m_pLifeBeam->RenderWithNumbers(g_pFramework->GetRenderWindow());
+		m_pManaBeam->RenderWithNumbers(g_pFramework->GetRenderWindow());
+		m_pExpBeam->RenderWithNumbers(g_pFramework->GetRenderWindow());
 	}
 	else
 	{
-		m_pLifeBeam->Render(g_pFramework->GetWindow());
-		m_pManaBeam->Render(g_pFramework->GetWindow());
-		m_pExpBeam->Render(g_pFramework->GetWindow());
+		m_pLifeBeam->Render(g_pFramework->GetRenderWindow());
+		m_pManaBeam->Render(g_pFramework->GetRenderWindow());
+		m_pExpBeam->Render(g_pFramework->GetRenderWindow());
 	}
 
 	//show the status effects
@@ -759,7 +759,7 @@ void CPlayer::RenderInventory()
 		if (m_StatusEffects[i].m_show)
 		{
 			m_StatusEffects[i].m_Sprite->SetPos(x,y);
-			m_StatusEffects[i].m_Sprite->Render(g_pFramework->GetWindow());
+			m_StatusEffects[i].m_Sprite->Render(g_pFramework->GetRenderWindow());
 
 			x += 80;
 		}
@@ -816,7 +816,7 @@ void CPlayer::RenderInventory()
 	if(m_pInventory->GetOpen() || m_pBuildingMenu->GetOpen() || m_pCharacterInfo->GetOpen() || m_pMagicMenu->GetOpen())
 	{
 		//render the panels
-		m_pPanelBeam->Render(g_pFramework->GetWindow());
+		m_pPanelBeam->Render(g_pFramework->GetRenderWindow());
 	
 		//was the inventory button clicked?
 		if(m_PanelInventory.m_Sprite->GetRect().contains(Mouse::getPosition()) && Mouse::isButtonPressed(Mouse::Left))
@@ -884,10 +884,10 @@ void CPlayer::RenderInventory()
 		}
 
 		//renders the panel buttons
-		m_PanelInventory.m_Sprite->Render(g_pFramework->GetWindow(), m_PanelInventory.m_isClicked);
-		m_PanelBuilding.m_Sprite->Render(g_pFramework->GetWindow(), m_PanelBuilding.m_isClicked);
-		m_PanelAttributes.m_Sprite->Render(g_pFramework->GetWindow(), m_PanelAttributes.m_isClicked);
-		m_PanelMagic.m_Sprite->Render(g_pFramework->GetWindow(), m_PanelMagic.m_isClicked);
+		m_PanelInventory.m_Sprite->Render(g_pFramework->GetRenderWindow(), m_PanelInventory.m_isClicked);
+		m_PanelBuilding.m_Sprite->Render(g_pFramework->GetRenderWindow(), m_PanelBuilding.m_isClicked);
+		m_PanelAttributes.m_Sprite->Render(g_pFramework->GetRenderWindow(), m_PanelAttributes.m_isClicked);
+		m_PanelMagic.m_Sprite->Render(g_pFramework->GetRenderWindow(), m_PanelMagic.m_isClicked);
 	}
 
 	//renders the panels

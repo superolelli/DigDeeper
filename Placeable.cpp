@@ -347,11 +347,11 @@ void CPlaceable::Render()
 	//if the thing is a door: check the animation frame
 	if(m_ID == DOOR)
 	{
-		m_pThingSprite->Render(g_pFramework->GetWindow(), (float)(m_SpecialID));
+		m_pThingSprite->Render(g_pFramework->GetRenderWindow(), (float)(m_SpecialID));
 	}
 	else
 		//else: just render it
-		m_pThingSprite->Render(g_pFramework->GetWindow());
+		m_pThingSprite->Render(g_pFramework->GetRenderWindow());
 
 	//if the thing is a beehouse: check the timer
 	if (m_ID == BEEHOUSE)
@@ -366,7 +366,7 @@ void CPlaceable::Render()
 	if(m_fBreakFrame >= 0)
 	{
 		m_BreakingAnimation.SetPos(m_pThingSprite->GetRect().left, m_pThingSprite->GetRect().top);
-		m_BreakingAnimation.Render(g_pFramework->GetWindow(), m_fBreakFrame);
+		m_BreakingAnimation.Render(g_pFramework->GetRenderWindow(), m_fBreakFrame);
 	}
 }
 

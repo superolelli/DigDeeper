@@ -36,10 +36,10 @@ void CCauldron::Init(int _number, bool _loaded)
 {
 	m_pPanel = new CSprite;
 	m_pPanel->Load(&g_pTextures->t_cauldronMenu);
-	m_pPanel->SetPos((int)g_pFramework->GetWindow()->getSize().x / 2, (int)g_pFramework->GetWindow()->getSize().y / 2 - m_pPanel->GetRect().height / 2);
+	m_pPanel->SetPos((int)g_pFramework->GetRenderWindow()->getSize().x / 2, (int)g_pFramework->GetRenderWindow()->getSize().y / 2 - m_pPanel->GetRect().height / 2);
 
 	m_pCookingButton = new CButton;
-	m_pCookingButton->Load(&g_pTextures->t_cookingButton, m_pPanel->GetRect().left + 120, m_pPanel->GetRect().top + 235, 3);
+	m_pCookingButton->Load(&g_pTextures->t_cookingButton, m_pPanel->GetRect().left + 120, m_pPanel->GetRect().top + 240, 3);
 
 	m_font.loadFromFile("Data/Fonts/ltromatic.ttf");
 	m_text.setFont(m_font);
@@ -185,7 +185,7 @@ void CCauldron::Render()
 	stringstream number;
 
 	//render the window and the things
-	m_pPanel->Render(g_pFramework->GetWindow());
+	m_pPanel->Render(g_pFramework->GetRenderWindow());
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -199,7 +199,7 @@ void CCauldron::Render()
 			number << (m_Ingredience[i].amount);
 			m_text.setString(number.str().c_str());
 			m_text.setPosition((float)(m_Ingredience[i].thing->GetInventorySprite()->GetRect().left + 70), (float)(m_Ingredience[i].thing->GetInventorySprite()->GetRect().top + 70));
-			g_pFramework->GetWindow()->draw(m_text);
+			g_pFramework->GetRenderWindow()->draw(m_text);
 		}
 	}
 
@@ -214,7 +214,7 @@ void CCauldron::Render()
 		number << (m_Output.amount);
 		m_text.setString(number.str().c_str());
 		m_text.setPosition((float)(m_Output.thing->GetInventorySprite()->GetRect().left + 70), (float)(m_Output.thing->GetInventorySprite()->GetRect().top + 70));
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 	}
 
 

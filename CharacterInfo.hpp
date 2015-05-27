@@ -33,11 +33,13 @@ private:
 	CSprite *m_pLevelUp;                               //the levelUp window
 
 	CButton *m_pFirstSkill;                            //the first skill button
-	CButton *m_pSecondSkill;                            //the second skill button
-	CButton *m_pThirdSkill;                              //the third skill button
-	CButton *m_pFourthSkill;                                //the fourth skill button
+	CButton *m_pSecondSkill;                           //the second skill button
+	CButton *m_pThirdSkill;                            //the third skill button
+	CButton *m_pFourthSkill;                           //the fourth skill button
 
-	SPlayerAttributes *m_pAttributes;                 //the player's attributes
+	CButton *m_pLevelUpButton;                         //the level up button
+
+	SPlayerAttributes *m_pAttributes;                  //the player's attributes
 	SToolAttributes *m_pModifications;
 	CPlayer *m_pPlayer;
 
@@ -51,6 +53,9 @@ private:
 
 	bool is_open;                                     //is the character info open?
 	bool level_up;
+	bool choosing_skill;
+
+	int m_levelUpCounter;
 };
 
 

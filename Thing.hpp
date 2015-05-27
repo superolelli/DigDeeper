@@ -11,7 +11,7 @@ public:
 
 	CSprite *GetInventorySprite(){return m_pInventorySprite;}
 	string GetName(){return m_Name;}
-	void RenderInventorySprite(){m_pInventorySprite->Render(g_pFramework->GetWindow());}
+	void RenderInventorySprite(){m_pInventorySprite->Render(g_pFramework->GetRenderWindow());}
 
 protected:
 	friend class boost::serialization::access;

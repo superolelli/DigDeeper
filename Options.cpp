@@ -21,7 +21,7 @@ void COptions::Init()
 	m_pBackground->Load(&g_pTextures->t_menuBackground);
 
     m_pReturnButton = new CButton;
-	m_pReturnButton->Load(&g_pTextures->t_menuButtonReturn, g_pFramework->GetWindow()->getSize().x/2 - 100, 3* (g_pFramework->GetWindow()->getSize().y/6), CButton::BUTTONTYPE_MOTION_UP); 
+	m_pReturnButton->Load(&g_pTextures->t_menuButtonReturn, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, 3* (g_pFramework->GetRenderWindow()->getSize().y/6), CButton::BUTTONTYPE_MOTION_UP); 
 
  
 }
@@ -59,7 +59,7 @@ void COptions::Run()
 				m_ButtonEventtype = MOUSE_LEFT_UP;
 
 		//Render the background
-		m_pBackground->Render(g_pFramework->GetWindow());
+		m_pBackground->Render(g_pFramework->GetRenderWindow());
 
 		//Render the buttons
 		RenderButtons();

@@ -325,5 +325,5 @@ void CEquipment::InitRing()
 void CEquipment::RenderEquipment(int _x, int _y, float _frameNumber)
 {
 	m_pCarriedEquipmentSprite->SetPos(_x, _y);
-	m_pCarriedEquipmentSprite->Render(g_pFramework->GetWindow(), _frameNumber);
+	m_pCarriedEquipmentSprite->Render(g_pFramework->GetRenderWindow(), _frameNumber);
 }

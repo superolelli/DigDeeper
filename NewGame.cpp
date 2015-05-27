@@ -32,10 +32,10 @@ void CNewGame::Init()
 	m_pBackground->Load(&g_pTextures->t_newGameBackground);
 
 	m_pStartGameButton = new CButton;
-	m_pStartGameButton->Load(&g_pTextures->t_menuButtonNewGame, g_pFramework->GetWindow()->getSize().x/2 +200, g_pFramework->GetWindow()->getSize().y - 200, 3);
+	m_pStartGameButton->Load(&g_pTextures->t_menuButtonNewGame, g_pFramework->GetRenderWindow()->getSize().x/2 +200, g_pFramework->GetRenderWindow()->getSize().y - 200, 3);
 
 	m_pReturnButton = new CButton;
-	m_pReturnButton->Load(&g_pTextures->t_menuButtonReturn, g_pFramework->GetWindow()->getSize().x/2 - 350, g_pFramework->GetWindow()->getSize().y - 200, 3);
+	m_pReturnButton->Load(&g_pTextures->t_menuButtonReturn, g_pFramework->GetRenderWindow()->getSize().x/2 - 350, g_pFramework->GetRenderWindow()->getSize().y - 200, 3);
 
 	m_pClass[0] = new CSprite;
 	m_pClass[0]->Load(&g_pTextures->t_newGameMiner);
@@ -50,7 +50,7 @@ void CNewGame::Init()
 	m_pClass[3]->Load(&g_pTextures->t_newGameMage);
 
 	BOOST_FOREACH(CSprite* c, m_pClass)
-		c->SetPos((float)g_pFramework->GetWindow()->getSize().x/5, (float)g_pFramework->GetWindow()->getSize().y/4);
+		c->SetPos((float)g_pFramework->GetRenderWindow()->getSize().x/5, (float)g_pFramework->GetRenderWindow()->getSize().y/4);
 
 	m_pWorldSize[0] = new CSprite;
 	m_pWorldSize[0]->Load(&g_pTextures->t_newGameSmallWorld);
@@ -62,7 +62,7 @@ void CNewGame::Init()
 	m_pWorldSize[2]->Load(&g_pTextures->t_newGameBigWorld);
 
 	BOOST_FOREACH(CSprite* c, m_pWorldSize)
-		c->SetPos((float)g_pFramework->GetWindow()->getSize().x/1.5, (float)g_pFramework->GetWindow()->getSize().y/2);
+		c->SetPos((float)g_pFramework->GetRenderWindow()->getSize().x/1.5, (float)g_pFramework->GetRenderWindow()->getSize().y/2);
 
 	m_pClassLeft = new CButton;
 	m_pClassLeft->Load(&g_pTextures->t_newGameButtonLeft, m_pClass[0]->GetRect().left - 120, m_pClass[0]->GetRect().top + m_pClass[0]->GetRect().height/2 - 37, 1);
@@ -77,7 +77,7 @@ void CNewGame::Init()
 	m_pWorldRight->Load(&g_pTextures->t_newGameButtonRight, m_pWorldSize[0]->GetRect().left + m_pWorldSize[0]->GetRect().width + 10, m_pWorldSize[0]->GetRect().top + m_pWorldSize[0]->GetRect().height/2 - 37, 1);
 
 	m_font.loadFromFile("Data/Fonts/ltromatic.ttf");
-	m_GameName.Init(m_font, 30, g_pFramework->GetWindow()->getSize().x/2, g_pFramework->GetWindow()->getSize().y/8, Color(230, 220, 0));
+	m_GameName.Init(m_font, 30, g_pFramework->GetRenderWindow()->getSize().x/2, g_pFramework->GetRenderWindow()->getSize().y/8, Color(230, 220, 0));
 	m_GameName.SetString("Neue Welt");
 
 	m_class = 0;
@@ -151,12 +151,12 @@ int CNewGame::Run()
 		m_GameName.HandleInput();
 
 		//Render the background
-		m_pBackground->Render(g_pFramework->GetWindow());
+		m_pBackground->Render(g_pFramework->GetRenderWindow());
 
-		m_GameName.Show(g_pFramework->GetWindow());
+		m_GameName.Show(g_pFramework->GetRenderWindow());
 
-		m_pClass[m_class]->Render(g_pFramework->GetWindow());
-		m_pWorldSize[m_worldSize]->Render(g_pFramework->GetWindow());
+		m_pClass[m_class]->Render(g_pFramework->GetRenderWindow());
+		m_pWorldSize[m_worldSize]->Render(g_pFramework->GetRenderWindow());
 
 		//Render the buttons
 		RenderButtons();

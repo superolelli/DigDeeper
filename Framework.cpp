@@ -5,10 +5,15 @@
 //Opens the window
 void CFramework::Init()
 {
-	m_pWindow = new RenderWindow;
-    m_pWindow->create(VideoMode::getDesktopMode(), "Dig Deeper", Style::None | Style::Fullscreen);
-	m_pWindow->setVerticalSyncEnabled(true);
-	m_pWindow->setKeyRepeatEnabled(false);
+	m_pRealWindow = new RenderWindow;
+    m_pRealWindow->create(VideoMode::getDesktopMode(), "Dig Deeper", Style::None | Style::Fullscreen);
+	m_pRealWindow->setVerticalSyncEnabled(true);
+	m_pRealWindow->setKeyRepeatEnabled(false);
+
+	m_pWindow = new RenderTexture;
+	m_pWindow->create(m_pRealWindow->getSize().x, m_pRealWindow->getSize().y, false);
+
+	m_Shader = 0;
 
 	m_pMyLog = new ige::FileLogger("0.2", "logfile.txt");
 }
@@ -19,7 +24,8 @@ void CFramework::Init()
 //Closes and deletes the window
 void CFramework::Quit()
 {
-	m_pWindow->close();
+	m_pRealWindow->close();
+	SAFE_DELETE(m_pRealWindow);
 	SAFE_DELETE(m_pWindow);
 	SAFE_DELETE(m_pMyLog);
 }
@@ -37,6 +43,7 @@ void CFramework::Update()
 //fills the background black
 void CFramework::Clear()
 {
+	m_pRealWindow->clear();
 	m_pWindow->clear();
 }
 
@@ -45,6 +52,24 @@ void CFramework::Clear()
 void CFramework::Flip()
 {
 	m_pWindow->display();
+
+	Sprite sprite;
+	sprite.setTexture(m_pWindow->getTexture());
+
+	switch (m_Shader)
+	{
+	case(NO_SHADER) :
+		m_pRealWindow->draw(sprite);
+		break;
+	case(DRUNK) :
+		g_pTextures->s_drunkShader.setParameter("blur_radius", 0.005f);
+		RenderStates states;
+		states.shader = &g_pTextures->s_drunkShader;
+		m_pRealWindow->draw(sprite, states);
+		break;
+	}
+
+	m_pRealWindow->display();
 }
 
 
@@ -57,7 +82,7 @@ void CFramework::ProcessEvents()
 
 	ClearKeyStates();
 
-	while(m_pWindow->pollEvent(event))
+	while(m_pRealWindow->pollEvent(event))
 	{
 		if(event.type == Event::TextEntered)
 		{

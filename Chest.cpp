@@ -34,7 +34,7 @@ void CChest::Init(int _Number, bool _loaded)
 {
 	m_pPanel = new CSprite;
 	m_pPanel->Load(&g_pTextures->t_inventoryWindow);
-	m_pPanel->SetPos((int)g_pFramework->GetWindow()->getSize().x/2 + 5, (int)g_pFramework->GetWindow()->getSize().y/2 - m_pPanel->GetRect().height/2);
+	m_pPanel->SetPos((int)g_pFramework->GetRenderWindow()->getSize().x/2 + 5, (int)g_pFramework->GetRenderWindow()->getSize().y/2 - m_pPanel->GetRect().height/2);
 
 	m_font.loadFromFile("Data/Fonts/ltromatic.ttf");
 	m_text.setFont(m_font);
@@ -86,7 +86,7 @@ void CChest::Render()
 	stringstream number;
 
 	//render the window
-	m_pPanel->Render(g_pFramework->GetWindow());
+	m_pPanel->Render(g_pFramework->GetRenderWindow());
 
 	for(int y = 0; y < 5; y++)
 	{
@@ -103,7 +103,7 @@ void CChest::Render()
 				number << (m_chest[x][y].amount);
 				m_text.setString(number.str().c_str());
 				m_text.setPosition((float)(m_chest[x][y].thing->GetInventorySprite()->GetRect().left + 70), (float)(m_chest[x][y].thing->GetInventorySprite()->GetRect().top + 70));
-				g_pFramework->GetWindow()->draw(m_text);	
+				g_pFramework->GetRenderWindow()->draw(m_text);	
 
 
 				//if needed set tooltip
@@ -216,8 +216,8 @@ void CChest::Render()
 		//render the tooltip
 		if(show_tooltip)
 		{
-			g_pFramework->GetWindow()->draw(m_tooltipBackground, m_tooltipText.getTransform());
-			g_pFramework->GetWindow()->draw(m_tooltipText);	
+			g_pFramework->GetRenderWindow()->draw(m_tooltipBackground, m_tooltipText.getTransform());
+			g_pFramework->GetRenderWindow()->draw(m_tooltipText);	
 			show_tooltip = false;
 		}
 }

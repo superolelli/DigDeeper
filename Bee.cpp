@@ -169,14 +169,14 @@ bool CBee::CheckCollisions()
 void CBee::Render()
 {
 	if(m_left)
-		m_pBeeSprite->Render(g_pFramework->GetWindow(), 0.0f);
+		m_pBeeSprite->Render(g_pFramework->GetRenderWindow(), 0.0f);
 	else
-		m_pBeeSprite->Render(g_pFramework->GetWindow(), 2.0f);
+		m_pBeeSprite->Render(g_pFramework->GetRenderWindow(), 2.0f);
 
 	if (m_State == FROZEN)
 	{
 		m_frozenSprite.SetPos(m_pBeeSprite->GetRect().left, m_pBeeSprite->GetRect().top);
-		m_frozenSprite.Render(g_pFramework->GetWindow());
+		m_frozenSprite.Render(g_pFramework->GetRenderWindow());
 	}
 }
 

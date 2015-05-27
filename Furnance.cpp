@@ -43,7 +43,7 @@ void CFurnance::Init(int _Number, bool _loaded)
 {
 	m_pPanel = new CSprite;
 	m_pPanel->Load(&g_pTextures->t_furnanceMenu);
-	m_pPanel->SetPos((int)g_pFramework->GetWindow()->getSize().x/2, (int)g_pFramework->GetWindow()->getSize().y/2 - m_pPanel->GetRect().height/2);
+	m_pPanel->SetPos((int)g_pFramework->GetRenderWindow()->getSize().x/2, (int)g_pFramework->GetRenderWindow()->getSize().y/2 - m_pPanel->GetRect().height/2);
 
 	m_font.loadFromFile("Data/Fonts/ltromatic.ttf");
 	m_text.setFont(m_font);
@@ -124,7 +124,7 @@ void CFurnance::Render()
 	stringstream number;
 
 	//render the window and the things
-		m_pPanel->Render(g_pFramework->GetWindow());
+		m_pPanel->Render(g_pFramework->GetRenderWindow());
 
 		//render the thing to burn inside the window
 		if(m_ThingToBurn.amount != 0)
@@ -136,7 +136,7 @@ void CFurnance::Render()
 			number << (m_ThingToBurn.amount);
 			m_text.setString(number.str().c_str());
 			m_text.setPosition((float)(m_ThingToBurn.thing->GetInventorySprite()->GetRect().left + 70), (float)(m_ThingToBurn.thing->GetInventorySprite()->GetRect().top + 70));
-			g_pFramework->GetWindow()->draw(m_text);		
+			g_pFramework->GetRenderWindow()->draw(m_text);		
 		}
 
 		//render the burning material inside the window
@@ -149,7 +149,7 @@ void CFurnance::Render()
 			number << (m_BurningMaterial.amount);
 			m_text.setString(number.str().c_str());
 			m_text.setPosition((float)(m_BurningMaterial.thing->GetInventorySprite()->GetRect().left + 70), (float)(m_BurningMaterial.thing->GetInventorySprite()->GetRect().top + 70));
-			g_pFramework->GetWindow()->draw(m_text);	
+			g_pFramework->GetRenderWindow()->draw(m_text);	
 		}
 
 		//render the burning material inside the window
@@ -162,7 +162,7 @@ void CFurnance::Render()
 			number << (m_Product.amount);
 			m_text.setString(number.str().c_str());
 			m_text.setPosition((float)(m_Product.thing->GetInventorySprite()->GetRect().left + 70), (float)(m_Product.thing->GetInventorySprite()->GetRect().top + 70));
-			g_pFramework->GetWindow()->draw(m_text);	
+			g_pFramework->GetRenderWindow()->draw(m_text);	
 		}
 }
 
@@ -189,28 +189,28 @@ void CFurnance::CheckThings()
 			{
 			case(COAL):
 				{
-					m_Smoke.Render(g_pFramework->GetWindow(), m_fAnimState);
+					m_Smoke.Render(g_pFramework->GetRenderWindow(), m_fAnimState);
 
 					if(m_fBurningTime >= 3.0f)
 						ChangeBurningThings();				
 				}break;
 			case(WOOD):
 				{
-					m_Smoke.Render(g_pFramework->GetWindow(), m_fAnimState);
+					m_Smoke.Render(g_pFramework->GetRenderWindow(), m_fAnimState);
 
 					if(m_fBurningTime >= 5.0f)
 						ChangeBurningThings();
 				}break;
 			case(WOODSTAFF):
 			{
-				m_Smoke.Render(g_pFramework->GetWindow(), m_fAnimState);
+				m_Smoke.Render(g_pFramework->GetRenderWindow(), m_fAnimState);
 
 				if(m_fBurningTime >= 10.0f)
 					ChangeBurningThings();
 			}break;
 			case(RECIPE):
 				{
-					m_Smoke.Render(g_pFramework->GetWindow(), m_fAnimState);
+					m_Smoke.Render(g_pFramework->GetRenderWindow(), m_fAnimState);
 
 					if(m_fBurningTime >= 2.0f)
 						ChangeBurningThings();

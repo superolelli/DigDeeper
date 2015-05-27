@@ -21,10 +21,12 @@ CGame::CGame()
 void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 {
 	//sets the view to it's normal size 
-	m_View.reset(FloatRect(0,0, (float)g_pFramework->GetWindow()->getSize().x, (float)g_pFramework->GetWindow()->getSize().y));
+	m_View.reset(FloatRect(0,0, (float)g_pFramework->GetRenderWindow()->getSize().x, (float)g_pFramework->GetRenderWindow()->getSize().y));
 
 	//applies the view to the window
-	g_pFramework->GetWindow()->setView(m_View);
+	g_pFramework->GetRenderWindow()->setView(m_View);
+
+
 
 	//Inits the profiler
 	g_pProfiler->Init();
@@ -49,7 +51,7 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 
 	//Inits the player
 	m_pPlayer = new CPlayer;
-	m_pPlayer->Init(500, 300, m_pWorld, &m_View, _attributes.PlayerClass);
+	m_pPlayer->Init(7000, 300, m_pWorld, &m_View, _attributes.PlayerClass);
 
 	//Inits the npc machine
 	m_NpcMachine.Init(m_pWorld, m_pPlayer, &m_View);
@@ -65,7 +67,7 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 
 	m_pPauseMenu = new CSprite;
 	m_pPauseMenu->Load(&g_pTextures->t_pauseMenu);
-	m_pPauseMenu->SetPos((int)(g_pFramework->GetWindow()->getSize().x/2 - m_pPauseMenu->GetRect().width/2), (int)(g_pFramework->GetWindow()->getSize().y/2 - m_pPauseMenu->GetRect().height/2));
+	m_pPauseMenu->SetPos((int)(g_pFramework->GetRenderWindow()->getSize().x/2 - m_pPauseMenu->GetRect().width/2), (int)(g_pFramework->GetRenderWindow()->getSize().y/2 - m_pPauseMenu->GetRect().height/2));
 
 	m_pContinueButton = new CButton;
 	m_pContinueButton->Load(&g_pTextures->t_pauseMenuContinueButton, m_pPauseMenu->GetRect().left + 50, m_pPauseMenu->GetRect().top + 25, 3);
@@ -127,7 +129,7 @@ void CGame::Quit()
 	g_pProjectiles->Quit();
 
 	//Sets the default view
-	g_pFramework->GetWindow()->setView(g_pFramework->GetWindow()->getDefaultView());
+	g_pFramework->GetRenderWindow()->setView(g_pFramework->GetRenderWindow()->getDefaultView());
 }
 
 
@@ -157,7 +159,7 @@ void CGame::Run()
 	//}
 	
 
-		g_pFramework->GetWindow()->setView(m_View);
+		g_pFramework->GetRenderWindow()->setView(m_View);
 
 		g_pFramework->ProcessEvents();
 
@@ -170,7 +172,7 @@ void CGame::Run()
 			g_pFramework->Update();
 			g_pFramework->Update();
 			g_pFramework->Clear();
-			g_pFramework->GetWindow()->setView(m_View);
+			g_pFramework->GetRenderWindow()->setView(m_View);
 
 			g_pFramework->ProcessEvents();
 		}
@@ -224,7 +226,7 @@ void CGame::Run()
 
 
 		//Sets the default view for rendering the panels
-		g_pFramework->GetWindow()->setView(g_pFramework->GetWindow()->getDefaultView());
+		g_pFramework->GetRenderWindow()->setView(g_pFramework->GetRenderWindow()->getDefaultView());
 
 		cout << "render inventory" << endl;
 		m_pPlayer->RenderInventory();
@@ -242,9 +244,9 @@ void CGame::Run()
 		{
 			Sprite sprite;
 			sprite.setTexture(g_pTextures->t_BackgroundDead);
-			sprite.setScale((float)g_pFramework->GetWindow()->getSize().x / (float)sprite.getLocalBounds().width, (float)g_pFramework->GetWindow()->getSize().y / (float)sprite.getLocalBounds().height);
+			sprite.setScale((float)g_pFramework->GetRenderWindow()->getSize().x / (float)sprite.getLocalBounds().width, (float)g_pFramework->GetRenderWindow()->getSize().y / (float)sprite.getLocalBounds().height);
 
-			g_pFramework->GetWindow()->draw(sprite);
+			g_pFramework->GetRenderWindow()->draw(sprite);
 			g_pFramework->Flip();
 
 			sleep(seconds(5));
@@ -264,29 +266,34 @@ void CGame::Run()
 //Moves the view and the player
 void CGame::CheckView()
 {
-	//rotate the view if player is drunk
+	////rotate the view if player is drunk
+	//if (m_pPlayer->GetDrunkness() > 5.0f)
+	//{
+	//	if (m_rotatingDown)
+	//	{
+	//		if (m_View.getRotation() < 20 || m_View.getRotation() >= 340)
+	//			m_View.rotate(0.25);
+	//		else
+	//			m_rotatingDown = false;		
+	//	}
+	//	else
+	//	{
+	//		if (m_View.getRotation() <= 20 || m_View.getRotation() > 340)
+	//			m_View.rotate(-0.25);
+	//		else
+	//			m_rotatingDown = true;
+	//	}
+	//}
+	//else
+	//{
+	//	//reset the rotation
+	//	m_View.rotate(360 - m_View.getRotation());
+	//}
+
 	if (m_pPlayer->GetDrunkness() > 5.0f)
-	{
-		if (m_rotatingDown)
-		{
-			if (m_View.getRotation() < 20 || m_View.getRotation() >= 340)
-				m_View.rotate(0.25);
-			else
-				m_rotatingDown = false;		
-		}
-		else
-		{
-			if (m_View.getRotation() <= 20 || m_View.getRotation() > 340)
-				m_View.rotate(-0.25);
-			else
-				m_rotatingDown = true;
-		}
-	}
+		g_pFramework->ApplyShader(DRUNK);
 	else
-	{
-		//reset the rotation
-		m_View.rotate(360 - m_View.getRotation());
-	}
+		g_pFramework->ApplyShader(NO_SHADER);
 
 	//Moves the player
 	Vector2f dwarfCenter = m_pPlayer->CheckMovement();
@@ -308,7 +315,7 @@ void CGame::CheckView()
 	cout << "XView :" << m_View.getCenter().x - m_View.getSize().x / 2 << endl;
 
 	//applies the view to the window
-    g_pFramework->GetWindow()->setView(m_View);
+    g_pFramework->GetRenderWindow()->setView(m_View);
 }
 
 
@@ -445,31 +452,31 @@ void CGame::RenderBackground()
 	//Render the backgrounds
 	m_pBackground->setTextureRect(offsets1);
 	m_pBackground->SetPos(x1, y1);
-	m_pBackground->Render(g_pFramework->GetWindow());
+	m_pBackground->Render(g_pFramework->GetRenderWindow());
 
 	m_pBackground->setTextureRect(offsets2);
 	m_pBackground->SetPos(x2, y2);
-	m_pBackground->Render(g_pFramework->GetWindow());
+	m_pBackground->Render(g_pFramework->GetRenderWindow());
 	
 	m_pBackground->setTextureRect(offsets3);
 	m_pBackground->SetPos(x3, y3);
-	m_pBackground->Render(g_pFramework->GetWindow());
+	m_pBackground->Render(g_pFramework->GetRenderWindow());
 
 	m_pBackground->setTextureRect(offsets4);
 	m_pBackground->SetPos(x4, y4);
-	m_pBackground->Render(g_pFramework->GetWindow());
+	m_pBackground->Render(g_pFramework->GetRenderWindow());
 
 	if(yView <= 400)
 	{
 		m_pNightSky->setTextureRect(offsets5);
 		m_pNightSky->SetPos(x1, y1);
 		m_pNightSky->SetColor(255, 255, 255, m_pWorld->GetNightAlpha());
-		m_pNightSky->Render(g_pFramework->GetWindow());
+		m_pNightSky->Render(g_pFramework->GetRenderWindow());
 
 		m_pNightSky->setTextureRect(offsets6);
 		m_pNightSky->SetPos(x2, y2);
 		m_pNightSky->SetColor(255, 255, 255, m_pWorld->GetNightAlpha());
-		m_pNightSky->Render(g_pFramework->GetWindow());
+		m_pNightSky->Render(g_pFramework->GetRenderWindow());
 	}
 
 	//sets the default texture rect
@@ -486,7 +493,7 @@ void CGame::PauseGame()
 	bool is_open = true;
 	int buttonEventtype = 0;
 
-	g_pFramework->GetWindow()->setView(g_pFramework->GetWindow()->getDefaultView());
+	g_pFramework->GetRenderWindow()->setView(g_pFramework->GetRenderWindow()->getDefaultView());
 
 	while(is_open)
 	{
@@ -499,7 +506,7 @@ void CGame::PauseGame()
 		if(g_pFramework->keyStates.leftMouseUp)
 			buttonEventtype = 1;
 
-		m_pPauseMenu->Render(g_pFramework->GetWindow());
+		m_pPauseMenu->Render(g_pFramework->GetRenderWindow());
 
 		if(m_pContinueButton->Render(buttonEventtype))
 			is_open = false;

@@ -28,7 +28,7 @@ void CMagicMenu::Init(CInventory *_inventory, CPlayer *_player, bool _loaded)
 
 	m_pMagicMenu = new CSprite;
 	m_pMagicMenu->Load(&g_pTextures->t_magicMenu);
-	m_pMagicMenu->SetPos((int)(g_pFramework->GetWindow()->getSize().x / 2 - m_pMagicMenu->GetRect().width / 2), (int)(g_pFramework->GetWindow()->getSize().y / 2 - m_pMagicMenu->GetRect().height / 2));
+	m_pMagicMenu->SetPos((int)(g_pFramework->GetRenderWindow()->getSize().x / 2 - m_pMagicMenu->GetRect().width / 2), (int)(g_pFramework->GetRenderWindow()->getSize().y / 2 - m_pMagicMenu->GetRect().height / 2));
 
 	//init the spells
 	for (int i = 0; i < AMOUNTOFSPELLS; i++)
@@ -79,13 +79,13 @@ void CMagicMenu::Render()
 
 	if (is_open)
 	{
-		m_pMagicMenu->Render(g_pFramework->GetWindow());
+		m_pMagicMenu->Render(g_pFramework->GetRenderWindow());
 
 		//render the magic points
 		stringstream str("");
 		str << m_MagicPoints;
 		m_text.setString(str.str());
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//render the spells
 		for (int i = 0; i < AMOUNTOFSPELLS; i++)
@@ -114,15 +114,15 @@ void CMagicMenu::Render()
 
 
 			if (m_SpellLevel[i] > 0)
-				m_Spells[i].m_Sprite->Render(g_pFramework->GetWindow(), 0.0f);
+				m_Spells[i].m_Sprite->Render(g_pFramework->GetRenderWindow(), 0.0f);
 			else
-				m_Spells[i].m_Sprite->Render(g_pFramework->GetWindow(), 1.0f);
+				m_Spells[i].m_Sprite->Render(g_pFramework->GetRenderWindow(), 1.0f);
 
 			str.str("");
 			str << m_SpellLevel[i] << "/10";
 			m_levelText.setString(str.str());
 			m_levelText.setPosition(m_Spells[i].m_Sprite->GetRect().left + 10, m_Spells[i].m_Sprite->GetRect().top + 100);
-			g_pFramework->GetWindow()->draw(m_levelText);
+			g_pFramework->GetRenderWindow()->draw(m_levelText);
 		}
 	}
 }

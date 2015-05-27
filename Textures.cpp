@@ -81,6 +81,7 @@ void TextureLoading::LoadTextures()
 
 	t_skillPage.loadFromFile("Data/Sprites/Skills/character_info2.png");
 	t_levelUp.loadFromFile("Data/Sprites/Skills/levelUp.png");
+	t_levelUp_button.loadFromFile("Data/Sprites/Skills/levelUp_button.png");
 	t_newSkillSpeed.loadFromFile("Data/Sprites/Skills/levelUp_speed.png");
 	t_newSkillStrength.loadFromFile("Data/Sprites/Skills/levelUp_strength.png");
 	t_newSkillHealth.loadFromFile("Data/Sprites/Skills/levelUp_health.png");
@@ -304,6 +305,8 @@ void TextureLoading::LoadTextures()
 	t_goblin_arm2.loadFromFile("Data/Sprites/Living/goblin_arm3.png");
 	t_goblin_body3.loadFromFile("Data/Sprites/Living/goblin_upper_body4.png");
 	t_goblin_arm3.loadFromFile("Data/Sprites/Living/goblin_arm4.png");
+
+	s_drunkShader.loadFromFile("Data/Shaders/blur.frag", Shader::Fragment);
 
 	f_coolsville.loadFromFile("Data/Fonts/coolsville.ttf");
 	f_ltromatic.loadFromFile("Data/Fonts/ltromatic.ttf");

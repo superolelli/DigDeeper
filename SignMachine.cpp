@@ -40,7 +40,7 @@ void CSignMachine::Render()
 		m_text.setColor((*i).color);
 
 		//renders the text
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//subtract the elapsed time
 		(*i).time -= g_pTimer->GetElapsedTime().asSeconds();

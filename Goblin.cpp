@@ -442,7 +442,7 @@ void CGoblin::Render()
 	if (m_State == FROZEN)
 	{
 		m_frozenSprite.SetPos(m_pGoblin->GetRect().left - 5, m_pGoblin->GetRect().top);
-		m_frozenSprite.Render(g_pFramework->GetWindow());
+		m_frozenSprite.Render(g_pFramework->GetRenderWindow());
 	}
 }
 

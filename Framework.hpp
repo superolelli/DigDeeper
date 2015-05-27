@@ -68,8 +68,14 @@ public:
 	//returns a list of all events, happened
 	void ProcessEvents();
 
+	//applies a shader
+	void ApplyShader(int _shader){ m_Shader = _shader; }
+
 	//returns a pointer to the window
-	inline RenderWindow *GetWindow(){return m_pWindow;}
+	inline RenderWindow *GetWindow(){return m_pRealWindow;}
+
+
+	inline RenderTexture *GetRenderWindow(){ return m_pWindow; }
 
 	//writes an log entry
 	void WriteToLog(int _ID, string _message);
@@ -77,7 +83,10 @@ public:
 private:
 
 	//the window to render on
-	RenderWindow *m_pWindow;
+	RenderWindow *m_pRealWindow;
+	RenderTexture *m_pWindow;
+
+	int m_Shader;
 
 	//the logfile
 	ige::FileLogger *m_pMyLog;

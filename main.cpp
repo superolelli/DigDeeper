@@ -26,12 +26,12 @@ void loading_screen(bool *is_loading)
 
 	CSprite Loading_screen;
 	Loading_screen.Load(&texture);
-	Loading_screen.setScale((float)g_pFramework->GetWindow()->getSize().x / (float)Loading_screen.GetRect().width, (float)g_pFramework->GetWindow()->getSize().y / (float)Loading_screen.GetRect().height);
+	Loading_screen.setScale((float)g_pFramework->GetRenderWindow()->getSize().x / (float)Loading_screen.GetRect().width, (float)g_pFramework->GetRenderWindow()->getSize().y / (float)Loading_screen.GetRect().height);
 
 	while(*is_loading == true)
 	{
 		g_pFramework->Update();
-		Loading_screen.Render(g_pFramework->GetWindow());
+		Loading_screen.Render(g_pFramework->GetRenderWindow());
 		g_pFramework->Flip();
 	}
 }

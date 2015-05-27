@@ -192,7 +192,7 @@ SItem CPlayerEquipment::Take(SItem _item)
 //renders the equipment window
 void CPlayerEquipment::Render()
 {
-	m_pPanel->Render(g_pFramework->GetWindow());
+	m_pPanel->Render(g_pFramework->GetRenderWindow());
 
 	if(m_helmet.amount != 0)
 	{
@@ -237,8 +237,8 @@ void CPlayerEquipment::Render()
 	//render the tooltip
 	if(m_showTooltip)
 	{
-		g_pFramework->GetWindow()->draw(m_tooltipBackground, m_tooltipText.getTransform());
-		g_pFramework->GetWindow()->draw(m_tooltipText);	
+		g_pFramework->GetRenderWindow()->draw(m_tooltipBackground, m_tooltipText.getTransform());
+		g_pFramework->GetRenderWindow()->draw(m_tooltipText);	
 		m_showTooltip = false;
 	}
 }

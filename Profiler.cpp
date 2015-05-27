@@ -63,7 +63,7 @@ void CProfiler::ShowProfiler()
 		}
 
 		m_text.setString(finalString);
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 	}
 }
 

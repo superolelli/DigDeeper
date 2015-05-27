@@ -40,7 +40,7 @@ void CBuildingMenu::Init(CInventory * _inventory)
 
 	m_pBuildingMenu = new CSprite;
 	m_pBuildingMenu->Load(&g_pTextures->t_buildingWindow);
-	m_pBuildingMenu->SetPos((int)(g_pFramework->GetWindow()->getSize().x/2 - m_pBuildingMenu->GetRect().width/2), (int)(g_pFramework->GetWindow()->getSize().y/2 - m_pBuildingMenu->GetRect().height/2));
+	m_pBuildingMenu->SetPos((int)(g_pFramework->GetRenderWindow()->getSize().x/2 - m_pBuildingMenu->GetRect().width/2), (int)(g_pFramework->GetRenderWindow()->getSize().y/2 - m_pBuildingMenu->GetRect().height/2));
 
 	m_pBuildButton = new CButton();
 	m_pBuildButton->Load(&g_pTextures->t_buildButton, m_pBuildingMenu->GetRect().left + 470, m_pBuildingMenu->GetRect().top + 420, 3);
@@ -83,7 +83,7 @@ void CBuildingMenu::InitLoaded(CInventory * _inventory)
 
 	m_pBuildingMenu = new CSprite;
 	m_pBuildingMenu->Load(&g_pTextures->t_buildingWindow);
-	m_pBuildingMenu->SetPos((int)(g_pFramework->GetWindow()->getSize().x/2 - m_pBuildingMenu->GetRect().width/2), (int)(g_pFramework->GetWindow()->getSize().y/2 - m_pBuildingMenu->GetRect().height/2));
+	m_pBuildingMenu->SetPos((int)(g_pFramework->GetRenderWindow()->getSize().x/2 - m_pBuildingMenu->GetRect().width/2), (int)(g_pFramework->GetRenderWindow()->getSize().y/2 - m_pBuildingMenu->GetRect().height/2));
 
 	m_pBuildButton = new CButton();
 	m_pBuildButton->Load(&g_pTextures->t_buildButton, m_pBuildingMenu->GetRect().left + 470, m_pBuildingMenu->GetRect().top + 420, 3);
@@ -424,7 +424,7 @@ void CBuildingMenu::Render()
 		bool enough_resources = true;
 
 		//Render the menu
-		m_pBuildingMenu->Render(g_pFramework->GetWindow());
+		m_pBuildingMenu->Render(g_pFramework->GetRenderWindow());
 	
 		//if the build button was pressed: build if possible the chosen thing
 		if(g_pFramework->keyStates.leftMouseUp)
@@ -517,7 +517,7 @@ void CBuildingMenu::Render()
 		for(i = c; i != m_recipes.end(); i++)
 		{
 			m_pThingBackground->SetPos(x, y);
-			m_pThingBackground->Render(g_pFramework->GetWindow());
+			m_pThingBackground->Render(g_pFramework->GetRenderWindow());
 
 			if(m_pThingBackground->GetRect().contains(Mouse::getPosition()) && Mouse::isButtonPressed(Mouse::Left))
 			{
@@ -527,7 +527,7 @@ void CBuildingMenu::Render()
 
 			m_text.setPosition((float)(x + 5) , (float)(y));
 			m_text.setString(i->Name);
-			g_pFramework->GetWindow()->draw(m_text);
+			g_pFramework->GetRenderWindow()->draw(m_text);
 
 			y += 41;
 			counter++;
@@ -537,7 +537,7 @@ void CBuildingMenu::Render()
 		}
 
 		//renders the building information of the chosen item
-		m_chosenItem.m_pInfoSprite->Render(g_pFramework->GetWindow());
+		m_chosenItem.m_pInfoSprite->Render(g_pFramework->GetRenderWindow());
 	}
 }
 
@@ -549,7 +549,7 @@ void CBuildingMenu::ShowText()
 	if(m_message.getString() != "")
 	{
 		m_textTime += g_pTimer->GetElapsedTime().asSeconds();
-		g_pFramework->GetWindow()->draw(m_message);
+		g_pFramework->GetRenderWindow()->draw(m_message);
 
 		if(m_textTime >= 3.0f)
 		{

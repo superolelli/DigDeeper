@@ -12,6 +12,7 @@ CCharacterInfo::CCharacterInfo()
 	m_pSecondSkill = NULL;
 	m_pThirdSkill = NULL;
 	m_pFourthSkill = NULL;
+	m_pLevelUpButton = NULL;
 	m_pPlayer = NULL;
 }
 
@@ -26,6 +27,7 @@ CCharacterInfo::~CCharacterInfo()
 	SAFE_DELETE(m_pSecondSkill);
 	SAFE_DELETE(m_pThirdSkill);
 	SAFE_DELETE(m_pFourthSkill);
+	SAFE_DELETE(m_pLevelUpButton);
 }
 
 
@@ -39,11 +41,14 @@ void CCharacterInfo::Init(SPlayerAttributes *_attributes, SToolAttributes *_modi
 
 	m_pCharacterWindow = new CSprite;
 	m_pCharacterWindow->Load(&g_pTextures->t_skillPage);
-	m_pCharacterWindow->SetPos((int)(g_pFramework->GetWindow()->getSize().x/2 - m_pCharacterWindow->GetRect().width/2), (int)(g_pFramework->GetWindow()->getSize().y/2 - m_pCharacterWindow->GetRect().height/2));
+	m_pCharacterWindow->SetPos((int)(g_pFramework->GetRenderWindow()->getSize().x/2 - m_pCharacterWindow->GetRect().width/2), (int)(g_pFramework->GetRenderWindow()->getSize().y/2 - m_pCharacterWindow->GetRect().height/2));
 
 	m_pLevelUp = new CSprite;
 	m_pLevelUp->Load(&g_pTextures->t_levelUp);
-	m_pLevelUp->SetPos((int)(g_pFramework->GetWindow()->getSize().x/2 - m_pLevelUp->GetRect().width/2), (int)(g_pFramework->GetWindow()->getSize().y/2 - m_pLevelUp->GetRect().height/2));
+	m_pLevelUp->SetPos((int)(g_pFramework->GetRenderWindow()->getSize().x/2 - m_pLevelUp->GetRect().width/2), (int)(g_pFramework->GetRenderWindow()->getSize().y/2 - m_pLevelUp->GetRect().height/2));
+
+	m_pLevelUpButton = new CButton;
+	m_pLevelUpButton->Load(&g_pTextures->t_levelUp_button, g_pFramework->GetWindow()->getSize().x - 100, 20, 1);
 
 	//loads the font and applies it to the text
 	m_font.loadFromFile("Data/Fonts/18cents.ttf");
@@ -65,6 +70,9 @@ void CCharacterInfo::Init(SPlayerAttributes *_attributes, SToolAttributes *_modi
 
 	is_open = false;
 	level_up = false;
+	choosing_skill = false;
+
+	m_levelUpCounter = 0;
 }
 
 
@@ -86,97 +94,112 @@ void CCharacterInfo::Render()
 
 	if(is_open)
 	{	
-		m_pCharacterWindow->Render(g_pFramework->GetWindow());
+		m_pCharacterWindow->Render(g_pFramework->GetRenderWindow());
 
 		//show the health
 		stream.str("");
 		stream << m_pModifications->maxHealth;
 		m_text.setString(stream.str());
 		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 99));
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the healthregeneration
 		stream.str("");
 		stream << m_pModifications->healthRegeneration;
 		m_text.setString(stream.str());
 		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 126));
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the armour
 		stream.str("");
 		stream << m_pModifications->armour;
 		m_text.setString(stream.str());
 		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 158));
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the strength
 		stream.str("");
 		stream << m_pModifications->strength;
 		m_text.setString(stream.str());
 		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 228));
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 		
 		//show the critical chance
 		stream.str("");
 		stream << m_pModifications->criticalChance;
 		m_text.setString(stream.str());
 		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 254));
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 		
 		//show the critical damage
 		stream.str("");
 		stream << m_pModifications->criticalDamage;
 		m_text.setString(stream.str());
 		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 287));
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the luck
 		stream.str("");
 		stream << m_pModifications->luck;
 		m_text.setString(stream.str());
 		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 352));
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the breakingSpeed
 		stream.str("");
 		stream << m_pModifications->breaking_speed;
 		m_text.setString(stream.str());
 		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 380));
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the speed
 		stream.str("");
 		stream << m_pModifications->speed;
 		m_text.setString(stream.str());
 		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 280), (float)(m_pCharacterWindow->GetRect().top + 412));
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the mana
 		stream.str("");
 		stream << m_pModifications->maxMana;
 		m_text.setString(stream.str());
 		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 595), (float)(m_pCharacterWindow->GetRect().top + 100));
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the manaregeneration
 		stream.str("");
 		stream << m_pModifications->manaRegeneration;
 		m_text.setString(stream.str());
 		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 595), (float)(m_pCharacterWindow->GetRect().top + 125));
-		g_pFramework->GetWindow()->draw(m_text);
+		g_pFramework->GetRenderWindow()->draw(m_text);
 	
 	}
 
 	CheckForLevelUp();
 
 	//if the player has reached a new level: show the new skills
-	if(level_up)
+	if(m_levelUpCounter > 0)
+	{
+		choosing_skill = true;
+
+		//if the level up button was pressed:
+		if (m_pLevelUpButton->Render(g_pFramework->keyStates.leftMouseUp))
+		{
+			is_open = true;
+		}
+	}
+
+
+	if (choosing_skill && is_open)
 	{
 		LevelUp();
 	}
 	//else set all skills to zero
-	else
+	else if (choosing_skill == false && m_levelUpCounter == 0)
 	{
+		choosing_skill = false;
+		level_up = false;
+
 		Skills[0] = 0;
 		Skills[1] = 0;
 		Skills[2] = 0;
@@ -195,43 +218,47 @@ void CCharacterInfo::Render()
 //checks if the player reached a new level
 void CCharacterInfo::CheckForLevelUp()
 {
-	if(!level_up)
+
+	if (m_pAttributes->currentExp >= m_pAttributes->maxExp)
 	{
-		if(m_pAttributes->currentExp >= m_pAttributes->maxExp)
+		//subtract the exp needed to level up
+		m_pAttributes->currentExp -= m_pAttributes->maxExp;
+		m_pAttributes->maxExp += 15;
+		level_up = true;
+
+		m_levelUpTime = 0.0f;
+
+		m_levelUpCounter++;
+	}
+
+
+	if (m_levelUpCounter > 0 && choosing_skill == false)
+	{
+		//clears the buttons
+		SAFE_DELETE(m_pFirstSkill);
+		SAFE_DELETE(m_pSecondSkill);
+		SAFE_DELETE(m_pThirdSkill);
+		SAFE_DELETE(m_pFourthSkill);
+
+		//loads new buttons
+		if (m_pPlayer->GetNotAvailableRecipesList().size() > 0)
 		{
-			//subtract the exp needed to level up
-			
-			m_pAttributes->currentExp -= m_pAttributes->maxExp;
-			m_pAttributes->maxExp += 15;
-			level_up = true;
-
-			m_levelUpTime = 0.0f;
-
-			//clears the buttons
-			SAFE_DELETE(m_pFirstSkill);
-			SAFE_DELETE(m_pSecondSkill);
-			SAFE_DELETE(m_pThirdSkill);
-			SAFE_DELETE(m_pFourthSkill);
-
-			//loads new buttons
-			if(m_pPlayer->GetNotAvailableRecipesList().size() > 0)
-			{
-				m_pFirstSkill = new CButton;
-				m_pFirstSkill->Load(&g_pTextures->t_newSkillRecipe, 0, 0, 1);
-				Skills[1] = RECIPESKILL;
-			}
-			else
-				m_pFirstSkill = RandomSkill(0);
-
-			m_pSecondSkill = RandomSkill(1);
-			m_pThirdSkill = RandomSkill(2);
-			m_pFourthSkill = RandomSkill(3);
-
-			m_pFirstSkill->SetPos(m_pLevelUp->GetRect().left, m_pLevelUp->GetRect().top + 50);
-			m_pSecondSkill->SetPos(m_pLevelUp->GetRect().left + 300, m_pLevelUp->GetRect().top + 50);
-			m_pThirdSkill->SetPos(m_pLevelUp->GetRect().left, m_pLevelUp->GetRect().top + 250);
-			m_pFourthSkill->SetPos(m_pLevelUp->GetRect().left + 300, m_pLevelUp->GetRect().top + 250);		
+			m_pFirstSkill = new CButton;
+			m_pFirstSkill->Load(&g_pTextures->t_newSkillRecipe, 0, 0, 1);
+			Skills[1] = RECIPESKILL;
 		}
+		else
+			m_pFirstSkill = RandomSkill(0);
+
+		m_pSecondSkill = RandomSkill(1);
+		m_pThirdSkill = RandomSkill(2);
+		m_pFourthSkill = RandomSkill(3);
+
+		m_pFirstSkill->SetPos(m_pLevelUp->GetRect().left, m_pLevelUp->GetRect().top + 50);
+		m_pSecondSkill->SetPos(m_pLevelUp->GetRect().left + 300, m_pLevelUp->GetRect().top + 50);
+		m_pThirdSkill->SetPos(m_pLevelUp->GetRect().left, m_pLevelUp->GetRect().top + 250);
+		m_pFourthSkill->SetPos(m_pLevelUp->GetRect().left + 300, m_pLevelUp->GetRect().top + 250);
+
 	}
 }
 
@@ -255,29 +282,33 @@ void CCharacterInfo::LevelUp()
 	}
 
 	//render the window and the buttons
-	m_pLevelUp->Render(g_pFramework->GetWindow());
+	m_pLevelUp->Render(g_pFramework->GetRenderWindow());
 
 	if(m_pFirstSkill->Render(eventtype))
 	{
-		level_up = false;
+		choosing_skill = false;
+		m_levelUpCounter--;
 		AddSkill(Skills[0]);
 	}
 
 	if(m_pSecondSkill->Render(eventtype))
 	{
-		level_up = false;
+		choosing_skill = false;
+		m_levelUpCounter--;
 		AddSkill(Skills[1]);
 	}
 
 	if(m_pThirdSkill->Render(eventtype))
 	{
-		level_up = false;
+		choosing_skill = false;
+		m_levelUpCounter--;
 		AddSkill(Skills[2]);
 	}
 
 	if(m_pFourthSkill->Render(eventtype))
 	{
-		level_up = false;
+		choosing_skill = false;
+		m_levelUpCounter--;
 		AddSkill(Skills[3]);
 	}
 }
