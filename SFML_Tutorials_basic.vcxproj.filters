@@ -138,6 +138,9 @@
     <ClCompile Include="Cauldron.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.hpp">
@@ -276,6 +279,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Cauldron.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

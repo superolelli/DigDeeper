@@ -12,6 +12,7 @@ void load_textures(bool *is_loading)
 	
 		//Load all textures
 	g_pTextures->LoadTextures();
+	g_pSound->LoadSounds();
 	g_pRims->LoadRims();
 
 	*is_loading = false;
@@ -56,7 +57,7 @@ int main()
 
 	bool quit = false;
 
-	g_pTextures->m_musicMenu.play();
+	g_pSound->m_musicMenu.play();
 
 	//Create the menu and start the main loop
 	CMenu menu;
@@ -78,7 +79,7 @@ int main()
 			{
 				SNewWorldAttributes attributes = menu.Quit();
 
-				g_pTextures->m_musicMenu.stop();
+				g_pSound->m_musicMenu.stop();
 
 				CGame Game;
 
@@ -86,7 +87,7 @@ int main()
 				Game.Run();
 				Game.Quit();
 
-				g_pTextures->m_musicMenu.play();
+				g_pSound->m_musicMenu.play();
 
 			}break;
 		case(3):
@@ -97,7 +98,7 @@ int main()
 			{
 				SNewWorldAttributes attributes = menu.Quit();
 
-				g_pTextures->m_musicMenu.stop();
+				g_pSound->m_musicMenu.stop();
 
 				CGame Game;
 
@@ -105,7 +106,7 @@ int main()
 				Game.Run();
 				Game.Quit();
 
-				g_pTextures->m_musicMenu.play();
+				g_pSound->m_musicMenu.play();
 
 			}break;
 		default:

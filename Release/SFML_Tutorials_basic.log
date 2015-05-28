@@ -1,22 +1,8 @@
-﻿Der Buildvorgang wurde am 27.05.2015 16:08:34 gestartet.
+﻿Der Buildvorgang wurde am 28.05.2015 14:41:05 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt World.cpp
-         World.cpp
-     1>World.cpp(480): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(481): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(762): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(763): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1727): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1728): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1729): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1730): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1784): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1785): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1786): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1787): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1948): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>World.cpp(1949): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
+         Game.cpp
        Link:
          F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.3\lib" "sfml-audio.lib" "sfml-graphics.lib" "sfml-network.lib" "sfml-system.lib" "sfml-window.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.lib" /MACHINE:X86 /SAFESEH Release\Beam.obj
          Release\Bee.obj
@@ -53,6 +39,7 @@
          Release\Projectiles.obj
          Release\Rims.obj
          Release\SignMachine.obj
+         Release\Sound.obj
          Release\Sprite.obj
          Release\StringInput.obj
          Release\Textures.obj
@@ -67,4 +54,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:10.85
+Verstrichene Zeit 00:00:12.16

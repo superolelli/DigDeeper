@@ -323,12 +323,7 @@ public:
 
 	Font f_coolsville;
 	Font f_ltromatic;
-	Font f_cents18;
-
-	Music m_musicMenu;
-	Music m_musicGame[10];
-
-	SoundBuffer m_goldSound[3];        
+	Font f_cents18; 
 };
 
 

@@ -26,6 +26,7 @@ public:
 	int GetID(){return m_ID;}
 	int GetState(){return m_State;}
 	void SetFrozen(float _frozenTime);
+	void PlayHitSound(){ m_hitSound.play(); }
 
 	bool m_wasHit;                          //was the npc hit?
 
@@ -52,6 +53,8 @@ protected:
 	int m_yPos; 
 
 	float m_fFrozenTimer;
+
+	Sound m_hitSound;
 
 	CWorld *m_pWorld;                         //a pointer to the world
 	CPlayer *m_pPlayer;

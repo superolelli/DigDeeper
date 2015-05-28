@@ -72,6 +72,8 @@ bool CButton::Render(int eventtype)
 			{
 			case BUTTONTYPE_UP:
 				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 1.0f);
+				g_pSound->m_sound.setBuffer(g_pSound->m_buttonClick);
+				g_pSound->m_sound.play();
 				return true;
 				break;
 
@@ -82,6 +84,8 @@ bool CButton::Render(int eventtype)
 
 			case BUTTONTYPE_MOTION_UP:
 				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 2.0f);
+				g_pSound->m_sound.setBuffer(g_pSound->m_buttonClick);
+				g_pSound->m_sound.play();
 				return true;
 				break;
 
@@ -104,6 +108,8 @@ bool CButton::Render(int eventtype)
 
 			case BUTTONTYPE_DOWN:
 				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 1.0f);
+				g_pSound->m_sound.setBuffer(g_pSound->m_buttonClick);
+				g_pSound->m_sound.play();
 				return true;
 				break;
 
@@ -114,6 +120,8 @@ bool CButton::Render(int eventtype)
 
 			case BUTTONTYPE_MOTION_DOWN:
 				m_pButtonSprite->Render(g_pFramework->GetRenderWindow(), 2.0f);
+				g_pSound->m_sound.setBuffer(g_pSound->m_buttonClick);
+				g_pSound->m_sound.play();
 				return true;
 				break;
 			}

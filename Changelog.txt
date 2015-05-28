@@ -1187,3 +1187,15 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Man wird nun betrunken, wenn man zuviel Met trinkt
 
 ------------------------------------------------------
+27.05.2015
+
+-Einige Bugs behoben, die das Spiel abstürzen ließen
+-Wenn man eine Stufe aufsteigt wird dies nun nicht automatisch angezeigt (und so der Bildschirm verdeckt)
+
+------------------------------------------------------
+28.05.2015
+
+-Sound-Management wurde umstrukturiert
+-Es wurden probehalber einige Sounds eingefügt
+
+------------------------------------------------------

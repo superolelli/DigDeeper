@@ -122,7 +122,7 @@ void CGame::Quit()
 
 	m_NpcMachine.Quit();
 
-	g_pTextures->m_musicGame[m_music].stop();
+	g_pSound->m_musicGame[m_music].stop();
 
 	g_pProfiler->Quit();
 
@@ -137,7 +137,7 @@ void CGame::Quit()
 
 void CGame::Run()
 {
-	g_pTextures->m_musicGame[m_music].play();
+	g_pSound->m_musicGame[m_music].play();
 
 	g_pFramework->Update();
 	while(is_running)
@@ -249,6 +249,9 @@ void CGame::Run()
 			g_pFramework->GetRenderWindow()->draw(sprite);
 			g_pFramework->Flip();
 
+			g_pSound->m_sound.setBuffer(g_pSound->m_laughSound);
+			g_pSound->m_sound.play();
+
 			sleep(seconds(5));
 
 			is_running = false;
@@ -266,34 +269,11 @@ void CGame::Run()
 //Moves the view and the player
 void CGame::CheckView()
 {
-	////rotate the view if player is drunk
-	//if (m_pPlayer->GetDrunkness() > 5.0f)
-	//{
-	//	if (m_rotatingDown)
-	//	{
-	//		if (m_View.getRotation() < 20 || m_View.getRotation() >= 340)
-	//			m_View.rotate(0.25);
-	//		else
-	//			m_rotatingDown = false;		
-	//	}
-	//	else
-	//	{
-	//		if (m_View.getRotation() <= 20 || m_View.getRotation() > 340)
-	//			m_View.rotate(-0.25);
-	//		else
-	//			m_rotatingDown = true;
-	//	}
-	//}
-	//else
-	//{
-	//	//reset the rotation
-	//	m_View.rotate(360 - m_View.getRotation());
-	//}
-
 	if (m_pPlayer->GetDrunkness() > 5.0f)
 		g_pFramework->ApplyShader(DRUNK);
 	else
 		g_pFramework->ApplyShader(NO_SHADER);
+
 
 	//Moves the player
 	Vector2f dwarfCenter = m_pPlayer->CheckMovement();
@@ -324,7 +304,7 @@ void CGame::CheckView()
 void CGame::CheckMusic()
 {
 	//is the music playing?
-	if(g_pTextures->m_musicGame[m_music].getStatus() == Music::Stopped)
+	if(g_pSound->m_musicGame[m_music].getStatus() == Music::Stopped)
 	{
 		//play random new music
 		int newMusic = rand()%10;
@@ -348,7 +328,7 @@ void CGame::CheckMusic()
 
 			song_played[newMusic] = true;
 
-			g_pTextures->m_musicGame[m_music].play();
+			g_pSound->m_musicGame[m_music].play();
 
 			cout << "Now playing music number: " << m_music << endl;
 		}

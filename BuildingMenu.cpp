@@ -461,6 +461,13 @@ void CBuildingMenu::Render()
 						CTool *thing = new CTool;
 						thing->InitToolRandomly(m_chosenItem.ID);
 						m_pInventory->Take(thing, m_chosenItem.amountOfProducts);
+
+						//if tool is a sword: play sound
+						if (m_chosenItem.ID == SWORD)
+						{
+							m_variousSounds.setBuffer(g_pSound->m_metalSliding);
+							m_variousSounds.play();
+						}
 					}
 					//if the thing is equipment
 					else

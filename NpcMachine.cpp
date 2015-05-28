@@ -140,6 +140,9 @@ void CNpcMachine::CheckAllNpcs()
 				//reset if npc was frozen
 				(*i)->SetFrozen(0.0f);
 
+				//play the hit sound
+				(*i)->PlayHitSound();
+
 				//throw the npc if hitted
 				if (m_pPlayer->GetRect().left > (*i)->GetRect().left)
 					(*i)->ThrowNpc(true, 300);
@@ -298,6 +301,9 @@ bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
 
 			//subtract the lost health
 			(*i)->GetAttributes()->currentHealth -= damage;
+
+			//plays the hit sound
+			(*i)->PlayHitSound();
 
 			//throw the npc if hitted
 			if (m_pPlayer->GetRect().left > (*i)->GetRect().left)

@@ -804,7 +804,7 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 						{
 							int soundNumber = rand()%3;
 
-							m_sound.setBuffer(g_pTextures->m_goldSound[soundNumber]);
+							m_sound.setBuffer(g_pSound->m_goldSound[soundNumber]);
 							m_sound.play();
 						}
 

@@ -22,6 +22,7 @@
 #include "singleton.hpp"
 #include "Time.hpp"
 #include "Textures.hpp"
+#include "Sound.hpp"
 #include "Rims.hpp"
 #include "Sprite.hpp"
 #include "Constants.hpp"
