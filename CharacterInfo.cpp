@@ -412,7 +412,7 @@ void CCharacterInfo::AddSkill(int _skill)
 		}break;
 	case STRENGTH:
 		{
-			m_pAttributes->strength += 10;
+			m_pAttributes->strength += 2;
 		}break;
 	case ARMOUR:
 		{

@@ -42,6 +42,11 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 
 	//Init the world with the right size
 	m_pWorld = new CWorld;
+	m_pPlayer = new CPlayer;
+
+	//Inits the npc machine
+	m_NpcMachine.Init(m_pWorld, m_pPlayer, &m_View);
+
 	if(_attributes.WorldSize == SMALL)
 		m_pWorld->Init(100, 54, &m_View, &m_NpcMachine, _loaded);
 	else if(_attributes.WorldSize == MEDIUM)
@@ -50,18 +55,12 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 		m_pWorld->Init(1000, 500, &m_View, &m_NpcMachine, _loaded);
 
 	//Inits the player
-	m_pPlayer = new CPlayer;
-	m_pPlayer->Init(7000, 300, m_pWorld, &m_View, _attributes.PlayerClass);
+	m_pPlayer->Init(700, 300, m_pWorld, &m_View, _attributes.PlayerClass);
 
-	//Inits the npc machine
-	m_NpcMachine.Init(m_pWorld, m_pPlayer, &m_View);
-	//if(!_loaded)
-	//{
-	//	m_NpcMachine.AddNpc(BEE, 700, 300);
-	//	m_NpcMachine.AddNpc(BEE, 800, 200);
-	//	m_NpcMachine.AddNpc(BEE, 600, 300);
-	//	m_NpcMachine.AddNpc(GOBLIN, 900, 270);
-	//}
+	if(!_loaded)
+	{
+		m_NpcMachine.AddNpc(GOBLIN, 900, 300);
+	}
 
 	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);
 

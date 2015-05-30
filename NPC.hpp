@@ -12,7 +12,7 @@ class CNpc
 public:
 	CNpc();
 
-	virtual void Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, bool _loaded = false) = 0;
+	virtual void Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, int _specialID, bool _loaded = false) = 0;
 	virtual bool CheckNpc() = 0;
 	virtual vector<SItem> GetLoot() = 0;
 	virtual void Render() = 0;

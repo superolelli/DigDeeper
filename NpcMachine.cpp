@@ -25,7 +25,7 @@ void CNpcMachine::Init(CWorld *_world, CPlayer *_player, View *_view, bool _load
 	{
 		list<CNpc*>::iterator i;
 		for(i = m_Npcs.begin(); i != m_Npcs.end(); i++)
-			(*i)->Init(0, 0, m_pWorld, m_pPlayer, m_pView, true);
+			(*i)->Init(0, 0, m_pWorld, m_pPlayer, m_pView, -1, true);
 	}
 }
 
@@ -47,7 +47,7 @@ void CNpcMachine::Quit()
 
 
 
-void CNpcMachine::AddNpc(int _ID, int _x, int _y)
+void CNpcMachine::AddNpc(int _ID, int _x, int _y, int _specialID)
 {
 	switch(_ID)
 	{
@@ -63,7 +63,7 @@ void CNpcMachine::AddNpc(int _ID, int _x, int _y)
 		case(GOBLIN):
 		{
 			CGoblin *goblin = new CGoblin;
-			goblin->Init(_x, _y, m_pWorld, m_pPlayer, m_pView);
+			goblin->Init(_x, _y, m_pWorld, m_pPlayer, m_pView, _specialID);
 			m_Npcs.push_back(goblin);
 		}break;
 	}
@@ -94,10 +94,13 @@ void CNpcMachine::CheckAllNpcs()
 		//if npc is out of range: despawn it
 		if (abs((*i)->GetRect().left - m_pPlayer->GetRect().left) > 2500 || abs((*i)->GetRect().top - m_pPlayer->GetRect().top) > 2500)
 		{
-			(*i)->Quit();
-			SAFE_DELETE((*i));
-			i = m_Npcs.erase(i);
-			continue;
+			if (!((*i)->GetID() == GOBLIN && ((CGoblin*)(*i))->IsChested()))
+			{
+				(*i)->Quit();
+				SAFE_DELETE((*i));
+				i = m_Npcs.erase(i);
+				continue;
+			}
 		}
 
 		//if the arm changed direction the npc is hittable
@@ -111,6 +114,9 @@ void CNpcMachine::CheckAllNpcs()
 		{
 			if(!(*i)->m_wasHit)
 			{
+				if ((*i)->GetID() == GOBLIN)
+					((CGoblin*)(*i))->SetChestedFalse();
+
 				//set was hit to true
 				(*i)->m_wasHit = true;
 

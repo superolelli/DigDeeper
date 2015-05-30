@@ -6,6 +6,7 @@ CNpc::CNpc()
 {
 	m_wasHit = false;
 	m_hitSound.setBuffer(g_pSound->m_hit1);
+	m_hitSound.setVolume(30);
 }
 
 

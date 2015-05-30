@@ -9,7 +9,7 @@ void SoundLoading::LoadSounds()
 	m_musicMenu.openFromFile("Data/Music/Music1.ogg");
 	m_musicMenu.setLoop(true);
 
-	m_musicMenu.setVolume(50);
+//	m_musicMenu.setVolume(50);
 
 	m_musicGame[0].openFromFile("Data/Music/Music2.ogg");
 	m_musicGame[1].openFromFile("Data/Music/Music3.ogg");
@@ -25,6 +25,7 @@ void SoundLoading::LoadSounds()
 	for (int i = 0; i < 10; i++)
 		m_musicGame[i].setVolume(50);
 
+	m_sound.setVolume(50);
 
 	m_goldSound[0].loadFromFile("Data/Sounds/gold1.ogg");
 	m_goldSound[1].loadFromFile("Data/Sounds/gold2.ogg");

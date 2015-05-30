@@ -14,6 +14,9 @@ void CFramework::Init()
 	m_pWindow->create(m_pRealWindow->getSize().x, m_pRealWindow->getSize().y, false);
 
 	m_Shader = 0;
+	m_fBlurNumber = 0.005f;
+	m_fBlurTimer = 0;
+	m_moreBlur = true;
 
 	m_pMyLog = new ige::FileLogger("0.2", "logfile.txt");
 }
@@ -62,7 +65,27 @@ void CFramework::Flip()
 		m_pRealWindow->draw(sprite);
 		break;
 	case(DRUNK) :
-		g_pTextures->s_drunkShader.setParameter("blur_radius", 0.005f);
+		if (m_fBlurTimer <= 0)
+		{
+			if (m_moreBlur)
+			{
+				m_fBlurNumber += 0.0001;
+				if (m_fBlurNumber >= 0.02)
+					m_moreBlur = false;
+			}
+			else
+			{
+				m_fBlurNumber -= 0.0001;
+				if (m_fBlurNumber <= 0.003)
+					m_moreBlur = true;
+			}
+
+			m_fBlurTimer = 0.0001;
+		}
+		else
+			m_fBlurTimer -= g_pTimer->GetElapsedTime().asSeconds();
+
+		g_pTextures->s_drunkShader.setParameter("blur_radius", m_fBlurNumber);
 		RenderStates states;
 		states.shader = &g_pTextures->s_drunkShader;
 		m_pRealWindow->draw(sprite, states);

@@ -82,6 +82,9 @@ CWorld::~CWorld()
 
 void CWorld::Init(int _width, int _height, View* _view, CNpcMachine* _npcs, bool _loaded)
 {
+	m_pView = _view;
+	m_pNpcMachine = _npcs;
+
 	if(!_loaded)
 	{
 		m_BlocksX = _width;
@@ -122,9 +125,6 @@ void CWorld::Init(int _width, int _height, View* _view, CNpcMachine* _npcs, bool
 
 	//m_lightMachine.Init(m_BlocksX*100, m_BlocksY*100);
 	m_lightMachine.Init(_view, this, false);
-
-	m_pView = _view;
-	m_pNpcMachine = _npcs;
 
 	m_WorldHeight = m_BlocksY *100;
 	m_WorldWidth = m_BlocksX *100;
@@ -291,7 +291,7 @@ void CWorld::GenerateRoom(int _x, int _y)
 				}
 				else if(y == _y + ySize -2)
 				{
-					int type = rand()%10;
+					int type = rand()%11;
 
 					//init the things in the room
 					if(type == 5)
@@ -316,6 +316,12 @@ void CWorld::GenerateRoom(int _x, int _y)
 					{
 						m_pBlocks[x][y]->Init(TABLE);
 						m_pBlocks[x][y]->SetPos(static_cast<float>(x*100), static_cast<float> (y * 100));
+					}
+					else if (type == 9)
+					{
+						m_pBlocks[x][y]->Init(ROOMFILL);
+						m_pNpcMachine->AddNpc(GOBLIN, x * 100, y * 100, CHESTGOBLIN);
+						cout << "added chest goblin" << endl;
 					}
 					else
 					{
@@ -453,13 +459,13 @@ void CWorld::Render()
 	//if it is night
 	else if(m_fNightTimer > 600.0f && m_fNightTimer < 900.0f)
 	{
-		if(m_NightAlpha < 240)
+		if(m_NightAlpha < 254)
 		{
 			if(m_fSecondTimer >= 0.5f)
 				m_NightAlpha++;
 		}
 		else
-			m_NightAlpha = 240;
+			m_NightAlpha = 254;
 	}
 	//if it is dawn: make it brighter
 	else if(m_fNightTimer >= 900)
@@ -1647,7 +1653,7 @@ void CWorld::FillChestRandomly(int _chestID)
 			while(is_filled == false)
 			{
 				//get a random ID
-				randomNumber = rand()%86 + 54;
+				randomNumber = rand()%85 + 54;
 
 				//very rare ring has currently the id 200
 				if(randomNumber == 138)
@@ -1662,13 +1668,13 @@ void CWorld::FillChestRandomly(int _chestID)
 					((CItem*)thing)->Init(randomNumber);	
 				}
 				//if thing is a consumable
-				else if (randomNumber >ICBREAK && randomNumber < 82)
+				else if (randomNumber >ICBREAK && randomNumber < 83)
 				{
 					thing = new CConsumable;
 					((CConsumable*)thing)->InitConsumable(randomNumber);
 				}
 				//if thing is a tool
-				else if(randomNumber > CTBREAK && randomNumber < 103)
+				else if(randomNumber > CTBREAK && randomNumber < 104)
 				{
 					thing = new CTool;
 					((CTool*)thing)->InitToolRandomly(randomNumber);

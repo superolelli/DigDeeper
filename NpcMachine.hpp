@@ -30,7 +30,7 @@ public:
 	void RenderDamageIndicator(){m_signMachine.Render();}
 
 	//adds a npc
-	void AddNpc(int _ID, int _x, int _y);
+	void AddNpc(int _ID, int _x, int _y, int _specialID = -1);
 
 	void Quit();
 

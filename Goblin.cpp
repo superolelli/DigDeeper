@@ -2,7 +2,7 @@
 #include "World.hpp"
 
 
-void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, bool _loaded)
+void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, int _specialID, bool _loaded)
 {
 	m_pWorld = _world;
 	m_pPlayer = _player;
@@ -10,7 +10,12 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 	m_ID = GOBLIN;
 
 	if (!_loaded)
-		m_goblinType = rand() % 3 + 1;
+	{
+		if (_specialID == -1)
+			m_goblinType = rand() % 4 + 1;
+		else
+			m_goblinType = _specialID;
+	}
 
 	//Init the sprite
 	m_pGoblin = new CLiving3Part;
@@ -43,7 +48,7 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 		m_Attributes.strength = 20;
 		m_Attributes.exp = 15;
 	}
-	else
+	else if (m_goblinType == KNIGHTGOBLIN)
 	{
 		m_pGoblin->Load(&g_pTextures->t_goblin_body3, 53, 68, 2, 0, &g_pTextures->t_goblin_arm3, 39, 54, 2, &g_pTextures->t_goblin_legs2, 48, 53, 12, _x, _y);
 		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 0.0f, 3.0f, 1.0f, 45.0f);
@@ -56,6 +61,23 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 		m_Attributes.speed = 130;
 		m_Attributes.strength = 15;
 		m_Attributes.exp = 15;
+	}
+	else
+	{
+		m_pGoblin->Load(&g_pTextures->t_goblin_body_chest, 57, 68, 2, 0, &g_pTextures->t_goblin_arm, 43, 30, 2, &g_pTextures->t_goblin_legs, 48, 58, 12, _x, _y);
+		m_pGoblin->SetPartsPos(-6.0f, 22.0f, 23.0f, 3.0f, 1.0f, 45.0f);
+		m_pGoblin->SetArmRotatingPoint(38.0f, 5.0f);
+		m_pGoblin->SetHandPosition(8.0f, 16.0f);
+
+		m_chestSprite.Load(&g_pTextures->t_blockTextures_chest);
+		m_chestSprite.SetPos(_x - (_x%100), _y - (_y%100));
+
+		//Init the attributes
+		m_Attributes.maxHealth = 40;
+		m_Attributes.armour = 0;
+		m_Attributes.speed = 150;
+		m_Attributes.strength = 10;
+		m_Attributes.exp = 10;
 	}
 
 	m_fXVel = 0;
@@ -71,6 +93,7 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 	m_fWaitToBeat = 0;
 	m_is_hitting = false;
 	m_jumping = false;
+	m_is_attacking = false;
 
 	m_fallingSpeed = 0;
 	m_sideSpeed = 0;
@@ -93,6 +116,7 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 
 		m_left = true;
 		m_Attributes.currentHealth = m_Attributes.maxHealth;
+		m_chested = true;
 	}
 }
 
@@ -109,14 +133,21 @@ void CGoblin::Quit()
 
 bool CGoblin::CheckCollision()
 {
-	//the rect, the dwarf would have, if he moved
-	FloatRect newPosition;
-	newPosition.left = m_pGoblin->GetRect().left + m_fXVel;
-	newPosition.top = m_pGoblin->GetRect().top + m_fYVel;
-	newPosition.width = (float)m_pGoblin->GetRect().width;
-	newPosition.height = (float)m_pGoblin->GetRect().height;
+	if (m_goblinType == CHESTGOBLIN && m_chested)
+	{
+		return m_pWorld->CheckLivingCollision((FloatRect)m_chestSprite.GetRect());
+	}
+	else
+	{
+		//the rect, the dwarf would have, if he moved
+		FloatRect newPosition;
+		newPosition.left = m_pGoblin->GetRect().left + m_fXVel;
+		newPosition.top = m_pGoblin->GetRect().top + m_fYVel;
+		newPosition.width = (float)m_pGoblin->GetRect().width;
+		newPosition.height = (float)m_pGoblin->GetRect().height;
 
-	return m_pWorld->CheckLivingCollision(newPosition);
+		return m_pWorld->CheckLivingCollision(newPosition);
+	}
 }
 
 
@@ -160,7 +191,14 @@ bool CGoblin::CheckNpc()
 				}
 
 			}
-			m_pGoblin->Move((int)m_fXVel, (int)m_fYVel);
+
+			if (m_goblinType == CHESTGOBLIN && m_chested)
+			{
+				m_chestSprite.Move((int)m_fXVel, (int)m_fYVel);
+				m_pGoblin->Move((int)m_fXVel, (int)m_fYVel);
+			}
+			else
+				m_pGoblin->Move((int)m_fXVel, (int)m_fYVel);
 		}
 		else
 			m_sideSpeed = 0;
@@ -239,26 +277,32 @@ void CGoblin::ThrowNpc(bool _left, int _strength)
 
 void CGoblin::CheckYMovement()
 {
-	//jump if needed
-	if (m_pWorld->CheckForBarrier(m_pGoblin->GetRect(), m_left) && m_pWorld->CheckCanJump(m_pGoblin->GetRect(), m_left) && m_jumping == false)
+	if (!(m_goblinType == CHESTGOBLIN && m_chested))
 	{
-		m_jumping = true;
-		m_fallingSpeed = -350;
+
+		//jump if needed
+		if (m_pWorld->CheckForBarrier(m_pGoblin->GetRect(), m_left) && m_pWorld->CheckCanJump(m_pGoblin->GetRect(), m_left) && m_jumping == false)
+		{
+			m_jumping = true;
+			m_fallingSpeed = -350;
+		}
 	}
 
 
-	//add something to the falling speed if it hasn't reached it's limit
-	if (m_fallingSpeed < 200)
-	{
-		m_fallingSpeed += static_cast<int>(400 * g_pTimer->GetElapsedTime().asSeconds());
+		//add something to the falling speed if it hasn't reached it's limit
+		if (m_fallingSpeed < 200)
+		{
+			m_fallingSpeed += static_cast<int>(400 * g_pTimer->GetElapsedTime().asSeconds());
 
-		//the normal falling speed is 200
-		if (m_fallingSpeed > 200)
-			m_fallingSpeed = 200;
-	}
+			//the normal falling speed is 200
+			if (m_fallingSpeed > 200)
+				m_fallingSpeed = 200;
+		}
 
-	//imitates gravity
-	m_fYVel = m_fallingSpeed * g_pTimer->GetElapsedTime().asSeconds();
+		//imitates gravity
+		m_fYVel = m_fallingSpeed * g_pTimer->GetElapsedTime().asSeconds();
+
+	
 }
 
 
@@ -277,48 +321,59 @@ void CGoblin::CheckState()
 		//if the goblin is idle: check if he should start walking
 		case(IDLE) :
 		{
-			cout << "Idle" << endl;
 
-			m_fStateTime -= g_pTimer->GetElapsedTime().asSeconds();
-
-
-			//if the goblin spotted the player: calculate the path and set state to following
-			if (m_pGoblin->GetRect().intersects(viewRect))
+			if (m_goblinType == CHESTGOBLIN && m_chested)
 			{
-				m_PointToGo = findPath(m_pPlayer->GetRect().left + m_pPlayer->GetRect().width / 2, m_pPlayer->GetRect().top + m_pPlayer->GetRect().height / 2);
-				if (m_PointToGo.x != -1 && m_PointToGo.x != m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2)
+				if (m_pGoblin->GetRect().contains(Vector2i(Mouse::getPosition().x + (m_pView->getCenter().x - m_pView->getSize().x / 2), Mouse::getPosition().y + (m_pView->getCenter().y - m_pView->getSize().y / 2))) && g_pFramework->keyStates.rightMouseUp)
 				{
-					m_State = WALKING;
-
-					//set the direction
-					if (m_PointToGo.x < m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2)
-					{
-						m_left = true;
-						m_fLegsAnimState = 5;
-					}
-					else if (m_PointToGo.x > m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2)
-					{
-						m_left = false;
-						m_fLegsAnimState = 6;
-					}
-				} 
-				else if (abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) > 50 && abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 120 && abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 80)
-				{
-					m_State = WALKING;
+					m_chested = false;
+					m_pGoblin->Move(0, -15);
 				}
-				
 			}
-			//if the time for being idle is up: seek a new point and start walking towards it
-			else if (m_fStateTime <= 0)
+			else
 			{
-				m_State = WALKING;
-				NewRandomDestination();		
+				cout << "Idle" << endl;
+
+				m_fStateTime -= g_pTimer->GetElapsedTime().asSeconds();
+
+
+				//if the goblin spotted the player: calculate the path and set state to following
+				if (m_pGoblin->GetRect().intersects(viewRect))
+				{
+					m_PointToGo = findPath(m_pPlayer->GetRect().left + m_pPlayer->GetRect().width / 2, m_pPlayer->GetRect().top + m_pPlayer->GetRect().height / 2);
+					if (m_PointToGo.x != -1 && m_PointToGo.x != m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2)
+					{
+						m_State = WALKING;
+
+						//set the direction
+						if (m_PointToGo.x < m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2)
+						{
+							m_left = true;
+							m_fLegsAnimState = 5;
+						}
+						else if (m_PointToGo.x > m_pGoblin->GetRect().left + m_pGoblin->GetRect().width / 2)
+						{
+							m_left = false;
+							m_fLegsAnimState = 6;
+						}
+					}
+					else if (abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) > 50 && abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 120 && abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 80)
+					{
+						m_State = WALKING;
+					}
+
+				}
+				//if the time for being idle is up: seek a new point and start walking towards it
+				else if (m_fStateTime <= 0)
+				{
+					m_State = WALKING;
+					NewRandomDestination();
+				}
+
+				//if the goblin is near the player: attack
+				if (abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 50 && abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 50)
+					m_State = ATTACKING;
 			}
-
-
-			//if the goblin is near the player: attack
-			if (abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 50 && abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 50)
-				m_State = ATTACKING;		
 
 		}break;
 		case(WALKING):
@@ -333,7 +388,7 @@ void CGoblin::CheckState()
 				if (m_PointToGo.x == -1)
 				{
 					//if player wasn't reached
-					if (abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) > 50 && abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 120 && abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 80)
+					if (abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) > 60 && abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 120 && abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 80)
 					{
 						m_State = WALKING;
 					}
@@ -374,17 +429,20 @@ void CGoblin::CheckState()
 
 		case(ATTACKING) :
 		{
-			cout << "attacking" << endl;
-			//if the goblin is near the player: attack
-			if (abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 50 && abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 50)
+			if (m_fWaitToBeat <= 0 && !m_is_attacking)
 			{
-				CheckArmAnimation();
+				m_is_attacking = true;
+				m_is_hitting = true;
+				m_fArmAnimState = 110;
 			}
 			else
+				m_fWaitToBeat -= g_pTimer->GetElapsedTime().asSeconds();
+
+			//if the goblin isn't near the player: stop attacking
+			if (!(abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 50 && abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 50))
 			{
 				m_State = IDLE;
 				m_fWaitToBeat = 0;
-				m_pGoblin->ResetArmRotation();
 			}
 
 		}break;
@@ -397,6 +455,11 @@ void CGoblin::CheckState()
 				m_State = IDLE;
 		}break;
 	}
+
+	CheckArmAnimation();
+
+	if (!m_is_attacking)
+		m_pGoblin->ResetArmRotation();
 }
 
 
@@ -428,21 +491,28 @@ void CGoblin::NewRandomDestination()
 
 void CGoblin::Render()
 {
-	if(m_left)
+	if (m_goblinType == CHESTGOBLIN && m_chested)
 	{
-		m_pGoblin->Render(0, m_fLegsAnimState);
-		m_pGoblin->RenderSecondPart(0);
+		m_chestSprite.Render(g_pFramework->GetRenderWindow());
 	}
 	else
 	{
-		m_pGoblin->Render(1, m_fLegsAnimState);
-		m_pGoblin->RenderSecondPart(1);
-	}
+		if (m_left)
+		{
+			m_pGoblin->Render(0, m_fLegsAnimState);
+			m_pGoblin->RenderSecondPart(0);
+		}
+		else
+		{
+			m_pGoblin->Render(1, m_fLegsAnimState);
+			m_pGoblin->RenderSecondPart(1);
+		}
 
-	if (m_State == FROZEN)
-	{
-		m_frozenSprite.SetPos(m_pGoblin->GetRect().left - 5, m_pGoblin->GetRect().top);
-		m_frozenSprite.Render(g_pFramework->GetRenderWindow());
+		if (m_State == FROZEN)
+		{
+			m_frozenSprite.SetPos(m_pGoblin->GetRect().left - 5, m_pGoblin->GetRect().top);
+			m_frozenSprite.Render(g_pFramework->GetRenderWindow());
+		}
 	}
 }
 
@@ -471,22 +541,20 @@ vector<SItem> CGoblin::GetLoot()
 
 void CGoblin::CheckArmAnimation()
 {
-	if (m_fWaitToBeat <= 0)
+	if (m_is_attacking)
 	{
 		//if arm reached lowest point: set arm to highest point
 		if (m_fArmAnimState <= -40)
 		{
-			m_fArmAnimState = 110;
-			m_fWaitToBeat = 0.6;
-			m_is_hitting = true;
+			m_fWaitToBeat = 0.3;
+			m_is_attacking = false;
+			m_is_hitting = false;
 		}
 
 		m_fArmAnimState -= g_pTimer->GetElapsedTime().asSeconds() * 500;
 
 		m_pGoblin->RotateArm(m_fArmAnimState);
 	}
-	else
-		m_fWaitToBeat -= g_pTimer->GetElapsedTime().asSeconds();
 }
 
 
@@ -510,6 +578,7 @@ IntRect CGoblin::GetWeaponRect()
 	switch (m_goblinType)
 	{
 	case(NORMALGOBLIN):
+	case(CHESTGOBLIN):
 		return IntRect(m_pGoblin->GetHandPos(m_left).x - 5, m_pGoblin->GetHandPos(m_left).y - 5, 10, 10);
 		break;
 	case(WARRIORGOBLIN) :

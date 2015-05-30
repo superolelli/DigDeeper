@@ -1199,3 +1199,10 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Es wurden probehalber einige Sounds eingefügt
 
 ------------------------------------------------------
+30.05.2015
+
+-Truhengoblin eingefügt
+-Kampf-KI etwas verbessert
+-Betrunkenheit etwas schöner gemacht
+
+------------------------------------------------------

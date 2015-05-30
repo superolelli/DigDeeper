@@ -148,6 +148,7 @@ const int GOBLIN = 2;
 const int NORMALGOBLIN = 1;
 const int WARRIORGOBLIN = 2;
 const int KNIGHTGOBLIN = 3;
+const int CHESTGOBLIN = 4;
 
 #pragma endregion
 

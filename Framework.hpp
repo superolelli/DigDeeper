@@ -89,6 +89,10 @@ private:
 
 	int m_Shader;
 
+	float m_fBlurNumber;
+	float m_fBlurTimer;
+	bool m_moreBlur;
+
 	//the logfile
 	ige::FileLogger *m_pMyLog;
 

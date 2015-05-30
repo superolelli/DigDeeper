@@ -8,7 +8,7 @@ class CBee : public CNpc
 {
 public:
 
-	void Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, bool _loaded = false);
+	void Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, int _specialID = -1, bool _loaded = false);
 	bool CheckNpc();
 	void Render();
 	void Quit();

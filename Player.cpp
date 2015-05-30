@@ -489,33 +489,67 @@ void CPlayer::CheckXMovement()
 		m_SideSpeed -= 200 * g_pTimer->GetElapsedTime().asSeconds();
 	else if (m_SideSpeed < 0)
 		m_SideSpeed += 200 * g_pTimer->GetElapsedTime().asSeconds();
+
+	//check the direction of the player
+	if (Mouse::getPosition().x < g_pFramework->GetWindow()->getSize().x / 2)
+		m_turned_left = true;
+	else
+		m_turned_left = false;
 	
 	if (abs(m_SideSpeed) < 50)
 	{
 		//if the left key is pressed
 		if (((Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A)) && m_fDrunk <= 5.0f) || (m_fDrunk > 5.0f && (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))))
 		{
-			m_turned_left = true;
+			//m_turned_left = true;
 
 			m_fXVel = (float)-m_modifications.speed * g_pTimer->GetElapsedTime().asSeconds();
-			m_fAnimState -= 8.0f * (m_modifications.speed / 150) * g_pTimer->GetElapsedTime().asSeconds();
 
-			//start the animation new if it has reached it's end
-			if (m_fAnimState < 0 || m_fAnimState > 7)
-				m_fAnimState = 6.99f;
+			//check legs
+			if (m_turned_left)
+			{
+				m_fAnimState -= 8.0f * (m_modifications.speed / 150) * g_pTimer->GetElapsedTime().asSeconds();
+
+				//start the animation new if it has reached it's end
+				if (m_fAnimState < 0 || m_fAnimState > 7)
+					m_fAnimState = 6.99f;
+			}
+			else
+			{
+
+				m_fAnimState += 8.0f * (m_modifications.speed / 150) * g_pTimer->GetElapsedTime().asSeconds();
+				//start the animation new if it has reached it's end
+				if (m_fAnimState < 7 || m_fAnimState > 14)
+					m_fAnimState = 7;
+			}
+			
 
 		}
 		//if the right key is pressed
 		else if (((Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D)) && m_fDrunk <= 5.0f) || (m_fDrunk > 5.0f && (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))))
 		{
-			m_turned_left = false;
+			//m_turned_left = false;
 
 			m_fXVel = (float)m_modifications.speed * g_pTimer->GetElapsedTime().asSeconds();
-			m_fAnimState += 8.0f * (m_modifications.speed / 150)* g_pTimer->GetElapsedTime().asSeconds();
 
-			//start the animation new if it has reached it's end
-			if (m_fAnimState < 7 || m_fAnimState > 14)
-				m_fAnimState = 7;
+			//check legs
+			if (m_turned_left)
+			{
+				m_fAnimState -= 8.0f * (m_modifications.speed / 150) * g_pTimer->GetElapsedTime().asSeconds();
+
+				//start the animation new if it has reached it's end
+				if (m_fAnimState < 0 || m_fAnimState > 7)
+					m_fAnimState = 6.99f;
+			}
+			else
+			{
+
+				m_fAnimState += 8.0f * (m_modifications.speed / 150) * g_pTimer->GetElapsedTime().asSeconds();
+				//start the animation new if it has reached it's end
+				if (m_fAnimState < 7 || m_fAnimState > 14)
+					m_fAnimState = 7;
+			}
+
 		}
 		else
 		{

@@ -2,7 +2,7 @@
 #include "World.hpp"
 
 
-void CBee::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, bool _loaded)
+void CBee::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, int _specialID, bool _loaded)
 {
 	m_pWorld = _world;
 	m_pPlayer = _player;

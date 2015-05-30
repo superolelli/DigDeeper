@@ -313,6 +313,7 @@ public:
 	Texture t_goblin_body;                       //a goblin
 	Texture t_goblin_body2;
 	Texture t_goblin_body3;
+	Texture t_goblin_body_chest;
 	Texture t_goblin_legs;
 	Texture t_goblin_legs2;
 	Texture t_goblin_arm;

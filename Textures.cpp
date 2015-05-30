@@ -305,6 +305,7 @@ void TextureLoading::LoadTextures()
 	t_goblin_arm2.loadFromFile("Data/Sprites/Living/goblin_arm3.png");
 	t_goblin_body3.loadFromFile("Data/Sprites/Living/goblin_upper_body4.png");
 	t_goblin_arm3.loadFromFile("Data/Sprites/Living/goblin_arm4.png");
+	t_goblin_body_chest.loadFromFile("Data/Sprites/Living/goblin_upper_body_chest.png");
 
 	s_drunkShader.loadFromFile("Data/Shaders/blur.frag", Shader::Fragment);
 
