@@ -287,6 +287,13 @@ void CBuildingMenu::InitRecipe(SBuildingItem *_recipe)
 			_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_cauldron);
 			_recipe->resources[IRON] = 5;
 		}break;
+		case(BATTLEAXE) :
+		{
+			_recipe->Name = "Kampfaxt";
+			_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_battleaxe);
+			_recipe->resources[IRON] = 5;
+			_recipe->resources[WOODSTAFF] = 1;
+		}break;
 		}
 
 		_recipe->m_pInfoSprite->SetPos(m_pBuildingMenu->GetRect().left + 250, m_pBuildingMenu->GetRect().top + 4);
@@ -392,6 +399,7 @@ void CBuildingMenu::FillRecipeList()
 	//m_notAvailableRecipes.push_back(MAGICHAT);
 	m_notAvailableRecipes.push_back(BEEHOUSE);
 	m_notAvailableRecipes.push_back(CAULDRON);
+	m_notAvailableRecipes.push_back(BATTLEAXE);
 
 
 	m_chosenItem = pickaxe;

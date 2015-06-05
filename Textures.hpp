@@ -145,6 +145,7 @@ public:
 	Texture t_buildingInfo_beehouse;
 	Texture t_buildingInfo_torch;
 	Texture t_buildingInfo_cauldron;
+	Texture t_buildingInfo_battleaxe;
 
 	Texture t_blockTextures_dirt;                     //the dirt textures
 	Texture t_blockTextures_stone;                      //the stone texture
@@ -174,6 +175,7 @@ public:
 	Texture t_blockTextures_torch_left;
 	Texture t_blockTextures_torch_right;
 	Texture t_blockTextures_cauldron;
+	Texture t_blockTextures_clover;
 	Texture t_blockTextures_noTexture;               //the no_texture texture
 
 	Texture t_dirtRimTop;
@@ -235,6 +237,9 @@ public:
 	Texture t_blockInventoryTexture_torch;
 	Texture t_blockInventoryTexture_cauldron;
 	Texture t_blockInventoryTexture_mead;
+	Texture t_blockInventoryTexture_slimepudding;
+	Texture t_blockInventoryTexture_clover;
+	Texture t_blockInventoryTexture_battleaxe;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -287,12 +292,16 @@ public:
 	Texture t_blockLittleTexture_torch;
 	Texture t_blockLittleTexture_cauldron;
 	Texture t_blockLittleTexture_mead;
+	Texture t_blockLittleTexture_slimepudding;
+	Texture t_blockLittleTexture_clover;
+	Texture t_blockLittleTexture_battleaxe;
 
 
 	//the "carried" texture of the tools
     Texture t_tool_pickaxe;
 	Texture t_tool_sword;
 	Texture t_tool_lantern;
+	Texture t_tool_battleaxe;
 	
 	//the "carried" texture of the equipment
 	Texture t_equipment_iron_helmet;

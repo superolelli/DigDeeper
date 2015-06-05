@@ -91,7 +91,7 @@ void CWorld::Init(int _width, int _height, View* _view, CNpcMachine* _npcs, bool
 		m_BlocksY = _height;
 
 		m_NightAlpha = 0;
-		m_fNightTimer = 480.0f;
+		m_fNightTimer = 0.0f;
 		m_fSecondTimer = 0.0f;
 
 		//set the world's size
@@ -256,8 +256,16 @@ void CWorld::GenerateWorld()
 	//set trees
 	for (int x = 0; x < m_BlocksX; x++)
 	{
-		if (rand() % 5 == 0)
+		randomNumber = rand() % 20;
+
+		if (randomNumber < 4)
 			SetTree(x, 3);
+		else if (randomNumber == 4)
+		{
+			m_pBlocks[x][3] = new CPlaceable;
+			m_pBlocks[x][3]->Init(CLOVERP);
+			m_pBlocks[x][3]->SetPos(static_cast<float>(x * 100), static_cast<float> (300));
+		}
 	}
 }
 						
@@ -1653,7 +1661,7 @@ void CWorld::FillChestRandomly(int _chestID)
 			while(is_filled == false)
 			{
 				//get a random ID
-				randomNumber = rand()%85 + 54;
+				randomNumber = rand()%83 + 56;
 
 				//very rare ring has currently the id 200
 				if(randomNumber == 138)
@@ -1668,13 +1676,13 @@ void CWorld::FillChestRandomly(int _chestID)
 					((CItem*)thing)->Init(randomNumber);	
 				}
 				//if thing is a consumable
-				else if (randomNumber >ICBREAK && randomNumber < 83)
+				else if (randomNumber >ICBREAK && randomNumber < 85)
 				{
 					thing = new CConsumable;
 					((CConsumable*)thing)->InitConsumable(randomNumber);
 				}
 				//if thing is a tool
-				else if(randomNumber > CTBREAK && randomNumber < 104)
+				else if(randomNumber > CTBREAK && randomNumber < 105)
 				{
 					thing = new CTool;
 					((CTool*)thing)->InitToolRandomly(randomNumber);
@@ -1936,6 +1944,7 @@ bool CWorld::isBlockPassable(int _x, int _y)
 
 void CWorld::DoAlchemy(int _level)
 {
+	
 	int newID = 0;
 
 	//set the block values
@@ -1958,12 +1967,12 @@ void CWorld::DoAlchemy(int _level)
 	x /= 100;
 	y /= 100;
 
-	if (m_pBlocks[x][y] != NULL)
+	if (m_pBlocks[x][y] != NULL && m_pBlocks[x][y]->getID() < 9)
 	{
 		int newValue = rand() % 100 + 1;
 
 		//calculate the new block value
-		if (newValue <= 100*((float)_level / 100.0f))
+		if (newValue <= 100 * ((float)_level / 100.0f))
 		{
 			newValue = blockValues[m_pBlocks[x][y]->getID() - 1] + 1;
 			if (newValue > 4)
@@ -1986,7 +1995,7 @@ void CWorld::DoAlchemy(int _level)
 			newID = DIRT;
 		}break;
 
-		case(2):
+		case(2) :
 		{
 			newID = rand() % 4;
 
@@ -2010,7 +2019,7 @@ void CWorld::DoAlchemy(int _level)
 				newID = GOLDBLOCK;
 		}break;
 
-		case(4):
+		case(4) :
 		{
 			newID = ARCANUSBLOCK;
 		}break;
@@ -2021,6 +2030,7 @@ void CWorld::DoAlchemy(int _level)
 		m_pBlocks[x][y] = new CPlaceable;
 		m_pBlocks[x][y]->Init(newID);
 		m_pBlocks[x][y]->SetPos(x * 100, y * 100);
+	}
 
 		//show alchemy animation
 		SProjectile projectile;
@@ -2040,5 +2050,5 @@ void CWorld::DoAlchemy(int _level)
 		projectile.m_Sprite = sprite;
 		projectile.m_fAnimState = 0;
 		g_pProjectiles->NewProjectile(projectile);
-	}
+	
 }

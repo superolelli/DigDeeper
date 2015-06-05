@@ -183,6 +183,24 @@ void CItem::Init(int _ID, bool _loaded)
 		if (!_loaded)
 			m_Name = "Met";
 	}break;
+	case(SLIMEPUDDING) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_slimepudding);
+		if (!_loaded)
+			m_Name = "Schleimpudding";
+	}break;
+	case(CLOVER) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_clover);
+		if (!_loaded)
+			m_Name = "Kleeblatt";
+	}break;
+	case(BATTLEAXE) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_battleaxe);
+		if (!_loaded)
+			m_Name = "Kampfaxt";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)
@@ -196,7 +214,7 @@ void CItem::Init(int _ID, bool _loaded)
 
 void CItem::InitRecipe()
 {
-	m_specialID = rand()%8 + 131;
+	m_specialID = rand()%9 + 131;
 
 	switch(m_specialID)
 	{
@@ -229,6 +247,11 @@ void CItem::InitRecipe()
 	case(138) :
 		m_Name.append("(Kessel)");
 		m_specialID = CAULDRON;
+		break;
+	case(139) :
+		m_Name.append("(Kampfaxt)");
+		m_specialID = BATTLEAXE;
+		break;
 	}
 }
 
@@ -267,6 +290,9 @@ void CItem::SetSpecialID(int _ID)
 		break;
 	case(CAULDRON) :
 		m_Name.append("(Kessel)");
+		break;
+	case(BATTLEAXE) :
+		m_Name.append("(Kampfaxt)");
 		break;
 	}
 }

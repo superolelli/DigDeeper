@@ -218,6 +218,18 @@ void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 	{
 		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_mead);
 	}break;
+	case(SLIMEPUDDING) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_slimepudding);
+	}break;
+	case(CLOVER) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_clover);
+	}break;
+	case(BATTLEAXE) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_battleaxe);
+	}break;
 	}
 
 

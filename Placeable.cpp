@@ -162,7 +162,12 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_Name = "Tür";
 			m_Hardness = 2;
 			m_Priority = -1;
-			m_is_passable = true;
+
+			if (m_SpecialID == 0)
+				m_is_passable = true;
+			else
+				m_is_passable = false;
+
 			m_is_visible = true;
 			m_can_place_on = false;
 		}break;
@@ -316,6 +321,17 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_is_visible = true;
 		m_can_place_on = false;
 	}break;
+	case CLOVERP:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_clover);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_clover);
+		m_Name = "Kleeblatt";
+		m_Hardness = 0;
+		m_Priority = -1;
+		m_is_passable = true;
+		m_is_visible = true;
+		m_can_place_on = false;
+	}break;
 	default:
 		{
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_noTexture);
@@ -421,6 +437,9 @@ int CPlaceable::GetLittleID()
 		break;
 	case(BEEHIVEP) :
 		return BEEHIVE;
+		break;
+	case(CLOVERP) :
+		return CLOVER;
 		break;
 
 	default:

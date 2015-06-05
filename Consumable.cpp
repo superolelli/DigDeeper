@@ -36,5 +36,15 @@ void CConsumable::InitConsumable(int _ID)
 	{
 		m_Attributes.health = 10;
 	}break;
+	case(SLIMEPUDDING) :
+	{
+		m_Attributes.manaRegeneration = 1;
+		m_Attributes.duration = 5;
+	}break;
+	case(CLOVER) :
+	{
+		m_Attributes.luck = 5;
+		m_Attributes.duration = 20.0f;
+	}break;
 	}
 }

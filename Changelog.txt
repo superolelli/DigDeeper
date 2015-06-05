@@ -1204,5 +1204,18 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Truhengoblin eingefügt
 -Kampf-KI etwas verbessert
 -Betrunkenheit etwas schöner gemacht
+-Schleimpudding hinzugefügt
+
+------------------------------------------------------
+31.05.2015
+
+-Kleeblätter hinzugefügt
+-No-Texture-Alchemie-Bug behoben
+-Bauinformation der Spitzhacke geändert
+
+------------------------------------------------------
+05.06.2015
+
+-Kampfaxt hinzugefügt
 
 ------------------------------------------------------

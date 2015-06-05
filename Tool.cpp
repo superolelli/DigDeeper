@@ -53,6 +53,18 @@ void CTool::InitTool(int _ID, bool _loaded)
 				m_rarity = 1;
 			}
 		}break;
+	case(BATTLEAXE) :
+	{
+		m_pCarriedToolSprite->Load(&g_pTextures->t_tool_battleaxe);
+		m_pCarriedToolSprite->setRotatingPoint(26.0f, 70.0f);
+		if (!_loaded)
+		{
+			m_Attributes.strength = 5;
+			m_Attributes.criticalChance = 5;
+			m_Attributes.criticalDamage = 5;
+			m_rarity = 1;
+		}
+	}break;
 	case(LANTERN):
 		{	
 			m_pCarriedToolSprite->Load(&g_pTextures->t_tool_lantern);
@@ -204,6 +216,13 @@ IntRect CTool::GetRect()
 			rect.left += 26;
 			return rect;
 		}break;
+	case(BATTLEAXE) :
+	{
+		IntRect rect;
+		rect = m_pCarriedToolSprite->GetGlobalRect();
+		rect.height = 55;
+		return rect;
+	}break;
 	default:
 		return m_pCarriedToolSprite->GetGlobalRect();
 	}

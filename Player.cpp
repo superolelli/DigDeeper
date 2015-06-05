@@ -52,6 +52,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 {
 	m_pTarget = g_pFramework->GetRenderWindow();
 	m_pWorld = _world;
+	m_pView = _view;
 
 	m_pDwarf = new CLiving3Part;
 	m_pDwarf->Load(&g_pTextures->t_dwarf_body, 53, 60, 2, 0, &g_pTextures->t_dwarf_arm, 58, 38, 4, &g_pTextures->t_dwarf_legs, 55, 50, 14, _x, _y);
@@ -141,6 +142,11 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 			gold = new CItem;
 			gold->Init(GOLDORE);
 			m_pInventory->Take(gold, 2);
+
+			CPlaceable *torch;
+			torch = new CPlaceable;
+			torch->Init(TORCH);
+			m_pInventory->Take(torch);
 		}break;
 	case BUILDER:
 		{
@@ -177,6 +183,11 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 			door = new CPlaceable;
 			door->Init(DOOR);
 			m_pInventory->Take(door);
+
+			CPlaceable *torch;
+			torch = new CPlaceable;
+			torch->Init(TORCH);
+			m_pInventory->Take(torch);
 		}break;
 	case WARRIOR:
 		{
@@ -191,6 +202,11 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 			sword = new CTool;
 			sword->InitTool(SWORD);
 			m_pInventory->Take(sword);
+
+			CPlaceable *torch;
+			torch = new CPlaceable;
+			torch->Init(TORCH);
+			m_pInventory->Take(torch);
 		}break;
 	case MAGE:
 		{
@@ -204,6 +220,11 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 			hat = new CEquipment;
 			hat->InitEquipment(MAGICHAT);
 			m_pInventory->Take(hat);
+
+			CPlaceable *torch;
+			torch = new CPlaceable;
+			torch->Init(TORCH);
+			m_pInventory->Take(torch);
 		}break;
 	case TEST:
 	{
@@ -216,6 +237,11 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 		pickaxe = new CTool;
 		pickaxe->InitTool(PICKAXE);
 		m_pInventory->Take(pickaxe);
+
+		CTool *battleaxe;
+		battleaxe = new CTool;
+		battleaxe->InitTool(BATTLEAXE);
+		m_pInventory->Take(battleaxe);
 
 		CEquipment *candle;
 		candle = new CEquipment;
@@ -304,6 +330,7 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view)
 {
 	m_pTarget = g_pFramework->GetRenderWindow();
 	m_pWorld = _world;
+	m_pView = _view;
 
 	m_pDwarf = new CLiving3Part;
 	m_pDwarf->Load(&g_pTextures->t_dwarf_body, 53, 60, 2, 0, &g_pTextures->t_dwarf_arm, 58, 38, 4, &g_pTextures->t_dwarf_legs, 55, 50, 14, _x, _y);
@@ -491,10 +518,11 @@ void CPlayer::CheckXMovement()
 		m_SideSpeed += 200 * g_pTimer->GetElapsedTime().asSeconds();
 
 	//check the direction of the player
-	if (Mouse::getPosition().x < g_pFramework->GetWindow()->getSize().x / 2)
+	if (Mouse::getPosition().x + (m_pView->getCenter().x - m_pView->getSize().x/2) < m_pDwarf->GetRect().left + m_pDwarf->GetRect().width/2)
 		m_turned_left = true;
 	else
 		m_turned_left = false;
+
 	
 	if (abs(m_SideSpeed) < 50)
 	{

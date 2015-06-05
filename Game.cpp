@@ -57,10 +57,10 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	//Inits the player
 	m_pPlayer->Init(700, 300, m_pWorld, &m_View, _attributes.PlayerClass);
 
-	if(!_loaded)
+	/*if(!_loaded)
 	{
 		m_NpcMachine.AddNpc(GOBLIN, 900, 300);
-	}
+	}*/
 
 	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);
 

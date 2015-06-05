@@ -115,6 +115,7 @@ private:
 
 	RenderTarget *m_pTarget;                         //the render target
 	CWorld *m_pWorld;                                //a pointer to the world
+	View *m_pView;
 
 	CLiving3Part *m_pDwarf;                             //the dwarf
 	CInventory *m_pInventory;                            //the inventory

@@ -139,6 +139,7 @@ void TextureLoading::LoadTextures()
 	t_buildingInfo_beehouse.loadFromFile("Data/Sprites/Building/building_info_bee_house.png");
 	t_buildingInfo_torch.loadFromFile("Data/Sprites/Building/building_info_torch.png");
 	t_buildingInfo_cauldron.loadFromFile("Data/Sprites/Building/building_info_cauldron.png");
+	t_buildingInfo_battleaxe.loadFromFile("Data/Sprites/Building/building_info_battleaxe.png");
 
 	t_blockTextures_dirt.loadFromFile("Data/Sprites/Objects/Blocks/dirt.png");
 	t_blockTextures_stone.loadFromFile("Data/Sprites/Objects/Blocks/stone.png");
@@ -169,6 +170,7 @@ void TextureLoading::LoadTextures()
 	t_blockTextures_torch_left.loadFromFile("Data/Sprites/Objects/Blocks/torch.png", IntRect(300, 0, 100, 100));
 	t_blockTextures_torch_right.loadFromFile("Data/Sprites/Objects/Blocks/torch.png", IntRect(200, 0, 100, 100));
 	t_blockTextures_cauldron.loadFromFile("Data/Sprites/Objects/Blocks/cauldron.png");
+	t_blockTextures_clover.loadFromFile("Data/Sprites/Objects/Blocks/cloverleaf.png");
 
 	t_dirtRimTop.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_top.png");
 	t_dirtRimBottom.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_bottom.png");
@@ -227,6 +229,9 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_torch.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/torch_inventory.png");
 	t_blockInventoryTexture_cauldron.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/cauldron_inventory.png");
 	t_blockInventoryTexture_mead.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/mead_inventory.png");
+	t_blockInventoryTexture_slimepudding.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/slime_pudding_inventory.png");
+	t_blockInventoryTexture_clover.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/cloverleaf_inventory.png");
+	t_blockInventoryTexture_battleaxe.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/battleaxe_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
@@ -277,10 +282,15 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_torch.loadFromFile("Data/Sprites/Objects/LittleItems/torch_little.png");
 	t_blockLittleTexture_cauldron.loadFromFile("Data/Sprites/Objects/LittleItems/cauldron_little.png");
 	t_blockLittleTexture_mead.loadFromFile("Data/Sprites/Objects/LittleItems/mead_little.png");
+	t_blockLittleTexture_slimepudding.loadFromFile("Data/Sprites/Objects/LittleItems/slime_pudding_little.png");
+	t_blockLittleTexture_clover.loadFromFile("Data/Sprites/Objects/LittleItems/cloverleaf_little.png");
+	t_blockLittleTexture_battleaxe.loadFromFile("Data/Sprites/Objects/LittleItems/battleaxe_little.png");
+
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");
 	t_tool_sword.loadFromFile("Data/Sprites/Objects/Tools/sword_carried.png");
 	t_tool_lantern.loadFromFile("Data/Sprites/Objects/Tools/lantern_carried.png");
+	t_tool_battleaxe.loadFromFile("Data/Sprites/Objects/Tools/battleaxe_carried.png");
 
 	t_equipment_iron_helmet.loadFromFile("Data/Sprites/Objects/Equipment/iron_helmet.png");
 	t_equipment_iron_armour.loadFromFile("Data/Sprites/Objects/Equipment/iron_armour.png");

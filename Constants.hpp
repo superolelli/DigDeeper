@@ -53,6 +53,7 @@ const int LANTERNP = 18;
 const int BEEHOUSE = 19;
 const int TORCH = 20;
 const int CAULDRON = 21;
+const int CLOVERP = 22;
 const int LADDER = 49;
 
 const int PWBREAK = 50;            //the Placeable-Wall-Break shows, where the wall section begins
@@ -82,12 +83,15 @@ const int ICBREAK = 80;              //the Item-Consumable-Break shows, where th
 
 const int HONEY = 81;
 const int MEAD = 82;
+const int SLIMEPUDDING = 83;
+const int CLOVER = 84;
 
 const int CTBREAK = 100;             //the Consumable-Tool-Break shows, where the tool section begins
 
 const int PICKAXE = 101;
 const int SWORD = 102;
 const int LANTERN = 103;
+const int BATTLEAXE = 104;
 
 const int TEBREAK = 130;             //the Tool-Equipment-Break shows, where the equipment section begins
 
@@ -268,10 +272,11 @@ const int ALCHEMYANIMATION = 5;
 
 #pragma region ConsumableRecipes
 
-const int NUMBER_OF_CONRECIPES = 1;
+const int NUMBER_OF_CONRECIPES = 2;
 
-const int CONRECIPES[1][5] = {
-	{ HONEY, HONEY, -1, -1, MEAD }
+const int CONRECIPES[2][5] = {
+	{ HONEY, HONEY, -1, -1, MEAD },
+	{SLIME, SLIME, -1, -1, SLIMEPUDDING}
 };
 
 #pragma endregion
