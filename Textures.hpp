@@ -24,6 +24,7 @@ public:
 	Texture t_menuBackground;                //the menu background
 	Texture t_menuButtonPlay;                   //the play buttons
 	Texture t_menuButtonOptions;                //the Options button
+	Texture t_menuButtonHighscore;                 //the highscore button
 	Texture t_menuButtonQuit;                 //the quit button
 	Texture t_menuButtonNewGame;               //the new game button
 	Texture t_menuButtonLoadGame;             //the load game button

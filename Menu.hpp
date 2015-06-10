@@ -6,6 +6,7 @@
 #include "Button.hpp"
 #include "GameChoose.hpp"
 #include "Options.hpp"
+#include "Highscore.hpp"
 
 class CMenu 
 {
@@ -22,6 +23,7 @@ private:
 	CButton * m_pQuit;                        //the quit button
 	CButton * m_pPlay;                        //the play button
 	CButton * m_pOptions;                     //the options button
+	CButton * m_pHighscore;                  // the highscore button
 
 	SNewWorldAttributes m_newWorldAttributes;
 

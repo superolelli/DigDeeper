@@ -345,8 +345,7 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view)
 
 	m_pBuildingMenu->InitLoaded(m_pInventory);
 
-	m_pCharacterInfo = new CCharacterInfo;
-	m_pCharacterInfo->Init(&m_Attributes, &m_modifications, this);
+	m_pCharacterInfo->Init(&m_Attributes, &m_modifications, this, true);
 
 	m_pMagicMenu->Init(m_pInventory, this, true);
 

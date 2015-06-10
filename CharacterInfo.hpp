@@ -13,7 +13,7 @@ public:
 
 	CCharacterInfo();
 	~CCharacterInfo();
-	void Init(SPlayerAttributes *_attributes, SToolAttributes *_modifications, CPlayer *_player);
+	void Init(SPlayerAttributes *_attributes, SToolAttributes *_modifications, CPlayer *_player, bool _loaded = false);
 	void Render();
 
 	//opens or closes the character menu
@@ -23,6 +23,16 @@ public:
 	bool GetOpen(){return is_open;}
 
 private:
+	friend class boost::serialization::access;
+
+
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & m_playerLevel;
+		ar & m_levelUpCounter;
+	}
+
 
 	void CheckForLevelUp();
 	void LevelUp();
@@ -45,6 +55,8 @@ private:
 
 	Font m_font;                                       //the font
 	Text m_text;                                       //the text to display
+
+	int m_playerLevel;                         //the player's level
 
 	float m_levelUpTime;                          //the time since the level up window has shown up
 

@@ -10,6 +10,7 @@ CMenu::CMenu()
 	m_pPlay = NULL;
 	m_pOptions = NULL;
 	m_pQuit = NULL;
+	m_pHighscore = NULL;
 }
 
 
@@ -29,13 +30,16 @@ void CMenu::Init()
 
 	//Load the three buttons
 	m_pPlay = new CButton;
-	m_pPlay->Load(&g_pTextures->t_menuButtonPlay, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, g_pFramework->GetRenderWindow()->getSize().y/6, CButton::BUTTONTYPE_MOTION_UP); 
+	m_pPlay->Load(&g_pTextures->t_menuButtonPlay, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, g_pFramework->GetRenderWindow()->getSize().y/10, CButton::BUTTONTYPE_MOTION_UP); 
 
 	m_pOptions = new CButton;
-	m_pOptions->Load(&g_pTextures->t_menuButtonOptions, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, 100 + 2*(g_pFramework->GetRenderWindow()->getSize().y/6), CButton::BUTTONTYPE_MOTION_UP); 
+	m_pOptions->Load(&g_pTextures->t_menuButtonOptions, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, 3*(g_pFramework->GetRenderWindow()->getSize().y/10), CButton::BUTTONTYPE_MOTION_UP); 
+
+	m_pHighscore = new CButton;
+	m_pHighscore->Load(&g_pTextures->t_menuButtonHighscore, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, 5*(g_pFramework->GetRenderWindow()->getSize().y/10), CButton::BUTTONTYPE_MOTION_UP); 
 
 	m_pQuit = new CButton;
-	m_pQuit->Load(&g_pTextures->t_menuButtonQuit, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, 200 + 3*(g_pFramework->GetRenderWindow()->getSize().y/6), CButton::BUTTONTYPE_MOTION_UP); 
+	m_pQuit->Load(&g_pTextures->t_menuButtonQuit, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, 7 * (g_pFramework->GetRenderWindow()->getSize().y / 10), CButton::BUTTONTYPE_MOTION_UP);
 }
 
 
@@ -45,6 +49,7 @@ SNewWorldAttributes CMenu::Quit()
 	SAFE_DELETE(m_pBackground);
 	SAFE_DELETE(m_pPlay);
 	SAFE_DELETE(m_pOptions);
+	SAFE_DELETE(m_pHighscore);
 	SAFE_DELETE(m_pQuit);
 
 	return m_newWorldAttributes;
@@ -102,6 +107,15 @@ void CMenu::RenderButtons()
 		Options.Init();
 		Options.Run();
 		Options.Quit();
+	}
+
+	if (m_pHighscore->Render(m_ButtonEventtype) == true)
+	{
+		CHighscore Highscore;
+
+		Highscore.Init();
+		Highscore.Run();
+		Highscore.Quit();
 	}
 
 	if(m_pPlay->Render(m_ButtonEventtype) == true)

@@ -33,7 +33,7 @@ CCharacterInfo::~CCharacterInfo()
 
 
 
-void CCharacterInfo::Init(SPlayerAttributes *_attributes, SToolAttributes *_modifications, CPlayer *_player)
+void CCharacterInfo::Init(SPlayerAttributes *_attributes, SToolAttributes *_modifications, CPlayer *_player, bool _loaded)
 {
 	m_pAttributes = _attributes;
 	m_pModifications = _modifications;
@@ -72,7 +72,11 @@ void CCharacterInfo::Init(SPlayerAttributes *_attributes, SToolAttributes *_modi
 	level_up = false;
 	choosing_skill = false;
 
-	m_levelUpCounter = 0;
+	if (!_loaded)
+	{
+		m_levelUpCounter = 0;
+		m_playerLevel = 1;
+	}
 }
 
 
@@ -95,6 +99,15 @@ void CCharacterInfo::Render()
 	if(is_open)
 	{	
 		m_pCharacterWindow->Render(g_pFramework->GetRenderWindow());
+
+		//show the level
+		m_text.setCharacterSize(60);
+		stream.str("");
+		stream << m_playerLevel;
+		m_text.setString(stream.str());
+		m_text.setPosition((float)(m_pCharacterWindow->GetRect().left + 340), (float)(m_pCharacterWindow->GetRect().top - 20));
+		g_pFramework->GetRenderWindow()->draw(m_text);
+		m_text.setCharacterSize(30);
 
 		//show the health
 		stream.str("");
@@ -229,6 +242,9 @@ void CCharacterInfo::CheckForLevelUp()
 		m_levelUpTime = 0.0f;
 
 		m_levelUpCounter++;
+
+		//increase the player's level
+		m_playerLevel++;
 	}
 
 

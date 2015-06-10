@@ -339,4 +339,12 @@ struct SEffect
 };
 
 
+
+struct SHighscore
+{
+	int points[10];
+	string name[10];
+};
+
+
 #endif

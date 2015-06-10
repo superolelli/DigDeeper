@@ -9,9 +9,10 @@
 void TextureLoading::LoadTextures()
 {
 	t_menuBackground.loadFromFile("Data/Sprites/Menu2.png");
-	t_menuButtonPlay.loadFromFile("Data/Sprites/Buttons/menuButtons.png", IntRect(2, 308, 600, 100));
-	t_menuButtonOptions.loadFromFile("Data/Sprites/Buttons/menuButtons.png", IntRect(904, 206, 600, 100));
-	t_menuButtonQuit.loadFromFile("Data/Sprites/Buttons/menuButtons.png", IntRect(604, 308, 600, 100));
+	t_menuButtonPlay.loadFromFile("Data/Sprites/Buttons/play_button.png");
+	t_menuButtonOptions.loadFromFile("Data/Sprites/Buttons/option_button.png");
+	t_menuButtonHighscore.loadFromFile("Data/Sprites/Buttons/highscore_button.png");
+	t_menuButtonQuit.loadFromFile("Data/Sprites/Buttons/quitButton.png");
 	t_menuButtonNewGame.loadFromFile("Data/Sprites/Buttons/menuButtons.png", IntRect(2, 206, 900, 100));
 	t_menuButtonLoadGame.loadFromFile("Data/Sprites/Buttons/menuButtons.png", IntRect(2, 104, 900, 100));
 	t_menuButtonMultiplayer.loadFromFile("Data/Sprites/Buttons/menuButtons.png", IntRect(904, 104, 900, 100));

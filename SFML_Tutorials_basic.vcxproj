@@ -101,6 +101,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameChoose.cpp" />
     <ClCompile Include="Goblin.cpp" />
+    <ClCompile Include="Highscore.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Items.cpp" />
     <ClCompile Include="LightMachine.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="Consumable.hpp" />
     <ClInclude Include="Filelogger.hpp" />
     <ClInclude Include="Goblin.hpp" />
+    <ClInclude Include="Highscore.hpp" />
     <ClInclude Include="MagicMenu.hpp" />
     <ClInclude Include="Profiler.hpp" />
     <ClInclude Include="Projectiles.hpp" />

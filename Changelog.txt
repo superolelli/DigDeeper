@@ -1219,3 +1219,19 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Kampfaxt hinzugefügt
 
 ------------------------------------------------------
+08.06.2015
+
+- Level wird nun im Charaktermenü angezeigt
+
+------------------------------------------------------
+09.06.2015
+
+-Hauptmenübuttons neu gezeichnet
+-Highscorebutton hinzugefügt
+
+------------------------------------------------------
+10.06.2015
+
+-Highscore hinzugefügt (man kann sich noch nicht eintragen)
+
+------------------------------------------------------
