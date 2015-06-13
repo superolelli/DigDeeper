@@ -26,6 +26,8 @@ public:
 	Texture t_menuButtonOptions;                //the Options button
 	Texture t_menuButtonHighscore;                 //the highscore button
 	Texture t_menuButtonQuit;                 //the quit button
+	Texture t_menuButtonDeleteHighscore;         //clears the highscore
+	Texture t_menuButtonSaveHighscore;
 	Texture t_menuButtonNewGame;               //the new game button
 	Texture t_menuButtonLoadGame;             //the load game button
 	Texture t_menuButtonMultiplayer;           //the multiplayer button

@@ -22,6 +22,9 @@ public:
 	//returns wether the character menu is open or closed
 	bool GetOpen(){return is_open;}
 
+	//returns the level
+	int GetLevel(){ return m_playerLevel; }
+
 private:
 	friend class boost::serialization::access;
 

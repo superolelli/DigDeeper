@@ -307,6 +307,8 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 
 	m_modifications.breaking_speed = 1;
 
+	m_class = _class;
+
 	m_FallingSpeed = 0;
 	m_SideSpeed = 0;
 

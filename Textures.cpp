@@ -13,11 +13,13 @@ void TextureLoading::LoadTextures()
 	t_menuButtonOptions.loadFromFile("Data/Sprites/Buttons/option_button.png");
 	t_menuButtonHighscore.loadFromFile("Data/Sprites/Buttons/highscore_button.png");
 	t_menuButtonQuit.loadFromFile("Data/Sprites/Buttons/quitButton.png");
-	t_menuButtonNewGame.loadFromFile("Data/Sprites/Buttons/menuButtons.png", IntRect(2, 206, 900, 100));
-	t_menuButtonLoadGame.loadFromFile("Data/Sprites/Buttons/menuButtons.png", IntRect(2, 104, 900, 100));
-	t_menuButtonMultiplayer.loadFromFile("Data/Sprites/Buttons/menuButtons.png", IntRect(904, 104, 900, 100));
-	t_menuButtonReturn.loadFromFile("Data/Sprites/Buttons/menuButtons.png", IntRect(1206, 308, 600, 100));
-	t_menuButtonLoad.loadFromFile("Data/Sprites/Buttons/load_button.png");
+	t_menuButtonDeleteHighscore.loadFromFile("Data/Sprites/Buttons/delete_highscore_button.png");
+	t_menuButtonSaveHighscore.loadFromFile("Data/Sprites/Buttons/save_highscore_button.png");
+	t_menuButtonNewGame.loadFromFile("Data/Sprites/Buttons/new_game_button2.png");
+	t_menuButtonLoadGame.loadFromFile("Data/Sprites/Buttons/load_game_button2.png");
+	t_menuButtonMultiplayer.loadFromFile("Data/Sprites/Buttons/Multiplayer_game_button_menu2.png");
+	t_menuButtonReturn.loadFromFile("Data/Sprites/Buttons/return_button.png");
+	t_menuButtonLoad.loadFromFile("Data/Sprites/Buttons/load_button2.png");
 	t_menuButtonLoadThisGame.loadFromFile("Data/Sprites/Buttons/load_game_button.png");
 	t_menuButtonDeleteThisGame.loadFromFile("Data/Sprites/Buttons/delete_game_button.png");
 	t_menuButtonUp.loadFromFile("Data/Sprites/Buttons/button_up.png");

@@ -342,8 +342,10 @@ struct SEffect
 
 struct SHighscore
 {
-	int points[10];
-	string name[10];
+	SPlayerAttributes m_attributes;
+	int m_level;
+	int m_class;
+	string m_name;
 };
 
 

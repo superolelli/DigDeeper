@@ -46,7 +46,7 @@ void CTool::InitTool(int _ID, bool _loaded)
 	case(SWORD):
 		{	
 			m_pCarriedToolSprite->Load(&g_pTextures->t_tool_sword);
-			m_pCarriedToolSprite->setRotatingPoint(30.0f, 53.0f);
+			m_pCarriedToolSprite->setRotatingPoint(31.0f, 53.0f);
 			if(!_loaded)
 			{
 				m_Attributes.strength = 5;
@@ -56,7 +56,7 @@ void CTool::InitTool(int _ID, bool _loaded)
 	case(BATTLEAXE) :
 	{
 		m_pCarriedToolSprite->Load(&g_pTextures->t_tool_battleaxe);
-		m_pCarriedToolSprite->setRotatingPoint(26.0f, 70.0f);
+		m_pCarriedToolSprite->setRotatingPoint(30.0f, 70.0f);
 		if (!_loaded)
 		{
 			m_Attributes.strength = 5;

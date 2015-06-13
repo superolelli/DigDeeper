@@ -41,6 +41,8 @@ public:
 	void ThrowPlayer(bool _left, int _strength);
 	int GetHealth(){ return m_Attributes.currentHealth; }
 	int GetMana(){ return m_Attributes.currentMana; }
+	int GetLevel(){ return m_pCharacterInfo->GetLevel(); }
+	int GetClass(){ return m_class; }
 	bool AddRecipe(int _ID){return m_pBuildingMenu->NewRecipe(_ID);}
 	list<int> GetNotAvailableRecipesList(){return m_pBuildingMenu->GetNotAvailableRecipes();}
 	inline IntRect GetRect(){return m_pDwarf->GetRect();}
@@ -51,6 +53,7 @@ public:
 	void DoAlchemy(int _level);   //tries alchemy
 
 	SToolAttributes GetPlayerAttributes();
+	SPlayerAttributes GetPlayerBasicAttributes(){ return m_Attributes; }
 
 	SToolAttributes m_modifications;                 //the modifications from tools etc.
 
@@ -64,6 +67,7 @@ private:
 		ar & m_pInventory;
 		ar & m_pBuildingMenu;
 		ar & m_pMagicMenu;
+		ar & m_class;
 		ar & m_Attributes.armour;
 		ar & m_Attributes.breakingSpeed;
 		ar & m_Attributes.currentExp;
@@ -91,6 +95,7 @@ private:
 		ar & m_pInventory;
 		ar & m_pBuildingMenu;
 		ar & m_pMagicMenu;
+		ar & m_class;
 		ar & m_Attributes.armour;
 		ar & m_Attributes.breakingSpeed;
 		ar & m_Attributes.currentExp;
@@ -144,6 +149,8 @@ private:
 	bool show_beam_numbers;                           //should the beam numbers be shown?
 
 	int m_loadedPosX, m_loadedPosY;                 //the loaded position of the dwarf
+
+	int m_class;
 
 	float m_fXVel, m_fYVel;                             //the x and y velocity
 	float m_fAnimState;                                //the current anim state

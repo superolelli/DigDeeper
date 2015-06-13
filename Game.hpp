@@ -9,6 +9,7 @@
 #include "NpcMachine.hpp"
 #include "Profiler.hpp"
 #include "Projectiles.hpp"
+#include "StringInput.hpp"
 
 
 class CGame
@@ -55,6 +56,7 @@ private:
 	void CheckMusic();                 //checks the music
 	void PauseGame();
 	void SaveGame();
+	void SaveHighscore();
 	void Zoom();
 
 

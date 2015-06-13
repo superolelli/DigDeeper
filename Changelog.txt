@@ -1235,3 +1235,13 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Highscore hinzugefügt (man kann sich noch nicht eintragen)
 
 ------------------------------------------------------
+12.06.2015
+
+-Man kann seinen Highscore nun eintragen (noch ein Bug vorhanden)
+
+------------------------------------------------------
+13.06.2015
+
+-Highscore geändert (es wird nun nur der Beste angezeigt)
+
+------------------------------------------------------

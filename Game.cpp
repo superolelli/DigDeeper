@@ -57,10 +57,10 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	//Inits the player
 	m_pPlayer->Init(700, 300, m_pWorld, &m_View, _attributes.PlayerClass);
 
-	/*if(!_loaded)
+	if(!_loaded)
 	{
 		m_NpcMachine.AddNpc(GOBLIN, 900, 300);
-	}*/
+	}
 
 	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);
 
@@ -252,6 +252,8 @@ void CGame::Run()
 			g_pSound->m_sound.play();
 
 			sleep(seconds(5));
+
+			SaveHighscore();
 
 			is_running = false;
 		}
@@ -618,4 +620,70 @@ void CGame::Load(string _path)
 	m_pWorld->Init(0,0, &m_View, &m_NpcMachine, true);
 	m_NpcMachine.Init(m_pWorld, m_pPlayer, &m_View, true);
 	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);
+}
+
+
+
+
+
+void CGame::SaveHighscore()
+{
+	SHighscore highscore;
+
+	ifstream Input("Data/Saves/Highscore.hsc", ios::binary);
+	Input.read((char *)&highscore, sizeof(highscore));
+	Input.close();
+
+	if (highscore.m_level < m_pPlayer->GetLevel())
+	{
+		CStringInput stringInput;
+		stringInput.Init(g_pTextures->f_coolsville, 35, g_pFramework->GetWindow()->getSize().x / 2, g_pFramework->GetWindow()->getSize().y / 2, Color(200, 200, 0));
+
+		CButton *button = new CButton;
+		button->Load(&g_pTextures->t_menuButtonSaveHighscore, g_pFramework->GetWindow()->getSize().x / 2 - 100, g_pFramework->GetWindow()->getSize().y - 100, 3);
+
+		//init the text
+		Text text;
+		text.setFont(g_pTextures->f_coolsville);
+		text.setCharacterSize(35);
+		text.setColor(Color(200, 0, 0));
+		text.setString("Gib deinen Namen ein:");
+		text.setPosition(g_pFramework->GetWindow()->getSize().x / 2 - text.getGlobalBounds().width / 2, 100);
+
+		bool quit = false;
+
+		while (quit == false)
+		{
+			g_pFramework->Update();
+			g_pFramework->Clear();
+
+			g_pFramework->ProcessEvents();
+
+			g_pFramework->GetRenderWindow()->draw(text);
+
+			stringInput.HandleInput();
+
+			if (button->Render(g_pFramework->keyStates.leftMouseUp))
+			{
+				quit = true;
+			}
+
+			stringInput.Show(g_pFramework->GetRenderWindow());
+
+			g_pFramework->Flip();
+		}
+
+		highscore.m_name = stringInput.GetString().c_str();
+		highscore.m_level = m_pPlayer->GetLevel();
+		highscore.m_attributes = m_pPlayer->GetPlayerBasicAttributes();
+		highscore.m_class = m_pPlayer->GetClass();
+
+		ofstream Output("Data/Saves/Highscore.hsc", ios::binary);
+		Output.write((char *)&highscore, sizeof(highscore));
+		Output.close();
+
+
+
+		SAFE_DELETE(button);
+	}
 }
