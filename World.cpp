@@ -266,6 +266,12 @@ void CWorld::GenerateWorld()
 			m_pBlocks[x][3]->Init(CLOVERP);
 			m_pBlocks[x][3]->SetPos(static_cast<float>(x * 100), static_cast<float> (300));
 		}
+		else if (randomNumber == 5)
+		{
+			m_pBlocks[x][3] = new CPlaceable;
+			m_pBlocks[x][3]->Init(RADISHP);
+			m_pBlocks[x][3]->SetPos(static_cast<float>(x * 100), static_cast<float> (300));
+		}
 	}
 }
 						
@@ -1676,7 +1682,7 @@ void CWorld::FillChestRandomly(int _chestID)
 					((CItem*)thing)->Init(randomNumber);	
 				}
 				//if thing is a consumable
-				else if (randomNumber >ICBREAK && randomNumber < 85)
+				else if (randomNumber >ICBREAK && randomNumber < 87)
 				{
 					thing = new CConsumable;
 					((CConsumable*)thing)->InitConsumable(randomNumber);

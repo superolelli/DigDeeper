@@ -628,13 +628,14 @@ void CGame::Load(string _path)
 
 void CGame::SaveHighscore()
 {
-	SHighscore highscore;
+	SHighscore highscore[10];
 
 	ifstream Input("Data/Saves/Highscore.hsc", ios::binary);
 	Input.read((char *)&highscore, sizeof(highscore));
 	Input.close();
 
-	if (highscore.m_level < m_pPlayer->GetLevel())
+
+	if (highscore[9].m_level < m_pPlayer->GetLevel())
 	{
 		CStringInput stringInput;
 		stringInput.Init(g_pTextures->f_coolsville, 35, g_pFramework->GetWindow()->getSize().x / 2, g_pFramework->GetWindow()->getSize().y / 2, Color(200, 200, 0));
@@ -673,17 +674,34 @@ void CGame::SaveHighscore()
 			g_pFramework->Flip();
 		}
 
-		highscore.m_name = stringInput.GetString().c_str();
-		highscore.m_level = m_pPlayer->GetLevel();
-		highscore.m_attributes = m_pPlayer->GetPlayerBasicAttributes();
-		highscore.m_class = m_pPlayer->GetClass();
+			//save the highscore
+			for (int i = 0; i < 10; i++)
+			{
+				if (highscore[i].m_level < m_pPlayer->GetLevel())
+				{
+					for (int a = 9; a > i; a--)
+					{
+						highscore[a].m_name = highscore[a - 1].m_name;
+						highscore[a].m_level = highscore[a - 1].m_level;
+						highscore[a].m_attributes = highscore[a - 1].m_attributes;
+						highscore[a].m_class = highscore[a - 1].m_class;
+					}
+					highscore[i].m_name = stringInput.GetString().c_str();
+					highscore[i].m_level = m_pPlayer->GetLevel();
+					highscore[i].m_attributes = m_pPlayer->GetPlayerBasicAttributes();
+					highscore[i].m_class = m_pPlayer->GetClass();
+
+					i = 10;
+				}
+			}
+
+
+			SAFE_DELETE(button);
+			
+		}
+
 
 		ofstream Output("Data/Saves/Highscore.hsc", ios::binary);
 		Output.write((char *)&highscore, sizeof(highscore));
 		Output.close();
-
-
-
-		SAFE_DELETE(button);
-	}
 }

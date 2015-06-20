@@ -273,6 +273,16 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 		mead->InitConsumable(MEAD);
 		m_pInventory->Take(mead, 4);
 
+		CConsumable *radish;
+		radish = new CConsumable;
+		radish->InitConsumable(RADISH);
+		m_pInventory->Take(radish, 4);
+
+		//add the recipe
+		CItem *book = new CItem;
+		book->Init(COOKINGBOOK);
+		m_pInventory->Take(book);
+
 		m_pMagicMenu->AddMagicPoints(10);
 
 		m_Attributes.criticalChance = 5;

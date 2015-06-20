@@ -28,13 +28,23 @@ public:
 private:
 	friend class boost::serialization::access;
 
-
+	//saves the character menu
 	template<class Archive>
-	void serialize(Archive & ar, const unsigned int version)
+	void save(Archive & ar, const unsigned int version) const
 	{
 		ar & m_playerLevel;
 		ar & m_levelUpCounter;
 	}
+
+	//load the character menu
+	template<class Archive>
+	void load(Archive & ar, const unsigned int version)
+	{
+		ar & m_playerLevel;
+		ar & m_levelUpCounter;
+	}
+	BOOST_SERIALIZATION_SPLIT_MEMBER();
+
 
 
 	void CheckForLevelUp();

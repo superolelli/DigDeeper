@@ -230,6 +230,18 @@ void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 	{
 		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_battleaxe);
 	}break;
+	case(RADISH) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_radish);
+	}break;
+	case(RADISHSOUP) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_radishsoup);
+	}break;
+	case(COOKINGBOOK) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_cookingbook);
+	}break;
 	}
 
 

@@ -113,7 +113,7 @@ void CChest::Render()
 					number << m_chest[x][y].thing->GetName();
 
 					//if it is a tool or equipment: show possible rarity and additional attributes
-					if(m_chest[x][y].thing->getID() > CTBREAK)
+					if(m_chest[x][y].thing->getID() > ICBREAK)
 					{
 						int rarity = 1;
 
@@ -148,7 +148,7 @@ void CChest::Render()
 								number << "\nKritischer Schaden " << equipment->GetAttributes().criticalDamage;
 						}
 						//if it is a tool
-						else
+						else if (m_chest[x][y].thing->getID() > CTBREAK)
 						{
 							CTool *tool = (CTool*)m_chest[x][y].thing;
 							rarity = tool->GetRarity();
@@ -175,6 +175,35 @@ void CChest::Render()
 								number << "\nKritische Chance " << tool->GetAttributes().criticalChance;
 							if (tool->GetAttributes().criticalDamage != 0)
 								number << "\nKritischer Schaden " << tool->GetAttributes().criticalDamage;
+						}
+						else
+						{
+							CConsumable *con = (CConsumable*)m_chest[x][y].thing;
+
+							if (con->GetAttributes().armour != 0)
+								number << "\nRüstung: " << con->GetAttributes().armour;
+							if (con->GetAttributes().breaking_speed != 0)
+								number << "\nAbbaugeschwindigkeit: " << con->GetAttributes().breaking_speed;
+							if (con->GetAttributes().luck != 0)
+								number << "\nGlück: " << con->GetAttributes().luck;
+							if (con->GetAttributes().health != 0)
+								number << "\nLeben: " << con->GetAttributes().health;
+							if (con->GetAttributes().healthRegeneration != 0)
+								number << "\nLebensregeneration: " << con->GetAttributes().healthRegeneration;
+							if (con->GetAttributes().mana != 0)
+								number << "\nMana: " << con->GetAttributes().mana;
+							if (con->GetAttributes().manaRegeneration != 0)
+								number << "\nManaregeneration: " << con->GetAttributes().manaRegeneration;
+							if (con->GetAttributes().speed != 0)
+								number << "\nGeschwindigkeit: " << con->GetAttributes().speed;
+							if (con->GetAttributes().strength != 0)
+								number << "\nStärke: " << con->GetAttributes().strength;
+							if (con->GetAttributes().criticalChance != 0)
+								number << "\nKritische Chance: " << con->GetAttributes().criticalChance;
+							if (con->GetAttributes().criticalDamage != 0)
+								number << "\nKritischer Schaden: " << con->GetAttributes().criticalDamage;
+
+							number << "\nDauer: " << con->GetAttributes().duration;
 						}
 
 						//sets the color

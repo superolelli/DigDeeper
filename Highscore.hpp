@@ -22,13 +22,14 @@ private:
 
 	bool is_running;
 
-	SHighscore m_highscore;
+	SHighscore m_highscore[10];
+	Text m_highscoreText[10];
 
 	CSprite m_background;            //the backgroundsprite
 	CButton *m_pReturn_button;         //the return button
 	CButton *m_pClear_button;         //the clear button
 
-
+	int m_mode;
 };
 
 

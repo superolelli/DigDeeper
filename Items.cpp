@@ -201,6 +201,24 @@ void CItem::Init(int _ID, bool _loaded)
 		if (!_loaded)
 			m_Name = "Kampfaxt";
 	}break;
+	case(RADISH) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_radish);
+		if (!_loaded)
+			m_Name = "Radieschen";
+	}break;
+	case(RADISHSOUP) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_radishsoup);
+		if (!_loaded)
+			m_Name = "Paradieschensuppe";
+	}break;
+	case(COOKINGBOOK) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_cookingbook);
+		if (!_loaded)
+			m_Name = "Kochbuch";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)

@@ -95,6 +95,7 @@
     <ClCompile Include="CharacterInfo.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="Consumable.cpp" />
+    <ClCompile Include="CookingBook.cpp" />
     <ClCompile Include="Equipment.cpp" />
     <ClCompile Include="Framework.cpp" />
     <ClCompile Include="Furnance.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="Chest.hpp" />
     <ClInclude Include="Constants.hpp" />
     <ClInclude Include="Consumable.hpp" />
+    <ClInclude Include="CookingBook.hpp" />
     <ClInclude Include="Filelogger.hpp" />
     <ClInclude Include="Goblin.hpp" />
     <ClInclude Include="Highscore.hpp" />

@@ -7,6 +7,7 @@
 #include "Items.hpp"
 #include "Equipment.hpp"
 #include "Tool.hpp"
+#include "Consumable.hpp"
 
 
 class CChest : public CPanel

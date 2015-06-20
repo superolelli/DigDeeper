@@ -144,6 +144,9 @@
     <ClCompile Include="Highscore.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="CookingBook.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.hpp">
@@ -288,6 +291,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Highscore.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="CookingBook.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -72,6 +72,8 @@ public:
 
 	Texture t_equipmentWindow;                      //the equipment window
 
+	Texture t_cookingBookWindow;
+
 	Texture t_expFrame;                              //the frame of the exp beam
 	Texture t_expBeam;                               //the beam, which shows the current exp
 	Texture t_lifeFrame;                             //the frame of the life beam
@@ -179,6 +181,7 @@ public:
 	Texture t_blockTextures_torch_right;
 	Texture t_blockTextures_cauldron;
 	Texture t_blockTextures_clover;
+	Texture t_blockTextures_radish;
 	Texture t_blockTextures_noTexture;               //the no_texture texture
 
 	Texture t_dirtRimTop;
@@ -243,6 +246,9 @@ public:
 	Texture t_blockInventoryTexture_slimepudding;
 	Texture t_blockInventoryTexture_clover;
 	Texture t_blockInventoryTexture_battleaxe;
+	Texture t_blockInventoryTexture_radish;
+	Texture t_blockInventoryTexture_radishsoup;
+	Texture t_blockInventoryTexture_cookingbook;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -298,6 +304,9 @@ public:
 	Texture t_blockLittleTexture_slimepudding;
 	Texture t_blockLittleTexture_clover;
 	Texture t_blockLittleTexture_battleaxe;
+	Texture t_blockLittleTexture_radish;
+	Texture t_blockLittleTexture_radishsoup;
+	Texture t_blockLittleTexture_cookingbook;
 
 
 	//the "carried" texture of the tools

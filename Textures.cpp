@@ -59,6 +59,8 @@ void TextureLoading::LoadTextures()
 
 	t_equipmentWindow.loadFromFile("Data/Sprites/Inventory/Equipment.png");
 
+	t_cookingBookWindow.loadFromFile("Data/Sprites/Panels/cookingbook_menu.png");
+
 	t_expBeam.loadFromFile("Data/Sprites/Panels/Exp_beam.png");
 	t_expFrame.loadFromFile("Data/Sprites/Panels/Exp_frame.png");
 	t_lifeFrame.loadFromFile("Data/Sprites/Panels/life_frame.png");
@@ -174,6 +176,7 @@ void TextureLoading::LoadTextures()
 	t_blockTextures_torch_right.loadFromFile("Data/Sprites/Objects/Blocks/torch.png", IntRect(200, 0, 100, 100));
 	t_blockTextures_cauldron.loadFromFile("Data/Sprites/Objects/Blocks/cauldron.png");
 	t_blockTextures_clover.loadFromFile("Data/Sprites/Objects/Blocks/cloverleaf.png");
+	t_blockTextures_radish.loadFromFile("Data/Sprites/Objects/Blocks/radish.png");
 
 	t_dirtRimTop.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_top.png");
 	t_dirtRimBottom.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_bottom.png");
@@ -235,6 +238,9 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_slimepudding.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/slime_pudding_inventory.png");
 	t_blockInventoryTexture_clover.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/cloverleaf_inventory.png");
 	t_blockInventoryTexture_battleaxe.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/battleaxe_inventory.png");
+	t_blockInventoryTexture_radish.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/radish_inventory.png");
+	t_blockInventoryTexture_radishsoup.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/radish_soup_inventory.png");
+	t_blockInventoryTexture_cookingbook.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/cookingbook_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
@@ -288,6 +294,9 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_slimepudding.loadFromFile("Data/Sprites/Objects/LittleItems/slime_pudding_little.png");
 	t_blockLittleTexture_clover.loadFromFile("Data/Sprites/Objects/LittleItems/cloverleaf_little.png");
 	t_blockLittleTexture_battleaxe.loadFromFile("Data/Sprites/Objects/LittleItems/battleaxe_little.png");
+	t_blockLittleTexture_radish.loadFromFile("Data/Sprites/Objects/LittleItems/radish_little.png");
+	t_blockLittleTexture_radishsoup.loadFromFile("Data/Sprites/Objects/LittleItems/radish_soup_little.png");
+	t_blockLittleTexture_cookingbook.loadFromFile("Data/Sprites/Objects/LittleItems/cookingbook_little.png");
 
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");

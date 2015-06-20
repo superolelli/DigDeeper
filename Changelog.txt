@@ -1245,3 +1245,26 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Highscore geändert (es wird nun nur der Beste angezeigt)
 
 ------------------------------------------------------
+14.06.2015
+
+-Highscore nochmals geändert ->Fusion der vorherigen Versionen (es ist nun wieder eine Highscoreliste, aber man kann Details zu den Spielern ansehen)
+
+------------------------------------------------------
+15.06.2015
+
+-Highscore verbessert
+-Tooltips für Konsumierbares eingefügt
+
+------------------------------------------------------
+17.06.2015
+
+-Radieschen hinzugefügt
+-Paradieschensuppe hinzugefügt
+
+------------------------------------------------------
+20.06.2015
+
+-Bug beim Laden eines Spielstands gefixt
+-Kochbuch gezeichnet
+
+------------------------------------------------------

@@ -46,5 +46,15 @@ void CConsumable::InitConsumable(int _ID)
 		m_Attributes.luck = 5;
 		m_Attributes.duration = 20.0f;
 	}break;
+	case(RADISH) :
+	{
+		m_Attributes.armour = 5;
+		m_Attributes.duration = 20.0f;
+	}break;
+	case(RADISHSOUP) :
+	{
+		m_Attributes.armour = 10;
+		m_Attributes.duration = 40.0f;
+	}break;
 	}
 }

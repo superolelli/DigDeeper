@@ -1,8 +1,141 @@
-﻿Der Buildvorgang wurde am 13.06.2015 18:38:56 gestartet.
+﻿Der Buildvorgang wurde am 20.06.2015 21:29:25 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
+         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Bee.cpp BuildingMenu.cpp Button.cpp Cauldron.cpp CharacterInfo.cpp Chest.cpp Consumable.cpp Equipment.cpp Framework.cpp Furnance.cpp Game.cpp GameChoose.cpp Goblin.cpp Highscore.cpp Inventory.cpp Items.cpp LightMachine.cpp LittleItems.cpp Living3Part.cpp LoadGame.cpp MagicMenu.cpp Menu.cpp NPC.cpp NewGame.cpp NpcMachine.cpp Options.cpp Panel.cpp Placeable.cpp Player.cpp PlayerEquipment.cpp Profiler.cpp Projectiles.cpp Rims.cpp SignMachine.cpp StringInput.cpp Textures.cpp Tool.cpp World.cpp main.cpp
+         Bee.cpp
+     1>Bee.cpp(69): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>Bee.cpp(71): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>Bee.cpp(81): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>Bee.cpp(83): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>Bee.cpp(91): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>Bee.cpp(160): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>Bee.cpp(161): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         BuildingMenu.cpp
+     1>BuildingMenu.cpp(509): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+         Button.cpp
+         Cauldron.cpp
+         CharacterInfo.cpp
+         Chest.cpp
+         Consumable.cpp
+         Equipment.cpp
+         Framework.cpp
+     1>Framework.cpp(72): warning C4305: '+=': Verkürzung von 'double' in 'float'
+     1>Framework.cpp(78): warning C4305: '-=': Verkürzung von 'double' in 'float'
+     1>Framework.cpp(83): warning C4305: '=': Verkürzung von 'double' in 'float'
+         Furnance.cpp
          Game.cpp
+         GameChoose.cpp
+         Goblin.cpp
+     1>Goblin.cpp(107): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>Goblin.cpp(111): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>Goblin.cpp(197): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>Goblin.cpp(198): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>Goblin.cpp(201): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>Goblin.cpp(222): warning C4244: '-=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>Goblin.cpp(224): warning C4244: '+=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>Goblin.cpp(314): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>Goblin.cpp(315): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>Goblin.cpp(316): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>Goblin.cpp(317): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>Goblin.cpp(327): warning C4244: 'Argument': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>Goblin.cpp(549): warning C4305: '=': Verkürzung von 'double' in 'float'
+         Highscore.cpp
+     1>Highscore.cpp(124): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         Inventory.cpp
+         Items.cpp
+         LightMachine.cpp
+     1>LightMachine.cpp(23): warning C4244: 'Argument': Konvertierung von 'const float' in 'unsigned int', möglicher Datenverlust
+     1>LightMachine.cpp(31): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>LightMachine.cpp(33): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>LightMachine.cpp(34): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>LightMachine.cpp(45): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>LightMachine.cpp(46): warning C4244: 'Argument': Konvertierung von 'const float' in 'unsigned int', möglicher Datenverlust
+     1>LightMachine.cpp(52): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>LightMachine.cpp(53): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>LightMachine.cpp(64): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(75): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(76): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(81): warning C4244: 'Argument': Konvertierung von 'double' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(96): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(97): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>LightMachine.cpp(101): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(102): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(105): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(110): warning C4244: '=': Konvertierung von 'double' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(119): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(120): warning C4244: '=': Konvertierung von 'double' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(123): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(128): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(156): warning C4244: 'Argument': Konvertierung von 'double' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(159): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>LightMachine.cpp(160): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>LightMachine.cpp(168): warning C4244: '=': Konvertierung von 'double' in 'int', möglicher Datenverlust
+     1>LightMachine.cpp(170): warning C4244: '=': Konvertierung von 'double' in 'int', möglicher Datenverlust
+     1>LightMachine.cpp(174): warning C4244: 'Argument': Konvertierung von 'double' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(176): warning C4244: 'Argument': Konvertierung von 'double' in 'float', möglicher Datenverlust
+     1>LightMachine.cpp(390): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>LightMachine.cpp(391): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>LightMachine.cpp(401): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         LittleItems.cpp
+         Living3Part.cpp
+         LoadGame.cpp
+     1>LoadGame.cpp(63): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+     1>LoadGame.cpp(188): warning C4018: '>': Konflikt zwischen 'signed' und 'unsigned'
+     1>LoadGame.cpp(210): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         Kompilieren...
+         MagicMenu.cpp
+     1>MagicMenu.cpp(52): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>MagicMenu.cpp(124): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         Menu.cpp
+         NPC.cpp
+     1>NPC.cpp(46): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+     1>NPC.cpp(48): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+     1>NPC.cpp(109): warning C4018: '>=': Konflikt zwischen 'signed' und 'unsigned'
+     1>NPC.cpp(113): warning C4018: '>=': Konflikt zwischen 'signed' und 'unsigned'
+         NewGame.cpp
+     1>NewGame.cpp(65): warning C4244: 'Argument': Konvertierung von 'double' in 'float', möglicher Datenverlust
+         NpcMachine.cpp
+     1>NpcMachine.cpp(124): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>NpcMachine.cpp(194): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>NpcMachine.cpp(271): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>NpcMachine.cpp(280): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>NpcMachine.cpp(299): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
+         Options.cpp
+         Panel.cpp
+         Placeable.cpp
+         Player.cpp
+     1>Player.cpp(353): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>Player.cpp(509): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>Player.cpp(527): warning C4244: '-=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>Player.cpp(529): warning C4244: '+=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+         PlayerEquipment.cpp
+         Profiler.cpp
+         Projectiles.cpp
+         Rims.cpp
+         SignMachine.cpp
+     1>SignMachine.cpp(34): warning C4244: '+=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>SignMachine.cpp(39): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         StringInput.cpp
+     1>StringInput.cpp(19): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>StringInput.cpp(50): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         Textures.cpp
+         Tool.cpp
+         World.cpp
+     1>World.cpp(500): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(501): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(782): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(783): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(1747): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(1748): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(1749): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(1750): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(1804): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(1805): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(1806): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(1807): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(1969): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(1970): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+         main.cpp
        Link:
          F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.3\lib" "sfml-audio.lib" "sfml-graphics.lib" "sfml-network.lib" "sfml-system.lib" "sfml-window.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\DigDeeper\Release\Dig Deeper rewritten.lib" /MACHINE:X86 /SAFESEH Release\Beam.obj
          Release\Bee.obj
@@ -55,4 +188,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:11.48
+Verstrichene Zeit 00:00:49.43

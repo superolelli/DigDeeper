@@ -1,12 +1,30 @@
-﻿Der Buildvorgang wurde am 30.05.2015 13:25:23 gestartet.
+﻿Der Buildvorgang wurde am 20.06.2015 18:32:11 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
+         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Bee.cpp CharacterInfo.cpp Game.cpp Goblin.cpp Inventory.cpp LightMachine.cpp MagicMenu.cpp NPC.cpp NpcMachine.cpp Player.cpp PlayerEquipment.cpp Projectiles.cpp World.cpp main.cpp
+         Bee.cpp
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(69): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(71): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(81): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(83): warning C4244: '=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(91): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(160): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\bee.cpp(161): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
+         Code wird generiert...
+         Überspringen... (keine relevanten Änderungen gefunden)
+         main.cpp
+         World.cpp
+         Projectiles.cpp
+         PlayerEquipment.cpp
          Player.cpp
-     1>f:\dig deeper rewritten\digdeeper\player.cpp(316): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\player.cpp(473): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\player.cpp(491): warning C4244: '-=': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\player.cpp(493): warning C4244: '+=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+         NpcMachine.cpp
+         NPC.cpp
+         MagicMenu.cpp
+         LightMachine.cpp
+         Inventory.cpp
+         Goblin.cpp
+         Game.cpp
+         CharacterInfo.cpp
        Link:
          F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.3\lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-network-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.lib" /MACHINE:X86 Debug\Beam.obj
          Debug\Bee.obj
@@ -22,6 +40,7 @@
          Debug\Game.obj
          Debug\GameChoose.obj
          Debug\Goblin.obj
+         Debug\Highscore.obj
          Debug\Inventory.obj
          Debug\Items.obj
          Debug\LightMachine.obj
@@ -55,4 +74,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:01.74
+Verstrichene Zeit 00:00:01.85

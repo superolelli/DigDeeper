@@ -632,8 +632,12 @@ void CInventory::Render(IntRect &_playerRect)
 					number.str("");
 					number << (i->thing->GetName());
 
+					//if thing is consumable: show that
+					if (i->thing->getID() > ICBREAK && i->thing->getID() < CTBREAK)
+						number << " (konsumierbar)";
+
 					//if the thing is equipment or a tool: change the coulor of the text
-					if(i->thing->getID() > CTBREAK)
+					if(i->thing->getID() > ICBREAK)
 					{
 						int rarity = 1;
 
@@ -651,25 +655,25 @@ void CInventory::Render(IntRect &_playerRect)
 							if(equipment->GetAttributes().luck != 0)
 								number << "\nGlück: " << equipment->GetAttributes().luck;
 							if(equipment->GetAttributes().maxHealth != 0)
-								number << "\nLeben " << equipment->GetAttributes().maxHealth;
+								number << "\nLeben: " << equipment->GetAttributes().maxHealth;
 							if (equipment->GetAttributes().healthRegeneration != 0)
-								number << "\nLebensregeneration " << equipment->GetAttributes().healthRegeneration;
+								number << "\nLebensregeneration: " << equipment->GetAttributes().healthRegeneration;
 							if(equipment->GetAttributes().maxMana != 0)
-								number << "\nMana " << equipment->GetAttributes().maxMana;
+								number << "\nMana: " << equipment->GetAttributes().maxMana;
 							if (equipment->GetAttributes().manaRegeneration != 0)
-								number << "\nManaregeneration " << equipment->GetAttributes().manaRegeneration;
+								number << "\nManaregeneration: " << equipment->GetAttributes().manaRegeneration;
 							if(equipment->GetAttributes().speed != 0)
-								number << "\nGeschwindigkeit " << equipment->GetAttributes().speed;
+								number << "\nGeschwindigkeit: " << equipment->GetAttributes().speed;
 							if(equipment->GetAttributes().strength != 0)
-								number << "\nStärke " << equipment->GetAttributes().strength;
+								number << "\nStärke: " << equipment->GetAttributes().strength;
 							if (equipment->GetAttributes().criticalChance != 0)
-								number << "\nKritische Chance " << equipment->GetAttributes().criticalChance;
+								number << "\nKritische Chance: " << equipment->GetAttributes().criticalChance;
 							if (equipment->GetAttributes().criticalDamage != 0)
-								number << "\nKritischer Schaden " << equipment->GetAttributes().criticalDamage;
+								number << "\nKritischer Schaden: " << equipment->GetAttributes().criticalDamage;
 						
 						}
 						//if it is a tool
-						else
+						else if (i->thing->getID() > CTBREAK)
 						{
 							CTool *tool = (CTool*)i->thing;
 							rarity = tool->GetRarity();
@@ -681,21 +685,50 @@ void CInventory::Render(IntRect &_playerRect)
 							if(tool->GetAttributes().luck != 0)
 								number << "\nGlück: " << tool->GetAttributes().luck;
 							if(tool->GetAttributes().maxHealth != 0)
-								number << "\nLeben " << tool->GetAttributes().maxHealth;
+								number << "\nLeben: " << tool->GetAttributes().maxHealth;
 							if (tool->GetAttributes().healthRegeneration != 0)
-								number << "\nLebensregeneration " << tool->GetAttributes().healthRegeneration;
+								number << "\nLebensregeneration: " << tool->GetAttributes().healthRegeneration;
 							if(tool->GetAttributes().maxMana != 0)
-								number << "\nMana " << tool->GetAttributes().maxMana;
+								number << "\nMana: " << tool->GetAttributes().maxMana;
 							if (tool->GetAttributes().manaRegeneration != 0)
-								number << "\nManaregeneration " << tool->GetAttributes().manaRegeneration;
+								number << "\nManaregeneration: " << tool->GetAttributes().manaRegeneration;
 							if(tool->GetAttributes().speed != 0)
-								number << "\nGeschwindigkeit " << tool->GetAttributes().speed;
+								number << "\nGeschwindigkeit: " << tool->GetAttributes().speed;
 							if(tool->GetAttributes().strength != 0)
-								number << "\nStärke " << tool->GetAttributes().strength;
+								number << "\nStärke: " << tool->GetAttributes().strength;
 							if (tool->GetAttributes().criticalChance != 0)
-								number << "\nKritische Chance " << tool->GetAttributes().criticalChance;
+								number << "\nKritische Chance: " << tool->GetAttributes().criticalChance;
 							if (tool->GetAttributes().criticalDamage != 0)
-								number << "\nKritischer Schaden " << tool->GetAttributes().criticalDamage;
+								number << "\nKritischer Schaden: " << tool->GetAttributes().criticalDamage;
+						}
+						else
+						{
+							CConsumable *con = (CConsumable*)i->thing;
+							
+							if (con->GetAttributes().armour != 0)
+								number << "\nRüstung: " << con->GetAttributes().armour;
+							if (con->GetAttributes().breaking_speed != 0)
+								number << "\nAbbaugeschwindigkeit: " << con->GetAttributes().breaking_speed;
+							if (con->GetAttributes().luck != 0)
+								number << "\nGlück: " << con->GetAttributes().luck;
+							if (con->GetAttributes().health != 0)
+								number << "\nLeben: " << con->GetAttributes().health;
+							if (con->GetAttributes().healthRegeneration != 0)
+								number << "\nLebensregeneration: " << con->GetAttributes().healthRegeneration;
+							if (con->GetAttributes().mana != 0)
+								number << "\nMana: " << con->GetAttributes().mana;
+							if (con->GetAttributes().manaRegeneration != 0)
+								number << "\nManaregeneration: " << con->GetAttributes().manaRegeneration;
+							if (con->GetAttributes().speed != 0)
+								number << "\nGeschwindigkeit: " << con->GetAttributes().speed;
+							if (con->GetAttributes().strength != 0)
+								number << "\nStärke: " << con->GetAttributes().strength;
+							if (con->GetAttributes().criticalChance != 0)
+								number << "\nKritische Chance: " << con->GetAttributes().criticalChance;
+							if (con->GetAttributes().criticalDamage != 0)
+								number << "\nKritischer Schaden: " << con->GetAttributes().criticalDamage;
+
+							number << "\nDauer: " << con->GetAttributes().duration;
 						}
 
 						//sets the color

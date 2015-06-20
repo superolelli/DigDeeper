@@ -332,6 +332,17 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_is_visible = true;
 		m_can_place_on = false;
 	}break;
+	case RADISHP:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_radish);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_radish);
+		m_Name = "Radieschen";
+		m_Hardness = 0;
+		m_Priority = -1;
+		m_is_passable = true;
+		m_is_visible = true;
+		m_can_place_on = false;
+	}break;
 	default:
 		{
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_noTexture);
@@ -440,6 +451,9 @@ int CPlaceable::GetLittleID()
 		break;
 	case(CLOVERP) :
 		return CLOVER;
+		break;
+	case(RADISHP) :
+		return RADISH;
 		break;
 
 	default:

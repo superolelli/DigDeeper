@@ -67,6 +67,7 @@ private:
 		ar & m_pInventory;
 		ar & m_pBuildingMenu;
 		ar & m_pMagicMenu;
+		ar & m_pCharacterInfo;
 		ar & m_class;
 		ar & m_Attributes.armour;
 		ar & m_Attributes.breakingSpeed;
@@ -95,6 +96,7 @@ private:
 		ar & m_pInventory;
 		ar & m_pBuildingMenu;
 		ar & m_pMagicMenu;
+		ar & m_pCharacterInfo;
 		ar & m_class;
 		ar & m_Attributes.armour;
 		ar & m_Attributes.breakingSpeed;

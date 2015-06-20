@@ -54,6 +54,7 @@ const int BEEHOUSE = 19;
 const int TORCH = 20;
 const int CAULDRON = 21;
 const int CLOVERP = 22;
+const int RADISHP = 23;
 const int LADDER = 49;
 
 const int PWBREAK = 50;            //the Placeable-Wall-Break shows, where the wall section begins
@@ -76,6 +77,7 @@ const int SLIME = 64;
 const int RECIPE = 65;
 const int WAX = 66;
 const int BEEHIVE = 67;
+const int COOKINGBOOK = 68;
 
 const int SPELL = 79;
 
@@ -85,6 +87,8 @@ const int HONEY = 81;
 const int MEAD = 82;
 const int SLIMEPUDDING = 83;
 const int CLOVER = 84;
+const int RADISH = 85;
+const int RADISHSOUP = 86;
 
 const int CTBREAK = 100;             //the Consumable-Tool-Break shows, where the tool section begins
 
@@ -221,6 +225,7 @@ const int HAND = 4;
 const int PANEL_CHEST = 1;
 const int PANEL_FURNANCE = 2;
 const int PANEL_CAULDRON = 3;
+const int PANEL_COOKINGBOOK = 4;
 
 #pragma endregion
 
@@ -272,11 +277,12 @@ const int ALCHEMYANIMATION = 5;
 
 #pragma region ConsumableRecipes
 
-const int NUMBER_OF_CONRECIPES = 2;
+const int NUMBER_OF_CONRECIPES = 3;
 
-const int CONRECIPES[2][5] = {
+const int CONRECIPES[3][5] = {
 	{ HONEY, HONEY, -1, -1, MEAD },
-	{SLIME, SLIME, -1, -1, SLIMEPUDDING}
+	{SLIME, SLIME, -1, -1, SLIMEPUDDING},
+	{RADISH, RADISH, SLIME, -1, RADISHSOUP}
 };
 
 #pragma endregion
