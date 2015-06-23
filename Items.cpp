@@ -278,40 +278,44 @@ void CItem::InitRecipe()
 void CItem::SetSpecialID(int _ID)
 {
 	m_specialID = _ID;
-	m_Name = "Rezept";
 
-	switch(m_specialID)
+	if (m_ID > CTBREAK)
 	{
-	case(IRONHELMET):
-		m_Name.append("(Eisenhelm)");
-		break;
-	case(IRONARMOUR):
-		m_Name.append("(Eisenrüstung)");
-		break;
-	case(IRONTROUSERS):
-		m_Name.append("(Eisenleggins)");
-		break;
-	case(IRONRING):
-		m_Name.append("(Eisenring)");
-		break;
-	case(ARCANUSRING):
-		m_Name.append("(Arcanusring)");
-		break;
-	case(MAGICHAT):
-		m_Name.append("(Zauberhut)");
-		break;
-	case(LANTERN):
-		m_Name.append("(Laterne)");
-		break;
-	case(BEEHOUSE) :
-		m_Name.append("(Bienenkiste)");
-		break;
-	case(CAULDRON) :
-		m_Name.append("(Kessel)");
-		break;
-	case(BATTLEAXE) :
-		m_Name.append("(Kampfaxt)");
-		break;
+		m_Name = "Rezept";
+
+		switch (m_specialID)
+		{
+		case(IRONHELMET) :
+			m_Name.append("(Eisenhelm)");
+			break;
+		case(IRONARMOUR) :
+			m_Name.append("(Eisenrüstung)");
+			break;
+		case(IRONTROUSERS) :
+			m_Name.append("(Eisenleggins)");
+			break;
+		case(IRONRING) :
+			m_Name.append("(Eisenring)");
+			break;
+		case(ARCANUSRING) :
+			m_Name.append("(Arcanusring)");
+			break;
+		case(MAGICHAT) :
+			m_Name.append("(Zauberhut)");
+			break;
+		case(LANTERN) :
+			m_Name.append("(Laterne)");
+			break;
+		case(BEEHOUSE) :
+			m_Name.append("(Bienenkiste)");
+			break;
+		case(CAULDRON) :
+			m_Name.append("(Kessel)");
+			break;
+		case(BATTLEAXE) :
+			m_Name.append("(Kampfaxt)");
+			break;
+		}
 	}
 }
 

@@ -73,6 +73,11 @@ public:
 	Texture t_equipmentWindow;                      //the equipment window
 
 	Texture t_cookingBookWindow;
+	Texture t_nextPageLeft;
+	Texture t_nextPageRight;
+	Texture t_cookingMead;
+	Texture t_cookingSlimepudding;
+	Texture t_cookingRadishsoup;
 
 	Texture t_expFrame;                              //the frame of the exp beam
 	Texture t_expBeam;                               //the beam, which shows the current exp

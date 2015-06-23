@@ -14,6 +14,7 @@
 #include "Furnance.hpp"
 #include "Cauldron.hpp"
 #include "Chest.hpp"
+#include "CookingBook.hpp"
 #include "Profiler.hpp"
 #include "Projectiles.hpp"
 #include "NpcMachine.hpp"
@@ -44,7 +45,10 @@ public:
 	bool CheckForBarrier(IntRect _living, bool _left);
 	
 	//returns the panel on which was clicked
-	CPanel* GetPanel();
+	CPanel* GetPanel(int _number = -1);
+
+	//deletes a panel
+	void DeletePanel(int _number);
 
 	//returns a pointer to the light machine
 	CLightMachine* GetLightMachine(){return &m_lightMachine;}
@@ -69,6 +73,10 @@ public:
 
 	//tries alchemy
 	void DoAlchemy(int _level);
+
+	//adds a panel and returns it's number (x and y is not necessary for all panels, just type in zero or something like that)
+	int AddPanel(int _ID, int _x, int _y);
+
 
 private:
 	friend class boost::serialization::access;
@@ -141,6 +149,11 @@ private:
 			{
 				CCauldron* cauldron = (CCauldron*)p;
 				ar & cauldron;
+			}
+			else if (d == PANEL_COOKINGBOOK)
+			{
+				CCookingBook* book = (CCookingBook*)p;
+				ar & book;
 			}
 		}
 
@@ -235,6 +248,13 @@ private:
 				cauldron->Init(0, true);
 				m_PanelList.push_back(cauldron);
 			}
+			else if (a == PANEL_COOKINGBOOK)
+			{
+				CCookingBook* book;
+				ar >> book;
+				book->Init(0, true);
+				m_PanelList.push_back(book);
+			}
 		}while(a != 1000);
 	}
 
@@ -274,10 +294,6 @@ private:
 
 	//checks if you can place a wall and places it
 	bool CanPlaceWall(int _x, int _y, int _ID);
-
-	//adds a panel and returns it's number (x and y is not necessary for all panels, just type in zero or something like that)
-	int AddPanel(int _ID, int _x, int _y);
-
 
 
 };

@@ -281,7 +281,15 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 		//add the recipe
 		CItem *book = new CItem;
 		book->Init(COOKINGBOOK);
+		book->SetSpecialID(m_pWorld->AddPanel(COOKINGBOOK, 0, 0));
 		m_pInventory->Take(book);
+	
+
+		CItem *book2 = new CItem;
+		book2->Init(COOKINGBOOK);
+		book2->SetSpecialID(m_pWorld->AddPanel(COOKINGBOOK, 0, 0));
+		m_pInventory->Take(book2);
+
 
 		m_pMagicMenu->AddMagicPoints(10);
 

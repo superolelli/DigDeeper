@@ -1268,3 +1268,19 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Kochbuch gezeichnet
 
 ------------------------------------------------------
+21.06.2015
+
+-Kochbuch eingefügt (kann geöffnet werden, enthält aber noch keine Rezepte)
+
+------------------------------------------------------
+22.06.2015
+
+-Kochbuch kann nun Rezepte enthalten und man kann weiterblättern
+
+------------------------------------------------------
+23.06.2015
+
+-Legt man zwei Bücher aufeinander verschmelzen diese nun
+-Man kann Bücher nun in Truhen finden
+
+------------------------------------------------------

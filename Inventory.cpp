@@ -174,8 +174,35 @@ void CInventory::Take(CThing *_thing, int _amount)
 
 			if (i->thing->getID() != SPELL)
 			{
+				//if the thing is a cooking book: merge the two books
+				if (i->thing->getID() == COOKINGBOOK)
+				{
+					//get the panels of books
+					CItem* book;
+					CItem* book2;
+					book = (CItem*)(i->thing);
+					book2 = (CItem*)(_thing);
+					CCookingBook *cookPanel = (CCookingBook*)m_world->GetPanel(book->GetSpecialID());
+					CCookingBook *cookPanel2 = (CCookingBook*)m_world->GetPanel(book2->GetSpecialID());
+
+					//get the recipes of the first book
+					vector<SItem> recipes = cookPanel2->GetContent();
+
+					//add the recipes to the second book
+					for (int counter = 0; counter < recipes.size(); counter++)
+					{
+						cookPanel->AddRecipe(recipes[counter].amount);
+					}
+
+					//deletes the first panel
+					m_world->DeletePanel(book2->GetSpecialID());
+				}
+
+
 				//if it is, add the amount to it and delete the added thing
-				i->amount += _amount;
+				if (i->thing->getID() != COOKINGBOOK)
+					i->amount += _amount;
+
 				SAFE_DELETE(_thing);
 				return;
 			}
@@ -292,7 +319,7 @@ void CInventory::Render(IntRect &_playerRect)
 		{
 			is_open = true;
 
-			if(m_pCurrentPanel == NULL)
+			if(m_pCurrentPanel == NULL || (m_pCurrentPanel != NULL && m_pCurrentPanel->GetType() == PANEL_COOKINGBOOK))
 			{
 				m_pCurrentPanel = m_pEquipment;
 			}
@@ -319,7 +346,7 @@ void CInventory::Render(IntRect &_playerRect)
 		m_pInventoryWindow->Render(g_pFramework->GetRenderWindow());
 
 		//if there is a panel: render it
-		if(m_pCurrentPanel != NULL)
+		if(m_pCurrentPanel != NULL && m_pCurrentPanel->GetType() != PANEL_COOKINGBOOK)
 			m_pCurrentPanel->Render();
 
 		for(i = m_inventoryList.begin(); i != m_inventoryList.end();)
@@ -335,6 +362,30 @@ void CInventory::Render(IntRect &_playerRect)
 						//if the clicked item is the same as this one: add the amounts
 						if(c != m_inventoryList.end() && c->thing->getID() == i->thing->getID() && i->thing->getID() < CTBREAK && i->thing->getID() != RECIPE && i->thing->getID() != SPELL)
 						{
+							//if the thing is a cooking book: merge the two books
+							if (c->thing->getID() == COOKINGBOOK)
+							{
+								//get the panels of books
+								CItem *book;
+								CItem* book2;
+								book = (CItem*)(c->thing);
+								book2 = (CItem*)(i->thing);
+								CCookingBook *cookPanel = (CCookingBook*)m_world->GetPanel(book->GetSpecialID());
+								CCookingBook *cookPanel2 = (CCookingBook*)m_world->GetPanel(book2->GetSpecialID());
+
+								//get the recipes of the first book
+								vector<SItem> recipes = cookPanel->GetContent();
+
+								//add the recipes to the second book
+								for (int counter = 0; counter < recipes.size(); counter++)
+								{
+									cookPanel2->AddRecipe(recipes[counter].amount);
+								}
+
+								//deletes the first panel
+								m_world->DeletePanel(book->GetSpecialID());
+							}
+
 							//add the amount and delete the clicked thing
 							i->amount += c->amount;
 							SAFE_DELETE(c->thing);
@@ -822,6 +873,15 @@ void CInventory::Render(IntRect &_playerRect)
 	//if the inventory isn't open
 	else
 	{
+		//render cooking book if needed
+		if (m_pCurrentPanel != NULL && m_pCurrentPanel->GetType() == PANEL_COOKINGBOOK)
+		{
+			m_pCurrentPanel->Render();
+
+			if (GetCarriedThing()->getID() != COOKINGBOOK)
+				m_pCurrentPanel = m_pEquipment;
+		}
+
 		for(i = m_inventoryList.begin(); i != m_inventoryList.end();)
 		{
 			//If the thing is in the beam: Render it
@@ -875,6 +935,13 @@ void CInventory::Render(IntRect &_playerRect)
 						continue;
 					}
 				}
+				//if the player wants to read a book
+				else if (CarriedObjectFramePos == i->position && g_pFramework->keyStates.rightMouseUp && i->thing->getID() == COOKINGBOOK)
+				{
+					CItem *item;
+					item = (CItem*)(i->thing);
+					m_pCurrentPanel = m_world->GetPanel(item->GetSpecialID());
+				}
 
 				i->thing->RenderInventorySprite();
 
@@ -887,6 +954,8 @@ void CInventory::Render(IntRect &_playerRect)
 
 			i++;
 		}
+
+
 	}
 
 

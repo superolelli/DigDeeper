@@ -60,6 +60,11 @@ void TextureLoading::LoadTextures()
 	t_equipmentWindow.loadFromFile("Data/Sprites/Inventory/Equipment.png");
 
 	t_cookingBookWindow.loadFromFile("Data/Sprites/Panels/cookingbook_menu.png");
+	t_nextPageLeft.loadFromFile("Data/Sprites/Cooking/nextPageLeft_button.png");
+	t_nextPageRight.loadFromFile("Data/Sprites/Cooking/nextPageRight_button.png");
+	t_cookingMead.loadFromFile("Data/Sprites/Cooking/mead_recipe.png");
+	t_cookingSlimepudding.loadFromFile("Data/Sprites/Cooking/slimepudding_recipe.png");
+	t_cookingRadishsoup.loadFromFile("Data/Sprites/Cooking/radishsoup_recipe.png");
 
 	t_expBeam.loadFromFile("Data/Sprites/Panels/Exp_beam.png");
 	t_expFrame.loadFromFile("Data/Sprites/Panels/Exp_frame.png");

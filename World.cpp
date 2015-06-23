@@ -1606,6 +1606,13 @@ int CWorld::AddPanel(int _ID, int _x, int _y)
 
 		m_PanelList.insert(p, newPanel);
 	}
+	else if (_ID == COOKINGBOOK)
+	{
+		newPanel = new CCookingBook();
+		newPanel->Init(counter);
+
+		m_PanelList.insert(p, newPanel);
+	}
 
 
 	return counter;
@@ -1614,9 +1621,9 @@ int CWorld::AddPanel(int _ID, int _x, int _y)
 
 
 //returns the panel on which was clicked
-CPanel* CWorld::GetPanel()
+CPanel* CWorld::GetPanel(int _number)
 {
-	int x, y, number = -1;
+	int x, y = -1;
 	list<CPanel*>::iterator p;
 
 	//calculate the chosen block's x and y
@@ -1625,20 +1632,20 @@ CPanel* CWorld::GetPanel()
 	x = (x - x%100)/100; 
 	y = (y -y%100)/100;
 
-	if(m_pBlocks[x][y] != NULL)
+	if(m_pBlocks[x][y] != NULL && _number == -1)
 	{
 		//if the thing is a furnance or a chest and the player clicked on it: get it's number
 		if(m_pBlocks[x][y]->getID() == FURNANCE || m_pBlocks[x][y]->getID() == CHEST || m_pBlocks[x][y]->getID() == CAULDRON)
 		{
 			if(Mouse::isButtonPressed(Mouse::Right))
-				number = m_pBlocks[x][y]->GetSpecialID();
+				_number = m_pBlocks[x][y]->GetSpecialID();
 		}
 	}
 
 	//get the panel of the thing
 	for(p = m_PanelList.begin(); p != m_PanelList.end(); p++)
 	{
-		if(number == (*p)->GetNumber())
+		if(_number == (*p)->GetNumber())
 			return (*p);
 	}
  
@@ -1647,6 +1654,24 @@ CPanel* CWorld::GetPanel()
 }
 
 
+
+
+void CWorld::DeletePanel(int _number)
+{
+	list<CPanel*>::iterator p;
+
+	//get the panel of the chest
+	for (p = m_PanelList.begin(); p != m_PanelList.end(); p++)
+	{
+		if (_number == (*p)->GetNumber())
+		{
+			(*p)->Quit();
+			m_PanelList.erase(p);
+			return;
+		}
+	}
+
+}
 
 
 
@@ -1676,10 +1701,15 @@ void CWorld::FillChestRandomly(int _chestID)
 				CThing *thing = NULL;
 
 				//if thing is an item
-				if(randomNumber > PIBREAK && randomNumber < 68)
+				if(randomNumber > PIBREAK && randomNumber < 69)
 				{
 					thing = new CItem;
 					((CItem*)thing)->Init(randomNumber);	
+
+					if (thing->getID() == COOKINGBOOK)
+					{
+						((CItem*)thing)->SetSpecialID(AddPanel(COOKINGBOOK, 0, 0));
+					}
 				}
 				//if thing is a consumable
 				else if (randomNumber >ICBREAK && randomNumber < 87)
