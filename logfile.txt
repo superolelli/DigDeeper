@@ -3,12 +3,20 @@ Log file created
 
 Init mainframe...
 Initialized Game...
-Deleted Cookingbook
+Set new ID: 5
+Set new ID: 16
+Set new ID: 17
 Initialized Game...
 Deleted Cookingbook
+Deleted Cookingbook
+Deleted Cookingbook
+Set new ID: 7
+Rezept-ID: 132
+Rezept-ID: 21
+Set new ID: 12
+Set new ID: 17
 Initialized Game...
 Deleted Cookingbook
-Initialized Game...
 Deleted Cookingbook
 Deleted Cookingbook
 

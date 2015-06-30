@@ -19,8 +19,8 @@ class CPlayer
 public:
 	CPlayer();
 	~CPlayer();
-	void Init(int _x, int _y, CWorld *_world, View *_view, int _class);
-	void InitLoaded(int _x, int _y, CWorld *_world, View *_view);
+	void Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool _inventoryNumbers, bool _beamNumbers);
+	void InitLoaded(int _x, int _y, CWorld *_world, View *_view, bool _inventoryNumbers, bool _beamNumbers);
 	void LoadNewBody(CSprite *_body){m_pDwarf->LoadNewBody(_body);}
 	void LoadNewBody(Texture *_body, int _frameWidth, int _frameHeight, int _frameNumber){m_pDwarf->LoadNewBody(_body, _frameWidth, _frameHeight, _frameNumber);} 
 	void LoadNewLegs(CSprite *_legs){m_pDwarf->LoadNewLegs(_legs);}

@@ -25,6 +25,10 @@ void TextureLoading::LoadTextures()
 	t_menuButtonUp.loadFromFile("Data/Sprites/Buttons/button_up.png");
 	t_menuButtonDown.loadFromFile("Data/Sprites/Buttons/button_down.png");
 	t_menuButtonBlank.loadFromFile("Data/Sprites/Buttons/button_blank.png");
+	t_optionsButton_beam_on.loadFromFile("Data/Sprites/Buttons/beamnumbers_on.png");
+	t_optionsButton_beam_off.loadFromFile("Data/Sprites/Buttons/beamnumbers_off.png");
+	t_optionsButton_inventory_on.loadFromFile("Data/Sprites/Buttons/button_option_inventorynumbers_on.png");
+	t_optionsButton_inventory_off.loadFromFile("Data/Sprites/Buttons/button_option_inventorynumbers_off.png");
 
 	t_newGameBackground.loadFromFile("Data/Sprites/NewGame/background_NewGame2.png");
 	t_newGameButtonLeft.loadFromFile("Data/Sprites/NewGame/button_left.png");
@@ -116,11 +120,13 @@ void TextureLoading::LoadTextures()
 	t_spell[1].loadFromFile("Data/Sprites/Magic/spell_heal.png");
 	t_spell[2].loadFromFile("Data/Sprites/Magic/spell_ice.png");
 	t_spell[3].loadFromFile("Data/Sprites/Magic/spell_alchemy.png");
+	t_spell[4].loadFromFile("Data/Sprites/Magic/spell_light.png");
 	t_fireballLeft.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(80, 0, 80, 30));
 	t_fireballRight.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(0, 0, 80, 30));
 	t_explosion.loadFromFile("Data/Sprites/Magic/explosion.png");
 	t_healing.loadFromFile("Data/Sprites/Magic/heal_animation.png");
 	t_alchemy.loadFromFile("Data/Sprites/Magic/alchemy.png");
+	t_lightsphere.loadFromFile("Data/Sprites/Magic/light.png");
 	t_iceballLeft.loadFromFile("Data/Sprites/Magic/iceball.png", IntRect(80, 0, 80, 30));
 	t_iceballRight.loadFromFile("Data/Sprites/Magic/iceball.png", IntRect(0, 0, 80, 30));
 	t_ice_goblin.loadFromFile("Data/Sprites/Magic/ice_goblin.png");
@@ -250,6 +256,7 @@ void TextureLoading::LoadTextures()
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_alchemy.loadFromFile("Data/Sprites/Magic/spell_alchemy.png", IntRect(0, 0, 97, 97));
+	t_spellInventoryTexture_light.loadFromFile("Data/Sprites/Magic/spell_light.png", IntRect(0, 0, 97, 97));
 
 	t_blockLittleTexture_dirt.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(86, 2, 40, 40));
 	t_blockLittleTexture_stone.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(464, 2, 40, 40));

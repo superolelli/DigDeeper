@@ -45,6 +45,7 @@ void CMagicMenu::Init(CInventory *_inventory, CPlayer *_player, bool _loaded)
 	m_Spells[ICE].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 186, m_pMagicMenu->GetRect().top + 91);
 	m_Spells[HEAL].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 374, m_pMagicMenu->GetRect().top + 91);
 	m_Spells[ALCHEMY].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 707, m_pMagicMenu->GetRect().top + 91);
+	m_Spells[LIGHT].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 852, m_pMagicMenu->GetRect().top + 91);
 
 	m_text.setFont(g_pTextures->f_coolsville);
 	m_text.setCharacterSize(25);
@@ -249,6 +250,34 @@ void CMagicMenu::CastSpell(int _ID)
 				//substract mana
 				m_pPlayer->SubstractMana(m_SpellLevel[ALCHEMY] * 5);
 			}
+
+		}break;
+
+		case(LIGHT) :
+		{
+			SProjectile projectile;
+
+			//add a projectile
+			CSprite *sprite = new CSprite;
+
+			sprite->Load(&g_pTextures->t_lightsphere);
+			
+			sprite->SetPos(m_pPlayer->GetWeaponRect().left - sprite->GetRect().left / 2, m_pPlayer->GetRect().top);
+
+			projectile.m_ID = LIGHTSPHERE;
+			projectile.m_Damage = 0;
+			projectile.m_fFlown = 0.0f;
+			projectile.m_flightLength = 400;
+			projectile.m_fromPlayer = true;
+			projectile.m_fXVel = 0;
+			projectile.m_fYVel = 0.0f;
+			projectile.m_Sprite = sprite;
+			projectile.m_fAnimState = -1;
+
+			g_pProjectiles->NewProjectile(projectile);
+
+			//substract mana
+			m_pPlayer->SubstractMana(m_SpellLevel[LIGHT] * 3);
 
 		}break;
 	}

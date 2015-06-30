@@ -1284,3 +1284,19 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Man kann Bücher nun in Truhen finden
 
 ------------------------------------------------------
+26.06.2015
+
+-Lichtzauber hinzugefügt (muss noch verbessert werden)
+
+------------------------------------------------------
+29.06.2015
+
+-Bugfix: Rezepte enthielten nicht das, wonach sie benannt waren
+-Tastenbelegung der Inventarleiste wird nun angezeigt
+
+------------------------------------------------------
+30.06.2015
+
+-Man kann nun in den Optionen Einstellungen ändern (Inventarnummerierung und Balkenfüllstandsanzeige)
+
+------------------------------------------------------

@@ -19,7 +19,7 @@ public:
 	~CInventory();
 
 	//Loads the inventory
-	void Load(CWorld *_world, View *_view, CPlayer *_player, bool _loaded = false);
+	void Load(CWorld *_world, View *_view, CPlayer *_player, bool _beamNumbers, bool _loaded = false);
 
 	//Renders the inventory
 	void Render(IntRect &_playerRect);
@@ -244,6 +244,7 @@ private:
 
 	bool is_open;                               //is the inventory open?
 	bool show_tooltip;                          //need to show a tooltip?
+	bool show_beam_numbers;
 
 
 

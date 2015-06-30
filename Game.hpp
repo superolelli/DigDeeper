@@ -38,6 +38,8 @@ private:
 	View m_View;                       //the view(camera)
 	vector<int> eventtype;             //the eventtype vector
 
+	SSettings m_Settings;
+
 	CSprite *m_pBackground;            //the background
 	CSprite *m_pNightSky;               //the sky at night
 	CSprite *m_pPauseMenu;             //the pause menu

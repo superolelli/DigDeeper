@@ -41,11 +41,13 @@ CInventory::~CInventory()
 
 
 //Loads the sprites and sets the position of the places
-void CInventory::Load(CWorld *_world, View *_view, CPlayer *_player, bool _loaded)
+void CInventory::Load(CWorld *_world, View *_view, CPlayer *_player, bool _beamNumbers, bool _loaded)
 {
 	m_world = _world;
 	m_pPlayer = _player;
 	m_view = _view;
+
+	show_beam_numbers = _beamNumbers;
 
 	m_pInventoryWindow = new CSprite;
 	m_pInventoryWindow->Load(&g_pTextures->t_inventoryWindow);
@@ -78,7 +80,7 @@ void CInventory::Load(CWorld *_world, View *_view, CPlayer *_player, bool _loade
 
 	show_tooltip = false;
 
-	//if this is no loaded inventory: reset the places and fill the inventory with stuff for testing :)
+	//if this is no loaded inventory: reset the places 
 	if(!_loaded)
 	{
 		//Sets the position of the inventory places and sets them unfilled
@@ -100,52 +102,6 @@ void CInventory::Load(CWorld *_world, View *_view, CPlayer *_player, bool _loade
 			m_inventory_beam_place_list[a].is_filled = false;
 		}
 	
-
-
-	/*CItem *block;
-	block = new CItem;
-	block->Init(GOLD);
-	Take(block, 2);
-
-	CPlaceable *block2;
-	block2 = new CPlaceable;
-	block2->Init(STONE);
-	Take(block2, 8);
-
-	CPlaceable *block5;
-	block5 = new CPlaceable;
-	block5->Init(WOOD);
-	Take(block5, 10);
-	
-	CPlaceable *block4;
-	block4 = new CPlaceable;
-	block4->Init(LADDER);
-	Take(block4, 10);
-
-	CItem *block7;
-	block7 = new CItem;
-	block7->Init(IRON);
-	Take(block7, 10);
-
-	CItem *block3;
-	block3 = new CItem;
-	block3->Init(SLIME);
-	Take(block3, 10);
-
-	CItem *block6;
-	block6 = new CItem;
-	block6->Init(RECIPE);
-	Take(block6, 1);
-
-	CPlaceable *block8;
-	block8 = new CPlaceable;
-	block8->Init(WOODWALL);
-	Take(block8, 10);
-
-	CTool *block9;
-	block9 = new CTool;
-	block9->InitTool(PICKAXE);
-	Take(block9, 1);*/
 	}
 	
 }
@@ -298,6 +254,7 @@ void CInventory::Render(IntRect &_playerRect)
 	stringstream number;
 	Vector2i mousePos = Mouse::getPosition();
 	bool is_one_clicked = false;
+	m_text.setColor(Color::Yellow);
 
 	//get the current panel
 	CPanel *temp = m_world->GetPanel();
@@ -493,6 +450,11 @@ void CInventory::Render(IntRect &_playerRect)
 					if(i->thing->getID() == RECIPE)
 					{
 						CItem *item = (CItem*)i->thing;
+						
+						stringstream logstream;
+						logstream << "Recipe-ID before adding: " << item->GetSpecialID() << endl;
+						g_pFramework->WriteToLog(INFO, logstream.str());
+
 						if(m_pPlayer->AddRecipe(item->GetSpecialID()) == true)
 						{
 							SAFE_DELETE(i->thing);
@@ -958,6 +920,29 @@ void CInventory::Render(IntRect &_playerRect)
 
 	}
 
+	//show beam numbers
+	if (show_beam_numbers)
+	{
+		int x = m_pInventoryBeam->GetRect().left + 45;
+		m_text.setColor(Color(100, 100, 0));
+
+		//render beam numbers
+		for (int counter = 0; counter < 10; counter++)
+		{
+			number.str("");
+
+			if (counter == 9)
+				number << 0;
+			else
+				number << counter + 1;
+
+			m_text.setString(number.str().c_str());
+			m_text.setPosition(x, m_pInventoryBeam->GetRect().top - 15);
+			g_pFramework->GetRenderWindow()->draw(m_text);
+
+			x += 100;
+		}
+	}
 
 	//sets the beam frame and renders it
 	//if the player has pressed a num key: set the frame

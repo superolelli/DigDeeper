@@ -26,8 +26,6 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	//applies the view to the window
 	g_pFramework->GetRenderWindow()->setView(m_View);
 
-
-
 	//Inits the profiler
 	g_pProfiler->Init();
 
@@ -44,6 +42,23 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	m_pWorld = new CWorld;
 	m_pPlayer = new CPlayer;
 
+	//load the current settings
+	path Path;
+	Path.append("Data/Settings.stt");
+
+	if (boost::filesystem::exists(Path))
+	{
+		ifstream Input(Path.string());
+		Input.read((char *)&m_Settings, sizeof(m_Settings));
+		Input.close();
+	}
+	else
+	{
+		m_Settings.m_beam_numbers = false;
+		m_Settings.m_inventory_numbers = false;
+		m_Settings.m_fast_light = true;
+	}
+
 	//Inits the npc machine
 	m_NpcMachine.Init(m_pWorld, m_pPlayer, &m_View);
 
@@ -55,7 +70,7 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 		m_pWorld->Init(1000, 500, &m_View, &m_NpcMachine, _loaded);
 
 	//Inits the player
-	m_pPlayer->Init(700, 300, m_pWorld, &m_View, _attributes.PlayerClass);
+	m_pPlayer->Init(700, 300, m_pWorld, &m_View, _attributes.PlayerClass, m_Settings.m_inventory_numbers, m_Settings.m_beam_numbers);
 
 	if(!_loaded)
 	{
@@ -616,7 +631,7 @@ void CGame::Load(string _path)
 	npcArchive >> m_NpcMachine;
 	inputFile.close();
 
-	m_pPlayer->InitLoaded(500, 300, m_pWorld, &m_View);
+	m_pPlayer->InitLoaded(500, 300, m_pWorld, &m_View, m_Settings.m_inventory_numbers, m_Settings.m_beam_numbers);
 	m_pWorld->Init(0,0, &m_View, &m_NpcMachine, true);
 	m_NpcMachine.Init(m_pWorld, m_pPlayer, &m_View, true);
 	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);

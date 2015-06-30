@@ -48,7 +48,7 @@ CPlayer::~CPlayer()
 
 
 
-void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
+void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool _inventoryNumbers, bool _beamNumbers)
 {
 	m_pTarget = g_pFramework->GetRenderWindow();
 	m_pWorld = _world;
@@ -61,7 +61,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 	m_pDwarf->SetHandPosition(12.0f, 32.0f);
 
 	m_pInventory = new CInventory;
-	m_pInventory->Load(_world, _view, this);
+	m_pInventory->Load(_world, _view, this, _inventoryNumbers);
 
 	m_pBuildingMenu = new CBuildingMenu;
 	m_pBuildingMenu->Init(m_pInventory);
@@ -321,7 +321,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 	m_pExpBeam->SetPos(20, 70);
 	m_pExpBeam->SetCharacterSize(10);
 
-	show_beam_numbers = false;
+	show_beam_numbers = _beamNumbers;
 
 	m_modifications.breaking_speed = 1;
 
@@ -346,7 +346,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class)
 
 
 
-void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view)
+void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view, bool _inventoryNumbers, bool _beamNumbers)
 {
 	m_pTarget = g_pFramework->GetRenderWindow();
 	m_pWorld = _world;
@@ -361,7 +361,7 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view)
 	m_pDwarf->SetPos(m_loadedPosX, m_loadedPosY);
 
 	//m_pInventory = new CInventory;
-	m_pInventory->Load(_world, _view, this, true);
+	m_pInventory->Load(_world, _view, this, _inventoryNumbers, true);
 
 	m_pBuildingMenu->InitLoaded(m_pInventory);
 
@@ -414,7 +414,7 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view)
 		m_StatusEffects[i].m_show = false;
 	}
 
-	show_beam_numbers = false;
+	show_beam_numbers = _beamNumbers;
 
 	m_modifications.breaking_speed = 1;
 

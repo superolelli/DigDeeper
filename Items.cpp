@@ -271,6 +271,10 @@ void CItem::InitRecipe()
 		m_specialID = BATTLEAXE;
 		break;
 	}
+
+	stringstream stream;
+	stream << "Rezept-ID: " << m_specialID;
+	g_pFramework->WriteToLog(INFO, stream.str());
 }
 
 
@@ -279,7 +283,7 @@ void CItem::SetSpecialID(int _ID)
 {
 	m_specialID = _ID;
 
-	if (m_ID > CTBREAK)
+	if (m_ID == RECIPE)
 	{
 		m_Name = "Rezept";
 
@@ -317,6 +321,10 @@ void CItem::SetSpecialID(int _ID)
 			break;
 		}
 	}
+
+	stringstream stream;
+	stream << "Set new ID: " << m_specialID;
+	g_pFramework->WriteToLog(INFO, stream.str());
 }
 
 
@@ -350,6 +358,11 @@ void CItem::InitSpell()
 	case(ALCHEMY) :
 		m_pInventorySprite->Load(&g_pTextures->t_spellInventoryTexture_alchemy);
 		m_Name = "Alchemie";
+		break;
+
+	case(LIGHT) :
+		m_pInventorySprite->Load(&g_pTextures->t_spellInventoryTexture_light);
+		m_Name = "Lichtkugel";
 		break;
 
 	default:
