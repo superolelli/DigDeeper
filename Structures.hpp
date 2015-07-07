@@ -335,7 +335,16 @@ struct SProjectile
 struct SEffect
 {
 	CSprite *m_Sprite;
-	bool m_show;
+	float m_fDuration;
+	float m_fTimeLeft;
+
+
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & m_fDuration;
+		ar & m_fTimeLeft;
+	}
 };
 
 

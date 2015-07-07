@@ -69,6 +69,7 @@ void TextureLoading::LoadTextures()
 	t_cookingMead.loadFromFile("Data/Sprites/Cooking/mead_recipe.png");
 	t_cookingSlimepudding.loadFromFile("Data/Sprites/Cooking/slimepudding_recipe.png");
 	t_cookingRadishsoup.loadFromFile("Data/Sprites/Cooking/radishsoup_recipe.png");
+	t_cookingBread.loadFromFile("Data/Sprites/Cooking/bread_recipe.png");
 
 	t_expBeam.loadFromFile("Data/Sprites/Panels/Exp_beam.png");
 	t_expFrame.loadFromFile("Data/Sprites/Panels/Exp_frame.png");
@@ -156,6 +157,7 @@ void TextureLoading::LoadTextures()
 	t_buildingInfo_torch.loadFromFile("Data/Sprites/Building/building_info_torch.png");
 	t_buildingInfo_cauldron.loadFromFile("Data/Sprites/Building/building_info_cauldron.png");
 	t_buildingInfo_battleaxe.loadFromFile("Data/Sprites/Building/building_info_battleaxe.png");
+	t_buildingInfo_sawdust.loadFromFile("Data/Sprites/Building/building_info_sawdust.png");
 
 	t_blockTextures_dirt.loadFromFile("Data/Sprites/Objects/Blocks/dirt.png");
 	t_blockTextures_stone.loadFromFile("Data/Sprites/Objects/Blocks/stone.png");
@@ -252,6 +254,8 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_radish.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/radish_inventory.png");
 	t_blockInventoryTexture_radishsoup.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/radish_soup_inventory.png");
 	t_blockInventoryTexture_cookingbook.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/cookingbook_inventory.png");
+	t_blockInventoryTexture_bread.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/bread_inventory.png");
+	t_blockInventoryTexture_sawdust.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/sawdust_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
@@ -309,6 +313,8 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_radish.loadFromFile("Data/Sprites/Objects/LittleItems/radish_little.png");
 	t_blockLittleTexture_radishsoup.loadFromFile("Data/Sprites/Objects/LittleItems/radish_soup_little.png");
 	t_blockLittleTexture_cookingbook.loadFromFile("Data/Sprites/Objects/LittleItems/cookingbook_little.png");
+	t_blockLittleTexture_bread.loadFromFile("Data/Sprites/Objects/LittleItems/bread_little.png");
+	t_blockLittleTexture_sawdust.loadFromFile("Data/Sprites/Objects/LittleItems/sawdust_little.png");
 
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");

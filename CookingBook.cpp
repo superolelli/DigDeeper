@@ -34,7 +34,7 @@ void CCookingBook::Init(int _Number, bool _loaded)
 		cookingRecipes.clear();
 		cookingRecipeSprites.clear();
 
-		switch (_Number % 3)
+		switch (_Number % 4)
 		{
 		case(0) :
 			AddRecipe(MEAD);
@@ -44,6 +44,9 @@ void CCookingBook::Init(int _Number, bool _loaded)
 			break;
 		case(2) :
 			AddRecipe(RADISHSOUP);
+			break;
+		case(3) :
+			AddRecipe(BREAD);
 			break;
 		default:
 			break;
@@ -142,6 +145,11 @@ void CCookingBook::AddRecipe(int _ID)
 		sprite.Load(&g_pTextures->t_cookingRadishsoup);
 		cookingRecipeSprites.push_back(sprite);
 		cookingRecipes.push_back(RADISHSOUP);
+		break;
+	case(BREAD) :
+		sprite.Load(&g_pTextures->t_cookingBread);
+		cookingRecipeSprites.push_back(sprite);
+		cookingRecipes.push_back(BREAD);
 		break;
 	default:
 		return;

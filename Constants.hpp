@@ -78,6 +78,7 @@ const int RECIPE = 65;
 const int WAX = 66;
 const int BEEHIVE = 67;
 const int COOKINGBOOK = 68;
+const int SAWDUST = 69;
 
 const int SPELL = 79;
 
@@ -89,6 +90,7 @@ const int SLIMEPUDDING = 83;
 const int CLOVER = 84;
 const int RADISH = 85;
 const int RADISHSOUP = 86;
+const int BREAD = 87;
 
 const int CTBREAK = 100;             //the Consumable-Tool-Break shows, where the tool section begins
 
@@ -279,12 +281,13 @@ const int LIGHTSPHERE = 6;
 
 #pragma region ConsumableRecipes
 
-const int NUMBER_OF_CONRECIPES = 3;
+const int NUMBER_OF_CONRECIPES = 4;
 
-const int CONRECIPES[3][5] = {
+const int CONRECIPES[4][5] = {
 	{ HONEY, HONEY, -1, -1, MEAD },
 	{SLIME, SLIME, -1, -1, SLIMEPUDDING},
-	{RADISH, RADISH, SLIME, -1, RADISHSOUP}
+	{RADISH, RADISH, SLIME, -1, RADISHSOUP},
+	{SLIME, SAWDUST, -1, -1, BREAD}
 };
 
 #pragma endregion

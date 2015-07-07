@@ -219,6 +219,18 @@ void CItem::Init(int _ID, bool _loaded)
 		if (!_loaded)
 			m_Name = "Kochbuch";
 	}break;
+	case(BREAD) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_bread);
+		if (!_loaded)
+			m_Name = "Zwergenbrot";
+	}break;
+	case(SAWDUST) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_sawdust);
+		if (!_loaded)
+			m_Name = "Sägespäne";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)
@@ -232,7 +244,7 @@ void CItem::Init(int _ID, bool _loaded)
 
 void CItem::InitRecipe()
 {
-	m_specialID = rand()%9 + 131;
+	m_specialID = rand()%10 + 131;
 
 	switch(m_specialID)
 	{
@@ -269,6 +281,10 @@ void CItem::InitRecipe()
 	case(139) :
 		m_Name.append("(Kampfaxt)");
 		m_specialID = BATTLEAXE;
+		break;
+	case(140) :
+		m_Name.append("(Sägespäne)");
+		m_specialID = SAWDUST;
 		break;
 	}
 
@@ -318,6 +334,9 @@ void CItem::SetSpecialID(int _ID)
 			break;
 		case(BATTLEAXE) :
 			m_Name.append("(Kampfaxt)");
+			break;
+		case(SAWDUST) :
+			m_Name.append("(Sägespäne)");
 			break;
 		}
 	}

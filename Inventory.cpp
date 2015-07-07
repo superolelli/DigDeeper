@@ -342,9 +342,10 @@ void CInventory::Render(IntRect &_playerRect)
 								//deletes the first panel
 								m_world->DeletePanel(book->GetSpecialID());
 							}
-
+							else
+								i->amount += c->amount;
+						
 							//add the amount and delete the clicked thing
-							i->amount += c->amount;
 							SAFE_DELETE(c->thing);
 							m_inventoryList.erase(c);
 							c = m_inventoryList.end();

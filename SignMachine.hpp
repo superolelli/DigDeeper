@@ -4,7 +4,10 @@
 
 #include "Framework.hpp"
 
-class CSignMachine
+#define g_pSignMachine CSignMachine::Get()
+
+//The framwork holds the window and processes the events
+class CSignMachine : public TSingleton<CSignMachine>
 {
 public:
 	CSignMachine();

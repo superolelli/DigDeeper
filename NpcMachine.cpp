@@ -42,7 +42,7 @@ void CNpcMachine::Quit()
 
 	m_Npcs.clear();
 
-	m_signMachine.Quit();
+	g_pSignMachine->Quit();
 }
 
 
@@ -131,13 +131,13 @@ void CNpcMachine::CheckAllNpcs()
 					
 					//put the damage into a stringstream	
 					stream << damage;
-					m_signMachine.AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top, Color(150, 0, 0));
+					g_pSignMachine->AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top, Color(150, 0, 0));
 				}
 				else
 				{
 					//put the damage into a stringstream	
 					stream << damage;
-					m_signMachine.AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top);
+					g_pSignMachine->AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top);
 				}
 
 				//subtract the lost health
@@ -206,7 +206,7 @@ void CNpcMachine::CheckAllNpcs()
 				stream << damage;
 
 				//shows the damage
-				m_signMachine.AddString(stream.str(), 1, m_pPlayer->GetRect().left, m_pPlayer->GetRect().top);
+				g_pSignMachine->AddString(stream.str(), 1, m_pPlayer->GetRect().left, m_pPlayer->GetRect().top);
 			}
 		}
 
@@ -293,7 +293,7 @@ bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
 	for (i = m_Npcs.begin(); i != m_Npcs.end();)
 	{
 		//if projectile hits npcs: do damage
-		if (_projectile->m_Sprite->GetRect().intersects((*i)->GetRect()))
+		if (_projectile->m_Sprite->GetRect().intersects((*i)->GetRect()) && _projectile->m_ID != LIGHTSPHERE)
 		{
 			//calculate the damage
 			int damage = _projectile->m_Damage - ((float)_projectile->m_Damage * ((float)(*i)->GetAttributes()->armour / 100.0f));
@@ -302,7 +302,7 @@ bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
 
 			//put the damage into a stringstream	
 			stream << damage;
-			m_signMachine.AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top);
+			g_pSignMachine->AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top);
 			
 
 			//subtract the lost health

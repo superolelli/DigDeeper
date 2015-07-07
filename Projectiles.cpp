@@ -46,7 +46,7 @@ void CProjectiles::Render()
 		if (i->m_ID == FIREBALLPROJECTILE)
 			m_pWorld->GetLightMachine()->AddLightCircle(i->m_Sprite->GetRect().left + i->m_Sprite->GetRect().width / 2, i->m_Sprite->GetRect().top + i->m_Sprite->GetRect().height / 2, 100, Color(0,0,0,0));
 		else if (i->m_ID == LIGHTSPHERE)
-			m_pWorld->GetLightMachine()->AddLightCircle(i->m_Sprite->GetRect().left + i->m_Sprite->GetRect().width / 2, i->m_Sprite->GetRect().top + i->m_Sprite->GetRect().height / 2, 300, Color(0, 0, 0, 0));
+			m_pWorld->GetLightMachine()->AddLightCircle(i->m_Sprite->GetRect().left + i->m_Sprite->GetRect().width / 2, i->m_Sprite->GetRect().top + i->m_Sprite->GetRect().height / 2, i->m_flightLength, Color(0, 0, 0, 0));
 
 		if (i->m_fAnimState == -1)
 			i->m_Sprite->Render(g_pFramework->GetRenderWindow());
@@ -90,12 +90,38 @@ void CProjectiles::CheckProjectiles()
 			i++;
 			continue;
 		}
+		else if (i->m_ID == LIGHTSPHERE)
+		{
+			if (m_pPlayer->GetRect().left > i->m_Sprite->GetRect().left + 40)
+				i->m_Sprite->Move(100 * g_pTimer->GetElapsedTime().asSeconds(), 0);
+			else if (m_pPlayer->GetRect().left + 80 < i->m_Sprite->GetRect().left)
+				i->m_Sprite->Move(-100 * g_pTimer->GetElapsedTime().asSeconds(), 0);
 
-		//check for collisions
-		if (i->m_fXVel < 0)
-			collided = m_pWorld->isBlockPassable(i->m_Sprite->GetRect().left / 100, i->m_Sprite->GetRect().top / 100);
-		else
-			collided = m_pWorld->isBlockPassable((i->m_Sprite->GetRect().left+70) / 100, (i->m_Sprite->GetRect().top +15) / 100);
+			if (m_pPlayer->GetRect().top > i->m_Sprite->GetRect().top + 10)
+				i->m_Sprite->Move(0, 100 * g_pTimer->GetElapsedTime().asSeconds());
+			else if (m_pPlayer->GetRect().top < i->m_Sprite->GetRect().top - 50)
+				i->m_Sprite->Move(0, -100 * g_pTimer->GetElapsedTime().asSeconds());
+
+			i->m_fFlown -= g_pTimer->GetElapsedTime().asSeconds();
+
+			if (i->m_fFlown <= 0)
+			{
+				i = m_Projectiles.erase(i);
+				continue;
+			}
+		}
+
+
+
+
+		if (i->m_ID != LIGHTSPHERE)
+		{
+			//check for collisions
+			if (i->m_fXVel < 0)
+				collided = m_pWorld->isBlockPassable(i->m_Sprite->GetRect().left / 100, i->m_Sprite->GetRect().top / 100);
+			else
+				collided = m_pWorld->isBlockPassable((i->m_Sprite->GetRect().left + 70) / 100, (i->m_Sprite->GetRect().top + 15) / 100);
+
 
 			//if collided: erase projectile
 			if (collided)
@@ -154,6 +180,8 @@ void CProjectiles::CheckProjectiles()
 
 				continue;
 			}
+		}
+	
 
 		//check if projectile collides with player 
 		if (m_pPlayer->GetRect().intersects(i->m_Sprite->GetRect()) && !i->m_fromPlayer)

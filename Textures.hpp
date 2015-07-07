@@ -82,6 +82,7 @@ public:
 	Texture t_cookingMead;
 	Texture t_cookingSlimepudding;
 	Texture t_cookingRadishsoup;
+	Texture t_cookingBread;
 
 	Texture t_expFrame;                              //the frame of the exp beam
 	Texture t_expBeam;                               //the beam, which shows the current exp
@@ -161,6 +162,7 @@ public:
 	Texture t_buildingInfo_torch;
 	Texture t_buildingInfo_cauldron;
 	Texture t_buildingInfo_battleaxe;
+	Texture t_buildingInfo_sawdust;
 
 	Texture t_blockTextures_dirt;                     //the dirt textures
 	Texture t_blockTextures_stone;                      //the stone texture
@@ -259,6 +261,8 @@ public:
 	Texture t_blockInventoryTexture_radish;
 	Texture t_blockInventoryTexture_radishsoup;
 	Texture t_blockInventoryTexture_cookingbook;
+	Texture t_blockInventoryTexture_bread;
+	Texture t_blockInventoryTexture_sawdust;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -317,6 +321,8 @@ public:
 	Texture t_blockLittleTexture_radish;
 	Texture t_blockLittleTexture_radishsoup;
 	Texture t_blockLittleTexture_cookingbook;
+	Texture t_blockLittleTexture_bread;
+	Texture t_blockLittleTexture_sawdust;
 
 
 	//the "carried" texture of the tools

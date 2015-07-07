@@ -56,5 +56,10 @@ void CConsumable::InitConsumable(int _ID)
 		m_Attributes.armour = 10;
 		m_Attributes.duration = 40.0f;
 	}break;
+	case(BREAD) :
+	{
+		m_Attributes.strength = 3;
+		m_Attributes.duration = 20.0f;
+	}break;
 	}
 }

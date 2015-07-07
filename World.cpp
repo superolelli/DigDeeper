@@ -1701,7 +1701,7 @@ void CWorld::FillChestRandomly(int _chestID)
 				CThing *thing = NULL;
 
 				//if thing is an item
-				if(randomNumber > PIBREAK && randomNumber < 69)
+				if(randomNumber > PIBREAK && randomNumber < 70)
 				{
 					thing = new CItem;
 					((CItem*)thing)->Init(randomNumber);	
@@ -1712,7 +1712,7 @@ void CWorld::FillChestRandomly(int _chestID)
 					}
 				}
 				//if thing is a consumable
-				else if (randomNumber >ICBREAK && randomNumber < 87)
+				else if (randomNumber >ICBREAK && randomNumber < 88)
 				{
 					thing = new CConsumable;
 					((CConsumable*)thing)->InitConsumable(randomNumber);
@@ -1738,7 +1738,7 @@ void CWorld::FillChestRandomly(int _chestID)
 					newItem.thing = thing;
 
 					//all tools and equipment have the amount 1
-					if(randomNumber > CTBREAK || randomNumber == RECIPE)
+					if(randomNumber > CTBREAK || randomNumber == RECIPE || randomNumber == COOKINGBOOK)
 						newItem.amount = 1;
 					else
 						newItem.amount = rand()%5 +1;

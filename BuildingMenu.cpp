@@ -294,6 +294,12 @@ void CBuildingMenu::InitRecipe(SBuildingItem *_recipe)
 			_recipe->resources[IRON] = 5;
 			_recipe->resources[WOODSTAFF] = 1;
 		}break;
+		case(SAWDUST) :
+		{
+			_recipe->Name = "Sägespäne";
+			_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_sawdust);
+			_recipe->resources[WOOD] = 1;
+		}break;
 		}
 
 		_recipe->m_pInfoSprite->SetPos(m_pBuildingMenu->GetRect().left + 250, m_pBuildingMenu->GetRect().top + 4);
@@ -400,6 +406,7 @@ void CBuildingMenu::FillRecipeList()
 	m_notAvailableRecipes.push_back(BEEHOUSE);
 	m_notAvailableRecipes.push_back(CAULDRON);
 	m_notAvailableRecipes.push_back(BATTLEAXE);
+	m_notAvailableRecipes.push_back(SAWDUST);
 
 
 	m_chosenItem = pickaxe;

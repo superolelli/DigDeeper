@@ -266,8 +266,8 @@ void CMagicMenu::CastSpell(int _ID)
 
 			projectile.m_ID = LIGHTSPHERE;
 			projectile.m_Damage = 0;
-			projectile.m_fFlown = 0.0f;
-			projectile.m_flightLength = 400;
+			projectile.m_fFlown = 5.0f * m_SpellLevel[LIGHT];            //stands for duration
+			projectile.m_flightLength = 50 * m_SpellLevel[LIGHT];          //stands for radius
 			projectile.m_fromPlayer = true;
 			projectile.m_fXVel = 0;
 			projectile.m_fYVel = 0.0f;

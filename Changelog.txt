@@ -1300,3 +1300,32 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -Man kann nun in den Optionen Einstellungen ändern (Inventarnummerierung und Balkenfüllstandsanzeige)
 
 ------------------------------------------------------
+01.07.2015
+
+-Lichtzauber folgt nun dem Spieler
+
+------------------------------------------------------
+02.07.2015
+
+-Lichtzauber skaliert nun mit der Stufe des Zaubers mit
+
+------------------------------------------------------
+03.07.2015
+
+-Lichtzauber folgt nun besser
+
+------------------------------------------------------
+04.07.2015
+
+-Zwergenbrot eingefügt
+-Interne Änderungen im Statusanzeigensystem zur Vorbereitung auf kommende Änderungen
+
+------------------------------------------------------
+07.07.2015
+
+- Dauer von Effekten wird nun angezeigt
+- Beendet man betrunken das Spiel, verschwimmt das Menü nun nicht mehr
+- Sägespäne eingefügt
+- Wenn man sich heilt, wir dies nun in genauen Zahlen angezeigt (wie beim Schaden)
+
+------------------------------------------------------

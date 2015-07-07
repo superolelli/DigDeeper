@@ -27,7 +27,7 @@ public:
 	void RenderAllNpcs();
 
 	//renders the damage indicator
-	void RenderDamageIndicator(){m_signMachine.Render();}
+	void RenderDamageIndicator(){g_pSignMachine->Render();}
 
 	//adds a npc
 	void AddNpc(int _ID, int _x, int _y, int _specialID = -1);
@@ -94,8 +94,6 @@ private:
 	CWorld *m_pWorld;             //pointer to the world
 	CPlayer *m_pPlayer;           //pointer to the player
 	View * m_pView;               //the view
-
-	CSignMachine m_signMachine;       //the sign machine
 
 	bool m_LastArmUp;               //was the arm going up last frame?
 	float m_spawnTime;              //the time until something spawns
