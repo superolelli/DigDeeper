@@ -357,6 +357,10 @@ public:
 	Texture t_goblin_arm2;
 	Texture t_goblin_arm3;
 
+	Texture t_ogre_body;
+	Texture t_ogre_arm;
+	Texture t_ogre_legs;
+
 	Shader s_drunkShader;
 
 	Font f_coolsville;

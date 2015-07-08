@@ -2,44 +2,28 @@ Dig Deeper, version 0.2
 Log file created
 
 Init mainframe...
-Set new ID: 4
-Rezept-ID: 19
-Set new ID: 13
-Set new ID: 24
-Set new ID: 25
-Deleted Cookingbook
-Initialized Game...
-Deleted Cookingbook
-Deleted Cookingbook
-Deleted Cookingbook
-Set new ID: 11
-Rezept-ID: 132
-Set new ID: 104
 Rezept-ID: 103
-Set new ID: 133
-Rezept-ID: 104
-Set new ID: 104
 Initialized Game...
-Recipe-ID before adding: 104
+Rezept-ID: 132
+Set new ID: 21
+Recipe-ID before adding: 21
 
-Recipe-ID before adding: 133
-
-Recipe-ID before adding: 104
-
-Deleted Cookingbook
-Rezept-ID: 134
+Set new ID: 2
+Rezept-ID: 69
+Set new ID: 3
+Set new ID: 7
+Set new ID: 16
 Set new ID: 19
-Rezept-ID: 134
-Set new ID: 69
-Rezept-ID: 21
-Set new ID: 131
+Set new ID: 20
+Deleted Cookingbook
 Initialized Game...
-Recipe-ID before adding: 69
-
-Recipe-ID before adding: 131
-
-Recipe-ID before adding: 19
-
+Deleted Cookingbook
+Deleted Cookingbook
+Deleted Cookingbook
+Deleted Cookingbook
+Deleted Cookingbook
+Rezept-ID: 135
+Initialized Game...
 
 
 0 warnings

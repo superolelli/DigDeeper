@@ -347,6 +347,10 @@ void TextureLoading::LoadTextures()
 	t_goblin_arm3.loadFromFile("Data/Sprites/Living/goblin_arm4.png");
 	t_goblin_body_chest.loadFromFile("Data/Sprites/Living/goblin_upper_body_chest.png");
 
+	t_ogre_body.loadFromFile("Data/Sprites/Living/ogre_body.png");
+	t_ogre_arm.loadFromFile("Data/Sprites/Living/ogre_arm.png");
+	t_ogre_legs.loadFromFile("Data/Sprites/Living/ogre_legs.png");
+
 	s_drunkShader.loadFromFile("Data/Shaders/blur.frag", Shader::Fragment);
 
 	f_coolsville.loadFromFile("Data/Fonts/coolsville.ttf");

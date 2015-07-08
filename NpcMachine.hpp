@@ -4,6 +4,7 @@
 #include "Framework.hpp"
 #include "Bee.hpp"
 #include "Goblin.hpp"
+#include "Ogre.hpp"
 #include "SignMachine.hpp"
 #include "Profiler.hpp"
 

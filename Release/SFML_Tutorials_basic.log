@@ -1,4 +1,4 @@
-﻿Der Buildvorgang wurde am 07.07.2015 13:17:16 gestartet.
+﻿Der Buildvorgang wurde am 08.07.2015 21:30:25 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
          F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
@@ -40,6 +40,7 @@
          Release\NewGame.obj
          Release\NPC.obj
          Release\NpcMachine.obj
+         Release\Ogre.obj
          Release\Options.obj
          Release\Panel.obj
          Release\Placeable.obj
@@ -64,4 +65,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:10.86
+Verstrichene Zeit 00:00:10.71

@@ -115,6 +115,7 @@
     <ClCompile Include="NewGame.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="NpcMachine.cpp" />
+    <ClCompile Include="Ogre.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="Placeable.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Goblin.hpp" />
     <ClInclude Include="Highscore.hpp" />
     <ClInclude Include="MagicMenu.hpp" />
+    <ClInclude Include="Ogre.hpp" />
     <ClInclude Include="Profiler.hpp" />
     <ClInclude Include="Projectiles.hpp" />
     <ClInclude Include="Rims.hpp" />

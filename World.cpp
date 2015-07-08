@@ -706,7 +706,7 @@ bool CWorld::CheckLivingCollision(FloatRect _player)
 	if(xEnd > m_BlocksX)
 		xEnd = m_BlocksX;
 
-	int yEnd = yStart +4;
+	int yEnd = yStart +4 + (_player.height/100);
 	if(yEnd > m_BlocksY)
 		yEnd = m_BlocksY;
 

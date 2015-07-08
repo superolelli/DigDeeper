@@ -1329,3 +1329,9 @@ ZUKÜNFITGE ÄNDERUNGEN:
 - Wenn man sich heilt, wir dies nun in genauen Zahlen angezeigt (wie beim Schaden)
 
 ------------------------------------------------------
+08.07.2015
+
+- Oger wurde hinzugefügt (manches muss noch geschrieben werden z.B. angepasstes pathfinding)
+- Stärkevorteil des Kriegers wurde runtergesetzt
+
+------------------------------------------------------

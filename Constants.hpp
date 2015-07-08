@@ -148,6 +148,7 @@ const int SHEET_WOOD = 23;
 
 const int BEE = 1;
 const int GOBLIN = 2;
+const int OGRE = 3;
 
 #pragma endregion
 

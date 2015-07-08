@@ -194,7 +194,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 		}break;
 	case WARRIOR:
 		{
-			m_Attributes.strength = 10;
+			m_Attributes.strength = 8;
 
 			CEquipment *helmet;
 			helmet = new CEquipment;

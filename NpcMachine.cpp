@@ -66,6 +66,14 @@ void CNpcMachine::AddNpc(int _ID, int _x, int _y, int _specialID)
 			goblin->Init(_x, _y, m_pWorld, m_pPlayer, m_pView, _specialID);
 			m_Npcs.push_back(goblin);
 		}break;
+
+		//if the new npc is an ogre:
+		case(OGRE) :
+		{
+			COgre *ogre = new COgre;
+			ogre->Init(_x, _y, m_pWorld, m_pPlayer, m_pView);
+			m_Npcs.push_back(ogre);
+		}break;
 	}
 }
 
