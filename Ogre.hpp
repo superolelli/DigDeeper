@@ -32,31 +32,32 @@ private:
 		ar & m_PointToGo.y;
 	}
 
-	CLiving3Part *m_pOgre;          //the goblin
+	CLiving3Part *m_pOgre;          //the ogre
 
+	CSprite m_OgreClub;             //the club of the ogre
 	//CSprite m_frozenSprite;
 
 	float m_fStateTime;
 
-	bool m_left;                   //is the goblin looking to the left
+	bool m_left;                   //is the ogre looking to the left
 	bool m_is_hitting;
 	bool m_jumping;
-	bool m_is_attacking;              //is the goblin attacking?
+	bool m_is_attacking;              //is the ogre attacking?
 
-	Vector2i m_PointToGo;          //the point where the goblin should go
+	Vector2i m_PointToGo;          //the point where the ogre should go
 	float m_fXVel, m_fYVel;             //the velocity
 	float m_fLegsAnimState;           //the animation state of the legs
 	float m_fArmAnimState;           //the animation state of the arm
-	float m_fWaitToBeat;             //how long must the goblin wait to hit the dwarf?
+	float m_fWaitToBeat;             //how long must the ogre wait to hit the dwarf?
 
-	int m_fallingSpeed;               //the speed with which the goblin falls
+	int m_fallingSpeed;               //the speed with which the ogre falls
 	int m_sideSpeed;
 
 	void CheckState();                 //checks the state
 	void NewRandomDestination();        //gets a new random destination
 	void CheckXMovement();                //checks the movement in x-direction
 	void CheckYMovement();                //checks the movement in y-direction
-	bool CheckCollision();                //Checks, if the goblin collided with anything
+	bool CheckCollision();                //Checks, if the ogre collided with anything
 	void CheckArmAnimation();
 };
 

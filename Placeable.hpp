@@ -67,6 +67,9 @@ private:
 	bool m_can_place_on;                        //can be something placed upon this?
 
 	 CSprite m_BreakingAnimation;
+
+
+	 int GetRubbish();                           //gets random thing
 };
 
 

@@ -250,6 +250,14 @@ void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 	{
 		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_sawdust);
 	}break;
+	case(MUSHROOM) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_mushroom);
+	}break;
+	case(DIADOCHIT) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_diadochit);
+	}break;
 	}
 
 

@@ -231,6 +231,18 @@ void CItem::Init(int _ID, bool _loaded)
 		if (!_loaded)
 			m_Name = "Sägespäne";
 	}break;
+	case(MUSHROOM) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_mushroom);
+		if (!_loaded)
+			m_Name = "Pilz";
+	}break;
+	case(DIADOCHIT) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_diadochit);
+		if (!_loaded)
+			m_Name = "Diadochit";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)

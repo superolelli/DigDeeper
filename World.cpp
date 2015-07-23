@@ -189,10 +189,10 @@ void CWorld::GenerateWorld()
 				if(y > 4 && x > 0)
 				{
 					if(m_pBlocks[x-1][y] != NULL)
-						if(m_pBlocks[x-1][y]->getID() != WOOD)
+						if(m_pBlocks[x-1][y]->getID() < 8 && m_pBlocks[x-1][y]->getID() > 0)
 							possibility[m_pBlocks[x-1][y]->getID()-1] += 50;
-					if(m_pBlocks[x][y-1] != NULL)
-						if(m_pBlocks[x][y-1]->getID() != WOOD)
+					if(m_pBlocks[x][y-1] != NULL && m_pBlocks[x][y-1]->getID() > 0)
+						if (m_pBlocks[x][y - 1]->getID() < 8)
 							possibility[m_pBlocks[x][y-1]->getID()-1] += 50;
 				}
 
@@ -230,7 +230,12 @@ void CWorld::GenerateWorld()
 						else
 						{
 							SAFE_DELETE(m_pBlocks[x][y]);
-							GenerateRoom(x, y);						
+
+							if (rand() % 2 == 0)
+								GenerateRoom(x, y);
+							else
+								GenerateCave(x, y);
+
 							x--;
 							continue;
 						}
@@ -239,6 +244,7 @@ void CWorld::GenerateWorld()
 					else
 						m_pBlocks[x][y]->Init(DIRT);
 
+		
 					//set position
 					m_pBlocks[x][y]->SetPos(static_cast<float>(x*100), static_cast<float> (y * 100));
 			}
@@ -362,6 +368,79 @@ void CWorld::GenerateRoom(int _x, int _y)
 		}
 
 	
+}
+
+
+
+void CWorld::GenerateCave(int _x, int _y)
+{
+	//generate the size of the cave
+	int xSize = rand() % 9 + 2;
+	int ySize = rand() % 3 + 3;
+
+	if (_x + xSize <= m_BlocksX && _y + ySize <= m_BlocksY)
+	{
+		//build the cave
+		for (int y = _y; y < _y + ySize; y++)
+		{
+			for (int x = _x; x < _x + xSize; x++)
+			{
+
+				m_pBlocks[x][y] = new CPlaceable;
+
+				//check if this block is one of the outer blocks
+				//check for stalagits
+				if (y == _y)
+				{
+					if (rand() % 3 == 0)
+					{
+						m_pBlocks[x][y]->Init(STALAGTIT);
+						m_pBlocks[x][y]->SetSpecialID(rand() % 4);
+						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+					}
+					else
+						m_pBlocks[x][y]->Init(ROOMFILL);
+				}
+				else if (x == _x || x == _x + xSize - 1)
+				{
+					if (rand() % 3 == 0)
+					{
+						m_pBlocks[x][y]->Init(STONE);
+						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+					}
+					else
+						m_pBlocks[x][y]->Init(ROOMFILL);
+				}
+				else if (y == _y + ySize - 1)
+				{
+					int type = rand() % 6;
+
+					//init the things in the cave
+					if (type == 0)
+					{
+						m_pBlocks[x][y]->Init(MUSHROOMP);
+						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+					}
+					else if (type == 1)
+					{
+						m_pBlocks[x][y]->Init(RUBBISH);
+						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+					}
+					else
+					{
+						m_pBlocks[x][y]->Init(ROOMFILL);
+					}
+
+				}
+				else
+				{
+					m_pBlocks[x][y]->Init(ROOMFILL);
+				}
+
+			}
+		}
+	}
+
 }
 
 
@@ -880,6 +959,29 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 						}
 
 
+						//if the placeable was rubbish show animation
+						if (m_pBlocks[x][y]->getID() == RUBBISH)
+						{
+							SProjectile projectile;
+
+							//add a projectile
+							CSprite *sprite = new CSprite;
+
+							sprite->Load(&g_pTextures->t_rubbishAnimation, 5, 150, 150);
+							sprite->SetPos(x*100 -25, y*100 - 50);
+
+							projectile.m_ID = RUBBISHANIMATION;
+							projectile.m_Damage = 0;
+							projectile.m_fFlown = 0.0f;
+							projectile.m_flightLength = 0;
+							projectile.m_fromPlayer = true;
+							projectile.m_fYVel = 0.0f;
+							projectile.m_Sprite = sprite;
+							projectile.m_fAnimState = 0;
+							g_pProjectiles->NewProjectile(projectile);
+						}
+
+
 						//check if the player could have luck
 						bool lucky = false;
 						int amount = 1;
@@ -1019,23 +1121,25 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 
 void CWorld::AddLittleItem(int _ID, int _x, int _y, int _amount)
 {
-	for(int i = 0; i < _amount; i++)
+	if (_ID != -1)
 	{
-		CLittleItem item;
+		for (int i = 0; i < _amount; i++)
+		{
+			CLittleItem item;
 
-		//if thing is a placeable
-			if(_ID < PIBREAK)
+			//if thing is a placeable
+			if (_ID < PIBREAK)
 			{
 				CPlaceable *thing = new CPlaceable;
 				thing->Init(_ID);
-				item.Init(thing, _x + (rand()%50 -25), _y + (rand()%20));
+				item.Init(thing, _x + (rand() % 50 - 25), _y + (rand() % 20));
 			}
 			//if thing is an item
-			else if(_ID > PIBREAK && _ID < ICBREAK)
+			else if (_ID > PIBREAK && _ID < ICBREAK)
 			{
 				CItem *thing = new CItem;
 				thing->Init(_ID);
-				item.Init(thing, _x + (rand()%50 -25), _y + (rand()%20));	
+				item.Init(thing, _x + (rand() % 50 - 25), _y + (rand() % 20));
 			}
 			else if (_ID > ICBREAK && _ID < CTBREAK)
 			{
@@ -1044,22 +1148,23 @@ void CWorld::AddLittleItem(int _ID, int _x, int _y, int _amount)
 				item.Init(thing, _x + (rand() % 50 - 25), _y + (rand() % 20));
 			}
 			//if thing is a tool
-			else if(_ID > CTBREAK && _ID < TEBREAK)
+			else if (_ID > CTBREAK && _ID < TEBREAK)
 			{
 				CTool *thing = new CTool;
 				thing->InitTool(_ID);
-				item.Init(thing, _x + (rand()%50 -25), _y + (rand()%20));
+				item.Init(thing, _x + (rand() % 50 - 25), _y + (rand() % 20));
 			}
 			//if thing is equipment
 			else
 			{
 				CEquipment *thing = new CEquipment;
 				thing->InitEquipment(_ID);
-				item.Init(thing, _x + (rand()%50 -25), _y + (rand()%20));
+				item.Init(thing, _x + (rand() % 50 - 25), _y + (rand() % 20));
 			}
 
-		item.SetVel(Vector2f(0, -350.0f));
-		m_LittleItemList.push_back(item);
+			item.SetVel(Vector2f(0, -350.0f));
+			m_LittleItemList.push_back(item);
+		}
 	}
 }
 
@@ -1701,7 +1806,7 @@ void CWorld::FillChestRandomly(int _chestID)
 				CThing *thing = NULL;
 
 				//if thing is an item
-				if(randomNumber > PIBREAK && randomNumber < 70)
+				if(randomNumber > PIBREAK && randomNumber < 71)
 				{
 					thing = new CItem;
 					((CItem*)thing)->Init(randomNumber);	
@@ -1712,7 +1817,7 @@ void CWorld::FillChestRandomly(int _chestID)
 					}
 				}
 				//if thing is a consumable
-				else if (randomNumber >ICBREAK && randomNumber < 88)
+				else if (randomNumber >ICBREAK && randomNumber < 89)
 				{
 					thing = new CConsumable;
 					((CConsumable*)thing)->InitConsumable(randomNumber);

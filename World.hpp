@@ -283,6 +283,9 @@ private:
 	//generates a random room
 	void GenerateRoom(int _x, int _y);
 
+	//generates a random cave
+	void GenerateCave(int _x, int _y);
+
 	//sets a tree
 	void SetTree(int _x, int _y);
 

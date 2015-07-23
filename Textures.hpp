@@ -131,6 +131,7 @@ public:
 	Texture t_healing;
 	Texture t_alchemy;
 	Texture t_lightsphere;
+	Texture t_rubbishAnimation;
 	Texture t_iceballLeft;
 	Texture t_iceballRight;
 	Texture t_ice_goblin;
@@ -194,6 +195,12 @@ public:
 	Texture t_blockTextures_cauldron;
 	Texture t_blockTextures_clover;
 	Texture t_blockTextures_radish;
+	Texture t_blockTextures_mushroom;
+	Texture t_blockTextures_stalagtit1;
+	Texture t_blockTextures_stalagtit2;
+	Texture t_blockTextures_stalagtit3;
+	Texture t_blockTextures_stalagtit4;
+	Texture t_blockTextures_rubbish;
 	Texture t_blockTextures_noTexture;               //the no_texture texture
 
 	Texture t_dirtRimTop;
@@ -263,6 +270,8 @@ public:
 	Texture t_blockInventoryTexture_cookingbook;
 	Texture t_blockInventoryTexture_bread;
 	Texture t_blockInventoryTexture_sawdust;
+	Texture t_blockInventoryTexture_mushroom;
+	Texture t_blockInventoryTexture_diadochit;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -323,6 +332,9 @@ public:
 	Texture t_blockLittleTexture_cookingbook;
 	Texture t_blockLittleTexture_bread;
 	Texture t_blockLittleTexture_sawdust;
+	Texture t_blockLittleTexture_mushroom;
+	Texture t_blockLittleTexture_diadochit;
+	
 
 
 	//the "carried" texture of the tools
@@ -360,6 +372,7 @@ public:
 	Texture t_ogre_body;
 	Texture t_ogre_arm;
 	Texture t_ogre_legs;
+	Texture t_ogre_club;
 
 	Shader s_drunkShader;
 

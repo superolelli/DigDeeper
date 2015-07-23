@@ -55,6 +55,9 @@ const int TORCH = 20;
 const int CAULDRON = 21;
 const int CLOVERP = 22;
 const int RADISHP = 23;
+const int MUSHROOMP = 24;
+const int STALAGTIT = 25;
+const int RUBBISH = 26;
 const int LADDER = 49;
 
 const int PWBREAK = 50;            //the Placeable-Wall-Break shows, where the wall section begins
@@ -79,6 +82,7 @@ const int WAX = 66;
 const int BEEHIVE = 67;
 const int COOKINGBOOK = 68;
 const int SAWDUST = 69;
+const int DIADOCHIT = 70;
 
 const int SPELL = 79;
 
@@ -91,6 +95,7 @@ const int CLOVER = 84;
 const int RADISH = 85;
 const int RADISHSOUP = 86;
 const int BREAD = 87;
+const int MUSHROOM = 88;
 
 const int CTBREAK = 100;             //the Consumable-Tool-Break shows, where the tool section begins
 
@@ -275,6 +280,7 @@ const int HEALING = 3;
 const int ICEBALLPROJECTILE = 4;
 const int ALCHEMYANIMATION = 5;
 const int LIGHTSPHERE = 6;
+const int RUBBISHANIMATION = 7;
 
 #pragma endregion
 

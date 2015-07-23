@@ -1335,3 +1335,15 @@ ZUKÜNFITGE ÄNDERUNGEN:
 - Stärkevorteil des Kriegers wurde runtergesetzt
 
 ------------------------------------------------------
+22.07.2015
+
+- Einfache Höhlen hinzugefügt
+
+------------------------------------------------------
+23.07.2015
+
+- Pilze hinzugefügt
+- Stalagtiten in Höhlen hinzugefügt
+- Müll hinzugefügt (mit Animation)
+
+------------------------------------------------------

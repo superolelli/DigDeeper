@@ -343,6 +343,39 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_is_visible = true;
 		m_can_place_on = false;
 	}break;
+	case MUSHROOMP:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_mushroom);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_mushroom);
+		m_Name = "Pilz";
+		m_Hardness = 0;
+		m_Priority = -1;
+		m_is_passable = true;
+		m_is_visible = true;
+		m_can_place_on = false;
+	}break;
+	case STALAGTIT:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_stalagtit1);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_diadochit);
+		m_Name = "Stalagtit";
+		m_Hardness = 5;
+		m_Priority = -1;
+		m_is_passable = true;
+		m_is_visible = true;
+		m_can_place_on = false;
+	}break;
+	case RUBBISH:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_rubbish);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_mushroom);
+		m_Name = "Müll";
+		m_Hardness = 0;
+		m_Priority = -1;
+		m_is_passable = true;
+		m_is_visible = true;
+		m_can_place_on = false;
+	}break;
 	default:
 		{
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_noTexture);
@@ -414,8 +447,10 @@ bool CPlaceable::IsBroken(float _modificator)
 		m_fBreakFrame = 2;
 	
 	
-	if(m_fBreakingTime >= m_Hardness)
+	if (m_fBreakingTime >= m_Hardness)
+	{
 		return true;
+	}
 
 		return false;	
 }
@@ -455,6 +490,15 @@ int CPlaceable::GetLittleID()
 	case(RADISHP) :
 		return RADISH;
 		break;
+	case(MUSHROOMP) :
+		return MUSHROOM;
+		break;
+	case(STALAGTIT) :
+		return DIADOCHIT;
+		break;
+	case(RUBBISH) :
+		return GetRubbish();
+		break;
 
 	default:
 		return m_ID;
@@ -488,7 +532,8 @@ int CPlaceable::GetLittleID()
 //Used for:
 //Furnances: the Panel ID
 //doors: the frame number (set any SID, it is going to be handled inside the function)
- //beehives: the direction of the hive
+//beehives: the direction of the hive
+//stalagtit: the appearance of the stalagtit
 void CPlaceable::SetSpecialID(int _SID)
 {
 	//set the special ID
@@ -529,6 +574,17 @@ void CPlaceable::SetSpecialID(int _SID)
 		else 
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_torch_left);
 	}
+	else if (m_ID == STALAGTIT)
+	{
+		if (m_SpecialID == 0)
+			m_pThingSprite->Load(&g_pTextures->t_blockTextures_stalagtit1);
+		else if (m_SpecialID == 1)
+			m_pThingSprite->Load(&g_pTextures->t_blockTextures_stalagtit2);
+		else if (m_SpecialID == 2)
+			m_pThingSprite->Load(&g_pTextures->t_blockTextures_stalagtit3);
+		else if (m_SpecialID == 3)
+			m_pThingSprite->Load(&g_pTextures->t_blockTextures_stalagtit4);
+	}
 }
 
 
@@ -547,4 +603,27 @@ bool CPlaceable::IsPlaceableReady()
 	
 
 	return false;
+}
+
+
+
+
+int CPlaceable::GetRubbish()
+{
+	int number = rand() % 85 + 56;
+
+	if (number > 70 && number < 81)
+		number = -1;
+	else if (number > 88 && number < 101)
+		number = -1;
+	else if (number > 104 && number < 131)
+		number = -1;
+	else if (number == 138)
+		number = 200;
+	else if (number == 139)
+		number = LADDER;
+	else if (number == 140)
+		number = TORCH;
+
+	return number;
 }

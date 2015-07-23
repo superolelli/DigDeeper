@@ -61,5 +61,10 @@ void CConsumable::InitConsumable(int _ID)
 		m_Attributes.strength = 3;
 		m_Attributes.duration = 20.0f;
 	}break;
+	case(MUSHROOM) :
+	{
+		m_Attributes.healthRegeneration = 2;
+		m_Attributes.duration = 5;
+	}break;
 	}
 }

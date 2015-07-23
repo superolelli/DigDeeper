@@ -17,6 +17,9 @@ void COgre::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, 
 	m_pOgre->SetArmRotatingPoint(80.0f, 14.0f);
 	m_pOgre->SetHandPosition(8.0f, 40.0f);
 
+	m_OgreClub.Load(&g_pTextures->t_ogre_club);
+	m_OgreClub.setRotatingPoint(26, 135);
+
 	//Init the attributes
 	m_Attributes.maxHealth = 100;
 	m_Attributes.armour = 4;
@@ -290,7 +293,7 @@ void COgre::CheckState()
 		}
 
 			//if the goblin is near the player: attack
-			if (abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 50 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 50)
+			if (abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 90 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 90)
 				m_State = ATTACKING;
 	}break;
 
@@ -337,7 +340,7 @@ void COgre::CheckState()
 		}
 
 		//if the ogre is near the player: attack
-		if (abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 50 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 50)
+		if (abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 90 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 90)
 			m_State = ATTACKING;
 	}break;
 
@@ -353,7 +356,7 @@ void COgre::CheckState()
 			m_fWaitToBeat -= g_pTimer->GetElapsedTime().asSeconds();
 
 		//if the ogre isn't near the player: stop attacking
-		if (!(abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 50 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 50))
+		if (!(abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 90 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 90))
 		{
 			m_State = IDLE;
 			m_fWaitToBeat = 0;
@@ -410,14 +413,20 @@ void COgre::NewRandomDestination()
 
 void COgre::Render()
 {
+	m_OgreClub.SetPos(m_pOgre->GetHandPos(m_left).x, m_pOgre->GetHandPos(m_left).y);
+
 	if (m_left)
 	{
+		m_OgreClub.setRotation(m_fArmAnimState);
 		m_pOgre->Render(0, m_fLegsAnimState);
+		m_OgreClub.Render(g_pFramework->GetRenderWindow());
 		m_pOgre->RenderSecondPart(0);
 	}
 	else
 	{
+		m_OgreClub.setRotation(-m_fArmAnimState);
 		m_pOgre->Render(1, m_fLegsAnimState);
+		m_OgreClub.Render(g_pFramework->GetRenderWindow());
 		m_pOgre->RenderSecondPart(1);
 	}
 

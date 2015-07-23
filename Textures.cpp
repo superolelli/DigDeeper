@@ -128,6 +128,7 @@ void TextureLoading::LoadTextures()
 	t_healing.loadFromFile("Data/Sprites/Magic/heal_animation.png");
 	t_alchemy.loadFromFile("Data/Sprites/Magic/alchemy.png");
 	t_lightsphere.loadFromFile("Data/Sprites/Magic/light.png");
+	t_rubbishAnimation.loadFromFile("Data/Sprites/Objects/Blocks/rubbish_animation.png");
 	t_iceballLeft.loadFromFile("Data/Sprites/Magic/iceball.png", IntRect(80, 0, 80, 30));
 	t_iceballRight.loadFromFile("Data/Sprites/Magic/iceball.png", IntRect(0, 0, 80, 30));
 	t_ice_goblin.loadFromFile("Data/Sprites/Magic/ice_goblin.png");
@@ -190,6 +191,12 @@ void TextureLoading::LoadTextures()
 	t_blockTextures_cauldron.loadFromFile("Data/Sprites/Objects/Blocks/cauldron.png");
 	t_blockTextures_clover.loadFromFile("Data/Sprites/Objects/Blocks/cloverleaf.png");
 	t_blockTextures_radish.loadFromFile("Data/Sprites/Objects/Blocks/radish.png");
+	t_blockTextures_mushroom.loadFromFile("Data/Sprites/Objects/Blocks/mushroom.png");
+	t_blockTextures_stalagtit1.loadFromFile("Data/Sprites/Objects/Blocks/stalagmit_2.png");
+	t_blockTextures_stalagtit2.loadFromFile("Data/Sprites/Objects/Blocks/stalagmit_3.png");
+	t_blockTextures_stalagtit3.loadFromFile("Data/Sprites/Objects/Blocks/stalagmit_4.png");
+	t_blockTextures_stalagtit4.loadFromFile("Data/Sprites/Objects/Blocks/stalagmit_5.png");
+	t_blockTextures_rubbish.loadFromFile("Data/Sprites/Objects/Blocks/rubbish_pile.png");
 
 	t_dirtRimTop.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_top.png");
 	t_dirtRimBottom.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_bottom.png");
@@ -256,6 +263,8 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_cookingbook.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/cookingbook_inventory.png");
 	t_blockInventoryTexture_bread.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/bread_inventory.png");
 	t_blockInventoryTexture_sawdust.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/sawdust_inventory.png");
+	t_blockInventoryTexture_mushroom.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/mushroom_inventory.png");
+	t_blockInventoryTexture_diadochit.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/diadochit_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
@@ -315,6 +324,8 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_cookingbook.loadFromFile("Data/Sprites/Objects/LittleItems/cookingbook_little.png");
 	t_blockLittleTexture_bread.loadFromFile("Data/Sprites/Objects/LittleItems/bread_little.png");
 	t_blockLittleTexture_sawdust.loadFromFile("Data/Sprites/Objects/LittleItems/sawdust_little.png");
+	t_blockLittleTexture_mushroom.loadFromFile("Data/Sprites/Objects/LittleItems/mushroom_little.png");
+	t_blockLittleTexture_diadochit.loadFromFile("Data/Sprites/Objects/LittleItems/diadochit_little.png");
 
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");
@@ -350,6 +361,7 @@ void TextureLoading::LoadTextures()
 	t_ogre_body.loadFromFile("Data/Sprites/Living/ogre_body.png");
 	t_ogre_arm.loadFromFile("Data/Sprites/Living/ogre_arm.png");
 	t_ogre_legs.loadFromFile("Data/Sprites/Living/ogre_legs.png");
+	t_ogre_club.loadFromFile("Data/Sprites/Living/ogre_club.png");
 
 	s_drunkShader.loadFromFile("Data/Shaders/blur.frag", Shader::Fragment);
 
