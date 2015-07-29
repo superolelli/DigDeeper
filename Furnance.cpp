@@ -188,19 +188,19 @@ void CFurnance::CheckThings()
 			switch(m_BurningMaterial.thing->getID())
 			{
 			case(COAL):
-				{
+			{
 					m_Smoke.Render(g_pFramework->GetRenderWindow(), m_fAnimState);
 
 					if(m_fBurningTime >= 3.0f)
 						ChangeBurningThings();				
-				}break;
-			case(WOOD):
-				{
-					m_Smoke.Render(g_pFramework->GetRenderWindow(), m_fAnimState);
+			}break;
+			case(WOOD) :
+			{
+				m_Smoke.Render(g_pFramework->GetRenderWindow(), m_fAnimState);
 
-					if(m_fBurningTime >= 5.0f)
-						ChangeBurningThings();
-				}break;
+				if (m_fBurningTime >= 5.0f)
+					ChangeBurningThings();
+			}break;
 			case(WOODSTAFF):
 			{
 				m_Smoke.Render(g_pFramework->GetRenderWindow(), m_fAnimState);
@@ -208,13 +208,27 @@ void CFurnance::CheckThings()
 				if(m_fBurningTime >= 10.0f)
 					ChangeBurningThings();
 			}break;
+			case(WOODWALL) :
+			{
+				m_Smoke.Render(g_pFramework->GetRenderWindow(), m_fAnimState);
+
+				if (m_fBurningTime >= 5.0f)
+					ChangeBurningThings();
+			}break;
 			case(RECIPE):
-				{
+			{
 					m_Smoke.Render(g_pFramework->GetRenderWindow(), m_fAnimState);
 
 					if(m_fBurningTime >= 2.0f)
 						ChangeBurningThings();
-				}break;
+			}break;
+			case(SAWDUST) :
+			{
+				m_Smoke.Render(g_pFramework->GetRenderWindow(), m_fAnimState);
+
+				if (m_fBurningTime >= 4.0f)
+					ChangeBurningThings();
+			}break;
 			}
 		}
 }

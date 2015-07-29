@@ -70,4 +70,6 @@ private:
 	bool m_cooking;
 };
 
+BOOST_CLASS_VERSION(CCauldron, 0)
+
 #endif

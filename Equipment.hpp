@@ -69,5 +69,6 @@ private:
 
 };
 
+BOOST_CLASS_VERSION(CEquipment, 0)
 
 #endif

@@ -14,6 +14,7 @@ void load_textures(bool *is_loading)
 	g_pTextures->LoadTextures();
 	g_pSound->LoadSounds();
 	g_pRims->LoadRims();
+	g_pSinCosLookup->CalculateLookupTable();
 
 	*is_loading = false;
 	
@@ -54,6 +55,19 @@ int main()
 
 	load.join();
 
+	//creates the dig deeper folder in appdata if needed
+	char* var = getenv("APPDATA");
+	path Path;
+	Path = var;
+	Path.append("/Dig Deeper");
+
+	if (!boost::filesystem::exists(Path))
+		create_directory(Path);
+
+	//create saves directory
+	Path.append("/Saves");
+	if (!boost::filesystem::exists(Path))
+		create_directory(Path);
 
 	bool quit = false;
 

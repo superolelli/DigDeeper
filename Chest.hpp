@@ -65,4 +65,6 @@ private:
 
 };
 
+BOOST_CLASS_VERSION(CChest, 0)
+
 #endif

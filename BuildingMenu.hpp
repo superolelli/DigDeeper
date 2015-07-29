@@ -110,4 +110,6 @@ private:
 	
 };
 
+BOOST_CLASS_VERSION(CBuildingMenu, 0)
+
 #endif

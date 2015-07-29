@@ -32,6 +32,8 @@ private:
 		ar & m_PointToGo.y;
 	}
 
+	
+
 	CSprite *m_pBeeSprite;              //the sprite
 	CSprite m_frozenSprite;
 
@@ -45,6 +47,6 @@ private:
 
 };
 
-
+BOOST_CLASS_VERSION(CBee, 0)
 
 #endif

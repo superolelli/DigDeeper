@@ -51,6 +51,7 @@ public:
 	bool IsLeft(){ return m_turned_left; }                   //is the player turned left?
 	void SubstractMana(int _mana){ m_Attributes.currentMana -= _mana; if (m_Attributes.currentMana < 0){ m_Attributes.currentMana = 0; } } //substracts the amount of mana
 	void DoAlchemy(int _level);   //tries alchemy
+	bool IsInventoryFull(){ return m_pInventory->IsFull(); }
 
 	SToolAttributes GetPlayerAttributes();
 	SPlayerAttributes GetPlayerBasicAttributes(){ return m_Attributes; }
@@ -139,6 +140,7 @@ private:
 	SHoldingButtons m_PanelBuilding;
 	SHoldingButtons m_PanelAttributes;
 	SHoldingButtons m_PanelMagic;
+	CButton *m_pCloseButton;
 
 	SEffect m_StatusEffects[NUMBER_OF_EFFECTS];
 	VertexArray m_StatusDuration[NUMBER_OF_EFFECTS];
@@ -164,6 +166,8 @@ private:
 	float m_fWaitToBeat;
 	float m_fRegenerationTime;                       
 
+	float m_fFallingDistance;                          //how long has the player fallen
+
 	int m_FallingSpeed;                                 //the speed with wich the dwarf is falling
 	int m_SideSpeed;                                    //the speed to one side (e.g. by being hitted)
 
@@ -178,7 +182,7 @@ private:
 	void CheckArmAnimation();                                      //checks the state of the arm
 };
 
-
+BOOST_CLASS_VERSION(CPlayer, 0)
 
 
 #endif

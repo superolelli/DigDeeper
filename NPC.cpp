@@ -11,21 +11,22 @@ CNpc::CNpc()
 
 
 
-
-
-
 Vector2i CNpc::findPath(int _xDest, int _yDest)
 {
+	vector <vector <SWorldPlace> > worldMatrix;
+
 	//get the world matrix
-	vector <vector <SWorldPlace> > worldMatrix = m_pWorld->GetWorldMatrix();
-	
+	worldMatrix = m_pWorld->GetWorldMatrix();
+
 	//make the lists
 	list<SWorldPlace*> openList;
 	list<SWorldPlace*> closedList;
 	list<SWorldPlace*>::iterator firstIt;
 	list<SWorldPlace*>::iterator secondIt;
 
-	int currentX = -1, currentY = -1, destinationX = -1, destinationY = -1, startX = -1, startY = -1;     
+	int currentX = -1, currentY = -1, destinationX = -1, destinationY = -1, startX = -1, startY = -1;
+
+	int blockSize = 100;
 
 	bool checkLeft, checkRight, checkTop, checkBottom;
 
@@ -48,7 +49,7 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 		for (int x = 0; x < worldMatrix.size(); x++)
 		{
 			//if the destination is inside this world place: save it
-			if (_xDest >= worldMatrix[x][y].xPos && _xDest < worldMatrix[x][y].xPos + 100 && _yDest >= worldMatrix[x][y].yPos && _yDest < worldMatrix[x][y].yPos + 100)
+			if (_xDest >= worldMatrix[x][y].xPos && _xDest < worldMatrix[x][y].xPos + blockSize && _yDest >= worldMatrix[x][y].yPos && _yDest < worldMatrix[x][y].yPos + blockSize)
 			{
 				destinationX = x;
 				destinationY = y;
@@ -63,7 +64,7 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 			}
 
 			//if the current place is inside this world place: save it
-			if (m_xPos >= worldMatrix[x][y].xPos && m_xPos < worldMatrix[x][y].xPos + 100 && m_yPos >= worldMatrix[x][y].yPos && m_yPos < worldMatrix[x][y].yPos + 100)
+			if (m_xPos >= worldMatrix[x][y].xPos && m_xPos < worldMatrix[x][y].xPos + blockSize && m_yPos >= worldMatrix[x][y].yPos && m_yPos < worldMatrix[x][y].yPos + blockSize)
 			{
 				startX = x;
 				startY = y;
@@ -80,6 +81,9 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 		}
 	}
 
+	//if no start place was found: return
+	if (startX == -1 || startY == -1)
+		return Vector2i(-1, -1);
 
 	worldMatrix[startX][startY].cost = 0;
 
@@ -88,12 +92,12 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 
 	currentX = startX;
 	currentY = startY;
-	
-	
+
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//					loop until getting to the destination													//
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+
 	//while the destination wasn't reached
 	while (currentX != destinationX || currentY != destinationY)
 	{
@@ -102,18 +106,16 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 		checkBottom = true;
 		checkLeft = true;
 		checkRight = true;
-		
+
 		//check if the neighbour blocks do exist and are passable
 		if (currentX - 1 < 0 || !worldMatrix[currentX - 1][currentY].passable)
 			checkLeft = false;
-		if (currentX + 1 >= worldMatrix.size() || !worldMatrix[currentX +1][currentY].passable)
+		if (currentX + 1 >= worldMatrix.size() || !worldMatrix[currentX + 1][currentY].passable)
 			checkRight = false;
-		if (currentY - 1 < 0 || !worldMatrix[currentX][currentY -1].passable)
+		if (currentY - 1 < 0 || !worldMatrix[currentX][currentY - 1].passable)
 			checkTop = false;
 		if (currentY + 1 >= worldMatrix[0].size() || !worldMatrix[currentX][currentY + 1].passable)
 			checkBottom = false;
-
-
 
 
 		//iterate through the closed list 
@@ -141,7 +143,7 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 					worldMatrix[currentX][currentY - 1].parentX = currentX;
 					worldMatrix[currentX][currentY - 1].parentY = currentY;
 				}
-		
+
 				checkTop = false;
 			}
 			else if (checkBottom && (*secondIt) == &worldMatrix[currentX][currentY + 1])
@@ -194,65 +196,65 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 			//calculate the value
 			worldMatrix[currentX][currentY - 1].cost = worldMatrix[currentX][currentY].cost + 1;
 			worldMatrix[currentX][currentY - 1].pathValue = worldMatrix[currentX][currentY - 1].cost + estimatedCost;
-					
+
 			//add the current place as parent
 			worldMatrix[currentX][currentY - 1].parentX = currentX;
 			worldMatrix[currentX][currentY - 1].parentY = currentY;
-		
+
 			//add to the open list
 			openList.push_front(&worldMatrix[currentX][currentY - 1]);
 		}
-		
+
 		//check bottom place
 		if (checkBottom)
 		{
 			//estimate the cost (absolute distance betweent start and destination)
 			estimatedCost = abs(currentX - destinationX) + abs(currentY - destinationY + 1);
-		
+
 			//calculate the value
 			worldMatrix[currentX][currentY + 1].cost = worldMatrix[currentX][currentY].cost + 1;
 			worldMatrix[currentX][currentY + 1].pathValue = worldMatrix[currentX][currentY + 1].cost + estimatedCost;
-		
+
 			//add the current place as parent
 			worldMatrix[currentX][currentY + 1].parentX = currentX;
 			worldMatrix[currentX][currentY + 1].parentY = currentY;
-		
+
 			//add to the open list
 			openList.push_front(&worldMatrix[currentX][currentY + 1]);
 		}
-		
+
 		//check left place
 		if (checkLeft)
 		{
 			//estimate the cost (absolute distance betweent start and destination)
 			estimatedCost = abs(currentX - destinationX - 1) + abs(currentY - destinationY);
-		
+
 			//calculate the value
 			worldMatrix[currentX - 1][currentY].cost = worldMatrix[currentX][currentY].cost + 1;
 			worldMatrix[currentX - 1][currentY].pathValue = worldMatrix[currentX - 1][currentY].cost + estimatedCost;
-		
+
 			//add the current place as parent
 			worldMatrix[currentX - 1][currentY].parentX = currentX;
 			worldMatrix[currentX - 1][currentY].parentY = currentY;
-		
+
 			//add to the open list
 			openList.push_front(&worldMatrix[currentX - 1][currentY]);
 		}
-		
+
 		//check right place
 		if (checkRight)
 		{
 			//estimate the cost (absolute distance betweent start and destination)
 			estimatedCost = abs(currentX - destinationX + 1) + abs(currentY - destinationY);
-		
+
 			//calculate the value
 			worldMatrix[currentX + 1][currentY].cost = worldMatrix[currentX][currentY].cost + 1;
 			worldMatrix[currentX + 1][currentY].pathValue = worldMatrix[currentX + 1][currentY].cost + estimatedCost;
-		
+
 			//add the current place as parent
 			worldMatrix[currentX + 1][currentY].parentX = currentX;
 			worldMatrix[currentX + 1][currentY].parentY = currentY;
-		
+
 			//add to the open list
 			openList.push_front(&worldMatrix[currentX + 1][currentY]);
 		}
@@ -267,7 +269,7 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 		firstIt = openList.begin();
 		currentX = (*firstIt)->matrixXPos;
 		currentY = (*firstIt)->matrixYPos;
-		
+
 		//iterate through the open list and seek for the place with the lowest path value
 		for (secondIt = openList.begin(); secondIt != openList.end(); secondIt++)
 		{
@@ -279,21 +281,21 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 				firstIt = secondIt;
 			}
 		}
-		
+
 		//add this place to the closed list and delete it in the open list
 		closedList.push_back(&worldMatrix[currentX][currentY]);
-		firstIt = openList.erase(firstIt);		
+		firstIt = openList.erase(firstIt);
 	}
 
 
-	
+
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//					the destination was reached: get the final path											//
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+
 	Vector2i nextStep(-1, -1);
-	
+
 	int nextX = -1;
 	int nextY = -1;
 
@@ -309,8 +311,8 @@ Vector2i CNpc::findPath(int _xDest, int _yDest)
 
 		if (nextX == startX && nextY == startY)
 		{
-			nextStep.x = worldMatrix[currentX][currentY].xPos + 50;
-			nextStep.y = worldMatrix[currentX][currentY].yPos + 50;
+			nextStep.x = worldMatrix[currentX][currentY].xPos + blockSize/2;
+			nextStep.y = worldMatrix[currentX][currentY].yPos + blockSize/2;
 		}
 
 		currentX = nextX;

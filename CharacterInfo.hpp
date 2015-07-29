@@ -83,6 +83,7 @@ private:
 	int m_levelUpCounter;
 };
 
+BOOST_CLASS_VERSION(CCharacterInfo, 0)
 
 
 #endif

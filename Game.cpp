@@ -43,8 +43,13 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	m_pPlayer = new CPlayer;
 
 	//load the current settings
+	//path Path;
+	/*Path.append("Data/Settings.stt");*/
+
+	char* var = getenv("APPDATA");
 	path Path;
-	Path.append("Data/Settings.stt");
+	Path = var;
+	Path.append("/Dig Deeper/Settings.stt");
 
 	if (boost::filesystem::exists(Path))
 	{
@@ -72,10 +77,10 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	//Inits the player
 	m_pPlayer->Init(700, 300, m_pWorld, &m_View, _attributes.PlayerClass, m_Settings.m_inventory_numbers, m_Settings.m_beam_numbers);
 
-	/*if(!_loaded)
+	if(!_loaded)
 	{
-		m_NpcMachine.AddNpc(OGRE, 900, 100);
-	}*/
+		m_NpcMachine.AddNpc(OGRE, 1500, 100, false);
+	}
 
 	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);
 
@@ -558,7 +563,10 @@ void CGame::SaveGame()
 {
 	//creates a new directory if needed
 	//get the path of the directory
-	string pathString("Data/Saves/");
+
+	char* var = getenv("APPDATA");
+	string pathString = var;
+	pathString.append("/Dig Deeper/Saves/");
 	pathString.append(m_Name.c_str());
 
 	path savegame(pathString);
@@ -601,8 +609,10 @@ void CGame::Load(string _path)
 
 	Init(attributes, true);
 	SAFE_DELETE(m_pPlayer);
-	
-	string pathString("Data/Saves/" + _path);
+
+	char* var = getenv("APPDATA");
+	string pathString = var;
+	pathString.append("/Dig Deeper/Saves/" + _path);
 
 	path savegame(pathString);
 
@@ -647,7 +657,16 @@ void CGame::SaveHighscore()
 {
 	SHighscore highscore[10];
 
-	ifstream Input("Data/Saves/Highscore.hsc", ios::binary);
+	//get the path
+	char* var = getenv("APPDATA");
+	string Path = var;
+	Path.append("/Dig Deeper/Highscore.hsc");
+
+	if (!boost::filesystem::exists(path(Path)))
+		ClearHighscore();
+	
+	//open the file
+	ifstream Input(Path, ios::binary);
 	Input.read((char *)&highscore, sizeof(highscore));
 	Input.close();
 
@@ -718,7 +737,49 @@ void CGame::SaveHighscore()
 		}
 
 
-		ofstream Output("Data/Saves/Highscore.hsc", ios::binary);
+		ofstream Output(Path, ios::binary);
 		Output.write((char *)&highscore, sizeof(highscore));
 		Output.close();
+}
+
+
+
+
+
+
+
+void CGame::ClearHighscore()
+{
+	char* var = getenv("APPDATA");
+	string Path = var;
+	Path.append("/Dig Deeper/Highscore.hsc");
+
+	SHighscore highscore[10];
+
+	for (int i = 0; i < 10; i++)
+	{
+		highscore[i].m_class = -1;
+		highscore[i].m_level = 0;
+		highscore[i].m_name = "Niemand";
+
+		highscore[i].m_attributes.armour = 0;
+		highscore[i].m_attributes.breakingSpeed = 0;
+		highscore[i].m_attributes.criticalChance = 0;
+		highscore[i].m_attributes.criticalDamage = 0;
+		highscore[i].m_attributes.currentExp = 0;
+		highscore[i].m_attributes.currentMana = 0;
+		highscore[i].m_attributes.currentHealth = 0;
+		highscore[i].m_attributes.healthRegeneration = 0;
+		highscore[i].m_attributes.luck = 0;
+		highscore[i].m_attributes.manaRegeneration = 0;
+		highscore[i].m_attributes.maxExp = 0;
+		highscore[i].m_attributes.maxHealth = 0;
+		highscore[i].m_attributes.maxMana = 0;
+		highscore[i].m_attributes.strength = 0;
+		highscore[i].m_attributes.speed = 0;
+	}
+
+	ofstream Output1(Path, ios::binary);
+	Output1.write((char *)&highscore, sizeof(highscore));
+	Output1.close();
 }

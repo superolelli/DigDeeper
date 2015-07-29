@@ -203,6 +203,19 @@ void CProjectiles::CheckProjectiles()
 				else
 					i->m_Sprite->SetPos(x + 20, y - 40);
 
+				//throw player
+				if (m_pPlayer->GetRect().left < i->m_Sprite->GetRect().left)
+					m_pPlayer->ThrowPlayer(true, 200);
+				else
+					m_pPlayer->ThrowPlayer(false, 200);
+
+				stringstream stream;
+				stream.str("");
+
+				//put the damage into a stringstream	
+				stream << i->m_Damage;
+				g_pSignMachine->AddString(stream.str(), 1, m_pPlayer->GetRect().left, m_pPlayer->GetRect().top);
+
 				i++;
 			}
 			else

@@ -1,23 +1,25 @@
-﻿Der Buildvorgang wurde am 23.07.2015 11:33:16 gestartet.
+﻿Der Buildvorgang wurde am 29.07.2015 21:59:01 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt World.cpp
-         World.cpp
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(586): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(587): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(795): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(868): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(869): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(1866): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(1867): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(1868): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(1869): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(1923): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(1924): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(1925): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(1926): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(2088): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(2089): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp Highscore.cpp
+         Highscore.cpp
+     1>f:\dig deeper rewritten\digdeeper\highscore.cpp(48): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 f:\visual studio\vc\include\stdlib.h(462): Siehe Deklaration von 'getenv'
+     1>f:\dig deeper rewritten\digdeeper\highscore.cpp(132): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\highscore.cpp(254): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 f:\visual studio\vc\include\stdlib.h(462): Siehe Deklaration von 'getenv'
+         Game.cpp
+     1>f:\dig deeper rewritten\digdeeper\game.cpp(49): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 f:\visual studio\vc\include\stdlib.h(462): Siehe Deklaration von 'getenv'
+     1>f:\dig deeper rewritten\digdeeper\game.cpp(567): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 f:\visual studio\vc\include\stdlib.h(462): Siehe Deklaration von 'getenv'
+     1>f:\dig deeper rewritten\digdeeper\game.cpp(613): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 f:\visual studio\vc\include\stdlib.h(462): Siehe Deklaration von 'getenv'
+     1>f:\dig deeper rewritten\digdeeper\game.cpp(661): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 f:\visual studio\vc\include\stdlib.h(462): Siehe Deklaration von 'getenv'
+     1>f:\dig deeper rewritten\digdeeper\game.cpp(753): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 f:\visual studio\vc\include\stdlib.h(462): Siehe Deklaration von 'getenv'
+         Code wird generiert...
        Link:
          F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.3\lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-network-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.lib" /MACHINE:X86 Debug\Beam.obj
          Debug\Bee.obj
@@ -57,6 +59,7 @@
          Debug\Projectiles.obj
          Debug\Rims.obj
          Debug\SignMachine.obj
+         Debug\SinCosLookup.obj
          Debug\Sound.obj
          Debug\Sprite.obj
          Debug\StringInput.obj
@@ -69,4 +72,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:01.98
+Verstrichene Zeit 00:00:06.72

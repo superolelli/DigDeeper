@@ -129,6 +129,6 @@ private:
 
 };
 
-
+BOOST_CLASS_VERSION(CLittleItem, 0)
 
 #endif

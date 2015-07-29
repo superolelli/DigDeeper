@@ -392,7 +392,7 @@ void CWorld::GenerateCave(int _x, int _y)
 				//check for stalagits
 				if (y == _y)
 				{
-					if (rand() % 3 == 0)
+					if (rand() % 3 == 0 && m_pBlocks[x][y-1] != NULL)
 					{
 						m_pBlocks[x][y]->Init(STALAGTIT);
 						m_pBlocks[x][y]->SetSpecialID(rand() % 4);
@@ -425,6 +425,11 @@ void CWorld::GenerateCave(int _x, int _y)
 					{
 						m_pBlocks[x][y]->Init(RUBBISH);
 						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+					}
+					else if (type == 2)
+					{
+						m_pBlocks[x][y]->Init(ROOMFILL);
+						m_pNpcMachine->AddNpc(GOBLIN, x*100, y*100, true);				
 					}
 					else
 					{
@@ -1103,7 +1108,7 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 	for(i = m_LittleItemList.begin(); i != m_LittleItemList.end(); i++)
 	{
 
-		if(_playerRect.intersects(i->GetRect()))
+		if(_playerRect.intersects(i->GetRect()) && !_player->IsInventoryFull())
 		{
 			_player->Take(i->GetThing(),1);			
 			i->Quit();
@@ -1797,10 +1802,10 @@ void CWorld::FillChestRandomly(int _chestID)
 			while(is_filled == false)
 			{
 				//get a random ID
-				randomNumber = rand()%83 + 56;
+				randomNumber = rand()%84 + 56;
 
 				//very rare ring has currently the id 200
-				if(randomNumber == 138)
+				if(randomNumber == 139)
 					randomNumber = 200;
 
 				CThing *thing = NULL;
@@ -1823,7 +1828,7 @@ void CWorld::FillChestRandomly(int _chestID)
 					((CConsumable*)thing)->InitConsumable(randomNumber);
 				}
 				//if thing is a tool
-				else if(randomNumber > CTBREAK && randomNumber < 105)
+				else if(randomNumber > CTBREAK && randomNumber < 106)
 				{
 					thing = new CTool;
 					((CTool*)thing)->InitToolRandomly(randomNumber);
@@ -1933,7 +1938,7 @@ vector<Vector2i> CWorld::GetSpawnPlaces()
 
 
 
-vector < vector <SWorldPlace> > CWorld::GetWorldMatrix()
+vector < vector <SWorldPlace> > CWorld::GetWorldMatrix(bool _big)
 {
 	IntRect viewRect;
 	viewRect.left = m_pView->getCenter().x - m_pView->getSize().x / 2;
@@ -1962,35 +1967,90 @@ vector < vector <SWorldPlace> > CWorld::GetWorldMatrix()
 	if (yEnd >= m_BlocksY)
 		yEnd = m_BlocksY - 1;
 
-	//resize the matrix
-	worldMatrix.resize(xEnd+1);
-	for (int i = 0; i < xEnd + 1; i++)
-		worldMatrix[i].resize(yEnd + 1);
-
-	for (int y = yStart; y <= yEnd; y++)
+	if (_big)
 	{
-		for (int x = xStart; x <= xEnd; x++)
+		//resize the matrix
+		worldMatrix.resize((xEnd + 1)/2);
+		for (int i = 0; i < (xEnd + 1)/2; i++)
+			worldMatrix[i].resize((yEnd + 1)/2);
+	}
+	else
+	{
+		//resize the matrix
+		worldMatrix.resize(xEnd + 1);
+		for (int i = 0; i < xEnd + 1; i++)
+			worldMatrix[i].resize(yEnd + 1);
+	}
+
+	//for big npcs
+	if (_big)
+	{
+		int x = xStart;
+		int y = yStart;
+
+		for (xMatrix = 0; xMatrix < worldMatrix.size(); xMatrix++)
 		{
-			worldMatrix[xMatrix][yMatrix].xPos = x * 100;
-			worldMatrix[xMatrix][yMatrix].yPos = y * 100;
-			worldMatrix[xMatrix][yMatrix].matrixXPos = xMatrix;
-			worldMatrix[xMatrix][yMatrix].matrixYPos = yMatrix;
-			worldMatrix[xMatrix][yMatrix].parentX = 0;
-			worldMatrix[xMatrix][yMatrix].parentY = 0;
-			worldMatrix[xMatrix][yMatrix].pathValue = 0;
-			worldMatrix[xMatrix][yMatrix].cost = 0;
-
-			//if there is no block or the block is passable: add passable worldPlace
-			if (m_pBlocks[x][y] == NULL || m_pBlocks[x][y]->IsPassable())
+			for (yMatrix = 0; yMatrix < worldMatrix[0].size(); yMatrix++)
+			{
+				worldMatrix[xMatrix][yMatrix].xPos = x * 100;
+				worldMatrix[xMatrix][yMatrix].yPos = y * 100;
+				worldMatrix[xMatrix][yMatrix].matrixXPos = xMatrix;
+				worldMatrix[xMatrix][yMatrix].matrixYPos = yMatrix;
+				worldMatrix[xMatrix][yMatrix].parentX = 0;
+				worldMatrix[xMatrix][yMatrix].parentY = 0;
+				worldMatrix[xMatrix][yMatrix].pathValue = 0;
+				worldMatrix[xMatrix][yMatrix].cost = 0;
 				worldMatrix[xMatrix][yMatrix].passable = true;
-			else
-				worldMatrix[xMatrix][yMatrix].passable = false;
 
-			xMatrix++;
+				for (int a = 0; a < 4; a++)
+				{
+					//if there is no block or the block is passable: add passable worldPlace
+					if (!(m_pBlocks[x][y] == NULL || m_pBlocks[x][y]->IsPassable()))
+						worldMatrix[xMatrix][yMatrix].passable = false;
+
+					if (a == 0)
+						y++;
+					else if (a == 1)
+						x++;
+					else if (a==2)
+						y--;
+				}
+
+				y += 2;
+				x--;
+			}
+
+			x += 2;
+			y = yStart;
 		}
+	}
+	else
+	{
+		for (int y = yStart; y <= yEnd; y++)
+		{
+			for (int x = xStart; x <= xEnd; x++)
+			{
+				worldMatrix[xMatrix][yMatrix].xPos = x * 100;
+				worldMatrix[xMatrix][yMatrix].yPos = y * 100;
+				worldMatrix[xMatrix][yMatrix].matrixXPos = xMatrix;
+				worldMatrix[xMatrix][yMatrix].matrixYPos = yMatrix;
+				worldMatrix[xMatrix][yMatrix].parentX = 0;
+				worldMatrix[xMatrix][yMatrix].parentY = 0;
+				worldMatrix[xMatrix][yMatrix].pathValue = 0;
+				worldMatrix[xMatrix][yMatrix].cost = 0;
 
-		xMatrix = 0;
-		yMatrix++;
+				//if there is no block or the block is passable: add passable worldPlace
+				if (m_pBlocks[x][y] == NULL || m_pBlocks[x][y]->IsPassable())
+					worldMatrix[xMatrix][yMatrix].passable = true;
+				else
+					worldMatrix[xMatrix][yMatrix].passable = false;
+
+				xMatrix++;
+			}
+
+			xMatrix = 0;
+			yMatrix++;
+		}
 	}
 
 	return worldMatrix;
@@ -2012,8 +2072,11 @@ bool CWorld::CheckCanJump(IntRect _living, bool _left)
 		if (y - 1 >= 0 && x - 1 >= 0)
 		{
 			//is there space to jump?
-			if ((m_pBlocks[x][y - 1] == NULL || m_pBlocks[x][y - 1]->IsPassable()) && (m_pBlocks[x -1][y - 1] == NULL || m_pBlocks[x-1][y - 1]->IsPassable()))
+			if ((m_pBlocks[x][y - 1] == NULL || m_pBlocks[x][y - 1]->IsPassable()) && (m_pBlocks[x - 1][y - 1] == NULL || m_pBlocks[x - 1][y - 1]->IsPassable()))
+			{
+				cout << "Can jump: true" << endl;
 				return true;
+			}
 		}
 	}
 	//if the living thing wants to jump to the right side
@@ -2024,11 +2087,14 @@ bool CWorld::CheckCanJump(IntRect _living, bool _left)
 		{
 			//is there space to jump?
 			if ((m_pBlocks[x][y - 1] == NULL || m_pBlocks[x][y - 1]->IsPassable()) && (m_pBlocks[x + 1][y - 1] == NULL || m_pBlocks[x + 1][y - 1]->IsPassable()))
+			{
+				cout << "Can jump: true" << endl;
 				return true;
+			}
 		}
 	}
 
-
+	cout << "Can jump: false" << endl;
 	return false;
 }
 
@@ -2041,12 +2107,18 @@ bool CWorld::CheckForBarrier(IntRect _living, bool _left)
 	int x = _living.left / 100;
 	int y = _living.top / 100;
 
+	if (_living.height > 120)
+		y++;
+
 	if (_left)
 	{
 		if (x - 1 >= 0)
 		{
 			if (m_pBlocks[x - 1][y] == NULL || m_pBlocks[x - 1][y]->IsPassable())
+			{
+				cout << "Is barrier: false" << endl;
 				return false;
+			}
 		}
 	}
 	else
@@ -2054,11 +2126,14 @@ bool CWorld::CheckForBarrier(IntRect _living, bool _left)
 		if (x + 1 < m_BlocksX)
 		{
 			if (m_pBlocks[x + 1][y] == NULL || m_pBlocks[x + 1][y]->IsPassable())
+			{
+				cout << "Is barrier: false" << endl;
 				return false;
+			}
 		}
 	}
 
-
+	cout << "Is barrier: true" << endl;
 	return true;
 }
 

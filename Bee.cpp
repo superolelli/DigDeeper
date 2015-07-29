@@ -18,6 +18,8 @@ void CBee::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, i
 	m_XVel = 0;
 	m_YVel = 0;
 
+	m_safe = false;
+
 	m_fFrozenTimer = 0;
 
 	//Init the attributes

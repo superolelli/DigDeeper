@@ -45,6 +45,6 @@ private:
 
 };
 
-
+BOOST_CLASS_VERSION(CItem, 0)
 
 #endif

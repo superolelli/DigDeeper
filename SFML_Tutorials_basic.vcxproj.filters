@@ -150,6 +150,9 @@
     <ClCompile Include="Ogre.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="SinCosLookup.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.hpp">
@@ -300,6 +303,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Ogre.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SinCosLookup.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

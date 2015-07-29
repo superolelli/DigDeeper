@@ -66,7 +66,7 @@ public:
 	vector<Vector2i> GetSpawnPlaces();
 
 	//returns a simple matrix of the current view of the blocks
-	vector < vector<SWorldPlace> > GetWorldMatrix();
+	vector < vector<SWorldPlace> > GetWorldMatrix(bool _big = false);
 
 	//is this block passable?
 	bool isBlockPassable(int _x, int _y);
@@ -301,7 +301,7 @@ private:
 
 };
 
-
+BOOST_CLASS_VERSION(CWorld, 0)
 
 
 

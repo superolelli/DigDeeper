@@ -109,14 +109,14 @@ void CInventory::Load(CWorld *_world, View *_view, CPlayer *_player, bool _beamN
 
 
 //adds an item to the inventory
-void CInventory::Take(CThing *_thing, int _amount)
+bool CInventory::Take(CThing *_thing, int _amount)
 {
 	list<SItem>::iterator i;
 
 	//Check if the item is already in the inventory and no tool or equipment
-	for(i = m_inventoryList.begin(); i != m_inventoryList.end(); i++)
+	for (i = m_inventoryList.begin(); i != m_inventoryList.end(); i++)
 	{
-		if(i->thing->getID() == _thing->getID() && i->thing->getID() < CTBREAK && i->thing->getID() != RECIPE)
+		if (i->thing->getID() == _thing->getID() && i->thing->getID() < CTBREAK && i->thing->getID() != RECIPE)
 		{
 			//if the spell is already in the inventory: return
 			if (i->thing->getID() == SPELL)
@@ -125,94 +125,94 @@ void CInventory::Take(CThing *_thing, int _amount)
 				CItem *currentItem = (CItem*)(*i).thing;
 
 				if (newItem->GetSpecialID() == currentItem->GetSpecialID())
-					return;
+					return false;
 			}
 
 			if (i->thing->getID() != SPELL)
 			{
-				//if the thing is a cooking book: merge the two books
-				if (i->thing->getID() == COOKINGBOOK)
-				{
-					//get the panels of books
-					CItem* book;
-					CItem* book2;
-					book = (CItem*)(i->thing);
-					book2 = (CItem*)(_thing);
-					CCookingBook *cookPanel = (CCookingBook*)m_world->GetPanel(book->GetSpecialID());
-					CCookingBook *cookPanel2 = (CCookingBook*)m_world->GetPanel(book2->GetSpecialID());
-
-					//get the recipes of the first book
-					vector<SItem> recipes = cookPanel2->GetContent();
-
-					//add the recipes to the second book
-					for (int counter = 0; counter < recipes.size(); counter++)
+					//if the thing is a cooking book: merge the two books
+					if (i->thing->getID() == COOKINGBOOK)
 					{
-						cookPanel->AddRecipe(recipes[counter].amount);
+						//get the panels of books
+						CItem* book;
+						CItem* book2;
+						book = (CItem*)(i->thing);
+						book2 = (CItem*)(_thing);
+						CCookingBook *cookPanel = (CCookingBook*)m_world->GetPanel(book->GetSpecialID());
+						CCookingBook *cookPanel2 = (CCookingBook*)m_world->GetPanel(book2->GetSpecialID());
+
+						//get the recipes of the first book
+						vector<SItem> recipes = cookPanel2->GetContent();
+
+						//add the recipes to the second book
+						for (int counter = 0; counter < recipes.size(); counter++)
+						{
+							cookPanel->AddRecipe(recipes[counter].amount);
+						}
+
+						//deletes the first panel
+						m_world->DeletePanel(book2->GetSpecialID());
 					}
 
-					//deletes the first panel
-					m_world->DeletePanel(book2->GetSpecialID());
+
+					//if it is, add the amount to it and delete the added thing
+					if (i->thing->getID() != COOKINGBOOK)
+						i->amount += _amount;
+
+					SAFE_DELETE(_thing);
+					return true;
 				}
-
-
-				//if it is, add the amount to it and delete the added thing
-				if (i->thing->getID() != COOKINGBOOK)
-					i->amount += _amount;
-
-				SAFE_DELETE(_thing);
-				return;
 			}
 		}
-	}
 
 
-	//Look for a free place in the beam
-	for(int a = 0; a < 10; a++)
-	{
-		if(m_inventory_beam_place_list[a].is_filled == false)
+		//Look for a free place in the beam
+		for (int a = 0; a < 10; a++)
 		{
-			SItem newItem;
-			newItem.amount = _amount;
-			newItem.position = a;
-			newItem.is_clicked = false;
-			newItem.thing = _thing;
-			newItem.thing->GetInventorySprite()->SetPos(static_cast<float>(m_inventory_beam_place_list[a].x +2), static_cast<float>(m_inventory_beam_place_list[a].y +2));
-			m_inventoryList.push_back(newItem);
-
-			m_inventory_beam_place_list[a].is_filled = true;
-			
-			return;
-		}
-	}
-
-	//if there was no place in the beam: return
-	if (_thing->getID() == SPELL)
-		return;
-
-	//Look for a free place in the inventory
-	for(int y = 0; y < 5; y++)
-	{
-		for(int x = 0; x < 5; x++)
-		{
-			if(m_inventory_place_list[x][y].is_filled == false)
+			if (m_inventory_beam_place_list[a].is_filled == false)
 			{
 				SItem newItem;
 				newItem.amount = _amount;
-				newItem.position = -1;
+				newItem.position = a;
 				newItem.is_clicked = false;
 				newItem.thing = _thing;
-				newItem.thing->GetInventorySprite()->SetPos(static_cast<float>(m_inventory_place_list[x][y].x +2), static_cast<float>(m_inventory_place_list[x][y].y +2));
+				newItem.thing->GetInventorySprite()->SetPos(static_cast<float>(m_inventory_beam_place_list[a].x + 2), static_cast<float>(m_inventory_beam_place_list[a].y + 2));
 				m_inventoryList.push_back(newItem);
 
-				m_inventory_place_list[x][y].is_filled = true;
+				m_inventory_beam_place_list[a].is_filled = true;
 
-				return;
+				return true;
 			}
 		}
 
-	}
+		//if there was no place in the beam: return
+		if (_thing->getID() == SPELL)
+			return false;
 
-	SAFE_DELETE(_thing);
+		//Look for a free place in the inventory
+		for (int y = 0; y < 5; y++)
+		{
+			for (int x = 0; x < 5; x++)
+			{
+				if (m_inventory_place_list[x][y].is_filled == false)
+				{
+					SItem newItem;
+					newItem.amount = _amount;
+					newItem.position = -1;
+					newItem.is_clicked = false;
+					newItem.thing = _thing;
+					newItem.thing->GetInventorySprite()->SetPos(static_cast<float>(m_inventory_place_list[x][y].x + 2), static_cast<float>(m_inventory_place_list[x][y].y + 2));
+					m_inventoryList.push_back(newItem);
+
+					m_inventory_place_list[x][y].is_filled = true;
+
+					return true;
+				}
+			}
+
+		}
+
+		return false;
 }
 
 
@@ -1026,4 +1026,15 @@ bool CInventory::IsAmountOfThing(int _ID, int _amount)
 void CInventory::RenderEquipment(int _x, int _y, bool _left)
 {
 	m_pEquipment->RenderEquipment(_x, _y, _left);
+}
+
+
+
+
+bool CInventory::IsFull()
+{
+	if (m_inventoryList.size() >= 35)
+		return true;
+	else
+		return false;
 }

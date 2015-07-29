@@ -12,13 +12,11 @@ void COgre::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, 
 	//Init the sprite
 	m_pOgre = new CLiving3Part;
 	
-	m_pOgre->Load(&g_pTextures->t_ogre_body, 100, 135, 2, 0, &g_pTextures->t_ogre_arm, 95, 50, 2, &g_pTextures->t_ogre_legs, 90, 65, 12, _x, _y);
-	m_pOgre->SetPartsPos(-6.0f, 9.0f, 35.0f, 0.0f, 2.0f, 100.0f);
-	m_pOgre->SetArmRotatingPoint(80.0f, 14.0f);
-	m_pOgre->SetHandPosition(8.0f, 40.0f);
+	m_pOgre->Load(&g_pTextures->t_ogre_body, 100, 135, 2, 0, &g_pTextures->t_ogre_arm, 250, 250, 10, &g_pTextures->t_ogre_legs, 90, 65, 12, _x, _y);
+	m_pOgre->SetPartsPos(-118.0f, -34.0f, -70.0f, 0.0f, 2.0f, 100.0f);
+	m_pOgre->SetArmRotatingPoint(190.0f, 112.0f);
+	m_pOgre->SetHandPosition(0, 0);
 
-	m_OgreClub.Load(&g_pTextures->t_ogre_club);
-	m_OgreClub.setRotatingPoint(26, 135);
 
 	//Init the attributes
 	m_Attributes.maxHealth = 100;
@@ -37,7 +35,7 @@ void COgre::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, 
 	//m_frozenSprite.Load(&g_pTextures->t_ice_goblin);
 
 	m_fLegsAnimState = 5;
-	m_fArmAnimState = 0;
+	m_fArmAnimState = 0; //3,99
 
 	m_fWaitToBeat = 0;
 	m_is_hitting = false;
@@ -46,6 +44,8 @@ void COgre::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, 
 
 	m_fallingSpeed = 0;
 	m_sideSpeed = 0;
+
+	nextStepDirection = 0;
 
 	//Init the state
 	m_State = IDLE;
@@ -64,6 +64,7 @@ void COgre::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, 
 		m_yPos = _y;
 
 		m_left = true;
+		m_safe = false;
 		m_Attributes.currentHealth = m_Attributes.maxHealth;
 	}
 }
@@ -168,7 +169,7 @@ void COgre::CheckXMovement()
 		if (m_left)
 		{
 			//is the goblin going?
-			if (m_State == WALKING && m_PointToGo.x != m_pOgre->GetRect().left)
+			if (m_State == WALKING && nextStepDirection == 0)
 			{
 				m_fXVel = -g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
 				m_fLegsAnimState -= 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
@@ -183,7 +184,7 @@ void COgre::CheckXMovement()
 		else
 		{
 			//is the goblin going?
-			if (m_State == WALKING && m_PointToGo.x != m_pOgre->GetRect().left)
+			if (m_State == WALKING && nextStepDirection == 2)
 			{
 				m_fXVel = g_pTimer->GetElapsedTime().asSeconds() * m_Attributes.speed;
 				m_fLegsAnimState += 8.0f * (m_Attributes.speed / 100) * g_pTimer->GetElapsedTime().asSeconds();
@@ -204,10 +205,16 @@ void COgre::CheckXMovement()
 
 
 
+
 //an ogre can't be thrown!!!
 void COgre::ThrowNpc(bool _left, int _strength)
 {
-	
+	if (_left)
+		m_sideSpeed = -_strength/2;
+	else
+		m_sideSpeed = _strength/2;
+
+	m_fallingSpeed = -150;
 }
 
 
@@ -254,112 +261,78 @@ void COgre::CheckState()
 
 	switch (m_State)
 	{
-		//if the goblin is idle: check if he should start walking
+		//if the ogre is idle: check if he should start walking
 	case(IDLE) :
 	{
-		m_fStateTime -= g_pTimer->GetElapsedTime().asSeconds();
-
-		//if the goblin spotted the player: calculate the path and set state to following
+		//if the ogre spotted the player: calculate the path and set state to following
 		if (m_pOgre->GetRect().intersects(viewRect))
-		{
-			m_PointToGo = findPath(m_pPlayer->GetRect().left + m_pPlayer->GetRect().width / 2, m_pPlayer->GetRect().top + m_pPlayer->GetRect().height / 2);
-			if (m_PointToGo.x != -1 && m_PointToGo.x != m_pOgre->GetRect().left + m_pOgre->GetRect().width / 2)
-			{
-				m_State = WALKING;
-
-				//set the direction
-				if (m_PointToGo.x < m_pOgre->GetRect().left + m_pOgre->GetRect().width / 2)
-				{
-					m_left = true;
-					m_fLegsAnimState = 5;
-				}
-				else if (m_PointToGo.x > m_pOgre->GetRect().left + m_pOgre->GetRect().width / 2)
-				{
-					m_left = false;
-					m_fLegsAnimState = 6;
-				}
-			}
-			else if (abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) > 50 && abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 120 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 80)
-			{
-					m_State = WALKING;
-			}
-
-		}
-		//if the time for being idle is up: seek a new point and start walking towards it
-		else if (m_fStateTime <= 0)
 		{
 			m_State = WALKING;
-			NewRandomDestination();
-		}
+		}	
 
-			//if the goblin is near the player: attack
-			if (abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 90 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 90)
-				m_State = ATTACKING;
 	}break;
-
 	case(WALKING) :
-	{
-		//if the goblin spotted the player: calculate the path and set state to following
-		if (m_pOgre->GetRect().intersects(viewRect))
-		{
-			m_PointToGo = findPath(m_pPlayer->GetRect().left + m_pPlayer->GetRect().width / 2, m_pPlayer->GetRect().top + m_pPlayer->GetRect().height / 2);
-
-			if (m_PointToGo.x == -1)
-			{
-				//if player wasn't reached
-				if (abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) > 60 && abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 120 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 80)
-				{
-					m_State = WALKING;
-				}
-				else
-					m_State = IDLE;
-			}
-			else if (m_PointToGo.x == m_pOgre->GetRect().left + m_pOgre->GetRect().width / 2)
-			{
-				m_State = IDLE;
-				if (m_left)
-					m_fLegsAnimState = 5;
-				else
-					m_fLegsAnimState = 6;
-			}
-			else
-			{
-				//set the direction if it has changed
-				if (m_PointToGo.x < m_pOgre->GetRect().left + m_pOgre->GetRect().width / 2 && m_left == false)
-				{
-					m_left = true;
-					m_fLegsAnimState = 5;
-				}
-				else if (m_PointToGo.x > m_pOgre->GetRect().left + m_pOgre->GetRect().width / 2 && m_left == true)
-				{
-					m_left = false;
-					m_fLegsAnimState = 6;
-				}
-			}
-
-		}
-
-		//if the ogre is near the player: attack
-		if (abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 90 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 90)
-			m_State = ATTACKING;
-	}break;
-
 	case(ATTACKING) :
 	{
-		if (m_fWaitToBeat <= 0 && !m_is_attacking)
+		//get next step to player
+		m_PointToGo = findPath(m_pPlayer->GetRect().left + m_pPlayer->GetRect().width / 2, m_pPlayer->GetRect().top + m_pPlayer->GetRect().height / 2);
+
+		//if ogre can't reach the player: just stand 
+		if (m_PointToGo.x == -1)
 		{
-			m_is_attacking = true;
-			m_is_hitting = true;
-			m_fArmAnimState = 110;
+			if (abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 140)
+			{
+				if (m_pOgre->GetRect().left < m_pPlayer->GetRect().left)
+					nextStepDirection = 2;
+				else
+					nextStepDirection = 0;
+			}
+			else
+				m_State = IDLE;
 		}
 		else
-			m_fWaitToBeat -= g_pTimer->GetElapsedTime().asSeconds();
-
-		//if the ogre isn't near the player: stop attacking
-		if (!(abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 90 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 90))
 		{
-			m_State = IDLE;
-			m_fWaitToBeat = 0;
+			//check direction of the next step
+			if (m_PointToGo.x / 100 > m_pOgre->GetRect().left / 100)
+			{
+				nextStepDirection = 2;
+				m_left = false;
+			}
+			else if (m_PointToGo.x / 100 < m_pOgre->GetRect().left / 100)
+			{
+				nextStepDirection = 0;
+				m_left = true;
+			}
+			else if (m_PointToGo.y / 100 > m_pOgre->GetRect().top / 100)
+				nextStepDirection = 3;
+			else if (m_PointToGo.y / 100 < m_pOgre->GetRect().top / 100)
+				nextStepDirection = 1;
+			else
+				m_State = IDLE;
+		}
+
+		//check if the goblin is attacking
+		if (abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 100 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 100)
+			m_State = ATTACKING;
+
+		//check if the goblin is attacking
+		if (m_State == ATTACKING)
+		{
+			if (m_fWaitToBeat <= 0 && !m_is_attacking)
+			{
+				m_is_attacking = true;
+				m_is_hitting = true;
+				m_fArmAnimState = 4.99;   //110
+			}
+			else
+				m_fWaitToBeat -= g_pTimer->GetElapsedTime().asSeconds();
+
+			//if the goblin isn't near the player: stop attacking
+			if (!(abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 100 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 100))
+			{
+				m_State = WALKING;
+				m_fWaitToBeat = 0;
+			}
 		}
 
 	}break;
@@ -375,8 +348,14 @@ void COgre::CheckState()
 
 	CheckArmAnimation();
 
+	//reset arm animation
 	if (!m_is_attacking)
-		m_pOgre->ResetArmRotation();
+	{
+		if (m_left)
+			m_fArmAnimState = 4.99f;
+		else
+			m_fArmAnimState = 5.0f;
+	}
 }
 
 
@@ -413,21 +392,15 @@ void COgre::NewRandomDestination()
 
 void COgre::Render()
 {
-	m_OgreClub.SetPos(m_pOgre->GetHandPos(m_left).x, m_pOgre->GetHandPos(m_left).y);
-
 	if (m_left)
 	{
-		m_OgreClub.setRotation(m_fArmAnimState);
 		m_pOgre->Render(0, m_fLegsAnimState);
-		m_OgreClub.Render(g_pFramework->GetRenderWindow());
-		m_pOgre->RenderSecondPart(0);
+		m_pOgre->RenderSecondPart(int(m_fArmAnimState));
 	}
 	else
 	{
-		m_OgreClub.setRotation(-m_fArmAnimState);
 		m_pOgre->Render(1, m_fLegsAnimState);
-		m_OgreClub.Render(g_pFramework->GetRenderWindow());
-		m_pOgre->RenderSecondPart(1);
+		m_pOgre->RenderSecondPart(int(m_fArmAnimState));
 	}
 
 	/*if (m_State == FROZEN)
@@ -467,17 +440,30 @@ void COgre::CheckArmAnimation()
 {
 	if (m_is_attacking)
 	{
-		//if arm reached lowest point: set arm to highest point
-		if (m_fArmAnimState <= -40)
+		if (m_left)
 		{
-			m_fWaitToBeat = 0.3;
-			m_is_attacking = false;
-			m_is_hitting = false;
+			//if arm reached lowest point: set arm to highest point
+			if (m_fArmAnimState <= 0) 
+			{
+				m_fWaitToBeat = 0.3;
+				m_is_attacking = false;
+				m_is_hitting = false;
+			}
+
+			m_fArmAnimState -= g_pTimer->GetElapsedTime().asSeconds() * 15;
 		}
+		else
+		{
+			//if arm reached lowest point: set arm to highest point
+			if (m_fArmAnimState >= 10) 
+			{
+				m_fWaitToBeat = 0.3;
+				m_is_attacking = false;
+				m_is_hitting = false;
+			}
 
-		m_fArmAnimState -= g_pTimer->GetElapsedTime().asSeconds() * 500;
-
-		m_pOgre->RotateArm(m_fArmAnimState);
+			m_fArmAnimState += g_pTimer->GetElapsedTime().asSeconds() * 15;
+		}
 	}
 }
 
@@ -499,5 +485,37 @@ bool COgre::IsHitting()
 
 IntRect COgre::GetWeaponRect()
 {
-	 return IntRect(m_pOgre->GetHandPos(m_left).x - 5, m_pOgre->GetHandPos(m_left).y - 6, 10, 15);
+	switch (int(m_fArmAnimState))
+	{
+	case(0) :
+		return IntRect(m_pOgre->GetHandPos(m_left).x, m_pOgre->GetHandPos(m_left).y + 156, 138, 58);
+		break;
+	case(1):
+		return IntRect(m_pOgre->GetHandPos(m_left).x + 4, m_pOgre->GetHandPos(m_left).y + 96, 120, 58);
+		break;
+	case(2):
+		return IntRect(m_pOgre->GetHandPos(m_left).x + 49, m_pOgre->GetHandPos(m_left).y + 85, 71, 106);
+		break;
+	case(3):
+		return IntRect(m_pOgre->GetHandPos(m_left).x + 109, m_pOgre->GetHandPos(m_left).y + 4, 49, 123);
+		break;
+	case(4):
+		return IntRect(m_pOgre->GetHandPos(m_left).x + 172, m_pOgre->GetHandPos(m_left).y + 82, 71, 67);
+		break;
+	case(5):
+		return IntRect(m_pOgre->GetHandPos(m_left).x + 9, m_pOgre->GetHandPos(m_left).y + 82, 71, 67);
+		break;
+	case(6) :
+		return IntRect(m_pOgre->GetHandPos(m_left).x + 93, m_pOgre->GetHandPos(m_left).y + 4, 49, 123);
+		break;
+	case(7) :
+		return IntRect(m_pOgre->GetHandPos(m_left).x + 145, m_pOgre->GetHandPos(m_left).y + 85, 71, 106);
+		break;
+	case(8) :
+		return IntRect(m_pOgre->GetHandPos(m_left).x + 125, m_pOgre->GetHandPos(m_left).y + 96, 120, 58);
+		break;
+	case(9) :
+		return IntRect(m_pOgre->GetHandPos(m_left).x + 112, m_pOgre->GetHandPos(m_left).y + 156, 138, 58);
+		break;
+	}
 }

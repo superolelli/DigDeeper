@@ -31,7 +31,7 @@ public:
 	void RenderDamageIndicator(){g_pSignMachine->Render();}
 
 	//adds a npc
-	void AddNpc(int _ID, int _x, int _y, int _specialID = -1);
+	void AddNpc(int _ID, int _x, int _y, bool m_safe = false, int _specialID = -1);
 
 	void Quit();
 
@@ -102,5 +102,7 @@ private:
 	void SpawnNpcs();                //spawns new npcs
 
 };
+
+BOOST_CLASS_VERSION(CNpcMachine, 0)
 
 #endif

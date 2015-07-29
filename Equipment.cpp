@@ -90,6 +90,17 @@ void CEquipment::InitEquipment(int _ID, bool _loaded)
 				m_rarity = 1;
 			}
 		}break;
+	case DIADOCHITARMOUR:
+	{
+		m_pCarriedEquipmentSprite->Load(&g_pTextures->t_equipment_diadochitarmour, 2, 53, 60);
+		if (!_loaded)
+		{
+			m_Attributes.armour = 3;
+			m_Attributes.healthRegeneration = 2;
+			m_EquipID = BODY;
+			m_rarity = 1;
+		}
+	}break;
 	case IRONRING:
 	case ARCANUSRING:
 	case VERYRARERING:

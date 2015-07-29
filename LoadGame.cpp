@@ -46,8 +46,14 @@ void CLoadGame::Init()
 	m_returnNumber = 0;
 	m_scrollPosition = 0;
 	
+
+	char* var = getenv("APPDATA");
+	string pathString = var;
+	pathString.append("/Dig Deeper/Saves/");
+
+
 	directory_iterator end_itr;
-	for(directory_iterator itr("Data/Saves"); itr != end_itr; itr++)
+	for(directory_iterator itr(pathString); itr != end_itr; itr++)
 	{
 		if(is_directory(itr->status()))
 		{
@@ -150,8 +156,13 @@ void CLoadGame::RenderButtons()
 	{
 		if(m_GamePath.length() > 0)
 		{
+			//get path
+			char* var = getenv("APPDATA");
+			string pathString = var;
+			pathString.append("/Dig Deeper/Saves/");
+
 			path Path;
-			Path.append("Data/Saves/" + m_GamePath);
+			Path.append(pathString + m_GamePath);
 			remove_all(Path);
 		
 			ib = m_pButtonList.begin();

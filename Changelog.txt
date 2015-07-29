@@ -1347,3 +1347,42 @@ ZUKÜNFITGE ÄNDERUNGEN:
 - Müll hinzugefügt (mit Animation)
 
 ------------------------------------------------------
+24.07.2015
+
+- Es wurde ein "Schließen-Knopf" im Inventarmenü hinzugefügt
+- Kampfstein hinzugefügt
+- Stalagtiten werden nun bei Doppelhöhlen nicht mehr in der Luft platziert
+- Es können nun keine Dinge aufgenommen werden, wenn das Inventar voll ist
+
+------------------------------------------------------
+25.07.2015
+
+- Diadochitrüstung hinzugefügt
+
+------------------------------------------------------
+26.07.2015
+
+- Pathfinding von Goblins und Ogern enorm verbessert
+- Oger werden nun von Schlägen leicht nach hinten geworfen
+- Spieler nimmt nun Schaden, wenn er eine größere Distanz nach unten fällt
+- Bugfix: Attribute von Konsumierbarem wurden nicht gespeichert
+- Bugfix: Spiel stürzte ab, wenn NPCs zu weit nach oben kamen
+
+------------------------------------------------------
+27.07.2015
+
+- Magiergoblin eingefügt
+- Dig Deeper - Wiki gestartet
+
+------------------------------------------------------
+28.07.2015
+
+- Highscore, Einstellungen und Spielstände werden nun extern gespeichert (%appdata%)
+- Ab dieser Version (0) sollten alle Spielstände nun kompatibel sein
+
+------------------------------------------------------
+29.07.2015
+
+- Schlaganimation vom Oger verbessert
+
+------------------------------------------------------

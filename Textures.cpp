@@ -56,6 +56,7 @@ void TextureLoading::LoadTextures()
 	t_buttonBuilding.loadFromFile("Data/Sprites/Buttons/button_building.png");
 	t_buttonAttributes.loadFromFile("Data/Sprites/Buttons/button_attributes.png");
 	t_buttonMagic.loadFromFile("Data/Sprites/Buttons/button_magic.png");
+	t_buttonClose.loadFromFile("Data/Sprites/Buttons/close_button.png");
 
 	t_inventoryWindow.loadFromFile("Data/Sprites/Inventory/InventoryNew.png");
 	t_inventoryBeam.loadFromFile("Data/Sprites/Inventory/Inventory.png", IntRect(704, 2, 1000, 100));
@@ -159,6 +160,8 @@ void TextureLoading::LoadTextures()
 	t_buildingInfo_cauldron.loadFromFile("Data/Sprites/Building/building_info_cauldron.png");
 	t_buildingInfo_battleaxe.loadFromFile("Data/Sprites/Building/building_info_battleaxe.png");
 	t_buildingInfo_sawdust.loadFromFile("Data/Sprites/Building/building_info_sawdust.png");
+	t_buildingInfo_battlestone.loadFromFile("Data/Sprites/Building/building_info_battlestone.png");
+	t_buildingInfo_diadochitarmour.loadFromFile("Data/Sprites/Building/building_info_diadochit_armour.png");
 
 	t_blockTextures_dirt.loadFromFile("Data/Sprites/Objects/Blocks/dirt.png");
 	t_blockTextures_stone.loadFromFile("Data/Sprites/Objects/Blocks/stone.png");
@@ -265,6 +268,8 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_sawdust.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/sawdust_inventory.png");
 	t_blockInventoryTexture_mushroom.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/mushroom_inventory.png");
 	t_blockInventoryTexture_diadochit.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/diadochit_inventory.png");
+	t_blockInventoryTexture_battlestone.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/battlestone_inventory.png");
+	t_blockInventoryTexture_diadochitarmour.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/diadochit_armour_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
@@ -326,18 +331,22 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_sawdust.loadFromFile("Data/Sprites/Objects/LittleItems/sawdust_little.png");
 	t_blockLittleTexture_mushroom.loadFromFile("Data/Sprites/Objects/LittleItems/mushroom_little.png");
 	t_blockLittleTexture_diadochit.loadFromFile("Data/Sprites/Objects/LittleItems/diadochit_little.png");
+	t_blockLittleTexture_battlestone.loadFromFile("Data/Sprites/Objects/LittleItems/battlestone_little.png");
+	t_blockLittleTexture_diadochitarmour.loadFromFile("Data/Sprites/Objects/LittleItems/diadochit_armour_little.png");
 
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");
 	t_tool_sword.loadFromFile("Data/Sprites/Objects/Tools/sword_carried.png");
 	t_tool_lantern.loadFromFile("Data/Sprites/Objects/Tools/lantern_carried.png");
 	t_tool_battleaxe.loadFromFile("Data/Sprites/Objects/Tools/battleaxe_carried.png");
+	t_tool_battlestone.loadFromFile("Data/Sprites/Objects/Tools/battlestone_carried.png");
 
 	t_equipment_iron_helmet.loadFromFile("Data/Sprites/Objects/Equipment/iron_helmet.png");
 	t_equipment_iron_armour.loadFromFile("Data/Sprites/Objects/Equipment/iron_armour.png");
 	t_equipment_iron_trousers.loadFromFile("Data/Sprites/Objects/Equipment/iron_trousers.png");
 	t_equipment_magic_hat.loadFromFile("Data/Sprites/Objects/Equipment/magic_hat.png");
 	t_equipment_candle.loadFromFile("Data/Sprites/Objects/Equipment/candle_helmet.png");
+	t_equipment_diadochitarmour.loadFromFile("Data/Sprites/Objects/Equipment/diadochit_armour.png");
 
 	t_breakingAnimation.loadFromFile("Data/Sprites/Objects/Blocks/breaking_animation.png");
 	t_smoke.loadFromFile("Data/Sprites/Objects/Blocks/smoke2.png");
@@ -357,9 +366,12 @@ void TextureLoading::LoadTextures()
 	t_goblin_body3.loadFromFile("Data/Sprites/Living/goblin_upper_body4.png");
 	t_goblin_arm3.loadFromFile("Data/Sprites/Living/goblin_arm4.png");
 	t_goblin_body_chest.loadFromFile("Data/Sprites/Living/goblin_upper_body_chest.png");
+	t_goblin_body4.loadFromFile("Data/Sprites/Living/goblin_upper_body5.png");
+	t_goblin_arm4.loadFromFile("Data/Sprites/Living/goblin_arm5.png");
+	t_goblin_legs3.loadFromFile("Data/Sprites/Living/goblin_legs4.png");
 
 	t_ogre_body.loadFromFile("Data/Sprites/Living/ogre_body.png");
-	t_ogre_arm.loadFromFile("Data/Sprites/Living/ogre_arm.png");
+	t_ogre_arm.loadFromFile("Data/Sprites/Living/ogre_arm_animated.png");
 	t_ogre_legs.loadFromFile("Data/Sprites/Living/ogre_legs.png");
 	t_ogre_club.loadFromFile("Data/Sprites/Living/ogre_club.png");
 

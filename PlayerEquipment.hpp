@@ -68,5 +68,6 @@ private:
 	void SetTooltip(CThing *_thing);
 };
 
+BOOST_CLASS_VERSION(CPlayerEquipment, 0)
 
 #endif

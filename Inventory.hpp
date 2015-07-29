@@ -25,7 +25,7 @@ public:
 	void Render(IntRect &_playerRect);
 
 	//Insert things into the inventory, the amount is normally 1
-	void Take(CThing *_thing, int _amount = 1);
+	bool Take(CThing *_thing, int _amount = 1);
 
 	//deletes a thing in the inventory
 	void DeleteThing(int _ID, int _amount);
@@ -53,6 +53,9 @@ public:
 
 	//Renders the equipment
 	void RenderEquipment(int _x, int _y, bool _left);
+
+	//is the inventory full?
+	bool IsFull();
 
 
 private:
@@ -253,7 +256,7 @@ private:
 };
 
 
-
+BOOST_CLASS_VERSION(CInventory, 0)
 
 
 

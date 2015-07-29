@@ -125,6 +125,7 @@
     <ClCompile Include="Projectiles.cpp" />
     <ClCompile Include="Rims.cpp" />
     <ClCompile Include="SignMachine.cpp" />
+    <ClCompile Include="SinCosLookup.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="StringInput.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Placeable.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PlayerEquipment.hpp" />
+    <ClInclude Include="SinCosLookup.hpp" />
     <ClInclude Include="singleton.hpp" />
     <ClInclude Include="Sound.hpp" />
     <ClInclude Include="Sprite.hpp" />

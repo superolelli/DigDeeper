@@ -103,6 +103,7 @@ const int PICKAXE = 101;
 const int SWORD = 102;
 const int LANTERN = 103;
 const int BATTLEAXE = 104;
+const int BATTLESTONE = 105;
 
 const int TEBREAK = 130;             //the Tool-Equipment-Break shows, where the equipment section begins
 
@@ -113,6 +114,7 @@ const int IRONRING = 134;
 const int ARCANUSRING = 135;
 const int MAGICHAT = 136;
 const int CANDLE = 137;
+const int DIADOCHITARMOUR = 138;
 const int VERYRARERING = 200;
 
 #pragma endregion
@@ -165,6 +167,7 @@ const int NORMALGOBLIN = 1;
 const int WARRIORGOBLIN = 2;
 const int KNIGHTGOBLIN = 3;
 const int CHESTGOBLIN = 4;
+const int MAGEGOBLIN = 5;
 
 #pragma endregion
 

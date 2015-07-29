@@ -63,6 +63,6 @@ private:
 
 };
 
-
+BOOST_CLASS_VERSION(CMagicMenu, 0)
 
 #endif

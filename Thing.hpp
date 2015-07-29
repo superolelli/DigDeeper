@@ -45,7 +45,7 @@ protected:
 
 };
 
-
+BOOST_CLASS_VERSION(CThing, 0)
 
 
 

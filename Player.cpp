@@ -15,6 +15,7 @@ CPlayer::CPlayer()
 	m_pPanelBeam = NULL;
 	m_pExpBeam = NULL;
 	m_pLifeBeam = NULL;
+	m_pCloseButton = NULL;
 	m_ActiveEffects.clear();
 }
 
@@ -35,6 +36,7 @@ CPlayer::~CPlayer()
 	SAFE_DELETE(m_PanelMagic.m_Sprite);
 	SAFE_DELETE(m_pExpBeam);
 	SAFE_DELETE(m_pLifeBeam);
+	SAFE_DELETE(m_pCloseButton);
 
 	for (int i = 0; i < NUMBER_OF_EFFECTS; i++)
 	{
@@ -95,6 +97,9 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 	m_PanelMagic.m_Sprite->Load(&g_pTextures->t_buttonMagic, 2, 250, 75);
 	m_PanelMagic.m_Sprite->SetPos(m_pPanelBeam->GetRect().left + 750, m_pPanelBeam->GetRect().top);
 	m_PanelMagic.m_isClicked = false;
+
+	m_pCloseButton = new CButton;
+	m_pCloseButton->Load(&g_pTextures->t_buttonClose, m_pPanelBeam->GetRect().left + m_pPanelBeam->GetRect().width, m_pPanelBeam->GetRect().top + 12, 3);
 
 	for (int i = 0; i < NUMBER_OF_EFFECTS; i++)
 	{
@@ -293,6 +298,11 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 		book2->SetSpecialID(m_pWorld->AddPanel(COOKINGBOOK, 0, 0));
 		m_pInventory->Take(book2);
 
+		CEquipment *darmour;
+		darmour = new CEquipment;
+		darmour->InitEquipment(DIADOCHITARMOUR);
+		m_pInventory->Take(darmour);
+
 
 		m_pMagicMenu->AddMagicPoints(10);
 
@@ -332,6 +342,8 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 
 	m_FallingSpeed = 0;
 	m_SideSpeed = 0;
+
+	m_fFallingDistance = 0;
 
 	m_State.breaking = false;
 	m_State.climbing = false;
@@ -396,6 +408,9 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view, bool _inve
 	m_PanelMagic.m_Sprite->SetPos(m_pPanelBeam->GetRect().left + 750, m_pPanelBeam->GetRect().top);
 	m_PanelMagic.m_isClicked = false;
 
+	m_pCloseButton = new CButton;
+	m_pCloseButton->Load(&g_pTextures->t_buttonClose, m_pPanelBeam->GetRect().left + m_pPanelBeam->GetRect().width, m_pPanelBeam->GetRect().top + 12, 3);
+
 	m_pLifeBeam = new CBeam();
 	m_pLifeBeam->Load(&g_pTextures->t_lifeBeam, &g_pTextures->t_lifeFrame, &m_Attributes.currentHealth, &m_modifications.maxHealth);
 	m_pLifeBeam->SetPos(20, 10);
@@ -426,6 +441,8 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view, bool _inve
 
 	m_FallingSpeed = 0;
 	m_SideSpeed = 0;
+
+	m_fFallingDistance = 0;
 
 	m_State.breaking = false;
 	m_State.climbing = false;
@@ -496,6 +513,7 @@ Vector2f CPlayer::CheckMovement()
 			if(CheckCollisions())
 			{
 				m_fYVel = 0;
+				m_fFallingDistance = 0;
 				//cout <<"Collided in y direction" << endl;
 			}
 		}
@@ -507,6 +525,15 @@ Vector2f CPlayer::CheckMovement()
 			m_State.jumping = false;
 			//	cout <<"Reached ground" << endl;
 		}
+
+		//do damage if player fell long way down
+		if (m_fFallingDistance >= 400)
+		{
+			int damage = ((m_fFallingDistance - 400) / 100) * 20;
+			DoDamage(damage - damage * (float)((float)(GetPlayerAttributes().armour)/100.0f));
+		}
+
+		m_fFallingDistance = 0;
 	}
 	//If he hasn't collide with anything he must be falling and you can't jump, while falling ;)
 	else
@@ -518,6 +545,17 @@ Vector2f CPlayer::CheckMovement()
 
 	CheckArmAnimation();
 
+
+	//check if the player felt down 
+	if (m_fYVel > 0)
+	{
+		m_fFallingDistance += m_fYVel;
+	}
+
+
+	stringstream stream;
+	stream << "Fallen distance: " << m_fFallingDistance;
+	g_pFramework->WriteToLog(INFO, stream.str());
 
 	//Move the dwarf
 	m_pDwarf->Move((int)m_fXVel, (int)m_fYVel);
@@ -925,6 +963,15 @@ void CPlayer::RenderInventory()
 	{
 		//render the panels
 		m_pPanelBeam->Render(g_pFramework->GetRenderWindow());
+
+		//if the player wants to close the menu
+		if (m_pCloseButton->Render(g_pFramework->keyStates.leftMouseUp))
+		{
+			m_pInventory->SetOpen(false);
+			m_pBuildingMenu->SetOpen(false);
+			m_pCharacterInfo->SetOpen(false);
+			m_pMagicMenu->SetOpen(false);
+		}
 	
 		//was the inventory button clicked?
 		if(m_PanelInventory.m_Sprite->GetRect().contains(Mouse::getPosition()) && Mouse::isButtonPressed(Mouse::Left))

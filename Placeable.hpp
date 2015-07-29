@@ -51,8 +51,6 @@ private:
 	}
 	BOOST_SERIALIZATION_SPLIT_MEMBER();
 
-
-
 	int m_Hardness;                                //the hardness of the placeable
 	int m_SpecialID;                                //a settable ID for different things (e.g. counting furnances, chests etc.) (doors: the frame)
 	int m_Priority;                               //the priority for overlapping
@@ -72,6 +70,6 @@ private:
 	 int GetRubbish();                           //gets random thing
 };
 
-
+BOOST_CLASS_VERSION(CPlaceable, 0)
 
 #endif

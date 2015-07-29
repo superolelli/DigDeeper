@@ -24,8 +24,13 @@ void COptions::Init()
 	m_pInventoryNumbersButton = new CButton;
 
 	//load the current settings
+	//path Path;
+	//Path.append("Data/Settings.stt");
+
+	char* var = getenv("APPDATA");
 	path Path;
-	Path.append("Data/Settings.stt");
+	Path = var;
+	Path.append("/Dig Deeper/Settings.stt");
 
 	if (boost::filesystem::exists(Path))
 	{
@@ -102,7 +107,12 @@ void COptions::Run()
 	}
 
 
-	ofstream Output("Data/Settings.stt");
+//	ofstream Output("Data/Settings.stt");
+	char* var = getenv("APPDATA");
+	string Path = var;
+	Path.append("/Dig Deeper/Settings.stt");
+
+	ofstream Output(Path);
 	Output.write((char *)&m_Settings, sizeof(m_Settings));
 	Output.close();
 

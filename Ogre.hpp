@@ -34,7 +34,6 @@ private:
 
 	CLiving3Part *m_pOgre;          //the ogre
 
-	CSprite m_OgreClub;             //the club of the ogre
 	//CSprite m_frozenSprite;
 
 	float m_fStateTime;
@@ -53,6 +52,8 @@ private:
 	int m_fallingSpeed;               //the speed with which the ogre falls
 	int m_sideSpeed;
 
+	int nextStepDirection;
+
 	void CheckState();                 //checks the state
 	void NewRandomDestination();        //gets a new random destination
 	void CheckXMovement();                //checks the movement in x-direction
@@ -61,6 +62,6 @@ private:
 	void CheckArmAnimation();
 };
 
-
+BOOST_CLASS_VERSION(COgre, 0)
 
 #endif

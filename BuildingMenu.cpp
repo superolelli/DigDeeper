@@ -300,6 +300,21 @@ void CBuildingMenu::InitRecipe(SBuildingItem *_recipe)
 			_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_sawdust);
 			_recipe->resources[WOOD] = 1;
 		}break;
+		case(BATTLESTONE) :
+		{
+			_recipe->Name = "Kampfstein";
+			_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_battlestone);
+			_recipe->resources[DIADOCHIT] = 1;
+			_recipe->resources[COAL] = 1;
+		}break;
+		case(DIADOCHITARMOUR) :
+		{
+			_recipe->Name = "Diadochitrüstung";
+			_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_diadochitarmour);
+			_recipe->resources[DIADOCHIT] = 8;
+			_recipe->resources[GLUE] = 3;
+			_recipe->resources[COAL] = 1;
+		}break;
 		}
 
 		_recipe->m_pInfoSprite->SetPos(m_pBuildingMenu->GetRect().left + 250, m_pBuildingMenu->GetRect().top + 4);
@@ -407,6 +422,8 @@ void CBuildingMenu::FillRecipeList()
 	m_notAvailableRecipes.push_back(CAULDRON);
 	m_notAvailableRecipes.push_back(BATTLEAXE);
 	m_notAvailableRecipes.push_back(SAWDUST);
+	m_notAvailableRecipes.push_back(BATTLESTONE);
+	m_notAvailableRecipes.push_back(DIADOCHITARMOUR);
 
 
 	m_chosenItem = pickaxe;
@@ -455,7 +472,7 @@ void CBuildingMenu::Render()
 				}
 
 				//if there are enough resources
-				if(enough_resources)
+				if(enough_resources && !m_pInventory->IsFull())
 				{
 					//if thing is a placeable
 					if(m_chosenItem.ID < PIBREAK)

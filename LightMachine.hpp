@@ -46,6 +46,8 @@ private:
 	bool m_fastLight;
 
 	Vector2f IsLineIntersecting(Vertex _firstPoint, Vertex _secondPoint, int _angle, int _radius);               //checks, wether a line intersects with a block
+	Vector2f IsLineIntersectingHV(Vector2f _point, Vector2f _steps, int _radius);
+	Vector2f IsLineIntersectingDiagonal(Vector2f _point, Vector2f _steps);
 	Vector2f IsBeamIntersecting(Vector2f _firstPoint, Vector2f _lastPoint);
 
 

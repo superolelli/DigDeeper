@@ -47,7 +47,7 @@ void CNpcMachine::Quit()
 
 
 
-void CNpcMachine::AddNpc(int _ID, int _x, int _y, int _specialID)
+void CNpcMachine::AddNpc(int _ID, int _x, int _y, bool _safe, int _specialID)
 {
 	switch(_ID)
 	{
@@ -56,6 +56,7 @@ void CNpcMachine::AddNpc(int _ID, int _x, int _y, int _specialID)
 		{
 			CBee *bee = new CBee;
 			bee->Init(_x, _y, m_pWorld, m_pPlayer, m_pView);
+			bee->SetSafe(_safe);
 			m_Npcs.push_back(bee);
 		}break;
 
@@ -64,6 +65,7 @@ void CNpcMachine::AddNpc(int _ID, int _x, int _y, int _specialID)
 		{
 			CGoblin *goblin = new CGoblin;
 			goblin->Init(_x, _y, m_pWorld, m_pPlayer, m_pView, _specialID);
+			goblin->SetSafe(_safe);
 			m_Npcs.push_back(goblin);
 		}break;
 
@@ -72,6 +74,7 @@ void CNpcMachine::AddNpc(int _ID, int _x, int _y, int _specialID)
 		{
 			COgre *ogre = new COgre;
 			ogre->Init(_x, _y, m_pWorld, m_pPlayer, m_pView);
+			ogre->SetSafe(_safe);
 			m_Npcs.push_back(ogre);
 		}break;
 	}
@@ -89,8 +92,26 @@ void CNpcMachine::CheckAllNpcs()
 	list<CNpc*>::iterator i;
 	for(i = m_Npcs.begin(); i != m_Npcs.end();)
 	{
+		//if npc is out of range: despawn it
+		if (abs((*i)->GetRect().left - m_pPlayer->GetRect().left) > 2500 || abs((*i)->GetRect().top - m_pPlayer->GetRect().top) > 2500)
+		{
+			if (!((*i)->GetID() == GOBLIN && ((CGoblin*)(*i))->IsChested()) && (*i)->m_safe == false)
+			{
+				(*i)->Quit();
+				SAFE_DELETE((*i));
+				i = m_Npcs.erase(i);
+				continue;
+			}
+			else if ((*i)->m_safe)
+			{
+				i++;
+				continue;
+			}
+		}
+
+
 		//if the npc despawned: delete it
-		if((*i)->CheckNpc() == false)
+		if ((*i)->CheckNpc() == false)
 		{
 			(*i)->Quit();
 			SAFE_DELETE((*i));
@@ -98,18 +119,6 @@ void CNpcMachine::CheckAllNpcs()
 			continue;
 		}
 
-
-		//if npc is out of range: despawn it
-		if (abs((*i)->GetRect().left - m_pPlayer->GetRect().left) > 2500 || abs((*i)->GetRect().top - m_pPlayer->GetRect().top) > 2500)
-		{
-			if (!((*i)->GetID() == GOBLIN && ((CGoblin*)(*i))->IsChested()))
-			{
-				(*i)->Quit();
-				SAFE_DELETE((*i));
-				i = m_Npcs.erase(i);
-				continue;
-			}
-		}
 
 		//if the arm changed direction the npc is hittable
 		if(m_LastArmUp != m_pPlayer->GetArmGoingUp())
@@ -220,6 +229,8 @@ void CNpcMachine::CheckAllNpcs()
 
 		i++;
 	}
+
+
 
 
 	m_LastArmUp = m_pPlayer->GetArmGoingUp();

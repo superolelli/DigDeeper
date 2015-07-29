@@ -59,6 +59,7 @@ private:
 	void PauseGame();
 	void SaveGame();
 	void SaveHighscore();
+	void ClearHighscore();
 	void Zoom();
 
 

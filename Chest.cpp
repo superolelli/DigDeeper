@@ -180,6 +180,8 @@ void CChest::Render()
 						{
 							CConsumable *con = (CConsumable*)m_chest[x][y].thing;
 
+							number << " (konsumierbar)";
+
 							if (con->GetAttributes().armour != 0)
 								number << "\nRüstung: " << con->GetAttributes().armour;
 							if (con->GetAttributes().breaking_speed != 0)

@@ -41,6 +41,6 @@ protected:
 
 };
 
-
+BOOST_CLASS_VERSION(CPanel, 0)
 
 #endif

@@ -64,5 +64,6 @@ private:
 	int m_rarity;                                   //the rarity of the tool
 };
 
+BOOST_CLASS_VERSION(CTool, 0)
 
 #endif

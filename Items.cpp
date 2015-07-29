@@ -243,6 +243,18 @@ void CItem::Init(int _ID, bool _loaded)
 		if (!_loaded)
 			m_Name = "Diadochit";
 	}break;
+	case(BATTLESTONE) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_battlestone);
+		if (!_loaded)
+			m_Name = "Kampfstein";
+	}break;
+	case(DIADOCHITARMOUR) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_diadochitarmour);
+		if (!_loaded)
+			m_Name = "Diadochitrüstung";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)
@@ -256,7 +268,7 @@ void CItem::Init(int _ID, bool _loaded)
 
 void CItem::InitRecipe()
 {
-	m_specialID = rand()%10 + 131;
+	m_specialID = rand()%11 + 131;
 
 	switch(m_specialID)
 	{
@@ -282,21 +294,28 @@ void CItem::InitRecipe()
 		m_Name.append("(Laterne)");
 		m_specialID = LANTERN;
 		break;
+	case(DIADOCHITARMOUR) :
+		m_Name.append("(Diadochitrüstung)");
+		break;
 	case(137) :
 		m_Name.append("(Bienenkiste)");
 		m_specialID = BEEHOUSE;
 		break;
-	case(138) :
+	case(139) :
 		m_Name.append("(Kessel)");
 		m_specialID = CAULDRON;
 		break;
-	case(139) :
+	case(140) :
 		m_Name.append("(Kampfaxt)");
 		m_specialID = BATTLEAXE;
 		break;
-	case(140) :
+	case(141) :
 		m_Name.append("(Sägespäne)");
 		m_specialID = SAWDUST;
+		break;
+	case(142) :
+		m_Name.append("(Kampfstein)");
+		m_specialID = BATTLESTONE;
 		break;
 	}
 
@@ -349,6 +368,12 @@ void CItem::SetSpecialID(int _ID)
 			break;
 		case(SAWDUST) :
 			m_Name.append("(Sägespäne)");
+			break;
+		case(BATTLESTONE) :
+			m_Name.append("(Kampfstein)");
+			break;
+		case(DIADOCHITARMOUR) :
+			m_Name.append("(Diadochitrüstung)");
 			break;
 		}
 	}

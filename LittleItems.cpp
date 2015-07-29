@@ -258,6 +258,14 @@ void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 	{
 		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_diadochit);
 	}break;
+	case(BATTLESTONE) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_battlestone);
+	}break;
+	case(DIADOCHITARMOUR) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_diadochitarmour);
+	}break;
 	}
 
 

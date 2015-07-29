@@ -76,4 +76,6 @@ private:
 	CSprite m_Smoke;                //the smoke sprite
 };
 
+BOOST_CLASS_VERSION(CFurnance, 0)
+
 #endif

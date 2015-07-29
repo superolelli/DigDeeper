@@ -15,6 +15,7 @@
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/base_object.hpp>
+#include <boost/serialization/version.hpp>
 #include <boost/foreach.hpp>
 #include "SFML\Graphics.hpp"
 #include "SFML\System.hpp"
@@ -29,6 +30,7 @@
 #include "Constants.hpp"
 #include "KeyStates.hpp"
 #include "Filelogger.hpp"
+#include "SinCosLookup.hpp"
 
 using namespace std;
 using namespace sf;

@@ -27,8 +27,10 @@ public:
 	int GetState(){return m_State;}
 	void SetFrozen(float _frozenTime);
 	void PlayHitSound(){ m_hitSound.play(); }
+	void SetSafe(bool _safe){ m_safe = _safe; }
 
 	bool m_wasHit;                          //was the npc hit?
+	bool m_safe;
 
 protected:
 	friend class boost::serialization::access;
@@ -41,6 +43,7 @@ protected:
 		ar & m_xPos;
 		ar & m_yPos;
 		ar & m_Attributes.currentHealth;
+		ar & m_safe;
 	}
 
 	//finds the shortest path to a destination
@@ -62,6 +65,6 @@ protected:
 
 };
 
-
+BOOST_CLASS_VERSION(CNpc, 0)
 
 #endif

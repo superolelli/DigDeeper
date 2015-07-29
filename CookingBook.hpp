@@ -55,5 +55,6 @@ private:
 	int m_currentPage;
 };
 
+BOOST_CLASS_VERSION(CCookingBook, 0)
 
 #endif

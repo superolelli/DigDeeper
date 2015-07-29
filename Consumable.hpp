@@ -27,6 +27,7 @@ private:
 	void save(Archive & ar, const unsigned int version) const
 	{
 		ar & boost::serialization::base_object<CItem>(*this);
+		ar & m_Attributes;
 	}
 
 	//load the building menu
@@ -34,6 +35,7 @@ private:
 	void load(Archive & ar, const unsigned int version)
 	{
 		ar & boost::serialization::base_object<CItem>(*this);
+		ar & m_Attributes;
 	}
 	BOOST_SERIALIZATION_SPLIT_MEMBER();
 
@@ -43,6 +45,6 @@ private:
 
 };
 
-
+BOOST_CLASS_VERSION(CConsumable, 0)
 
 #endif

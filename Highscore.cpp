@@ -45,8 +45,16 @@ void CHighscore::Quit()
 
 void CHighscore::Run()
 {
+	char* var = getenv("APPDATA");
+	string Path = var;
+	Path.append("/Dig Deeper/Highscore.hsc");
+
+	//if there is now highscore file: make new one and clear it
+	if (!boost::filesystem::exists(path(Path)))
+		clearHighscore();
+	
 	//open the highscore file
-	ifstream Input("Data/Saves/Highscore.hsc", ios::binary);
+	ifstream Input(Path, ios::binary);
 	Input.read((char *)&m_highscore, sizeof(m_highscore));
 	//close the highscore file
 	Input.close();
@@ -243,20 +251,40 @@ void CHighscore::RenderHighscore()
 
 void CHighscore::clearHighscore()
 {
+	char* var = getenv("APPDATA");
+	string Path = var;
+	Path.append("/Dig Deeper/Highscore.hsc");
+
 	for (int i = 0; i < 10; i++)
 	{
 		m_highscore[i].m_class = -1;
 		m_highscore[i].m_level = 0;
 		m_highscore[i].m_name = "Niemand";
+
+		m_highscore[i].m_attributes.armour = 0;
+		m_highscore[i].m_attributes.breakingSpeed = 0;
+		m_highscore[i].m_attributes.criticalChance = 0;
+		m_highscore[i].m_attributes.criticalDamage = 0;
+		m_highscore[i].m_attributes.currentExp = 0;
+		m_highscore[i].m_attributes.currentMana = 0;
+		m_highscore[i].m_attributes.currentHealth = 0;
+		m_highscore[i].m_attributes.healthRegeneration = 0;
+		m_highscore[i].m_attributes.luck = 0;
+		m_highscore[i].m_attributes.manaRegeneration = 0;
+		m_highscore[i].m_attributes.maxExp = 0;
+		m_highscore[i].m_attributes.maxHealth = 0;
+		m_highscore[i].m_attributes.maxMana = 0;
+		m_highscore[i].m_attributes.strength = 0;
+		m_highscore[i].m_attributes.speed = 0;
 	}
 
-	ofstream Output1("Data/Saves/Highscore.hsc", ios::binary);
+	ofstream Output1(Path, ios::binary);
 	Output1.write((char *)&m_highscore, sizeof(m_highscore));
 	Output1.close();
 
 
 	//open the highscore file
-	ifstream Input("Data/Saves/Highscore.hsc", ios::binary);
+	ifstream Input(Path, ios::binary);
 	Input.read((char *)&m_highscore, sizeof(m_highscore));
 	Input.close();
 

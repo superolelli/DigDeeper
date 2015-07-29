@@ -69,6 +69,7 @@ public:
 	Texture t_buttonBuilding;
 	Texture t_buttonAttributes;
 	Texture t_buttonMagic;
+	Texture t_buttonClose;
 
 	Texture t_inventoryWindow;                     //the inventory
 	Texture t_inventoryBeam;                        //the inventory beam
@@ -164,6 +165,8 @@ public:
 	Texture t_buildingInfo_cauldron;
 	Texture t_buildingInfo_battleaxe;
 	Texture t_buildingInfo_sawdust;
+	Texture t_buildingInfo_battlestone;
+	Texture t_buildingInfo_diadochitarmour;
 
 	Texture t_blockTextures_dirt;                     //the dirt textures
 	Texture t_blockTextures_stone;                      //the stone texture
@@ -272,6 +275,8 @@ public:
 	Texture t_blockInventoryTexture_sawdust;
 	Texture t_blockInventoryTexture_mushroom;
 	Texture t_blockInventoryTexture_diadochit;
+	Texture t_blockInventoryTexture_battlestone;
+	Texture t_blockInventoryTexture_diadochitarmour;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -334,6 +339,8 @@ public:
 	Texture t_blockLittleTexture_sawdust;
 	Texture t_blockLittleTexture_mushroom;
 	Texture t_blockLittleTexture_diadochit;
+	Texture t_blockLittleTexture_battlestone;
+	Texture t_blockLittleTexture_diadochitarmour;
 	
 
 
@@ -342,6 +349,7 @@ public:
 	Texture t_tool_sword;
 	Texture t_tool_lantern;
 	Texture t_tool_battleaxe;
+	Texture t_tool_battlestone;
 	
 	//the "carried" texture of the equipment
 	Texture t_equipment_iron_helmet;
@@ -349,6 +357,7 @@ public:
 	Texture t_equipment_iron_trousers;
 	Texture t_equipment_magic_hat;
 	Texture t_equipment_candle;
+	Texture t_equipment_diadochitarmour;
 
 	Texture t_breakingAnimation;                          //the breaking animation for placeables
 	Texture t_smoke;                                      //the smoke cloud animation
@@ -362,12 +371,15 @@ public:
 	Texture t_goblin_body;                       //a goblin
 	Texture t_goblin_body2;
 	Texture t_goblin_body3;
+	Texture t_goblin_body4;
 	Texture t_goblin_body_chest;
 	Texture t_goblin_legs;
 	Texture t_goblin_legs2;
+	Texture t_goblin_legs3;
 	Texture t_goblin_arm;
 	Texture t_goblin_arm2;
 	Texture t_goblin_arm3;
+	Texture t_goblin_arm4;
 
 	Texture t_ogre_body;
 	Texture t_ogre_arm;
