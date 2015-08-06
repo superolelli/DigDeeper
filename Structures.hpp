@@ -172,10 +172,8 @@ struct SItem
 	template<class Archive>
 	void save(Archive & ar, const unsigned int version) const
 	{
-		cout <<"About to save an item" << endl;
 		if(amount > 0)
 		{
-			cout << "Amount greater than zero" << endl;
 			//show, that the amount is greater than 0
 			int d = 1;
 			ar & d;
@@ -184,16 +182,20 @@ struct SItem
 			//save the ID for checking
 			ar & d;
 			//save the thing
-			cout <<"Going to save the thing now..." << endl;
 			if(thing->getID() < PIBREAK)
 			{
 				CPlaceable* placeable = (CPlaceable*)thing;
 				ar & placeable;
 			}
-			else if(thing->getID() < CTBREAK)
+			else if(thing->getID() < ICBREAK)
 			{
 				CItem * item = (CItem*)thing;
 				ar & item;
+			}
+			else if (thing->getID() < CTBREAK)
+			{
+				CConsumable *con = (CConsumable*)thing;
+				ar & con;
 			}
 			else if(thing->getID() < TEBREAK)
 			{
@@ -206,7 +208,6 @@ struct SItem
 				ar & equipment;
 			}
 
-			cout << "Saved the thing" << endl;
 			//save the item's attributes
 			ar & amount;
 			ar & position;
@@ -217,11 +218,9 @@ struct SItem
 			y = thing->GetInventorySprite()->GetRect().top;
 			ar & x;
 			ar & y;
-			cout <<"Saved the other attributes" << endl;
 		}
 		else
 		{
-			cout <<"Amount not greater than zero" << endl;
 			int a = 0;
 			ar & a;
 		}
@@ -249,7 +248,7 @@ struct SItem
 				//load the thing
 				thing = newThing;
 			}
-			else if(a < CTBREAK)
+			else if(a < ICBREAK)
 			{
 				//make a new thing with this ID
 				CItem *newThing;
@@ -258,6 +257,13 @@ struct SItem
 				//Init the sprites etc.
 				newThing->Init(a, true);
 				//load the thing
+				thing = newThing;
+			}
+			else if (a < CTBREAK)
+			{
+				CConsumable *newThing;
+				ar >> newThing;
+				newThing->InitConsumable(a);
 				thing = newThing;
 			}
 			else if(a < TEBREAK)

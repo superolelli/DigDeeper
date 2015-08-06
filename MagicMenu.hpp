@@ -61,6 +61,8 @@ private:
 	Text m_levelText;
 	int m_MagicPoints;
 
+	string GetTooltip(int _spellID);
+
 };
 
 BOOST_CLASS_VERSION(CMagicMenu, 0)

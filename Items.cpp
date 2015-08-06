@@ -421,6 +421,11 @@ void CItem::InitSpell()
 		m_Name = "Lichtkugel";
 		break;
 
+	case(MANASHIELD) :
+		m_pInventorySprite->Load(&g_pTextures->t_spellInventoryTexture_manashield);
+		m_Name = "Manaschild";
+		break;
+
 	default:
 		m_Name = "Error";
 	}

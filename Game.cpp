@@ -42,10 +42,6 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	m_pWorld = new CWorld;
 	m_pPlayer = new CPlayer;
 
-	//load the current settings
-	//path Path;
-	/*Path.append("Data/Settings.stt");*/
-
 	char* var = getenv("APPDATA");
 	path Path;
 	Path = var;
@@ -79,7 +75,7 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 
 	if(!_loaded)
 	{
-		m_NpcMachine.AddNpc(OGRE, 1500, 100, false);
+		m_NpcMachine.AddNpc(GOBLIN, 1500, 100, false);
 	}
 
 	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);
@@ -184,6 +180,7 @@ void CGame::Run()
 
 		Zoom();
 		
+		//check for the pause menu
 		if(g_pFramework->keyStates.escapeDown)
 		{
 			PauseGame();
@@ -195,6 +192,24 @@ void CGame::Run()
 
 			g_pFramework->ProcessEvents();
 		}
+		
+		//check for the help page
+		if (g_pFramework->keyStates.f1)
+		{
+			CHelpPage help;
+			help.Init();
+			help.Run();
+			help.Quit();
+
+			g_pFramework->Update();
+			g_pFramework->Update();
+			g_pFramework->Clear();
+			g_pFramework->GetRenderWindow()->setView(m_View);
+
+			g_pFramework->ProcessEvents();
+		}
+
+
 		cout << "Check music" << endl;
 
 		CheckMusic();

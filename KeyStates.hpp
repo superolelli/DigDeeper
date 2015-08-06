@@ -18,6 +18,7 @@ struct KeyStates
 	bool subtract;
 	bool backspace;
 	bool f3;
+	bool f1;
 
 	bool text_entered;
 	char text_input;

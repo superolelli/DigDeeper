@@ -1384,5 +1384,31 @@ ZUKÜNFITGE ÄNDERUNGEN:
 29.07.2015
 
 - Schlaganimation vom Oger verbessert
+- Sin-/Cos-Berechnungen in Lookup-Tabelle verlagert
+
+------------------------------------------------------
+30.07.2015
+
+- Bugfix: Spiel stürzte ab, wenn Oger nach rechts schlug
+- Oger spawnen nun in Höhlen
+- Wenn der Oger schlägt wirbelt nun Staub vom Boden auf
+- Oger können nicht mehr springen, sondern zerstören einfach alles, was im Weg ist
+
+------------------------------------------------------
+31.07.2015
+
+- Manaschild hinzugefügt
+
+------------------------------------------------------
+04.08.2015
+
+- Tooltips im Magiemenü hinzugefügt
+- Bugfix: Nach dem skillen war der Knopf für das Inventar gesperrt
+
+------------------------------------------------------
+06.08.2015
+
+- Ingame-Hilfeseite hinzugefügt (noch nicht fertig)
+- Wiki weiter gefüllt
 
 ------------------------------------------------------

@@ -125,18 +125,20 @@ public:
 
 	Texture t_magicMenu;                            //the magic menu
 	Texture t_buttonPlus;
-	Texture t_spell[5];                             //the buttons for the spells in the menu
+	Texture t_spell[6];                             //the buttons for the spells in the menu
 	Texture t_fireballLeft;
 	Texture t_fireballRight;
 	Texture t_explosion;
 	Texture t_healing;
 	Texture t_alchemy;
 	Texture t_lightsphere;
+	Texture t_manashield;
 	Texture t_rubbishAnimation;
 	Texture t_iceballLeft;
 	Texture t_iceballRight;
 	Texture t_ice_goblin;
 	Texture t_ice_bee;
+	Texture t_ice_ogre;
 
 
 	//the information for the things
@@ -282,6 +284,7 @@ public:
 	Texture t_spellInventoryTexture_ice;
 	Texture t_spellInventoryTexture_alchemy;
 	Texture t_spellInventoryTexture_light;
+	Texture t_spellInventoryTexture_manashield;
 
 	//the little item pictures of the things
 	Texture t_blockLittleTexture_dirt;
@@ -384,7 +387,7 @@ public:
 	Texture t_ogre_body;
 	Texture t_ogre_arm;
 	Texture t_ogre_legs;
-	Texture t_ogre_club;
+	Texture t_ground_hit;
 
 	Shader s_drunkShader;
 

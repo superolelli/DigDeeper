@@ -30,11 +30,12 @@ private:
 		ar & m_left;
 		ar & m_PointToGo.x;
 		ar & m_PointToGo.y;
+		ar & m_safe;
 	}
 
 	CLiving3Part *m_pOgre;          //the ogre
 
-	//CSprite m_frozenSprite;
+	CSprite m_frozenSprite;
 
 	float m_fStateTime;
 
@@ -60,6 +61,7 @@ private:
 	void CheckYMovement();                //checks the movement in y-direction
 	bool CheckCollision();                //Checks, if the ogre collided with anything
 	void CheckArmAnimation();
+	void AddDust();
 };
 
 BOOST_CLASS_VERSION(COgre, 0)

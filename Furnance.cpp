@@ -229,6 +229,13 @@ void CFurnance::CheckThings()
 				if (m_fBurningTime >= 4.0f)
 					ChangeBurningThings();
 			}break;
+			case(WAX) :
+			{
+				m_Smoke.Render(g_pFramework->GetRenderWindow(), m_fAnimState);
+
+				if (m_fBurningTime >= 4.0f)
+					ChangeBurningThings();
+			}break;
 			}
 		}
 }

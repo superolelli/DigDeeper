@@ -98,6 +98,7 @@ void CCharacterInfo::Render()
 
 	if(is_open)
 	{	
+		g_pFramework->WriteToLog(INFO, "Inventory is open");
 		m_pCharacterWindow->Render(g_pFramework->GetRenderWindow());
 
 		//show the level
@@ -199,6 +200,7 @@ void CCharacterInfo::Render()
 		if (m_pLevelUpButton->Render(g_pFramework->keyStates.leftMouseUp))
 		{
 			is_open = true;
+			m_pPlayer->SetMenuOpen(2);
 		}
 	}
 

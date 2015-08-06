@@ -431,6 +431,11 @@ void CWorld::GenerateCave(int _x, int _y)
 						m_pBlocks[x][y]->Init(ROOMFILL);
 						m_pNpcMachine->AddNpc(GOBLIN, x*100, y*100, true);				
 					}
+					else if (type == 3)
+					{
+						m_pBlocks[x][y]->Init(ROOMFILL);
+						m_pNpcMachine->AddNpc(OGRE, x * 100, (y-1) * 100, true);
+					}
 					else
 					{
 						m_pBlocks[x][y]->Init(ROOMFILL);
@@ -2112,7 +2117,7 @@ bool CWorld::CheckForBarrier(IntRect _living, bool _left)
 
 	if (_left)
 	{
-		if (x - 1 >= 0)
+		if (x - 1 >= 0 && y < m_BlocksY)
 		{
 			if (m_pBlocks[x - 1][y] == NULL || m_pBlocks[x - 1][y]->IsPassable())
 			{
@@ -2123,7 +2128,7 @@ bool CWorld::CheckForBarrier(IntRect _living, bool _left)
 	}
 	else
 	{
-		if (x + 1 < m_BlocksX)
+		if (x + 1 < m_BlocksX && y < m_BlocksY)
 		{
 			if (m_pBlocks[x + 1][y] == NULL || m_pBlocks[x + 1][y]->IsPassable())
 			{
@@ -2267,4 +2272,61 @@ void CWorld::DoAlchemy(int _level)
 		projectile.m_fAnimState = 0;
 		g_pProjectiles->NewProjectile(projectile);
 	
+}
+
+
+
+
+void CWorld::DeleteBlock(int _x, int _y)
+{
+	list<CPanel*>::iterator p;
+
+	if (_x >= 0 && _y >= 0 && _x < m_BlocksX && _y < m_BlocksY)
+	{
+		if (m_pBlocks[_x][_y] != NULL)
+		{
+			AddLittleItem(m_pBlocks[_x][_y]->GetLittleID(), m_pBlocks[_x][_y]->GetRect().left + 23, m_pBlocks[_x][_y]->GetRect().top + 20);
+
+			//if a furnance or else was destroyed: delete the panel
+			if (m_pBlocks[_x][_y]->getID() == FURNANCE || m_pBlocks[_x][_y]->getID() == CHEST || m_pBlocks[_x][_y]->getID() == CAULDRON)
+			{
+				vector<SItem> droppedItems;
+
+				//seek for the panel
+				for (p = m_PanelList.begin(); p != m_PanelList.end(); p++)
+				{
+					//if found: delete it
+					if (m_pBlocks[_x][_y]->GetSpecialID() == (*p)->GetNumber())
+					{
+						droppedItems = (*p)->GetContent();
+						SAFE_DELETE(*p);
+						m_PanelList.erase(p);
+						break;
+					}
+				}
+
+				//add the content as little items
+				BOOST_FOREACH(SItem s, droppedItems)
+				{
+					for (int amount = 0; amount < s.amount; amount++)
+					{
+
+						if (amount > 0)
+						{
+							AddLittleItem(s.thing->getID(), m_pBlocks[_x][_y]->GetRect().left + 23, m_pBlocks[_x][_y]->GetRect().top - 20);
+						}
+						else
+						{
+							CLittleItem item;
+							item.Init(s.thing, m_pBlocks[_x][_y]->GetRect().left + 23 + (rand() % 50 - 25), m_pBlocks[_x][_y]->GetRect().top - 20 + (rand() % 50 - 25));
+							item.SetVel(Vector2f(0, -150.0f));
+							m_LittleItemList.push_back(item);
+						}
+					}
+				}
+			}
+
+			SAFE_DELETE(m_pBlocks[_x][_y]);
+		}
+	}
 }

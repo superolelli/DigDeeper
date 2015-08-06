@@ -74,7 +74,7 @@ void CProjectiles::CheckProjectiles()
 		collided = false;
 
 		//check for explosions and healing
-		if (i->m_ID == EXPLOSION || i->m_ID == HEALING || i->m_ID == ALCHEMYANIMATION || i->m_ID == RUBBISHANIMATION)
+		if (i->m_ID == EXPLOSION || i->m_ID == HEALING || i->m_ID == ALCHEMYANIMATION || i->m_ID == RUBBISHANIMATION || i->m_ID == DUSTANIMATION)
 		{
 			i->m_fAnimState += 20 * g_pTimer->GetElapsedTime().asSeconds();
 
@@ -110,11 +110,22 @@ void CProjectiles::CheckProjectiles()
 				continue;
 			}
 		}
+		else if (i->m_ID == MANASHIELDPROJECTILE)
+		{
+			i->m_Sprite->SetPos(m_pPlayer->GetRect().left - 30, m_pPlayer->GetRect().top - 20);
+			i->m_fFlown -= g_pTimer->GetElapsedTime().asSeconds();
+
+			if (i->m_fFlown <= 0)
+			{
+				i = m_Projectiles.erase(i);
+				continue;
+			}
+		}
 
 
 
 
-		if (i->m_ID != LIGHTSPHERE)
+		if (i->m_ID != LIGHTSPHERE && i->m_ID != MANASHIELDPROJECTILE)
 		{
 			//check for collisions
 			if (i->m_fXVel < 0)
@@ -184,7 +195,7 @@ void CProjectiles::CheckProjectiles()
 	
 
 		//check if projectile collides with player 
-		if (m_pPlayer->GetRect().intersects(i->m_Sprite->GetRect()) && !i->m_fromPlayer)
+		if (m_pPlayer->GetRect().intersects(i->m_Sprite->GetRect()) && !i->m_fromPlayer && i->m_Damage > 0)
 		{
 			m_pPlayer->DoDamage(i->m_Damage - (i->m_Damage * (m_pPlayer->GetPlayerAttributes().armour / 100)));
 

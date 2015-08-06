@@ -263,13 +263,14 @@ const int BIG = 3;
 
 #pragma region Spells
 
-const int AMOUNTOFSPELLS = 5;
+const int AMOUNTOFSPELLS = 6;
 
 const int FIREBALL = 0;
 const int HEAL = 1;
 const int ICE = 2;
 const int ALCHEMY = 3;
 const int LIGHT = 4;
+const int MANASHIELD = 5;
 
 #pragma endregion
 
@@ -284,6 +285,8 @@ const int ICEBALLPROJECTILE = 4;
 const int ALCHEMYANIMATION = 5;
 const int LIGHTSPHERE = 6;
 const int RUBBISHANIMATION = 7;
+const int DUSTANIMATION = 8;
+const int MANASHIELDPROJECTILE = 9;
 
 #pragma endregion
 

@@ -10,6 +10,7 @@
 #include "Profiler.hpp"
 #include "Projectiles.hpp"
 #include "StringInput.hpp"
+#include "HelpPage.hpp"
 
 
 class CGame

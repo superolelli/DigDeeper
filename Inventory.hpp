@@ -79,10 +79,15 @@ private:
 				CPlaceable* placeable = (CPlaceable*)s.thing;
 				ar & placeable;
 			}
-			else if(s.thing->getID() < CTBREAK)
+			else if(s.thing->getID() < ICBREAK)
 			{
 				CItem * item = (CItem*)s.thing;
 				ar & item;
+			}
+			else if (s.thing->getID() < CTBREAK)
+			{
+				CConsumable *con = (CConsumable*)s.thing;
+				ar & con;
 			}
 			else if(s.thing->getID() < TEBREAK)
 			{
@@ -148,12 +153,27 @@ private:
 				item.thing->GetInventorySprite()->SetPos(x, y);
 				m_inventoryList.push_back(item);
 			}
-			else if(a < CTBREAK)
+			else if(a < ICBREAK)
 			{
 				CItem *thing;
 				ar & thing;
 				thing->Init(a, true);
-				cout << "Inited item" << endl;
+				SItem item;
+				item.thing = thing;
+				ar & item.amount;
+				ar & item.position;
+				ar & item.is_clicked;
+				int x, y;
+				ar & x;
+				ar & y;
+				item.thing->GetInventorySprite()->SetPos(x, y);
+				m_inventoryList.push_back(item);
+			}
+			else if (a < CTBREAK)
+			{
+				CConsumable *thing;
+				ar & thing;
+				thing->InitConsumable(a);
 				SItem item;
 				item.thing = thing;
 				ar & item.amount;

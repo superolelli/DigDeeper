@@ -2,6 +2,11 @@ Dig Deeper, version 0.2
 Log file created
 
 Init mainframe...
+Set new ID: 8
+Set new ID: 9
+Deleted Cookingbook
+Initialized Game...
+Deleted Cookingbook
 
 
 0 warnings

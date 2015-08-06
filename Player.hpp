@@ -52,6 +52,7 @@ public:
 	void SubstractMana(int _mana){ m_Attributes.currentMana -= _mana; if (m_Attributes.currentMana < 0){ m_Attributes.currentMana = 0; } } //substracts the amount of mana
 	void DoAlchemy(int _level);   //tries alchemy
 	bool IsInventoryFull(){ return m_pInventory->IsFull(); }
+	void SetMenuOpen(int _menu);
 
 	SToolAttributes GetPlayerAttributes();
 	SPlayerAttributes GetPlayerBasicAttributes(){ return m_Attributes; }

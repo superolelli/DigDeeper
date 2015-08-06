@@ -44,10 +44,10 @@ void CFramework::Update()
 
 
 //fills the background black
-void CFramework::Clear()
+void CFramework::Clear(Color _color)
 {
-	m_pRealWindow->clear();
-	m_pWindow->clear();
+	m_pRealWindow->clear(_color);
+	m_pWindow->clear(_color);
 }
 
 
@@ -152,6 +152,9 @@ void CFramework::ProcessEvents()
 
 					if (event.key.code == Keyboard::F3)
 						keyStates.f3 = true;
+
+					if (event.key.code == Keyboard::F1)
+						keyStates.f1 = true;
 					
 				}break;
 
@@ -203,6 +206,7 @@ void CFramework::ClearKeyStates()
 	keyStates.subtract = false;
 	keyStates.backspace = false;
 	keyStates.f3 = false;
+	keyStates.f1 = false;
 
 	keyStates.text_entered = false;
 	keyStates.text_input = 'a';

@@ -299,6 +299,8 @@ void CInventory::Render(IntRect &_playerRect)
 	//If the inventory is open: Render the window and it's content
 	if(is_open)
 	{
+		g_pFramework->WriteToLog(INFO, "Inventory is open");
+
 		//Renders the window
 		m_pInventoryWindow->Render(g_pFramework->GetRenderWindow());
 
@@ -876,7 +878,7 @@ void CInventory::Render(IntRect &_playerRect)
 					//cast the spell
 					m_pPlayer->CastSpell(spell->GetSpecialID());
 				}
-				//if the player wants to consum a consumable
+				//if the player wants to consume a consumable
 				else if (CarriedObjectFramePos == i->position && g_pFramework->keyStates.rightMouseUp && i->thing->getID() > ICBREAK && i->thing->getID() < CTBREAK)
 				{
 					CConsumable *con;

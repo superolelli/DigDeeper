@@ -71,6 +71,9 @@ public:
 	//is this block passable?
 	bool isBlockPassable(int _x, int _y);
 
+	//deletes a block
+	void DeleteBlock(int _x, int _y);
+
 	//tries alchemy
 	void DoAlchemy(int _level);
 

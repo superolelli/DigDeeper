@@ -552,11 +552,6 @@ Vector2f CPlayer::CheckMovement()
 		m_fFallingDistance += m_fYVel;
 	}
 
-
-	stringstream stream;
-	stream << "Fallen distance: " << m_fFallingDistance;
-	g_pFramework->WriteToLog(INFO, stream.str());
-
 	//Move the dwarf
 	m_pDwarf->Move((int)m_fXVel, (int)m_fYVel);
 
@@ -674,7 +669,7 @@ void CPlayer::ThrowPlayer(bool _left, int _strength)
 void CPlayer::CheckYMovement()
 { 
 	//Checks wether the up key is pressed and sets the dwarf jumping, if he isn't already
-	if(Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::W))
+	if(Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Space))
 	{
 		if(!m_State.jumping && !m_State.climbing)
 		{
@@ -1050,6 +1045,20 @@ void CPlayer::RenderInventory()
 	m_pBuildingMenu->Render();
 	m_pCharacterInfo->Render();
 	m_pMagicMenu->Render();
+}
+
+
+
+void CPlayer::SetMenuOpen(int _menu)
+{
+	m_PanelInventory.m_isClicked = false;
+	m_PanelAttributes.m_isClicked = true;
+	m_PanelBuilding.m_isClicked = false;
+	m_PanelMagic.m_isClicked = false;
+
+	m_pInventory->SetOpen(false);
+	m_pBuildingMenu->SetOpen(false);
+	m_pMagicMenu->SetOpen(false);
 }
 
 

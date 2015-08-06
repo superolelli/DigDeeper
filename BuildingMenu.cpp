@@ -151,7 +151,7 @@ void CBuildingMenu::InitRecipe(SBuildingItem *_recipe)
 			}break;
 		case(WOODSTAFF):
 			{
-				_recipe->Name = "Stab";
+				_recipe->Name = "Holzstab";
 				_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_woodstaff);
 				_recipe->resources[WOOD] = 1;
 				_recipe->amountOfProducts = 2;
@@ -446,6 +446,7 @@ void CBuildingMenu::Render()
 	//if it is open
 	if(is_open)
 	{
+		g_pFramework->WriteToLog(INFO, "Buildingmenu is open");
 		list<SBuildingItem>::iterator i;
 		map<int, int>::iterator m;
 

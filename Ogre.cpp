@@ -23,7 +23,7 @@ void COgre::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, 
 	m_Attributes.armour = 4;
 	m_Attributes.speed = 130;
 	m_Attributes.strength = 40;
-	m_Attributes.exp = 30;
+	m_Attributes.exp = 35;
 
 	
 
@@ -32,10 +32,10 @@ void COgre::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, 
 
 	m_fFrozenTimer = 0;
 
-	//m_frozenSprite.Load(&g_pTextures->t_ice_goblin);
+	m_frozenSprite.Load(&g_pTextures->t_ice_ogre);
 
 	m_fLegsAnimState = 5;
-	m_fArmAnimState = 0; //3,99
+	m_fArmAnimState = 4.99; 
 
 	m_fWaitToBeat = 0;
 	m_is_hitting = false;
@@ -96,6 +96,7 @@ bool COgre::CheckCollision()
 
 bool COgre::CheckNpc()
 {
+	cout << "Check npc" << endl;
 	m_fXVel = 0;
 	m_fYVel = 0;
 
@@ -143,6 +144,8 @@ bool COgre::CheckNpc()
 
 	m_xPos = m_pOgre->GetRect().left;
 	m_yPos = m_pOgre->GetRect().top;
+
+	cout << "Checked npc" << endl;
 
 	//return false if the ogre is outside the world
 	if (m_pOgre->GetRect().left + m_pOgre->GetRect().width < 0 || m_pOgre->GetRect().left > m_pWorld->GetDimensions().x * 100)
@@ -222,11 +225,26 @@ void COgre::ThrowNpc(bool _left, int _strength)
 
 void COgre::CheckYMovement()
 {
+	IntRect ogreRect = m_pOgre->GetRect();
+	ogreRect.top += 100;
+	ogreRect.height -= 100;
+
+	if (!m_left)
+		ogreRect.left += 30;
+
 	//jump if needed
-	if (m_pWorld->CheckForBarrier(m_pOgre->GetRect(), m_left) && m_pWorld->CheckCanJump(m_pOgre->GetRect(), m_left) && m_jumping == false)
+	if (m_pWorld->CheckForBarrier(ogreRect, m_left) && m_jumping == false)
 	{
-		m_jumping = true;
-		m_fallingSpeed = -350;
+		if (m_is_attacking == false)
+		{
+			m_is_attacking = true;
+			m_is_hitting = true;
+
+			if (m_left)
+				m_fArmAnimState = 4.99;
+			else
+				m_fArmAnimState = 5.0f;
+		}
 	}
 
 
@@ -311,9 +329,18 @@ void COgre::CheckState()
 				m_State = IDLE;
 		}
 
-		//check if the goblin is attacking
-		if (abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 100 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 100)
-			m_State = ATTACKING;
+		if (m_left)
+		{
+			//check if the goblin is attacking
+			if (abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 100 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 100)
+				m_State = ATTACKING;
+		}
+		else
+		{
+			//check if the goblin is attacking
+			if (abs(m_pOgre->GetRect().left + m_pOgre->GetRect().width - m_pPlayer->GetRect().left) < 100 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 100)
+				m_State = ATTACKING;
+		}
 
 		//check if the goblin is attacking
 		if (m_State == ATTACKING)
@@ -322,16 +349,32 @@ void COgre::CheckState()
 			{
 				m_is_attacking = true;
 				m_is_hitting = true;
-				m_fArmAnimState = 4.99;   //110
+
+				if (m_left)
+					m_fArmAnimState = 4.99;
+				else
+					m_fArmAnimState = 5.0f;
 			}
 			else
 				m_fWaitToBeat -= g_pTimer->GetElapsedTime().asSeconds();
 
-			//if the goblin isn't near the player: stop attacking
-			if (!(abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 100 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 100))
+			if (m_left)
 			{
-				m_State = WALKING;
-				m_fWaitToBeat = 0;
+				//if the goblin isn't near the player: stop attacking
+				if (!(abs(m_pOgre->GetRect().left - m_pPlayer->GetRect().left) < 100 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 100))
+				{
+					m_State = WALKING;
+					m_fWaitToBeat = 0;
+				}
+			}
+			else
+			{
+				//check if the goblin is attacking
+				if (!(abs(m_pOgre->GetRect().left + m_pOgre->GetRect().width - m_pPlayer->GetRect().left) < 100 && abs(m_pOgre->GetRect().top - m_pPlayer->GetRect().top) < 100))
+				{
+					m_State = WALKING;
+					m_fWaitToBeat = 0;
+				}
 			}
 		}
 
@@ -403,11 +446,11 @@ void COgre::Render()
 		m_pOgre->RenderSecondPart(int(m_fArmAnimState));
 	}
 
-	/*if (m_State == FROZEN)
+	if (m_State == FROZEN)
 	{
-		m_frozenSprite.SetPos(m_pGoblin->GetRect().left - 5, m_pGoblin->GetRect().top);
+		m_frozenSprite.SetPos(m_pOgre->GetRect().left - 5, m_pOgre->GetRect().top - 10);
 		m_frozenSprite.Render(g_pFramework->GetRenderWindow());
-	}*/
+	}
 }
 
 
@@ -423,7 +466,7 @@ vector<SItem> COgre::GetLoot()
 
 	//add slime
 	SItem slime;
-	slime.amount = 1;
+	slime.amount = 2;
 	CItem* thing = new CItem;
 	thing->Init(SLIME);
 	slime.thing = thing;
@@ -448,9 +491,13 @@ void COgre::CheckArmAnimation()
 				m_fWaitToBeat = 0.3;
 				m_is_attacking = false;
 				m_is_hitting = false;
+				AddDust();
 			}
 
 			m_fArmAnimState -= g_pTimer->GetElapsedTime().asSeconds() * 15;
+
+			m_pWorld->DeleteBlock(GetWeaponRect().left / 100, (GetWeaponRect().top) / 100);
+			m_pWorld->DeleteBlock((GetWeaponRect().left+30) / 100, (GetWeaponRect().top) / 100);
 		}
 		else
 		{
@@ -460,11 +507,17 @@ void COgre::CheckArmAnimation()
 				m_fWaitToBeat = 0.3;
 				m_is_attacking = false;
 				m_is_hitting = false;
+				AddDust();
 			}
 
 			m_fArmAnimState += g_pTimer->GetElapsedTime().asSeconds() * 15;
+
+			m_pWorld->DeleteBlock((GetWeaponRect().left + GetWeaponRect().width - 50) / 100, (GetWeaponRect().top) / 100);
+			m_pWorld->DeleteBlock((GetWeaponRect().left + GetWeaponRect().width) / 100, (GetWeaponRect().top) / 100);
 		}
+
 	}
+
 }
 
 
@@ -489,33 +542,72 @@ IntRect COgre::GetWeaponRect()
 	{
 	case(0) :
 		return IntRect(m_pOgre->GetHandPos(m_left).x, m_pOgre->GetHandPos(m_left).y + 156, 138, 58);
+		cout << "Got weapon rect" << endl;
 		break;
 	case(1):
 		return IntRect(m_pOgre->GetHandPos(m_left).x + 4, m_pOgre->GetHandPos(m_left).y + 96, 120, 58);
+		cout << "Got weapon rect" << endl;
 		break;
 	case(2):
 		return IntRect(m_pOgre->GetHandPos(m_left).x + 49, m_pOgre->GetHandPos(m_left).y + 85, 71, 106);
+		cout << "Got weapon rect" << endl;
 		break;
 	case(3):
 		return IntRect(m_pOgre->GetHandPos(m_left).x + 109, m_pOgre->GetHandPos(m_left).y + 4, 49, 123);
+		cout << "Got weapon rect" << endl;
 		break;
 	case(4):
 		return IntRect(m_pOgre->GetHandPos(m_left).x + 172, m_pOgre->GetHandPos(m_left).y + 82, 71, 67);
+		cout << "Got weapon rect" << endl;
 		break;
 	case(5):
-		return IntRect(m_pOgre->GetHandPos(m_left).x + 9, m_pOgre->GetHandPos(m_left).y + 82, 71, 67);
+		return IntRect(m_pOgre->GetRect().left + 9, m_pOgre->GetHandPos(m_left).y + 82, 71, 67);
+		cout << "Got weapon rect" << endl;
 		break;
 	case(6) :
-		return IntRect(m_pOgre->GetHandPos(m_left).x + 93, m_pOgre->GetHandPos(m_left).y + 4, 49, 123);
+		return IntRect(m_pOgre->GetRect().left + 93, m_pOgre->GetHandPos(m_left).y + 4, 49, 123);
+		cout << "Got weapon rect" << endl;
 		break;
 	case(7) :
-		return IntRect(m_pOgre->GetHandPos(m_left).x + 145, m_pOgre->GetHandPos(m_left).y + 85, 71, 106);
+		return IntRect(m_pOgre->GetRect().left + 145, m_pOgre->GetHandPos(m_left).y + 85, 71, 106);
+		cout << "Got weapon rect" << endl;
 		break;
 	case(8) :
-		return IntRect(m_pOgre->GetHandPos(m_left).x + 125, m_pOgre->GetHandPos(m_left).y + 96, 120, 58);
+		return IntRect(m_pOgre->GetRect().left + 125, m_pOgre->GetHandPos(m_left).y + 96, 120, 58);
+		cout << "Got weapon rect" << endl;
 		break;
 	case(9) :
-		return IntRect(m_pOgre->GetHandPos(m_left).x + 112, m_pOgre->GetHandPos(m_left).y + 156, 138, 58);
+	case(10):
+		return IntRect(m_pOgre->GetRect().left + 112, m_pOgre->GetHandPos(m_left).y + 156, 138, 58);
+		cout << "Got weapon rect" << endl;
 		break;
 	}
+}
+
+
+
+
+void COgre::AddDust()
+{
+	SProjectile projectile;
+
+	//add a projectile
+	CSprite *sprite = new CSprite;
+
+	sprite->Load(&g_pTextures->t_ground_hit, 5, 100, 100);
+
+	if (m_left)
+		sprite->SetPos(m_pOgre->GetRect().left - 105, m_pOgre->GetRect().top + 80);
+	else
+		sprite->SetPos(m_pOgre->GetRect().left + 105, m_pOgre->GetRect().top + 80);
+
+	projectile.m_ID = DUSTANIMATION;
+	projectile.m_Damage = 0;
+	projectile.m_fFlown = 0.0f;
+	projectile.m_flightLength = 0;
+	projectile.m_fromPlayer = false;
+	projectile.m_fYVel = 0.0f;
+	projectile.m_Sprite = sprite;
+	projectile.m_fAnimState = 0;
+	g_pProjectiles->NewProjectile(projectile);
 }

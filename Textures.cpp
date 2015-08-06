@@ -123,10 +123,12 @@ void TextureLoading::LoadTextures()
 	t_spell[2].loadFromFile("Data/Sprites/Magic/spell_ice.png");
 	t_spell[3].loadFromFile("Data/Sprites/Magic/spell_alchemy.png");
 	t_spell[4].loadFromFile("Data/Sprites/Magic/spell_light.png");
+	t_spell[5].loadFromFile("Data/Sprites/Magic/spell_manashield.png");
 	t_fireballLeft.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(80, 0, 80, 30));
 	t_fireballRight.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(0, 0, 80, 30));
 	t_explosion.loadFromFile("Data/Sprites/Magic/explosion.png");
 	t_healing.loadFromFile("Data/Sprites/Magic/heal_animation.png");
+	t_manashield.loadFromFile("Data/Sprites/Magic/manashield.png");
 	t_alchemy.loadFromFile("Data/Sprites/Magic/alchemy.png");
 	t_lightsphere.loadFromFile("Data/Sprites/Magic/light.png");
 	t_rubbishAnimation.loadFromFile("Data/Sprites/Objects/Blocks/rubbish_animation.png");
@@ -134,6 +136,7 @@ void TextureLoading::LoadTextures()
 	t_iceballRight.loadFromFile("Data/Sprites/Magic/iceball.png", IntRect(0, 0, 80, 30));
 	t_ice_goblin.loadFromFile("Data/Sprites/Magic/ice_goblin.png");
 	t_ice_bee.loadFromFile("Data/Sprites/Magic/ice_bee.png");
+	t_ice_ogre.loadFromFile("Data/Sprites/Magic/ice_ogre.png");
 
 	t_buildingInfo_woodwall.loadFromFile("Data/Sprites/Building/building_info_woodwall.png");
 	t_buildingInfo_stonewall.loadFromFile("Data/Sprites/Building/building_info_stonewall.png");
@@ -275,6 +278,7 @@ void TextureLoading::LoadTextures()
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_alchemy.loadFromFile("Data/Sprites/Magic/spell_alchemy.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_light.loadFromFile("Data/Sprites/Magic/spell_light.png", IntRect(0, 0, 97, 97));
+	t_spellInventoryTexture_manashield.loadFromFile("Data/Sprites/Magic/spell_manashield.png", IntRect(0, 0, 97, 97));
 
 	t_blockLittleTexture_dirt.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(86, 2, 40, 40));
 	t_blockLittleTexture_stone.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(464, 2, 40, 40));
@@ -373,7 +377,7 @@ void TextureLoading::LoadTextures()
 	t_ogre_body.loadFromFile("Data/Sprites/Living/ogre_body.png");
 	t_ogre_arm.loadFromFile("Data/Sprites/Living/ogre_arm_animated.png");
 	t_ogre_legs.loadFromFile("Data/Sprites/Living/ogre_legs.png");
-	t_ogre_club.loadFromFile("Data/Sprites/Living/ogre_club.png");
+	t_ground_hit.loadFromFile("Data/Sprites/Living/ground_hit.png");
 
 	s_drunkShader.loadFromFile("Data/Shaders/blur.frag", Shader::Fragment);
 

@@ -44,8 +44,10 @@ void CMagicMenu::Init(CInventory *_inventory, CPlayer *_player, bool _loaded)
 	m_Spells[FIREBALL].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 41, m_pMagicMenu->GetRect().top + 91);
 	m_Spells[ICE].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 186, m_pMagicMenu->GetRect().top + 91);
 	m_Spells[HEAL].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 374, m_pMagicMenu->GetRect().top + 91);
+	m_Spells[MANASHIELD].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 519, m_pMagicMenu->GetRect().top + 91);
 	m_Spells[ALCHEMY].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 707, m_pMagicMenu->GetRect().top + 91);
 	m_Spells[LIGHT].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 852, m_pMagicMenu->GetRect().top + 91);
+
 
 	m_text.setFont(g_pTextures->f_coolsville);
 	m_text.setCharacterSize(25);
@@ -80,13 +82,20 @@ void CMagicMenu::Render()
 
 	if (is_open)
 	{
+		g_pFramework->WriteToLog(INFO, "Magicmenu is open");
 		m_pMagicMenu->Render(g_pFramework->GetRenderWindow());
 
 		//render the magic points
 		stringstream str("");
 		str << m_MagicPoints;
 		m_text.setString(str.str());
+		m_text.setCharacterSize(25);
+		m_text.setColor(Color::Black);
+		m_text.setPosition(m_pMagicMenu->GetRect().left + 565, m_pMagicMenu->GetRect().top + 12);
 		g_pFramework->GetRenderWindow()->draw(m_text);
+
+		string tooltip("");
+		RectangleShape tooltipBackground;
 
 		//render the spells
 		for (int i = 0; i < AMOUNTOFSPELLS; i++)
@@ -112,6 +121,10 @@ void CMagicMenu::Render()
 					m_pInventory->Take(spell);
 				}
 			}
+			else if (m_Spells[i].m_Sprite->GetRect().contains(Mouse::getPosition()))
+			{
+				tooltip = GetTooltip(i);
+			}
 
 
 			if (m_SpellLevel[i] > 0)
@@ -124,6 +137,23 @@ void CMagicMenu::Render()
 			m_levelText.setString(str.str());
 			m_levelText.setPosition(m_Spells[i].m_Sprite->GetRect().left + 10, m_Spells[i].m_Sprite->GetRect().top + 100);
 			g_pFramework->GetRenderWindow()->draw(m_levelText);
+		}
+
+
+		//show tooltip
+		if (tooltip != "")
+		{
+			m_text.setString(tooltip);
+			m_text.setPosition((float)(Mouse::getPosition().x + 13), (float)(Mouse::getPosition().y));
+			m_text.setCharacterSize(15);
+			m_text.setColor(Color::Yellow);
+
+			FloatRect backgroundRect = m_text.getLocalBounds();
+			tooltipBackground = RectangleShape(Vector2f(backgroundRect.width, backgroundRect.height + 5));
+			tooltipBackground.setFillColor(Color::Black);
+
+			g_pFramework->GetRenderWindow()->draw(tooltipBackground, m_text.getTransform());
+			g_pFramework->GetRenderWindow()->draw(m_text);
 		}
 	}
 }
@@ -241,6 +271,50 @@ void CMagicMenu::CastSpell(int _ID)
 			}
 		}break;
 
+		case(MANASHIELD) :
+		{
+			if (m_pPlayer->GetMana() >= m_pPlayer->GetPlayerAttributes().maxMana * ((float)m_SpellLevel[MANASHIELD] * 0.03))
+			{
+				SProjectile projectile;
+
+				//add a projectile
+				CSprite *sprite = new CSprite;
+
+				sprite->Load(&g_pTextures->t_manashield);
+				sprite->SetPos(m_pPlayer->GetRect().left - 30, m_pPlayer->GetRect().top);
+
+				projectile.m_ID = MANASHIELDPROJECTILE;
+				projectile.m_Damage = 0;
+				projectile.m_fFlown = m_SpellLevel[MANASHIELD] * 5;   //stands for the duration
+				projectile.m_flightLength = 0;
+				projectile.m_fromPlayer = true;
+				projectile.m_fYVel = 0.0f;
+				projectile.m_Sprite = sprite;
+				projectile.m_fAnimState = -1;
+				g_pProjectiles->NewProjectile(projectile);
+
+				SConsumableAttributes effect;
+				effect.armour = m_pPlayer->GetPlayerAttributes().maxMana * (m_SpellLevel[MANASHIELD] * 0.05);
+				effect.breaking_speed = 0;
+				effect.luck = 0;
+				effect.health = 0;
+				effect.mana = 0;
+				effect.speed = 0;
+				effect.strength = 0;
+				effect.healthRegeneration = 0;
+				effect.manaRegeneration = 0;
+				effect.criticalChance = 0;
+				effect.criticalDamage = 0;
+				effect.duration = m_SpellLevel[MANASHIELD] * 5;
+
+				m_pPlayer->AddEffect(effect);
+
+				//substract mana
+				m_pPlayer->SubstractMana(m_pPlayer->GetPlayerAttributes().maxMana * (float)m_SpellLevel[MANASHIELD] * 0.03);
+			}
+
+		}break;
+
 		case(ALCHEMY) :
 		{
 			if (m_pPlayer->GetMana() >= m_SpellLevel[ALCHEMY] * 5)
@@ -281,4 +355,180 @@ void CMagicMenu::CastSpell(int _ID)
 
 		}break;
 	}
+}
+
+
+
+//returns the tooltip for the spell
+string CMagicMenu::GetTooltip(int _spellID)
+{
+	stringstream tooltip;
+
+	switch (_spellID)
+	{
+	case(FIREBALL) :
+	{
+		tooltip << "Der gute alte Feuerball." << endl << endl;
+
+		if (m_SpellLevel[FIREBALL] == 0)
+		{
+			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+		}
+		else
+		{
+			tooltip << "Schaden: " << m_SpellLevel[FIREBALL] * 3 << endl;
+			tooltip << "Manakosten: " << m_SpellLevel[FIREBALL] * 5 << endl << endl;
+		}
+
+		if (m_SpellLevel[FIREBALL] == 10)
+		{
+			tooltip << "Zauber ist auf der höchsten Stufe!";
+		}
+		else
+		{
+			tooltip << "Auf der nächsten Stufe: " << endl;
+			tooltip << "Schaden: " << (m_SpellLevel[FIREBALL] + 1) * 3 << endl;
+			tooltip << "Manakosten: " << (m_SpellLevel[FIREBALL] + 1) * 5;
+		}
+	}break;
+	case(ICE) :
+	{
+		tooltip << "Der Eispfeil friert Gegner ein!" << endl << endl;
+
+		if (m_SpellLevel[ICE] == 0)
+		{
+			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+		}
+		else
+		{
+			tooltip << "Schaden: " << m_SpellLevel[ICE] * 1 << endl;
+			tooltip << "Einfrierdauer: " << m_SpellLevel[ICE] * 0.5 << endl;
+			tooltip << "Manakosten: " << m_SpellLevel[ICE] * 5 << endl << endl;
+		}
+
+		if (m_SpellLevel[ICE] == 10)
+		{
+			tooltip << "Zauber ist auf der höchsten Stufe!";
+		}
+		else
+		{
+			tooltip << "Auf der nächsten Stufe: " << endl;
+			tooltip << "Schaden: " << (m_SpellLevel[ICE] + 1) * 1 << endl;
+			tooltip << "Einfrierdauer: " << (m_SpellLevel[ICE] + 1) * 0.5 << endl;
+			tooltip << "Manakosten: " << (m_SpellLevel[ICE] + 1) * 5;
+		}
+	}break;
+	case(HEAL) :
+	{
+		tooltip << "Ein Heilzauber, der dir sofort Leben auffüllt." << endl << endl;
+
+		if (m_SpellLevel[HEAL] == 0)
+		{
+			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+		}
+		else
+		{
+			tooltip << "Lebenspunkte: " << m_SpellLevel[HEAL] * 10 << endl;
+			tooltip << "Manakosten: " << m_SpellLevel[HEAL] * 10 << endl << endl;
+		}
+
+		if (m_SpellLevel[HEAL] == 10)
+		{
+			tooltip << "Zauber ist auf der höchsten Stufe!";
+		}
+		else
+		{
+			tooltip << "Auf der nächsten Stufe: " << endl;
+			tooltip << "Lebenspunkte: " << (m_SpellLevel[HEAL] + 1) * 10 << endl;
+			tooltip << "Manakosten: " << (m_SpellLevel[HEAL] + 1) * 10;
+		}
+	}break;
+	case(MANASHIELD) :
+	{
+		tooltip << "Das Manaschild wandelt einen Prozentsatz deines maximalen Manas in Rüstung um." << endl << endl;
+
+		if (m_SpellLevel[MANASHIELD] == 0)
+		{
+			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+		}
+		else
+		{
+			tooltip << "Rüstung: " << m_pPlayer->GetPlayerAttributes().maxMana * (float)(m_SpellLevel[MANASHIELD] * 0.05) << endl;
+			tooltip << "Dauer: " << m_SpellLevel[MANASHIELD] * 5 << endl;
+			tooltip << "Manakosten: " << m_pPlayer->GetPlayerAttributes().maxMana * (float)(m_SpellLevel[MANASHIELD] * 0.03) << endl << endl;
+		}
+
+		if (m_SpellLevel[MANASHIELD] == 10)
+		{
+			tooltip << "Zauber ist auf der höchsten Stufe!";
+		}
+		else
+		{
+			tooltip << "Auf der nächsten Stufe: " << endl;
+			tooltip << "Rüstung: " << m_pPlayer->GetPlayerAttributes().maxMana * (float)((m_SpellLevel[MANASHIELD]+1) * 0.05) << endl;
+			tooltip << "Dauer: " << (m_SpellLevel[MANASHIELD]+1) * 5 << endl;
+			tooltip << "Manakosten: " << m_pPlayer->GetPlayerAttributes().maxMana * (float)((m_SpellLevel[MANASHIELD]+1) * 0.03);
+		}
+	}break;
+	case(ALCHEMY) :
+	{
+		tooltip << "Der Alchemiezauber wandelt einen Block\nin einen Block ähnlicher Wertigkeit um." << endl << endl;
+
+		if (m_SpellLevel[ALCHEMY] == 0)
+		{
+			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+		}
+		else
+		{
+			tooltip << "Chance auf Block höherer Wertigkeit: " << m_SpellLevel[ALCHEMY] * 1 << "%" << endl;
+			tooltip << "Chance auf Block niedrigerer Wertigkeit: 5%" << endl;
+			tooltip << "Manakosten: " << m_SpellLevel[ALCHEMY] * 5 << endl << endl;
+		}
+
+		if (m_SpellLevel[ALCHEMY] == 10)
+		{
+			tooltip << "Zauber ist auf der höchsten Stufe!";
+		}
+		else
+		{
+			tooltip << "Auf der nächsten Stufe: " << endl;
+			tooltip << "Chance auf Block höherer Wertigkeit: " << (m_SpellLevel[ALCHEMY]+1) * 1 << "%" << endl;
+			tooltip << "Chance auf Block niedrigerer Wertigkeit: 5%" << endl;
+			tooltip << "Manakosten: " << (m_SpellLevel[ALCHEMY] + 1) * 5;
+		}
+	}break;
+	case(LIGHT) :
+	{
+
+		tooltip << "Eine Lichtkugel, die dir folgt. Juhu!" << endl << endl;
+
+		if (m_SpellLevel[LIGHT] == 0)
+		{
+			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+		}
+		else
+		{
+			tooltip << "Lichtradius: " << m_SpellLevel[LIGHT] * 50 << endl;
+			tooltip << "Dauer: " << m_SpellLevel[LIGHT] * 5 << endl;
+			tooltip << "Manakosten: " << m_SpellLevel[LIGHT] * 5 << endl << endl;
+		}
+
+		if (m_SpellLevel[LIGHT] == 10)
+		{
+			tooltip << "Zauber ist auf der höchsten Stufe!";
+		}
+		else
+		{
+			tooltip << "Auf der nächsten Stufe: " << endl;
+			tooltip << "Lichtradius: " << (m_SpellLevel[LIGHT]+1) * 50 << endl;
+			tooltip << "Dauer: " << (m_SpellLevel[LIGHT] +1)* 5 << endl;
+			tooltip << "Manakosten: " << (m_SpellLevel[FIREBALL] + 1) * 5;
+		}
+	}break;
+	default:
+		tooltip << "Kein Tooltip!";
+	}
+
+
+	return tooltip.str();
 }

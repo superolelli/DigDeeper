@@ -84,6 +84,7 @@ void CNpcMachine::AddNpc(int _ID, int _x, int _y, bool _safe, int _specialID)
 
 void CNpcMachine::CheckAllNpcs()
 {
+	cout << "NPC-Machine: Check Npcs" << endl;
 	//spawns new Npcs
 	SpawnNpcs();
 
@@ -200,13 +201,11 @@ void CNpcMachine::CheckAllNpcs()
 		else
 			(*i)->m_wasHit = false;
 
-
 		//if the player was hit by the npc
 		if ((*i)->GetState() == ATTACKING && (*i)->GetWeaponRect().intersects(m_pPlayer->GetRect()))
 		{	
 			if ((*i)->IsHitting())
 			{
-
 				//calculate the damage
 				int damage = (*i)->GetAttributes()->strength - ((float)(*i)->GetAttributes()->strength * ((float)m_pPlayer->GetPlayerAttributes().armour/100.0f));
 
@@ -217,6 +216,7 @@ void CNpcMachine::CheckAllNpcs()
 					m_pPlayer->ThrowPlayer(true, 300);
 				else
 					m_pPlayer->ThrowPlayer(false, 300);
+
 
 				//put the damage into a stringstream
 				stream.str("");
@@ -236,6 +236,8 @@ void CNpcMachine::CheckAllNpcs()
 	m_LastArmUp = m_pPlayer->GetArmGoingUp();
 
 	g_pProfiler->SetProfilingValue(NPCAMOUNT, (int)m_Npcs.size());
+
+	cout << "NPC-Machine: Checked Npcs" << endl;
 }
 
 
@@ -312,7 +314,7 @@ bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
 	for (i = m_Npcs.begin(); i != m_Npcs.end();)
 	{
 		//if projectile hits npcs: do damage
-		if (_projectile->m_Sprite->GetRect().intersects((*i)->GetRect()) && _projectile->m_ID != LIGHTSPHERE)
+		if (_projectile->m_Sprite->GetRect().intersects((*i)->GetRect()) && _projectile->m_Damage > 0)
 		{
 			//calculate the damage
 			int damage = _projectile->m_Damage - ((float)_projectile->m_Damage * ((float)(*i)->GetAttributes()->armour / 100.0f));

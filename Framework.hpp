@@ -64,7 +64,7 @@ public:
 	void Update();
 
 	//Fills the background black
-	void Clear();
+	void Clear(Color _color = Color::Black);
 
 	//flips the double-buffer and shows the new frame
 	void Flip();
