@@ -31,6 +31,10 @@ void CLittleItem::Quit(bool _forever)
 //Loads the sprite for the little item
 void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 {
+	m_dynamiteTime = 0;
+	m_xPos = 0;
+	m_yPos = 0;
+
 	m_pLittleItemSprite = new CSprite;
 
 	if(!_loaded)
@@ -266,6 +270,31 @@ void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 	{
 		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_diadochitarmour);
 	}break;
+	case(BEDROCK) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_bedrock);
+	}break;
+	case(BRICKS) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_bricks);
+	}break;
+	case(BRICKWALL) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_brickwall);
+	}break;
+	case(KEY) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_key);
+	}break;
+	case(DYNAMITE) :
+	{
+		if (((CItem*)(_thing))->GetSpecialID() == 0)
+			m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_dynamite);
+		else
+			m_pLittleItemSprite->Load(&g_pTextures->t_tool_dynamite);
+
+		m_dynamiteTime = 5;
+	}break;
 	}
 
 
@@ -277,6 +306,14 @@ void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 //Renders the sprite
 void CLittleItem::Render()
 {
+	m_xPos = m_pLittleItemSprite->GetRect().left;
+	m_yPos = m_pLittleItemSprite->GetRect().top;
+
+	if (m_pThing->getID() == DYNAMITE)
+	{
+		m_dynamiteTime -= g_pTimer->GetElapsedTime().asSeconds();
+	}
+
 	m_pLittleItemSprite->Render(g_pFramework->GetRenderWindow());
 }
 
@@ -292,4 +329,10 @@ void CLittleItem::Move()
 }
 
 
-
+bool CLittleItem::DynamiteExploded()
+{
+	if (m_dynamiteTime <= 0)
+		return true;
+	else
+		return false;
+}

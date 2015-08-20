@@ -132,6 +132,7 @@ void TextureLoading::LoadTextures()
 	t_alchemy.loadFromFile("Data/Sprites/Magic/alchemy.png");
 	t_lightsphere.loadFromFile("Data/Sprites/Magic/light.png");
 	t_rubbishAnimation.loadFromFile("Data/Sprites/Objects/Blocks/rubbish_animation.png");
+	t_dynamiteAnimation.loadFromFile("Data/Sprites/Magic/dynamite_effect.png");
 	t_iceballLeft.loadFromFile("Data/Sprites/Magic/iceball.png", IntRect(80, 0, 80, 30));
 	t_iceballRight.loadFromFile("Data/Sprites/Magic/iceball.png", IntRect(0, 0, 80, 30));
 	t_ice_goblin.loadFromFile("Data/Sprites/Magic/ice_goblin.png");
@@ -165,6 +166,8 @@ void TextureLoading::LoadTextures()
 	t_buildingInfo_sawdust.loadFromFile("Data/Sprites/Building/building_info_sawdust.png");
 	t_buildingInfo_battlestone.loadFromFile("Data/Sprites/Building/building_info_battlestone.png");
 	t_buildingInfo_diadochitarmour.loadFromFile("Data/Sprites/Building/building_info_diadochit_armour.png");
+	t_buildingInfo_bricks.loadFromFile("Data/Sprites/Building/building_info_bricks.png");
+	t_buildingInfo_brickwall.loadFromFile("Data/Sprites/Building/building_info_brickwall.png");
 
 	t_blockTextures_dirt.loadFromFile("Data/Sprites/Objects/Blocks/dirt.png");
 	t_blockTextures_stone.loadFromFile("Data/Sprites/Objects/Blocks/stone.png");
@@ -198,11 +201,16 @@ void TextureLoading::LoadTextures()
 	t_blockTextures_clover.loadFromFile("Data/Sprites/Objects/Blocks/cloverleaf.png");
 	t_blockTextures_radish.loadFromFile("Data/Sprites/Objects/Blocks/radish.png");
 	t_blockTextures_mushroom.loadFromFile("Data/Sprites/Objects/Blocks/mushroom.png");
+	t_blockTextures_bedrock.loadFromFile("Data/Sprites/Objects/Blocks/bedrock.png");
 	t_blockTextures_stalagtit1.loadFromFile("Data/Sprites/Objects/Blocks/stalagmit_2.png");
 	t_blockTextures_stalagtit2.loadFromFile("Data/Sprites/Objects/Blocks/stalagmit_3.png");
 	t_blockTextures_stalagtit3.loadFromFile("Data/Sprites/Objects/Blocks/stalagmit_4.png");
 	t_blockTextures_stalagtit4.loadFromFile("Data/Sprites/Objects/Blocks/stalagmit_5.png");
 	t_blockTextures_rubbish.loadFromFile("Data/Sprites/Objects/Blocks/rubbish_pile.png");
+	t_blockTextures_bricks.loadFromFile("Data/Sprites/Objects/Blocks/bricks.png");
+	t_blockTextures_brickwall.loadFromFile("Data/Sprites/Objects/Blocks/dark_brick_wall.png");
+	t_blockTextures_princessCage.loadFromFile("Data/Sprites/Objects/Blocks/princess_in_cage.png");
+	t_blockTextures_princessCage2.loadFromFile("Data/Sprites/Objects/Blocks/princess_in_cage2.png");
 
 	t_dirtRimTop.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_top.png");
 	t_dirtRimBottom.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_bottom.png");
@@ -273,6 +281,11 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_diadochit.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/diadochit_inventory.png");
 	t_blockInventoryTexture_battlestone.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/battlestone_inventory.png");
 	t_blockInventoryTexture_diadochitarmour.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/diadochit_armour_inventory.png");
+	t_blockInventoryTexture_bedrock.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/bedrock_inventory.png");
+	t_blockInventoryTexture_bricks.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/bricks_inventory.png");
+	t_blockInventoryTexture_brickwall.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/dark_brick_wall_inventory.png");
+	t_blockInventoryTexture_dynamite.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/dynamite_inventory.png");
+	t_blockInventoryTexture_key.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/key_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
@@ -337,6 +350,11 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_diadochit.loadFromFile("Data/Sprites/Objects/LittleItems/diadochit_little.png");
 	t_blockLittleTexture_battlestone.loadFromFile("Data/Sprites/Objects/LittleItems/battlestone_little.png");
 	t_blockLittleTexture_diadochitarmour.loadFromFile("Data/Sprites/Objects/LittleItems/diadochit_armour_little.png");
+	t_blockLittleTexture_bedrock.loadFromFile("Data/Sprites/Objects/LittleItems/bedrock_little.png");
+	t_blockLittleTexture_bricks.loadFromFile("Data/Sprites/Objects/LittleItems/bricks_little.png");
+	t_blockLittleTexture_brickwall.loadFromFile("Data/Sprites/Objects/LittleItems/dark_brick_wall_little.png");
+	t_blockLittleTexture_dynamite.loadFromFile("Data/Sprites/Objects/LittleItems/dynamite_little.png");
+	t_blockLittleTexture_key.loadFromFile("Data/Sprites/Objects/LittleItems/key_little.png");
 
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");
@@ -344,6 +362,7 @@ void TextureLoading::LoadTextures()
 	t_tool_lantern.loadFromFile("Data/Sprites/Objects/Tools/lantern_carried.png");
 	t_tool_battleaxe.loadFromFile("Data/Sprites/Objects/Tools/battleaxe_carried.png");
 	t_tool_battlestone.loadFromFile("Data/Sprites/Objects/Tools/battlestone_carried.png");
+	t_tool_dynamite.loadFromFile("Data/Sprites/Objects/Tools/dynamite.png");
 
 	t_equipment_iron_helmet.loadFromFile("Data/Sprites/Objects/Equipment/iron_helmet.png");
 	t_equipment_iron_armour.loadFromFile("Data/Sprites/Objects/Equipment/iron_armour.png");

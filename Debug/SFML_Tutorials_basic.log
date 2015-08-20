@@ -1,8 +1,25 @@
-﻿Der Buildvorgang wurde am 06.08.2015 20:27:42 gestartet.
+﻿Der Buildvorgang wurde am 18.08.2015 13:19:05 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CharacterInfo.cpp
-         CharacterInfo.cpp
+         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt World.cpp
+         World.cpp
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(700): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(701): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(909): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(982): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(983): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(2003): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(2004): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(2005): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(2006): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(2060): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(2061): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(2062): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(2063): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(2107): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(2109): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(2295): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\world.cpp(2296): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
        Link:
          F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.3\lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-network-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.lib" /MACHINE:X86 Debug\Beam.obj
          Debug\Bee.obj
@@ -19,6 +36,7 @@
          Debug\Game.obj
          Debug\GameChoose.obj
          Debug\Goblin.obj
+         Debug\HelpPage.obj
          Debug\Highscore.obj
          Debug\Inventory.obj
          Debug\Items.obj
@@ -55,4 +73,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:01.79
+Verstrichene Zeit 00:00:02.26

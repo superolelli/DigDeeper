@@ -1412,3 +1412,45 @@ ZUKÜNFITGE ÄNDERUNGEN:
 - Wiki weiter gefüllt
 
 ------------------------------------------------------
+15.08.2015
+
+- Simple Ingame-Hilfeseite fertiggestellt (Tastenbelegung)
+- Bugfix: Tooltips wurden am unteren Bildschirrand abgeschnitten, wenn sie zu groß waren
+
+------------------------------------------------------
+16.08.2015
+
+- Bugfix: Equipmentfenster wurde manchmal nicht angezeigt
+- Grundgestein hinzugefügt (nicht zerstörbares Gestein)
+- Die unterste Ebene besteht nun aus Grundgestein. Dadurch wurden sämtliche Bugs im Zusammenhang mit der unteren Ebene behoben
+
+------------------------------------------------------
+17.08.2015
+
+- Bugfix: Der Hintergrund wiederholte sich (d.h. ab einer gewissen Tiefe kam wieder Himmel)
+- Bugfix: Wenn man unter der Erde war, konnte man die Hilfeseite nicht mehr aufrufen
+- Steinziegel eingefügt
+- Steinziegelwand eingefügt
+- Letzten Raum eingefügt (auf unteren Ebenen), wo in Zukunft das Ziel sein soll
+- Im Letzten Raum befindet sich nun ein Käfig mit der Zwergenprinzessin
+
+------------------------------------------------------
+18.08.2015
+
+- Bugfix: Manchmal stürzte das Spiel beim generieren vom Prinzessinnenraum ab
+- Dynamit hinzugefügt (kann geworfen werden, explodiert aber noch nicht)
+- Schlüssel hinzugefügt (soll später den Käfig der Prinzessin aufschließen können)
+
+------------------------------------------------------
+19.08.2015
+
+- Dynamit explodiert nun und zerstört Blöcke und macht Schaden
+
+------------------------------------------------------
+20.08.2015
+
+- Bugfix: Dynamit zerstörte nicht immer genau die angrenzenden Blöcke
+- Bugfix: Dynamit und Oger konnten Grundgestein zerstören
+- Wenn man mit dem Schlüssel mit rechts auf den Käfig klickt wird das Spiel beendet (bis jetzt genauso, als wäre man gestorben. Wird noch geändert)
+
+------------------------------------------------------

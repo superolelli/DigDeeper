@@ -3,6 +3,7 @@
 
 #include "Framework.hpp"
 #include "Thing.hpp"
+#include "Items.hpp"
 
 
 class CLittleItem
@@ -19,11 +20,14 @@ public:
 	Vector2f GetVel(){return m_Vel;}
 	void SetVel(Vector2f _vel){m_Vel = _vel;}
 	void Move();
+	bool DynamiteExploded();
 
 	//int GetID(){return m_pThing->getID();}
 	CThing* GetThing(){return m_pThing;}
 	IntRect GetRect(){return m_pLittleItemSprite->GetRect();}
 
+	int *GetXPos(){return &m_xPos;}
+	int *GetYPos(){ return &m_yPos; }
 
 
 private:
@@ -127,6 +131,9 @@ private:
 	bool m_loaded;                             //was this item loaded the last frame?
 	Vector2f m_Vel;
 
+	float m_dynamiteTime;
+	int m_xPos;
+	int m_yPos;
 };
 
 BOOST_CLASS_VERSION(CLittleItem, 0)

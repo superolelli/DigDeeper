@@ -134,6 +134,7 @@ public:
 	Texture t_lightsphere;
 	Texture t_manashield;
 	Texture t_rubbishAnimation;
+	Texture t_dynamiteAnimation;
 	Texture t_iceballLeft;
 	Texture t_iceballRight;
 	Texture t_ice_goblin;
@@ -169,6 +170,8 @@ public:
 	Texture t_buildingInfo_sawdust;
 	Texture t_buildingInfo_battlestone;
 	Texture t_buildingInfo_diadochitarmour;
+	Texture t_buildingInfo_bricks;
+	Texture t_buildingInfo_brickwall;
 
 	Texture t_blockTextures_dirt;                     //the dirt textures
 	Texture t_blockTextures_stone;                      //the stone texture
@@ -206,6 +209,11 @@ public:
 	Texture t_blockTextures_stalagtit3;
 	Texture t_blockTextures_stalagtit4;
 	Texture t_blockTextures_rubbish;
+	Texture t_blockTextures_bedrock;
+	Texture t_blockTextures_bricks;
+	Texture t_blockTextures_brickwall;
+	Texture t_blockTextures_princessCage;
+	Texture t_blockTextures_princessCage2;
 	Texture t_blockTextures_noTexture;               //the no_texture texture
 
 	Texture t_dirtRimTop;
@@ -279,6 +287,11 @@ public:
 	Texture t_blockInventoryTexture_diadochit;
 	Texture t_blockInventoryTexture_battlestone;
 	Texture t_blockInventoryTexture_diadochitarmour;
+	Texture t_blockInventoryTexture_bedrock;
+	Texture t_blockInventoryTexture_bricks;
+	Texture t_blockInventoryTexture_brickwall;
+	Texture t_blockInventoryTexture_dynamite;
+	Texture t_blockInventoryTexture_key;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -344,6 +357,11 @@ public:
 	Texture t_blockLittleTexture_diadochit;
 	Texture t_blockLittleTexture_battlestone;
 	Texture t_blockLittleTexture_diadochitarmour;
+	Texture t_blockLittleTexture_bedrock;
+	Texture t_blockLittleTexture_bricks;
+	Texture t_blockLittleTexture_brickwall;
+	Texture t_blockLittleTexture_dynamite;
+	Texture t_blockLittleTexture_key;
 	
 
 
@@ -353,6 +371,7 @@ public:
 	Texture t_tool_lantern;
 	Texture t_tool_battleaxe;
 	Texture t_tool_battlestone;
+	Texture t_tool_dynamite;
 	
 	//the "carried" texture of the equipment
 	Texture t_equipment_iron_helmet;

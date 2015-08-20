@@ -25,6 +25,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_ID = _ID;
 		m_SpecialID = 0;
 		m_fPlaceableTimer = 60.0f;
+		m_is_breakable = true;
 	}
 	m_fBreakingTime = 0;
 	m_fBreakFrame = -1;
@@ -364,6 +365,9 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_is_passable = true;
 		m_is_visible = true;
 		m_can_place_on = false;
+
+		if (_loaded)
+			SetSpecialID(m_SpecialID);
 	}break;
 	case RUBBISH:
 	{
@@ -375,6 +379,58 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_is_passable = true;
 		m_is_visible = true;
 		m_can_place_on = false;
+	}break;
+	case BEDROCK:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_bedrock);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_bedrock);
+		m_Name = "Grundgestein";
+		m_Hardness = 0;
+		m_Priority = 0;
+		m_is_passable = false;
+		m_is_visible = true;
+		m_can_place_on = true;
+
+		if (!_loaded)
+			m_is_breakable = false;
+	}break;
+	case BRICKS:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_bricks);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_bricks);
+		m_Name = "Steinziegel";
+		m_Hardness = 5;
+		m_Priority = 0;
+		m_is_passable = false;
+		m_is_visible = true;
+		m_can_place_on = true;
+	}break;
+	case BRICKWALL:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_brickwall);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_brickwall);
+		m_Name = "Steinziegelwand";
+		m_Hardness = 3;
+		m_Priority = -1;
+		m_is_passable = true;
+		m_is_visible = true;
+		m_can_place_on = true;
+	}break;
+	case PRINCESSCAGE:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_princessCage);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_brickwall);
+		m_Name = "Prinzessin im Käfig";
+		m_Hardness = 3;
+		m_Priority = -1;
+		m_is_passable = true;
+		m_is_visible = true;
+		m_can_place_on = true;
+
+		if (!_loaded)
+			m_is_breakable = false;
+		else
+			SetSpecialID(m_SpecialID);
 	}break;
 	default:
 		{
@@ -434,22 +490,25 @@ void CPlaceable::Render()
 //returns true if placeable is broken
 bool CPlaceable::IsBroken(float _modificator)
 {
-	//is the left mouse button pressed? -> Add time to the timer
-	if(Mouse::isButtonPressed(Mouse::Left))
-		m_fBreakingTime += _modificator * g_pTimer->GetElapsedTime().asSeconds();
-
-	//Check in which state the block is
-	if(m_fBreakingTime <= static_cast<float>(m_Hardness)/3.0f)
-		m_fBreakFrame = 0;
-	else if(m_fBreakingTime <= (static_cast<float>(m_Hardness)/3.0f) * 2 )
-		m_fBreakFrame = 1;
-	else if(m_fBreakingTime <= m_Hardness)
-		m_fBreakFrame = 2;
-	
-	
-	if (m_fBreakingTime >= m_Hardness)
+	if (m_is_breakable)
 	{
-		return true;
+		//is the left mouse button pressed? -> Add time to the timer
+		if (Mouse::isButtonPressed(Mouse::Left))
+			m_fBreakingTime += _modificator * g_pTimer->GetElapsedTime().asSeconds();
+
+		//Check in which state the block is
+		if (m_fBreakingTime <= static_cast<float>(m_Hardness) / 3.0f)
+			m_fBreakFrame = 0;
+		else if (m_fBreakingTime <= (static_cast<float>(m_Hardness) / 3.0f) * 2)
+			m_fBreakFrame = 1;
+		else if (m_fBreakingTime <= m_Hardness)
+			m_fBreakFrame = 2;
+
+
+		if (m_fBreakingTime >= m_Hardness)
+		{
+			return true;
+		}
 	}
 
 		return false;	
@@ -534,6 +593,7 @@ int CPlaceable::GetLittleID()
 //doors: the frame number (set any SID, it is going to be handled inside the function)
 //beehives: the direction of the hive
 //stalagtit: the appearance of the stalagtit
+//princess cage: hanging or standing?
 void CPlaceable::SetSpecialID(int _SID)
 {
 	//set the special ID
@@ -584,6 +644,13 @@ void CPlaceable::SetSpecialID(int _SID)
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_stalagtit3);
 		else if (m_SpecialID == 3)
 			m_pThingSprite->Load(&g_pTextures->t_blockTextures_stalagtit4);
+	}
+	else if (m_ID == PRINCESSCAGE)
+	{
+		if (m_SpecialID == 0)
+			m_pThingSprite->Load(&g_pTextures->t_blockTextures_princessCage);
+		else
+			m_pThingSprite->Load(&g_pTextures->t_blockTextures_princessCage2);
 	}
 }
 

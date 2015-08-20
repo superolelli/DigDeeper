@@ -255,6 +255,18 @@ void CItem::Init(int _ID, bool _loaded)
 		if (!_loaded)
 			m_Name = "Diadochitrüstung";
 	}break;
+	case(DYNAMITE) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_dynamite);
+		if (!_loaded)
+			m_Name = "Dynamit";
+	}break;
+	case(KEY) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_key);
+		if (!_loaded)
+			m_Name = "Schlüssel";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)
@@ -268,7 +280,7 @@ void CItem::Init(int _ID, bool _loaded)
 
 void CItem::InitRecipe()
 {
-	m_specialID = rand()%11 + 131;
+	m_specialID = rand()%14 + 131;
 
 	switch(m_specialID)
 	{
@@ -317,6 +329,14 @@ void CItem::InitRecipe()
 		m_Name.append("(Kampfstein)");
 		m_specialID = BATTLESTONE;
 		break;
+	case(143) :
+		m_Name.append("(Steinziegel)");
+		m_specialID = BRICKS;
+		break;
+	case(144) :
+		m_Name.append("(Steinziegelwand)");
+		m_specialID = BRICKWALL;
+		break;
 	}
 
 	stringstream stream;
@@ -325,7 +345,7 @@ void CItem::InitRecipe()
 }
 
 
-
+//dynamite: 0 - little item		1 - burning
 void CItem::SetSpecialID(int _ID)
 {
 	m_specialID = _ID;
@@ -374,6 +394,12 @@ void CItem::SetSpecialID(int _ID)
 			break;
 		case(DIADOCHITARMOUR) :
 			m_Name.append("(Diadochitrüstung)");
+			break;
+		case(BRICKS) :
+			m_Name.append("(Steinziegel)");
+			break;
+		case(BRICKWALL) :
+			m_Name.append("(Steinziegelwand)");
 			break;
 		}
 	}

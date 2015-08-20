@@ -39,6 +39,9 @@ private:
 		ar & boost::serialization::base_object<CThing>(*this);
 		ar & m_SpecialID;
 		ar & m_fPlaceableTimer;
+
+		if (version > 0)
+			ar & m_is_breakable;
 	}
 
 	//load the building menu
@@ -48,6 +51,12 @@ private:
 		ar & boost::serialization::base_object<CThing>(*this);
 		ar & m_SpecialID;
 		ar & m_fPlaceableTimer;
+
+		if (version == 0)
+			m_is_breakable = true;
+
+		if (version > 0)
+			ar & m_is_breakable;
 	}
 	BOOST_SERIALIZATION_SPLIT_MEMBER();
 
@@ -63,8 +72,9 @@ private:
 	bool m_is_visible;                          //is the placeable visible?
 	bool m_is_passable;                         //is the placealbe passable?
 	bool m_can_place_on;                        //can be something placed upon this?
+	bool m_is_breakable;                         //is the placeable brakeable?
 
-	 CSprite m_BreakingAnimation;
+	CSprite m_BreakingAnimation;
 
 
 	 int GetRubbish();                           //gets random thing

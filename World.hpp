@@ -31,7 +31,7 @@ public:
 	void Init(int _width, int _height, View* _view, CNpcMachine* _npcs, bool _loaded = false);
 	void Render();
 	void RenderLight();
-	void CheckPlaceables(IntRect _playerRect, CPlayer *_player);
+	bool CheckPlaceables(IntRect _playerRect, CPlayer *_player);              //returns true if the player won
 	void AddLittleItem(int _ID, int _x, int _y, int _amount = 1);
 
 	//checks wether the player would collide with the world
@@ -288,6 +288,9 @@ private:
 
 	//generates a random cave
 	void GenerateCave(int _x, int _y);
+
+	//generates the final room
+	void GenerateFinalRoom(int _x, int _y);
 
 	//sets a tree
 	void SetTree(int _x, int _y);

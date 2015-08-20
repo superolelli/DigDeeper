@@ -43,6 +43,7 @@ const int WOOD = 8;
 const int TREETRUNK = 9;
 const int TREECROWN = 10;
 const int BEEHIVEP = 11;
+const int BEDROCK = 12;
 
 const int FURNANCE = 13;
 const int CUPBOARD = 14;
@@ -58,6 +59,8 @@ const int RADISHP = 23;
 const int MUSHROOMP = 24;
 const int STALAGTIT = 25;
 const int RUBBISH = 26;
+const int BRICKS = 27;
+const int PRINCESSCAGE = 28;
 const int LADDER = 49;
 
 const int PWBREAK = 50;            //the Placeable-Wall-Break shows, where the wall section begins
@@ -65,6 +68,7 @@ const int PWBREAK = 50;            //the Placeable-Wall-Break shows, where the w
 const int STONEWALL = 51;
 const int WOODWALL = 52;
 const int MARBLEWALL = 53;
+const int BRICKWALL = 54;
 
 const int PIBREAK = 55;            //the Placeable-Item-Break shows, where the item section begins
 
@@ -83,6 +87,8 @@ const int BEEHIVE = 67;
 const int COOKINGBOOK = 68;
 const int SAWDUST = 69;
 const int DIADOCHIT = 70;
+const int DYNAMITE = 71;
+const int KEY = 72;
 
 const int SPELL = 79;
 
@@ -287,6 +293,7 @@ const int LIGHTSPHERE = 6;
 const int RUBBISHANIMATION = 7;
 const int DUSTANIMATION = 8;
 const int MANASHIELDPROJECTILE = 9;
+const int DYNAMITEEFFECT = 10;
 
 #pragma endregion
 

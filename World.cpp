@@ -137,19 +137,32 @@ void CWorld::GenerateWorld()
 {
 	int possibility[8];
 
-
+	bool finalRoom = false;
 	int randomNumber;
 	int possibilitySum = 0;
 	srand((int)time(0));
 
 
 	//generates the blocks
-	for(int y = 4; y < m_BlocksY; y++)
+	for(int y = 4; y < m_BlocksY -1 ; y++)
 	{
 		for(int x = 0; x < m_BlocksX; x++)
 		{	
 			if(m_pBlocks[x][y] == NULL)
 			{
+				//check for final room
+				if (finalRoom == false && y >= m_BlocksY - 7)
+				{
+					if (rand() % 10 == 0 || x >= m_BlocksX - 8)
+					{
+						GenerateFinalRoom(x, y);
+						finalRoom = true;
+						x--;
+						continue;
+					}
+				}
+
+
 				//set the start possibilities
 				possibility[0] = 84;            //dirt
 				possibility[1] = 10;            //stone
@@ -257,11 +270,15 @@ void CWorld::GenerateWorld()
 	}
 
 
-
-
-	//set trees
+	//set trees and bedrock
 	for (int x = 0; x < m_BlocksX; x++)
 	{
+		//set bedrock
+		m_pBlocks[x][m_BlocksY - 1] = new CPlaceable;
+		m_pBlocks[x][m_BlocksY - 1]->Init(BEDROCK);
+		m_pBlocks[x][m_BlocksY - 1]->SetPos(static_cast<float>(x * 100), static_cast<float> ((m_BlocksY-1)*100));
+
+		//set trees
 		randomNumber = rand() % 20;
 
 		if (randomNumber < 4)
@@ -293,7 +310,7 @@ void CWorld::GenerateRoom(int _x, int _y)
 	int xSize = rand()%9 +3;
 	int ySize = rand()%3 +3;
 
-	if(_x + xSize <= m_BlocksX && _y + ySize <= m_BlocksY)
+	if(_x + xSize <= m_BlocksX && _y + ySize <= m_BlocksY-1)
 	{
 		//build the room
 		for(int y=_y; y < _y + ySize; y++)
@@ -340,7 +357,7 @@ void CWorld::GenerateRoom(int _x, int _y)
 					else if (type == 9)
 					{
 						m_pBlocks[x][y]->Init(ROOMFILL);
-						m_pNpcMachine->AddNpc(GOBLIN, x * 100, y * 100, CHESTGOBLIN);
+						m_pNpcMachine->AddNpc(GOBLIN, x * 100, y * 100, true, CHESTGOBLIN);
 						cout << "added chest goblin" << endl;
 					}
 					else
@@ -372,13 +389,109 @@ void CWorld::GenerateRoom(int _x, int _y)
 
 
 
+void CWorld::GenerateFinalRoom(int _x, int _y)
+{
+	bool princess = false;
+
+	//generate the size of the room
+	int xSize = rand() % 4 + 8;
+	int ySize = rand() % 2 + 5;
+
+	while (_x + xSize >= m_BlocksX && _y + ySize >= m_BlocksY - 1)
+	{
+		xSize--;
+		ySize--;
+	}
+
+	//build the room
+	for (int y = _y; y < _y + ySize; y++)
+	{
+		for (int x = _x; x < _x + xSize; x++)
+		{
+
+			m_pBlocks[x][y] = new CPlaceable;
+
+			//check if this block is one of the outer blocks
+			if (y == _y || y == _y + ySize - 1 || x == _x || x == _x + xSize - 1)
+			{
+				m_pBlocks[x][y]->Init(BRICKS);
+				m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+			}
+			else if (y == _y + ySize - 2)
+			{
+				//check for princess
+				if (princess == false && (rand() % 5 == 0 || x == _x + xSize -2))
+				{
+					princess = true;
+
+					if (rand() % 2 == 0)
+					{
+						SAFE_DELETE(m_pBlocks[x][_y + 1]);
+						m_pBlocks[x][_y + 1] = new CPlaceable;
+						m_pBlocks[x][_y + 1]->Init(PRINCESSCAGE);
+						m_pBlocks[x][_y + 1]->SetSpecialID(0);
+						m_pBlocks[x][_y + 1]->SetPos(static_cast<float>(x * 100), static_cast<float> ((_y+1) * 100));
+					}
+					else
+					{
+						m_pBlocks[x][y]->Init(PRINCESSCAGE);
+						m_pBlocks[x][y]->SetSpecialID(1);
+						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+
+						m_pWalls[x][y] = new CPlaceable;
+						m_pWalls[x][y]->Init(BRICKWALL);
+						m_pWalls[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+
+						continue;
+					}
+					
+				}
+
+				int type = rand() % 5;
+
+					if (type == 0)
+					{
+						m_pBlocks[x][y]->Init(RUBBISH);
+						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+					}
+					else if (type == 1)
+					{
+						m_pBlocks[x][y]->Init(ROOMFILL);
+						m_pNpcMachine->AddNpc(GOBLIN, x * 100, y * 100, true);
+					}
+					else
+					{
+						m_pBlocks[x][y]->Init(ROOMFILL);
+					}
+
+
+					m_pWalls[x][y] = new CPlaceable;
+					m_pWalls[x][y]->Init(BRICKWALL);
+					m_pWalls[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+
+				}
+				else
+				{
+					m_pBlocks[x][y]->Init(ROOMFILL);
+
+					m_pWalls[x][y] = new CPlaceable;
+					m_pWalls[x][y]->Init(BRICKWALL);
+					m_pWalls[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+				}
+
+			}
+		}
+	
+
+}
+
 void CWorld::GenerateCave(int _x, int _y)
 {
 	//generate the size of the cave
 	int xSize = rand() % 9 + 2;
 	int ySize = rand() % 3 + 3;
 
-	if (_x + xSize <= m_BlocksX && _y + ySize <= m_BlocksY)
+	if (_x + xSize <= m_BlocksX && _y + ySize <= m_BlocksY-1)
 	{
 		//build the cave
 		for (int y = _y; y < _y + ySize; y++)
@@ -862,7 +975,7 @@ int CWorld::CheckCollisionWithPassable(FloatRect _player)
 
 
 //Checks wether placeables are broken by the player and deletes them and checks the little items
-void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
+bool CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 {
 
 	IntRect rectP;
@@ -1075,6 +1188,11 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 					{
 						AddLittleItem(HONEY, m_pBlocks[x][y]->GetRect().left + 23, m_pBlocks[x][y]->GetRect().top - 20);
 					}
+
+					if (m_pBlocks[x][y]->getID() == PRINCESSCAGE && _player->GetCarriedItem()->getID() == KEY)
+					{
+						return true;
+					}
 				}
 			}
 
@@ -1115,15 +1233,32 @@ void CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 
 		if(_playerRect.intersects(i->GetRect()) && !_player->IsInventoryFull())
 		{
+			//if it is a dynamite: end burning
+			if (i->GetThing()->getID() == DYNAMITE)
+			{
+				if (((CItem*)(i->GetThing()))->GetSpecialID() == 1)
+					continue;
+			}
+
 			_player->Take(i->GetThing(),1);			
 			i->Quit();
 			m_LittleItemList.erase(i);
-			return;
+			return false;
+		}
+
+		if (i->GetThing()->getID() == DYNAMITE)
+		{
+			if (i->DynamiteExploded())
+			{
+				i->Quit();
+				i = m_LittleItemList.erase(i);
+				continue;
+			}
 		}
 
 	}
 
-
+	return false;
 }
 
 
@@ -1149,6 +1284,10 @@ void CWorld::AddLittleItem(int _ID, int _x, int _y, int _amount)
 			{
 				CItem *thing = new CItem;
 				thing->Init(_ID);
+
+				if (thing->getID() == DYNAMITE)
+					thing->SetSpecialID(1);
+
 				item.Init(thing, _x + (rand() % 50 - 25), _y + (rand() % 20));
 			}
 			else if (_ID > ICBREAK && _ID < CTBREAK)
@@ -1172,7 +1311,38 @@ void CWorld::AddLittleItem(int _ID, int _x, int _y, int _amount)
 				item.Init(thing, _x + (rand() % 50 - 25), _y + (rand() % 20));
 			}
 
-			item.SetVel(Vector2f(0, -350.0f));
+			//if thing is dynamite: add effect
+			if (_ID == DYNAMITE)
+			{
+				item.SetVel(Vector2f(0, -150.0f));
+				m_LittleItemList.push_back(item);
+
+				SProjectile projectile;
+
+				//add a projectile
+				CSprite *sprite = new CSprite;
+
+				sprite->Load(&g_pTextures->t_dynamiteAnimation, 5, 100, 50);
+				sprite->SetPos(_x, _y);
+
+				projectile.m_ID = DYNAMITEEFFECT;
+				projectile.m_Damage = 0;
+				projectile.m_fFlown = 5.0f;   //time
+				projectile.m_flightLength = 0;
+				projectile.m_fromPlayer = false;
+				projectile.m_fYVel = 0.0f;
+				projectile.m_Sprite = sprite;
+				projectile.m_fAnimState = 0;
+				projectile.m_xPos = m_LittleItemList.back().GetXPos();
+				projectile.m_yPos = m_LittleItemList.back().GetYPos();
+				g_pProjectiles->NewProjectile(projectile);
+
+				i++;
+				continue;
+			}
+			else
+				item.SetVel(Vector2f(0, -350.0f));
+
 			m_LittleItemList.push_back(item);
 		}
 	}
@@ -1816,7 +1986,7 @@ void CWorld::FillChestRandomly(int _chestID)
 				CThing *thing = NULL;
 
 				//if thing is an item
-				if(randomNumber > PIBREAK && randomNumber < 71)
+				if(randomNumber > PIBREAK && randomNumber < 72)
 				{
 					thing = new CItem;
 					((CItem*)thing)->Init(randomNumber);	
@@ -2283,7 +2453,7 @@ void CWorld::DeleteBlock(int _x, int _y)
 
 	if (_x >= 0 && _y >= 0 && _x < m_BlocksX && _y < m_BlocksY)
 	{
-		if (m_pBlocks[_x][_y] != NULL)
+		if (m_pBlocks[_x][_y] != NULL && m_pBlocks[_x][_y]->getID() != BEDROCK)
 		{
 			AddLittleItem(m_pBlocks[_x][_y]->GetLittleID(), m_pBlocks[_x][_y]->GetRect().left + 23, m_pBlocks[_x][_y]->GetRect().top + 20);
 

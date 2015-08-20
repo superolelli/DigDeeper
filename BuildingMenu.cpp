@@ -315,6 +315,18 @@ void CBuildingMenu::InitRecipe(SBuildingItem *_recipe)
 			_recipe->resources[GLUE] = 3;
 			_recipe->resources[COAL] = 1;
 		}break;
+		case(BRICKS) :
+		{
+			_recipe->Name = "Steinziegel";
+			_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_bricks);
+			_recipe->resources[STONE] = 2;
+		}break;
+		case(BRICKWALL) :
+		{
+			_recipe->Name = "Steinziegelwand";
+			_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_brickwall);
+			_recipe->resources[BRICKS] = 2;
+		}break;
 		}
 
 		_recipe->m_pInfoSprite->SetPos(m_pBuildingMenu->GetRect().left + 250, m_pBuildingMenu->GetRect().top + 4);
@@ -424,6 +436,8 @@ void CBuildingMenu::FillRecipeList()
 	m_notAvailableRecipes.push_back(SAWDUST);
 	m_notAvailableRecipes.push_back(BATTLESTONE);
 	m_notAvailableRecipes.push_back(DIADOCHITARMOUR);
+	m_notAvailableRecipes.push_back(BRICKS);
+	m_notAvailableRecipes.push_back(BRICKWALL);
 
 
 	m_chosenItem = pickaxe;

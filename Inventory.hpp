@@ -31,7 +31,7 @@ public:
 	void DeleteThing(int _ID, int _amount);
 
 	//opens or closes the inventory
-	void SetOpen(bool _open){is_open = _open;}
+	void SetOpen(bool _open);
 
 	//returns wether the inventory is open or closed
 	bool GetOpen(){return is_open;}

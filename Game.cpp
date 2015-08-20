@@ -73,10 +73,10 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	//Inits the player
 	m_pPlayer->Init(700, 300, m_pWorld, &m_View, _attributes.PlayerClass, m_Settings.m_inventory_numbers, m_Settings.m_beam_numbers);
 
-	if(!_loaded)
-	{
-		m_NpcMachine.AddNpc(GOBLIN, 1500, 100, false);
-	}
+	//if(!_loaded)
+	//{
+	//	m_NpcMachine.AddNpc(GOBLIN, 1500, 100, false);
+	//}
 
 	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);
 
@@ -196,6 +196,8 @@ void CGame::Run()
 		//check for the help page
 		if (g_pFramework->keyStates.f1)
 		{
+			g_pFramework->GetRenderWindow()->setView(g_pFramework->GetRenderWindow()->getDefaultView());
+
 			CHelpPage help;
 			help.Init();
 			help.Run();
@@ -216,9 +218,29 @@ void CGame::Run()
 
 
 		cout << "Check placeables" << endl;
-		if(m_zoom == 1)
-			m_pWorld->CheckPlaceables(m_pPlayer->GetRect(), m_pPlayer);
+		if (m_zoom == 1)
+		{
+			if (m_pWorld->CheckPlaceables(m_pPlayer->GetRect(), m_pPlayer))
+			{
+				g_pFramework->GetRenderWindow()->setView(g_pFramework->GetRenderWindow()->getDefaultView());
 
+				Sprite sprite;
+				sprite.setTexture(g_pTextures->t_BackgroundDead);
+				sprite.setScale((float)g_pFramework->GetRenderWindow()->getSize().x / (float)sprite.getLocalBounds().width, (float)g_pFramework->GetRenderWindow()->getSize().y / (float)sprite.getLocalBounds().height);
+
+				g_pFramework->GetRenderWindow()->draw(sprite);
+				g_pFramework->Flip();
+
+				g_pSound->m_sound.setBuffer(g_pSound->m_laughSound);
+				g_pSound->m_sound.play();
+
+				sleep(seconds(5));
+
+				SaveHighscore();
+
+				is_running = false;
+			}
+		}
 
 		cout << "check npcs" << endl;
 		//Checks all npcs
@@ -409,7 +431,7 @@ void CGame::RenderBackground()
 
 	//get the widht and height of the background
 	background_width = m_pBackground->GetRect().width;
-	background_height = m_pBackground->GetRect().height;
+	background_height = m_pBackground->GetRect().height - 400;
 
 	//set the coordinates of the backgrounds
 	x1 = xView - (xView % background_width);
@@ -427,9 +449,16 @@ void CGame::RenderBackground()
 
 	//sets the texture rects of the background for rendering
 	offsets1.left = xView - x1;
-	offsets1.top = yView - y1;
 	offsets1.width = background_width - offsets1.left;
+
+	//check for sky
+	if (yView <= background_height - m_View.getSize().y)
+		offsets1.top = yView - y1;
+	else
+		offsets1.top = yView - y1 + 400;
+
 	offsets1.height = background_height - (yView - y1);
+
 
 	//changes the position
 	x1 = xView;
@@ -443,13 +472,13 @@ void CGame::RenderBackground()
 	y2 = y1;
 
 	offsets3.left = offsets1.left;
-	offsets3.top = 0;
+	offsets3.top = 400;
 	offsets3.width = offsets1.width;
 	offsets3.height = (int)(m_View.getSize().y - offsets1.height);
 
 	x3 = x1;
 
-	offsets4.left = 0;
+	offsets4.left = 400;
 	offsets4.top = offsets3.top;
 	offsets4.width = offsets2.width;
 	offsets4.height = offsets3.height;

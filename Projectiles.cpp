@@ -73,13 +73,14 @@ void CProjectiles::CheckProjectiles()
 	{
 		collided = false;
 
-		//check for explosions and healing
+		//check for explosions, alchemy, healing, rubbish and dust
 		if (i->m_ID == EXPLOSION || i->m_ID == HEALING || i->m_ID == ALCHEMYANIMATION || i->m_ID == RUBBISHANIMATION || i->m_ID == DUSTANIMATION)
 		{
 			i->m_fAnimState += 20 * g_pTimer->GetElapsedTime().asSeconds();
 
 			if (i->m_ID == HEALING)
 				i->m_Sprite->SetPos(m_pPlayer->GetRect().left - 30, m_pPlayer->GetRect().top);
+
 
 			if (i->m_fAnimState >= 5)
 			{
@@ -90,6 +91,7 @@ void CProjectiles::CheckProjectiles()
 			i++;
 			continue;
 		}
+		//check for lightsphere
 		else if (i->m_ID == LIGHTSPHERE)
 		{
 			if (m_pPlayer->GetRect().left > i->m_Sprite->GetRect().left + 40)
@@ -110,6 +112,7 @@ void CProjectiles::CheckProjectiles()
 				continue;
 			}
 		}
+		//check for manashield
 		else if (i->m_ID == MANASHIELDPROJECTILE)
 		{
 			i->m_Sprite->SetPos(m_pPlayer->GetRect().left - 30, m_pPlayer->GetRect().top - 20);
@@ -121,11 +124,72 @@ void CProjectiles::CheckProjectiles()
 				continue;
 			}
 		}
+		//check for dynamite
+		else if (i->m_ID == DYNAMITEEFFECT)
+		{
+			
+			i->m_fAnimState += 20 * g_pTimer->GetElapsedTime().asSeconds();
+			i->m_fFlown -= g_pTimer->GetElapsedTime().asSeconds();
+
+			i->m_Sprite->SetPos(*i->m_xPos - 30, *i->m_yPos - 20);
+
+			if (i->m_fAnimState >= 5)
+				i->m_fAnimState = 0;
+
+			if (i->m_fFlown <= 0)
+			{
+				int x = i->m_Sprite->GetRect().left;
+				int y = i->m_Sprite->GetRect().top;
+				SAFE_DELETE(i->m_Sprite);
+				i->m_Sprite = new CSprite;
+				i->m_ID = EXPLOSION;
+				i->m_fAnimState = 0;
+				i->m_Sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
+				i->m_Sprite->SetPos(x - 40, y - 40);
+				i->m_Damage = 30;
+
+				//check for blocks
+				for (int x = ((*i->m_xPos + 20) / 100) - 1; x < ((*i->m_xPos + 20) / 100) + 2; x++)
+				{
+					for (int y = (*i->m_yPos / 100) - 1; y < (*i->m_yPos / 100) + 2; y++)
+					{
+						m_pWorld->DeleteBlock(x, y);
+					}
+				}
+				
+				//check if it hits npc
+				m_pNpcs->CheckProjectile(&*i);
+
+				//check if it hits player
+				if (m_pPlayer->GetRect().intersects(i->m_Sprite->GetRect()))
+				{
+					m_pPlayer->DoDamage(i->m_Damage - (i->m_Damage * (m_pPlayer->GetPlayerAttributes().armour / 100)));
+
+					//throw player
+					if (m_pPlayer->GetRect().left < i->m_Sprite->GetRect().left)
+						m_pPlayer->ThrowPlayer(true, 200);
+					else
+						m_pPlayer->ThrowPlayer(false, 200);
+
+					stringstream stream;
+					stream.str("");
+
+					//put the damage into a stringstream	
+					stream << i->m_Damage;
+					g_pSignMachine->AddString(stream.str(), 1, m_pPlayer->GetRect().left, m_pPlayer->GetRect().top);
+
+				}
+
+
+				i++;
+				continue;
+			}
+		}
 
 
 
 
-		if (i->m_ID != LIGHTSPHERE && i->m_ID != MANASHIELDPROJECTILE)
+		if (i->m_ID != LIGHTSPHERE && i->m_ID != MANASHIELDPROJECTILE && i->m_ID != DYNAMITEEFFECT)
 		{
 			//check for collisions
 			if (i->m_fXVel < 0)

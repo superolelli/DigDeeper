@@ -285,6 +285,14 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 		radish = new CConsumable;
 		radish->InitConsumable(RADISH);
 		m_pInventory->Take(radish, 4);
+	
+		CItem *dynamite = new CItem;
+		dynamite->Init(DYNAMITE);
+		m_pInventory->Take(dynamite, 5);
+
+		CItem *key= new CItem;
+		key->Init(KEY);
+		m_pInventory->Take(key);
 
 		//add the recipe
 		CItem *book = new CItem;

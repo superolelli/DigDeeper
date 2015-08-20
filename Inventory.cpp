@@ -267,20 +267,7 @@ void CInventory::Render(IntRect &_playerRect)
 	//if e was pressed: Open or close the inventory
 	if(g_pFramework->keyStates.eUp)
 	{
-		if(is_open)
-		{
-			is_open = false;
-			m_pCurrentPanel = NULL;
-		}
-		else
-		{
-			is_open = true;
-
-			if(m_pCurrentPanel == NULL || (m_pCurrentPanel != NULL && m_pCurrentPanel->GetType() == PANEL_COOKINGBOOK))
-			{
-				m_pCurrentPanel = m_pEquipment;
-			}
-		}
+		SetOpen(!is_open);
 	}
 
 	//Render the beam
@@ -770,7 +757,11 @@ void CInventory::Render(IntRect &_playerRect)
 						m_tooltipText.setColor(Color::Yellow);
 
 					m_tooltipText.setString(number.str().c_str());
-					m_tooltipText.setPosition((float)(Mouse::getPosition().x + 13), (float)(Mouse::getPosition().y));
+
+					if (Mouse::getPosition().y + m_tooltipText.getGlobalBounds().height > g_pFramework->GetWindow()->getSize().y)
+						m_tooltipText.setPosition((float)(Mouse::getPosition().x + 13), (float)(Mouse::getPosition().y - m_tooltipText.getGlobalBounds().height));
+					else
+						m_tooltipText.setPosition((float)(Mouse::getPosition().x + 13), (float)(Mouse::getPosition().y));
 
 					FloatRect backgroundRect = m_tooltipText.getLocalBounds();
 					m_tooltipBackground = RectangleShape(Vector2f(backgroundRect.width, backgroundRect.height + 5));
@@ -799,6 +790,7 @@ void CInventory::Render(IntRect &_playerRect)
 			number << (i->amount);
 			m_text.setString(number.str().c_str());
 			m_text.setPosition((float)(i->thing->GetInventorySprite()->GetRect().left + 70), (float)(i->thing->GetInventorySprite()->GetRect().top + 70));
+
 			g_pFramework->GetRenderWindow()->draw(m_text);			
 
 			i++;
@@ -906,6 +898,21 @@ void CInventory::Render(IntRect &_playerRect)
 					CItem *item;
 					item = (CItem*)(i->thing);
 					m_pCurrentPanel = m_world->GetPanel(item->GetSpecialID());
+				}
+				//if the player wants to throw a dynamite
+				else if (CarriedObjectFramePos == i->position && g_pFramework->keyStates.rightMouseUp && i->thing->getID() == DYNAMITE)
+				{
+					m_world->AddLittleItem(DYNAMITE, m_pPlayer->GetRect().left, m_pPlayer->GetRect().top);
+
+					i->amount--;
+
+					if (i->amount <= 0)
+					{
+						SAFE_DELETE(i->thing);
+						i = m_inventoryList.erase(i);
+						continue;
+					}
+
 				}
 
 				i->thing->RenderInventorySprite();
@@ -1039,4 +1046,23 @@ bool CInventory::IsFull()
 		return true;
 	else
 		return false;
+}
+
+
+void CInventory::SetOpen(bool _open)
+{
+	if (_open)
+	{
+		is_open = true;
+
+		if (m_pCurrentPanel == NULL || (m_pCurrentPanel != NULL && m_pCurrentPanel->GetType() == PANEL_COOKINGBOOK))
+		{
+			m_pCurrentPanel = m_pEquipment;
+		}
+	}
+	else
+	{
+		is_open = false;
+		m_pCurrentPanel = NULL;
+	}
 }

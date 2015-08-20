@@ -53,6 +53,7 @@ public:
 	void DoAlchemy(int _level);   //tries alchemy
 	bool IsInventoryFull(){ return m_pInventory->IsFull(); }
 	void SetMenuOpen(int _menu);
+	CThing* GetCarriedItem(){ return m_pInventory->GetCarriedThing(); }
 
 	SToolAttributes GetPlayerAttributes();
 	SPlayerAttributes GetPlayerBasicAttributes(){ return m_Attributes; }

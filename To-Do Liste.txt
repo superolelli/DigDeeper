@@ -1,0 +1,4 @@
+- Lichtberechnung
+- Zielsetzung (Prinzessin?)
+- Bugfix: Konsumierbares wird mit komischen Werten initialisiert
+- Bugfix: Goblins stecken in Decke fest
