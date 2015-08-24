@@ -283,11 +283,23 @@ private:
 	//generates a new world
 	void GenerateWorld();
 
+	//generates the top layer
+	void GenerateTopLayer();
+
+	//generates the mid layer
+	void GenerateMidLayer();
+
+	//generates the bottom layer
+	void GenerateBottomLayer();
+
 	//generates a random room
 	void GenerateRoom(int _x, int _y);
 
 	//generates a random cave
 	void GenerateCave(int _x, int _y);
+
+	//generates an outer room
+	void GenerateOuterRoom(int _x, int _y);
 
 	//generates the final room
 	void GenerateFinalRoom(int _x, int _y);

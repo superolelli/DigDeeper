@@ -327,6 +327,14 @@ void CBuildingMenu::InitRecipe(SBuildingItem *_recipe)
 			_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_brickwall);
 			_recipe->resources[BRICKS] = 2;
 		}break;
+		case(DYNAMITE) :
+		{
+			_recipe->Name = "Dynamit";
+			_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_dynamite);
+			_recipe->resources[SULFUR] = 1;
+			_recipe->resources[SALPETER] = 1;
+			_recipe->resources[COAL] = 1;
+		}break;
 		}
 
 		_recipe->m_pInfoSprite->SetPos(m_pBuildingMenu->GetRect().left + 250, m_pBuildingMenu->GetRect().top + 4);
@@ -438,6 +446,7 @@ void CBuildingMenu::FillRecipeList()
 	m_notAvailableRecipes.push_back(DIADOCHITARMOUR);
 	m_notAvailableRecipes.push_back(BRICKS);
 	m_notAvailableRecipes.push_back(BRICKWALL);
+	m_notAvailableRecipes.push_back(DYNAMITE);
 
 
 	m_chosenItem = pickaxe;

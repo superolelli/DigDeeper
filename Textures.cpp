@@ -47,6 +47,7 @@ void TextureLoading::LoadTextures()
 	t_pauseMenuQuitButton.loadFromFile("Data/Sprites/Buttons/quit_button.png");
 
 	t_BackgroundDead.loadFromFile("Data/Sprites/background_dead.png");
+	t_BackgroundWon.loadFromFile("Data/Sprites/background_princess_free.png");
 
 	t_gameBackground.loadFromFile("Data/Sprites/Background.png");
 	t_gameNightSky.loadFromFile("Data/Sprites/nightsky3.png");
@@ -168,6 +169,7 @@ void TextureLoading::LoadTextures()
 	t_buildingInfo_diadochitarmour.loadFromFile("Data/Sprites/Building/building_info_diadochit_armour.png");
 	t_buildingInfo_bricks.loadFromFile("Data/Sprites/Building/building_info_bricks.png");
 	t_buildingInfo_brickwall.loadFromFile("Data/Sprites/Building/building_info_brickwall.png");
+	t_buildingInfo_dynamite.loadFromFile("Data/Sprites/Building/building_info_dynamite.png");
 
 	t_blockTextures_dirt.loadFromFile("Data/Sprites/Objects/Blocks/dirt.png");
 	t_blockTextures_stone.loadFromFile("Data/Sprites/Objects/Blocks/stone.png");
@@ -211,6 +213,11 @@ void TextureLoading::LoadTextures()
 	t_blockTextures_brickwall.loadFromFile("Data/Sprites/Objects/Blocks/dark_brick_wall.png");
 	t_blockTextures_princessCage.loadFromFile("Data/Sprites/Objects/Blocks/princess_in_cage.png");
 	t_blockTextures_princessCage2.loadFromFile("Data/Sprites/Objects/Blocks/princess_in_cage2.png");
+	t_blockTextures_sulfurBlock.loadFromFile("Data/Sprites/Objects/Blocks/sulfur_block.png");
+	t_blockTextures_salpeterBlock[0].loadFromFile("Data/Sprites/Objects/Blocks/salpeter_block1.png");
+	t_blockTextures_salpeterBlock[1].loadFromFile("Data/Sprites/Objects/Blocks/salpeter_block2.png");
+	t_blockTextures_salpeterBlock[2].loadFromFile("Data/Sprites/Objects/Blocks/salpeter_block3.png");
+	t_blockTextures_salpeterBlock[3].loadFromFile("Data/Sprites/Objects/Blocks/salpeter_block4.png");
 
 	t_dirtRimTop.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_top.png");
 	t_dirtRimBottom.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_bottom.png");
@@ -286,6 +293,10 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_brickwall.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/dark_brick_wall_inventory.png");
 	t_blockInventoryTexture_dynamite.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/dynamite_inventory.png");
 	t_blockInventoryTexture_key.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/key_inventory.png");
+	t_blockInventoryTexture_sulfurBlock.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/sulfur_block_inventory.png");
+	t_blockInventoryTexture_salpeterBlock.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/salpeter_block_inventory.png");
+	t_blockInventoryTexture_sulfur.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/sulfur_inventory.png");
+	t_blockInventoryTexture_salpeter.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/salpeter_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
@@ -355,6 +366,10 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_brickwall.loadFromFile("Data/Sprites/Objects/LittleItems/dark_brick_wall_little.png");
 	t_blockLittleTexture_dynamite.loadFromFile("Data/Sprites/Objects/LittleItems/dynamite_little.png");
 	t_blockLittleTexture_key.loadFromFile("Data/Sprites/Objects/LittleItems/key_little.png");
+	t_blockLittleTexture_sulfurBlock.loadFromFile("Data/Sprites/Objects/LittleItems/sulfur_block_little.png");
+	t_blockLittleTexture_salpeterBlock.loadFromFile("Data/Sprites/Objects/LittleItems/salpeter_block_little.png");
+	t_blockLittleTexture_sulfur.loadFromFile("Data/Sprites/Objects/LittleItems/sulfur_little.png");
+	t_blockLittleTexture_salpeter.loadFromFile("Data/Sprites/Objects/LittleItems/salpeter_little.png");
 
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");

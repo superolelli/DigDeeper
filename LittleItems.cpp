@@ -295,6 +295,22 @@ void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 
 		m_dynamiteTime = 5;
 	}break;
+	case(SULFURBLOCK) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_sulfurBlock);
+	}break;
+	case(SALPETERBLOCK) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_salpeterBlock);
+	}break;
+	case(SULFUR) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_sulfur);
+	}break;
+	case(SALPETER) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_salpeter);
+	}break;
 	}
 
 

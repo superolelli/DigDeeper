@@ -60,6 +60,7 @@ public:
 	Texture t_pauseMenuQuitButton;       
 
 	Texture t_BackgroundDead;
+	Texture t_BackgroundWon;
 
 	Texture t_gameBackground;                      //the ingame background
 	Texture t_gameNightSky;                          //the sky at night
@@ -172,6 +173,7 @@ public:
 	Texture t_buildingInfo_diadochitarmour;
 	Texture t_buildingInfo_bricks;
 	Texture t_buildingInfo_brickwall;
+	Texture t_buildingInfo_dynamite;
 
 	Texture t_blockTextures_dirt;                     //the dirt textures
 	Texture t_blockTextures_stone;                      //the stone texture
@@ -214,6 +216,8 @@ public:
 	Texture t_blockTextures_brickwall;
 	Texture t_blockTextures_princessCage;
 	Texture t_blockTextures_princessCage2;
+	Texture t_blockTextures_sulfurBlock;
+	Texture t_blockTextures_salpeterBlock[4];
 	Texture t_blockTextures_noTexture;               //the no_texture texture
 
 	Texture t_dirtRimTop;
@@ -292,6 +296,10 @@ public:
 	Texture t_blockInventoryTexture_brickwall;
 	Texture t_blockInventoryTexture_dynamite;
 	Texture t_blockInventoryTexture_key;
+	Texture t_blockInventoryTexture_sulfurBlock;
+	Texture t_blockInventoryTexture_salpeterBlock;
+	Texture t_blockInventoryTexture_sulfur;
+	Texture t_blockInventoryTexture_salpeter;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -362,6 +370,10 @@ public:
 	Texture t_blockLittleTexture_brickwall;
 	Texture t_blockLittleTexture_dynamite;
 	Texture t_blockLittleTexture_key;
+	Texture t_blockLittleTexture_sulfurBlock;
+	Texture t_blockLittleTexture_salpeterBlock;
+	Texture t_blockLittleTexture_sulfur;
+	Texture t_blockLittleTexture_salpeter;
 	
 
 

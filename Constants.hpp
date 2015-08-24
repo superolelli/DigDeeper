@@ -39,11 +39,11 @@ const int IRONBLOCK = 4;
 const int GOLDBLOCK = 5;
 const int ARCANUSBLOCK = 6;
 const int MARBLE = 7;
-const int WOOD = 8;
-const int TREETRUNK = 9;
-const int TREECROWN = 10;
-const int BEEHIVEP = 11;
-const int BEDROCK = 12;
+const int SULFURBLOCK = 8;
+const int SALPETERBLOCK = 9;
+const int WOOD = 10;
+const int TREETRUNK = 11;
+const int TREECROWN = 12;
 
 const int FURNANCE = 13;
 const int CUPBOARD = 14;
@@ -61,6 +61,8 @@ const int STALAGTIT = 25;
 const int RUBBISH = 26;
 const int BRICKS = 27;
 const int PRINCESSCAGE = 28;
+const int BEDROCK = 29;
+const int BEEHIVEP = 30;
 const int LADDER = 49;
 
 const int PWBREAK = 50;            //the Placeable-Wall-Break shows, where the wall section begins
@@ -88,7 +90,9 @@ const int COOKINGBOOK = 68;
 const int SAWDUST = 69;
 const int DIADOCHIT = 70;
 const int DYNAMITE = 71;
-const int KEY = 72;
+const int SULFUR = 72;
+const int SALPETER = 73;
+const int KEY = 78;
 
 const int SPELL = 79;
 

@@ -1454,3 +1454,31 @@ ZUKÜNFITGE ÄNDERUNGEN:
 - Wenn man mit dem Schlüssel mit rechts auf den Käfig klickt wird das Spiel beendet (bis jetzt genauso, als wäre man gestorben. Wird noch geändert)
 
 ------------------------------------------------------
+21.08.2015
+
+- Befreit man die Prinzessin, wird nun ein entsprechender Hintergrund bei Beendigung angezeigt
+
+------------------------------------------------------
+22.08.2015
+
+- Begonnen die Weltgenerierung neu zu schreiben. In Zukunft soll die Welt folgendermaßen aussehen:
+  1. Oberwelt mit Pflanzen und Tieren
+  2. Erde, Erze und vereinzelt Räume und Höhlen, so wie bis jetzt die ganze Welt aussah (ungefähr die Hälfte der Welt)
+  3. Erste kleine Goblinbehausungen mit Türen etc. dazwischen Luft (nur ca. 8 Block hoch)
+  4. Goblinstadt mit vielen verbundenen Räumen und Höhlen, dazwischen Erde und Erze (ca. 1/4 der Welt)
+  5. Durchgehende Kerker ohne Luft oder Erde o.ä. dazwischen. Ganz unten der Prinzessinnenraum (ca. 1/8 der Welt)
+
+-> Bis jetzt werden die Punkte 1-3 bereits generiert. Anstelle von 4 und 5 befindet sich dort bis jetzt nur Erde
+
+-------------------------------------------------------
+23.08.2015
+
+- Block mit Schwefel hinzugefügt (kommt natürlich vor)
+- Block mit Salpeter hinzugefügt (kommt natürlich vor; 4 Erscheinungsarten)
+- Schwefel hinzugefügt
+- Salpeter hinzugefügt
+- Dynamit kann nun gebaut werden
+- Rezepte, die man schon hat bringen einem bei Anwendung nun 25 Exp
+- Goldfund-Sound entfernt
+
+-------------------------------------------------------

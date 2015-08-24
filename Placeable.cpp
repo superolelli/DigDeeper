@@ -414,7 +414,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_Priority = -1;
 		m_is_passable = true;
 		m_is_visible = true;
-		m_can_place_on = true;
+		m_can_place_on = false;
 	}break;
 	case PRINCESSCAGE:
 	{
@@ -431,6 +431,28 @@ void CPlaceable::Init(int _ID, bool _loaded)
 			m_is_breakable = false;
 		else
 			SetSpecialID(m_SpecialID);
+	}break;
+	case SULFURBLOCK:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_sulfurBlock);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_sulfurBlock);
+		m_Name = "Block mit Schwefel";
+		m_Hardness = 5;
+		m_Priority = 1;
+		m_is_passable = false;
+		m_is_visible = true;
+		m_can_place_on = true;
+	}break;
+	case SALPETERBLOCK:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_salpeterBlock[rand()%4]);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_salpeterBlock);
+		m_Name = "Block mit Salpeter";
+		m_Hardness = 5;
+		m_Priority = 1;
+		m_is_passable = false;
+		m_is_visible = true;
+		m_can_place_on = true;
 	}break;
 	default:
 		{
@@ -558,6 +580,12 @@ int CPlaceable::GetLittleID()
 	case(RUBBISH) :
 		return GetRubbish();
 		break;
+	case(SULFURBLOCK) :
+		return SULFUR;
+		break;
+	case(SALPETERBLOCK) :
+		return SALPETER;
+		break;
 
 	default:
 		return m_ID;
@@ -679,7 +707,7 @@ int CPlaceable::GetRubbish()
 {
 	int number = rand() % 85 + 56;
 
-	if (number > 70 && number < 81)
+	if (number > 73 && number < 81)
 		number = -1;
 	else if (number > 88 && number < 101)
 		number = -1;

@@ -440,38 +440,38 @@ void CInventory::Render(IntRect &_playerRect)
 					if(i->thing->getID() == RECIPE)
 					{
 						CItem *item = (CItem*)i->thing;
-						
-						stringstream logstream;
-						logstream << "Recipe-ID before adding: " << item->GetSpecialID() << endl;
-						g_pFramework->WriteToLog(INFO, logstream.str());
 
-						if(m_pPlayer->AddRecipe(item->GetSpecialID()) == true)
+						//if the recipe exists already: add exp
+						if (m_pPlayer->AddRecipe(item->GetSpecialID()) == false)
 						{
-							SAFE_DELETE(i->thing);
-							i = m_inventoryList.erase(i);
-
-							//declare the inventory place free
-							if(m_pInventoryWindow->GetRect().contains(mousePos))
-							{
-								int xItem = mousePos.x - m_pInventoryWindow->GetRect().left;
-								int yItem = mousePos.y - m_pInventoryWindow->GetRect().top;
-
-								xItem = (xItem - xItem%100);
-								yItem = (yItem- yItem%100);
-
-								m_inventory_place_list[xItem/100][yItem/100].is_filled = false;
-							}
-							else
-							{
-								int xItem = mousePos.x - m_pInventoryBeam->GetRect().left;						
-
-								xItem = (xItem - xItem%100);
-
-								m_inventory_beam_place_list[xItem/100].is_filled = false;
-							}
-
-							continue;
+							m_pPlayer->AddExp(25);
 						}
+
+						//delete the recipe
+						SAFE_DELETE(i->thing);
+						i = m_inventoryList.erase(i);
+
+						//declare the inventory place free
+						if(m_pInventoryWindow->GetRect().contains(mousePos))
+						{
+							int xItem = mousePos.x - m_pInventoryWindow->GetRect().left;
+							int yItem = mousePos.y - m_pInventoryWindow->GetRect().top;
+
+							xItem = (xItem - xItem%100);
+							yItem = (yItem- yItem%100);
+
+							m_inventory_place_list[xItem/100][yItem/100].is_filled = false;
+						}
+						else
+						{
+							int xItem = mousePos.x - m_pInventoryBeam->GetRect().left;						
+
+							xItem = (xItem - xItem%100);
+
+							m_inventory_beam_place_list[xItem/100].is_filled = false;
+						}
+
+						continue;		
 					}
 
 					if(i->is_clicked == false)

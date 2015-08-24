@@ -267,6 +267,18 @@ void CItem::Init(int _ID, bool _loaded)
 		if (!_loaded)
 			m_Name = "Schlüssel";
 	}break;
+	case(SULFUR) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_sulfur);
+		if (!_loaded)
+			m_Name = "Schwefel";
+	}break;
+	case(SALPETER) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_salpeter);
+		if (!_loaded)
+			m_Name = "Salpeter";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)
@@ -280,7 +292,7 @@ void CItem::Init(int _ID, bool _loaded)
 
 void CItem::InitRecipe()
 {
-	m_specialID = rand()%14 + 131;
+	m_specialID = rand()%14 + 132;
 
 	switch(m_specialID)
 	{
@@ -336,6 +348,10 @@ void CItem::InitRecipe()
 	case(144) :
 		m_Name.append("(Steinziegelwand)");
 		m_specialID = BRICKWALL;
+		break;
+	case(145) :
+		m_Name.append("(Dynamit)");
+		m_specialID = DYNAMITE;
 		break;
 	}
 
@@ -400,6 +416,9 @@ void CItem::SetSpecialID(int _ID)
 			break;
 		case(BRICKWALL) :
 			m_Name.append("(Steinziegelwand)");
+			break;
+		case(DYNAMITE) :
+			m_Name.append("(Dynamit)");
 			break;
 		}
 	}

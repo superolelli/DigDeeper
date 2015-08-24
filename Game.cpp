@@ -225,14 +225,11 @@ void CGame::Run()
 				g_pFramework->GetRenderWindow()->setView(g_pFramework->GetRenderWindow()->getDefaultView());
 
 				Sprite sprite;
-				sprite.setTexture(g_pTextures->t_BackgroundDead);
+				sprite.setTexture(g_pTextures->t_BackgroundWon);
 				sprite.setScale((float)g_pFramework->GetRenderWindow()->getSize().x / (float)sprite.getLocalBounds().width, (float)g_pFramework->GetRenderWindow()->getSize().y / (float)sprite.getLocalBounds().height);
 
 				g_pFramework->GetRenderWindow()->draw(sprite);
 				g_pFramework->Flip();
-
-				g_pSound->m_sound.setBuffer(g_pSound->m_laughSound);
-				g_pSound->m_sound.play();
 
 				sleep(seconds(5));
 
