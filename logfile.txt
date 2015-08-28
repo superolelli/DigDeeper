@@ -2,8 +2,12 @@ Dig Deeper, version 0.2
 Log file created
 
 Init mainframe...
-Set new ID: 13
-Set new ID: 14
+Rezept-ID: 71
+Rezept-ID: 135
+Set new ID: 10
+Set new ID: 19
+Set new ID: 20
+Set new ID: 21
 Deleted Cookingbook
 Initialized Game...
 Inventory is open
@@ -208,6 +212,39 @@ Inventory is open
 Inventory is open
 Inventory is open
 Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Set new ID: 1
+Deleted Cookingbook
+Deleted Cookingbook
 Deleted Cookingbook
 
 

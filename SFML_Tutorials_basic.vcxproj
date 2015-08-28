@@ -42,13 +42,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Ole\Desktop\boost_1_57_0;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Ole\Desktop\boost_1_57_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Ole\Desktop\Boost Libraries\boost_1_57_0;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Ole\Desktop\Boost Libraries\boost_1_57_0\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\Ole\Desktop\boost_1_57_0;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Ole\Desktop\boost_1_57_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Ole\Desktop\Boost Libraries\boost_1_57_0;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Ole\Desktop\Boost Libraries\boost_1_57_0\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
