@@ -711,7 +711,7 @@ int CPlaceable::GetRubbish()
 		number = -1;
 	else if (number > 88 && number < 101)
 		number = -1;
-	else if (number > 104 && number < 131)
+	else if (number > 106 && number < 131)
 		number = -1;
 	else if (number == 138)
 		number = 200;

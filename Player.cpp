@@ -251,6 +251,11 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 		battleaxe->InitTool(BATTLEAXE);
 		m_pInventory->Take(battleaxe);
 
+		CTool *dagger;
+		dagger = new CTool;
+		dagger->InitTool(GOBLINDAGGER);
+		m_pInventory->Take(dagger);
+
 		CEquipment *candle;
 		candle = new CEquipment;
 		candle->InitEquipment(CANDLE);
@@ -792,7 +797,7 @@ void CPlayer::Render()
 			tool->SetRotation(m_fArmAnimState);
 			m_pDwarf->Render(0.0f, m_fAnimState);
 			m_pInventory->RenderEquipment(m_pDwarf->GetRect().left, m_pDwarf->GetRect().top, true);
-			tool->RenderTool(m_pDwarf->GetHandPos(m_turned_left).x, m_pDwarf->GetHandPos(m_turned_left).y);
+			tool->RenderTool(m_pDwarf->GetHandPos(m_turned_left).x, m_pDwarf->GetHandPos(m_turned_left).y, m_turned_left);
 			m_pDwarf->RenderSecondPart(0);
 		}
 		else
@@ -800,7 +805,7 @@ void CPlayer::Render()
 			tool->SetRotation(-m_fArmAnimState);
 			m_pDwarf->Render(1.0f, m_fAnimState);
 			m_pInventory->RenderEquipment(m_pDwarf->GetRect().left, m_pDwarf->GetRect().top, false);
-			tool->RenderTool(m_pDwarf->GetHandPos(m_turned_left).x, m_pDwarf->GetHandPos(m_turned_left).y);
+			tool->RenderTool(m_pDwarf->GetHandPos(m_turned_left).x, m_pDwarf->GetHandPos(m_turned_left).y, m_turned_left);
 			m_pDwarf->RenderSecondPart(3);
 		}
 	}

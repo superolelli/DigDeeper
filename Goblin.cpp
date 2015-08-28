@@ -554,6 +554,17 @@ vector<SItem> CGoblin::GetLoot()
 	slime.thing = thing;
 	loot.push_back(slime);
 
+	//maybe add dagger
+	if (m_goblinType == WARRIORGOBLIN && rand()%10 == 0)
+	{
+		SItem dagger;
+		dagger.amount = 1;
+		CTool* thing2 = new CTool;
+		thing2->InitToolRandomly(GOBLINDAGGER);
+		dagger.thing = thing2;
+		loot.push_back(dagger);
+	}
+
 	return loot;
 }
 

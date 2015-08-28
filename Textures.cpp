@@ -297,6 +297,7 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_salpeterBlock.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/salpeter_block_inventory.png");
 	t_blockInventoryTexture_sulfur.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/sulfur_inventory.png");
 	t_blockInventoryTexture_salpeter.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/salpeter_inventory.png");
+	t_blockInventoryTexture_goblindagger.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/goblindagger_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
@@ -370,6 +371,7 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_salpeterBlock.loadFromFile("Data/Sprites/Objects/LittleItems/salpeter_block_little.png");
 	t_blockLittleTexture_sulfur.loadFromFile("Data/Sprites/Objects/LittleItems/sulfur_little.png");
 	t_blockLittleTexture_salpeter.loadFromFile("Data/Sprites/Objects/LittleItems/salpeter_little.png");
+	t_blockLittleTexture_goblindagger.loadFromFile("Data/Sprites/Objects/LittleItems/goblindagger_little.png");
 
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");
@@ -378,6 +380,7 @@ void TextureLoading::LoadTextures()
 	t_tool_battleaxe.loadFromFile("Data/Sprites/Objects/Tools/battleaxe_carried.png");
 	t_tool_battlestone.loadFromFile("Data/Sprites/Objects/Tools/battlestone_carried.png");
 	t_tool_dynamite.loadFromFile("Data/Sprites/Objects/Tools/dynamite.png");
+	t_tool_goblindagger.loadFromFile("Data/Sprites/Objects/Tools/goblindagger_carried.png");
 
 	t_equipment_iron_helmet.loadFromFile("Data/Sprites/Objects/Equipment/iron_helmet.png");
 	t_equipment_iron_armour.loadFromFile("Data/Sprites/Objects/Equipment/iron_armour.png");

@@ -19,7 +19,7 @@ public:
 	void InitToolRandomly(int _ID);
 
 	//renders the tool
-	void RenderTool(int _x, int _y);
+	void RenderTool(int _x, int _y, bool _left);
 
 	//sets the rotation
 	void SetRotation(float _angle);
