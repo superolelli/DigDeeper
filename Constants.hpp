@@ -114,6 +114,7 @@ const int SWORD = 102;
 const int LANTERN = 103;
 const int BATTLEAXE = 104;
 const int BATTLESTONE = 105;
+const int GOBLINDAGGER = 106;
 
 const int TEBREAK = 130;             //the Tool-Equipment-Break shows, where the equipment section begins
 

@@ -374,4 +374,18 @@ struct SSettings
 	bool m_fast_light;
 };
 
+
+
+struct SRoom
+{
+	int x;
+	int y;
+	int width;
+	int height;
+	bool connectionLeft;
+	bool connectionRight;
+	bool connectionUp;
+	bool connectionDown;
+};
+
 #endif
