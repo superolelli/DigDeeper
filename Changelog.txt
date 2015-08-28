@@ -1473,6 +1473,7 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -------------------------------------------------------
 23.08.2015
 
+- Goblindolch hinzugefügt (trifft nur beim Schlag nach unten; wird manchmal von Jägergoblins gedroppt)
 - Block mit Schwefel hinzugefügt (kommt natürlich vor)
 - Block mit Salpeter hinzugefügt (kommt natürlich vor; 4 Erscheinungsarten)
 - Schwefel hinzugefügt
@@ -1480,5 +1481,17 @@ ZUKÜNFITGE ÄNDERUNGEN:
 - Dynamit kann nun gebaut werden
 - Rezepte, die man schon hat bringen einem bei Anwendung nun 25 Exp
 - Goldfund-Sound entfernt
+- Bugfix: Memoryleak beim Goblindrop gefixt
+
+-------------------------------------------------------
+26.08.2015
+
+- Bugfix: Spiel stürzte ab, wenn ein Müllhaufen ein Kochbuch droppte
+
+-------------------------------------------------------
+28.08.2015
+
+- Weltgenerierung Teil 4 (Goblinstadt) begonnen
+  -> Es gibt nun viele Räume, die durch Gänge miteinander verbunden sind (bis jetzt nur horizontale Gänge)
 
 -------------------------------------------------------

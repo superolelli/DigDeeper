@@ -77,14 +77,24 @@ void CTool::InitTool(int _ID, bool _loaded)
 		}
 	}break;
 	case(LANTERN):
-		{	
-			m_pCarriedToolSprite->Load(&g_pTextures->t_tool_lantern);
-			m_pCarriedToolSprite->setRotatingPoint(10.0f, 0.0f);
-			if(!_loaded)
-			{
-				m_rarity = 1;
-			}
-		}break;
+	{	
+		m_pCarriedToolSprite->Load(&g_pTextures->t_tool_lantern);
+		m_pCarriedToolSprite->setRotatingPoint(10.0f, 0.0f);
+		if(!_loaded)
+		{
+			m_rarity = 1;
+		}
+	}break;
+	case(GOBLINDAGGER) :
+	{
+		m_pCarriedToolSprite->Load(&g_pTextures->t_tool_goblindagger, 2, 16, 38);
+		m_pCarriedToolSprite->setRotatingPoint(5.0f, 7.0f);
+		if (!_loaded)
+		{
+			m_Attributes.strength = 7;
+			m_rarity = 1;
+		}
+	}break;
 	}
 }
 
@@ -193,10 +203,28 @@ void CTool::InitToolRandomly(int _ID)
 
 
 
-void CTool::RenderTool(int _x, int _y)
+void CTool::RenderTool(int _x, int _y, bool _left)
 {
-	m_pCarriedToolSprite->SetPos(_x, _y);
-	m_pCarriedToolSprite->Render(g_pFramework->GetRenderWindow());
+	
+
+	if (m_ID == GOBLINDAGGER)
+	{
+		if (_left)
+		{
+			m_pCarriedToolSprite->SetPos(_x, _y);
+			m_pCarriedToolSprite->Render(g_pFramework->GetRenderWindow(), 0.0f);
+		}
+		else
+		{
+			m_pCarriedToolSprite->SetPos(_x - 5, _y);
+			m_pCarriedToolSprite->Render(g_pFramework->GetRenderWindow(), 1.0f);
+		}
+	}
+	else
+	{
+		m_pCarriedToolSprite->SetPos(_x, _y);
+		m_pCarriedToolSprite->Render(g_pFramework->GetRenderWindow());
+	}
 }
 
 
@@ -234,10 +262,13 @@ IntRect CTool::GetRect()
 		rect.height = 55;
 		return rect;
 	}break;
-	case(BATTLESTONE) :
+	case(GOBLINDAGGER) :
 	{
 		IntRect rect;
 		rect = m_pCarriedToolSprite->GetGlobalRect();
+		rect.top += 9;
+		rect.height -= 9;
+
 		return rect;
 	}break;
 	default:

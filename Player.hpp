@@ -125,8 +125,6 @@ private:
 	}
 	BOOST_SERIALIZATION_SPLIT_MEMBER();
 
-	void CalculateAttributes();
-
 	RenderTarget *m_pTarget;                         //the render target
 	CWorld *m_pWorld;                                //a pointer to the world
 	View *m_pView;
@@ -174,7 +172,7 @@ private:
 	int m_SideSpeed;                                    //the speed to one side (e.g. by being hitted)
 
 	bool m_turned_left;                                //is the player turned to the left side?
-	bool m_armGoingUp;                                  //is the arm moved up?
+	bool m_armGoingUp;                                  //is the arm moving up?
 
 
 	bool CheckCollisions();                                     //Checks, if the player collides with a unpassable
@@ -182,6 +180,7 @@ private:
 	void CheckXMovement();                                       //Checks the player's movement on the x-axis
 	void CheckYMovement();                                       //Checks the player's movement on the y-axis
 	void CheckArmAnimation();                                      //checks the state of the arm
+	void CalculateAttributes();
 };
 
 BOOST_CLASS_VERSION(CPlayer, 0)

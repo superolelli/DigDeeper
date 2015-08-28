@@ -300,6 +300,7 @@ public:
 	Texture t_blockInventoryTexture_salpeterBlock;
 	Texture t_blockInventoryTexture_sulfur;
 	Texture t_blockInventoryTexture_salpeter;
+	Texture t_blockInventoryTexture_goblindagger;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -374,6 +375,7 @@ public:
 	Texture t_blockLittleTexture_salpeterBlock;
 	Texture t_blockLittleTexture_sulfur;
 	Texture t_blockLittleTexture_salpeter;
+	Texture t_blockLittleTexture_goblindagger;
 	
 
 
@@ -384,6 +386,7 @@ public:
 	Texture t_tool_battleaxe;
 	Texture t_tool_battlestone;
 	Texture t_tool_dynamite;
+	Texture t_tool_goblindagger;
 	
 	//the "carried" texture of the equipment
 	Texture t_equipment_iron_helmet;

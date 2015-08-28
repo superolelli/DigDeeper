@@ -279,6 +279,12 @@ void CItem::Init(int _ID, bool _loaded)
 		if (!_loaded)
 			m_Name = "Salpeter";
 	}break;
+	case(GOBLINDAGGER) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_goblindagger);
+		if (!_loaded)
+			m_Name = "Goblindolch";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)

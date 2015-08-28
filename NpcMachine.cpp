@@ -132,69 +132,79 @@ void CNpcMachine::CheckAllNpcs()
 		{
 			if(!(*i)->m_wasHit)
 			{
-				if ((*i)->GetID() == GOBLIN)
-					((CGoblin*)(*i))->SetChestedFalse();
-
-				//set was hit to true
-				(*i)->m_wasHit = true;
-
-				//calculate the damage
-				int damage = m_pPlayer->GetPlayerAttributes().strength - ((float)m_pPlayer->GetPlayerAttributes().strength * ((float)(*i)->GetAttributes()->armour/100.0f));
-
-				stream.str("");
-
-				if (rand() % 100 < m_pPlayer->GetPlayerAttributes().criticalChance)
+				if (!(m_pPlayer->GetCarriedItem()->getID() == GOBLINDAGGER && m_pPlayer->GetArmGoingUp()))
 				{
-					damage += damage * m_pPlayer->GetPlayerAttributes().criticalDamage / 10;
-					
-					//put the damage into a stringstream	
-					stream << damage;
-					g_pSignMachine->AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top, Color(150, 0, 0));
-				}
-				else
-				{
-					//put the damage into a stringstream	
-					stream << damage;
-					g_pSignMachine->AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top);
-				}
+					if ((*i)->GetID() == GOBLIN)
+						((CGoblin*)(*i))->SetChestedFalse();
 
-				//subtract the lost health
-				(*i)->GetAttributes()->currentHealth -= damage;
+					//set was hit to true
+					(*i)->m_wasHit = true;
 
-				//reset if npc was frozen
-				(*i)->SetFrozen(0.0f);
+					//calculate the damage
+					int damage = m_pPlayer->GetPlayerAttributes().strength - ((float)m_pPlayer->GetPlayerAttributes().strength * ((float)(*i)->GetAttributes()->armour / 100.0f));
 
-				//play the hit sound
-				(*i)->PlayHitSound();
+					stream.str("");
 
-				//throw the npc if hitted
-				if (m_pPlayer->GetRect().left > (*i)->GetRect().left)
-					(*i)->ThrowNpc(true, 300);
-				else
-					(*i)->ThrowNpc(false, 300);
-
-				
-
-				//shows the damage
-				
-
-				//if the npc died: delete it 
-				if((*i)->GetAttributes()->currentHealth <= 0)
-				{
-					//give loot
-					vector<SItem> loot = (*i)->GetLoot();
-					for(int a = 0; a != loot.size(); a++)
+					if (rand() % 100 < m_pPlayer->GetPlayerAttributes().criticalChance)
 					{
-						m_pWorld->AddLittleItem(loot[a].thing->getID(), (*i)->GetRect().left, (*i)->GetRect().top, loot[a].amount);
+						damage += damage * m_pPlayer->GetPlayerAttributes().criticalDamage / 10;
+
+						//put the damage into a stringstream	
+						stream << damage;
+						g_pSignMachine->AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top, Color(150, 0, 0));
+					}
+					else
+					{
+						//put the damage into a stringstream	
+						stream << damage;
+						g_pSignMachine->AddString(stream.str(), 1, (*i)->GetRect().left, (*i)->GetRect().top);
 					}
 
-					//adds the experience
-					m_pPlayer->AddExp((*i)->GetAttributes()->exp);
+					//subtract the lost health
+					(*i)->GetAttributes()->currentHealth -= damage;
 
-					(*i)->Quit();
-					SAFE_DELETE((*i));
-					i = m_Npcs.erase(i);
-					continue;
+					//reset if npc was frozen
+					(*i)->SetFrozen(0.0f);
+
+					//play the hit sound
+					(*i)->PlayHitSound();
+
+					//throw the npc if hitted
+					if (m_pPlayer->GetRect().left > (*i)->GetRect().left)
+						(*i)->ThrowNpc(true, 300);
+					else
+						(*i)->ThrowNpc(false, 300);
+
+
+
+					//shows the damage
+
+
+					//if the npc died: delete it 
+					if ((*i)->GetAttributes()->currentHealth <= 0)
+					{
+						//give loot
+						vector<SItem> loot = (*i)->GetLoot();
+						for (int a = 0; a != loot.size(); a++)
+						{
+							//if thing is tool or equipment: save attributes
+							if (loot[a].thing->getID() > CTBREAK)
+								m_pWorld->AddLittleItem(loot[a].thing, (*i)->GetRect().left, (*i)->GetRect().top);
+							else
+							{
+								m_pWorld->AddLittleItem(loot[a].thing->getID(), (*i)->GetRect().left, (*i)->GetRect().top, loot[a].amount);
+								SAFE_DELETE(loot[a].thing);
+							}
+						}
+
+						//adds the experience
+						m_pPlayer->AddExp((*i)->GetAttributes()->exp);
+
+						(*i)->Quit();
+						SAFE_DELETE((*i));
+						i = m_Npcs.erase(i);
+						continue;
+					}
 				}
 			}
 		}
@@ -349,7 +359,14 @@ bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
 				vector<SItem> loot = (*i)->GetLoot();
 				for (int a = 0; a != loot.size(); a++)
 				{
-					m_pWorld->AddLittleItem(loot[a].thing->getID(), (*i)->GetRect().left, (*i)->GetRect().top, loot[a].amount);
+					//if thing is tool or equipment: save attributes
+					if (loot[a].thing->getID() > CTBREAK)
+						m_pWorld->AddLittleItem(loot[a].thing, (*i)->GetRect().left, (*i)->GetRect().top);
+					else
+					{
+						m_pWorld->AddLittleItem(loot[a].thing->getID(), (*i)->GetRect().left, (*i)->GetRect().top, loot[a].amount);
+						SAFE_DELETE(loot[a].thing);
+					}
 				}
 
 				//adds the experience

@@ -33,6 +33,7 @@ public:
 	void RenderLight();
 	bool CheckPlaceables(IntRect _playerRect, CPlayer *_player);              //returns true if the player won
 	void AddLittleItem(int _ID, int _x, int _y, int _amount = 1);
+	void AddLittleItem(CThing* _thing, int _x, int _y);
 
 	//checks wether the player would collide with the world
 	bool CheckLivingCollision(FloatRect _player);
@@ -300,6 +301,12 @@ private:
 
 	//generates an outer room
 	void GenerateOuterRoom(int _x, int _y);
+
+	//generates a goblin room
+	Vector2i GenerateGoblinRoom(int _x, int _y);
+
+	//generates a connection between two rooms
+	void GenerateConnection(int _xStart, int _yStart, int _xEnd, int _yEnd);
 
 	//generates the final room
 	void GenerateFinalRoom(int _x, int _y);
