@@ -29,6 +29,8 @@ void TextureLoading::LoadTextures()
 	t_optionsButton_beam_off.loadFromFile("Data/Sprites/Buttons/beamnumbers_off.png");
 	t_optionsButton_inventory_on.loadFromFile("Data/Sprites/Buttons/button_option_inventorynumbers_on.png");
 	t_optionsButton_inventory_off.loadFromFile("Data/Sprites/Buttons/button_option_inventorynumbers_off.png");
+	t_optionsButton_fastLight_off.loadFromFile("Data/Sprites/Buttons/fastLight_off.png");
+	t_optionsButton_fastLight_on.loadFromFile("Data/Sprites/Buttons/fastLight_on.png");
 
 	t_newGameBackground.loadFromFile("Data/Sprites/NewGame/background_NewGame2.png");
 	t_newGameButtonLeft.loadFromFile("Data/Sprites/NewGame/button_left.png");

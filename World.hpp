@@ -28,7 +28,7 @@ public:
 	CWorld();
 	~CWorld();
 
-	void Init(int _width, int _height, View* _view, CNpcMachine* _npcs, bool _loaded = false);
+	void Init(int _width, int _height, View* _view, CNpcMachine* _npcs, bool _fastLight, bool _loaded = false);
 	void Render();
 	void RenderLight();
 	bool CheckPlaceables(IntRect _playerRect, CPlayer *_player);              //returns true if the player won
@@ -273,6 +273,8 @@ private:
 	vector < vector<CPlaceable*> > m_pWalls;
 	list<CLittleItem> m_LittleItemList;                                //the list with all little items
 
+	bool m_fast_sun;
+
 	list<CPanel*> m_PanelList;                                          //the list with all the existing panels
 
 	CLightMachine m_lightMachine;                                        //the light machine
@@ -305,8 +307,11 @@ private:
 	//generates a goblin room
 	Vector2i GenerateGoblinRoom(int _x, int _y);
 
-	//generates a connection between two rooms
-	void GenerateConnection(int _xStart, int _yStart, int _xEnd, int _yEnd);
+	//generates a horizontal connection between two rooms
+	void GenerateConnectionHorizontal(int _xStart, int _yStart, int _xEnd, int _yEnd);
+
+	//generates a vertical connection between two rooms
+	void GenerateConnectionVertical(int _xStart, int _yStart, int _xEnd, int _yEnd);
 
 	//generates the final room
 	void GenerateFinalRoom(int _x, int _y);

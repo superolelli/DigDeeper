@@ -45,7 +45,7 @@ public:
 	int GetClass(){ return m_class; }
 	bool AddRecipe(int _ID){return m_pBuildingMenu->NewRecipe(_ID);}
 	list<int> GetNotAvailableRecipesList(){return m_pBuildingMenu->GetNotAvailableRecipes();}
-	inline IntRect GetRect(){return m_pDwarf->GetRect();}
+	IntRect GetRect(){return m_pDwarf->GetRect();}
 	IntRect GetWeaponRect();                                       //gets the rect of the weapon
 	bool GetArmGoingUp(){return m_armGoingUp;}                    //is the arm going up?
 	bool IsLeft(){ return m_turned_left; }                   //is the player turned left?
@@ -57,7 +57,7 @@ public:
 
 	SToolAttributes GetPlayerAttributes();
 	SPlayerAttributes GetPlayerBasicAttributes(){ return m_Attributes; }
-
+	
 	SToolAttributes m_modifications;                 //the modifications from tools etc.
 
 private:

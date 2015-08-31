@@ -43,7 +43,7 @@ public:
 	IntRect GetRect(){return m_pInventoryWindow->GetRect();}
 
 	//returns the id of the helmet
-	int GetHelmetID(){return m_pEquipment->GetHelmetID();}
+	int GetHelmetID(){ return m_pEquipment->GetHelmetID(); }
 
 	//returns the currently carried thing
 	CThing *GetCarriedThing();

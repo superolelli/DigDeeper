@@ -42,6 +42,8 @@ public:
 	Texture t_optionsButton_beam_off;
 	Texture t_optionsButton_inventory_on;
 	Texture t_optionsButton_inventory_off;
+	Texture t_optionsButton_fastLight_on;
+	Texture t_optionsButton_fastLight_off;
 
 	Texture t_newGameBackground;                   //the background of the "New Game" window
 	Texture t_newGameButtonLeft;

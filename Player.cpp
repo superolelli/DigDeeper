@@ -686,7 +686,6 @@ void CPlayer::CheckYMovement()
 	{
 		if(!m_State.jumping && !m_State.climbing)
 		{
-			cout <<"Player jumped" << endl;
 			m_FallingSpeed = -350;
 			m_State.jumping = true;
 		}

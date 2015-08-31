@@ -64,11 +64,11 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	m_NpcMachine.Init(m_pWorld, m_pPlayer, &m_View);
 
 	if(_attributes.WorldSize == SMALL)
-		m_pWorld->Init(100, 54, &m_View, &m_NpcMachine, _loaded);
+		m_pWorld->Init(100, 54, &m_View, &m_NpcMachine, m_Settings.m_fast_light, _loaded);
 	else if(_attributes.WorldSize == MEDIUM)
-		m_pWorld->Init(500, 100, &m_View, &m_NpcMachine, _loaded);
+		m_pWorld->Init(500, 100, &m_View, &m_NpcMachine, m_Settings.m_fast_light, _loaded);
 	else
-		m_pWorld->Init(1000, 500, &m_View, &m_NpcMachine, _loaded);
+		m_pWorld->Init(1000, 500, &m_View, &m_NpcMachine, m_Settings.m_fast_light, _loaded);
 
 	//Inits the player
 	m_pPlayer->Init(700, 300, m_pWorld, &m_View, _attributes.PlayerClass, m_Settings.m_inventory_numbers, m_Settings.m_beam_numbers);
@@ -157,22 +157,12 @@ void CGame::Run()
 	g_pFramework->Update();
 	while(is_running)
 	{
-		cout << "New frame" << endl;
 		g_pFramework->Update();
 		g_pFramework->Clear();
 
 		//clear the profiler
 		g_pProfiler->ClearProfiler();
 
-	//if(Keyboard::isKeyPressed(Keyboard::Add))
-	//{
-	//	m_View.zoom(0.8f);
-	//}
-	//else if(Keyboard::isKeyPressed(Keyboard::Subtract))
-	//{
-	//	m_View.zoom(1.2f);
-	//}
-	
 
 		g_pFramework->GetRenderWindow()->setView(m_View);
 
@@ -212,12 +202,9 @@ void CGame::Run()
 		}
 
 
-		cout << "Check music" << endl;
-
 		CheckMusic();
 
 
-		cout << "Check placeables" << endl;
 		if (m_zoom == 1)
 		{
 			if (m_pWorld->CheckPlaceables(m_pPlayer->GetRect(), m_pPlayer))
@@ -239,37 +226,26 @@ void CGame::Run()
 			}
 		}
 
-		cout << "check npcs" << endl;
 		//Checks all npcs
 		m_NpcMachine.CheckAllNpcs();
 
 
-		cout << "check projectiles" << endl;
 		g_pProjectiles->CheckProjectiles();
 
 
-		cout << "render world" << endl;
 		RenderBackground();
 		m_pWorld->Render();
 
-
 		CheckView();
 
-		cout << "render player" << endl;
 		//renders the player
 		m_pPlayer->Render();
 
-
-		cout << "render npcs" << endl;
 		//renders the npcs
 		m_NpcMachine.RenderAllNpcs();
 
-
-		cout << "render projectiles" << endl;
 		g_pProjectiles->Render();
 
-
-		cout << "render light" << endl;
 		//renders darkness and light
 		m_pWorld->RenderLight();
 
@@ -281,7 +257,6 @@ void CGame::Run()
 		//Sets the default view for rendering the panels
 		g_pFramework->GetRenderWindow()->setView(g_pFramework->GetRenderWindow()->getDefaultView());
 
-		cout << "render inventory" << endl;
 		m_pPlayer->RenderInventory();
 
 		//sets the fps value
@@ -348,9 +323,6 @@ void CGame::CheckView()
 	//sets the view
 	m_View.setCenter(dwarfCenter);
 
-
-	cout << "XView :" << m_View.getCenter().x - m_View.getSize().x / 2 << endl;
-
 	//applies the view to the window
     g_pFramework->GetRenderWindow()->setView(m_View);
 }
@@ -405,7 +377,6 @@ void CGame::CheckFps()
 	if(m_seconds >= 1.0f)
 	{
 		//write the frames per second and set the frame counter and the frame timer to zero
-		cout << "Fps: " << m_frame << endl;
 		m_currentFPS = m_frame;
 		m_frame = 0;
 		m_seconds = 0;
@@ -685,7 +656,7 @@ void CGame::Load(string _path)
 	inputFile.close();
 
 	m_pPlayer->InitLoaded(500, 300, m_pWorld, &m_View, m_Settings.m_inventory_numbers, m_Settings.m_beam_numbers);
-	m_pWorld->Init(0,0, &m_View, &m_NpcMachine, true);
+	m_pWorld->Init(0, 0, &m_View, &m_NpcMachine, m_Settings.m_fast_light, true);
 	m_NpcMachine.Init(m_pWorld, m_pPlayer, &m_View, true);
 	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);
 }

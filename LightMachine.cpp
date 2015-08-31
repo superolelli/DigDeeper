@@ -33,6 +33,11 @@ void CLightMachine::Init(View* _view, CWorld *_world, bool _fastLight)
 	m_ViewX = m_View->getCenter().x - m_View->getSize().x / 2;
 	m_ViewY = m_View->getCenter().y - m_View->getSize().y / 2;
 	m_currentAlpha = 0;
+
+	if (m_fastLight)
+		m_amountOfRays = 45;
+	else
+		m_amountOfRays = 90;
 }
 
 
@@ -71,16 +76,16 @@ void CLightMachine::Render()
 
 void CLightMachine::AddLightCircle(int _x, int _y, int _radius, Color _color)
 {
-	VertexArray circle(TrianglesFan, 92);
+	VertexArray circle(TrianglesFan, m_amountOfRays+2);   
 	circle[0].position.x = _x - m_ViewX + 10;
 	circle[0].position.y = _y - m_ViewY + 10;
 	circle[0].color = Color(255, 255, 255, _color.a);
 
-	for (int angle = 1; angle <= 91; angle++)
+	for (int angle = 1; angle <= m_amountOfRays+1; angle++)
 	{
-		circle[angle].position = Vector2f((_x - m_ViewX + 10) + _radius * g_pSinCosLookup->cosLookup[(angle-1)*4], (_y - m_ViewY + 10) + _radius * g_pSinCosLookup->sinLookup[(angle-1)*4]);
+		circle[angle].position = Vector2f((_x - m_ViewX + 10) + _radius * g_pSinCosLookup->cosLookup[(angle - 1)*(360 / m_amountOfRays)], (_y - m_ViewY + 10) + _radius * g_pSinCosLookup->sinLookup[(angle - 1)*(360 / m_amountOfRays)]);
 
-		circle[angle].position = IsLineIntersecting(circle[0], circle[angle], (angle-1) *4, _radius);
+		circle[angle].position = IsLineIntersecting(circle[0], circle[angle], (angle - 1) *(360 / m_amountOfRays), _radius);
 
 		circle[angle].color = Color(_color.r, _color.g, _color.b, 255);
 	}
@@ -144,7 +149,7 @@ void CLightMachine::AddLightBeam(int _x, int _y, int _length, int _width, Color 
 
 //Vector2f CLightMachine::IsLineIntersecting(Vertex _firstPoint, Vertex _secondPoint, int _angle, int _radius)
 //{
-//	//Wenn der Strahl außerhalb der Welt ist: gib 0,0 zurück
+//	Wenn der Strahl außerhalb der Welt ist: gib 0,0 zurück
 //	if ((_firstPoint.position.y <= 0 && _secondPoint.position.y < _firstPoint.position.y) ||_firstPoint.position.x < 0)
 //		return Vector2f(0, 0);
 //
@@ -156,26 +161,26 @@ void CLightMachine::AddLightBeam(int _x, int _y, int _length, int _width, Color 
 //	Vector2f secondCollisionPoint(-1, -1);
 //
 //
-//	//Berechne Position des Startpunktes des Strahls
+//	Berechne Position des Startpunktes des Strahls
 //	int x = _firstPoint.position.x - 10 + m_ViewX;
 //	int y = _firstPoint.position.y - 10 + m_ViewY;
 //
-//	//die Position des ersten Kollisionspunktes
+//	die Position des ersten Kollisionspunktes
 //	int xA = 0;
 //	int yA = 0;
 //	
-//	//Der Betrag, der in jedem Schritt addiert wird
+//	Der Betrag, der in jedem Schritt addiert wird
 //	int stepX = 0;
 //	int stepY = 0;
 //
 //
-//	//Prüfe Kollision mit Horizontalen nach oben
+//	Prüfe Kollision mit Horizontalen nach oben
 //	if (_angle >= 180)
 //	{
-//		//Berechne die y-Koordinate des nächsten Kollisionspunktes, durch den der Lichtstrahl geht
+//		Berechne die y-Koordinate des nächsten Kollisionspunktes, durch den der Lichtstrahl geht
 //		yA = (y / 100) * 100 - 1;
 //
-//		//Berechne die x-Koordinate des nächsten Kollisionspunktes, durch den der Lichtstrahl geht
+//		Berechne die x-Koordinate des nächsten Kollisionspunktes, durch den der Lichtstrahl geht
 //		xA = x + (y - yA) / -tan(_angle*3.1415926535 / 180);
 //
 //		if (yA < 0 || xA < 0)
@@ -183,18 +188,18 @@ void CLightMachine::AddLightBeam(int _x, int _y, int _length, int _width, Color 
 //			firstCollisionPoint = _secondPoint.position;
 //			foundFirstPoint = true;
 //		}
-//		//ist der Block solide: speichere diesen Punkt als Kollisionspunkt mit der Horizontalen
+//		ist der Block solide: speichere diesen Punkt als Kollisionspunkt mit der Horizontalen
 //		else if (!m_pWorld->isBlockPassable(xA / 100, yA / 100))
 //		{
 //			firstCollisionPoint = Vector2f(xA - m_ViewX + 10, yA - m_ViewY + 10);
 //			foundFirstPoint = true;
 //		}
 //
-//		//Berechne den Betrag, der in jedem Schritt addiert wird
+//		Berechne den Betrag, der in jedem Schritt addiert wird
 //		stepX = 100 / -tan(_angle*3.1415926535 / 180);
 //		stepY = -100;
 //	}
-//	//Prüfe Kollision mit Horizontalen nach unten
+//	Prüfe Kollision mit Horizontalen nach unten
 //	else
 //	{
 //		yA = (y / 100) * 100 + 100;
@@ -225,7 +230,7 @@ void CLightMachine::AddLightBeam(int _x, int _y, int _length, int _width, Color 
 //	{
 //		while (is_intersecting == false)
 //		{
-//			//Berechne den nächsten Kollisionspunkt
+//			Berechne den nächsten Kollisionspunkt
 //			xA += stepX;
 //			yA += stepY;
 //
@@ -234,13 +239,13 @@ void CLightMachine::AddLightBeam(int _x, int _y, int _length, int _width, Color 
 //				firstCollisionPoint = _secondPoint.position;
 //				is_intersecting = true;
 //			}
-//			//Prüfe, ob der Strahl nun länger als der Radius ist
+//			Prüfe, ob der Strahl nun länger als der Radius ist
 //			else if (pow(x - xA, 2) + pow(y - yA, 2) > _radius * _radius)
 //			{
 //				firstCollisionPoint = Vector2f(_firstPoint.position.x + _radius * cos(_angle*3.1415926535 / 180), _firstPoint.position.y + _radius * sin(_angle*3.1415926535 / 180));
 //				is_intersecting = true;
 //			}
-//			//Prüfe, ob der Endpunkt des Strahls in einem soliden Block liegt
+//			Prüfe, ob der Endpunkt des Strahls in einem soliden Block liegt
 //			else if (!m_pWorld->isBlockPassable(xA / 100, yA / 100))
 //			{
 //				firstCollisionPoint = Vector2f(xA - m_ViewX + 10, yA - m_ViewY + 10);
@@ -250,10 +255,10 @@ void CLightMachine::AddLightBeam(int _x, int _y, int _length, int _width, Color 
 //	}
 //
 //
-//	//das gleiche wird nun mit der Vertikalen durchgeführt, sodass man am Ende einen Kollisionspunkt mit der Horizontalen und einen mit der Vertikalen hat
+//	das gleiche wird nun mit der Vertikalen durchgeführt, sodass man am Ende einen Kollisionspunkt mit der Horizontalen und einen mit der Vertikalen hat
 //
 //
-//	//Prüfe Kollision mit Vertikalen nach links
+//	Prüfe Kollision mit Vertikalen nach links
 //	if (_angle >= 90 && _angle < 270)
 //	{
 //		xA = (x / 100) * 100 - 1;
@@ -324,7 +329,7 @@ void CLightMachine::AddLightBeam(int _x, int _y, int _length, int _width, Color 
 //	}
 //
 //
-//	//gib den Punkt zurück, bei dem die Länge des Strahls kürzer ist
+//	gib den Punkt zurück, bei dem die Länge des Strahls kürzer ist
 //	if (pow(firstCollisionPoint.x - (x - m_ViewX + 10), 2) + pow(firstCollisionPoint.y - (y - m_ViewY + 10), 2) < pow(secondCollisionPoint.x - (x - m_ViewX + 10), 2) + pow(secondCollisionPoint.y - (y - m_ViewY + 10), 2))
 //	{
 //		return firstCollisionPoint;
@@ -345,7 +350,7 @@ void CLightMachine::AddLightBeam(int _x, int _y, int _length, int _width, Color 
 Vector2f CLightMachine::IsLineIntersecting(Vertex _firstPoint, Vertex _secondPoint, int _angle, int _radius)
 {
 	if (_firstPoint.position.y <= 0 && _secondPoint.position.y < _firstPoint.position.y)
-		return Vector2f(0, 0);
+		return _secondPoint.position;
 
 
 	int currentRadius = 5;
@@ -393,12 +398,6 @@ Vector2f CLightMachine::IsLineIntersecting(Vertex _firstPoint, Vertex _secondPoi
 
 	return _secondPoint.position;
 }
-
-
-
-
-
-
 
 
 

@@ -1495,3 +1495,20 @@ ZUKÜNFITGE ÄNDERUNGEN:
   -> Es gibt nun viele Räume, die durch Gänge miteinander verbunden sind (bis jetzt nur horizontale Gänge)
 
 -------------------------------------------------------
+30.08.2015
+
+- Schwefel- und Salpeterblock in das Alchemiesystem eingefügt
+
+-------------------------------------------------------
+31.08.2015
+
+- Schnelles Lichtrendering eingebaut
+- Knopf im Optionsmenü eingebaut: Schnelles/Schönes Lichtrendering 
+- Range eingebaut, in der die Npcs inaktiv sind (um die Performance zu verbessern)
+- Performance der Überprüfung der einzelnen Blöcke verbessert und übersichtlicher gemacht (im Code)
+- Performanceverbesserung durch entfernen von unnötigen Meldungen in der Konsole
+
+-> Insgesamt ist die Performance stark verbessert, wenn man das schnelle Lichtrendering wählt (für schwächere PCs).
+   Das schnelle Lichtrendering unterscheidet sich leicht vom schönen, ist aber nicht immens schlechter.
+
+-------------------------------------------------------

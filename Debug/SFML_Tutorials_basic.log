@@ -1,27 +1,27 @@
-﻿Der Buildvorgang wurde am 27.08.2015 16:38:29 gestartet.
-     1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
+﻿Der Buildvorgang wurde am 30.08.2015 19:54:17 gestartet.
+     1>Projekt "C:\Users\Ole\Desktop\Projekte\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt World.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt World.cpp
          World.cpp
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(1477): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(1478): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(1686): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(1759): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(1760): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(2858): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(2859): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(2860): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(2861): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(2915): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(2916): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(2917): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(2918): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(2962): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(2964): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(3150): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\world.cpp(3151): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(1466): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(1467): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(1669): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(1742): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(1743): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(2841): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(2842): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(2843): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(2844): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(2898): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(2899): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(2900): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(2901): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(2945): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(2947): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(3135): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>c:\users\ole\desktop\projekte\digdeeper\world.cpp(3136): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
        Link:
-         F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.3\lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-network-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.lib" /MACHINE:X86 Debug\Beam.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ole\Desktop\Projekte\DigDeeper\Debug\Dig Deeper rewritten.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.3\lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-network-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Ole\Desktop\Projekte\DigDeeper\Debug\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ole\Desktop\Projekte\DigDeeper\Debug\Dig Deeper rewritten.lib" /MACHINE:X86 Debug\Beam.obj
          Debug\Bee.obj
          Debug\BuildingMenu.obj
          Debug\Button.obj
@@ -68,9 +68,9 @@
          Debug\Time.obj
          Debug\Tool.obj
          Debug\World.obj
-         SFML_Tutorials_basic.vcxproj -> F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.exe
-     1>Die Erstellung des Projekts "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" ist abgeschlossen, Build Ziel(e).
+         SFML_Tutorials_basic.vcxproj -> C:\Users\Ole\Desktop\Projekte\DigDeeper\Debug\Dig Deeper rewritten.exe
+     1>Die Erstellung des Projekts "C:\Users\Ole\Desktop\Projekte\DigDeeper\SFML_Tutorials_basic.vcxproj" ist abgeschlossen, Build Ziel(e).
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:01.98
+Verstrichene Zeit 00:00:16.16

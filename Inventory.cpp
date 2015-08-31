@@ -286,8 +286,6 @@ void CInventory::Render(IntRect &_playerRect)
 	//If the inventory is open: Render the window and it's content
 	if(is_open)
 	{
-		g_pFramework->WriteToLog(INFO, "Inventory is open");
-
 		//Renders the window
 		m_pInventoryWindow->Render(g_pFramework->GetRenderWindow());
 

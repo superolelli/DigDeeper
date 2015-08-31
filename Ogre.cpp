@@ -96,7 +96,6 @@ bool COgre::CheckCollision()
 
 bool COgre::CheckNpc()
 {
-	cout << "Check npc" << endl;
 	m_fXVel = 0;
 	m_fYVel = 0;
 
@@ -144,8 +143,6 @@ bool COgre::CheckNpc()
 
 	m_xPos = m_pOgre->GetRect().left;
 	m_yPos = m_pOgre->GetRect().top;
-
-	cout << "Checked npc" << endl;
 
 	//return false if the ogre is outside the world
 	if (m_pOgre->GetRect().left + m_pOgre->GetRect().width < 0 || m_pOgre->GetRect().left > m_pWorld->GetDimensions().x * 100)
