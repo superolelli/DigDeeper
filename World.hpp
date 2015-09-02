@@ -290,22 +290,22 @@ private:
 	void GenerateTopLayer();
 
 	//generates the mid layer
-	void GenerateMidLayer();
+	list<SRoom> GenerateMidLayer();
 
 	//generates the bottom layer
-	void GenerateBottomLayer();
+	void GenerateBottomLayer(list<SRoom> _roomlist);
 
 	//generates a random room
 	void GenerateRoom(int _x, int _y);
 
 	//generates a random cave
-	void GenerateCave(int _x, int _y);
+	Vector2i GenerateCave(int _x, int _y);
 
 	//generates an outer room
-	void GenerateOuterRoom(int _x, int _y);
+	Vector2i GenerateOuterRoom(int _x, int _y);
 
 	//generates a goblin room
-	Vector2i GenerateGoblinRoom(int _x, int _y);
+	Vector2i GenerateGoblinRoom(int _x, int _y, int _sizeX = -1, int _sizeY = -1, bool _dungeon = false);
 
 	//generates a horizontal connection between two rooms
 	void GenerateConnectionHorizontal(int _xStart, int _yStart, int _xEnd, int _yEnd);
@@ -314,7 +314,13 @@ private:
 	void GenerateConnectionVertical(int _xStart, int _yStart, int _xEnd, int _yEnd);
 
 	//generates the final room
-	void GenerateFinalRoom(int _x, int _y);
+	void GenerateFinalRoom(int _x, int _y, int _xSize);
+
+	//makes a block to a free block with brickwall
+	void MakeBrickwall(int _x, int _y);
+
+	//generates a random block
+	void GenerateRandomBlock(int _x, int _y);
 
 	//sets a tree
 	void SetTree(int _x, int _y);

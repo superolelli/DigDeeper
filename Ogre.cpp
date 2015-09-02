@@ -206,7 +206,6 @@ void COgre::CheckXMovement()
 
 
 
-//an ogre can't be thrown!!!
 void COgre::ThrowNpc(bool _left, int _strength)
 {
 	if (_left)

@@ -324,6 +324,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 		m_Attributes.maxMana = 300;
 		m_Attributes.currentMana = 300;
 		m_Attributes.manaRegeneration = 5;
+		m_Attributes.breakingSpeed = 5;
 
 	}break;
 	default:
@@ -560,7 +561,7 @@ Vector2f CPlayer::CheckMovement()
 
 
 	//check if the player felt down 
-	if (m_fYVel > 0)
+	if (m_fYVel > 0 && m_pWorld->CheckCollisionWithPassable(FloatRect(GetRect())) != LADDER)
 	{
 		m_fFallingDistance += m_fYVel;
 	}
@@ -1075,9 +1076,9 @@ void CPlayer::SetMenuOpen(int _menu)
 
 
 //gives the player an item
-void CPlayer::Take(CThing *_thing, int amount)
+bool CPlayer::Take(CThing *_thing, int amount)
 {
-	m_pInventory->Take(_thing, amount);
+	return m_pInventory->Take(_thing, amount);
 }
 
 

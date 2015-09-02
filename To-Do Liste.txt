@@ -1,4 +1,7 @@
-- Lichtberechnung
 - Zielsetzung (Prinzessin?)
+- Spawnverhalten überarbeiten
+- Balancingtabellen erstellen
+- Werte in Datenbanken o.ä. auslagern (Charakterwerte etc.)
+- Übersetzung des Spiels (v.a. in Englisch) ermöglichen
 - Bugfix: Konsumierbares wird mit komischen Werten initialisiert
 - Bugfix: Goblins stecken in Decke fest

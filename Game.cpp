@@ -66,9 +66,9 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	if(_attributes.WorldSize == SMALL)
 		m_pWorld->Init(100, 54, &m_View, &m_NpcMachine, m_Settings.m_fast_light, _loaded);
 	else if(_attributes.WorldSize == MEDIUM)
-		m_pWorld->Init(500, 100, &m_View, &m_NpcMachine, m_Settings.m_fast_light, _loaded);
+		m_pWorld->Init(200, 100, &m_View, &m_NpcMachine, m_Settings.m_fast_light, _loaded);
 	else
-		m_pWorld->Init(1000, 500, &m_View, &m_NpcMachine, m_Settings.m_fast_light, _loaded);
+		m_pWorld->Init(300, 200, &m_View, &m_NpcMachine, m_Settings.m_fast_light, _loaded);
 
 	//Inits the player
 	m_pPlayer->Init(700, 300, m_pWorld, &m_View, _attributes.PlayerClass, m_Settings.m_inventory_numbers, m_Settings.m_beam_numbers);

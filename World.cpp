@@ -305,7 +305,7 @@ void CWorld::Init(int _width, int _height, View* _view, CNpcMachine* _npcs, bool
 void CWorld::GenerateWorld()
 {
 	GenerateTopLayer();
-	GenerateMidLayer();
+	GenerateBottomLayer(GenerateMidLayer());
 }
 					
 
@@ -473,9 +473,13 @@ void CWorld::GenerateTopLayer()
 }
 
 
-
-void CWorld::GenerateMidLayer()
+list<SRoom> CWorld::GenerateMidLayer()
 {
+	list<SRoom> roomlist;
+	list<SRoom>::iterator i;
+
+	Vector2i roomSize;
+
 	//generate outer rooms
 	for (int y = m_BlocksY/2; y < m_BlocksY/2 + 6; y++)
 	{
@@ -485,7 +489,22 @@ void CWorld::GenerateMidLayer()
 			{
 				if (rand() % 10 == 0 && y == m_BlocksY/2 + 5)
 				{
-					GenerateOuterRoom(x, y);
+					roomSize = GenerateOuterRoom(x, y);
+
+					if (roomSize.x != 0 && roomSize.y != 0)
+					{
+						SRoom room;
+						room.x = x;
+						room.y = y;
+						room.width = roomSize.x;
+						room.height = roomSize.y;
+						room.connectionDown = false;
+						room.connectionLeft = false;
+						room.connectionRight = false;
+						room.connectionUp = false;
+
+						roomlist.push_back(room);
+					}
 				}
 
 			}
@@ -506,234 +525,247 @@ void CWorld::GenerateMidLayer()
 	int y = m_BlocksY / 2 + 6 + rand()%3;
 	int yAdd, xAdd;
 	int lowestY = 0;
+	int lastLowestY = 0;
 	int distanceX, distanceY;
-	Vector2i roomSize;
 
-	list<SRoom> roomlist;
-	list<SRoom>::iterator i;
 
 	while (end == false)
 	{
 		//generate a new room
-		roomSize = GenerateGoblinRoom(x, y);
-		SRoom room;
-		room.x = x;
-		room.y = y;
-		room.width = roomSize.x;
-		room.height = roomSize.y;
-		room.connectionDown = false;
-		room.connectionLeft = false;
-		room.connectionRight = false;
-		room.connectionUp = false;
+		if (rand() % 15 == 0)
+			roomSize = GenerateCave(x, y);
+		else
+			roomSize = GenerateGoblinRoom(x, y);
 
-		//connect rooms
-		for (i = roomlist.begin(); i != roomlist.end(); i++)
+		if (roomSize.x != 0 && roomSize.y != 0)
 		{
-			distanceX = abs(room.x - i->x);
-			distanceY = abs(room.y - i->y);
+			SRoom room;
+			room.x = x;
+			room.y = y;
+			room.width = roomSize.x;
+			room.height = roomSize.y;
+			room.connectionDown = false;
+			room.connectionLeft = false;
+			room.connectionRight = false;
+			room.connectionUp = false;
 
-			//if rooms are near together
-			if (distanceX < 21 && distanceY < 9 && distanceX >= distanceY)
+			//connect rooms
+			for (i = roomlist.begin(); i != roomlist.end(); i++)
 			{
-				//if other room is at the right side
-				if (room.x + room.width -1 < i->x)
+				distanceX = abs(room.x - i->x);
+				distanceY = abs(room.y - i->y);
+
+				//if rooms are near together
+				if (distanceX < 21 && distanceY < 21 && distanceX >= distanceY)
 				{
-					if (!i->connectionLeft)
+					//if other room is at the right side
+					if (room.x + room.width - 1 < i->x && distanceX > distanceY)
 					{
-						GenerateConnectionHorizontal(room.x + room.width - 1, room.y + room.height - 2, i->x, i->y + i->height - 2);
-						room.connectionRight = true;
+						if (!i->connectionLeft)
+						{
+							GenerateConnectionHorizontal(room.x + room.width - 1, room.y + room.height - 2, i->x, i->y + i->height - 2);
+							room.connectionRight = true;
+							i->connectionLeft = true;
+						}
+					}
+					//if the room is at the left side
+					else if (i->x + i->width - 1 < room.x && distanceX > distanceY)
+					{
+						if (!i->connectionRight)
+						{
+							GenerateConnectionHorizontal(i->x + i->width - 1, i->y + i->height - 2, room.x, room.y + room.height - 2);
+							room.connectionLeft = true;
+							i->connectionRight = true;
+						}
+					}
+					//if the room is lower
+					else if (room.y + room.height - 1 < i->y)
+					{
+						if (!i->connectionUp)
+						{
+							if (i->x > room.x && i->x < room.x + room.width - 1)
+								GenerateConnectionVertical(i->x + 1, room.y + room.height - 1, i->x + 1, i->y);
+							else if (i->x + i->width - 1 > room.x && i->x + i->width - 1 < room.x + room.width - 1)
+								GenerateConnectionVertical(i->x + i->width - 2, room.y + room.height - 1, i->x + i->width - 2, i->y);
+							else if (room.x > i->x)
+								GenerateConnectionVertical(room.x + 1, room.y + room.height - 1, i->x + i->width - 2, i->y);
+							else
+								GenerateConnectionVertical(room.x + room.width - 2, room.y + room.height - 1, i->x + 1, i->y);
+
+							//room.connectionDown = true;
+							//i->connectionUp = true;
+						}
+					}
+					else if (room.y > i->y + i->height - 1)
+					{
+						cout << "In last else..." << endl;
+						if (!i->connectionDown)
+						{
+							if (room.x + 1 > i->x && room.x + 1 < i->x + i->width - 1)
+								GenerateConnectionVertical(room.x + 1, i->y + i->height - 1, room.x + 1, room.y);
+							else if (room.x + room.width - 2 > i->x && room.x + room.width - 2 < i->x + i->width - 1)
+								GenerateConnectionVertical(room.x + room.width - 2, i->y + i->height - 1, room.x + room.width - 2, room.y);
+							else if (i->x > room.x)
+								GenerateConnectionVertical(i->x + 1, i->y + i->height - 1, room.x + room.width - 2, room.y);
+							else
+								GenerateConnectionVertical(i->x + i->width - 2, i->y + i->height - 1, room.x + 1, room.y);
+
+							//room.connectionUp = true;
+							//i->connectionDown = true;
+						}
 					}
 				}
-				//if the room is at the left side
-				else if (i->x + i->width -1 < room.x)
+			}
+
+
+			roomlist.push_back(room);
+
+
+
+			//get distance for next room
+			xAdd = rand() % 9 + 1;
+			x = x + room.width + xAdd;
+
+			//get y-distance
+			yAdd = rand() % 4;
+			if (yAdd > xAdd)
+				yAdd = xAdd;
+
+			if (rand() % 2 == 0)
+				y = y + yAdd;
+			else
+				y = y - yAdd;
+
+			if (y <= m_BlocksY / 2 + 6)
+				y = m_BlocksY / 2 + 6 + rand() % 3;
+
+			if (y <= lastLowestY + 4)
+				y = lastLowestY + 5 + rand() % 3;
+
+
+			if (y > lowestY)
+				lowestY = y;
+
+			//check for new row or end
+			if (x >= m_BlocksX)
+			{
+				x = 0;
+				y = lowestY + 6;
+				lastLowestY = lowestY;
+
+				if (y >= m_BlocksY - 18)
+					end = true;
+			}
+		}
+		else
+		{
+			x++;
+
+			if (x >= m_BlocksX)
+			{
+				x = 0;
+				y = lowestY + 6;
+				lastLowestY = lowestY;
+
+				if (y >= m_BlocksY - 18)
+					end = true;
+			}
+		}
+
+	}
+
+	return roomlist;
+}
+
+
+void CWorld::GenerateBottomLayer(list<SRoom> _roomlist)
+{
+	int randomNumber;
+	bool princess = false;
+	int y = m_BlocksY - 12;
+	Vector2i roomSize;
+	list<SRoom>::iterator i;
+
+	//build first dungeon layer
+	for (int x = 0; x < m_BlocksX;)
+	{
+		randomNumber = rand() % 7 + 4;
+		roomSize = GenerateGoblinRoom(x, y, randomNumber, 5, true);
+
+
+		if (roomSize.x != 0 && roomSize.y != 0)
+		{
+			//connect rooms
+			for (i = _roomlist.begin(); i != _roomlist.end(); i++)
+			{
+				//if rooms are near together
+				if (abs(x - i->x) < 15 && abs(y - i->y) < 21)
 				{
-					if (!i->connectionRight)
+					if (y > i->y + i->height - 1)
 					{
-						GenerateConnectionHorizontal(i->x + i->width - 1, i->y + i->height - 2, room.x, room.y + room.height - 2);
-						room.connectionLeft = true;
-					}
-				}
-				//if the room is lower
-				else if (room.y + room.height < i->y)
-				{
-					if (!i->connectionUp)
-					{
-						GenerateConnectionVertical(room.x + room.width/2, room.y + room.height - 1, i->x + i->width/2, i->y);
-						room.connectionDown = true;
-					}
-				}
-				else
-				{
-					if (!i->connectionDown)
-					{
-						GenerateConnectionVertical(i->x + i->width / 2, i->y + i->height - 1, room.x + room.width / 2, room.y);
-						room.connectionUp = true;
+						if (!i->connectionDown)
+						{
+							if (x + 1 > i->x && x + 1 < i->x + i->width - 1)
+								GenerateConnectionVertical(x + 1, i->y + i->height - 1, x + 1, y);
+							else if (x + roomSize.x - 2 > i->x && x + roomSize.x - 2 < i->x + i->width - 1)
+								GenerateConnectionVertical(x + roomSize.x - 2, i->y + i->height - 1, x + roomSize.x - 2, y);
+							else if (i->x > x)
+								GenerateConnectionVertical(i->x + 1, i->y + i->height - 1, x + roomSize.x - 2, y);
+							else
+								GenerateConnectionVertical(i->x + i->width - 2, i->y + i->height - 1, x + 1, y);
+
+							i->connectionDown = true;
+						}
 					}
 				}
 			}
 		}
 
-
-		roomlist.push_back(room);
-
-
-
-		//get distance for next room
-		xAdd = rand() % 9 + 1;
-		x = x + room.width + xAdd;
-
-		//get y-distance
-		yAdd = rand() % 4;
-		if (yAdd > xAdd)
-			yAdd = xAdd;
-
-		if (rand() % 2 == 0)	
-			y = y + yAdd;
-		else
-			y = y - yAdd;
-		
-
-		if (y > lowestY)
-			lowestY = y;
-
-		//check for new row or end
-		if (x >= m_BlocksX)
-		{
-			x = 0;
-			y = lowestY + 8;
-
-			if (y >= m_BlocksY - 11)
-				end = true;
-		}
-
+		x += randomNumber;
 	}
 
-	
 
+	y = m_BlocksY - 7;
 
+	//build second dungeon layer
+	for (int x = 0; x < m_BlocksX;)
+	{
+		if (!princess && (rand() % 12 == 0 || x >= m_BlocksX - 20))
+		{
+			randomNumber = rand() % 6 + 6;
+			GenerateFinalRoom(x, y, randomNumber);
+			princess = true;
+		}
+		else
+		{
+			randomNumber = rand() % 7 + 4;
+			GenerateGoblinRoom(x, y, randomNumber, 6, true);
+		}
+
+		x += randomNumber;
+	}
 
 
 	//generate blocks between rooms
-	int possibility[9];
-	int randomNumber;
-	int possibilitySum = 0;
-
-
-	for (int y = m_BlocksY / 2 + 6; y < m_BlocksY; y++)
+	for (int y = m_BlocksY / 2 + 6; y < m_BlocksY - 1; y++)
 	{
 		for (int x = 0; x < m_BlocksX; x++)
 		{
-			if (m_pBlocks[x][y] == NULL)
-			{
-				//set the start possibilities
-				possibility[0] = 84;            //dirt
-				possibility[1] = 10;            //stone
-
-				if (y > 7)
-					possibility[2] = 3;            //coal
-				else
-					possibility[2] = 0;
-
-				if (y > 10)
-					possibility[3] = 2;            //iron
-				else
-					possibility[3] = 0;
-
-				if (y > 15)
-					possibility[4] = 1;            //gold
-				else
-					possibility[4] = 0;
-
-				if (y > 20)
-					possibility[5] = 1;              //arcanus
-				else
-					possibility[5] = 0;
-
-				if (y > 4)
-					possibility[6] = 5;             //marble
-				else
-					possibility[6] = 0;
-
-				if (y > 7)
-					possibility[7] = 3;            //sulfur
-				else
-					possibility[7] = 0;
-
-				if (y > 7)
-					possibility[8] = 3;            //salpeter
-				else
-					possibility[8] = 0;
-
-
-
-				//if a near placeable is a specific type: greater chance, that this placeable will be the same type
-				if (y > 4 && x > 0)
-				{
-					if (m_pBlocks[x - 1][y] != NULL)
-						if (m_pBlocks[x - 1][y]->getID() < 10 && m_pBlocks[x - 1][y]->getID() > 0)
-							possibility[m_pBlocks[x - 1][y]->getID() - 1] += 50;
-					if (m_pBlocks[x][y - 1] != NULL && m_pBlocks[x][y - 1]->getID() > 0)
-						if (m_pBlocks[x][y - 1]->getID() < 10)
-							possibility[m_pBlocks[x][y - 1]->getID() - 1] += 50;
-				}
-
-
-
-				//Create new Placeable
-				m_pBlocks[x][y] = new CPlaceable;
-
-				//the first layer is a dirt layer
-
-					//calculate the sum
-					possibilitySum = 0;
-					for (int i = 0; i < 9; i++)
-						possibilitySum += possibility[i];
-
-					//generate a random number between 1 and 100
-					randomNumber = rand() % possibilitySum + 1;
-
-					//decide which placeable is going to be set
-					if (randomNumber <= possibility[0])
-						m_pBlocks[x][y]->Init(DIRT);
-					else if (randomNumber <= possibility[1] + possibility[0])
-						m_pBlocks[x][y]->Init(STONE);
-					else if (randomNumber <= possibility[0] + possibility[1] + possibility[2])
-						m_pBlocks[x][y]->Init(COALBLOCK);
-					else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3])
-						m_pBlocks[x][y]->Init(IRONBLOCK);
-					else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3] + possibility[4])
-						m_pBlocks[x][y]->Init(GOLDBLOCK);
-					else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3] + possibility[4] + possibility[5])
-						m_pBlocks[x][y]->Init(ARCANUSBLOCK);
-					else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3] + possibility[4] + possibility[5] + possibility[6])
-						m_pBlocks[x][y]->Init(MARBLE);
-					else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3] + possibility[4] + possibility[5] + possibility[6] + possibility[7])
-						m_pBlocks[x][y]->Init(SULFURBLOCK);
-					else
-						m_pBlocks[x][y]->Init(SALPETERBLOCK);
-
-
-				//set position
-				m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
-
-			}
-			else if (m_pBlocks[x][y]->getID() == ROOMFILL)
-			{
-				SAFE_DELETE(m_pBlocks[x][y]);
-			}
+			GenerateRandomBlock(x, y);
 		}
 	}
 
 
+	y = m_BlocksY - 1;
+
+	//build bedrock layer
+	for (int x = 0; x < m_BlocksX; x++)
+	{
+		m_pBlocks[x][y] = new CPlaceable;
+		m_pBlocks[x][y]->Init(BEDROCK);
+		m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+	}
 }
-
-
-
-void CWorld::GenerateBottomLayer()
-{
-
-}
-
 
 
 //Generates a random room
@@ -791,7 +823,6 @@ void CWorld::GenerateRoom(int _x, int _y)
 					{
 						m_pBlocks[x][y]->Init(ROOMFILL);
 						m_pNpcMachine->AddNpc(GOBLIN, x * 100, y * 100, true, CHESTGOBLIN);
-						cout << "added chest goblin" << endl;
 					}
 					else
 					{
@@ -822,7 +853,7 @@ void CWorld::GenerateRoom(int _x, int _y)
 
 
 //Generates an outer room
-void CWorld::GenerateOuterRoom(int _x, int _y)
+Vector2i CWorld::GenerateOuterRoom(int _x, int _y)
 {
 	bool door = false;
 
@@ -833,7 +864,7 @@ void CWorld::GenerateOuterRoom(int _x, int _y)
 	if (_x + xSize <= m_BlocksX && _y + ySize <= m_BlocksY - 1)
 	{
 		//build the room
-		for (int y = _y - ySize +1; y < _y + 1; y++)
+		for (int y = _y - ySize + 1; y < _y + 1; y++)
 		{
 			for (int x = _x; x < _x + xSize; x++)
 			{
@@ -923,15 +954,30 @@ void CWorld::GenerateOuterRoom(int _x, int _y)
 			}
 		}
 	}
+	else
+		return Vector2i(0, 0);
+
+	return Vector2i(xSize, ySize);
 }
 
 
 //Generates a goblin room
-Vector2i CWorld::GenerateGoblinRoom(int _x, int _y)
+Vector2i CWorld::GenerateGoblinRoom(int _x, int _y, int _sizeX, int _sizeY, bool _dungeon)
 {
+	int xSize, ySize;
+
 	//generate the size of the room
-	int xSize = rand() % 7 + 4;
-	int ySize = rand() % 3 + 3;
+	if (_sizeX == -1)
+		xSize = rand() % 7 + 4;
+	else
+		xSize = _sizeX;
+
+	if (_sizeY == -1)
+		ySize = rand() % 3 + 3;
+	else
+		ySize = _sizeY;
+
+
 
 	if (_x + xSize <= m_BlocksX && _y + ySize <= m_BlocksY - 1)
 	{
@@ -940,50 +986,59 @@ Vector2i CWorld::GenerateGoblinRoom(int _x, int _y)
 		{
 			for (int x = _x; x < _x + xSize; x++)
 			{
-
-				m_pBlocks[x][y] = new CPlaceable;
-
 				//check if this block is one of the outer blocks
 				if (y == _y || y == _y + ySize - 1 || x == _x || x == _x + xSize - 1)
 				{
-					m_pBlocks[x][y]->Init(BRICKS);
-					m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+					if (m_pBlocks[x][y] == NULL)
+					{
+						m_pBlocks[x][y] = new CPlaceable;
+						m_pBlocks[x][y]->Init(BRICKS);
+						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+					}
+					else
+						MakeBrickwall(x, y);
 				}
 				else if (y == _y + ySize - 2)
 				{
 					int type = rand() % 10;
 
 					//init the things in the room
-					if (type == 5)
+					if (type == 5 && !_dungeon)
 					{
+						m_pBlocks[x][y] = new CPlaceable;
 						m_pBlocks[x][y]->Init(CUPBOARD);
 						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
 					}
 					else if (type == 6)
 					{
+						m_pBlocks[x][y] = new CPlaceable;
 						m_pBlocks[x][y]->Init(CHEST);
 						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
 						m_pBlocks[x][y]->SetSpecialID(AddPanel(CHEST, x * 100, y * 100));
 						FillChestRandomly(m_pBlocks[x][y]->GetSpecialID());
 					}
-					else if (type == 7)
+					else if (type == 7 && !_dungeon)
 					{
+						m_pBlocks[x][y] = new CPlaceable;
 						m_pBlocks[x][y]->Init(FURNANCE);
 						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
 						m_pBlocks[x][y]->SetSpecialID(AddPanel(FURNANCE, x * 100, y * 100));
 					}
 					else if (type == 8)
 					{
+						m_pBlocks[x][y] = new CPlaceable;
 						m_pBlocks[x][y]->Init(RUBBISH);
 						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
 					}
 					else if (type == 9)
 					{
+						m_pBlocks[x][y] = new CPlaceable;
 						m_pBlocks[x][y]->Init(ROOMFILL);
 						m_pNpcMachine->AddNpc(GOBLIN, x * 100, y * 100, true, CHESTGOBLIN);
 					}
 					else
 					{
+						m_pBlocks[x][y] = new CPlaceable;
 						m_pBlocks[x][y]->Init(ROOMFILL);
 					}
 
@@ -995,6 +1050,7 @@ Vector2i CWorld::GenerateGoblinRoom(int _x, int _y)
 				}
 				else
 				{
+					m_pBlocks[x][y] = new CPlaceable;
 					m_pBlocks[x][y]->Init(ROOMFILL);
 
 					m_pWalls[x][y] = new CPlaceable;
@@ -1004,11 +1060,18 @@ Vector2i CWorld::GenerateGoblinRoom(int _x, int _y)
 
 			}
 		}
+
+		//if the room is in the dungeon: make connection
+		if (_dungeon)
+		{
+			MakeBrickwall(_x, _y + ySize - 2);
+			MakeBrickwall(_x + xSize - 1, _y + ySize - 2);
+		}
 	}
 	else
 	{
-		xSize = 5;
-		ySize = 5;
+		xSize = 0;
+		ySize = 0;
 	}
 
 	return Vector2i(xSize, ySize);
@@ -1029,14 +1092,7 @@ void CWorld::GenerateConnectionHorizontal(int _xStart, int _yStart, int _xEnd, i
 			directionRegulator = 1;
 
 		//make an entrance
-		SAFE_DELETE(m_pBlocks[_xStart][_yStart]);
-		m_pBlocks[_xStart][_yStart] = new CPlaceable;
-		m_pBlocks[_xStart][_yStart]->Init(ROOMFILL);
-
-		SAFE_DELETE(m_pWalls[_xStart][_yStart]);
-		m_pWalls[_xStart][_yStart] = new CPlaceable;
-		m_pWalls[_xStart][_yStart]->Init(BRICKWALL);
-		m_pWalls[_xStart][_yStart]->SetPos((float)_xStart * 100, (float)_yStart * 100);
+		MakeBrickwall(_xStart, _yStart);
 
 
 		//if there's a difference in height
@@ -1046,12 +1102,17 @@ void CWorld::GenerateConnectionHorizontal(int _xStart, int _yStart, int _xEnd, i
 			for (yConnection; yConnection != _yEnd;)
 			{
 				//generate ceiling
-				if (m_pBlocks[xConnection][yConnection - 1 - directionRegulator] == NULL)
+				if (m_pBlocks[xConnection][yConnection - 1 - directionRegulator] == NULL && m_pWalls[xConnection][yConnection - 1 - directionRegulator] == NULL)
 				{
 					m_pBlocks[xConnection][yConnection - 1 - directionRegulator] = new CPlaceable;
 					m_pBlocks[xConnection][yConnection - 1 - directionRegulator]->Init(BRICKS);
 					m_pBlocks[xConnection][yConnection - 1 - directionRegulator]->SetPos((float)xConnection * 100, (float)(yConnection - 1 - directionRegulator) * 100);
 				}
+				else
+				{
+					MakeBrickwall(xConnection, yConnection - 1 - directionRegulator);
+				}
+
 
 				//generate inside
 				if (m_pBlocks[xConnection][yConnection - directionRegulator] == NULL && m_pWalls[xConnection][yConnection - directionRegulator] == NULL)
@@ -1063,6 +1124,11 @@ void CWorld::GenerateConnectionHorizontal(int _xStart, int _yStart, int _xEnd, i
 					m_pWalls[xConnection][yConnection - directionRegulator]->Init(BRICKWALL);
 					m_pWalls[xConnection][yConnection - directionRegulator]->SetPos((float)xConnection * 100, (float)(yConnection - directionRegulator) * 100);
 				}
+				else
+				{
+					MakeBrickwall(xConnection, yConnection - directionRegulator);
+				}
+
 
 
 				if (m_pBlocks[xConnection][yConnection + 1 - directionRegulator] == NULL && m_pWalls[xConnection][yConnection + 1 - directionRegulator] == NULL)
@@ -1074,14 +1140,24 @@ void CWorld::GenerateConnectionHorizontal(int _xStart, int _yStart, int _xEnd, i
 					m_pWalls[xConnection][yConnection + 1 - directionRegulator]->Init(BRICKWALL);
 					m_pWalls[xConnection][yConnection + 1 - directionRegulator]->SetPos((float)xConnection * 100, (float)(yConnection + 1 - directionRegulator) * 100);
 				}
+				else
+				{
+					MakeBrickwall(xConnection, yConnection + 1 - directionRegulator);
+				}
+
 
 				//generate floor
-				if (m_pBlocks[xConnection][yConnection + 2 - directionRegulator] == NULL)
+				if (m_pBlocks[xConnection][yConnection + 2 - directionRegulator] == NULL && m_pWalls[xConnection][yConnection + 2 - directionRegulator] == NULL)
 				{
 					m_pBlocks[xConnection][yConnection + 2 - directionRegulator] = new CPlaceable;
 					m_pBlocks[xConnection][yConnection + 2 - directionRegulator]->Init(BRICKS);
 					m_pBlocks[xConnection][yConnection + 2 - directionRegulator]->SetPos((float)xConnection * 100, (float)(yConnection + 2 - directionRegulator) * 100);
 				}
+				else
+				{
+					MakeBrickwall(xConnection, yConnection + 2 - directionRegulator);
+				}
+
 
 
 				xConnection++;
@@ -1102,12 +1178,17 @@ void CWorld::GenerateConnectionHorizontal(int _xStart, int _yStart, int _xEnd, i
 		while (_xEnd != xConnection)
 		{
 			//generate ceiling
-			if (m_pBlocks[xConnection][yConnection - 1] == NULL)
+			if (m_pBlocks[xConnection][yConnection - 1] == NULL && m_pWalls[xConnection][yConnection - 1] == NULL)
 			{
 				m_pBlocks[xConnection][yConnection - 1] = new CPlaceable;
 				m_pBlocks[xConnection][yConnection - 1]->Init(BRICKS);
 				m_pBlocks[xConnection][yConnection - 1]->SetPos((float)xConnection * 100, (float)(yConnection - 1) * 100);
 			}
+			else
+			{
+				MakeBrickwall(xConnection, yConnection -1);
+			}
+			
 
 			//generate inside
 			if (m_pBlocks[xConnection][yConnection] == NULL && m_pWalls[xConnection][yConnection] == NULL)
@@ -1119,27 +1200,28 @@ void CWorld::GenerateConnectionHorizontal(int _xStart, int _yStart, int _xEnd, i
 				m_pWalls[xConnection][yConnection]->Init(BRICKWALL);
 				m_pWalls[xConnection][yConnection]->SetPos((float)xConnection * 100, (float)yConnection * 100);
 			}
+			else
+			{
+				MakeBrickwall(xConnection, yConnection);
+			}
 
 			//generate floor
-			if (m_pBlocks[xConnection][yConnection + 1] == NULL)
+			if (m_pBlocks[xConnection][yConnection + 1] == NULL && m_pWalls[xConnection][yConnection + 1] == NULL)
 			{
 				m_pBlocks[xConnection][yConnection + 1] = new CPlaceable;
 				m_pBlocks[xConnection][yConnection + 1]->Init(BRICKS);
 				m_pBlocks[xConnection][yConnection + 1]->SetPos((float)xConnection * 100, (float)(yConnection + 1) * 100);
+			}
+			else
+			{
+				MakeBrickwall(xConnection, yConnection + 1);
 			}
 
 			xConnection++;
 		}
 
 		//make an exit
-		SAFE_DELETE(m_pBlocks[xConnection][yConnection]);
-		m_pBlocks[xConnection][yConnection] = new CPlaceable;
-		m_pBlocks[xConnection][yConnection]->Init(ROOMFILL);
-
-		SAFE_DELETE(m_pWalls[xConnection][yConnection]);
-		m_pWalls[xConnection][yConnection] = new CPlaceable;
-		m_pWalls[xConnection][yConnection]->Init(BRICKWALL);
-		m_pWalls[xConnection][yConnection]->SetPos((float)xConnection * 100, (float)yConnection * 100);
+		MakeBrickwall(xConnection, yConnection);
 
 	}
 }
@@ -1158,10 +1240,14 @@ void CWorld::GenerateConnectionVertical(int _xStart, int _yStart, int _xEnd, int
 		if (_xStart > _xEnd)
 			directionRegulator = 1;
 
+		//delete all things above the entrance (cupboards, chests etc.)
+		MakeBrickwall(_xStart, _yStart - 1);
+
 		//make an entrance
 		SAFE_DELETE(m_pBlocks[_xStart][_yStart]);
 		m_pBlocks[_xStart][_yStart] = new CPlaceable;
-		m_pBlocks[_xStart][_yStart]->Init(ROOMFILL);
+		m_pBlocks[_xStart][_yStart]->Init(LADDER);
+		m_pBlocks[_xStart][_yStart]->SetPos((float)_xStart * 100, (float)_yStart * 100);
 
 		SAFE_DELETE(m_pWalls[_xStart][_yStart]);
 		m_pWalls[_xStart][_yStart] = new CPlaceable;
@@ -1176,52 +1262,70 @@ void CWorld::GenerateConnectionVertical(int _xStart, int _yStart, int _xEnd, int
 			for (xConnection; xConnection != _xEnd;)
 			{
 				//generate left wall
-				if (m_pBlocks[xConnection][yConnection - 1 - directionRegulator] == NULL)
+				if (m_pBlocks[xConnection - 1 - directionRegulator][yConnection] == NULL && m_pWalls[xConnection - 1 - directionRegulator][yConnection] == NULL)
 				{
-					m_pBlocks[xConnection][yConnection - 1 - directionRegulator] = new CPlaceable;
-					m_pBlocks[xConnection][yConnection - 1 - directionRegulator]->Init(BRICKS);
-					m_pBlocks[xConnection][yConnection - 1 - directionRegulator]->SetPos((float)xConnection * 100, (float)(yConnection - 1 - directionRegulator) * 100);
+					m_pBlocks[xConnection - 1 - directionRegulator][yConnection] = new CPlaceable;
+					m_pBlocks[xConnection - 1 - directionRegulator][yConnection]->Init(BRICKS);
+					m_pBlocks[xConnection - 1 - directionRegulator][yConnection]->SetPos((float)(xConnection - 1 - directionRegulator) * 100, (float)yConnection * 100);
+				}
+				else
+				{
+					if (!(m_pBlocks[xConnection - 1 - directionRegulator][yConnection] != NULL && m_pBlocks[xConnection - 1 - directionRegulator][yConnection]->getID() == BRICKS))
+						MakeBrickwall(xConnection - 1 - directionRegulator, yConnection);
 				}
 
 				//generate inside
-				if (m_pBlocks[xConnection][yConnection - directionRegulator] == NULL && m_pWalls[xConnection][yConnection - directionRegulator] == NULL)
+				if (m_pBlocks[xConnection - directionRegulator][yConnection] == NULL && m_pWalls[xConnection - directionRegulator][yConnection] == NULL)
 				{
-					m_pBlocks[xConnection][yConnection - directionRegulator] = new CPlaceable;
-					m_pBlocks[xConnection][yConnection - directionRegulator]->Init(ROOMFILL);
+					m_pBlocks[xConnection - directionRegulator][yConnection] = new CPlaceable;
+					m_pBlocks[xConnection - directionRegulator][yConnection]->Init(ROOMFILL);
 
-					m_pWalls[xConnection][yConnection - directionRegulator] = new CPlaceable;
-					m_pWalls[xConnection][yConnection - directionRegulator]->Init(BRICKWALL);
-					m_pWalls[xConnection][yConnection - directionRegulator]->SetPos((float)xConnection * 100, (float)(yConnection - directionRegulator) * 100);
+					m_pWalls[xConnection - directionRegulator][yConnection] = new CPlaceable;
+					m_pWalls[xConnection - directionRegulator][yConnection]->Init(BRICKWALL);
+					m_pWalls[xConnection - directionRegulator][yConnection]->SetPos((float)(xConnection - directionRegulator) * 100, (float)yConnection * 100);
+				}
+				else
+				{
+					MakeBrickwall(xConnection - directionRegulator, yConnection);
 				}
 
 
-				if (m_pBlocks[xConnection][yConnection + 1 - directionRegulator] == NULL && m_pWalls[xConnection][yConnection + 1 - directionRegulator] == NULL)
+				if (m_pBlocks[xConnection + 1 - directionRegulator][yConnection] == NULL && m_pWalls[xConnection + 1 - directionRegulator][yConnection] == NULL)
 				{
-					m_pBlocks[xConnection][yConnection + 1 - directionRegulator] = new CPlaceable;
-					m_pBlocks[xConnection][yConnection + 1 - directionRegulator]->Init(ROOMFILL);
+					m_pBlocks[xConnection + 1 - directionRegulator][yConnection] = new CPlaceable;
+					m_pBlocks[xConnection + 1 - directionRegulator][yConnection]->Init(ROOMFILL);
 
-					m_pWalls[xConnection][yConnection + 1 - directionRegulator] = new CPlaceable;
-					m_pWalls[xConnection][yConnection + 1 - directionRegulator]->Init(BRICKWALL);
-					m_pWalls[xConnection][yConnection + 1 - directionRegulator]->SetPos((float)xConnection * 100, (float)(yConnection + 1 - directionRegulator) * 100);
+					m_pWalls[xConnection + 1 - directionRegulator][yConnection] = new CPlaceable;
+					m_pWalls[xConnection + 1 - directionRegulator][yConnection]->Init(BRICKWALL);
+					m_pWalls[xConnection + 1 - directionRegulator][yConnection]->SetPos((float)(xConnection + 1 - directionRegulator) * 100, (float)yConnection * 100);
+				}
+				else
+				{
+					MakeBrickwall(xConnection + 1 - directionRegulator, yConnection);
 				}
 
 				//generate right wall
-				if (m_pBlocks[xConnection][yConnection + 2 - directionRegulator] == NULL)
+				if (m_pBlocks[xConnection + 2 - directionRegulator][yConnection] == NULL && m_pWalls[xConnection + 2 - directionRegulator][yConnection] == NULL)
 				{
-					m_pBlocks[xConnection][yConnection + 2 - directionRegulator] = new CPlaceable;
-					m_pBlocks[xConnection][yConnection + 2 - directionRegulator]->Init(BRICKS);
-					m_pBlocks[xConnection][yConnection + 2 - directionRegulator]->SetPos((float)xConnection * 100, (float)(yConnection + 2 - directionRegulator) * 100);
+					m_pBlocks[xConnection + 2 - directionRegulator][yConnection] = new CPlaceable;
+					m_pBlocks[xConnection + 2 - directionRegulator][yConnection]->Init(BRICKS);
+					m_pBlocks[xConnection + 2 - directionRegulator][yConnection]->SetPos((float)(xConnection + 2 - directionRegulator) * 100, (float)yConnection * 100);
+				}
+				else
+				{
+					if (!(m_pBlocks[xConnection + 2 - directionRegulator][yConnection] != NULL && m_pBlocks[xConnection + 2 - directionRegulator][yConnection]->getID() == BRICKS))
+						MakeBrickwall(xConnection + 2 - directionRegulator, yConnection);
 				}
 
 
-				xConnection++;
+				yConnection++;
 
-				if (xConnection != _xStart)
+				if (yConnection != _yStart)
 				{
-					if (_yStart < _yEnd)
-						yConnection++;
+					if (_xStart < _xEnd)
+						xConnection++;
 					else
-						yConnection--;
+						xConnection--;
 				}
 			}
 
@@ -1234,11 +1338,16 @@ void CWorld::GenerateConnectionVertical(int _xStart, int _yStart, int _xEnd, int
 		while (_yEnd != yConnection)
 		{
 			//generate left wall
-			if (m_pBlocks[xConnection - 1][yConnection] == NULL)
+			if (m_pBlocks[xConnection - 1][yConnection] == NULL && m_pWalls[xConnection - 1][yConnection] == NULL)
 			{
 				m_pBlocks[xConnection - 1][yConnection] = new CPlaceable;
 				m_pBlocks[xConnection - 1][yConnection]->Init(BRICKS);
 				m_pBlocks[xConnection - 1][yConnection]->SetPos((float)(xConnection-1) * 100, (float)yConnection * 100);
+			}
+			else
+			{
+				if (!(m_pBlocks[xConnection - 1 - directionRegulator][yConnection] != NULL && m_pBlocks[xConnection - 1 - directionRegulator][yConnection]->getID() == BRICKS))
+					MakeBrickwall(xConnection - 1, yConnection);
 			}
 
 			//generate inside
@@ -1252,13 +1361,22 @@ void CWorld::GenerateConnectionVertical(int _xStart, int _yStart, int _xEnd, int
 				m_pWalls[xConnection][yConnection]->Init(BRICKWALL);
 				m_pWalls[xConnection][yConnection]->SetPos((float)xConnection * 100, (float)yConnection * 100);
 			}
+			else
+			{
+				MakeBrickwall(xConnection, yConnection);
+			}
 
 			//generate right wall
-			if (m_pBlocks[xConnection + 1][yConnection] == NULL)
+			if (m_pBlocks[xConnection + 1][yConnection] == NULL && m_pWalls[xConnection + 1][yConnection] == NULL)
 			{
 				m_pBlocks[xConnection + 1][yConnection] = new CPlaceable;
 				m_pBlocks[xConnection + 1][yConnection]->Init(BRICKS);
 				m_pBlocks[xConnection + 1][yConnection]->SetPos((float)(xConnection+1) * 100, (float)yConnection * 100);
+			}
+			else
+			{
+				if (!(m_pBlocks[xConnection + 1 - directionRegulator][yConnection] != NULL && m_pBlocks[xConnection + 1 - directionRegulator][yConnection]->getID() == BRICKS))
+					MakeBrickwall(xConnection + 1, yConnection);
 			}
 
 			yConnection++;
@@ -1267,29 +1385,182 @@ void CWorld::GenerateConnectionVertical(int _xStart, int _yStart, int _xEnd, int
 		//make an exit
 		SAFE_DELETE(m_pBlocks[xConnection][yConnection]);
 		m_pBlocks[xConnection][yConnection] = new CPlaceable;
-		m_pBlocks[xConnection][yConnection]->Init(ROOMFILL);
+		m_pBlocks[xConnection][yConnection]->Init(LADDER);
+		m_pBlocks[xConnection][yConnection]->SetPos((float)xConnection * 100, (float)yConnection * 100);
 
 		SAFE_DELETE(m_pWalls[xConnection][yConnection]);
 		m_pWalls[xConnection][yConnection] = new CPlaceable;
 		m_pWalls[xConnection][yConnection]->Init(BRICKWALL);
 		m_pWalls[xConnection][yConnection]->SetPos((float)xConnection * 100, (float)yConnection * 100);
 
+		yConnection++;
+
+		//build ladders to the ground
+		while (m_pBlocks[xConnection][yConnection] == NULL || m_pBlocks[xConnection][yConnection]->IsPassable())
+		{
+			MakeBrickwall(xConnection, yConnection);
+
+			SAFE_DELETE(m_pBlocks[xConnection][yConnection]);
+			m_pBlocks[xConnection][yConnection] = new CPlaceable;
+			m_pBlocks[xConnection][yConnection]->Init(LADDER);
+			m_pBlocks[xConnection][yConnection]->SetPos((float)xConnection * 100, (float)yConnection * 100);
+
+			yConnection++;
+		}
+
 	}
 }
 
+
+//converts block in brickwall
+void CWorld::MakeBrickwall(int _x, int _y)
+{
+	list<CPanel*>::iterator p;
+
+	//check for panels
+	if (m_pBlocks[_x][_y] != NULL && (m_pBlocks[_x][_y]->getID() == FURNANCE || m_pBlocks[_x][_y]->getID() == CHEST || m_pBlocks[_x][_y]->getID() == CAULDRON))
+	{
+		//seek for the panel
+		for (p = m_PanelList.begin(); p != m_PanelList.end(); p++)
+		{
+			//if found: delete it
+			if (m_pBlocks[_x][_y]->GetSpecialID() == (*p)->GetNumber())
+			{
+				SAFE_DELETE(*p);
+				m_PanelList.erase(p);
+				break;
+			}
+		}
+	}
+
+	SAFE_DELETE(m_pBlocks[_x][_y]);
+	m_pBlocks[_x][_y] = new CPlaceable;
+	m_pBlocks[_x][_y]->Init(ROOMFILL);
+
+	SAFE_DELETE(m_pWalls[_x][_y]);
+	m_pWalls[_x][_y] = new CPlaceable;
+	m_pWalls[_x][_y]->Init(BRICKWALL);
+	m_pWalls[_x][_y]->SetPos((float)_x * 100, (float)_y * 100);
+}
+
+
+//generates a random block
+void CWorld::GenerateRandomBlock(int _x, int _y)
+{
+	int possibility[9];
+	int randomNumber;
+	int possibilitySum = 0;
+
+	if (m_pBlocks[_x][_y] == NULL)
+	{
+		//set the start possibilities
+		possibility[0] = 84;            //dirt
+		possibility[1] = 10;            //stone
+
+		if (_y > 7)
+			possibility[2] = 3;            //coal
+		else
+			possibility[2] = 0;
+
+		if (_y > 10)
+			possibility[3] = 2;            //iron
+		else
+			possibility[3] = 0;
+
+		if (_y > 15)
+			possibility[4] = 1;            //gold
+		else
+			possibility[4] = 0;
+
+		if (_y > 20)
+			possibility[5] = 1;              //arcanus
+		else
+			possibility[5] = 0;
+
+		if (_y > 4)
+			possibility[6] = 5;             //marble
+		else
+			possibility[6] = 0;
+
+		if (_y > 7)
+			possibility[7] = 3;            //sulfur
+		else
+			possibility[7] = 0;
+
+		if (_y > 7)
+			possibility[8] = 3;            //salpeter
+		else
+			possibility[8] = 0;
+
+
+
+		//if a near placeable is a specific type: greater chance, that this placeable will be the same type
+		if (_y > 4 && _x > 0)
+		{
+			if (m_pBlocks[_x - 1][_y] != NULL)
+				if (m_pBlocks[_x - 1][_y]->getID() < 10 && m_pBlocks[_x - 1][_y]->getID() > 0)
+					possibility[m_pBlocks[_x - 1][_y]->getID() - 1] += 50;
+			if (m_pBlocks[_x][_y - 1] != NULL && m_pBlocks[_x][_y - 1]->getID() > 0)
+				if (m_pBlocks[_x][_y - 1]->getID() < 10)
+					possibility[m_pBlocks[_x][_y - 1]->getID() - 1] += 50;
+		}
+
+
+
+		//Create new Placeable
+		m_pBlocks[_x][_y] = new CPlaceable;
+
+		//calculate the sum
+		for (int i = 0; i < 9; i++)
+			possibilitySum += possibility[i];
+
+		//generate a random number between 1 and 100
+		randomNumber = rand() % possibilitySum + 1;
+
+		//decide which placeable is going to be set
+		if (randomNumber <= possibility[0])
+			m_pBlocks[_x][_y]->Init(DIRT);
+		else if (randomNumber <= possibility[1] + possibility[0])
+			m_pBlocks[_x][_y]->Init(STONE);
+		else if (randomNumber <= possibility[0] + possibility[1] + possibility[2])
+			m_pBlocks[_x][_y]->Init(COALBLOCK);
+		else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3])
+			m_pBlocks[_x][_y]->Init(IRONBLOCK);
+		else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3] + possibility[4])
+			m_pBlocks[_x][_y]->Init(GOLDBLOCK);
+		else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3] + possibility[4] + possibility[5])
+			m_pBlocks[_x][_y]->Init(ARCANUSBLOCK);
+		else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3] + possibility[4] + possibility[5] + possibility[6])
+			m_pBlocks[_x][_y]->Init(MARBLE);
+		else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3] + possibility[4] + possibility[5] + possibility[6] + possibility[7])
+			m_pBlocks[_x][_y]->Init(SULFURBLOCK);
+		else
+			m_pBlocks[_x][_y]->Init(SALPETERBLOCK);
+
+
+		//set position
+		m_pBlocks[_x][_y]->SetPos(static_cast<float>(_x * 100), static_cast<float> (_y * 100));
+
+	}
+	else if (m_pBlocks[_x][_y]->getID() == ROOMFILL)
+	{
+		SAFE_DELETE(m_pBlocks[_x][_y]);
+	}
+}
+
+
 //generates the princess room
-void CWorld::GenerateFinalRoom(int _x, int _y)
+void CWorld::GenerateFinalRoom(int _x, int _y, int _xSize)
 {
 	bool princess = false;
 
 	//generate the size of the room
-	int xSize = rand() % 4 + 8;
-	int ySize = rand() % 2 + 5;
+	int xSize = _xSize;
+	int ySize = 6;
 
-	while (_x + xSize >= m_BlocksX && _y + ySize >= m_BlocksY - 1)
+	while (_x + xSize >= m_BlocksX)
 	{
 		xSize--;
-		ySize--;
 	}
 
 	//build the room
@@ -1371,18 +1642,22 @@ void CWorld::GenerateFinalRoom(int _x, int _y)
 			}
 		}
 	
+	MakeBrickwall(_x, _y + ySize - 2);
+	MakeBrickwall(_x + xSize - 1, _y + ySize - 2);
 
 }
 
 
 //generates a cave
-void CWorld::GenerateCave(int _x, int _y)
+Vector2i CWorld::GenerateCave(int _x, int _y)
 {
+	bool ogreInCave = false;
+
 	//generate the size of the cave
 	int xSize = rand() % 9 + 2;
 	int ySize = rand() % 3 + 3;
 
-	if (_x + xSize <= m_BlocksX && _y + ySize <= m_BlocksY-1)
+	if (_x + xSize <= m_BlocksX && _y + ySize <= m_BlocksY - 1)
 	{
 		//build the cave
 		for (int y = _y; y < _y + ySize; y++)
@@ -1396,7 +1671,7 @@ void CWorld::GenerateCave(int _x, int _y)
 				//check for stalagits
 				if (y == _y)
 				{
-					if (rand() % 3 == 0 && m_pBlocks[x][y-1] != NULL)
+					if (rand() % 3 == 0 && m_pBlocks[x][y - 1] != NULL)
 					{
 						m_pBlocks[x][y]->Init(STALAGTIT);
 						m_pBlocks[x][y]->SetSpecialID(rand() % 4);
@@ -1433,12 +1708,13 @@ void CWorld::GenerateCave(int _x, int _y)
 					else if (type == 2)
 					{
 						m_pBlocks[x][y]->Init(ROOMFILL);
-						m_pNpcMachine->AddNpc(GOBLIN, x*100, y*100, true);				
+						m_pNpcMachine->AddNpc(GOBLIN, x * 100, y * 100, true);
 					}
-					else if (type == 3)
+					else if (type == 3 && !ogreInCave)
 					{
 						m_pBlocks[x][y]->Init(ROOMFILL);
-						m_pNpcMachine->AddNpc(OGRE, x * 100, (y-1) * 100, true);
+						m_pNpcMachine->AddNpc(OGRE, x * 100, (y - 1) * 100, true);
+						ogreInCave = true;
 					}
 					else
 					{
@@ -1454,7 +1730,10 @@ void CWorld::GenerateCave(int _x, int _y)
 			}
 		}
 	}
+	else
+		return Vector2i(0, 0);
 
+	return Vector2i(xSize, ySize);
 }
 
 
@@ -2141,22 +2420,27 @@ bool CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 	//check, wether the player has collided with a little item
 	 list<CLittleItem>::iterator i;
 
-	for(i = m_LittleItemList.begin(); i != m_LittleItemList.end(); i++)
+	 for (i = m_LittleItemList.begin(); i != m_LittleItemList.end();)
 	{
 
-		if(_playerRect.intersects(i->GetRect()) && !_player->IsInventoryFull())
+		if(_playerRect.intersects(i->GetRect()))
 		{
 			//if it is a dynamite: end burning
 			if (i->GetThing()->getID() == DYNAMITE)
 			{
 				if (((CItem*)(i->GetThing()))->GetSpecialID() == 1)
+				{
+					i++;
 					continue;
+				}
 			}
 
-			_player->Take(i->GetThing(),1);			
-			i->Quit();
-			m_LittleItemList.erase(i);
-			return false;
+			if (_player->Take(i->GetThing(), 1))
+			{
+				i->Quit();
+				i = m_LittleItemList.erase(i);
+				continue;
+			}
 		}
 
 		if (i->GetThing()->getID() == DYNAMITE)
@@ -2169,6 +2453,7 @@ bool CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 			}
 		}
 
+		i++;
 	}
 
 	return false;
@@ -2297,12 +2582,12 @@ void CWorld::CheckLittle()
 			yStart = 0;
 
 		int xEnd = static_cast<int>(i->GetRect().left/100) +2;
-		if(xEnd > 100)
-				xEnd = 100;
+		if(xEnd > m_BlocksX)
+				xEnd = m_BlocksX;
 
 		int yEnd = static_cast<int>(i->GetRect().top/100) +2;
-		if(yEnd > 54)
-			yEnd = 54;
+		if(yEnd > m_BlocksY)
+			yEnd = m_BlocksY;
 	
 		//Check the velocity
 
@@ -2845,7 +3130,10 @@ CPanel* CWorld::GetPanel(int _number)
 	x = (x - x%100)/100; 
 	y = (y -y%100)/100;
 
-	if(m_pBlocks[x][y] != NULL && _number == -1)
+	if ((x < 0 || y < 0) && _number == -1)
+		return NULL;
+
+	if (_number == -1 && m_pBlocks[x][y] != NULL)
 	{
 		//if the thing is a furnance or a chest and the player clicked on it: get it's number
 		if(m_pBlocks[x][y]->getID() == FURNANCE || m_pBlocks[x][y]->getID() == CHEST || m_pBlocks[x][y]->getID() == CAULDRON)
@@ -3380,6 +3668,7 @@ void CWorld::DeleteBlock(int _x, int _y)
 
 	if (_x >= 0 && _y >= 0 && _x < m_BlocksX && _y < m_BlocksY)
 	{
+		//delete blocks
 		if (m_pBlocks[_x][_y] != NULL && m_pBlocks[_x][_y]->getID() != BEDROCK)
 		{
 			AddLittleItem(m_pBlocks[_x][_y]->GetLittleID(), m_pBlocks[_x][_y]->GetRect().left + 23, m_pBlocks[_x][_y]->GetRect().top + 20);
@@ -3424,6 +3713,14 @@ void CWorld::DeleteBlock(int _x, int _y)
 			}
 
 			SAFE_DELETE(m_pBlocks[_x][_y]);
+		}
+
+		//delete walls
+		if (m_pWalls[_x][_y] != NULL)
+		{
+			AddLittleItem(m_pWalls[_x][_y]->GetLittleID(), m_pWalls[_x][_y]->GetRect().left + 23, m_pWalls[_x][_y]->GetRect().top + 20);
+
+			SAFE_DELETE(m_pWalls[_x][_y]);
 		}
 	}
 }

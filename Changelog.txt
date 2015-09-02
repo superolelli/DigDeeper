@@ -1512,3 +1512,21 @@ ZUKÜNFITGE ÄNDERUNGEN:
    Das schnelle Lichtrendering unterscheidet sich leicht vom schönen, ist aber nicht immens schlechter.
 
 -------------------------------------------------------
+01.09.2015
+
+- Bugfix: In mittleren und großen Welten fielen ab einer bestimmten Höhe die kleinen Items durch alle Blöcke durch
+- Bugfix: Items konnten nicht aufgehoben werden, wenn das Inventar voll war (obwohl dieses Item ggf. schon im Inventar vorhanden war)
+- Bugfix: Oger konnten keine Rückwände zerstören
+- Es sind nun auch vertikale Verbindungen zwischen Räumen in Teil 4 der Welt möglich (auch zwischen Räumen aus Teil 3 mit Räumen aus Teil 4)
+- Weltgrößen geändert (mittel: 100 x 200; groß: 200 x 300)
+- Der Spieler bekommt nun keinen Fallschaden mehr, wenn er Leitern benutzt
+- Es wird nun nur noch maximal ein Oger pro Höhle gespawnt
+- In der Goblinstadt können selten nun auch Höhlen vorkommen
+
+-------------------------------------------------------
+02.09.2015
+
+- Teil 5 der Weltgenerierung geschrieben (Kerker)
+- Zwischen Räumen aus Teil 4 und oberen Räumen aus Teil 5 können nun vertikale Gänge existieren
+
+-------------------------------------------------------

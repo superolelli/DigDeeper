@@ -44,7 +44,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 	{
 	case ROOMFILL:
 		{
-
+			m_is_passable = true;
 		}break;
 	case DIRT:
 		{
