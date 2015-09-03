@@ -98,6 +98,8 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	m_currentFPS = 0;
 	m_seconds = 0;
 
+	m_TimeRunning = 0;
+
 	//select the first music
 	m_music = rand()%10;
 
@@ -159,6 +161,8 @@ void CGame::Run()
 	{
 		g_pFramework->Update();
 		g_pFramework->Clear();
+
+		m_TimeRunning += g_pTimer->GetElapsedTime().asSeconds();
 
 		//clear the profiler
 		g_pProfiler->ClearProfiler();
@@ -281,8 +285,6 @@ void CGame::Run()
 			g_pSound->m_sound.play();
 
 			sleep(seconds(5));
-
-			SaveHighscore();
 
 			is_running = false;
 		}
@@ -607,6 +609,13 @@ void CGame::SaveGame()
 	binary_oarchive npcArchive(outputFile);
 	npcArchive << m_NpcMachine;
 	outputFile.close();
+
+	//save the game data
+	outputFile.open(pathString + "/Gamedata.gmd", ios::binary);
+	outputFile.clear();
+	binary_oarchive gameArchive(outputFile);
+	gameArchive << m_TimeRunning;
+	outputFile.close();
 }
 
 
@@ -655,12 +664,24 @@ void CGame::Load(string _path)
 	npcArchive >> m_NpcMachine;
 	inputFile.close();
 
+	//load the game data
+	savegame.append("/Gamedata.gmd");
+
+	if (exists(savegame))
+	{
+		inputFile.open(pathString + "/Gamedata.gmd", ios::binary);
+		binary_iarchive gameArchive(inputFile);
+		gameArchive >> m_TimeRunning;
+		inputFile.close();
+	}
+	else
+		m_TimeRunning = 0;
+
 	m_pPlayer->InitLoaded(500, 300, m_pWorld, &m_View, m_Settings.m_inventory_numbers, m_Settings.m_beam_numbers);
 	m_pWorld->Init(0, 0, &m_View, &m_NpcMachine, m_Settings.m_fast_light, true);
 	m_NpcMachine.Init(m_pWorld, m_pPlayer, &m_View, true);
 	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);
 }
-
 
 
 
@@ -672,18 +693,18 @@ void CGame::SaveHighscore()
 	//get the path
 	char* var = getenv("APPDATA");
 	string Path = var;
-	Path.append("/Dig Deeper/Highscore.hsc");
+	Path.append("/Dig Deeper/Highscore_02.hsc");
 
 	if (!boost::filesystem::exists(path(Path)))
 		ClearHighscore();
-	
+
 	//open the file
 	ifstream Input(Path, ios::binary);
 	Input.read((char *)&highscore, sizeof(highscore));
 	Input.close();
 
 
-	if (highscore[9].m_level < m_pPlayer->GetLevel())
+	if (highscore[9].m_timeNeeded > m_TimeRunning)
 	{
 		CStringInput stringInput;
 		stringInput.Init(g_pTextures->f_coolsville, 35, g_pFramework->GetWindow()->getSize().x / 2, g_pFramework->GetWindow()->getSize().y / 2, Color(200, 200, 0));
@@ -722,36 +743,38 @@ void CGame::SaveHighscore()
 			g_pFramework->Flip();
 		}
 
-			//save the highscore
-			for (int i = 0; i < 10; i++)
+		//save the highscore
+		for (int i = 0; i < 10; i++)
+		{
+			if (highscore[i].m_timeNeeded > m_TimeRunning)
 			{
-				if (highscore[i].m_level < m_pPlayer->GetLevel())
+				for (int a = 9; a > i; a--)
 				{
-					for (int a = 9; a > i; a--)
-					{
-						highscore[a].m_name = highscore[a - 1].m_name;
-						highscore[a].m_level = highscore[a - 1].m_level;
-						highscore[a].m_attributes = highscore[a - 1].m_attributes;
-						highscore[a].m_class = highscore[a - 1].m_class;
-					}
-					highscore[i].m_name = stringInput.GetString().c_str();
-					highscore[i].m_level = m_pPlayer->GetLevel();
-					highscore[i].m_attributes = m_pPlayer->GetPlayerBasicAttributes();
-					highscore[i].m_class = m_pPlayer->GetClass();
-
-					i = 10;
+					highscore[a].m_name = highscore[a - 1].m_name;
+					highscore[a].m_level = highscore[a - 1].m_level;
+					highscore[a].m_attributes = highscore[a - 1].m_attributes;
+					highscore[a].m_class = highscore[a - 1].m_class;
+					highscore[a].m_timeNeeded = highscore[a - 1].m_timeNeeded;
 				}
+				highscore[i].m_name = stringInput.GetString().c_str();
+				highscore[i].m_level = m_pPlayer->GetLevel();
+				highscore[i].m_attributes = m_pPlayer->GetPlayerBasicAttributes();
+				highscore[i].m_class = m_pPlayer->GetClass();
+				highscore[i].m_timeNeeded = m_TimeRunning;
+
+				i = 10;
 			}
-
-
-			SAFE_DELETE(button);
-			
 		}
 
 
-		ofstream Output(Path, ios::binary);
-		Output.write((char *)&highscore, sizeof(highscore));
-		Output.close();
+		SAFE_DELETE(button);
+
+	}
+
+
+	ofstream Output(Path, ios::binary);
+	Output.write((char *)&highscore, sizeof(highscore));
+	Output.close();
 }
 
 
@@ -764,13 +787,14 @@ void CGame::ClearHighscore()
 {
 	char* var = getenv("APPDATA");
 	string Path = var;
-	Path.append("/Dig Deeper/Highscore.hsc");
+	Path.append("/Dig Deeper/Highscore_02.hsc");
 
 	SHighscore highscore[10];
 
 	for (int i = 0; i < 10; i++)
 	{
 		highscore[i].m_class = -1;
+		highscore[i].m_timeNeeded = 10000;
 		highscore[i].m_level = 0;
 		highscore[i].m_name = "Niemand";
 

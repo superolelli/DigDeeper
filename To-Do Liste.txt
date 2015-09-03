@@ -1,7 +1,10 @@
-- Zielsetzung (Prinzessin?)
+- Schlüsselwächter einbauen
 - Spawnverhalten überarbeiten
+- Vergitterte Fenster für Kerker
 - Balancingtabellen erstellen
 - Werte in Datenbanken o.ä. auslagern (Charakterwerte etc.)
+- Externes Belohnungssystem ausdenken (Punkte für erreichte Stufen nach Tod -> Einlösen in neue Klassen o.ä.)
+- Erfolgemenü einbauen
 - Übersetzung des Spiels (v.a. in Englisch) ermöglichen
 - Bugfix: Konsumierbares wird mit komischen Werten initialisiert
 - Bugfix: Goblins stecken in Decke fest

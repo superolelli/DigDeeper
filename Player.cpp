@@ -135,6 +135,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 	case MINER:
 		{
 			m_Attributes.breakingSpeed = 1.5f;
+			m_Attributes.luck = 10;
 
 			CTool *pickaxe;
 			pickaxe = new CTool;
@@ -158,6 +159,10 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 		}break;
 	case BUILDER:
 		{
+			m_Attributes.maxHealth = 120;
+			m_Attributes.currentHealth = 120;
+			m_Attributes.healthRegeneration = 1;
+
 			//gives the player 3 random recipes
 			for(int u = 0; u < 3; u++)
 			{
@@ -199,7 +204,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 		}break;
 	case WARRIOR:
 		{
-			m_Attributes.strength = 8;
+			m_Attributes.strength = 7;
 
 			CEquipment *helmet;
 			helmet = new CEquipment;
@@ -218,6 +223,8 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 		}break;
 	case MAGE:
 		{
+			m_Attributes.maxHealth = 75;
+			m_Attributes.currentHealth = 75;
 			m_Attributes.maxMana = 50;
 			m_Attributes.currentMana = 50;
 			m_Attributes.manaRegeneration = 1;
@@ -778,7 +785,7 @@ void CPlayer::Render()
 		if (m_Attributes.currentMana > m_modifications.maxMana)
 			m_Attributes.currentMana = m_modifications.maxMana;
 
-		m_fRegenerationTime = 3;
+		m_fRegenerationTime = 1;
 	}
 
 
@@ -1087,26 +1094,6 @@ void CPlayer::CheckArmAnimation()
 {
 	if(Mouse::isButtonPressed(Mouse::Left))
 	{
-		//if dwarf carries sword
-		//CThing *thing = m_pInventory->GetCarriedThing();
-		//if (thing != NULL && thing->getID() == SWORD)
-		//{
-		//	if (m_fWaitToBeat <= 0)
-		//	{
-		//		//if arm reached lowest point: set arm to highest point
-		//		if (m_fArmAnimState <= -40)
-		//		{
-		//			m_fArmAnimState = 110;
-		//			m_fWaitToBeat = 0.6;
-		//		}
-
-		//		m_fArmAnimState -= g_pTimer->GetElapsedTime().asSeconds() * 500;
-		//	}
-		//	else
-		//		m_fWaitToBeat -= g_pTimer->GetElapsedTime().asSeconds();
-		//}
-		//else
-		//{
 			if (m_fArmAnimState >= 90)
 				m_armGoingUp = false;
 			if (m_fArmAnimState <= -40)
@@ -1116,7 +1103,6 @@ void CPlayer::CheckArmAnimation()
 				m_fArmAnimState += g_pTimer->GetElapsedTime().asSeconds() * 300;
 			else
 				m_fArmAnimState -= g_pTimer->GetElapsedTime().asSeconds() * 300;
-		//}
 	}
 	else
 	{
@@ -1171,58 +1157,6 @@ void CPlayer::CalculateAttributes()
 
 		i++;
 	}
-
-	////set status symbols
-	//if (allEffects.armour != 0)
-	//	m_StatusEffects[EFFECT_ARMOUR].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_ARMOUR].m_show = false;
-
-	//if (allEffects.breaking_speed != 0)
-	//	m_StatusEffects[EFFECT_BREAKINGSPEED].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_BREAKINGSPEED].m_show = false;
-
-	//if (allEffects.luck != 0)
-	//	m_StatusEffects[EFFECT_LUCK].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_LUCK].m_show = false;
-
-	//if (allEffects.healthRegeneration != 0)
-	//	m_StatusEffects[EFFECT_HEALTHREGENERATION].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_HEALTHREGENERATION].m_show = false;
-
-	//if (allEffects.manaRegeneration != 0)
-	//	m_StatusEffects[EFFECT_MANAREGENERATION].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_MANAREGENERATION].m_show = false;
-
-	//if (allEffects.speed != 0)
-	//	m_StatusEffects[EFFECT_SPEED].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_SPEED].m_show = false;
-
-	//if (allEffects.strength != 0)
-	//	m_StatusEffects[EFFECT_STRENGTH].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_STRENGTH].m_show = false;
-
-	//if (allEffects.criticalChance != 0)
-	//	m_StatusEffects[EFFECT_CRITICALCHANCE].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_CRITICALCHANCE].m_show = false;
-
-	//if (allEffects.criticalDamage != 0)
-	//	m_StatusEffects[EFFECT_CRITICALDAMAGE].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_CRITICALDAMAGE].m_show = false;
-
-	//if (m_fDrunk > 0)
-	//	m_StatusEffects[EFFECT_DRUNK].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_DRUNK].m_show = false;
-
 
 
 	m_modifications = m_pInventory->GetEquipmentAttributes();

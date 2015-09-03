@@ -247,6 +247,8 @@ void CCharacterInfo::CheckForLevelUp()
 
 		//increase the player's level
 		m_playerLevel++;
+
+		g_pSignMachine->AddString("Level Up!", 2, m_pPlayer->GetRect().left, m_pPlayer->GetRect().top, Color::Blue);
 	}
 
 

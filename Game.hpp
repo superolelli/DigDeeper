@@ -34,6 +34,8 @@ private:
 	bool m_rotatingDown;                  //is the view rotating down?
 	string m_Name;                         //the name of the game
 
+	float m_TimeRunning;                        //how long is the game running
+
 	bool is_running;                   //is the game still running?
 	bool song_played[10];                //has this song already been played?
 	View m_View;                       //the view(camera)

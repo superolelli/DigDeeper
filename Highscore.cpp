@@ -46,10 +46,19 @@ void CHighscore::Quit()
 void CHighscore::Run()
 {
 	char* var = getenv("APPDATA");
-	string Path = var;
-	Path.append("/Dig Deeper/Highscore.hsc");
 
-	//if there is now highscore file: make new one and clear it
+	//delete the old highscore file if existis
+	string oldPath = var;
+	oldPath.append("/Dig Deeper/Highscore.hsc");
+
+	if (boost::filesystem::exists(path(oldPath)))
+		boost::filesystem::remove(path(oldPath));
+
+
+	string Path = var;
+	Path.append("/Dig Deeper/Highscore_02.hsc");
+
+	//if there is no highscore file: make new one and clear it
 	if (!boost::filesystem::exists(path(Path)))
 		clearHighscore();
 	
@@ -64,7 +73,9 @@ void CHighscore::Run()
 
 	for (int i = 0; i < 10; i++)
 	{
-		stream << m_highscore[i].m_level << "     " << m_highscore[i].m_name;
+
+		stream << roundf(m_highscore[i].m_timeNeeded / 60) << " Minuten" << "     " << m_highscore[i].m_name;
+
 		m_highscoreText[i].setString(stream.str());
 		stream.str("");
 	}
@@ -253,13 +264,14 @@ void CHighscore::clearHighscore()
 {
 	char* var = getenv("APPDATA");
 	string Path = var;
-	Path.append("/Dig Deeper/Highscore.hsc");
+	Path.append("/Dig Deeper/Highscore_02.hsc");
 
 	for (int i = 0; i < 10; i++)
 	{
 		m_highscore[i].m_class = -1;
 		m_highscore[i].m_level = 0;
 		m_highscore[i].m_name = "Niemand";
+		m_highscore[i].m_timeNeeded = 1000000;
 
 		m_highscore[i].m_attributes.armour = 0;
 		m_highscore[i].m_attributes.breakingSpeed = 0;
@@ -293,7 +305,7 @@ void CHighscore::clearHighscore()
 
 	for (int i = 0; i < 10; i++)
 	{
-		stream << m_highscore[i].m_level << "     " << m_highscore[i].m_name;
+		stream << m_highscore[i].m_timeNeeded << " Minuten" << "     " << m_highscore[i].m_name;
 		m_highscoreText[i].setString(stream.str());
 		stream.str("");
 	}

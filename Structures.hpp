@@ -363,6 +363,7 @@ struct SHighscore
 	int m_level;
 	int m_class;
 	string m_name;
+	float m_timeNeeded;
 };
 
 
