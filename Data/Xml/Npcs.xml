@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npcs>
+  <!-- Bee -->
+  <bee 
+    ID ="1"
+    health ="20"
+    strength ="0"
+    speed ="100"
+    armour ="0"
+    exp ="1"
+ ></bee>
+
+  <!-- Goblin -->
+  <normalgoblin
+    ID ="2"
+    health ="40"
+    strength ="10"
+    speed ="150"
+    armour ="0"
+    exp ="5"
+ ></normalgoblin>
+
+  <!-- Warriorgoblin -->
+  <warriorgoblin
+    ID ="3"
+    health ="40"
+    strength ="20"
+    speed ="180"
+    armour ="0"
+    exp ="15"
+ ></warriorgoblin>
+
+  <!-- Knightgoblin -->
+  <knightgoblin
+    ID ="4"
+    health ="70"
+    strength ="15"
+    speed ="130"
+    armour ="10"
+    exp ="15"
+ ></knightgoblin>
+
+  <!-- Chestgoblin -->
+  <chestgoblin
+    ID ="5"
+    health ="40"
+    strength ="10"
+    speed ="150"
+    armour ="0"
+    exp ="10"
+ ></chestgoblin>
+
+  <!-- Magegoblin -->
+  <magegoblin
+    ID ="6"
+    health ="30"
+    strength ="6"
+    speed ="150"
+    armour ="0"
+    exp ="15"
+ ></magegoblin>
+
+  <!-- Ogre -->
+  <ogre
+    ID ="7"
+    health ="100"
+    strength ="40"
+    speed ="130"
+    armour ="4"
+    exp ="35"
+ ></ogre>
+  
+</npcs>

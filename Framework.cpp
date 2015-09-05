@@ -2,6 +2,7 @@
 
 
 
+
 //Opens the window
 void CFramework::Init()
 {
@@ -155,6 +156,9 @@ void CFramework::ProcessEvents()
 
 					if (event.key.code == Keyboard::F1)
 						keyStates.f1 = true;
+
+					if (event.key.code == Keyboard::F6)
+						keyStates.f6 = true;
 					
 				}break;
 
@@ -207,6 +211,7 @@ void CFramework::ClearKeyStates()
 	keyStates.backspace = false;
 	keyStates.f3 = false;
 	keyStates.f1 = false;
+	keyStates.f6 = false;
 
 	keyStates.text_entered = false;
 	keyStates.text_input = 'a';

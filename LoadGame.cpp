@@ -161,7 +161,7 @@ void CLoadGame::RenderButtons()
 			string pathString = var;
 			pathString.append("/Dig Deeper/Saves/");
 
-			path Path;
+			boost::filesystem::path Path;
 			Path.append(pathString + m_GamePath);
 			remove_all(Path);
 		

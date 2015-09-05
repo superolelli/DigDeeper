@@ -126,15 +126,15 @@ void CEquipment::InitEquipmentRandomly(int _ID)
 		return;
 
 	//get a rarity
-	int number = rand()%100;
+	int number = rand()%1000;
 
-	if(number == 99)
+	if (number < 5)
 		m_rarity = 5;
-	else if(number == 98 || number == 97 || number == 96)
+	else if (number < 20)
 		m_rarity = 4;
-	else if(number > 90)
+	else if (number < 50)
 		m_rarity = 3;
-	else if(number > 80)
+	else if (number < 100)
 		m_rarity = 2;
 	else
 		m_rarity = 1;
@@ -149,19 +149,19 @@ void CEquipment::InitEquipmentRandomly(int _ID)
 		{
 		case ARMOUR:
 			{
-				m_Attributes.armour += rand()%5 + 1;
+				m_Attributes.armour += rand()%3 + 1;
 				if(i == 1)
 					m_Name.append(" des Schutzes");
 			}break;
 		case BREAKINGSPEED:
 			{
-				m_Attributes.breaking_speed += (float)(rand()%3 +1) /10;
+				m_Attributes.breaking_speed += (float)(rand()%5 +1) /10;
 				if(i == 1)
 					m_Name.append(" des Erdreiches");
 			}break;
 		case STRENGTH:
 			{
-				m_Attributes.strength += rand()%5 +1;
+				m_Attributes.strength += 1;
 				if(i == 1)
 					m_Name.append(" der Zerstörung");
 			}break;
@@ -179,7 +179,7 @@ void CEquipment::InitEquipmentRandomly(int _ID)
 			}break;
 		case LUCK:
 			{
-				m_Attributes.luck += rand()%3 +1;
+				m_Attributes.luck += rand()%10 +1;
 				if(i == 1)
 					m_Name.append(" des Schornsteinfegers");
 			}break;
@@ -191,19 +191,19 @@ void CEquipment::InitEquipmentRandomly(int _ID)
 			}break;
 		case HEALTHREGENERATION:
 			{
-				m_Attributes.healthRegeneration += rand() % 3 + 1;
+				m_Attributes.healthRegeneration += 1;
 				if (i == 1)
 					m_Name.append(" der Regeneration");
 			}break;
 			case MANAREGENERATION:
 			{
-				m_Attributes.manaRegeneration += rand() % 3 + 1;
+				m_Attributes.manaRegeneration += rand() % 2 + 1;
 				if (i == 1)
 					m_Name.append(" der arkanen Macht");
 			}break;
 			case CRITICALCHANCE:
 			{
-				m_Attributes.criticalChance += rand() % 3 + 1;
+				m_Attributes.criticalChance += rand() % 5 + 1;
 				if (i == 1)
 					m_Name.append(" des Zufalls");
 			}break;
@@ -226,15 +226,15 @@ void CEquipment::InitEquipmentRandomly(int _ID)
 void CEquipment::InitRing()
 {
 		//get a rarity
-	int number = rand()%100;
+	int number = rand()%1000;
 
-	if(number == 99)
+	if (number < 5)
 		m_rarity = 5;
-	else if(number == 98 || number == 97 || number == 96)
+	else if (number < 20)
 		m_rarity = 4;
-	else if(number > 90)
+	else if (number < 50)
 		m_rarity = 3;
-	else if(number > 80)
+	else if (number < 100)
 		m_rarity = 2;
 	else
 		m_rarity = 1;
@@ -261,19 +261,19 @@ void CEquipment::InitRing()
 		{
 		case ARMOUR:
 			{
-				m_Attributes.armour += rand()%5 + 1;
+				m_Attributes.armour += rand()%3 + 1;
 				if(i == 1 && m_ID != VERYRARERING)
 					m_Name.append(" des Schutzes");
 			}break;
 		case BREAKINGSPEED:
 			{
-				m_Attributes.breaking_speed += (float)(rand()%3 +1) /10;
+				m_Attributes.breaking_speed += (float)(rand()%5 +1) /10;
 				if(i == 1 && m_ID != VERYRARERING)
 					m_Name.append(" des Erdreiches");
 			}break;
 		case STRENGTH:
 			{
-				m_Attributes.strength += rand()%5 +1;
+				m_Attributes.strength += 1;
 				if(i == 1 && m_ID != VERYRARERING)
 					m_Name.append(" der Zerstörung");
 			}break;
@@ -291,7 +291,7 @@ void CEquipment::InitRing()
 			}break;
 		case LUCK:
 			{
-				m_Attributes.luck += rand()%3 +1;
+				m_Attributes.luck += rand()%10 +1;
 				if(i == 1 && m_ID != VERYRARERING)
 					m_Name.append(" des Schornsteinfegers");
 			}break;
@@ -303,19 +303,19 @@ void CEquipment::InitRing()
 			}break;
 		case HEALTHREGENERATION:
 			{
-				m_Attributes.healthRegeneration += rand() % 3 + 1;
+				m_Attributes.healthRegeneration += 1;
 				if (i == 1 && m_ID != VERYRARERING)
 					m_Name.append(" der Regeneration");
 			}break;
 		case MANAREGENERATION:
 			{
-				m_Attributes.manaRegeneration += rand() % 3 + 1;
+				m_Attributes.manaRegeneration += rand() % 2 + 1;
 				if (i == 1 && m_ID != VERYRARERING)
 					m_Name.append(" der arkanen Macht");
 			}break;
 		case CRITICALCHANCE:
 			{
-				m_Attributes.criticalChance += rand() % 3 + 1;
+				m_Attributes.criticalChance += rand() % 5 + 1;
 				if (i == 1 && m_ID != VERYRARERING)
 					m_Name.append(" des Zufalls");
 			}break;

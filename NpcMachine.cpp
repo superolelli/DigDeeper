@@ -98,7 +98,7 @@ void CNpcMachine::CheckAllNpcs()
 			//if npc is out of range: despawn it
 			if (abs((*i)->GetRect().left - m_pPlayer->GetRect().left) > 2500 || abs((*i)->GetRect().top - m_pPlayer->GetRect().top) > 2500)
 			{
-				if (!((*i)->GetID() == GOBLIN && ((CGoblin*)(*i))->IsChested()) && (*i)->m_safe == false)
+				if (!(((*i)->GetID() >= NORMALGOBLIN && (*i)->GetID() <= MAGEGOBLIN) && ((CGoblin*)(*i))->IsChested()) && (*i)->m_safe == false)
 				{
 					(*i)->Quit();
 					SAFE_DELETE((*i));
@@ -136,7 +136,7 @@ void CNpcMachine::CheckAllNpcs()
 				{
 					if (!(m_pPlayer->GetCarriedItem()->getID() == GOBLINDAGGER && m_pPlayer->GetArmGoingUp()))
 					{
-						if ((*i)->GetID() == GOBLIN)
+						if ((*i)->GetID() >= NORMALGOBLIN && (*i)->GetID() <= MAGEGOBLIN)
 							((CGoblin*)(*i))->SetChestedFalse();
 
 						//set was hit to true

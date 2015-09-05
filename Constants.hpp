@@ -164,21 +164,15 @@ const int SHEET_WOOD = 23;
 
 #pragma region Npcs
 
+const int GOBLIN = -1;
+
 const int BEE = 1;
-const int GOBLIN = 2;
-const int OGRE = 3;
-
-#pragma endregion
-
-
-
-#pragma region Goblins
-
-const int NORMALGOBLIN = 1;
-const int WARRIORGOBLIN = 2;
-const int KNIGHTGOBLIN = 3;
-const int CHESTGOBLIN = 4;
-const int MAGEGOBLIN = 5;
+const int NORMALGOBLIN = 2;
+const int WARRIORGOBLIN = 3;
+const int KNIGHTGOBLIN = 4;
+const int CHESTGOBLIN = 5;
+const int MAGEGOBLIN = 6;
+const int OGRE = 7;
 
 #pragma endregion
 

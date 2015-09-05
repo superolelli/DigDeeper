@@ -52,7 +52,7 @@ private:
 				ar & a;
 				ar & bee;
 			}
-			else if (n->GetID() == GOBLIN)
+			else if (n->GetID() >= NORMALGOBLIN && n->GetID() <= MAGEGOBLIN)
 			{
 				CGoblin* goblin = (CGoblin*)n;
 				a = goblin->GetID();
@@ -79,7 +79,7 @@ private:
 				ar & bee;
 				m_Npcs.push_back(bee);
 			}
-			else if (a == GOBLIN)
+			else if (a >= NORMALGOBLIN && a <= MAGEGOBLIN)
 			{
 				CGoblin *goblin = new CGoblin;
 				ar & goblin;

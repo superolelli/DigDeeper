@@ -121,6 +121,7 @@
     <ClCompile Include="NewGame.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="NpcMachine.cpp" />
+    <ClCompile Include="ObjectProperties.cpp" />
     <ClCompile Include="Ogre.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="Panel.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="HelpPage.hpp" />
     <ClInclude Include="Highscore.hpp" />
     <ClInclude Include="MagicMenu.hpp" />
+    <ClInclude Include="ObjectProperties.hpp" />
     <ClInclude Include="Ogre.hpp" />
     <ClInclude Include="Profiler.hpp" />
     <ClInclude Include="Projectiles.hpp" />

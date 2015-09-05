@@ -51,15 +51,15 @@ void CHighscore::Run()
 	string oldPath = var;
 	oldPath.append("/Dig Deeper/Highscore.hsc");
 
-	if (boost::filesystem::exists(path(oldPath)))
-		boost::filesystem::remove(path(oldPath));
+	if (boost::filesystem::exists(boost::filesystem::path(oldPath)))
+		boost::filesystem::remove(boost::filesystem::path(oldPath));
 
 
 	string Path = var;
 	Path.append("/Dig Deeper/Highscore_02.hsc");
 
 	//if there is no highscore file: make new one and clear it
-	if (!boost::filesystem::exists(path(Path)))
+	if (!boost::filesystem::exists(boost::filesystem::path(Path)))
 		clearHighscore();
 	
 	//open the highscore file

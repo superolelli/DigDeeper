@@ -7,62 +7,42 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 	m_pWorld = _world;
 	m_pPlayer = _player;
 	m_pView = _view;
-	m_ID = GOBLIN;
 
 	if (!_loaded)
 	{
 		if (_specialID == -1)
-			m_goblinType = rand() % 5 + 1;
+			m_ID = rand() % 5 + 2;
 		else
-			m_goblinType = _specialID;
+			m_ID = _specialID;
 	}
+
+	//load attributes
+	m_Attributes = g_pProperties->m_NpcProperties[m_ID];
 
 	//Init the sprite
 	m_pGoblin = new CLiving3Part;
-	if (m_goblinType == NORMALGOBLIN)
+	if (m_ID == NORMALGOBLIN)
 	{
 		m_pGoblin->Load(&g_pTextures->t_goblin_body, 50, 64, 2, 0, &g_pTextures->t_goblin_arm, 43, 30, 2, &g_pTextures->t_goblin_legs, 48, 58, 12, _x, _y);
 		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 22.0f, 6.5f, -3.0f, 40.0f);
 		m_pGoblin->SetArmRotatingPoint(38.0f, 5.0f);
 		m_pGoblin->SetHandPosition(8.0f, 16.0f);
-
-		//Init the attributes
-		m_Attributes.maxHealth = 40;
-		m_Attributes.armour = 0;
-		m_Attributes.speed = 150;
-		m_Attributes.strength = 10;
-		m_Attributes.exp = 5;
-
 	}
-	else if (m_goblinType == WARRIORGOBLIN)
+	else if (m_ID == WARRIORGOBLIN)
 	{
 		m_pGoblin->Load(&g_pTextures->t_goblin_body2, 50, 64, 2, 0, &g_pTextures->t_goblin_arm2, 43, 35, 2, &g_pTextures->t_goblin_legs, 48, 58, 12, _x, _y);
 		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 22.0f, 6.5f, -3.0f, 40.0f);
 		m_pGoblin->SetArmRotatingPoint(38.0f, 5.0f);
 		m_pGoblin->SetHandPosition(10.0f, 17.0f);
-
-		//Init the attributes
-		m_Attributes.maxHealth = 40;
-		m_Attributes.armour = 0;
-		m_Attributes.speed = 180;
-		m_Attributes.strength = 20;
-		m_Attributes.exp = 15;
 	}
-	else if (m_goblinType == KNIGHTGOBLIN)
+	else if (m_ID == KNIGHTGOBLIN)
 	{
 		m_pGoblin->Load(&g_pTextures->t_goblin_body3, 53, 68, 2, 0, &g_pTextures->t_goblin_arm3, 39, 54, 2, &g_pTextures->t_goblin_legs2, 48, 53, 12, _x, _y);
 		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 0.0f, 3.0f, 1.0f, 45.0f);
 		m_pGoblin->SetArmRotatingPoint(33.0f, 29.0f);
 		m_pGoblin->SetHandPosition(6.0f, 42.0f);
-
-		//Init the attributes
-		m_Attributes.maxHealth = 70;
-		m_Attributes.armour = 10;
-		m_Attributes.speed = 130;
-		m_Attributes.strength = 15;
-		m_Attributes.exp = 15;
 	}
-	else if (m_goblinType == CHESTGOBLIN)
+	else if (m_ID == CHESTGOBLIN)
 	{
 		m_pGoblin->Load(&g_pTextures->t_goblin_body_chest, 57, 68, 2, 0, &g_pTextures->t_goblin_arm, 43, 30, 2, &g_pTextures->t_goblin_legs, 48, 58, 12, _x, _y);
 		m_pGoblin->SetPartsPos(-6.0f, 22.0f, 23.0f, 3.0f, 1.0f, 45.0f);
@@ -71,27 +51,13 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 
 		m_chestSprite.Load(&g_pTextures->t_blockTextures_chest);
 		m_chestSprite.SetPos(_x - (_x%100), _y - (_y%100));
-
-		//Init the attributes
-		m_Attributes.maxHealth = 40;
-		m_Attributes.armour = 0;
-		m_Attributes.speed = 150;
-		m_Attributes.strength = 10;
-		m_Attributes.exp = 10;
 	}
-	else if (m_goblinType == MAGEGOBLIN)
+	else if (m_ID == MAGEGOBLIN)
 	{
 		m_pGoblin->Load(&g_pTextures->t_goblin_body4, 50, 64, 2, 0, &g_pTextures->t_goblin_arm4, 43, 30, 2, &g_pTextures->t_goblin_legs3, 48, 58, 12, _x, _y);
 		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 22.0f, 6.5f, -3.0f, 40.0f);
 		m_pGoblin->SetArmRotatingPoint(38.0f, 5.0f);
 		m_pGoblin->SetHandPosition(8.0f, 16.0f);
-
-		//Init the attributes
-		m_Attributes.maxHealth = 30;
-		m_Attributes.armour = 0;
-		m_Attributes.speed = 150;
-		m_Attributes.strength = 6;
-		m_Attributes.exp = 15;
 	}
 
 	m_fXVel = 0;
@@ -150,7 +116,7 @@ void CGoblin::Quit()
 
 bool CGoblin::CheckCollision()
 {
-	if (m_goblinType == CHESTGOBLIN && m_chested)
+	if (m_ID == CHESTGOBLIN && m_chested)
 	{
 		return m_pWorld->CheckLivingCollision((FloatRect)m_chestSprite.GetRect());
 	}
@@ -209,7 +175,7 @@ bool CGoblin::CheckNpc()
 
 			}
 
-			if (m_goblinType == CHESTGOBLIN && m_chested)
+			if (m_ID == CHESTGOBLIN && m_chested)
 			{
 				m_chestSprite.Move((int)m_fXVel, (int)m_fYVel);
 				m_pGoblin->Move((int)m_fXVel, (int)m_fYVel);
@@ -295,7 +261,7 @@ void CGoblin::ThrowNpc(bool _left, int _strength)
 
 void CGoblin::CheckYMovement()
 {
-	if (!(m_goblinType == CHESTGOBLIN && m_chested))
+	if (!(m_ID == CHESTGOBLIN && m_chested))
 	{
 		if (nextStepDirection == 1 && !m_pWorld->isBlockPassable(m_pGoblin->GetRect().left/100, m_pGoblin->GetRect().top/100 +1))
 		{
@@ -345,7 +311,7 @@ void CGoblin::CheckState()
 	case(IDLE) :
 	{
 
-		if (m_goblinType == CHESTGOBLIN && m_chested)
+		if (m_ID == CHESTGOBLIN && m_chested)
 		{
 			if (m_pGoblin->GetRect().contains(Vector2i(Mouse::getPosition().x + (m_pView->getCenter().x - m_pView->getSize().x / 2), Mouse::getPosition().y + (m_pView->getCenter().y - m_pView->getSize().y / 2))) && g_pFramework->keyStates.rightMouseUp)
 			{
@@ -404,7 +370,7 @@ void CGoblin::CheckState()
 		}
 
 
-		if (m_goblinType == MAGEGOBLIN)
+		if (m_ID == MAGEGOBLIN)
 		{
 			//check if the goblin is attacking
 			if (abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top ) < 50 && abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 650 &&FreeLineOfSight())
@@ -512,7 +478,7 @@ void CGoblin::NewRandomDestination()
 
 void CGoblin::Render()
 {
-	if (m_goblinType == CHESTGOBLIN && m_chested)
+	if (m_ID == CHESTGOBLIN && m_chested)
 	{
 		m_chestSprite.Render(g_pFramework->GetRenderWindow());
 	}
@@ -555,7 +521,7 @@ vector<SItem> CGoblin::GetLoot()
 	loot.push_back(slime);
 
 	//maybe add dagger
-	if (m_goblinType == WARRIORGOBLIN && rand()%10 == 0)
+	if (m_ID == WARRIORGOBLIN && rand()%10 == 0)
 	{
 		SItem dagger;
 		dagger.amount = 1;
@@ -578,7 +544,7 @@ void CGoblin::CheckArmAnimation()
 		//if arm reached lowest point: set arm to highest point
 		if (m_fArmAnimState <= -40)
 		{
-			if (m_goblinType == MAGEGOBLIN)
+			if (m_ID == MAGEGOBLIN)
 			{
 				m_fWaitToBeat = 2;
 				ThrowFireball();			
@@ -616,7 +582,7 @@ bool CGoblin::IsHitting()
 
 IntRect CGoblin::GetWeaponRect()
 {
-	switch (m_goblinType)
+	switch (m_ID)
 	{
 	case(NORMALGOBLIN):
 	case(MAGEGOBLIN):

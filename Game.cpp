@@ -43,7 +43,7 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	m_pPlayer = new CPlayer;
 
 	char* var = getenv("APPDATA");
-	path Path;
+	boost::filesystem::path Path;
 	Path = var;
 	Path.append("/Dig Deeper/Settings.stt");
 
@@ -205,6 +205,12 @@ void CGame::Run()
 			g_pFramework->ProcessEvents();
 		}
 
+		//check for fast saving
+		if (g_pFramework->keyStates.f6)
+		{
+			SaveGame();
+			g_pFramework->Update();
+		}
 
 		CheckMusic();
 
@@ -583,7 +589,7 @@ void CGame::SaveGame()
 	pathString.append("/Dig Deeper/Saves/");
 	pathString.append(m_Name.c_str());
 
-	path savegame(pathString);
+	boost::filesystem::path savegame(pathString);
 
 	//create the directory
 	if(!exists(savegame))
@@ -635,7 +641,7 @@ void CGame::Load(string _path)
 	string pathString = var;
 	pathString.append("/Dig Deeper/Saves/" + _path);
 
-	path savegame(pathString);
+	boost::filesystem::path savegame(pathString);
 
 	cout <<"Load player..." << endl;
 
@@ -695,7 +701,7 @@ void CGame::SaveHighscore()
 	string Path = var;
 	Path.append("/Dig Deeper/Highscore_02.hsc");
 
-	if (!boost::filesystem::exists(path(Path)))
+	if (!boost::filesystem::exists(boost::filesystem::path(Path)))
 		ClearHighscore();
 
 	//open the file

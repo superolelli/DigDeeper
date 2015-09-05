@@ -17,15 +17,8 @@ void COgre::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, 
 	m_pOgre->SetArmRotatingPoint(190.0f, 112.0f);
 	m_pOgre->SetHandPosition(0, 0);
 
-
 	//Init the attributes
-	m_Attributes.maxHealth = 100;
-	m_Attributes.armour = 4;
-	m_Attributes.speed = 130;
-	m_Attributes.strength = 40;
-	m_Attributes.exp = 35;
-
-	
+	m_Attributes = g_pProperties->m_NpcProperties[m_ID];
 
 	m_fXVel = 0;
 	m_fYVel = 0;

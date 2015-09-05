@@ -29,7 +29,7 @@ void COptions::Init()
 	//Path.append("Data/Settings.stt");
 
 	char* var = getenv("APPDATA");
-	path Path;
+	boost::filesystem::path Path;
 	Path = var;
 	Path.append("/Dig Deeper/Settings.stt");
 

@@ -156,6 +156,9 @@
     <ClCompile Include="HelpPage.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectProperties.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.hpp">
@@ -312,6 +315,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="HelpPage.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectProperties.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
