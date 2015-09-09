@@ -26,6 +26,12 @@ struct SPlayerAttributes
 };
 
 
+struct SPlayerXML
+{
+	SPlayerAttributes attributes;
+	vector<Vector2i> items;
+};
+
 struct SPlayerModifications
 {
 	float breakingSpeed;
@@ -65,6 +71,7 @@ struct SToolAttributes
 	int strength;
 	int luck;
 	int speed;
+	int light;
 
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int version)
@@ -80,8 +87,13 @@ struct SToolAttributes
 		ar & manaRegeneration;
 		ar & criticalChance;
 		ar & criticalDamage;
+
+		if (version > 0)
+			ar & light;
 	}
 };
+
+BOOST_CLASS_VERSION(SToolAttributes, 1)
 
 
 

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<startclasses>
+
+  <!-- MINER -->
+  <class
+    ID = "1"
+    health = "100"
+    healthregeneration = "0"
+    mana = "10"
+    manaregeneration ="0"
+    armour ="0"
+    breakingspeed ="1.5"
+    strength ="5"
+    luck ="10"
+    speed ="150"
+    criticalchance ="0"
+    criticaldamage ="0"
+  >
+
+    <pickaxe
+      ID ="101"
+      amount ="1"
+    ></pickaxe>
+    
+    <torch
+      ID ="20"
+      amount ="1"
+    ></torch>
+
+    <ironore
+      ID ="58"
+      amount ="4"
+    ></ironore>
+
+    <goldore
+      ID ="60"
+      amount ="2"
+    ></goldore>
+    
+  </class>
+
+
+  <!-- BUILDER -->
+  <class
+    ID = "2"
+    health = "120"
+    healthregeneration = "1"
+    mana = "10"
+    manaregeneration ="0"
+    armour ="0"
+    breakingspeed ="1"
+    strength ="5"
+    luck ="0"
+    speed ="150"
+    criticalchance ="0"
+    criticaldamage ="0"
+  >
+
+    <wood
+      ID ="10"
+      amount ="12"
+    ></wood>
+
+    <woodwall
+      ID ="52"
+      amount ="9"
+    ></woodwall>
+
+    <door
+      ID ="15"
+      amount ="1"
+    ></door>
+
+    <torch
+      ID ="20"
+      amount ="1"
+    ></torch>
+
+  </class>
+
+
+  <!-- WARRIOR -->
+  <class
+    ID = "3"
+    health = "100"
+    healthregeneration = "0"
+    mana = "10"
+    manaregeneration ="0"
+    armour ="0"
+    breakingspeed ="1"
+    strength ="7"
+    luck ="0"
+    speed ="150"
+    criticalchance ="0"
+    criticaldamage ="0"
+  >
+
+    <sword
+      ID ="102"
+      amount ="1"
+    ></sword>
+
+    <ironhelmet
+      ID ="131"
+      amount ="1"
+    ></ironhelmet>
+
+    <torch
+      ID ="20"
+      amount ="1"
+    ></torch>
+
+  </class>
+  
+  
+    <!-- MAGE -->
+  <class
+    ID = "4"
+    health = "75"
+    healthregeneration = "0"
+    mana = "50"
+    manaregeneration ="1"
+    armour ="0"
+    breakingspeed ="1"
+    strength ="5"
+    luck ="0"
+    speed ="150"
+    criticalchance ="0"
+    criticaldamage ="0"
+  >
+
+    <magichat
+      ID ="136"
+      amount ="1"
+    ></magichat>
+
+    <torch
+      ID ="20"
+      amount ="1"
+    ></torch>
+
+  </class>
+  
+</startclasses>

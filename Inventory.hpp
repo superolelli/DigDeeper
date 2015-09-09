@@ -42,8 +42,12 @@ public:
 	//returns the rect of the inventory windwo
 	IntRect GetRect(){return m_pInventoryWindow->GetRect();}
 
-	//returns the id of the helmet
-	int GetHelmetID(){ return m_pEquipment->GetHelmetID(); }
+	//returns the light of the helmet
+	int GetHelmetLight(){ return m_pEquipment->GetHelmetLight(); }
+	int GetBodyLight(){ return m_pEquipment->GetBodyLight(); }
+	int GetTrousersLight(){ return m_pEquipment->GetTrousersLight(); }
+	int GetRing1Light(){ return m_pEquipment->GetRing1Light(); }
+	int GetRing2Light(){ return m_pEquipment->GetRing2Light(); }
 
 	//returns the currently carried thing
 	CThing *GetCarriedThing();

@@ -254,14 +254,49 @@ void CPlayerEquipment::CheckThings()
 
 
 
-int CPlayerEquipment::GetHelmetID()
+int CPlayerEquipment::GetHelmetLight()
 {
-	if(m_helmet.amount != 0)
-		return m_helmet.thing->getID();
+	if (m_helmet.amount != 0)
+		return ((CEquipment*)m_helmet.thing)->GetLight();
 	else 
-		return -1;
+		return 0;
 }
 
+
+int CPlayerEquipment::GetBodyLight()
+{
+	if (m_body.amount != 0)
+		return ((CEquipment*)m_body.thing)->GetLight();
+	else
+		return 0;
+}
+
+
+int CPlayerEquipment::GetTrousersLight()
+{
+	if (m_trousers.amount != 0)
+		return ((CEquipment*)m_trousers.thing)->GetLight();
+	else
+		return 0;
+}
+
+
+int CPlayerEquipment::GetRing1Light()
+{
+	if (m_ring1.amount != 0)
+		return ((CEquipment*)m_ring1.thing)->GetLight();
+	else
+		return 0;
+}
+
+
+int CPlayerEquipment::GetRing2Light()
+{
+	if (m_ring2.amount != 0)
+		return ((CEquipment*)m_ring2.thing)->GetLight();
+	else
+		return 0;
+}
 
 
 const SToolAttributes operator+(SToolAttributes const &lhs, SToolAttributes const &rhs)	
@@ -425,6 +460,8 @@ void CPlayerEquipment::SetTooltip(CThing *_thing)
 		m_stream << "\nKritische Chance " << equipment->GetAttributes().criticalChance;
 	if (equipment->GetAttributes().criticalDamage != 0)
 		m_stream << "\nKritischer Schaden " << equipment->GetAttributes().criticalDamage;
+	if (equipment->GetAttributes().light != 0)
+		m_stream << "\nLicht: " << equipment->GetAttributes().light;
 
 		//sets the color
 	switch(rarity)

@@ -220,6 +220,7 @@ public:
 	Texture t_blockTextures_princessCage2;
 	Texture t_blockTextures_sulfurBlock;
 	Texture t_blockTextures_salpeterBlock[4];
+	Texture t_blockTextures_metalbars;
 	Texture t_blockTextures_noTexture;               //the no_texture texture
 
 	Texture t_dirtRimTop;
@@ -303,6 +304,7 @@ public:
 	Texture t_blockInventoryTexture_sulfur;
 	Texture t_blockInventoryTexture_salpeter;
 	Texture t_blockInventoryTexture_goblindagger;
+	Texture t_blockInventoryTexture_metalbars;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -378,6 +380,7 @@ public:
 	Texture t_blockLittleTexture_sulfur;
 	Texture t_blockLittleTexture_salpeter;
 	Texture t_blockLittleTexture_goblindagger;
+	Texture t_blockLittleTexture_metalbars;
 	
 
 
@@ -424,6 +427,10 @@ public:
 	Texture t_ogre_arm;
 	Texture t_ogre_legs;
 	Texture t_ground_hit;
+
+	Texture t_keykeeper_body;
+	Texture t_keykeeper_arm;
+	Texture t_keykeeper_legs;
 
 	Shader s_drunkShader;
 

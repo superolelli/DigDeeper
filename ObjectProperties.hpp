@@ -7,6 +7,8 @@
 #include <boost/property_tree/ptree.hpp>
 
 struct SNpcAttributes;
+struct SToolAttributes;
+struct SPlayerXML;
 
 using namespace boost::property_tree;
 
@@ -19,6 +21,8 @@ public:
 	void LoadProperties();
 
 	map<int, SNpcAttributes> m_NpcProperties;
+	map<int, SToolAttributes> m_EquipmentProperties;
+	map<int, SPlayerXML> m_StartClassesProperties;
 
 };
 

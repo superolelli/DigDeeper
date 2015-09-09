@@ -1560,3 +1560,32 @@ ZUKÜNFITGE ÄNDERUNGEN:
 - Attribute der Npcs in eine XML-File ausgelagert
 
 -------------------------------------------------------
+06.09.2015
+
+- Attribute des Equipments in eine XML-File ausgelagert
+- Hinzugefügt, dass eine Eigenschaft von Equipment auch "Licht" sein kann (kann bis jetzt nicht zufällig auftauchen)
+
+-------------------------------------------------------
+07.09.2015
+
+- Attribute von Waffen und Werkzeugen in eine XML-File ausgelagert
+- Attribute und Items der Startklassen in eine XML-File ausgelagert
+- Gitterfenster (bzw. Metallstäbe) hinzugefügt
+- Im Kerker können nun Gitterfenster vorkommen
+- Bugfix: Das Spiel stürzte ab, wenn man mit der bloßen Hand schlug
+
+-------------------------------------------------------
+08.09.2015
+
+- Prototyp eines Schlüsselwächters eingefügt (bis jetzt schmeißt er einfach nur mit Feuerbällen)
+
+-------------------------------------------------------
+09.09.2015
+
+- Explosionen (Feuerball und Dynamit) erhellen nun kurz die Umgebung
+- Die Animation des Schlüsselwächters (Flammen am Rücken) wurde überarbeitet
+- Es wird nun ein "Schlüsselwächterraum" generiert, in welchem der Schlüsselwächter zu finden ist (Raum ist in Teil 2 der Welt)
+
+-> Der Schlüsselwächter und dessen Raum müssen noch weiter ausgefeilt werden (z.B. Fähigkeiten des Wächters und Aussehen des Raums)
+
+-------------------------------------------------------

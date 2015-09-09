@@ -43,8 +43,10 @@ void CProjectiles::Render()
 	list<SProjectile>::iterator i;
 	for (i = m_Projectiles.begin(); i != m_Projectiles.end(); i++)
 	{
-		if (i->m_ID == FIREBALLPROJECTILE)
+		if (i->m_ID == FIREBALLPROJECTILE || i->m_ID == EXPLOSION)
 			m_pWorld->GetLightMachine()->AddLightCircle(i->m_Sprite->GetRect().left + i->m_Sprite->GetRect().width / 2, i->m_Sprite->GetRect().top + i->m_Sprite->GetRect().height / 2, 100, Color(0,0,0,0));
+		else if (i->m_ID == DYNAMITEEFFECT)
+			m_pWorld->GetLightMachine()->AddLightCircle(i->m_Sprite->GetRect().left + 75, i->m_Sprite->GetRect().top + i->m_Sprite->GetRect().height / 2, 50, Color(0, 0, 0, 0));
 		else if (i->m_ID == LIGHTSPHERE)
 			m_pWorld->GetLightMachine()->AddLightCircle(i->m_Sprite->GetRect().left + i->m_Sprite->GetRect().width / 2, i->m_Sprite->GetRect().top + i->m_Sprite->GetRect().height / 2, i->m_flightLength, Color(0, 0, 0, 0));
 

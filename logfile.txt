@@ -2,28 +2,13 @@ Dig Deeper, version 0.2
 Log file created
 
 Init mainframe...
+Set new ID: 5
 Set new ID: 9
-Set new ID: 14
-Rezept-ID: 54
-Set new ID: 25
-Rezept-ID: 132
+Rezept-ID: 69
 Rezept-ID: 21
-Set new ID: 36
+Rezept-ID: 69
+Rezept-ID: 134
 Set new ID: 37
-Deleted Cookingbook
-Initialized Game...
-Deleted Cookingbook
-Deleted Cookingbook
-Deleted Cookingbook
-Deleted Cookingbook
-Set new ID: 10
-Set new ID: 12
-Set new ID: 18
-Set new ID: 21
-Set new ID: 19
-Set new ID: 24
-Rezept-ID: 71
-Rezept-ID: 104
 Initialized Game...
 Inventory is open
 Inventory is open
@@ -186,51 +171,6 @@ Inventory is open
 Inventory is open
 Inventory is open
 Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Inventory is open
-Deleted Cookingbook
-Deleted Cookingbook
-Deleted Cookingbook
 Deleted Cookingbook
 Deleted Cookingbook
 Deleted Cookingbook

@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<equipment>
+
+   <pickaxe
+    ID = "101"
+    health = "0"
+    healthregeneration = "0"
+    mana = "0"
+    manaregeneration ="0"
+    armour ="0"
+    breakingspeed ="0.7"
+    strength ="1"
+    luck ="0"
+    speed ="0"
+    criticalchance ="0"
+    criticaldamage ="0"
+    light ="0"
+    ></pickaxe>
+  
+   <sword
+    ID = "102"
+    health = "0"
+    healthregeneration = "0"
+    mana = "0"
+    manaregeneration ="0"
+    armour ="0"
+    breakingspeed ="0"
+    strength ="5"
+    luck ="0"
+    speed ="0"
+    criticalchance ="0"
+    criticaldamage ="0"
+    light ="0"
+    ></sword>
+  
+   <lantern
+    ID = "103"
+    health = "0"
+    healthregeneration = "0"
+    mana = "0"
+    manaregeneration ="0"
+    armour ="0"
+    breakingspeed ="0"
+    strength ="0"
+    luck ="0"
+    speed ="0"
+    criticalchance ="0"
+    criticaldamage ="0"
+    light ="350"
+    ></lantern>
+  
+   <battleaxe
+    ID = "104"
+    health = "0"
+    healthregeneration = "0"
+    mana = "0"
+    manaregeneration ="0"
+    armour ="0"
+    breakingspeed ="0"
+    strength ="5"
+    luck ="0"
+    speed ="0"
+    criticalchance ="5"
+    criticaldamage ="5"
+    light ="0"
+    ></battleaxe>
+  
+   <battlestone
+    ID = "105"
+    health = "0"
+    healthregeneration = "2"
+    mana = "0"
+    manaregeneration ="0"
+    armour ="0"
+    breakingspeed ="0"
+    strength ="2"
+    luck ="0"
+    speed ="0"
+    criticalchance ="0"
+    criticaldamage ="0"
+    light ="0"
+    ></battlestone>
+  
+  <ironhelmet
+    ID = "131"
+    health = "0"
+    healthregeneration = "0"
+    mana = "0"
+    manaregeneration ="0"
+    armour ="2"
+    breakingspeed ="0"
+    strength ="0"
+    luck ="0"
+    speed ="0"
+    criticalchance ="0"
+    criticaldamage ="0"
+    light ="0"
+    ></ironhelmet>
+  
+   <goblindagger
+    ID = "106"
+    health = "0"
+    healthregeneration = "0"
+    mana = "0"
+    manaregeneration ="0"
+    armour ="0"
+    breakingspeed ="0"
+    strength ="7"
+    luck ="0"
+    speed ="0"
+    criticalchance ="0"
+    criticaldamage ="0"
+    light ="0"
+    ></goblindagger>
+
+  <ironarmour
+  ID = "132"
+  health = "0"
+  healthregeneration = "0"
+  mana = "0"
+  manaregeneration ="0"
+  armour ="5"
+  breakingspeed ="0"
+  strength ="0"
+  luck ="0"
+  speed ="0"
+  criticalchance ="0"
+  criticaldamage ="0"
+  light ="0"
+    ></ironarmour>
+
+  <irontrousers
+  ID = "133"
+  health = "0"
+  healthregeneration = "0"
+  mana = "0"
+  manaregeneration ="0"
+  armour ="2"
+  breakingspeed ="0"
+  strength ="0"
+  luck ="0"
+  speed ="0"
+  criticalchance ="0"
+  criticaldamage ="0"
+  light ="0"
+    ></irontrousers>
+
+  <ironring
+  ID = "134"
+  health = "0"
+  healthregeneration = "0"
+  mana = "0"
+  manaregeneration ="0"
+  armour ="0"
+  breakingspeed ="0"
+  strength ="0"
+  luck ="0"
+  speed ="0"
+  criticalchance ="0"
+  criticaldamage ="0"
+  light ="0"
+    ></ironring>
+
+  <arcanusring
+  ID = "135"
+  health = "0"
+  healthregeneration = "0"
+  mana = "0"
+  manaregeneration ="0"
+  armour ="0"
+  breakingspeed ="0"
+  strength ="0"
+  luck ="0"
+  speed ="0"
+  criticalchance ="0"
+  criticaldamage ="0"
+  light ="0"
+    ></arcanusring>
+
+  <magichat
+  ID = "136"
+  health = "0"
+  healthregeneration = "0"
+  mana = "10"
+  manaregeneration ="1"
+  armour ="0"
+  breakingspeed ="0"
+  strength ="0"
+  luck ="0"
+  speed ="0"
+  criticalchance ="0"
+  criticaldamage ="0"
+  light ="0"
+    ></magichat>
+
+  <candle
+  ID = "137"
+  health = "0"
+  healthregeneration = "0"
+  mana = "0"
+  manaregeneration ="0"
+  armour ="0"
+  breakingspeed ="0"
+  strength ="0"
+  luck ="0"
+  speed ="0"
+  criticalchance ="0"
+  criticaldamage ="0"
+  light ="250"
+    ></candle>
+
+  <diadochitarmour
+  ID = "138"
+  health = "0"
+  healthregeneration = "2"
+  mana = "0"
+  manaregeneration ="0"
+  armour ="3"
+  breakingspeed ="0"
+  strength ="0"
+  luck ="0"
+  speed ="0"
+  criticalchance ="0"
+  criticaldamage ="0"
+  light ="0"
+    ></diadochitarmour>
+
+  <veryrarering
+  ID = "200"
+  health = "0"
+  healthregeneration = "0"
+  mana = "0"
+  manaregeneration ="0"
+  armour ="0"
+  breakingspeed ="0"
+  strength ="0"
+  luck ="0"
+  speed ="0"
+  criticalchance ="0"
+  criticaldamage ="0"
+  light ="0"
+    ></veryrarering>
+  
+</equipment>

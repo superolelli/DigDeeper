@@ -1,8 +1,6 @@
-- Schlüsselwächter einbauen
+- Schlüsselwächter: Fähigkeiten ausarbeiten (Eisball, Skelette erschaffen, Teleport etc.)
 - Spawnverhalten überarbeiten
-- Vergitterte Fenster für Kerker
 - Balancingtabellen erstellen
-- Werte in Datenbanken o.ä. auslagern (Charakterwerte etc.)
 - Externes Belohnungssystem ausdenken (Punkte für erreichte Stufen nach Tod -> Einlösen in neue Klassen o.ä.)
 - Erfolgemenü einbauen
 - Übersetzung des Spiels (v.a. in Englisch) ermöglichen

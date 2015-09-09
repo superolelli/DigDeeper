@@ -313,6 +313,9 @@ private:
 	//generates a vertical connection between two rooms
 	void GenerateConnectionVertical(int _xStart, int _yStart, int _xEnd, int _yEnd);
 
+	//generates the room with the keykeeper
+	void GenerateKeyKeeperRoom();
+
 	//generates the final room
 	void GenerateFinalRoom(int _x, int _y, int _xSize);
 

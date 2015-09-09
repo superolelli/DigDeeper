@@ -148,11 +148,11 @@ void CLiving3Part::Move(float _x, float _y)
 void CLiving3Part::Render(float _bodyFrame,  float _legsFrame)
 {
 	//if the direction has changed
-	if(m_LastBodyFrame <= m_BodyLeftFrame && _bodyFrame > m_BodyLeftFrame || m_LastBodyFrame > m_BodyLeftFrame && _bodyFrame <= m_BodyLeftFrame)
+	if(m_LastBodyFrame <= m_BodyLeftFrame + 0.99f && _bodyFrame > m_BodyLeftFrame || m_LastBodyFrame > m_BodyLeftFrame + 0.99f && _bodyFrame <= m_BodyLeftFrame)
 	{
 		//change the part's position
 		//if it is left sided
-		if(_bodyFrame <= m_BodyLeftFrame)
+		if(_bodyFrame <= (float)(m_BodyLeftFrame) + 0.99f)
 		{
 			m_pArm->SetPos((int)(m_pBody->GetRect().left + m_ArmXLeft), m_pArm->GetRect().top);
 			m_pLegs->SetPos((int)(m_pBody->GetRect().left + m_LegsXLeft), m_pLegs->GetRect().top);

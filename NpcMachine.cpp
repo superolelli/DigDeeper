@@ -77,6 +77,15 @@ void CNpcMachine::AddNpc(int _ID, int _x, int _y, bool _safe, int _specialID)
 			ogre->SetSafe(_safe);
 			m_Npcs.push_back(ogre);
 		}break;
+
+		//if the new npc is a keykeeper:
+		case(KEYKEEPER) :
+		{
+			CKeyKeeper *keeper = new CKeyKeeper;
+			keeper->Init(_x, _y, m_pWorld, m_pPlayer, m_pView);
+			keeper->SetSafe(_safe);
+			m_Npcs.push_back(keeper);
+		}break;
 	}
 }
 
@@ -134,7 +143,7 @@ void CNpcMachine::CheckAllNpcs()
 			{
 				if (!(*i)->m_wasHit)
 				{
-					if (!(m_pPlayer->GetCarriedItem()->getID() == GOBLINDAGGER && m_pPlayer->GetArmGoingUp()))
+					if (!((m_pPlayer->GetCarriedItem() != NULL && m_pPlayer->GetCarriedItem()->getID() == GOBLINDAGGER) && m_pPlayer->GetArmGoingUp()))
 					{
 						if ((*i)->GetID() >= NORMALGOBLIN && (*i)->GetID() <= MAGEGOBLIN)
 							((CGoblin*)(*i))->SetChestedFalse();

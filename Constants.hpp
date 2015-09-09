@@ -63,10 +63,11 @@ const int BRICKS = 27;
 const int PRINCESSCAGE = 28;
 const int BEDROCK = 29;
 const int BEEHIVEP = 30;
-const int LADDER = 49;
+const int LADDER = 48;
 
-const int PWBREAK = 50;            //the Placeable-Wall-Break shows, where the wall section begins
+const int PWBREAK = 49;            //the Placeable-Wall-Break shows, where the wall section begins
 
+const int METALBARS = 50;
 const int STONEWALL = 51;
 const int WOODWALL = 52;
 const int MARBLEWALL = 53;
@@ -173,6 +174,7 @@ const int KNIGHTGOBLIN = 4;
 const int CHESTGOBLIN = 5;
 const int MAGEGOBLIN = 6;
 const int OGRE = 7;
+const int KEYKEEPER = 8;
 
 #pragma endregion
 

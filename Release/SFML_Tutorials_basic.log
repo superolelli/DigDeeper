@@ -1,21 +1,25 @@
-﻿Der Buildvorgang wurde am 05.09.2015 15:56:07 gestartet.
+﻿Der Buildvorgang wurde am 09.09.2015 16:34:41 gestartet.
      1>Projekt "C:\Users\Ole\Desktop\Projekte\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /Zi /nologo /W3 /WX- /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Goblin.cpp
-         Goblin.cpp
-     1>Goblin.cpp(89): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>Goblin.cpp(93): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>Goblin.cpp(180): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>Goblin.cpp(181): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>Goblin.cpp(184): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>Goblin.cpp(205): warning C4244: '-=': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>Goblin.cpp(207): warning C4244: '+=': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>Goblin.cpp(303): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>Goblin.cpp(304): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>Goblin.cpp(305): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>Goblin.cpp(306): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>Goblin.cpp(316): warning C4244: 'Argument': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>Goblin.cpp(553): warning C4305: '=': Verkürzung von 'double' in 'float'
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /Zi /nologo /W3 /WX- /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt World.cpp
+         World.cpp
+     1>World.cpp(1957): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(1958): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(2166): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>World.cpp(2239): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(2240): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(3364): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(3365): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(3366): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(3367): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(3421): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(3422): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(3423): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(3424): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(3468): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+     1>World.cpp(3470): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+     1>World.cpp(3651): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>World.cpp(3652): warning C4244: 'Initialisierung': Konvertierung von 'const float' in 'int', möglicher Datenverlust
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ole\Desktop\Projekte\DigDeeper\Release\Dig Deeper rewritten.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.3\lib" "sfml-audio.lib" "sfml-graphics.lib" "sfml-network.lib" "sfml-system.lib" "sfml-window.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Ole\Desktop\Projekte\DigDeeper\Release\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ole\Desktop\Projekte\DigDeeper\Release\Dig Deeper rewritten.lib" /MACHINE:X86 /SAFESEH Release\Beam.obj
          Release\Bee.obj
@@ -36,6 +40,7 @@
          Release\Highscore.obj
          Release\Inventory.obj
          Release\Items.obj
+         Release\Keykeeper.obj
          Release\LightMachine.obj
          Release\LittleItems.obj
          Release\Living3Part.obj
@@ -67,11 +72,11 @@
          Release\World.obj
             Bibliothek "C:\Users\Ole\Desktop\Projekte\DigDeeper\Release\Dig Deeper rewritten.lib" und Objekt "C:\Users\Ole\Desktop\Projekte\DigDeeper\Release\Dig Deeper rewritten.exp" werden erstellt.
          Code wird generiert.
-     1>c:\users\ole\desktop\projekte\digdeeper\ogre.cpp(581): warning C4715: "COgre::GetWeaponRect": Nicht alle Steuerelementpfade geben einen Wert zurück.
+     1>c:\users\ole\desktop\projekte\digdeeper\ogre.cpp(574): warning C4715: "COgre::GetWeaponRect": Nicht alle Steuerelementpfade geben einen Wert zurück.
          Codegenerierung ist abgeschlossen.
          SFML_Tutorials_basic.vcxproj -> C:\Users\Ole\Desktop\Projekte\DigDeeper\Release\Dig Deeper rewritten.exe
      1>Die Erstellung des Projekts "C:\Users\Ole\Desktop\Projekte\DigDeeper\SFML_Tutorials_basic.vcxproj" ist abgeschlossen, Build Ziel(e).
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:48.18
+Verstrichene Zeit 00:00:47.87

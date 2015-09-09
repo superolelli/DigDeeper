@@ -24,7 +24,11 @@ public:
 	void RenderEquipment(int _x, int _y, bool _left);
 
 	//returns the id of the helmet
-	int GetHelmetID();
+	int GetHelmetLight();
+	int GetBodyLight();
+	int GetTrousersLight();
+	int GetRing1Light();
+	int GetRing2Light();
 
 	//they do nothing
 	void CheckThings();

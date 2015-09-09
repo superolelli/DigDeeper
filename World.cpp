@@ -134,181 +134,91 @@ void CWorld::Init(int _width, int _height, View* _view, CNpcMachine* _npcs, bool
 
 
 
-
-//void CWorld::GenerateWorld()
-//{
-//	int possibility[8];
-//
-//	bool finalRoom = false;
-//	int randomNumber;
-//	int possibilitySum = 0;
-//	srand((int)time(0));
-//
-//
-//	//generates the blocks
-//	for (int y = 4; y < m_BlocksY - 1; y++)
-//	{
-//		for (int x = 0; x < m_BlocksX; x++)
-//		{
-//			if (m_pBlocks[x][y] == NULL)
-//			{
-//				//check for final room
-//				if (finalRoom == false && y >= m_BlocksY - 7)
-//				{
-//					if (rand() % 10 == 0 || x >= m_BlocksX - 8)
-//					{
-//						GenerateFinalRoom(x, y);
-//						finalRoom = true;
-//						x--;
-//						continue;
-//					}
-//				}
-//
-//
-//				//set the start possibilities
-//				possibility[0] = 84;            //dirt
-//				possibility[1] = 10;            //stone
-//
-//				if (y > 7)
-//					possibility[2] = 3;            //coal
-//				else
-//					possibility[2] = 0;
-//
-//				if (y > 10)
-//					possibility[3] = 2;            //iron
-//				else
-//					possibility[3] = 0;
-//
-//				if (y > 15)
-//					possibility[4] = 1;            //gold
-//				else
-//					possibility[4] = 0;
-//
-//				if (y > 20)
-//					possibility[5] = 1;              //arcanus
-//				else
-//					possibility[5] = 0;
-//
-//				if (y > 4)
-//					possibility[6] = 5;             //marble
-//				else
-//					possibility[6] = 0;
-//
-//				if (y > 7)
-//					possibility[7] = 1;             //room
-//				else
-//					possibility[7] = 0;
-//
-//
-//				//if a near placeable is a specific type: greater chance, that this placeable will be the same type
-//				if (y > 4 && x > 0)
-//				{
-//					if (m_pBlocks[x - 1][y] != NULL)
-//						if (m_pBlocks[x - 1][y]->getID() < 8 && m_pBlocks[x - 1][y]->getID() > 0)
-//							possibility[m_pBlocks[x - 1][y]->getID() - 1] += 50;
-//					if (m_pBlocks[x][y - 1] != NULL && m_pBlocks[x][y - 1]->getID() > 0)
-//						if (m_pBlocks[x][y - 1]->getID() < 8)
-//							possibility[m_pBlocks[x][y - 1]->getID() - 1] += 50;
-//				}
-//
-//
-//
-//				//Create new Placeable
-//				m_pBlocks[x][y] = new CPlaceable;
-//
-//				//the first layer is a dirt layer
-//				if (y != 4)
-//				{
-//					//calculate the sum
-//					possibilitySum = 0;
-//					for (int i = 0; i < 8; i++)
-//						possibilitySum += possibility[i];
-//
-//					//generate a random number between 1 and 100
-//					randomNumber = rand() % possibilitySum + 1;
-//
-//					//decide which placeable is going to be set
-//					if (randomNumber <= possibility[0])
-//						m_pBlocks[x][y]->Init(DIRT);
-//					else if (randomNumber <= possibility[1] + possibility[0])
-//						m_pBlocks[x][y]->Init(STONE);
-//					else if (randomNumber <= possibility[0] + possibility[1] + possibility[2])
-//						m_pBlocks[x][y]->Init(COALBLOCK);
-//					else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3])
-//						m_pBlocks[x][y]->Init(IRONBLOCK);
-//					else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3] + possibility[4])
-//						m_pBlocks[x][y]->Init(GOLDBLOCK);
-//					else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3] + possibility[4] + possibility[5])
-//						m_pBlocks[x][y]->Init(ARCANUSBLOCK);
-//					else if (randomNumber <= possibility[0] + possibility[1] + possibility[2] + possibility[3] + possibility[4] + possibility[5] + possibility[6])
-//						m_pBlocks[x][y]->Init(MARBLE);
-//					else
-//					{
-//						SAFE_DELETE(m_pBlocks[x][y]);
-//
-//						if (rand() % 2 == 0)
-//							GenerateRoom(x, y);
-//						else
-//							GenerateCave(x, y);
-//
-//						x--;
-//						continue;
-//					}
-//
-//				}
-//				else
-//					m_pBlocks[x][y]->Init(DIRT);
-//
-//
-//				//set position
-//				m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
-//			}
-//			else
-//			{
-//				if (m_pBlocks[x][y]->getID() == ROOMFILL)
-//					SAFE_DELETE(m_pBlocks[x][y]);
-//			}
-//		}
-//	}
-//
-//
-//	//set trees and bedrock
-//	for (int x = 0; x < m_BlocksX; x++)
-//	{
-//		//set bedrock
-//		m_pBlocks[x][m_BlocksY - 1] = new CPlaceable;
-//		m_pBlocks[x][m_BlocksY - 1]->Init(BEDROCK);
-//		m_pBlocks[x][m_BlocksY - 1]->SetPos(static_cast<float>(x * 100), static_cast<float> ((m_BlocksY - 1) * 100));
-//
-//		//set trees
-//		randomNumber = rand() % 20;
-//
-//		if (randomNumber < 4)
-//			SetTree(x, 3);
-//		else if (randomNumber == 4)
-//		{
-//			m_pBlocks[x][3] = new CPlaceable;
-//			m_pBlocks[x][3]->Init(CLOVERP);
-//			m_pBlocks[x][3]->SetPos(static_cast<float>(x * 100), static_cast<float> (300));
-//		}
-//		else if (randomNumber == 5)
-//		{
-//			m_pBlocks[x][3] = new CPlaceable;
-//			m_pBlocks[x][3]->Init(RADISHP);
-//			m_pBlocks[x][3]->SetPos(static_cast<float>(x * 100), static_cast<float> (300));
-//		}
-//	}
-//}
-
-
 //generates a random world
 void CWorld::GenerateWorld()
 {
+	GenerateKeyKeeperRoom();
 	GenerateTopLayer();
 	GenerateBottomLayer(GenerateMidLayer());
 }
 					
 
+void CWorld::GenerateKeyKeeperRoom()
+{
+	int xPos, yPos, xSize, ySize;
+
+	//get the position and size
+	xPos = rand() % m_BlocksX - 13;
+	yPos = rand() % (m_BlocksY / 2 - 25) + 10;
+	xSize = rand() % 4 + 8;
+	ySize = rand() % 3 + 5;
+
+	//build the room
+	for (int y = yPos; y < yPos + ySize; y++)
+	{
+		for (int x = xPos; x < xPos + xSize; x++)
+		{
+			//check if this block is one of the outer blocks
+			if (y == yPos || y == yPos + ySize - 1 || x == xPos || x == xPos + xSize - 1)
+			{
+				if (m_pBlocks[x][y] == NULL)
+				{
+					m_pBlocks[x][y] = new CPlaceable;
+					m_pBlocks[x][y]->Init(BRICKS);
+					m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+				}
+				else
+					MakeBrickwall(x, y);
+			}
+			else if (y == yPos + ySize - 2)
+			{
+				int type = rand() % 9;
+
+				//init the things in the room
+				if (type == 6)
+				{
+					m_pBlocks[x][y] = new CPlaceable;
+					m_pBlocks[x][y]->Init(CHEST);
+					m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+					m_pBlocks[x][y]->SetSpecialID(AddPanel(CHEST, x * 100, y * 100));
+					FillChestRandomly(m_pBlocks[x][y]->GetSpecialID());
+				}
+				else if (type == 8)
+				{
+					m_pBlocks[x][y] = new CPlaceable;
+					m_pBlocks[x][y]->Init(RUBBISH);
+					m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+				}
+				else
+				{
+					m_pBlocks[x][y] = new CPlaceable;
+					m_pBlocks[x][y]->Init(ROOMFILL);
+				}
+
+
+				m_pWalls[x][y] = new CPlaceable;
+				m_pWalls[x][y]->Init(BRICKWALL);
+				m_pWalls[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+
+			}
+			else
+			{
+				m_pBlocks[x][y] = new CPlaceable;
+				m_pBlocks[x][y]->Init(ROOMFILL);
+
+				m_pWalls[x][y] = new CPlaceable;
+				m_pWalls[x][y]->Init(BRICKWALL);
+				m_pWalls[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+			}
+
+		}
+	}
+
+	int keyX = rand() % (xSize - 2) + xPos + 1;
+	int keyY = yPos + ySize - 2;
+
+	m_pNpcMachine->AddNpc(KEYKEEPER, keyX * 100, keyY * 100, true);
+}
 
 
 void CWorld::GenerateTopLayer()
@@ -1054,8 +964,17 @@ Vector2i CWorld::GenerateGoblinRoom(int _x, int _y, int _sizeX, int _sizeY, bool
 					m_pBlocks[x][y]->Init(ROOMFILL);
 
 					m_pWalls[x][y] = new CPlaceable;
-					m_pWalls[x][y]->Init(BRICKWALL);
-					m_pWalls[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+
+					if (_dungeon && y == _y + ySize - 3 && rand() % 3 == 0)
+					{
+						m_pWalls[x][y]->Init(METALBARS);
+						m_pWalls[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+					}
+					else
+					{
+						m_pWalls[x][y]->Init(BRICKWALL);
+						m_pWalls[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+					}
 				}
 
 			}

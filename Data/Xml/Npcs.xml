@@ -69,5 +69,15 @@
     armour ="4"
     exp ="35"
  ></ogre>
+
+  <!-- Keykeeper -->
+  <keykeeper
+    ID ="8"
+    health ="100"
+    strength ="10"
+    speed ="150"
+    armour ="0"
+    exp ="35"
+ ></keykeeper>
   
 </npcs>

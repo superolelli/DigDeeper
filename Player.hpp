@@ -30,6 +30,7 @@ public:
 	void Render();
 	void RenderInventory();
 	bool Take(CThing *_thing, int amount);
+	bool Take(int _ID, int _amount);
 	void AddExp(int _exp){m_Attributes.currentExp += _exp;}
 	void AddDrunkness(float _drunkness){ m_StatusEffects[EFFECT_DRUNK].m_fDuration += _drunkness; m_StatusEffects[EFFECT_DRUNK].m_fTimeLeft += _drunkness; }
 	float GetDrunkness(){ return m_StatusEffects[EFFECT_DRUNK].m_fDuration; }

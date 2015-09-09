@@ -146,6 +146,8 @@ void CChest::Render()
 								number << "\nKritische Chance " << equipment->GetAttributes().criticalChance;
 							if (equipment->GetAttributes().criticalDamage != 0)
 								number << "\nKritischer Schaden " << equipment->GetAttributes().criticalDamage;
+							if (equipment->GetAttributes().light != 0)
+								number << "\nLicht: " << equipment->GetAttributes().light;
 						}
 						//if it is a tool
 						else if (m_chest[x][y].thing->getID() > CTBREAK)
@@ -175,6 +177,8 @@ void CChest::Render()
 								number << "\nKritische Chance " << tool->GetAttributes().criticalChance;
 							if (tool->GetAttributes().criticalDamage != 0)
 								number << "\nKritischer Schaden " << tool->GetAttributes().criticalDamage;
+							if (tool->GetAttributes().light != 0)
+								number << "\nLicht: " << tool->GetAttributes().light;
 						}
 						else
 						{

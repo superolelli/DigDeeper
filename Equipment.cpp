@@ -17,6 +17,7 @@ CEquipment::CEquipment()
 	m_Attributes.manaRegeneration = 0;
 	m_Attributes.criticalChance = 0;
 	m_Attributes.criticalDamage = 0;
+	m_Attributes.light = 0;
 
 	m_EquipID = 0;
 }
@@ -38,6 +39,9 @@ void CEquipment::InitEquipment(int _ID, bool _loaded)
 	
 	m_pCarriedEquipmentSprite = new CSprite;
 
+	if (!_loaded)
+		m_Attributes = g_pProperties->m_EquipmentProperties[_ID];
+
 	switch(_ID)
 	{
 	case IRONHELMET:
@@ -45,7 +49,6 @@ void CEquipment::InitEquipment(int _ID, bool _loaded)
 			m_pCarriedEquipmentSprite->Load(&g_pTextures->t_equipment_iron_helmet, 2, 32, 30);
 			if(!_loaded)
 			{
-				m_Attributes.armour = 2;
 				m_EquipID = HEAD;
 				m_rarity = 1;
 			}
@@ -55,7 +58,6 @@ void CEquipment::InitEquipment(int _ID, bool _loaded)
 			m_pCarriedEquipmentSprite->Load(&g_pTextures->t_equipment_iron_armour, 2, 53, 60);
 			if(!_loaded)
 			{
-				m_Attributes.armour = 5;
 				m_EquipID = BODY;
 				m_rarity = 1;
 			}
@@ -65,7 +67,6 @@ void CEquipment::InitEquipment(int _ID, bool _loaded)
 			m_pCarriedEquipmentSprite->Load(&g_pTextures->t_equipment_iron_trousers, 14, 55, 50);
 			if(!_loaded)
 			{
-				m_Attributes.armour = 3;
 				m_EquipID = LEGS;
 				m_rarity = 1;
 			}
@@ -75,8 +76,6 @@ void CEquipment::InitEquipment(int _ID, bool _loaded)
 			m_pCarriedEquipmentSprite->Load(&g_pTextures->t_equipment_magic_hat, 2, 46, 34);
 			if(!_loaded)
 			{
-				m_Attributes.maxMana = 10;
-				m_Attributes.manaRegeneration = 1;
 				m_EquipID = HEAD;
 				m_rarity = 1;
 			}
@@ -95,8 +94,6 @@ void CEquipment::InitEquipment(int _ID, bool _loaded)
 		m_pCarriedEquipmentSprite->Load(&g_pTextures->t_equipment_diadochitarmour, 2, 53, 60);
 		if (!_loaded)
 		{
-			m_Attributes.armour = 3;
-			m_Attributes.healthRegeneration = 2;
 			m_EquipID = BODY;
 			m_rarity = 1;
 		}
