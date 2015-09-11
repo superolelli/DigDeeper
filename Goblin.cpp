@@ -45,7 +45,7 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 	else if (m_ID == CHESTGOBLIN)
 	{
 		m_pGoblin->Load(&g_pTextures->t_goblin_body_chest, 57, 68, 2, 0, &g_pTextures->t_goblin_arm, 43, 30, 2, &g_pTextures->t_goblin_legs, 48, 58, 12, _x, _y);
-		m_pGoblin->SetPartsPos(-6.0f, 22.0f, 23.0f, 3.0f, 1.0f, 45.0f);
+		m_pGoblin->SetPartsPos(-6.0f, 22.0f, 23.0f, 3.0f, 1.0f, 38.0f);
 		m_pGoblin->SetArmRotatingPoint(38.0f, 5.0f);
 		m_pGoblin->SetHandPosition(8.0f, 16.0f);
 
@@ -174,6 +174,8 @@ bool CGoblin::CheckNpc()
 				}
 
 			}
+			else
+				m_jumping = true;
 
 			if (m_ID == CHESTGOBLIN && m_chested)
 			{
@@ -313,10 +315,10 @@ void CGoblin::CheckState()
 
 		if (m_ID == CHESTGOBLIN && m_chested)
 		{
-			if (m_pGoblin->GetRect().contains(Vector2i(Mouse::getPosition().x + (m_pView->getCenter().x - m_pView->getSize().x / 2), Mouse::getPosition().y + (m_pView->getCenter().y - m_pView->getSize().y / 2))) && g_pFramework->keyStates.rightMouseUp)
+			if (m_chestSprite.GetRect().contains(Vector2i(Mouse::getPosition().x + (m_pView->getCenter().x - m_pView->getSize().x / 2), Mouse::getPosition().y + (m_pView->getCenter().y - m_pView->getSize().y / 2))) && Mouse::isButtonPressed(Mouse::Right))
 			{
 				m_chested = false;
-				m_pGoblin->Move(0, -15);
+				m_fallingSpeed = -200;
 			}
 		}
 		else

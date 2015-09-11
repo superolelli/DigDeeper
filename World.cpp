@@ -3411,7 +3411,7 @@ bool CWorld::CheckCanJump(IntRect _living, bool _left)
 bool CWorld::CheckForBarrier(IntRect _living, bool _left)
 {
 	int x = _living.left / 100;
-	int y = _living.top / 100;
+	int y = (_living.top +40) / 100;
 
 	if (_living.height > 120)
 		y++;

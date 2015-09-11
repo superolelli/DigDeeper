@@ -208,7 +208,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 		m_Attributes.luck = 0;
 		m_Attributes.speed = 150;
 		m_Attributes.strength = 5;
-		m_Attributes.maxExp = 10;
+		m_Attributes.maxExp = 20;
 		m_Attributes.currentExp = 0;
 		m_Attributes.criticalChance = 5;
 		m_Attributes.criticalDamage = 4;

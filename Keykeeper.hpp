@@ -61,6 +61,8 @@ private:
 	bool CheckCollision();                //Checks, if the goblin collided with anything
 	void CheckArmAnimation();
 	void ThrowFireball();
+	void ThrowMultipleFireballs();
+	void CreateSkeleton();
 	bool FreeLineOfSight();
 };
 

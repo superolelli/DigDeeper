@@ -1589,3 +1589,15 @@ ZUKÜNFITGE ÄNDERUNGEN:
 -> Der Schlüsselwächter und dessen Raum müssen noch weiter ausgefeilt werden (z.B. Fähigkeiten des Wächters und Aussehen des Raums)
 
 -------------------------------------------------------
+10.09.2015
+
+- Der Schlüsselwächter wirft nun Feuerbälle in mehrere Richtungen gleichzeitig
+- Bugfix: Der Truhengoblin hatte Probleme bei der Pfadberechnung und kam manchmal nicht aus der Truhe beim Rechtsklick.
+          Außerdem griff er oft nicht sofort an, sondern stand nur rum.
+  ->Bugs gefixt und Truhengoblin kleiner gemacht (die Größe war u.a. einer der Problemquellen)
+- Erfahrung, die man für Npc-Kills bekommt geändert
+- Anzahl an Erfahrungspunkten, die man pro Stufe braucht um aufzusteigen geändert (pro Stufe 1,5 Punkte mehr)
+- Spawnverhalten der NPCs verändert: Je tiefer man kommt, desto mehr NPCs spawnen und desto stärker sind sie (z.B. Oger erst weit unten)
+  -> In der Nacht spawnen auch viele Npcs an der Oberfläche
+
+-------------------------------------------------------

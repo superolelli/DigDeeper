@@ -81,22 +81,6 @@
     light ="0"
     ></battlestone>
   
-  <ironhelmet
-    ID = "131"
-    health = "0"
-    healthregeneration = "0"
-    mana = "0"
-    manaregeneration ="0"
-    armour ="2"
-    breakingspeed ="0"
-    strength ="0"
-    luck ="0"
-    speed ="0"
-    criticalchance ="0"
-    criticaldamage ="0"
-    light ="0"
-    ></ironhelmet>
-  
    <goblindagger
     ID = "106"
     health = "0"
@@ -112,6 +96,22 @@
     criticaldamage ="0"
     light ="0"
     ></goblindagger>
+  
+  <ironhelmet
+    ID = "131"
+    health = "0"
+    healthregeneration = "0"
+    mana = "0"
+    manaregeneration ="0"
+    armour ="2"
+    breakingspeed ="0"
+    strength ="0"
+    luck ="0"
+    speed ="0"
+    criticalchance ="0"
+    criticaldamage ="0"
+    light ="0"
+    ></ironhelmet>
 
   <ironarmour
   ID = "132"

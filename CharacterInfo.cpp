@@ -238,7 +238,7 @@ void CCharacterInfo::CheckForLevelUp()
 	{
 		//subtract the exp needed to level up
 		m_pAttributes->currentExp -= m_pAttributes->maxExp;
-		m_pAttributes->maxExp += 15;
+		m_pAttributes->maxExp += m_pAttributes->maxExp/2;
 		level_up = true;
 
 		m_levelUpTime = 0.0f;

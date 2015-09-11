@@ -77,7 +77,7 @@ void PropertyLoading::LoadProperties()
 		atb.criticalChance = v.second.get("<xmlattr>.criticalchance", 0);
 		atb.criticalDamage = v.second.get("<xmlattr>.criticaldamage", 0);
 		atb.currentExp = 0;
-		atb.maxExp = 10;
+		atb.maxExp = 20;
 
 		itms.clear();
 

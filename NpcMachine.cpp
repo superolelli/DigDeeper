@@ -291,31 +291,65 @@ void CNpcMachine::SpawnNpcs()
 
 		if (spawnPlaces.size() > 0)
 		{
-			//if it is day:
-			if (m_pWorld->GetNightAlpha() < 200)
-			{
-				newNPC = rand() % 2 + 1;
 
-				if (newNPC == BEE)
+			//if player is not below the earth
+			if (m_pPlayer->GetRect().top < 800)
+			{
+				if (m_pWorld->GetNightAlpha() < 200)
 				{
-					//spawn new npc
-					AddNpc(newNPC, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y + 50);
+					newNPC = rand() % 2 + 1;
+
+					if (newNPC == BEE)
+					{
+						//spawn new npc
+						AddNpc(BEE, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y + 50);
+					}
+					else
+					{
+						//spawn new npc
+						AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
+					}
+
+
+					//get new spawn time
+					m_spawnTime = rand() % 80 + 20;
 				}
 				else
 				{
-					//spawn new npc
-					AddNpc(newNPC, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
-				}
+					//spawn new goblin
+					AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
 
+					//get new spawn time
+					m_spawnTime = rand() % 20 + 5;
+				}
+			}
+			//if player is below the earth
+			else if (m_pView->getCenter().y < (m_pWorld->GetDimensions().y * 100) / 2)
+			{
+				//spawn new goblin
+				AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
 
 				//get new spawn time
 				m_spawnTime = rand() % 80 + 20;
 			}
-			//if it is night
-			else
+			//if player is in the goblintown
+			else if (m_pView->getCenter().y < (m_pWorld->GetDimensions().y * 100) - 15)
 			{
 				//spawn new goblin
 				AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
+
+				//get new spawn time
+				m_spawnTime = rand() % 40 + 10;
+			}
+			//if player is in the dungeon
+			else
+			{
+				newNPC = rand() % 15;
+
+				if (newNPC == 0)
+					AddNpc(OGRE, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
+				else
+					AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
 
 				//get new spawn time
 				m_spawnTime = rand() % 20 + 1;

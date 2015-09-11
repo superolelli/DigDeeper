@@ -17,7 +17,7 @@
     strength ="10"
     speed ="150"
     armour ="0"
-    exp ="5"
+    exp ="18"
  ></normalgoblin>
 
   <!-- Warriorgoblin -->
@@ -27,7 +27,7 @@
     strength ="20"
     speed ="180"
     armour ="0"
-    exp ="15"
+    exp ="28"
  ></warriorgoblin>
 
   <!-- Knightgoblin -->
@@ -37,7 +37,7 @@
     strength ="15"
     speed ="130"
     armour ="10"
-    exp ="15"
+    exp ="27"
  ></knightgoblin>
 
   <!-- Chestgoblin -->
@@ -47,7 +47,7 @@
     strength ="10"
     speed ="150"
     armour ="0"
-    exp ="10"
+    exp ="22"
  ></chestgoblin>
 
   <!-- Magegoblin -->
@@ -57,7 +57,7 @@
     strength ="6"
     speed ="150"
     armour ="0"
-    exp ="15"
+    exp ="24"
  ></magegoblin>
 
   <!-- Ogre -->
@@ -67,7 +67,7 @@
     strength ="40"
     speed ="130"
     armour ="4"
-    exp ="35"
+    exp ="57"
  ></ogre>
 
   <!-- Keykeeper -->

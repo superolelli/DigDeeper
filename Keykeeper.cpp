@@ -197,7 +197,7 @@ void CKeyKeeper::ThrowNpc(bool _left, int _strength)
 void CKeyKeeper::CheckYMovement()
 {
 
-	if (nextStepDirection == 1 && !m_pWorld->isBlockPassable(m_pKeyKeeper->GetRect().left / 100, m_pKeyKeeper->GetRect().top / 100 + 1))
+	if (nextStepDirection == 1 && m_jumping == false)
 	{
 		m_jumping = true;
 		m_fallingSpeed = -350;
@@ -443,7 +443,7 @@ void CKeyKeeper::CheckArmAnimation()
 		if (m_fArmAnimState <= -40)
 		{
 			m_fWaitToBeat = 2;
-			ThrowFireball();
+			ThrowMultipleFireballs();
 
 			m_is_attacking = false;
 			m_is_hitting = false;
@@ -515,6 +515,71 @@ void CKeyKeeper::ThrowFireball()
 
 
 
+void CKeyKeeper::ThrowMultipleFireballs()
+{
+	for (int i = 0; i < 5; i++)
+	{
+		SProjectile projectile;
+
+		//add a projectile
+		CSprite *sprite = new CSprite;
+
+		switch (i)
+		{
+		case(0) :
+			projectile.m_fXVel = -200;
+			projectile.m_fYVel = 0;
+			sprite->Load(&g_pTextures->t_fireballLeft);
+			break;
+
+		case(1):
+			projectile.m_fXVel = -100;
+			projectile.m_fYVel = -100;
+			sprite->Load(&g_pTextures->t_fireballLeft);
+			sprite->rotate(45);
+			break;
+
+		case(2) :
+			projectile.m_fXVel = 0;
+			projectile.m_fYVel = -200;
+			sprite->Load(&g_pTextures->t_fireballLeft);
+			sprite->rotate(90);
+			break;
+
+		case(3) :
+			projectile.m_fXVel = 100;
+			projectile.m_fYVel = -100;
+			sprite->Load(&g_pTextures->t_fireballRight);
+			sprite->rotate(315);
+			break;
+
+		case(4) :
+			projectile.m_fXVel = 200;
+			projectile.m_fYVel = 0;
+			sprite->Load(&g_pTextures->t_fireballRight);
+			break;
+		}
+
+		sprite->SetPos(GetWeaponRect().left - sprite->GetRect().width / 2, GetWeaponRect().top - sprite->GetRect().height / 2);
+
+		projectile.m_ID = FIREBALLPROJECTILE;
+		projectile.m_Damage = 10;
+		projectile.m_fFlown = 0.0f;
+		projectile.m_flightLength = 600;
+		projectile.m_fromPlayer = false;
+		projectile.m_Sprite = sprite;
+		projectile.m_fAnimState = -1;
+
+		g_pProjectiles->NewProjectile(projectile);
+	}
+}
+
+
+
+void CKeyKeeper::CreateSkeleton()
+{
+
+}
 
 bool CKeyKeeper::FreeLineOfSight()
 {
