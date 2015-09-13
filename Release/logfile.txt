@@ -1,0 +1,4 @@
+Dig Deeper, version 0.2
+Log file created
+
+Init mainframe...

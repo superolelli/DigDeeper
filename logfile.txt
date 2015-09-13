@@ -2,81 +2,94 @@ Dig Deeper, version 0.2
 Log file created
 
 Init mainframe...
-Set new ID: 7
-Rezept-ID: 21
-Rezept-ID: 138
-Set new ID: 12
-Set new ID: 19
+Set new ID: 11
 Rezept-ID: 104
-Rezept-ID: 71
-Initialized Game...
-Deleted Cookingbook
-Deleted Cookingbook
-Deleted Cookingbook
-Set new ID: 9
+Rezept-ID: 27
+Rezept-ID: 69
 Rezept-ID: 132
-Initialized Game...
-Deleted Cookingbook
-Set new ID: 3
-Set new ID: 17
+Rezept-ID: 133
 Set new ID: 22
-Rezept-ID: 105
-Rezept-ID: 71
-Set new ID: 35
 Initialized Game...
+Set new ID: 1
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
+Inventory is open
 Deleted Cookingbook
 Deleted Cookingbook
-Deleted Cookingbook
-Deleted Cookingbook
-Rezept-ID: 27
-Set new ID: 18
-Rezept-ID: 27
-Set new ID: 33
-Initialized Game...
-Deleted Cookingbook
-Deleted Cookingbook
-Set new ID: 18
-Initialized Game...
-Deleted Cookingbook
-Rezept-ID: 71
-Set new ID: 5
-Rezept-ID: 138
-Rezept-ID: 69
-Rezept-ID: 138
-Rezept-ID: 69
-Set new ID: 26
-Set new ID: 28
-Initialized Game...
-Deleted Cookingbook
-Deleted Cookingbook
-Deleted Cookingbook
-Rezept-ID: 69
-Rezept-ID: 104
-Set new ID: 9
-Rezept-ID: 104
-Rezept-ID: 135
-Set new ID: 20
-Rezept-ID: 132
-Rezept-ID: 54
-Set new ID: 24
-Set new ID: 25
-Rezept-ID: 103
-Rezept-ID: 104
-Initialized Game...
-Deleted Cookingbook
-Deleted Cookingbook
-Deleted Cookingbook
-Deleted Cookingbook
-Set new ID: 3
-Rezept-ID: 19
-Rezept-ID: 138
-Initialized Game...
-Deleted Cookingbook
-Rezept-ID: 105
-Set new ID: 9
-Rezept-ID: 69
-Set new ID: 32
-Rezept-ID: 54
-Initialized Game...
-Deleted Cookingbook
-Deleted Cookingbook
+
+
+0 warnings
+0 errors
