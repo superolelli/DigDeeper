@@ -32,6 +32,9 @@ public:
 	//gets the rect of the carried tool
 	IntRect GetRect();
 
+	//gets the lightradius
+	int GetLight(){ return m_Attributes.light; }
+
 
 private:
 	friend class boost::serialization::access;

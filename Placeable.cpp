@@ -44,7 +44,7 @@ void CPlaceable::Init(int _ID, bool _loaded)
 	{
 	case ROOMFILL:
 		{
-
+			m_is_passable = true;
 		}break;
 	case DIRT:
 		{
@@ -453,6 +453,17 @@ void CPlaceable::Init(int _ID, bool _loaded)
 		m_is_passable = false;
 		m_is_visible = true;
 		m_can_place_on = true;
+	}break;
+	case METALBARS:
+	{
+		m_pThingSprite->Load(&g_pTextures->t_blockTextures_metalbars);
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_metalbars);
+		m_Name = "Gitterstäbe";
+		m_Hardness = 5;
+		m_Priority = -1;
+		m_is_passable = true;
+		m_is_visible = true;
+		m_can_place_on = false;
 	}break;
 	default:
 		{

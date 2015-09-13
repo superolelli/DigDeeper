@@ -17,15 +17,8 @@ void COgre::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, 
 	m_pOgre->SetArmRotatingPoint(190.0f, 112.0f);
 	m_pOgre->SetHandPosition(0, 0);
 
-
 	//Init the attributes
-	m_Attributes.maxHealth = 100;
-	m_Attributes.armour = 4;
-	m_Attributes.speed = 130;
-	m_Attributes.strength = 40;
-	m_Attributes.exp = 35;
-
-	
+	m_Attributes = g_pProperties->m_NpcProperties[m_ID];
 
 	m_fXVel = 0;
 	m_fYVel = 0;
@@ -96,7 +89,6 @@ bool COgre::CheckCollision()
 
 bool COgre::CheckNpc()
 {
-	cout << "Check npc" << endl;
 	m_fXVel = 0;
 	m_fYVel = 0;
 
@@ -144,8 +136,6 @@ bool COgre::CheckNpc()
 
 	m_xPos = m_pOgre->GetRect().left;
 	m_yPos = m_pOgre->GetRect().top;
-
-	cout << "Checked npc" << endl;
 
 	//return false if the ogre is outside the world
 	if (m_pOgre->GetRect().left + m_pOgre->GetRect().width < 0 || m_pOgre->GetRect().left > m_pWorld->GetDimensions().x * 100)
@@ -209,7 +199,6 @@ void COgre::CheckXMovement()
 
 
 
-//an ogre can't be thrown!!!
 void COgre::ThrowNpc(bool _left, int _strength)
 {
 	if (_left)

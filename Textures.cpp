@@ -29,6 +29,8 @@ void TextureLoading::LoadTextures()
 	t_optionsButton_beam_off.loadFromFile("Data/Sprites/Buttons/beamnumbers_off.png");
 	t_optionsButton_inventory_on.loadFromFile("Data/Sprites/Buttons/button_option_inventorynumbers_on.png");
 	t_optionsButton_inventory_off.loadFromFile("Data/Sprites/Buttons/button_option_inventorynumbers_off.png");
+	t_optionsButton_fastLight_off.loadFromFile("Data/Sprites/Buttons/fastLight_off.png");
+	t_optionsButton_fastLight_on.loadFromFile("Data/Sprites/Buttons/fastLight_on.png");
 
 	t_newGameBackground.loadFromFile("Data/Sprites/NewGame/background_NewGame2.png");
 	t_newGameButtonLeft.loadFromFile("Data/Sprites/NewGame/button_left.png");
@@ -218,6 +220,7 @@ void TextureLoading::LoadTextures()
 	t_blockTextures_salpeterBlock[1].loadFromFile("Data/Sprites/Objects/Blocks/salpeter_block2.png");
 	t_blockTextures_salpeterBlock[2].loadFromFile("Data/Sprites/Objects/Blocks/salpeter_block3.png");
 	t_blockTextures_salpeterBlock[3].loadFromFile("Data/Sprites/Objects/Blocks/salpeter_block4.png");
+	t_blockTextures_metalbars.loadFromFile("Data/Sprites/Objects/Blocks/metalbars.png");
 
 	t_dirtRimTop.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_top.png");
 	t_dirtRimBottom.loadFromFile("Data/Sprites/Objects/Blocks/dirt_rim_bottom.png");
@@ -298,6 +301,7 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_sulfur.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/sulfur_inventory.png");
 	t_blockInventoryTexture_salpeter.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/salpeter_inventory.png");
 	t_blockInventoryTexture_goblindagger.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/goblindagger_inventory.png");
+	t_blockInventoryTexture_metalbars.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/metalbars_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
@@ -372,6 +376,7 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_sulfur.loadFromFile("Data/Sprites/Objects/LittleItems/sulfur_little.png");
 	t_blockLittleTexture_salpeter.loadFromFile("Data/Sprites/Objects/LittleItems/salpeter_little.png");
 	t_blockLittleTexture_goblindagger.loadFromFile("Data/Sprites/Objects/LittleItems/goblindagger_little.png");
+	t_blockLittleTexture_metalbars.loadFromFile("Data/Sprites/Objects/LittleItems/metalbars_little.png");
 
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");
@@ -415,6 +420,10 @@ void TextureLoading::LoadTextures()
 	t_ogre_arm.loadFromFile("Data/Sprites/Living/ogre_arm_animated.png");
 	t_ogre_legs.loadFromFile("Data/Sprites/Living/ogre_legs.png");
 	t_ground_hit.loadFromFile("Data/Sprites/Living/ground_hit.png");
+
+	t_keykeeper_body.loadFromFile("Data/Sprites/Living/keykeeper_body.png");
+	t_keykeeper_arm.loadFromFile("Data/Sprites/Living/keykeeper_arm.png");
+	t_keykeeper_legs.loadFromFile("Data/Sprites/Living/keykeeper_leg.png");
 
 	s_drunkShader.loadFromFile("Data/Shaders/blur.frag", Shader::Fragment);
 

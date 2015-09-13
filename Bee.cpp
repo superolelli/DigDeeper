@@ -23,11 +23,13 @@ void CBee::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, i
 	m_fFrozenTimer = 0;
 
 	//Init the attributes
-	m_Attributes.maxHealth = 20;
-	m_Attributes.armour = 0;
-	m_Attributes.speed = 100;
-	m_Attributes.strength = 0;
-	m_Attributes.exp = 1;
+	//m_Attributes.maxHealth = 20;
+	//m_Attributes.armour = 0;
+	//m_Attributes.speed = 100;
+	//m_Attributes.strength = 0;
+	//m_Attributes.exp = 1;
+
+	m_Attributes = g_pProperties->m_NpcProperties[m_ID];
 
 	//Init the state
 	m_State = IDLE;
@@ -45,7 +47,7 @@ void CBee::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, i
 		m_yPos = _y;
 
 		m_left = true;
-		m_Attributes.currentHealth = 20;
+		m_Attributes.currentHealth = m_Attributes.maxHealth;
 	}
 }
 

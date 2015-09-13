@@ -5,6 +5,7 @@
 #include "Bee.hpp"
 #include "Goblin.hpp"
 #include "Ogre.hpp"
+#include "Keykeeper.hpp"
 #include "SignMachine.hpp"
 #include "Profiler.hpp"
 
@@ -52,12 +53,26 @@ private:
 				ar & a;
 				ar & bee;
 			}
-			else if (n->GetID() == GOBLIN)
+			else if (n->GetID() >= NORMALGOBLIN && n->GetID() <= MAGEGOBLIN)
 			{
 				CGoblin* goblin = (CGoblin*)n;
 				a = goblin->GetID();
 				ar & a;
 				ar & goblin;
+			}
+			else if (n->GetID() == OGRE)
+			{
+				COgre* ogre = (COgre*)n;
+				a = ogre->GetID();
+				ar & a;
+				ar & ogre;
+			}
+			else if (n->GetID() == KEYKEEPER)
+			{
+				CKeyKeeper* keeper = (CKeyKeeper*)n;
+				a = keeper->GetID();
+				ar & a;
+				ar & keeper;
 			}
 		}
 
@@ -79,11 +94,23 @@ private:
 				ar & bee;
 				m_Npcs.push_back(bee);
 			}
-			else if (a == GOBLIN)
+			else if (a >= NORMALGOBLIN && a <= MAGEGOBLIN)
 			{
 				CGoblin *goblin = new CGoblin;
 				ar & goblin;
 				m_Npcs.push_back(goblin);
+			}
+			else if (a == OGRE)
+			{
+				COgre *ogre = new COgre;
+				ar & ogre;
+				m_Npcs.push_back(ogre);
+			}
+			else if (a == KEYKEEPER)
+			{
+				CKeyKeeper *keeper = new CKeyKeeper;
+				ar & keeper;
+				m_Npcs.push_back(keeper);
 			}
 		}while(a != 1000);
 	}

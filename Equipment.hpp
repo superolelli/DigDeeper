@@ -32,6 +32,9 @@ public:
 	//returns the rarity
 	int GetRarity(){return m_rarity;}
 
+	//gets the lightradius
+	int GetLight(){ return m_Attributes.light; }
+
 
 private:
 	friend class boost::serialization::access;

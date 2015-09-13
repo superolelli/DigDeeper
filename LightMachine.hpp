@@ -43,6 +43,8 @@ private:
 	int m_ViewLastWidth;                          //the last width of the view
 	int m_currentAlpha;
 
+	int m_amountOfRays;
+
 	bool m_fastLight;
 
 	Vector2f IsLineIntersecting(Vertex _firstPoint, Vertex _secondPoint, int _angle, int _radius);               //checks, wether a line intersects with a block

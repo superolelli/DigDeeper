@@ -113,128 +113,43 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 		m_StatusDuration[i][0].color = Color(0, 0, 0, 255);
 	}
 
-	m_Attributes.currentHealth = 100;
-	m_Attributes.maxHealth = 100;
-	m_Attributes.healthRegeneration = 0;
-	m_Attributes.armour = 0;
-	m_Attributes.strength = 5;
-	m_Attributes.luck = 0;
-	m_Attributes.breakingSpeed = 1.0f;
-	m_Attributes.speed = 150;
-	m_Attributes.currentMana = 10;
-	m_Attributes.maxMana = 10;
-	m_Attributes.manaRegeneration = 0;
-	m_Attributes.criticalChance = 0;
-	m_Attributes.criticalDamage = 0;
+	//load the attributes and items of the startclass
+	m_Attributes = g_pProperties->m_StartClassesProperties[_class].attributes;
 
-	m_Attributes.currentExp = 0;
-	m_Attributes.maxExp = 10;
-
-	switch(_class)
+	for (int a = 0; a < g_pProperties->m_StartClassesProperties[_class].items.size(); a++)
 	{
-	case MINER:
+		Take(g_pProperties->m_StartClassesProperties[_class].items[a].x, g_pProperties->m_StartClassesProperties[_class].items[a].y);
+	}
+
+
+
+	if (_class == BUILDER)
+	{
+
+		//gives the player 3 random recipes
+		for (int u = 0; u < 3; u++)
 		{
-			m_Attributes.breakingSpeed = 1.5f;
-
-			CTool *pickaxe;
-			pickaxe = new CTool;
-			pickaxe->InitTool(PICKAXE);
-			m_pInventory->Take(pickaxe);
-
-			CItem *iron;
-			iron = new CItem;
-			iron->Init(IRONORE);
-			m_pInventory->Take(iron, 4);
-
-			CItem *gold;
-			gold = new CItem;
-			gold->Init(GOLDORE);
-			m_pInventory->Take(gold, 2);
-
-			CPlaceable *torch;
-			torch = new CPlaceable;
-			torch->Init(TORCH);
-			m_pInventory->Take(torch);
-		}break;
-	case BUILDER:
-		{
-			//gives the player 3 random recipes
-			for(int u = 0; u < 3; u++)
+			list<int> neededRecipes = GetNotAvailableRecipesList();
+			list<int>::iterator a = neededRecipes.begin();
+			int randomNumber = rand() % neededRecipes.size();
+			for (int i = 0; i < randomNumber; i++)
 			{
-				list<int> neededRecipes = GetNotAvailableRecipesList();
-				list<int>::iterator a = neededRecipes.begin();
-				int randomNumber = rand()%neededRecipes.size();
-				for(int i = 0; i < randomNumber; i++)
-				{
-					a++;
-				}
-			
-				//add the recipe
-				CItem *newItem = new CItem;
-				newItem->Init(RECIPE);
-				newItem->SetSpecialID(*a);
-				m_pInventory->Take(newItem);
+				a++;
 			}
 
-			//gives the player some building material
-			CPlaceable *woodwall;
-			woodwall = new CPlaceable;
-			woodwall->Init(WOODWALL);
-			m_pInventory->Take(woodwall, 9);
+			//add the recipe
+			CItem *newItem = new CItem;
+			newItem->Init(RECIPE);
+			newItem->SetSpecialID(*a);
+			m_pInventory->Take(newItem);
+		}
 
-			CPlaceable *wood;
-			wood = new CPlaceable;
-			wood->Init(WOOD);
-			m_pInventory->Take(wood, 12);
-
-			CPlaceable *door;
-			door = new CPlaceable;
-			door->Init(DOOR);
-			m_pInventory->Take(door);
-
-			CPlaceable *torch;
-			torch = new CPlaceable;
-			torch->Init(TORCH);
-			m_pInventory->Take(torch);
-		}break;
-	case WARRIOR:
-		{
-			m_Attributes.strength = 8;
-
-			CEquipment *helmet;
-			helmet = new CEquipment;
-			helmet->InitEquipment(IRONHELMET);
-			m_pInventory->Take(helmet);
-
-			CTool *sword;
-			sword = new CTool;
-			sword->InitTool(SWORD);
-			m_pInventory->Take(sword);
-
-			CPlaceable *torch;
-			torch = new CPlaceable;
-			torch->Init(TORCH);
-			m_pInventory->Take(torch);
-		}break;
-	case MAGE:
-		{
-			m_Attributes.maxMana = 50;
-			m_Attributes.currentMana = 50;
-			m_Attributes.manaRegeneration = 1;
-
-			m_pMagicMenu->AddMagicPoints(3);
-
-			CEquipment *hat;
-			hat = new CEquipment;
-			hat->InitEquipment(MAGICHAT);
-			m_pInventory->Take(hat);
-
-			CPlaceable *torch;
-			torch = new CPlaceable;
-			torch->Init(TORCH);
-			m_pInventory->Take(torch);
-		}break;
-	case TEST:
+	}
+	else if (_class == MAGE)
+	{
+		m_pMagicMenu->AddMagicPoints(3);
+	}
+	else if (_class == TEST)
 	{
 		CTool *lantern;
 		lantern = new CTool;
@@ -251,20 +166,10 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 		battleaxe->InitTool(BATTLEAXE);
 		m_pInventory->Take(battleaxe);
 
-		CTool *dagger;
-		dagger = new CTool;
-		dagger->InitTool(GOBLINDAGGER);
-		m_pInventory->Take(dagger);
-
 		CEquipment *candle;
 		candle = new CEquipment;
 		candle->InitEquipment(CANDLE);
 		m_pInventory->Take(candle);
-
-		CPlaceable *beehouse;
-		beehouse = new CPlaceable;
-		beehouse->Init(BEEHOUSE);
-		m_pInventory->Take(beehouse);
 
 		CPlaceable *torch;
 		torch = new CPlaceable;
@@ -276,40 +181,18 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 		cauldron->Init(CAULDRON);
 		m_pInventory->Take(cauldron);
 
-		CConsumable *honey;
-		honey = new CConsumable;
-		honey->InitConsumable(HONEY);
-		m_pInventory->Take(honey, 4);
-
 		CConsumable *mead;
 		mead = new CConsumable;
 		mead->InitConsumable(MEAD);
 		m_pInventory->Take(mead, 4);
 
-		CConsumable *radish;
-		radish = new CConsumable;
-		radish->InitConsumable(RADISH);
-		m_pInventory->Take(radish, 4);
-	
 		CItem *dynamite = new CItem;
 		dynamite->Init(DYNAMITE);
 		m_pInventory->Take(dynamite, 5);
 
-		CItem *key= new CItem;
+		CItem *key = new CItem;
 		key->Init(KEY);
 		m_pInventory->Take(key);
-
-		//add the recipe
-		CItem *book = new CItem;
-		book->Init(COOKINGBOOK);
-		book->SetSpecialID(m_pWorld->AddPanel(COOKINGBOOK, 0, 0));
-		m_pInventory->Take(book);
-	
-
-		CItem *book2 = new CItem;
-		book2->Init(COOKINGBOOK);
-		book2->SetSpecialID(m_pWorld->AddPanel(COOKINGBOOK, 0, 0));
-		m_pInventory->Take(book2);
 
 		CEquipment *darmour;
 		darmour = new CEquipment;
@@ -319,18 +202,21 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 
 		m_pMagicMenu->AddMagicPoints(10);
 
+		m_Attributes.armour = 0;
+		m_Attributes.maxHealth = 200;
+		m_Attributes.currentHealth = 200;
+		m_Attributes.luck = 0;
+		m_Attributes.speed = 150;
+		m_Attributes.strength = 5;
+		m_Attributes.maxExp = 20;
+		m_Attributes.currentExp = 0;
 		m_Attributes.criticalChance = 5;
 		m_Attributes.criticalDamage = 4;
 		m_Attributes.maxMana = 300;
 		m_Attributes.currentMana = 300;
 		m_Attributes.manaRegeneration = 5;
-
-	}break;
-	default:
-		{
-		}break;
+		m_Attributes.breakingSpeed = 5;
 	}
-
 
 
 
@@ -560,7 +446,7 @@ Vector2f CPlayer::CheckMovement()
 
 
 	//check if the player felt down 
-	if (m_fYVel > 0)
+	if (m_fYVel > 0 && m_pWorld->CheckCollisionWithPassable(FloatRect(GetRect())) != LADDER)
 	{
 		m_fFallingDistance += m_fYVel;
 	}
@@ -686,7 +572,6 @@ void CPlayer::CheckYMovement()
 	{
 		if(!m_State.jumping && !m_State.climbing)
 		{
-			cout <<"Player jumped" << endl;
 			m_FallingSpeed = -350;
 			m_State.jumping = true;
 		}
@@ -778,7 +663,7 @@ void CPlayer::Render()
 		if (m_Attributes.currentMana > m_modifications.maxMana)
 			m_Attributes.currentMana = m_modifications.maxMana;
 
-		m_fRegenerationTime = 3;
+		m_fRegenerationTime = 1;
 	}
 
 
@@ -789,8 +674,8 @@ void CPlayer::Render()
 		CTool *tool = (CTool *)thing;
 
 		//if the player carries a lantern: render a light circle
-		if(tool->getID() == LANTERN)
-			m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetHandPos(m_turned_left).x, m_pDwarf->GetHandPos(m_turned_left).y, 350, Color(0,0,0,0));
+		if(tool->GetLight() > 0)
+			m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetHandPos(m_turned_left).x, m_pDwarf->GetHandPos(m_turned_left).y, tool->GetLight(), Color(0,0,0,0));
 
 		if(m_turned_left)
 		{
@@ -826,9 +711,24 @@ void CPlayer::Render()
 		}
 	}
 
-	//if the player is wearing a candle: render a light circle
-	if(m_pInventory->GetHelmetID() == CANDLE)
-		m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetRect().left + m_pDwarf->GetRect().width/2, m_pDwarf->GetRect().top, 250, Color(0,0,0,0));
+	//if the player is wearing a shining equipment: render a light circle
+	if(m_pInventory->GetHelmetLight() > 0)
+		m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetRect().left + m_pDwarf->GetRect().width/2, m_pDwarf->GetRect().top, m_pInventory->GetHelmetLight(), Color(0,0,0,0));
+
+	if (m_pInventory->GetBodyLight() > 0)
+		m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetRect().left + m_pDwarf->GetRect().width / 2, m_pDwarf->GetRect().top + m_pDwarf->GetRect().height/2, m_pInventory->GetBodyLight(), Color(0, 0, 0, 0));
+
+	if (m_pInventory->GetTrousersLight() > 0)
+		m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetRect().left + m_pDwarf->GetRect().width / 2, m_pDwarf->GetRect().top + m_pDwarf->GetRect().height - 20, m_pInventory->GetTrousersLight(), Color(0, 0, 0, 0));
+
+	if (m_pInventory->GetRing1Light() > 0)
+		m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetHandPos(m_turned_left).x, m_pDwarf->GetHandPos(m_turned_left).y, m_pInventory->GetRing1Light(), Color(0, 0, 0, 0));
+
+	if (m_pInventory->GetRing2Light() > 0)
+		m_pWorld->GetLightMachine()->AddLightCircle(m_pDwarf->GetHandPos(m_turned_left).x, m_pDwarf->GetHandPos(m_turned_left).y, m_pInventory->GetRing2Light(), Color(0, 0, 0, 0));
+
+
+
 }
 
 
@@ -1076,37 +976,61 @@ void CPlayer::SetMenuOpen(int _menu)
 
 
 //gives the player an item
-void CPlayer::Take(CThing *_thing, int amount)
+bool CPlayer::Take(CThing *_thing, int amount)
 {
-	m_pInventory->Take(_thing, amount);
+	return m_pInventory->Take(_thing, amount);
 }
 
+
+bool CPlayer::Take(int _ID, int _amount)
+{
+	//if thing is a placeable
+	if (_ID < PIBREAK)
+	{
+		CPlaceable *thing = new CPlaceable;
+		thing->Init(_ID);
+		return m_pInventory->Take(thing, _amount);
+	}
+	//if thing is an item
+	else if (_ID > PIBREAK && _ID < ICBREAK)
+	{
+		CItem *thing = new CItem;
+		thing->Init(_ID);
+
+		if (thing->getID() == DYNAMITE)
+			thing->SetSpecialID(1);
+
+		return m_pInventory->Take(thing, _amount);
+	}
+	else if (_ID > ICBREAK && _ID < CTBREAK)
+	{
+		CConsumable *thing = new CConsumable;
+		thing->InitConsumable(_ID);
+		return m_pInventory->Take(thing, _amount);
+	}
+	//if thing is a tool
+	else if (_ID > CTBREAK && _ID < TEBREAK)
+	{
+		CTool *thing = new CTool;
+		thing->InitTool(_ID);
+		return m_pInventory->Take(thing, _amount);
+	}
+	//if thing is equipment
+	else
+	{
+		CEquipment *thing = new CEquipment;
+		thing->InitEquipment(_ID);
+		return m_pInventory->Take(thing, _amount);
+	}
+
+	return false;
+}
 
 //checks the animation state of the arm
 void CPlayer::CheckArmAnimation()
 {
 	if(Mouse::isButtonPressed(Mouse::Left))
 	{
-		//if dwarf carries sword
-		//CThing *thing = m_pInventory->GetCarriedThing();
-		//if (thing != NULL && thing->getID() == SWORD)
-		//{
-		//	if (m_fWaitToBeat <= 0)
-		//	{
-		//		//if arm reached lowest point: set arm to highest point
-		//		if (m_fArmAnimState <= -40)
-		//		{
-		//			m_fArmAnimState = 110;
-		//			m_fWaitToBeat = 0.6;
-		//		}
-
-		//		m_fArmAnimState -= g_pTimer->GetElapsedTime().asSeconds() * 500;
-		//	}
-		//	else
-		//		m_fWaitToBeat -= g_pTimer->GetElapsedTime().asSeconds();
-		//}
-		//else
-		//{
 			if (m_fArmAnimState >= 90)
 				m_armGoingUp = false;
 			if (m_fArmAnimState <= -40)
@@ -1116,7 +1040,6 @@ void CPlayer::CheckArmAnimation()
 				m_fArmAnimState += g_pTimer->GetElapsedTime().asSeconds() * 300;
 			else
 				m_fArmAnimState -= g_pTimer->GetElapsedTime().asSeconds() * 300;
-		//}
 	}
 	else
 	{
@@ -1171,58 +1094,6 @@ void CPlayer::CalculateAttributes()
 
 		i++;
 	}
-
-	////set status symbols
-	//if (allEffects.armour != 0)
-	//	m_StatusEffects[EFFECT_ARMOUR].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_ARMOUR].m_show = false;
-
-	//if (allEffects.breaking_speed != 0)
-	//	m_StatusEffects[EFFECT_BREAKINGSPEED].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_BREAKINGSPEED].m_show = false;
-
-	//if (allEffects.luck != 0)
-	//	m_StatusEffects[EFFECT_LUCK].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_LUCK].m_show = false;
-
-	//if (allEffects.healthRegeneration != 0)
-	//	m_StatusEffects[EFFECT_HEALTHREGENERATION].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_HEALTHREGENERATION].m_show = false;
-
-	//if (allEffects.manaRegeneration != 0)
-	//	m_StatusEffects[EFFECT_MANAREGENERATION].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_MANAREGENERATION].m_show = false;
-
-	//if (allEffects.speed != 0)
-	//	m_StatusEffects[EFFECT_SPEED].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_SPEED].m_show = false;
-
-	//if (allEffects.strength != 0)
-	//	m_StatusEffects[EFFECT_STRENGTH].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_STRENGTH].m_show = false;
-
-	//if (allEffects.criticalChance != 0)
-	//	m_StatusEffects[EFFECT_CRITICALCHANCE].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_CRITICALCHANCE].m_show = false;
-
-	//if (allEffects.criticalDamage != 0)
-	//	m_StatusEffects[EFFECT_CRITICALDAMAGE].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_CRITICALDAMAGE].m_show = false;
-
-	//if (m_fDrunk > 0)
-	//	m_StatusEffects[EFFECT_DRUNK].m_show = true;
-	//else
-	//	m_StatusEffects[EFFECT_DRUNK].m_show = false;
-
 
 
 	m_modifications = m_pInventory->GetEquipmentAttributes();

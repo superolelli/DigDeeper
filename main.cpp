@@ -14,6 +14,7 @@ void load_textures(bool *is_loading)
 	g_pTextures->LoadTextures();
 	g_pSound->LoadSounds();
 	g_pRims->LoadRims();
+	g_pProperties->LoadProperties();
 	g_pSinCosLookup->CalculateLookupTable();
 
 	*is_loading = false;
@@ -57,7 +58,7 @@ int main()
 
 	//creates the dig deeper folder in appdata if needed
 	char* var = getenv("APPDATA");
-	path Path;
+	boost::filesystem::path Path;
 	Path = var;
 	Path.append("/Dig Deeper");
 

@@ -20,7 +20,7 @@ private:
 
 	struct Savegame
 	{
-		path m_path;
+		boost::filesystem::path m_path;
 		bool m_clicked;
 	};
 

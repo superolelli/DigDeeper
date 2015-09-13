@@ -1,7 +1,6 @@
 #ifndef FRAMEWORK_HPP
 #define FRAMEWORK_HPP
 
-
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -26,6 +25,7 @@
 #include "Textures.hpp"
 #include "Sound.hpp"
 #include "Rims.hpp"
+#include "ObjectProperties.hpp"
 #include "Sprite.hpp"
 #include "Constants.hpp"
 #include "KeyStates.hpp"

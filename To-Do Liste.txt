@@ -1,4 +1,5 @@
-- Lichtberechnung
-- Zielsetzung (Prinzessin?)
-- Bugfix: Konsumierbares wird mit komischen Werten initialisiert
+- Schlüsselwächter: Fähigkeiten ausarbeiten (Eisball, Skelette erschaffen, Teleport etc.)
+- Externes Belohnungssystem ausdenken (Punkte für erreichte Stufen nach Tod -> Einlösen in neue Klassen o.ä.)
+- Erfolgemenü einbauen
+- Übersetzung des Spiels (v.a. in Englisch) ermöglichen
 - Bugfix: Goblins stecken in Decke fest

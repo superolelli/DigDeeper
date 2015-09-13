@@ -315,6 +315,10 @@ void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 	{
 		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_goblindagger);
 	}break;
+	case(METALBARS) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_metalbars);
+	}break;
 	}
 
 

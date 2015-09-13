@@ -28,7 +28,7 @@ public:
 	CWorld();
 	~CWorld();
 
-	void Init(int _width, int _height, View* _view, CNpcMachine* _npcs, bool _loaded = false);
+	void Init(int _width, int _height, View* _view, CNpcMachine* _npcs, bool _fastLight, bool _loaded = false);
 	void Render();
 	void RenderLight();
 	bool CheckPlaceables(IntRect _playerRect, CPlayer *_player);              //returns true if the player won
@@ -273,6 +273,8 @@ private:
 	vector < vector<CPlaceable*> > m_pWalls;
 	list<CLittleItem> m_LittleItemList;                                //the list with all little items
 
+	bool m_fast_sun;
+
 	list<CPanel*> m_PanelList;                                          //the list with all the existing panels
 
 	CLightMachine m_lightMachine;                                        //the light machine
@@ -288,28 +290,40 @@ private:
 	void GenerateTopLayer();
 
 	//generates the mid layer
-	void GenerateMidLayer();
+	list<SRoom> GenerateMidLayer();
 
 	//generates the bottom layer
-	void GenerateBottomLayer();
+	void GenerateBottomLayer(list<SRoom> _roomlist);
 
 	//generates a random room
 	void GenerateRoom(int _x, int _y);
 
 	//generates a random cave
-	void GenerateCave(int _x, int _y);
+	Vector2i GenerateCave(int _x, int _y);
 
 	//generates an outer room
-	void GenerateOuterRoom(int _x, int _y);
+	Vector2i GenerateOuterRoom(int _x, int _y);
 
 	//generates a goblin room
-	Vector2i GenerateGoblinRoom(int _x, int _y);
+	Vector2i GenerateGoblinRoom(int _x, int _y, int _sizeX = -1, int _sizeY = -1, bool _dungeon = false);
 
-	//generates a connection between two rooms
-	void GenerateConnection(int _xStart, int _yStart, int _xEnd, int _yEnd);
+	//generates a horizontal connection between two rooms
+	void GenerateConnectionHorizontal(int _xStart, int _yStart, int _xEnd, int _yEnd);
+
+	//generates a vertical connection between two rooms
+	void GenerateConnectionVertical(int _xStart, int _yStart, int _xEnd, int _yEnd);
+
+	//generates the room with the keykeeper
+	void GenerateKeyKeeperRoom();
 
 	//generates the final room
-	void GenerateFinalRoom(int _x, int _y);
+	void GenerateFinalRoom(int _x, int _y, int _xSize);
+
+	//makes a block to a free block with brickwall
+	void MakeBrickwall(int _x, int _y);
+
+	//generates a random block
+	void GenerateRandomBlock(int _x, int _y);
 
 	//sets a tree
 	void SetTree(int _x, int _y);

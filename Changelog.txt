@@ -1495,3 +1495,109 @@ ZUKÜNFITGE ÄNDERUNGEN:
   -> Es gibt nun viele Räume, die durch Gänge miteinander verbunden sind (bis jetzt nur horizontale Gänge)
 
 -------------------------------------------------------
+30.08.2015
+
+- Schwefel- und Salpeterblock in das Alchemiesystem eingefügt
+
+-------------------------------------------------------
+31.08.2015
+
+- Schnelles Lichtrendering eingebaut
+- Knopf im Optionsmenü eingebaut: Schnelles/Schönes Lichtrendering 
+- Range eingebaut, in der die Npcs inaktiv sind (um die Performance zu verbessern)
+- Performance der Überprüfung der einzelnen Blöcke verbessert und übersichtlicher gemacht (im Code)
+- Performanceverbesserung durch entfernen von unnötigen Meldungen in der Konsole
+
+-> Insgesamt ist die Performance stark verbessert, wenn man das schnelle Lichtrendering wählt (für schwächere PCs).
+   Das schnelle Lichtrendering unterscheidet sich leicht vom schönen, ist aber nicht immens schlechter.
+
+-------------------------------------------------------
+01.09.2015
+
+- Bugfix: In mittleren und großen Welten fielen ab einer bestimmten Höhe die kleinen Items durch alle Blöcke durch
+- Bugfix: Items konnten nicht aufgehoben werden, wenn das Inventar voll war (obwohl dieses Item ggf. schon im Inventar vorhanden war)
+- Bugfix: Oger konnten keine Rückwände zerstören
+- Es sind nun auch vertikale Verbindungen zwischen Räumen in Teil 4 der Welt möglich (auch zwischen Räumen aus Teil 3 mit Räumen aus Teil 4)
+- Weltgrößen geändert (mittel: 100 x 200; groß: 200 x 300)
+- Der Spieler bekommt nun keinen Fallschaden mehr, wenn er Leitern benutzt
+- Es wird nun nur noch maximal ein Oger pro Höhle gespawnt
+- In der Goblinstadt können selten nun auch Höhlen vorkommen
+
+-------------------------------------------------------
+02.09.2015
+
+- Teil 5 der Weltgenerierung geschrieben (Kerker)
+- Zwischen Räumen aus Teil 4 und oberen Räumen aus Teil 5 können nun vertikale Gänge existieren
+
+-------------------------------------------------------
+03.09.2015
+
+- Begonnen Balancing-Tabellen zu erstellen
+- Einige Werte geändert um die Startklassen ausgeglichener zu machen
+- Man regeneriert nun nicht mehr alle 3 Sekunden Leben, sondern jede Sekunde
+- Beim Levelaufstieg wird nun kurz der Text "Level Up!" über dem Zwerg angezeigt
+- Man kann sich jetzt nicht mehr in den Highscore eintragen, nachdem man gestorben ist, sondern nachdem man die Prinzessin befreit hat
+- Der Highscore wird nun nicht mehr nach dem erreichten Level geordnet, sondern nach der Zeit die man gebraucht hat, um die Prinzessin zu befreien
+
+-------------------------------------------------------
+04.09.2015
+
+- Man kann nun über die F6 Taste im Spiel Schnellspeichern
+- Balancing-Tabellen zu Npcs, Equipment, Startklassen und Materialien erstellt
+- Werte für Zufallseigenschaften von Equipment und Werkzeug leicht verändert (weniger Stärke möglich, mehr Rüstung möglich, mehr Glück möglich etc.)
+- Die Wahrscheinlichkeit für ein seltenes Item wurde nach unten gesetzt (von 18 auf 10%) und die Seltenheitsgrade wurden neu verteilt:
+  -> Grad 1 (nicht selten): 90%
+  -> Grad 2 (ungewöhnlich): 5%
+  -> Grad 3 (selten)      : 3%
+  -> Grad 4 (sehr selten) : 1,5%
+  -> Grad 5 (legendär)    : 0,5%
+
+-------------------------------------------------------
+05.09.2015
+
+- Vorbereitungen getroffen um verschiedene Werte wie Attribute der Npcs, Attribute von Equipment etc. in XML-Files auszulagern
+  -> Ermöglicht bessere Übersicht, sowie einfaches tweaken der Werte, ohne jedesmal in den Code einzugreifen
+- Attribute der Npcs in eine XML-File ausgelagert
+
+-------------------------------------------------------
+06.09.2015
+
+- Attribute des Equipments in eine XML-File ausgelagert
+- Hinzugefügt, dass eine Eigenschaft von Equipment auch "Licht" sein kann (kann bis jetzt nicht zufällig auftauchen)
+
+-------------------------------------------------------
+07.09.2015
+
+- Attribute von Waffen und Werkzeugen in eine XML-File ausgelagert
+- Attribute und Items der Startklassen in eine XML-File ausgelagert
+- Gitterfenster (bzw. Metallstäbe) hinzugefügt
+- Im Kerker können nun Gitterfenster vorkommen
+- Bugfix: Das Spiel stürzte ab, wenn man mit der bloßen Hand schlug
+
+-------------------------------------------------------
+08.09.2015
+
+- Prototyp eines Schlüsselwächters eingefügt (bis jetzt schmeißt er einfach nur mit Feuerbällen)
+
+-------------------------------------------------------
+09.09.2015
+
+- Explosionen (Feuerball und Dynamit) erhellen nun kurz die Umgebung
+- Die Animation des Schlüsselwächters (Flammen am Rücken) wurde überarbeitet
+- Es wird nun ein "Schlüsselwächterraum" generiert, in welchem der Schlüsselwächter zu finden ist (Raum ist in Teil 2 der Welt)
+
+-> Der Schlüsselwächter und dessen Raum müssen noch weiter ausgefeilt werden (z.B. Fähigkeiten des Wächters und Aussehen des Raums)
+
+-------------------------------------------------------
+10.09.2015
+
+- Der Schlüsselwächter wirft nun Feuerbälle in mehrere Richtungen gleichzeitig
+- Bugfix: Der Truhengoblin hatte Probleme bei der Pfadberechnung und kam manchmal nicht aus der Truhe beim Rechtsklick.
+          Außerdem griff er oft nicht sofort an, sondern stand nur rum.
+  ->Bugs gefixt und Truhengoblin kleiner gemacht (die Größe war u.a. einer der Problemquellen)
+- Erfahrung, die man für Npc-Kills bekommt geändert
+- Anzahl an Erfahrungspunkten, die man pro Stufe braucht um aufzusteigen geändert (pro Stufe 1,5 Punkte mehr)
+- Spawnverhalten der NPCs verändert: Je tiefer man kommt, desto mehr NPCs spawnen und desto stärker sind sie (z.B. Oger erst weit unten)
+  -> In der Nacht spawnen auch viele Npcs an der Oberfläche
+
+-------------------------------------------------------

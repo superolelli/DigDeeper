@@ -4,6 +4,7 @@
 #include "Framework.hpp"
 #include "Button.hpp"
 #include "Structures.hpp"
+#include "SignMachine.hpp"
 
 class CPlayer;
 

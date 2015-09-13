@@ -238,7 +238,7 @@ void CCharacterInfo::CheckForLevelUp()
 	{
 		//subtract the exp needed to level up
 		m_pAttributes->currentExp -= m_pAttributes->maxExp;
-		m_pAttributes->maxExp += 15;
+		m_pAttributes->maxExp += m_pAttributes->maxExp/2;
 		level_up = true;
 
 		m_levelUpTime = 0.0f;
@@ -247,6 +247,8 @@ void CCharacterInfo::CheckForLevelUp()
 
 		//increase the player's level
 		m_playerLevel++;
+
+		g_pSignMachine->AddString("Level Up!", 2, m_pPlayer->GetRect().left - m_pPlayer->GetRect().width/2, m_pPlayer->GetRect().top, Color::Blue);
 	}
 
 

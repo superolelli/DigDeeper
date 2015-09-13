@@ -32,7 +32,10 @@ private:
 		ar & m_left;
 		ar & m_PointToGo.x;
 		ar & m_PointToGo.y;
-		ar & m_goblinType;
+
+		if (version == 0)
+			ar & m_fallingSpeed;
+
 		ar & m_chested;
 	}
 
@@ -40,8 +43,6 @@ private:
 
 	CSprite m_frozenSprite;
 	CSprite m_chestSprite;              //for chestgoblins
-
-	int m_goblinType;                   //the goblin type
 
 	bool m_left;                   //is the goblin looking to the left
 	bool m_is_hitting;
@@ -71,6 +72,6 @@ private:
 	bool FreeLineOfSight();
 };
 
-BOOST_CLASS_VERSION(CGoblin, 0)
+BOOST_CLASS_VERSION(CGoblin, 1)
 
 #endif

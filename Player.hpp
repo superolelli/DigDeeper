@@ -29,7 +29,8 @@ public:
 	Vector2f CheckMovement();
 	void Render();
 	void RenderInventory();
-	void Take(CThing *_thing, int amount);
+	bool Take(CThing *_thing, int amount);
+	bool Take(int _ID, int _amount);
 	void AddExp(int _exp){m_Attributes.currentExp += _exp;}
 	void AddDrunkness(float _drunkness){ m_StatusEffects[EFFECT_DRUNK].m_fDuration += _drunkness; m_StatusEffects[EFFECT_DRUNK].m_fTimeLeft += _drunkness; }
 	float GetDrunkness(){ return m_StatusEffects[EFFECT_DRUNK].m_fDuration; }
@@ -45,7 +46,7 @@ public:
 	int GetClass(){ return m_class; }
 	bool AddRecipe(int _ID){return m_pBuildingMenu->NewRecipe(_ID);}
 	list<int> GetNotAvailableRecipesList(){return m_pBuildingMenu->GetNotAvailableRecipes();}
-	inline IntRect GetRect(){return m_pDwarf->GetRect();}
+	IntRect GetRect(){return m_pDwarf->GetRect();}
 	IntRect GetWeaponRect();                                       //gets the rect of the weapon
 	bool GetArmGoingUp(){return m_armGoingUp;}                    //is the arm going up?
 	bool IsLeft(){ return m_turned_left; }                   //is the player turned left?
@@ -57,7 +58,7 @@ public:
 
 	SToolAttributes GetPlayerAttributes();
 	SPlayerAttributes GetPlayerBasicAttributes(){ return m_Attributes; }
-
+	
 	SToolAttributes m_modifications;                 //the modifications from tools etc.
 
 private:

@@ -113,23 +113,25 @@ bool CInventory::Take(CThing *_thing, int _amount)
 {
 	list<SItem>::iterator i;
 
-	//Check if the item is already in the inventory and no tool or equipment
-	for (i = m_inventoryList.begin(); i != m_inventoryList.end(); i++)
+	if (_amount > 0)
 	{
-		if (i->thing->getID() == _thing->getID() && i->thing->getID() < CTBREAK && i->thing->getID() != RECIPE)
+		//Check if the item is already in the inventory and no tool or equipment
+		for (i = m_inventoryList.begin(); i != m_inventoryList.end(); i++)
 		{
-			//if the spell is already in the inventory: return
-			if (i->thing->getID() == SPELL)
+			if (i->thing->getID() == _thing->getID() && i->thing->getID() < CTBREAK && i->thing->getID() != RECIPE)
 			{
-				CItem *newItem = (CItem*)_thing;
-				CItem *currentItem = (CItem*)(*i).thing;
+				//if the spell is already in the inventory: return
+				if (i->thing->getID() == SPELL)
+				{
+					CItem *newItem = (CItem*)_thing;
+					CItem *currentItem = (CItem*)(*i).thing;
 
-				if (newItem->GetSpecialID() == currentItem->GetSpecialID())
-					return false;
-			}
+					if (newItem->GetSpecialID() == currentItem->GetSpecialID())
+						return false;
+				}
 
-			if (i->thing->getID() != SPELL)
-			{
+				if (i->thing->getID() != SPELL)
+				{
 					//if the thing is a cooking book: merge the two books
 					if (i->thing->getID() == COOKINGBOOK)
 					{
@@ -212,6 +214,7 @@ bool CInventory::Take(CThing *_thing, int _amount)
 
 		}
 
+	}
 		return false;
 }
 
@@ -286,8 +289,6 @@ void CInventory::Render(IntRect &_playerRect)
 	//If the inventory is open: Render the window and it's content
 	if(is_open)
 	{
-		g_pFramework->WriteToLog(INFO, "Inventory is open");
-
 		//Renders the window
 		m_pInventoryWindow->Render(g_pFramework->GetRenderWindow());
 
@@ -673,6 +674,8 @@ void CInventory::Render(IntRect &_playerRect)
 								number << "\nKritische Chance: " << equipment->GetAttributes().criticalChance;
 							if (equipment->GetAttributes().criticalDamage != 0)
 								number << "\nKritischer Schaden: " << equipment->GetAttributes().criticalDamage;
+							if (equipment->GetAttributes().light != 0)
+								number << "\nLicht: " << equipment->GetAttributes().light;
 						
 						}
 						//if it is a tool
@@ -703,6 +706,8 @@ void CInventory::Render(IntRect &_playerRect)
 								number << "\nKritische Chance: " << tool->GetAttributes().criticalChance;
 							if (tool->GetAttributes().criticalDamage != 0)
 								number << "\nKritischer Schaden: " << tool->GetAttributes().criticalDamage;
+							if (tool->GetAttributes().light != 0)
+								number << "\nLicht: " << tool->GetAttributes().light;
 						}
 						else
 						{

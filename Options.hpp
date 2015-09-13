@@ -28,6 +28,7 @@ private:
 
 	CButton *m_pBeamNumbersButton;
 	CButton *m_pInventoryNumbersButton;
+	CButton *m_pFastLightButton;
 	CButton *m_pReturnButton;                          //the return button
 
 	void RenderButtons();
