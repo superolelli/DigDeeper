@@ -43,8 +43,11 @@ void CPlaceable::Init(int _ID, bool _loaded)
 	switch(m_ID)
 	{
 	case ROOMFILL:
+	case PRINCESSCAGEPART2:
 		{
 			m_is_passable = true;
+			m_can_place_on = false;
+			m_Priority = -1;
 		}break;
 	case DIRT:
 		{

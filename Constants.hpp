@@ -31,6 +31,7 @@ const int WARNING = 2;
 
 #pragma region IDs
 const int ROOMFILL = -1;
+const int PRINCESSCAGEPART2 = -2;
 
 const int DIRT = 1;
 const int STONE = 2;
@@ -175,6 +176,7 @@ const int CHESTGOBLIN = 5;
 const int MAGEGOBLIN = 6;
 const int OGRE = 7;
 const int KEYKEEPER = 8;
+const int SKELETON = 9;
 
 #pragma endregion
 
@@ -213,7 +215,7 @@ const int MAGICPOINTS = 12;
 
 #pragma region Effects
 
-const int NUMBER_OF_EFFECTS = 10;
+const int NUMBER_OF_EFFECTS = 11;
 
 const int EFFECT_ARMOUR = 0;
 const int EFFECT_BREAKINGSPEED = 1;
@@ -225,6 +227,7 @@ const int EFFECT_LUCK = 6;
 const int EFFECT_MANAREGENERATION = 7;
 const int EFFECT_SPEED = 8;
 const int EFFECT_STRENGTH = 9;
+const int EFFECT_POISON = 10;
 
 #pragma endregion
 
@@ -295,6 +298,9 @@ const int RUBBISHANIMATION = 7;
 const int DUSTANIMATION = 8;
 const int MANASHIELDPROJECTILE = 9;
 const int DYNAMITEEFFECT = 10;
+const int CREATESKELETONEFFECT = 11;
+const int POISONBALL = 12;
+const int POISONEXPLOSION = 13;
 
 #pragma endregion
 

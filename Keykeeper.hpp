@@ -62,6 +62,7 @@ private:
 	void CheckArmAnimation();
 	void ThrowFireball();
 	void ThrowMultipleFireballs();
+	void ThrowPoisonBall();
 	void CreateSkeleton();
 	bool FreeLineOfSight();
 };

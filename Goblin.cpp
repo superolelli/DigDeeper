@@ -2,7 +2,7 @@
 #include "World.hpp"
 
 
-void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, int _specialID, bool _loaded)
+void CHumanoid::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, int _specialID, bool _loaded)
 {
 	m_pWorld = _world;
 	m_pPlayer = _player;
@@ -59,6 +59,13 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 		m_pGoblin->SetArmRotatingPoint(38.0f, 5.0f);
 		m_pGoblin->SetHandPosition(8.0f, 16.0f);
 	}
+	else if (m_ID == SKELETON)
+	{
+		m_pGoblin->Load(&g_pTextures->t_skeleton_body, 33, 64, 2, 0, &g_pTextures->t_skeleton_arm, 52, 32, 2, &g_pTextures->t_skeleton_legs, 40, 47, 12, _x, _y);
+		m_pGoblin->SetPartsPos(-22.0f, 4.0f, 37.0f, -8.0f, 4.0f, 50.0f);
+		m_pGoblin->SetArmRotatingPoint(47.0f, 4.0f);
+		m_pGoblin->SetHandPosition(10.0f, 25.0f);
+	}
 
 	m_fXVel = 0;
 	m_fYVel = 0;
@@ -106,7 +113,7 @@ void CGoblin::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view
 
 
 
-void CGoblin::Quit()
+void CHumanoid::Quit()
 {
 	SAFE_DELETE(m_pGoblin);
 }
@@ -114,7 +121,7 @@ void CGoblin::Quit()
 
 
 
-bool CGoblin::CheckCollision()
+bool CHumanoid::CheckCollision()
 {
 	if (m_ID == CHESTGOBLIN && m_chested)
 	{
@@ -136,7 +143,7 @@ bool CGoblin::CheckCollision()
 
 
 
-bool CGoblin::CheckNpc()
+bool CHumanoid::CheckNpc()
 {
 		m_fXVel = 0;
 		m_fYVel = 0;
@@ -200,7 +207,7 @@ bool CGoblin::CheckNpc()
 
 
 
-void CGoblin::CheckXMovement()
+void CHumanoid::CheckXMovement()
 {
 	//regulate the side speed
 	if (m_sideSpeed > 0)
@@ -249,7 +256,7 @@ void CGoblin::CheckXMovement()
 
 
 
-void CGoblin::ThrowNpc(bool _left, int _strength)
+void CHumanoid::ThrowNpc(bool _left, int _strength)
 {
 	if (_left)
 		m_sideSpeed = -_strength;
@@ -261,7 +268,7 @@ void CGoblin::ThrowNpc(bool _left, int _strength)
 
 
 
-void CGoblin::CheckYMovement()
+void CHumanoid::CheckYMovement()
 {
 	if (!(m_ID == CHESTGOBLIN && m_chested))
 	{
@@ -299,7 +306,7 @@ void CGoblin::CheckYMovement()
 
 
 
-void CGoblin::CheckState()
+void CHumanoid::CheckState()
 {
 	IntRect viewRect;
 	viewRect.left = m_pView->getCenter().x - m_pView->getSize().x / 2;
@@ -454,7 +461,7 @@ void CGoblin::CheckState()
 
 
 
-void CGoblin::NewRandomDestination()
+void CHumanoid::NewRandomDestination()
 {
 	//get new x distance
 	m_PointToGo.x = m_pGoblin->GetRect().left + rand() % 400 + 300;
@@ -478,7 +485,7 @@ void CGoblin::NewRandomDestination()
 
 
 
-void CGoblin::Render()
+void CHumanoid::Render()
 {
 	if (m_ID == CHESTGOBLIN && m_chested)
 	{
@@ -509,7 +516,7 @@ void CGoblin::Render()
 
 
 
-vector<SItem> CGoblin::GetLoot()
+vector<SItem> CHumanoid::GetLoot()
 {
 	vector<SItem> loot;
 	loot.clear();
@@ -539,7 +546,7 @@ vector<SItem> CGoblin::GetLoot()
 
 
 
-void CGoblin::CheckArmAnimation()
+void CHumanoid::CheckArmAnimation()
 {
 	if (m_is_attacking)
 	{
@@ -569,7 +576,7 @@ void CGoblin::CheckArmAnimation()
 
 
 
-bool CGoblin::IsHitting()
+bool CHumanoid::IsHitting()
 {
 	bool temp;
 
@@ -582,13 +589,14 @@ bool CGoblin::IsHitting()
 
 
 
-IntRect CGoblin::GetWeaponRect()
+IntRect CHumanoid::GetWeaponRect()
 {
 	switch (m_ID)
 	{
 	case(NORMALGOBLIN):
 	case(MAGEGOBLIN):
 	case(CHESTGOBLIN):
+	case(SKELETON):
 		return IntRect(m_pGoblin->GetHandPos(m_left).x - 5, m_pGoblin->GetHandPos(m_left).y - 5, 10, 10);
 		break;
 	case(WARRIORGOBLIN) :
@@ -607,7 +615,7 @@ IntRect CGoblin::GetWeaponRect()
 
 
 
-void CGoblin::ThrowFireball()
+void CHumanoid::ThrowFireball()
 {
 	SProjectile projectile;
 
@@ -642,7 +650,7 @@ void CGoblin::ThrowFireball()
 
 
 
-bool CGoblin::FreeLineOfSight()
+bool CHumanoid::FreeLineOfSight()
 {
 	int x = m_pGoblin->GetRect().left / 100;
 	int y = m_pGoblin->GetRect().top / 100;

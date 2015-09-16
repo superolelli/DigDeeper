@@ -60,7 +60,9 @@ void CHelpPage::Run()
 		stream << "Rechte Maustaste        :				   Gewähltes Item benutzen, besonderes Objekt benutzen" << endl;
 		stream << "Mausrad							  :					Nächstes/Vorheriges Item auswählen (Inventarleiste)" << endl;
 		stream << "1 - 0										 :					Bestimmtes Item auswählen(Inventarleiste)" << endl << endl;
+		stream << "F6                                              :                   Schnellspeichern" << endl << endl;
 		stream << "F1                                              :                   Hilfeseite öffnen / schließen" << endl;
+
 
 		m_text.setString(stream.str());
 		m_text.setCharacterSize(25);

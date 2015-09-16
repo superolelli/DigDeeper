@@ -305,7 +305,7 @@ void CHighscore::clearHighscore()
 
 	for (int i = 0; i < 10; i++)
 	{
-		stream << m_highscore[i].m_timeNeeded << " Minuten" << "     " << m_highscore[i].m_name;
+		stream << roundf(m_highscore[i].m_timeNeeded/60) << " Minuten" << "     " << m_highscore[i].m_name;
 		m_highscoreText[i].setString(stream.str());
 		stream.str("");
 	}

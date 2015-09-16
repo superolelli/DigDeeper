@@ -442,8 +442,21 @@ void CKeyKeeper::CheckArmAnimation()
 		//if arm reached lowest point: set arm to highest point
 		if (m_fArmAnimState <= -40)
 		{
-			m_fWaitToBeat = 2;
-			ThrowMultipleFireballs();
+			m_fWaitToBeat = 3;
+
+			//choose the attack
+			switch (rand() % 3)
+			{
+			case(0) :
+				ThrowMultipleFireballs();
+				break;
+			case(1) :
+				CreateSkeleton();
+				break;
+			case(2) :
+				ThrowPoisonBall();
+				break;
+			}
 
 			m_is_attacking = false;
 			m_is_hitting = false;
@@ -453,7 +466,6 @@ void CKeyKeeper::CheckArmAnimation()
 
 		m_pKeyKeeper->RotateArm(m_fArmAnimState);
 	}
-
 }
 
 
@@ -576,10 +588,95 @@ void CKeyKeeper::ThrowMultipleFireballs()
 
 
 
+
+
+void CKeyKeeper::ThrowPoisonBall()
+{
+	SProjectile projectile;
+
+	//add a projectile
+	CSprite *sprite = new CSprite;
+
+	if (m_left)
+	{
+		projectile.m_fXVel = -200;
+		sprite->Load(&g_pTextures->t_poisonballLeft);
+	}
+	else
+	{
+		projectile.m_fXVel = 200;
+		sprite->Load(&g_pTextures->t_poisonballRight);
+	}
+
+	sprite->SetPos(GetWeaponRect().left - sprite->GetRect().width / 2, GetWeaponRect().top - sprite->GetRect().height / 2);
+
+	projectile.m_ID = POISONBALL;
+	projectile.m_Damage = 2;
+	projectile.m_fFlown = 0.0f;
+	projectile.m_flightLength = 600;
+	projectile.m_fromPlayer = false;
+	projectile.m_fYVel = 0.0f;
+	projectile.m_Sprite = sprite;
+	projectile.m_fAnimState = -1;
+
+	g_pProjectiles->NewProjectile(projectile);
+}
+
+
+
+
 void CKeyKeeper::CreateSkeleton()
 {
+	int x;
+	int y = m_pKeyKeeper->GetRect().top - 9;
+	bool place_found = false;
+	int counter = 0;
 
+	while (place_found == false)
+	{
+		x = m_pKeyKeeper->GetRect().left;
+
+		if (rand() % 2 == 0)
+			x += rand() % 500;	
+		else
+			x -= rand() % 500;
+
+		if (m_pWorld->isBlockPassable(x / 100, y / 100))
+			place_found = true;
+
+		counter++;
+
+		if (counter > 5)
+			return;
+	}
+
+	m_pWorld->AddNpc(GOBLIN, x, y, false, SKELETON);
+
+
+	SProjectile projectile;
+
+	//add a projectile
+	CSprite *sprite = new CSprite;
+
+	sprite->Load(&g_pTextures->t_skeletonEffect, 5, 100, 100);
+	sprite->SetPos(x, y);
+
+	projectile.m_ID = CREATESKELETONEFFECT;
+	projectile.m_Damage = 0;
+	projectile.m_fFlown = 0.0f;
+	projectile.m_flightLength = 0;
+	projectile.m_fromPlayer = false;
+	projectile.m_fYVel = 0.0f;
+	projectile.m_fXVel = 0.0f;
+	projectile.m_Sprite = sprite;
+	projectile.m_fAnimState = 0;
+
+	g_pProjectiles->NewProjectile(projectile);
 }
+
+
+
+
 
 bool CKeyKeeper::FreeLineOfSight()
 {

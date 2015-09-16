@@ -255,6 +255,7 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 	m_fWaitToBeat = 0;
 	m_fRegenerationTime = 0;
 
+	m_poisonLevel = 0;
 }
 
 
@@ -353,6 +354,8 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view, bool _inve
 	m_fAnimState = 6;
 	m_fRegenerationTime = 0;
 	m_fWaitToBeat = 0;
+
+	m_poisonLevel = 0;
 }
 
 
@@ -653,15 +656,22 @@ void CPlayer::Render()
 	//refresh health and mana
 	if (m_fRegenerationTime <= 0)
 	{
+		//regenerate health
 		m_Attributes.currentHealth += m_modifications.healthRegeneration;
 
 		if (m_Attributes.currentHealth > m_modifications.maxHealth)
 			m_Attributes.currentHealth = m_modifications.maxHealth;
 
+		//regenerate mana
 		m_Attributes.currentMana += m_modifications.manaRegeneration;
 
 		if (m_Attributes.currentMana > m_modifications.maxMana)
 			m_Attributes.currentMana = m_modifications.maxMana;
+
+		//check for poison
+		if (m_poisonLevel > 0)
+			DoDamage(m_poisonLevel);
+
 
 		m_fRegenerationTime = 1;
 	}
@@ -1068,6 +1078,7 @@ void CPlayer::CalculateAttributes()
 	allEffects.strength = 0;
 	allEffects.criticalChance = 0;
 	allEffects.criticalDamage = 0;
+	allEffects.poison = 0;
 
 	for (i = m_ActiveEffects.begin(); i != m_ActiveEffects.end();)
 	{
@@ -1081,6 +1092,7 @@ void CPlayer::CalculateAttributes()
 		allEffects.strength += i->strength;
 		allEffects.criticalChance += i->criticalChance;
 		allEffects.criticalDamage += i->criticalDamage;
+		allEffects.poison += i->poison;
 
 		//check duration
 		i->duration -= g_pTimer->GetElapsedTime().asSeconds();
@@ -1095,6 +1107,8 @@ void CPlayer::CalculateAttributes()
 		i++;
 	}
 
+
+	m_poisonLevel = allEffects.poison;
 
 	m_modifications = m_pInventory->GetEquipmentAttributes();
 
@@ -1156,6 +1170,39 @@ void CPlayer::Heal(int _life)
 }
 
 
+void CPlayer::AddPoison(int _damage, float _time)
+{
+	SConsumableAttributes effect;
+	effect.armour = 0;
+	effect.breaking_speed = 0;
+	effect.luck = 0;
+	effect.health = 0;
+	effect.mana = 0;
+	effect.speed = 0;
+	effect.strength = 0;
+	effect.healthRegeneration = 0;
+	effect.manaRegeneration = 0;
+	effect.criticalChance = 0;
+	effect.criticalDamage = 0;
+	effect.poison = _damage;
+	effect.duration = _time;
+
+	AddEffect(effect);
+}
+
+
+
+void CPlayer::DoDamage(int _damage)
+{
+	m_Attributes.currentHealth -= _damage;
+
+	stringstream stream;
+	stream.str("");
+
+	//put the damage into a stringstream	
+	stream << _damage;
+	g_pSignMachine->AddString(stream.str(), 1, GetRect().left, GetRect().top);
+}
 
 
 void CPlayer::DoAlchemy(int _level)
@@ -1245,6 +1292,12 @@ void CPlayer::AddEffect(SConsumableAttributes _attributes)
 		{
 			m_StatusEffects[EFFECT_CRITICALDAMAGE].m_fTimeLeft += _attributes.duration;
 			m_StatusEffects[EFFECT_CRITICALDAMAGE].m_fDuration = m_StatusEffects[EFFECT_CRITICALDAMAGE].m_fTimeLeft;
+		}
+
+		if (_attributes.poison != 0)
+		{
+			m_StatusEffects[EFFECT_POISON].m_fTimeLeft += _attributes.duration;
+			m_StatusEffects[EFFECT_POISON].m_fDuration = m_StatusEffects[EFFECT_POISON].m_fTimeLeft;
 		}
 	}
 }

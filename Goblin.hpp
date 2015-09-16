@@ -4,7 +4,7 @@
 #include "NPC.hpp"
 
 
-class CGoblin : public CNpc
+class CHumanoid : public CNpc
 {
 public:
 
@@ -72,6 +72,6 @@ private:
 	bool FreeLineOfSight();
 };
 
-BOOST_CLASS_VERSION(CGoblin, 1)
+BOOST_CLASS_VERSION(CHumanoid, 1)
 
 #endif

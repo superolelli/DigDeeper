@@ -76,9 +76,12 @@ void CProjectiles::CheckProjectiles()
 		collided = false;
 
 		//check for explosions, alchemy, healing, rubbish and dust
-		if (i->m_ID == EXPLOSION || i->m_ID == HEALING || i->m_ID == ALCHEMYANIMATION || i->m_ID == RUBBISHANIMATION || i->m_ID == DUSTANIMATION)
+		if (i->m_ID == EXPLOSION || i->m_ID == HEALING || i->m_ID == ALCHEMYANIMATION || i->m_ID == RUBBISHANIMATION || i->m_ID == DUSTANIMATION || i->m_ID == CREATESKELETONEFFECT || i->m_ID == POISONEXPLOSION)
 		{
-			i->m_fAnimState += 20 * g_pTimer->GetElapsedTime().asSeconds();
+			if (i->m_ID != CREATESKELETONEFFECT)
+				i->m_fAnimState += 20 * g_pTimer->GetElapsedTime().asSeconds();
+			else
+				i->m_fAnimState += 12 * g_pTimer->GetElapsedTime().asSeconds();
 
 			if (i->m_ID == HEALING)
 				i->m_Sprite->SetPos(m_pPlayer->GetRect().left - 30, m_pPlayer->GetRect().top);
@@ -172,14 +175,6 @@ void CProjectiles::CheckProjectiles()
 						m_pPlayer->ThrowPlayer(true, 200);
 					else
 						m_pPlayer->ThrowPlayer(false, 200);
-
-					stringstream stream;
-					stream.str("");
-
-					//put the damage into a stringstream	
-					stream << i->m_Damage;
-					g_pSignMachine->AddString(stream.str(), 1, m_pPlayer->GetRect().left, m_pPlayer->GetRect().top);
-
 				}
 
 
@@ -210,15 +205,21 @@ void CProjectiles::CheckProjectiles()
 
 				if (i->m_fFlown >= i->m_flightLength)
 				{
-					if (i->m_ID == FIREBALLPROJECTILE)
+					if (i->m_ID == FIREBALLPROJECTILE || i->m_ID == POISONBALL)
 					{
 						int x = i->m_Sprite->GetRect().left;
 						int y = i->m_Sprite->GetRect().top;
-						SAFE_DELETE(i->m_Sprite);
-						i->m_Sprite = new CSprite;
-						i->m_ID = EXPLOSION;
 						i->m_fAnimState = 0;
-						i->m_Sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
+
+						SAFE_DELETE(i->m_Sprite);
+						i->m_Sprite = new CSprite;		
+
+						if (i->m_ID == FIREBALLPROJECTILE)
+							i->m_Sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
+						else
+							i->m_Sprite->Load(&g_pTextures->t_poisonExplosion, 5, 100, 100);
+
+						i->m_ID = EXPLOSION;
 
 						if (i->m_fXVel < 0)
 							i->m_Sprite->SetPos(x - 40, y - 40);
@@ -235,16 +236,22 @@ void CProjectiles::CheckProjectiles()
 			}
 			else
 			{
-				if (i->m_ID == FIREBALLPROJECTILE)
+				if (i->m_ID == FIREBALLPROJECTILE || i->m_ID == POISONBALL)
 				{
 					int x = i->m_Sprite->GetRect().left;
 					int y = i->m_Sprite->GetRect().top;
+					i->m_fAnimState = 0;
+
 					SAFE_DELETE(i->m_Sprite);
 					i->m_Sprite = new CSprite;
-					i->m_ID = EXPLOSION;
-					i->m_fAnimState = 0;
-					i->m_Sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
 
+					if (i->m_ID == FIREBALLPROJECTILE)
+						i->m_Sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
+					else
+						i->m_Sprite->Load(&g_pTextures->t_poisonExplosion, 5, 100, 100);
+
+					i->m_ID = EXPLOSION;
+					
 					if (i->m_fXVel < 0)
 						i->m_Sprite->SetPos(x - 40, y - 40);
 					else
@@ -263,17 +270,27 @@ void CProjectiles::CheckProjectiles()
 		//check if projectile collides with player 
 		if (m_pPlayer->GetRect().intersects(i->m_Sprite->GetRect()) && !i->m_fromPlayer && i->m_Damage > 0)
 		{
-			m_pPlayer->DoDamage(i->m_Damage - (i->m_Damage * (m_pPlayer->GetPlayerAttributes().armour / 100)));
+			if (i->m_ID != POISONBALL)
+				m_pPlayer->DoDamage(i->m_Damage - (i->m_Damage * (m_pPlayer->GetPlayerAttributes().armour / 100)));
+			else
+				m_pPlayer->AddPoison(i->m_Damage, 10);
 
-			if (i->m_ID == FIREBALLPROJECTILE)
+
+			if (i->m_ID == FIREBALLPROJECTILE || i->m_ID == POISONBALL)
 			{
 				int x = i->m_Sprite->GetRect().left;
 				int y = i->m_Sprite->GetRect().top;
+				i->m_fAnimState = 0;
+
 				SAFE_DELETE(i->m_Sprite);
 				i->m_Sprite = new CSprite;
+
+				if (i->m_ID == FIREBALLPROJECTILE)
+					i->m_Sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
+				else
+					i->m_Sprite->Load(&g_pTextures->t_poisonExplosion, 5, 100, 100);
+
 				i->m_ID = EXPLOSION;
-				i->m_fAnimState = 0;
-				i->m_Sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
 
 				if (i->m_fXVel < 0)
 					i->m_Sprite->SetPos(x - 40, y - 40);
@@ -285,13 +302,6 @@ void CProjectiles::CheckProjectiles()
 					m_pPlayer->ThrowPlayer(true, 200);
 				else
 					m_pPlayer->ThrowPlayer(false, 200);
-
-				stringstream stream;
-				stream.str("");
-
-				//put the damage into a stringstream	
-				stream << i->m_Damage;
-				g_pSignMachine->AddString(stream.str(), 1, m_pPlayer->GetRect().left, m_pPlayer->GetRect().top);
 
 				i++;
 			}
@@ -306,16 +316,22 @@ void CProjectiles::CheckProjectiles()
 		{
 			if (m_pNpcs->CheckProjectile(&*i))
 			{
-				cout << "Projectile collided with npc" << endl;
-				if (i->m_ID == FIREBALLPROJECTILE)
+				if (i->m_ID == FIREBALLPROJECTILE || i->m_ID == POISONBALL)
 				{
 					int x = i->m_Sprite->GetRect().left;
 					int y = i->m_Sprite->GetRect().top;
+					i->m_fAnimState = 0;
+
 					SAFE_DELETE(i->m_Sprite);
 					i->m_Sprite = new CSprite;
+					
+
+					if (i->m_ID == FIREBALLPROJECTILE)
+						i->m_Sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
+					else
+						i->m_Sprite->Load(&g_pTextures->t_poisonExplosion, 5, 100, 100);
+
 					i->m_ID = EXPLOSION;
-					i->m_fAnimState = 0;
-					i->m_Sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
 
 					if (i->m_fXVel < 0)
 						i->m_Sprite->SetPos(x - 40, y - 40);

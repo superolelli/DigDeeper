@@ -1601,3 +1601,25 @@ ZUKÜNFITGE ÄNDERUNGEN:
   -> In der Nacht spawnen auch viele Npcs an der Oberfläche
 
 -------------------------------------------------------
+13.09.2015
+
+- Beim Wählen der Startklasse werden nun genauere Information zur Klasse angezeigt
+
+-------------------------------------------------------
+14.09.2015
+
+- Skelett hinzugefügt
+- Schlüsselwächter kann jetzt Skelette beschwören
+
+--------------------------------------------------------
+15.09.2015
+
+- Schlüsselwächter kann nun Giftball werfen (vergiftet bis jetzt noch nicht, sondern macht nur Schaden)
+
+--------------------------------------------------------
+16.09.2015
+
+- Der Spieler kann nun vergiftet werden (ein entsprechendes Statussymbol wird angezeigt)
+- Der genaue Betrag des Fallschadens wird nun angezeigt
+
+--------------------------------------------------------

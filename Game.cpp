@@ -75,7 +75,7 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 
 	if(!_loaded)
 	{
-		m_NpcMachine.AddNpc(GOBLIN, 1500, 100, false);
+		m_NpcMachine.AddNpc(KEYKEEPER, 1500, 100, false);
 	}
 
 	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);

@@ -81,6 +81,9 @@ public:
 	//adds a panel and returns it's number (x and y is not necessary for all panels, just type in zero or something like that)
 	int AddPanel(int _ID, int _x, int _y);
 
+	//adds a npc
+	void AddNpc(int _ID, int _x, int _y, bool _safe, int _specialID){ m_pNpcMachine->AddNpc(_ID, _x, _y, _safe, _specialID); }
+
 
 private:
 	friend class boost::serialization::access;

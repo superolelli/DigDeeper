@@ -37,7 +37,8 @@ public:
 	void AddEffect(SConsumableAttributes _attributes);
 	void Heal(int _life);
 	void AddMagicPoints(int _points){ m_pMagicMenu->AddMagicPoints(_points); }
-	void DoDamage(int _damage){ m_Attributes.currentHealth -= _damage; }
+	void DoDamage(int _damage);
+	void AddPoison(int _damage, float _time);
 	void CastSpell(int _ID){ m_pMagicMenu->CastSpell(_ID); }
 	void ThrowPlayer(bool _left, int _strength);
 	int GetHealth(){ return m_Attributes.currentHealth; }
@@ -172,9 +173,10 @@ private:
 	int m_FallingSpeed;                                 //the speed with wich the dwarf is falling
 	int m_SideSpeed;                                    //the speed to one side (e.g. by being hitted)
 
+	int m_poisonLevel;
+
 	bool m_turned_left;                                //is the player turned to the left side?
 	bool m_armGoingUp;                                  //is the arm moving up?
-
 
 	bool CheckCollisions();                                     //Checks, if the player collides with a unpassable
 	int CheckCollisionPassable();                               //Checks, if the player collides with a passable (returns ID)
@@ -184,7 +186,7 @@ private:
 	void CalculateAttributes();
 };
 
-BOOST_CLASS_VERSION(CPlayer, 0)
+BOOST_CLASS_VERSION(CPlayer, 1)
 
 
 #endif

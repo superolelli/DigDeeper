@@ -1510,16 +1510,24 @@ void CWorld::GenerateFinalRoom(int _x, int _y, int _xSize)
 						m_pBlocks[x][_y + 1]->Init(PRINCESSCAGE);
 						m_pBlocks[x][_y + 1]->SetSpecialID(0);
 						m_pBlocks[x][_y + 1]->SetPos(static_cast<float>(x * 100), static_cast<float> ((_y+1) * 100));
+
+						SAFE_DELETE(m_pBlocks[x][_y + 2]);
+						m_pBlocks[x][_y + 2] = new CPlaceable;
+						m_pBlocks[x][_y + 2]->Init(PRINCESSCAGEPART2);
 					}
 					else
 					{
 						m_pBlocks[x][y]->Init(PRINCESSCAGE);
 						m_pBlocks[x][y]->SetSpecialID(1);
-						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+						m_pBlocks[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> ((y-1) * 100));
 
 						m_pWalls[x][y] = new CPlaceable;
 						m_pWalls[x][y]->Init(BRICKWALL);
 						m_pWalls[x][y]->SetPos(static_cast<float>(x * 100), static_cast<float> (y * 100));
+
+						SAFE_DELETE(m_pBlocks[x][y-1]);
+						m_pBlocks[x][y-1] = new CPlaceable;
+						m_pBlocks[x][y-1]->Init(PRINCESSCAGEPART2);
 
 						continue;
 					}
@@ -2300,7 +2308,7 @@ bool CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 						AddLittleItem(HONEY, m_pBlocks[x][y]->GetRect().left + 23, m_pBlocks[x][y]->GetRect().top - 20);
 					}
 
-					if (m_pBlocks[x][y]->getID() == PRINCESSCAGE && _player->GetCarriedItem()->getID() == KEY)
+					if ((m_pBlocks[x][y]->getID() == PRINCESSCAGE || m_pBlocks[x][y]->getID() == PRINCESSCAGEPART2) && _player->GetCarriedItem()->getID() == KEY)
 					{
 						return true;
 					}

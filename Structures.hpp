@@ -111,6 +111,7 @@ struct SConsumableAttributes
 	int luck;
 	int speed;
 	float duration;
+	int poison;
 
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int version)
@@ -127,8 +128,15 @@ struct SConsumableAttributes
 		ar & criticalChance;
 		ar & criticalDamage;
 		ar & duration;
+
+		if (version > 0)
+			ar & poison;
+		else
+			poison = 0;
 	}
 };
+
+BOOST_CLASS_VERSION(SConsumableAttributes, 1)
 
 
 struct SNewWorldAttributes

@@ -305,6 +305,7 @@ void CMagicMenu::CastSpell(int _ID)
 				effect.manaRegeneration = 0;
 				effect.criticalChance = 0;
 				effect.criticalDamage = 0;
+				effect.poison = 0;
 				effect.duration = m_SpellLevel[MANASHIELD] * 5;
 
 				m_pPlayer->AddEffect(effect);

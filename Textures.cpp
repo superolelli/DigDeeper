@@ -91,6 +91,7 @@ void TextureLoading::LoadTextures()
 	t_status[7].loadFromFile("Data/Sprites/Effects/status_manaregeneration.png");
 	t_status[8].loadFromFile("Data/Sprites/Effects/status_speed.png");
 	t_status[9].loadFromFile("Data/Sprites/Effects/status_strength.png");
+	t_status[10].loadFromFile("Data/Sprites/Effects/status_poisoned.png");
 
 	t_buildingWindow.loadFromFile("Data/Sprites/Building/building_menu.png");
 	t_buildButton.loadFromFile("Data/Sprites/Building/build_button.png");
@@ -130,7 +131,11 @@ void TextureLoading::LoadTextures()
 	t_fireballLeft.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(80, 0, 80, 30));
 	t_fireballRight.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(0, 0, 80, 30));
 	t_explosion.loadFromFile("Data/Sprites/Magic/explosion.png");
+	t_poisonballLeft.loadFromFile("Data/Sprites/Magic/poisonball.png", IntRect(80, 0, 80, 30));
+	t_poisonballRight.loadFromFile("Data/Sprites/Magic/poisonball.png", IntRect(0, 0, 80, 30));
+	t_poisonExplosion.loadFromFile("Data/Sprites/Magic/poison_explosion.png");
 	t_healing.loadFromFile("Data/Sprites/Magic/heal_animation.png");
+	t_skeletonEffect.loadFromFile("Data/Sprites/Magic/create_skeleton.png");
 	t_manashield.loadFromFile("Data/Sprites/Magic/manashield.png");
 	t_alchemy.loadFromFile("Data/Sprites/Magic/alchemy.png");
 	t_lightsphere.loadFromFile("Data/Sprites/Magic/light.png");
@@ -424,6 +429,10 @@ void TextureLoading::LoadTextures()
 	t_keykeeper_body.loadFromFile("Data/Sprites/Living/keykeeper_body.png");
 	t_keykeeper_arm.loadFromFile("Data/Sprites/Living/keykeeper_arm.png");
 	t_keykeeper_legs.loadFromFile("Data/Sprites/Living/keykeeper_leg.png");
+
+	t_skeleton_body.loadFromFile("Data/Sprites/Living/skeleton_body.png");
+	t_skeleton_arm.loadFromFile("Data/Sprites/Living/skeleton_arm.png");
+	t_skeleton_legs.loadFromFile("Data/Sprites/Living/skeleton_legs.png");
 
 	s_drunkShader.loadFromFile("Data/Shaders/blur.frag", Shader::Fragment);
 

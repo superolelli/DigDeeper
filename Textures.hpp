@@ -95,7 +95,7 @@ public:
 	Texture t_manaBeam;                              //the beam, which shows the current mana
 
 	//the status symbols
-	Texture t_status[10];
+	Texture t_status[11];
 
 	Texture t_buildingWindow;                           //the building menu
 	Texture t_buildButton;                              //the "build" button
@@ -132,7 +132,11 @@ public:
 	Texture t_fireballLeft;
 	Texture t_fireballRight;
 	Texture t_explosion;
+	Texture t_poisonballLeft;
+	Texture t_poisonballRight;
+	Texture t_poisonExplosion;
 	Texture t_healing;
+	Texture t_skeletonEffect;
 	Texture t_alchemy;
 	Texture t_lightsphere;
 	Texture t_manashield;
@@ -431,6 +435,10 @@ public:
 	Texture t_keykeeper_body;
 	Texture t_keykeeper_arm;
 	Texture t_keykeeper_legs;
+
+	Texture t_skeleton_body;
+	Texture t_skeleton_arm;
+	Texture t_skeleton_legs;
 
 	Shader s_drunkShader;
 

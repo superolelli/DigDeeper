@@ -63,7 +63,7 @@ void CNpcMachine::AddNpc(int _ID, int _x, int _y, bool _safe, int _specialID)
 		//if the new npc is a goblin:
 		case(GOBLIN):
 		{
-			CGoblin *goblin = new CGoblin;
+			CHumanoid *goblin = new CHumanoid;
 			goblin->Init(_x, _y, m_pWorld, m_pPlayer, m_pView, _specialID);
 			goblin->SetSafe(_safe);
 			m_Npcs.push_back(goblin);
@@ -107,7 +107,7 @@ void CNpcMachine::CheckAllNpcs()
 			//if npc is out of range: despawn it
 			if (abs((*i)->GetRect().left - m_pPlayer->GetRect().left) > 2500 || abs((*i)->GetRect().top - m_pPlayer->GetRect().top) > 2500)
 			{
-				if (!(((*i)->GetID() >= NORMALGOBLIN && (*i)->GetID() <= MAGEGOBLIN) && ((CGoblin*)(*i))->IsChested()) && (*i)->m_safe == false)
+				if (!(((*i)->GetID() >= NORMALGOBLIN && (*i)->GetID() <= MAGEGOBLIN) && ((CHumanoid*)(*i))->IsChested()) && (*i)->m_safe == false)
 				{
 					(*i)->Quit();
 					SAFE_DELETE((*i));
@@ -146,7 +146,7 @@ void CNpcMachine::CheckAllNpcs()
 					if (!((m_pPlayer->GetCarriedItem() != NULL && m_pPlayer->GetCarriedItem()->getID() == GOBLINDAGGER) && m_pPlayer->GetArmGoingUp()))
 					{
 						if ((*i)->GetID() >= NORMALGOBLIN && (*i)->GetID() <= MAGEGOBLIN)
-							((CGoblin*)(*i))->SetChestedFalse();
+							((CHumanoid*)(*i))->SetChestedFalse();
 
 						//set was hit to true
 						(*i)->m_wasHit = true;
@@ -237,14 +237,6 @@ void CNpcMachine::CheckAllNpcs()
 						m_pPlayer->ThrowPlayer(true, 300);
 					else
 						m_pPlayer->ThrowPlayer(false, 300);
-
-
-					//put the damage into a stringstream
-					stream.str("");
-					stream << damage;
-
-					//shows the damage
-					g_pSignMachine->AddString(stream.str(), 1, m_pPlayer->GetRect().left, m_pPlayer->GetRect().top);
 				}
 			}
 		}
