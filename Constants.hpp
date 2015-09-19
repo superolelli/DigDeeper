@@ -32,6 +32,7 @@ const int WARNING = 2;
 #pragma region IDs
 const int ROOMFILL = -1;
 const int PRINCESSCAGEPART2 = -2;
+const int MAGICPOINT = -3;
 
 const int DIRT = 1;
 const int STONE = 2;
@@ -94,6 +95,7 @@ const int DIADOCHIT = 70;
 const int DYNAMITE = 71;
 const int SULFUR = 72;
 const int SALPETER = 73;
+const int LEATHER = 74;
 const int KEY = 78;
 
 const int SPELL = 79;
@@ -177,6 +179,7 @@ const int MAGEGOBLIN = 6;
 const int OGRE = 7;
 const int KEYKEEPER = 8;
 const int SKELETON = 9;
+const int BUNNY = 10;
 
 #pragma endregion
 
@@ -187,6 +190,7 @@ const int IDLE = 1;
 const int WALKING = 2;
 const int ATTACKING = 3;
 const int FROZEN = 4;
+const int FLEEING = 5;
 
 #pragma endregion
 

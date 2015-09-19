@@ -146,6 +146,7 @@ public:
 	Texture t_iceballRight;
 	Texture t_ice_goblin;
 	Texture t_ice_bee;
+	Texture t_ice_bunny;
 	Texture t_ice_ogre;
 
 
@@ -309,6 +310,7 @@ public:
 	Texture t_blockInventoryTexture_salpeter;
 	Texture t_blockInventoryTexture_goblindagger;
 	Texture t_blockInventoryTexture_metalbars;
+	Texture t_blockInventoryTexture_leather;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -385,6 +387,8 @@ public:
 	Texture t_blockLittleTexture_salpeter;
 	Texture t_blockLittleTexture_goblindagger;
 	Texture t_blockLittleTexture_metalbars;
+	Texture t_blockLittleTexture_magicpoint;
+	Texture t_blockLittleTexture_leather;
 	
 
 
@@ -413,6 +417,8 @@ public:
 	Texture t_dwarf_arm;                             //the dwarf's arm
 
 	Texture t_bee;                                      //a bee
+
+	Texture t_bunny;
 
 	Texture t_goblin_body;                       //a goblin
 	Texture t_goblin_body2;

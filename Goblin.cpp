@@ -94,6 +94,9 @@ void CHumanoid::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_vi
 	if (_loaded)
 	{
 		m_pGoblin->SetPos(m_xPos, m_yPos);
+
+		if (m_chested)
+			m_chestSprite.SetPos((m_xPos/100) *100, (m_yPos/100)*100);
 	}
 	else
 	{
@@ -538,6 +541,16 @@ vector<SItem> CHumanoid::GetLoot()
 		thing2->InitToolRandomly(GOBLINDAGGER);
 		dagger.thing = thing2;
 		loot.push_back(dagger);
+	}
+	//maybe add magicpoint
+	else if (m_ID == MAGEGOBLIN && rand() % 15 == 0)
+	{
+		SItem magicpoint;
+		magicpoint.amount = 1;
+		CItem* thing2 = new CItem;
+		thing2->Init(MAGICPOINT);
+		magicpoint.thing = thing2;
+		loot.push_back(magicpoint);
 	}
 
 	return loot;

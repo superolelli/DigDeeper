@@ -60,6 +60,15 @@ void CNpcMachine::AddNpc(int _ID, int _x, int _y, bool _safe, int _specialID)
 			m_Npcs.push_back(bee);
 		}break;
 
+		//if the new npc is a bunny
+		case(BUNNY) :
+		{
+			CAnimatedAnimal *bunny = new CAnimatedAnimal;
+			bunny->Init(_x, _y, m_pWorld, m_pPlayer, m_pView);
+			bunny->SetSafe(_safe);
+			m_Npcs.push_back(bunny);
+		}break;
+
 		//if the new npc is a goblin:
 		case(GOBLIN):
 		{
@@ -289,17 +298,22 @@ void CNpcMachine::SpawnNpcs()
 			{
 				if (m_pWorld->GetNightAlpha() < 200)
 				{
-					newNPC = rand() % 2 + 1;
+					newNPC = rand() % 3 + 1;
 
 					if (newNPC == BEE)
 					{
 						//spawn new npc
 						AddNpc(BEE, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y + 50);
 					}
-					else
+					else if (newNPC == 1)
 					{
 						//spawn new npc
 						AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
+					}
+					else
+					{
+						//spawn new npc
+						AddNpc(BUNNY, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y + 10);
 					}
 
 

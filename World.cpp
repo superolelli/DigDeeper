@@ -2361,6 +2361,14 @@ bool CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 					continue;
 				}
 			}
+			//if thing is a magicpoint
+			else if (i->GetThing()->getID() == MAGICPOINT)
+			{
+				_player->AddMagicPoints(1);
+				i->Quit();
+				i = m_LittleItemList.erase(i);
+				continue;
+			}
 
 			if (_player->Take(i->GetThing(), 1))
 			{
@@ -3129,7 +3137,7 @@ void CWorld::FillChestRandomly(int _chestID)
 				CThing *thing = NULL;
 
 				//if thing is an item
-				if(randomNumber > PIBREAK && randomNumber < 72)
+				if(randomNumber > PIBREAK && randomNumber < 75)
 				{
 					thing = new CItem;
 					((CItem*)thing)->Init(randomNumber);	
@@ -3419,7 +3427,7 @@ bool CWorld::CheckCanJump(IntRect _living, bool _left)
 bool CWorld::CheckForBarrier(IntRect _living, bool _left)
 {
 	int x = _living.left / 100;
-	int y = (_living.top +40) / 100;
+	int y = (_living.top + _living.height/2) / 100;
 
 	if (_living.height > 120)
 		y++;

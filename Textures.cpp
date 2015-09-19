@@ -146,6 +146,7 @@ void TextureLoading::LoadTextures()
 	t_ice_goblin.loadFromFile("Data/Sprites/Magic/ice_goblin.png");
 	t_ice_bee.loadFromFile("Data/Sprites/Magic/ice_bee.png");
 	t_ice_ogre.loadFromFile("Data/Sprites/Magic/ice_ogre.png");
+	t_ice_bunny.loadFromFile("Data/Sprites/Magic/ice_bunny.png");
 
 	t_buildingInfo_woodwall.loadFromFile("Data/Sprites/Building/building_info_woodwall.png");
 	t_buildingInfo_stonewall.loadFromFile("Data/Sprites/Building/building_info_stonewall.png");
@@ -307,6 +308,7 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_salpeter.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/salpeter_inventory.png");
 	t_blockInventoryTexture_goblindagger.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/goblindagger_inventory.png");
 	t_blockInventoryTexture_metalbars.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/metalbars_inventory.png");
+	t_blockInventoryTexture_leather.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/leather_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
@@ -382,6 +384,8 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_salpeter.loadFromFile("Data/Sprites/Objects/LittleItems/salpeter_little.png");
 	t_blockLittleTexture_goblindagger.loadFromFile("Data/Sprites/Objects/LittleItems/goblindagger_little.png");
 	t_blockLittleTexture_metalbars.loadFromFile("Data/Sprites/Objects/LittleItems/metalbars_little.png");
+	t_blockLittleTexture_magicpoint.loadFromFile("Data/Sprites/Objects/LittleItems/magic_point_little.png");
+	t_blockLittleTexture_leather.loadFromFile("Data/Sprites/Objects/LittleItems/leather_little.png");
 
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");
@@ -407,6 +411,8 @@ void TextureLoading::LoadTextures()
 	t_dwarf_arm.loadFromFile("Data/Sprites/Living/Dwarf_animated.png", IntRect(2, 2, 232, 38));
 
 	t_bee.loadFromFile("Data/Sprites/Living/bee.png");
+
+	t_bunny.loadFromFile("Data/Sprites/Living/bunny.png");
 
 	t_goblin_body.loadFromFile("Data/Sprites/Living/goblin_upper_body2.png");
 	t_goblin_legs.loadFromFile("Data/Sprites/Living/goblin_legs2.png");

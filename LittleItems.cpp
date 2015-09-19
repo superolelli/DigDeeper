@@ -319,6 +319,14 @@ void CLittleItem::Init(CThing *_thing, int _x, int _y, bool _loaded)
 	{
 		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_metalbars);
 	}break;
+	case(MAGICPOINT) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_magicpoint);
+	}break;
+	case(LEATHER) :
+	{
+		m_pLittleItemSprite->Load(&g_pTextures->t_blockLittleTexture_leather);
+	}break;
 	}
 
 

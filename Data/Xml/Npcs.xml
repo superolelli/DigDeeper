@@ -89,5 +89,15 @@
     armour ="0"
     exp ="12"
  ></skeleton>
+
+  <!-- Bunny -->
+  <bunny
+    ID ="10"
+    health ="10"
+    strength ="0"
+    speed ="120"
+    armour ="0"
+    exp ="5"
+ ></bunny>
   
 </npcs>

@@ -36,7 +36,7 @@ public:
 	float GetDrunkness(){ return m_StatusEffects[EFFECT_DRUNK].m_fDuration; }
 	void AddEffect(SConsumableAttributes _attributes);
 	void Heal(int _life);
-	void AddMagicPoints(int _points){ m_pMagicMenu->AddMagicPoints(_points); }
+	void AddMagicPoints(int _points){ m_pMagicMenu->AddMagicPoints(_points); g_pSignMachine->AddString("Magiepunkt!", 2, GetRect().left - GetRect().width / 2, GetRect().top, Color::Blue); }
 	void DoDamage(int _damage);
 	void AddPoison(int _damage, float _time);
 	void CastSpell(int _ID){ m_pMagicMenu->CastSpell(_ID); }

@@ -1623,3 +1623,21 @@ ZUKÜNFITGE ÄNDERUNGEN:
 - Der genaue Betrag des Fallschadens wird nun angezeigt
 
 --------------------------------------------------------
+17.09.2015
+
+- Magiergoblins können nun selten Magiepunkte droppen
+- Bugfix: Beim Laden eines Spielstandes wurde in der links oberen Ecke immer eine Truhe angezeigt
+
+--------------------------------------------------------
+18.09.2015
+
+- Kaninchen hinzugefügt (hüpft zufällig durch die Gegend; attackiert den Spieler nicht)
+
+--------------------------------------------------------
+19.09.2015
+
+- Kaninchen fliehen nun, wenn sie geschlagen werden (weg vom Spieler mit höherer Geschwindigkeit)
+- Leder hinzugefügt
+- Kaninchen droppen nun Leder
+
+--------------------------------------------------------

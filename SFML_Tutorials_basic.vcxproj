@@ -87,6 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedAnimal.cpp" />
     <ClCompile Include="Beam.cpp" />
     <ClCompile Include="Bee.cpp" />
     <ClCompile Include="BuildingMenu.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedAnimal.hpp" />
     <ClInclude Include="Beam.hpp" />
     <ClInclude Include="Bee.hpp" />
     <ClInclude Include="BuildingMenu.hpp" />

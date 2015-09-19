@@ -6,6 +6,7 @@
 #include "Goblin.hpp"
 #include "Ogre.hpp"
 #include "Keykeeper.hpp"
+#include "AnimatedAnimal.hpp"
 #include "SignMachine.hpp"
 #include "Profiler.hpp"
 

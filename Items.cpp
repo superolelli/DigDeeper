@@ -285,6 +285,18 @@ void CItem::Init(int _ID, bool _loaded)
 		if (!_loaded)
 			m_Name = "Goblindolch";
 	}break;
+	case(MAGICPOINT) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_goblindagger);
+		if (!_loaded)
+			m_Name = "Magiepunkt";
+	}break;
+	case(LEATHER) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_leather);
+		if (!_loaded)
+			m_Name = "Leder";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)
