@@ -5,6 +5,7 @@
 #include "Framework.hpp"
 #include "Button.hpp"
 #include "Structures.hpp"
+#include "Settings.hpp"
 
 
 
@@ -24,11 +25,10 @@ private:
 	int m_ButtonEventtype;                           //the event, important for the buttons
 	bool is_running;                                 //is it still running?
 
-	SSettings m_Settings;
 
-	CButton *m_pBeamNumbersButton;
-	CButton *m_pInventoryNumbersButton;
-	CButton *m_pFastLightButton;
+	CButton *m_pSettingsButton;
+	CButton *m_pAchievementsButton;
+	CButton *m_pUpgradesButton;
 	CButton *m_pReturnButton;                          //the return button
 
 	void RenderButtons();

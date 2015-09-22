@@ -1641,3 +1641,26 @@ ZUKÜNFITGE ÄNDERUNGEN:
 - Kaninchen droppen nun Leder
 
 --------------------------------------------------------
+20.09.2015
+
+- Struktur des Optionen-Menüs verändert: Über den "Optionen"-Button kommt man in ein Menü mit den Buttons:
+  -> Einstellungen (beinhaltet alles, was bis jetzt in 'Optionen' war)
+  -> Erfolge (bis jetzt leer)
+  -> Upgrades (bis jetzt leer)
+- Lederrüstung hinzugefügt
+- Lederkappe hinzugefügt
+
+--------------------------------------------------------
+21.09.2015
+
+- Der Schlüsselwächter kann sich nun teleportieren (er tut dies manchmal, wenn er getroffen wird)
+- Skelettkrieger hinzugefügt
+- Bombenskelett hinzugefügt
+
+--------------------------------------------------------
+22.09.2015
+
+- Bombenskelette können nun selten Schwefel oder Salpeter droppen
+- Bugfix: Goblins steckten oft in der Decke fest, wenn man sie in 1 Block hohen Gängen schlug
+
+--------------------------------------------------------

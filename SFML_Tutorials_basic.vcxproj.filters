@@ -165,6 +165,9 @@
     <ClCompile Include="AnimatedAnimal.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.hpp">
@@ -330,6 +333,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="AnimatedAnimal.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Settings.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

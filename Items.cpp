@@ -297,6 +297,18 @@ void CItem::Init(int _ID, bool _loaded)
 		if (!_loaded)
 			m_Name = "Leder";
 	}break;
+	case(LEATHERARMOUR) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_leatherarmour);
+		if (!_loaded)
+			m_Name = "Lederrüstung";
+	}break;
+	case(LEATHERHELMET) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_leatherhelmet);
+		if (!_loaded)
+			m_Name = "Lederkappe";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)
@@ -310,7 +322,7 @@ void CItem::Init(int _ID, bool _loaded)
 
 void CItem::InitRecipe()
 {
-	m_specialID = rand()%14 + 132;
+	m_specialID = rand()%16 + 132;
 
 	switch(m_specialID)
 	{
@@ -370,6 +382,14 @@ void CItem::InitRecipe()
 	case(145) :
 		m_Name.append("(Dynamit)");
 		m_specialID = DYNAMITE;
+		break;
+	case(146) :
+		m_Name.append("(Lederrüstung)");
+		m_specialID = LEATHERARMOUR;
+		break;
+	case(147) :
+		m_Name.append("(Lederkappe)");
+		m_specialID = LEATHERHELMET;
 		break;
 	}
 
@@ -437,6 +457,12 @@ void CItem::SetSpecialID(int _ID)
 			break;
 		case(DYNAMITE) :
 			m_Name.append("(Dynamit)");
+			break;
+		case(LEATHERARMOUR) :
+			m_Name.append("(Lederrüstung)");
+			break;
+		case(LEATHERHELMET) :
+			m_Name.append("(Lederkappe)");
 			break;
 		}
 	}

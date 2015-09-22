@@ -1,50 +1,24 @@
-﻿Der Buildvorgang wurde am 07.09.2015 18:49:15 gestartet.
-     1>Projekt "C:\Users\Ole\Desktop\Projekte\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
+﻿Der Buildvorgang wurde am 22.09.2015 11:17:57 gestartet.
+     1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Bee.cpp BuildingMenu.cpp Cauldron.cpp CharacterInfo.cpp Chest.cpp Consumable.cpp CookingBook.cpp Equipment.cpp Furnance.cpp Game.cpp GameChoose.cpp Goblin.cpp Highscore.cpp Inventory.cpp Items.cpp LightMachine.cpp LittleItems.cpp MagicMenu.cpp Menu.cpp NPC.cpp NewGame.cpp NpcMachine.cpp ObjectProperties.cpp Ogre.cpp Options.cpp Panel.cpp Placeable.cpp Player.cpp PlayerEquipment.cpp Projectiles.cpp Tool.cpp World.cpp main.cpp
-         NpcMachine.cpp
-     1>c:\users\ole\desktop\projekte\digdeeper\npcmachine.cpp(96): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
-     1>c:\users\ole\desktop\projekte\digdeeper\npcmachine.cpp(146): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>c:\users\ole\desktop\projekte\digdeeper\npcmachine.cpp(222): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>c:\users\ole\desktop\projekte\digdeeper\npcmachine.cpp(303): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>c:\users\ole\desktop\projekte\digdeeper\npcmachine.cpp(312): warning C4244: '=': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>c:\users\ole\desktop\projekte\digdeeper\npcmachine.cpp(331): warning C4244: 'Initialisierung': Konvertierung von 'float' in 'int', möglicher Datenverlust
-         Code wird generiert...
-         Überspringen... (keine relevanten Änderungen gefunden)
-         main.cpp
-         World.cpp
-         Tool.cpp
-         Projectiles.cpp
-         PlayerEquipment.cpp
-         Player.cpp
-         Placeable.cpp
-         Panel.cpp
-         Options.cpp
-         Ogre.cpp
-         ObjectProperties.cpp
-         NewGame.cpp
-         NPC.cpp
-         Menu.cpp
-         MagicMenu.cpp
-         LittleItems.cpp
-         LightMachine.cpp
-         Items.cpp
-         Inventory.cpp
-         Highscore.cpp
+         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Goblin.cpp
          Goblin.cpp
-         GameChoose.cpp
-         Game.cpp
-         Furnance.cpp
-         Equipment.cpp
-         CookingBook.cpp
-         Consumable.cpp
-         Chest.cpp
-         CharacterInfo.cpp
-         Cauldron.cpp
-         BuildingMenu.cpp
-         Bee.cpp
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(114): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(121): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(209): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(210): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(213): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(234): warning C4244: '-=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(236): warning C4244: '+=': Konvertierung von 'float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(332): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(333): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(334): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(335): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(345): warning C4244: 'Argument': Konvertierung von 'const float' in 'int', möglicher Datenverlust
+     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(639): warning C4305: '=': Verkürzung von 'double' in 'float'
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ole\Desktop\Projekte\DigDeeper\Debug\Dig Deeper rewritten.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.3\lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-network-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Ole\Desktop\Projekte\DigDeeper\Debug\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ole\Desktop\Projekte\DigDeeper\Debug\Dig Deeper rewritten.lib" /MACHINE:X86 Debug\Beam.obj
+         F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.3\lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-network-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.lib" /MACHINE:X86 Debug\AnimatedAnimal.obj
+         Debug\Beam.obj
          Debug\Bee.obj
          Debug\BuildingMenu.obj
          Debug\Button.obj
@@ -63,6 +37,7 @@
          Debug\Highscore.obj
          Debug\Inventory.obj
          Debug\Items.obj
+         Debug\Keykeeper.obj
          Debug\LightMachine.obj
          Debug\LittleItems.obj
          Debug\Living3Part.obj
@@ -83,6 +58,7 @@
          Debug\Profiler.obj
          Debug\Projectiles.obj
          Debug\Rims.obj
+         Debug\Settings.obj
          Debug\SignMachine.obj
          Debug\SinCosLookup.obj
          Debug\Sound.obj
@@ -92,9 +68,9 @@
          Debug\Time.obj
          Debug\Tool.obj
          Debug\World.obj
-         SFML_Tutorials_basic.vcxproj -> C:\Users\Ole\Desktop\Projekte\DigDeeper\Debug\Dig Deeper rewritten.exe
-     1>Die Erstellung des Projekts "C:\Users\Ole\Desktop\Projekte\DigDeeper\SFML_Tutorials_basic.vcxproj" ist abgeschlossen, Build Ziel(e).
+         SFML_Tutorials_basic.vcxproj -> F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.exe
+     1>Die Erstellung des Projekts "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" ist abgeschlossen, Build Ziel(e).
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:17.16
+Verstrichene Zeit 00:00:02.26

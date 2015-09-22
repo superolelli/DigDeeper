@@ -90,9 +90,29 @@
     exp ="12"
  ></skeleton>
 
+  <!-- Skeletonwarrior -->
+  <skeletonwarrior
+    ID ="10"
+    health ="35"
+    strength ="7"
+    speed ="150"
+    armour ="3"
+    exp ="16"
+ ></skeletonwarrior>
+
+  <!-- Skeletonrunner -->
+  <skeletonrunner
+    ID ="11"
+    health ="1"
+    strength ="0"
+    speed ="190"
+    armour ="0"
+    exp ="22"
+ ></skeletonrunner>
+
   <!-- Bunny -->
   <bunny
-    ID ="10"
+    ID ="12"
     health ="10"
     strength ="0"
     speed ="120"

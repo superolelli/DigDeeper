@@ -18,6 +18,9 @@ void TextureLoading::LoadTextures()
 	t_menuButtonNewGame.loadFromFile("Data/Sprites/Buttons/new_game_button2.png");
 	t_menuButtonLoadGame.loadFromFile("Data/Sprites/Buttons/load_game_button2.png");
 	t_menuButtonMultiplayer.loadFromFile("Data/Sprites/Buttons/Multiplayer_game_button_menu2.png");
+	t_menuButtonSettings.loadFromFile("Data/Sprites/Buttons/settings_button.png");
+	t_menuButtonAchievements.loadFromFile("Data/Sprites/Buttons/achievements_button.png");
+	t_menuButtonUpgrades.loadFromFile("Data/Sprites/Buttons/upgrades_button.png");
 	t_menuButtonReturn.loadFromFile("Data/Sprites/Buttons/return_button.png");
 	t_menuButtonLoad.loadFromFile("Data/Sprites/Buttons/load_button2.png");
 	t_menuButtonLoadThisGame.loadFromFile("Data/Sprites/Buttons/load_game_button.png");
@@ -136,6 +139,7 @@ void TextureLoading::LoadTextures()
 	t_poisonExplosion.loadFromFile("Data/Sprites/Magic/poison_explosion.png");
 	t_healing.loadFromFile("Data/Sprites/Magic/heal_animation.png");
 	t_skeletonEffect.loadFromFile("Data/Sprites/Magic/create_skeleton.png");
+	t_teleport.loadFromFile("Data/Sprites/Magic/teleport.png");
 	t_manashield.loadFromFile("Data/Sprites/Magic/manashield.png");
 	t_alchemy.loadFromFile("Data/Sprites/Magic/alchemy.png");
 	t_lightsphere.loadFromFile("Data/Sprites/Magic/light.png");
@@ -178,6 +182,8 @@ void TextureLoading::LoadTextures()
 	t_buildingInfo_bricks.loadFromFile("Data/Sprites/Building/building_info_bricks.png");
 	t_buildingInfo_brickwall.loadFromFile("Data/Sprites/Building/building_info_brickwall.png");
 	t_buildingInfo_dynamite.loadFromFile("Data/Sprites/Building/building_info_dynamite.png");
+	t_buildingInfo_leatherarmour.loadFromFile("Data/Sprites/Building/building_info_leather_armour.png");
+	t_buildingInfo_leatherhelmet.loadFromFile("Data/Sprites/Building/building_info_leather_helmet.png");
 
 	t_blockTextures_dirt.loadFromFile("Data/Sprites/Objects/Blocks/dirt.png");
 	t_blockTextures_stone.loadFromFile("Data/Sprites/Objects/Blocks/stone.png");
@@ -309,6 +315,8 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_goblindagger.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/goblindagger_inventory.png");
 	t_blockInventoryTexture_metalbars.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/metalbars_inventory.png");
 	t_blockInventoryTexture_leather.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/leather_inventory.png");
+	t_blockInventoryTexture_leatherarmour.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/leather_armour_inventory.png");
+	t_blockInventoryTexture_leatherhelmet.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/leather_helmet_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
@@ -386,7 +394,8 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_metalbars.loadFromFile("Data/Sprites/Objects/LittleItems/metalbars_little.png");
 	t_blockLittleTexture_magicpoint.loadFromFile("Data/Sprites/Objects/LittleItems/magic_point_little.png");
 	t_blockLittleTexture_leather.loadFromFile("Data/Sprites/Objects/LittleItems/leather_little.png");
-
+	t_blockLittleTexture_leatherarmour.loadFromFile("Data/Sprites/Objects/LittleItems/leather_armour_little.png");
+	t_blockLittleTexture_leatherhelmet.loadFromFile("Data/Sprites/Objects/LittleItems/leather_helmet_little.png");
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");
 	t_tool_sword.loadFromFile("Data/Sprites/Objects/Tools/sword_carried.png");
@@ -402,6 +411,8 @@ void TextureLoading::LoadTextures()
 	t_equipment_magic_hat.loadFromFile("Data/Sprites/Objects/Equipment/magic_hat.png");
 	t_equipment_candle.loadFromFile("Data/Sprites/Objects/Equipment/candle_helmet.png");
 	t_equipment_diadochitarmour.loadFromFile("Data/Sprites/Objects/Equipment/diadochit_armour.png");
+	t_equipment_leatherarmour.loadFromFile("Data/Sprites/Objects/Equipment/leather_armour.png");
+	t_equipment_leatherhelmet.loadFromFile("Data/Sprites/Objects/Equipment/leather_helmet.png");
 
 	t_breakingAnimation.loadFromFile("Data/Sprites/Objects/Blocks/breaking_animation.png");
 	t_smoke.loadFromFile("Data/Sprites/Objects/Blocks/smoke2.png");
@@ -438,6 +449,9 @@ void TextureLoading::LoadTextures()
 
 	t_skeleton_body.loadFromFile("Data/Sprites/Living/skeleton_body.png");
 	t_skeleton_arm.loadFromFile("Data/Sprites/Living/skeleton_arm.png");
+	t_skeleton_body2.loadFromFile("Data/Sprites/Living/skeleton_body2.png");
+	t_skeleton_arm2.loadFromFile("Data/Sprites/Living/skeleton_arm2.png");
+	t_skeleton_body3.loadFromFile("Data/Sprites/Living/skeleton_body3.png");
 	t_skeleton_legs.loadFromFile("Data/Sprites/Living/skeleton_legs.png");
 
 	s_drunkShader.loadFromFile("Data/Shaders/blur.frag", Shader::Fragment);

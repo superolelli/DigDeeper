@@ -130,6 +130,8 @@ const int ARCANUSRING = 135;
 const int MAGICHAT = 136;
 const int CANDLE = 137;
 const int DIADOCHITARMOUR = 138;
+const int LEATHERARMOUR = 139;
+const int LEATHERHELMET = 140;
 const int VERYRARERING = 200;
 
 #pragma endregion
@@ -179,7 +181,9 @@ const int MAGEGOBLIN = 6;
 const int OGRE = 7;
 const int KEYKEEPER = 8;
 const int SKELETON = 9;
-const int BUNNY = 10;
+const int WARRIORSKELETON = 10;
+const int SKELETONRUNNER = 11;
+const int BUNNY = 12;
 
 #pragma endregion
 
@@ -302,7 +306,7 @@ const int RUBBISHANIMATION = 7;
 const int DUSTANIMATION = 8;
 const int MANASHIELDPROJECTILE = 9;
 const int DYNAMITEEFFECT = 10;
-const int CREATESKELETONEFFECT = 11;
+const int SMOKEEFFECT = 11;
 const int POISONBALL = 12;
 const int POISONEXPLOSION = 13;
 

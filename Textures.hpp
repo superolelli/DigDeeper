@@ -31,6 +31,9 @@ public:
 	Texture t_menuButtonNewGame;               //the new game button
 	Texture t_menuButtonLoadGame;             //the load game button
 	Texture t_menuButtonMultiplayer;           //the multiplayer button
+	Texture t_menuButtonSettings;                //the settings button
+	Texture t_menuButtonAchievements;              //the achievements button
+	Texture t_menuButtonUpgrades;                   //the upgrades button
 	Texture t_menuButtonReturn;                  //the return button
 	Texture t_menuButtonLoad;                     //the load button
 	Texture t_menuButtonLoadThisGame;             //the button in the load menu
@@ -137,6 +140,7 @@ public:
 	Texture t_poisonExplosion;
 	Texture t_healing;
 	Texture t_skeletonEffect;
+	Texture t_teleport;
 	Texture t_alchemy;
 	Texture t_lightsphere;
 	Texture t_manashield;
@@ -181,6 +185,8 @@ public:
 	Texture t_buildingInfo_bricks;
 	Texture t_buildingInfo_brickwall;
 	Texture t_buildingInfo_dynamite;
+	Texture t_buildingInfo_leatherarmour;
+	Texture t_buildingInfo_leatherhelmet;
 
 	Texture t_blockTextures_dirt;                     //the dirt textures
 	Texture t_blockTextures_stone;                      //the stone texture
@@ -311,6 +317,8 @@ public:
 	Texture t_blockInventoryTexture_goblindagger;
 	Texture t_blockInventoryTexture_metalbars;
 	Texture t_blockInventoryTexture_leather;
+	Texture t_blockInventoryTexture_leatherarmour;
+	Texture t_blockInventoryTexture_leatherhelmet;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
@@ -389,7 +397,8 @@ public:
 	Texture t_blockLittleTexture_metalbars;
 	Texture t_blockLittleTexture_magicpoint;
 	Texture t_blockLittleTexture_leather;
-	
+	Texture t_blockLittleTexture_leatherarmour;
+	Texture t_blockLittleTexture_leatherhelmet;
 
 
 	//the "carried" texture of the tools
@@ -408,6 +417,8 @@ public:
 	Texture t_equipment_magic_hat;
 	Texture t_equipment_candle;
 	Texture t_equipment_diadochitarmour;
+	Texture t_equipment_leatherarmour;
+	Texture t_equipment_leatherhelmet;
 
 	Texture t_breakingAnimation;                          //the breaking animation for placeables
 	Texture t_smoke;                                      //the smoke cloud animation
@@ -443,7 +454,10 @@ public:
 	Texture t_keykeeper_legs;
 
 	Texture t_skeleton_body;
+	Texture t_skeleton_body2;
+	Texture t_skeleton_body3;
 	Texture t_skeleton_arm;
+	Texture t_skeleton_arm2;
 	Texture t_skeleton_legs;
 
 	Shader s_drunkShader;

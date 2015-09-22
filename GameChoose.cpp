@@ -28,13 +28,13 @@ void CGameChoose::Init()
 	m_pBackground->Load(&g_pTextures->t_menuBackground);
 
     m_pNewGameButton = new CButton;
-	m_pNewGameButton->Load(&g_pTextures->t_menuButtonNewGame, g_pFramework->GetRenderWindow()->getSize().x/2 - 150, g_pFramework->GetRenderWindow()->getSize().y/6, CButton::BUTTONTYPE_MOTION_UP); 
+	m_pNewGameButton->Load(&g_pTextures->t_menuButtonNewGame, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, g_pFramework->GetRenderWindow()->getSize().y/6, CButton::BUTTONTYPE_MOTION_UP); 
 
 	m_pLoadGameButton = new CButton;
-	m_pLoadGameButton->Load(&g_pTextures->t_menuButtonLoadGame, g_pFramework->GetRenderWindow()->getSize().x/2 - 150, 100 + 2*(g_pFramework->GetRenderWindow()->getSize().y/6), CButton::BUTTONTYPE_MOTION_UP); 
+	m_pLoadGameButton->Load(&g_pTextures->t_menuButtonLoadGame, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, 100 + 2*(g_pFramework->GetRenderWindow()->getSize().y/6), CButton::BUTTONTYPE_MOTION_UP); 
 
 	m_pMultiplayerButton = new CButton;
-	m_pMultiplayerButton->Load(&g_pTextures->t_menuButtonMultiplayer, g_pFramework->GetRenderWindow()->getSize().x/2 - 150, 200 + 3*(g_pFramework->GetRenderWindow()->getSize().y/6), CButton::BUTTONTYPE_MOTION_UP); 
+	m_pMultiplayerButton->Load(&g_pTextures->t_menuButtonMultiplayer, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, 200 + 3*(g_pFramework->GetRenderWindow()->getSize().y/6), CButton::BUTTONTYPE_MOTION_UP); 
 }
 
 

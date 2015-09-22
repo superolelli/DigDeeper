@@ -5,5 +5,3 @@
 - Erfolgemenü einbauen
 
 - Übersetzung des Spiels (v.a. in Englisch) ermöglichen
-
-- Bugfix: Goblins stecken in Decke fest

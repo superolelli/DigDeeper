@@ -128,6 +128,7 @@
     <ClCompile Include="Profiler.cpp" />
     <ClCompile Include="Projectiles.cpp" />
     <ClCompile Include="Rims.cpp" />
+    <ClCompile Include="Settings.cpp" />
     <ClCompile Include="SignMachine.cpp" />
     <ClCompile Include="SinCosLookup.cpp" />
     <ClCompile Include="Sound.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Profiler.hpp" />
     <ClInclude Include="Projectiles.hpp" />
     <ClInclude Include="Rims.hpp" />
+    <ClInclude Include="Settings.hpp" />
     <ClInclude Include="SignMachine.hpp" />
     <ClInclude Include="Equipment.hpp" />
     <ClInclude Include="Framework.hpp" />

@@ -98,6 +98,24 @@ void CEquipment::InitEquipment(int _ID, bool _loaded)
 			m_rarity = 1;
 		}
 	}break;
+	case LEATHERARMOUR:
+	{
+		m_pCarriedEquipmentSprite->Load(&g_pTextures->t_equipment_leatherarmour, 2, 53, 60);
+		if (!_loaded)
+		{
+			m_EquipID = BODY;
+			m_rarity = 1;
+		}
+	}break;
+	case LEATHERHELMET:
+	{
+		m_pCarriedEquipmentSprite->Load(&g_pTextures->t_equipment_leatherhelmet, 2, 40, 24);
+		if (!_loaded)
+		{
+			m_EquipID = HEAD;
+			m_rarity = 1;
+		}
+	}break;
 	case IRONRING:
 	case ARCANUSRING:
 	case VERYRARERING:

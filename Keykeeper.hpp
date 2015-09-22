@@ -64,6 +64,7 @@ private:
 	void ThrowMultipleFireballs();
 	void ThrowPoisonBall();
 	void CreateSkeleton();
+	void Teleport();
 	bool FreeLineOfSight();
 };
 

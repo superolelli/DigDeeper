@@ -6,6 +6,9 @@
 COptions::COptions()
 {
 	m_pBackground = NULL;
+	m_pSettingsButton = NULL;
+	m_pAchievementsButton = NULL;
+	m_pUpgradesButton = NULL;
 	m_pReturnButton = NULL;
 }
 
@@ -20,52 +23,17 @@ void COptions::Init()
 	m_pBackground = new CSprite;
 	m_pBackground->Load(&g_pTextures->t_menuBackground);
 
-	m_pBeamNumbersButton = new CButton;
-	m_pInventoryNumbersButton = new CButton;
-	m_pFastLightButton = new CButton;
+	m_pSettingsButton = new CButton;
+	m_pAchievementsButton = new CButton;
+	m_pUpgradesButton = new CButton;
 
-	//load the current settings
-	//path Path;
-	//Path.append("Data/Settings.stt");
+	m_pSettingsButton->Load(&g_pTextures->t_menuButtonSettings, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, g_pFramework->GetRenderWindow()->getSize().y / 6, CButton::BUTTONTYPE_MOTION_UP);
+	m_pAchievementsButton->Load(&g_pTextures->t_menuButtonAchievements, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, 100 + 2 * (g_pFramework->GetRenderWindow()->getSize().y / 6), CButton::BUTTONTYPE_MOTION_UP);
+	m_pUpgradesButton->Load(&g_pTextures->t_menuButtonUpgrades, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, 200 + 3 * (g_pFramework->GetRenderWindow()->getSize().y / 6), CButton::BUTTONTYPE_MOTION_UP);
 
-	char* var = getenv("APPDATA");
-	boost::filesystem::path Path;
-	Path = var;
-	Path.append("/Dig Deeper/Settings.stt");
-
-	if (boost::filesystem::exists(Path))
-	{
-		ifstream Input(Path.string());
-		Input.read((char *)&m_Settings, sizeof(m_Settings));
-		Input.close();
-	}
-	else
-	{
-		m_Settings.m_beam_numbers = false;
-		m_Settings.m_inventory_numbers = false;
-		m_Settings.m_fast_light = false;
-	}
-
-	//Load the buttons
-	if (m_Settings.m_beam_numbers)
-		m_pBeamNumbersButton->Load(&g_pTextures->t_optionsButton_beam_on, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, g_pFramework->GetRenderWindow()->getSize().y / 6, CButton::BUTTONTYPE_MOTION_UP);
-	else
-		m_pBeamNumbersButton->Load(&g_pTextures->t_optionsButton_beam_off, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, g_pFramework->GetRenderWindow()->getSize().y / 6, CButton::BUTTONTYPE_MOTION_UP);
-
-	if (m_Settings.m_inventory_numbers)
-		m_pInventoryNumbersButton->Load(&g_pTextures->t_optionsButton_inventory_on, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, 3 * (g_pFramework->GetRenderWindow()->getSize().y / 6), CButton::BUTTONTYPE_MOTION_UP);
-	else
-		m_pInventoryNumbersButton->Load(&g_pTextures->t_optionsButton_inventory_off, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, 3*(g_pFramework->GetRenderWindow()->getSize().y / 6), CButton::BUTTONTYPE_MOTION_UP);
-
-	if (m_Settings.m_fast_light)
-		m_pFastLightButton->Load(&g_pTextures->t_optionsButton_fastLight_on, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, 2 * (g_pFramework->GetRenderWindow()->getSize().y / 6), CButton::BUTTONTYPE_MOTION_UP);
-	else
-		m_pFastLightButton->Load(&g_pTextures->t_optionsButton_fastLight_off, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, 2 * (g_pFramework->GetRenderWindow()->getSize().y / 6), CButton::BUTTONTYPE_MOTION_UP);
 
     m_pReturnButton = new CButton;
 	m_pReturnButton->Load(&g_pTextures->t_menuButtonReturn, g_pFramework->GetRenderWindow()->getSize().x/2 - 100, g_pFramework->GetRenderWindow()->getSize().y - 80, CButton::BUTTONTYPE_MOTION_UP); 
-
- 
 }
 
 
@@ -75,9 +43,9 @@ void COptions::Init()
 void COptions::Quit()
 {
 	SAFE_DELETE(m_pBackground);
-	SAFE_DELETE(m_pBeamNumbersButton);
-	SAFE_DELETE(m_pInventoryNumbersButton);
-	SAFE_DELETE(m_pFastLightButton);
+	SAFE_DELETE(m_pSettingsButton);
+	SAFE_DELETE(m_pAchievementsButton);
+	SAFE_DELETE(m_pUpgradesButton);
 	SAFE_DELETE(m_pReturnButton);	
 }
 
@@ -87,7 +55,6 @@ void COptions::Quit()
 
 void COptions::Run()
 {
-
 	//the loop
 	while(is_running == true)
 	{
@@ -112,17 +79,6 @@ void COptions::Run()
 
 		g_pFramework->Flip();
 	}
-
-
-//	ofstream Output("Data/Settings.stt");
-	char* var = getenv("APPDATA");
-	string Path = var;
-	Path.append("/Dig Deeper/Settings.stt");
-
-	ofstream Output(Path);
-	Output.write((char *)&m_Settings, sizeof(m_Settings));
-	Output.close();
-
 }
 
 
@@ -131,66 +87,26 @@ void COptions::Run()
 
 void COptions::RenderButtons()
 {
-	
-	if (m_pBeamNumbersButton->Render(m_ButtonEventtype))
-	{
-		//change the beam setting
-		SAFE_DELETE(m_pBeamNumbersButton);
-		m_pBeamNumbersButton = new CButton;
-
-		if (m_Settings.m_beam_numbers)
-		{
-			m_pBeamNumbersButton->Load(&g_pTextures->t_optionsButton_beam_off, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, g_pFramework->GetRenderWindow()->getSize().y / 6, CButton::BUTTONTYPE_MOTION_UP);
-			m_Settings.m_beam_numbers = false;
-		}
-		else
-		{
-			m_pBeamNumbersButton->Load(&g_pTextures->t_optionsButton_beam_on, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, g_pFramework->GetRenderWindow()->getSize().y / 6, CButton::BUTTONTYPE_MOTION_UP);
-			m_Settings.m_beam_numbers = true;
-		}
-	}
-
-
-
-
-	if (m_pInventoryNumbersButton->Render(m_ButtonEventtype))
-	{
-		//change the inventory settings
-		SAFE_DELETE(m_pInventoryNumbersButton);
-		m_pInventoryNumbersButton = new CButton;
-
-		if (m_Settings.m_inventory_numbers)
-		{
-			m_pInventoryNumbersButton->Load(&g_pTextures->t_optionsButton_inventory_off, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, 3 * (g_pFramework->GetRenderWindow()->getSize().y / 6), CButton::BUTTONTYPE_MOTION_UP);
-			m_Settings.m_inventory_numbers = false;
-		}
-		else
-		{
-			m_pInventoryNumbersButton->Load(&g_pTextures->t_optionsButton_inventory_on, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, 3 * (g_pFramework->GetRenderWindow()->getSize().y / 6), CButton::BUTTONTYPE_MOTION_UP);
-			m_Settings.m_inventory_numbers = true;
-		}
-	}
-
-
-	if (m_pFastLightButton->Render(m_ButtonEventtype))
-	{
-		//change the beam setting
-		SAFE_DELETE(m_pFastLightButton);
-		m_pFastLightButton = new CButton;
-
-		if (m_Settings.m_fast_light)
-		{
-			m_pFastLightButton->Load(&g_pTextures->t_optionsButton_fastLight_off, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, 2*(g_pFramework->GetRenderWindow()->getSize().y / 6), CButton::BUTTONTYPE_MOTION_UP);
-			m_Settings.m_fast_light = false;
-		}
-		else
-		{
-			m_pFastLightButton->Load(&g_pTextures->t_optionsButton_fastLight_on, g_pFramework->GetRenderWindow()->getSize().x / 2 - 100, 2*(g_pFramework->GetRenderWindow()->getSize().y / 6), CButton::BUTTONTYPE_MOTION_UP);
-			m_Settings.m_fast_light = true;
-		}
-	}
-
-
-	if(m_pReturnButton->Render(m_ButtonEventtype) == true)
+	if (m_pReturnButton->Render(m_ButtonEventtype) == true)
 		is_running = false;
+
+	if (m_pSettingsButton->Render(m_ButtonEventtype))
+	{
+		CSettings Settings;
+		Settings.Init();
+		Settings.Run();
+		Settings.Quit();
+	}
+
+
+	if (m_pAchievementsButton->Render(m_ButtonEventtype))
+	{
+		
+	}
+
+
+	if (m_pUpgradesButton->Render(m_ButtonEventtype))
+	{
+		
+	}
 }

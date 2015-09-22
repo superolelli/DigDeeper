@@ -225,6 +225,38 @@
   light ="0"
     ></diadochitarmour>
 
+  <leatherarmour
+  ID = "139"
+  health = "0"
+  healthregeneration = "0"
+  mana = "0"
+  manaregeneration ="0"
+  armour ="2"
+  breakingspeed ="0"
+  strength ="0"
+  luck ="0"
+  speed ="0"
+  criticalchance ="0"
+  criticaldamage ="0"
+  light ="0"
+    ></leatherarmour>
+
+  <leatherhelmet
+  ID = "140"
+  health = "2"
+  healthregeneration = "0"
+  mana = "0"
+  manaregeneration ="0"
+  armour ="0"
+  breakingspeed ="0"
+  strength ="0"
+  luck ="2"
+  speed ="0"
+  criticalchance ="0"
+  criticaldamage ="0"
+  light ="0"
+    ></leatherhelmet>
+
   <veryrarering
   ID = "200"
   health = "0"

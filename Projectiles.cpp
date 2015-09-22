@@ -76,9 +76,9 @@ void CProjectiles::CheckProjectiles()
 		collided = false;
 
 		//check for explosions, alchemy, healing, rubbish and dust
-		if (i->m_ID == EXPLOSION || i->m_ID == HEALING || i->m_ID == ALCHEMYANIMATION || i->m_ID == RUBBISHANIMATION || i->m_ID == DUSTANIMATION || i->m_ID == CREATESKELETONEFFECT || i->m_ID == POISONEXPLOSION)
+		if (i->m_ID == EXPLOSION || i->m_ID == HEALING || i->m_ID == ALCHEMYANIMATION || i->m_ID == RUBBISHANIMATION || i->m_ID == DUSTANIMATION || i->m_ID == SMOKEEFFECT || i->m_ID == POISONEXPLOSION)
 		{
-			if (i->m_ID != CREATESKELETONEFFECT)
+			if (i->m_ID != SMOKEEFFECT)
 				i->m_fAnimState += 20 * g_pTimer->GetElapsedTime().asSeconds();
 			else
 				i->m_fAnimState += 12 * g_pTimer->GetElapsedTime().asSeconds();

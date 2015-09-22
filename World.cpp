@@ -3128,10 +3128,10 @@ void CWorld::FillChestRandomly(int _chestID)
 			while(is_filled == false)
 			{
 				//get a random ID
-				randomNumber = rand()%84 + 56;
+				randomNumber = rand()%86 + 56;
 
 				//very rare ring has currently the id 200
-				if(randomNumber == 139)
+				if(randomNumber == 141)
 					randomNumber = 200;
 
 				CThing *thing = NULL;
@@ -3504,7 +3504,7 @@ void CWorld::DoAlchemy(int _level)
 	x /= 100;
 	y /= 100;
 
-	if (m_pBlocks[x][y] != NULL && m_pBlocks[x][y]->getID() < 9)
+	if (m_pBlocks[x][y] != NULL && m_pBlocks[x][y]->getID() < 11)
 	{
 		int newValue = rand() % 100 + 1;
 

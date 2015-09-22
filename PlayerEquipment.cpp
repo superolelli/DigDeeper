@@ -388,6 +388,10 @@ void CPlayerEquipment::RenderEquipment(int _x, int _y, bool _left)
 			case CANDLE:
 				equipment->RenderEquipment(_x + 30, _y - 20, 0.0f);
 				break;
+
+			case LEATHERHELMET:
+				equipment->RenderEquipment(_x + 15, _y - 4, 0.0f);
+				break;
 			}
 		}
 		else
@@ -404,6 +408,10 @@ void CPlayerEquipment::RenderEquipment(int _x, int _y, bool _left)
 
 			case CANDLE:
 				equipment->RenderEquipment(_x + 12, _y - 20, 1.0f);
+				break;
+
+			case LEATHERHELMET:
+				equipment->RenderEquipment(_x - 1, _y - 4, 1.0f);
 				break;
 			}
 		

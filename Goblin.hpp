@@ -16,8 +16,10 @@ public:
 	IntRect GetWeaponRect();
 	bool IsHitting();
 	void ThrowNpc(bool _left, int _strength);
-	void SetChestedFalse(){ m_chested = false; m_pGoblin->Move(0, -5); }
+	void SetChestedFalse(){ m_chested = false;}
 	bool IsChested(){ return m_chested; }
+
+	void Explode();
 
 	vector<SItem> GetLoot();
 
@@ -43,6 +45,7 @@ private:
 
 	CSprite m_frozenSprite;
 	CSprite m_chestSprite;              //for chestgoblins
+	CSprite m_effectSprite;            //for skeletonrunners
 
 	bool m_left;                   //is the goblin looking to the left
 	bool m_is_hitting;
@@ -54,6 +57,7 @@ private:
 	float m_fXVel, m_fYVel;             //the velocity
 	float m_fLegsAnimState;           //the animation state of the legs
 	float m_fArmAnimState;           //the animation state of the arm
+	float m_fBombAnimState;
 	float m_fWaitToBeat;             //how long must the goblin wait to hit the dwarf?
 
 	float m_fStateTime;               //how long does the current state last?

@@ -24,21 +24,21 @@ void CHumanoid::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_vi
 	if (m_ID == NORMALGOBLIN)
 	{
 		m_pGoblin->Load(&g_pTextures->t_goblin_body, 50, 64, 2, 0, &g_pTextures->t_goblin_arm, 43, 30, 2, &g_pTextures->t_goblin_legs, 48, 58, 12, _x, _y);
-		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 22.0f, 6.5f, -3.0f, 40.0f);
+		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 22.0f, 6.5f, -3.0f, 40.0f); 
 		m_pGoblin->SetArmRotatingPoint(38.0f, 5.0f);
 		m_pGoblin->SetHandPosition(8.0f, 16.0f);
 	}
 	else if (m_ID == WARRIORGOBLIN)
 	{
 		m_pGoblin->Load(&g_pTextures->t_goblin_body2, 50, 64, 2, 0, &g_pTextures->t_goblin_arm2, 43, 35, 2, &g_pTextures->t_goblin_legs, 48, 58, 12, _x, _y);
-		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 22.0f, 6.5f, -3.0f, 40.0f);
+		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 22.0f, 6.5f, -3.0f, 40.0f); 
 		m_pGoblin->SetArmRotatingPoint(38.0f, 5.0f);
 		m_pGoblin->SetHandPosition(10.0f, 17.0f);
 	}
 	else if (m_ID == KNIGHTGOBLIN)
 	{
 		m_pGoblin->Load(&g_pTextures->t_goblin_body3, 53, 68, 2, 0, &g_pTextures->t_goblin_arm3, 39, 54, 2, &g_pTextures->t_goblin_legs2, 48, 53, 12, _x, _y);
-		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 0.0f, 3.0f, 1.0f, 45.0f);
+		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 0.0f, 3.0f, 1.0f, 45.0f); 
 		m_pGoblin->SetArmRotatingPoint(33.0f, 29.0f);
 		m_pGoblin->SetHandPosition(6.0f, 42.0f);
 	}
@@ -55,7 +55,7 @@ void CHumanoid::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_vi
 	else if (m_ID == MAGEGOBLIN)
 	{
 		m_pGoblin->Load(&g_pTextures->t_goblin_body4, 50, 64, 2, 0, &g_pTextures->t_goblin_arm4, 43, 30, 2, &g_pTextures->t_goblin_legs3, 48, 58, 12, _x, _y);
-		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 22.0f, 6.5f, -3.0f, 40.0f);
+		m_pGoblin->SetPartsPos(-4.0f, 16.0f, 22.0f, 6.5f, -3.0f, 40.0f); 
 		m_pGoblin->SetArmRotatingPoint(38.0f, 5.0f);
 		m_pGoblin->SetHandPosition(8.0f, 16.0f);
 	}
@@ -65,6 +65,22 @@ void CHumanoid::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_vi
 		m_pGoblin->SetPartsPos(-22.0f, 4.0f, 37.0f, -8.0f, 4.0f, 50.0f);
 		m_pGoblin->SetArmRotatingPoint(47.0f, 4.0f);
 		m_pGoblin->SetHandPosition(10.0f, 25.0f);
+	}
+	else if (m_ID == WARRIORSKELETON)
+	{
+		m_pGoblin->Load(&g_pTextures->t_skeleton_body2, 33, 64, 2, 0, &g_pTextures->t_skeleton_arm2, 45, 45, 2, &g_pTextures->t_skeleton_legs, 40, 47, 12, _x, _y);
+		m_pGoblin->SetPartsPos(-15.0f, 4.0f, 24.0f, -8.0f, 4.0f, 50.0f);
+		m_pGoblin->SetArmRotatingPoint(40.0f, 17.0f);
+		m_pGoblin->SetHandPosition(6.0f, 38.0f);
+	}
+	else if (m_ID == SKELETONRUNNER)
+	{
+		m_pGoblin->Load(&g_pTextures->t_skeleton_body3, 46, 64, 2, 0, &g_pTextures->t_skeleton_arm, 52, 32, 2, &g_pTextures->t_skeleton_legs, 40, 47, 12, _x, _y);
+		m_pGoblin->SetPartsPos(-22.0f, 17.0f, 37.0f, -8.0f, 17.0f, 50.0f);
+		m_pGoblin->SetArmRotatingPoint(47.0f, 4.0f);
+		m_pGoblin->SetHandPosition(10.0f, 25.0f);
+
+		m_effectSprite.Load(&g_pTextures->t_dynamiteAnimation, 5, 100, 50);
 	}
 
 	m_fXVel = 0;
@@ -76,6 +92,8 @@ void CHumanoid::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_vi
 
 	m_fLegsAnimState = 5;
 	m_fArmAnimState = 0;
+
+	m_fBombAnimState = 0;
 
 	m_fWaitToBeat = 0;
 	m_is_hitting = false;
@@ -139,7 +157,7 @@ bool CHumanoid::CheckCollision()
 		newPosition.width = (float)m_pGoblin->GetRect().width;
 		newPosition.height = (float)m_pGoblin->GetRect().height;
 
-		return m_pWorld->CheckLivingCollision(newPosition);
+		return (m_pWorld->CheckLivingCollision(newPosition));
 	}
 }
 
@@ -162,9 +180,8 @@ bool CHumanoid::CheckNpc()
 
 			//if the goblin would collide: set the x-velocity to 0
 			if (CheckCollision())
-			{
 				m_fXVel = 0;
-			}
+			
 
 			//checks the movement in y-direction
 			CheckYMovement();
@@ -201,8 +218,8 @@ bool CHumanoid::CheckNpc()
 		m_xPos = m_pGoblin->GetRect().left;
 		m_yPos = m_pGoblin->GetRect().top;
 	
-		//return false if the goblin is outside the world
-		if (m_pGoblin->GetRect().left + m_pGoblin->GetRect().width < 0 || m_pGoblin->GetRect().left > m_pWorld->GetDimensions().x*100)
+		//return false if the goblin is outside the world or dead
+		if (m_pGoblin->GetRect().left + m_pGoblin->GetRect().width < 0 || m_pGoblin->GetRect().left > m_pWorld->GetDimensions().x*100 || m_Attributes.currentHealth <= 0)
 			return false;
 		else
 			return true;
@@ -337,6 +354,9 @@ void CHumanoid::CheckState()
 			if (m_pGoblin->GetRect().intersects(viewRect))
 			{
 				m_State = WALKING;
+
+				if (m_ID == SKELETONRUNNER)
+					m_fWaitToBeat = 5;
 			}
 		}
 
@@ -408,6 +428,21 @@ void CHumanoid::CheckState()
 				}
 			}
 		}
+		else if (m_ID == SKELETONRUNNER)
+		{
+			//check if the goblin is attacking
+			if (abs(m_pGoblin->GetRect().top - m_pPlayer->GetRect().top) < 50 && abs(m_pGoblin->GetRect().left - m_pPlayer->GetRect().left) < 50)
+				m_State = ATTACKING;
+
+			m_fWaitToBeat -= g_pTimer->GetElapsedTime().asSeconds();
+
+			//explode if near the player
+			if (m_State == ATTACKING || m_fWaitToBeat <= 0)
+			{
+				m_Attributes.currentHealth = 0;
+				Explode();
+			}
+		}
 		else
 		{
 			//check if the goblin is attacking
@@ -458,12 +493,6 @@ void CHumanoid::CheckState()
 
 
 
-
-
-
-
-
-
 void CHumanoid::NewRandomDestination()
 {
 	//get new x distance
@@ -500,11 +529,31 @@ void CHumanoid::Render()
 		{
 			m_pGoblin->Render(0, m_fLegsAnimState);
 			m_pGoblin->RenderSecondPart(0);
+
+			if (m_ID == SKELETONRUNNER)
+			{
+				m_fBombAnimState += g_pTimer->GetElapsedTime().asSeconds() * 20;
+				if (m_fBombAnimState >= 5)
+					m_fBombAnimState = 0;
+
+				m_effectSprite.SetPos(m_xPos - 10, m_yPos - 15);
+				m_effectSprite.Render(g_pFramework->GetRenderWindow(), m_fBombAnimState);
+			}
 		}
 		else
 		{
 			m_pGoblin->Render(1, m_fLegsAnimState);
 			m_pGoblin->RenderSecondPart(1);
+
+			if (m_ID == SKELETONRUNNER)
+			{
+				m_fBombAnimState += g_pTimer->GetElapsedTime().asSeconds() * 20;
+				if (m_fBombAnimState >= 5)
+					m_fBombAnimState = 0;
+
+				m_effectSprite.SetPos(m_xPos - 80, m_yPos - 15);
+				m_effectSprite.Render(g_pFramework->GetRenderWindow(), m_fBombAnimState);
+			}
 		}
 
 		if (m_State == FROZEN)
@@ -551,6 +600,21 @@ vector<SItem> CHumanoid::GetLoot()
 		thing2->Init(MAGICPOINT);
 		magicpoint.thing = thing2;
 		loot.push_back(magicpoint);
+	}
+	//maybe add sulfur or salpeter
+	else if (m_ID == SKELETONRUNNER && rand() % 10 == 0)
+	{
+		SItem sulfurorsalpeter;
+		sulfurorsalpeter.amount = 1;
+		CItem* thing2 = new CItem;
+
+		if (rand() % 2 == 0)
+			thing2->Init(SALPETER);
+		else
+			thing2->Init(SULFUR);
+
+		sulfurorsalpeter.thing = thing2;
+		loot.push_back(sulfurorsalpeter);
 	}
 
 	return loot;
@@ -610,6 +674,7 @@ IntRect CHumanoid::GetWeaponRect()
 	case(MAGEGOBLIN):
 	case(CHESTGOBLIN):
 	case(SKELETON):
+	case(SKELETONRUNNER):
 		return IntRect(m_pGoblin->GetHandPos(m_left).x - 5, m_pGoblin->GetHandPos(m_left).y - 5, 10, 10);
 		break;
 	case(WARRIORGOBLIN) :
@@ -617,6 +682,9 @@ IntRect CHumanoid::GetWeaponRect()
 		break;
 	case(KNIGHTGOBLIN) :
 		return IntRect(m_pGoblin->GetHandPos(m_left).x + 3, m_pGoblin->GetHandPos(m_left).y - 42, 20, 17);
+		break;
+	case(WARRIORSKELETON) :
+		return IntRect(m_pGoblin->GetHandPos(m_left).x - 5, m_pGoblin->GetHandPos(m_left).y - 38, 35, 12);
 		break;
 	default:
 		return IntRect(0, 0, 0, 0);
@@ -658,6 +726,43 @@ void CHumanoid::ThrowFireball()
 	projectile.m_fAnimState = -1;
 
 	g_pProjectiles->NewProjectile(projectile);
+}
+
+
+
+void CHumanoid::Explode()
+{
+	SProjectile projectile;
+
+	//add a projectile
+	CSprite *sprite = new CSprite;
+	sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
+	sprite->SetPos(m_pGoblin->GetRect().left , m_pGoblin->GetRect().top);
+
+	projectile.m_ID = EXPLOSION;
+	projectile.m_Damage = 30;
+	projectile.m_fFlown = 0.0f;
+	projectile.m_flightLength = 0;
+	projectile.m_fromPlayer = false;
+	projectile.m_fYVel = 0.0f;
+	projectile.m_fXVel = 0;
+	projectile.m_Sprite = sprite;
+	projectile.m_fAnimState = 0;
+
+	g_pProjectiles->NewProjectile(projectile);
+
+
+	//check if it hits player
+	if (m_pPlayer->GetRect().intersects(sprite->GetRect()))
+	{
+		m_pPlayer->DoDamage(projectile.m_Damage - (projectile.m_Damage * (m_pPlayer->GetPlayerAttributes().armour / 100)));
+
+		//throw player
+		if (m_pPlayer->GetRect().left < sprite->GetRect().left)
+			m_pPlayer->ThrowPlayer(true, 200);
+		else
+			m_pPlayer->ThrowPlayer(false, 200);
+	}
 }
 
 

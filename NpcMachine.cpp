@@ -131,14 +131,7 @@ void CNpcMachine::CheckAllNpcs()
 			}
 
 
-			//if the npc despawned: delete it
-			if ((*i)->CheckNpc() == false)
-			{
-				(*i)->Quit();
-				SAFE_DELETE((*i));
-				i = m_Npcs.erase(i);
-				continue;
-			}
+	
 
 
 			//if the arm changed direction the npc is hittable
@@ -220,6 +213,9 @@ void CNpcMachine::CheckAllNpcs()
 							//adds the experience
 							m_pPlayer->AddExp((*i)->GetAttributes()->exp);
 
+							if ((*i)->GetID() == SKELETONRUNNER)
+								((CHumanoid*)(*i))->Explode();
+
 							(*i)->Quit();
 							SAFE_DELETE((*i));
 							i = m_Npcs.erase(i);
@@ -230,6 +226,16 @@ void CNpcMachine::CheckAllNpcs()
 			}
 			else
 				(*i)->m_wasHit = false;
+
+
+			//if the npc despawned: delete it
+			if ((*i)->CheckNpc() == false)
+			{
+				(*i)->Quit();
+				SAFE_DELETE((*i));
+				i = m_Npcs.erase(i);
+				continue;
+			}
 
 			//if the player was hit by the npc
 			if ((*i)->GetState() == ATTACKING && (*i)->GetWeaponRect().intersects(m_pPlayer->GetRect()))
@@ -421,6 +427,9 @@ bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
 
 				//adds the experience
 				m_pPlayer->AddExp((*i)->GetAttributes()->exp);
+
+				if ((*i)->GetID() == SKELETONRUNNER)
+					((CHumanoid*)(*i))->Explode();
 
 				(*i)->Quit();
 				SAFE_DELETE((*i));

@@ -196,8 +196,13 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 
 		CEquipment *darmour;
 		darmour = new CEquipment;
-		darmour->InitEquipment(DIADOCHITARMOUR);
+		darmour->InitEquipment(LEATHERARMOUR);
 		m_pInventory->Take(darmour);
+
+		CEquipment *helmet;
+		helmet = new CEquipment;
+		helmet->InitEquipment(LEATHERHELMET);
+		m_pInventory->Take(helmet);
 
 
 		m_pMagicMenu->AddMagicPoints(10);

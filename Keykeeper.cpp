@@ -190,6 +190,9 @@ void CKeyKeeper::ThrowNpc(bool _left, int _strength)
 		m_sideSpeed = _strength;
 
 	m_fallingSpeed = -200;
+
+	if (rand() % 2 == 0)
+		Teleport();
 }
 
 
@@ -650,7 +653,7 @@ void CKeyKeeper::CreateSkeleton()
 			return;
 	}
 
-	m_pWorld->AddNpc(GOBLIN, x, y, false, SKELETON);
+	m_pWorld->AddNpc(GOBLIN, x, y, false, rand()%3+ 9);
 
 
 	SProjectile projectile;
@@ -661,7 +664,7 @@ void CKeyKeeper::CreateSkeleton()
 	sprite->Load(&g_pTextures->t_skeletonEffect, 5, 100, 100);
 	sprite->SetPos(x, y);
 
-	projectile.m_ID = CREATESKELETONEFFECT;
+	projectile.m_ID = SMOKEEFFECT;
 	projectile.m_Damage = 0;
 	projectile.m_fFlown = 0.0f;
 	projectile.m_flightLength = 0;
@@ -675,6 +678,53 @@ void CKeyKeeper::CreateSkeleton()
 }
 
 
+
+
+void CKeyKeeper::Teleport()
+{
+	int x;
+	int counter = 0;
+
+	while (counter < 5)
+	{
+		x = m_pKeyKeeper->GetRect().left;
+
+		if (rand() % 2 == 0)
+			x += (rand() % 5 + 1) * 100;
+		else
+			x -= (rand() % 5 + 1) * 100;
+
+		if (m_pWorld->isBlockPassable(x / 100, m_pKeyKeeper->GetRect().top / 100))
+		{
+			m_pKeyKeeper->SetPos(x, m_pKeyKeeper->GetRect().top);
+
+			SProjectile projectile;
+
+			//add a projectile
+			CSprite *sprite = new CSprite;
+
+			sprite->Load(&g_pTextures->t_teleport, 5, 100, 100);
+			sprite->SetPos(x, m_pKeyKeeper->GetRect().top);
+
+			projectile.m_ID = SMOKEEFFECT;
+			projectile.m_Damage = 0;
+			projectile.m_fFlown = 0.0f;
+			projectile.m_flightLength = 0;
+			projectile.m_fromPlayer = false;
+			projectile.m_fYVel = 0.0f;
+			projectile.m_fXVel = 0.0f;
+			projectile.m_Sprite = sprite;
+			projectile.m_fAnimState = 0;
+
+			g_pProjectiles->NewProjectile(projectile);
+
+			return;
+		}
+
+		counter++;
+	}
+	
+}
 
 
 
