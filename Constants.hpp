@@ -96,6 +96,7 @@ const int DYNAMITE = 71;
 const int SULFUR = 72;
 const int SALPETER = 73;
 const int LEATHER = 74;
+const int BONE = 75;
 const int KEY = 78;
 
 const int SPELL = 79;
@@ -137,32 +138,17 @@ const int VERYRARERING = 200;
 #pragma endregion
 
 
-#pragma region Sprite Sheet IDs
+#pragma region Observer actions
 
-const int SHEET_CHEST_CLOSED = 0;
-const int SHEET_CHEST_OPEN = 1;
-const int SHEET_ARCANUS = 2;
-const int SHEET_CUPBOARD = 3;
-const int SHEET_FURNANCE = 4;
-const int SHEET_DOOR_OPEN = 5;
-const int SHEET_DOOR_CLOSED = 6;
-const int SHEET_COAL = 7;
-const int SHEET_DIRT = 8;
-const int SHEET_GOLD = 9;
-const int SHEET_IRON = 10;
-const int SHEET_LADDER = 11;
-const int SHEET_MARBLE = 12;
-const int SHEET_STONEWALL1 = 13;
-const int SHEET_TABLE = 14;
-const int SHEET_LANTERN = 15;
-const int SHEET_MARBLEWALL = 16;
-const int SHEET_STONE = 17;
-const int SHEET_TREECROWN = 18;
-const int SHEET_WOODWALL = 19;
-const int SHEET_NOTEXTURE = 20;
-const int SHEET_STONEWALL2 = 21;
-const int SHEET_TREETRUNK = 22;
-const int SHEET_WOOD = 23;
+const int O_HIT = 1;
+
+#pragma endregion
+
+
+#pragma region Observer objects
+
+const int O_PLAYER = 1;
+const int O_GOBLIN = 2;
 
 #pragma endregion
 
@@ -178,12 +164,12 @@ const int WARRIORGOBLIN = 3;
 const int KNIGHTGOBLIN = 4;
 const int CHESTGOBLIN = 5;
 const int MAGEGOBLIN = 6;
-const int OGRE = 7;
-const int KEYKEEPER = 8;
-const int SKELETON = 9;
-const int WARRIORSKELETON = 10;
-const int SKELETONRUNNER = 11;
-const int BUNNY = 12;
+const int SKELETON = 7;
+const int WARRIORSKELETON = 8;
+const int SKELETONRUNNER = 9;
+const int BUNNY = 10;
+const int OGRE = 11;
+const int KEYKEEPER = 12;
 
 #pragma endregion
 
@@ -221,7 +207,7 @@ const int MAGICPOINTS = 12;
 #pragma endregion
 
 
-#pragma region Effects
+#pragma region StatusEffects
 
 const int NUMBER_OF_EFFECTS = 11;
 
@@ -281,7 +267,7 @@ const int BIG = 3;
 
 #pragma region Spells
 
-const int AMOUNTOFSPELLS = 6;
+const int AMOUNTOFSPELLS = 8;
 
 const int FIREBALL = 0;
 const int HEAL = 1;
@@ -289,6 +275,8 @@ const int ICE = 2;
 const int ALCHEMY = 3;
 const int LIGHT = 4;
 const int MANASHIELD = 5;
+const int POISONCLOUD = 6;
+const int TELEPORT = 7;
 
 #pragma endregion
 
@@ -297,21 +285,40 @@ const int MANASHIELD = 5;
 #pragma region Projectiles
 
 const int FIREBALLPROJECTILE = 1;
-const int EXPLOSION = 2;
-const int HEALING = 3;
-const int ICEBALLPROJECTILE = 4;
-const int ALCHEMYANIMATION = 5;
-const int LIGHTSPHERE = 6;
-const int RUBBISHANIMATION = 7;
-const int DUSTANIMATION = 8;
-const int MANASHIELDPROJECTILE = 9;
-const int DYNAMITEEFFECT = 10;
-const int SMOKEEFFECT = 11;
-const int POISONBALL = 12;
-const int POISONEXPLOSION = 13;
+const int ICEBALLPROJECTILE = 2;
+const int LIGHTSPHERE = 3;
+const int POISONBALL = 4;
 
 #pragma endregion
 
+
+
+#pragma region Effects
+
+const int EXPLOSION = 1;
+const int DYNAMITEEFFECT = 2;
+const int RUBBISHEFFECT = 3;
+const int DUSTEFFECT = 4;
+const int ALCHEMYEFFECT = 5;
+const int HEALEFFECT = 6;
+const int TELEPORTEFFECT = 7;
+const int POISONEFFECT = 8;
+const int CREATEEFFECT = 9;
+const int MANASHIELDEFFECT = 10;
+
+#pragma endregion
+
+
+
+
+#pragma region EffectTypes
+
+const int LOCALEFFECT_ONCE = 1;
+const int LOCALEFFECT_LOOP = 2;
+const int MOVINGEFFECT_ONCE = 3;
+const int MOVINGEFFECT_LOOP = 4;
+
+#pragma endregion
 
 
 #pragma region ConsumableRecipes

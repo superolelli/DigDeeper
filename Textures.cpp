@@ -131,12 +131,15 @@ void TextureLoading::LoadTextures()
 	t_spell[3].loadFromFile("Data/Sprites/Magic/spell_alchemy.png");
 	t_spell[4].loadFromFile("Data/Sprites/Magic/spell_light.png");
 	t_spell[5].loadFromFile("Data/Sprites/Magic/spell_manashield.png");
+	t_spell[6].loadFromFile("Data/Sprites/Magic/spell_poison.png");
+	t_spell[7].loadFromFile("Data/Sprites/Magic/spell_teleport.png");
 	t_fireballLeft.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(80, 0, 80, 30));
 	t_fireballRight.loadFromFile("Data/Sprites/Magic/fireball.png", IntRect(0, 0, 80, 30));
 	t_explosion.loadFromFile("Data/Sprites/Magic/explosion.png");
 	t_poisonballLeft.loadFromFile("Data/Sprites/Magic/poisonball.png", IntRect(80, 0, 80, 30));
 	t_poisonballRight.loadFromFile("Data/Sprites/Magic/poisonball.png", IntRect(0, 0, 80, 30));
 	t_poisonExplosion.loadFromFile("Data/Sprites/Magic/poison_explosion.png");
+	t_poisonExplosionBig.loadFromFile("Data/Sprites/Magic/poison_explosion_big.png");
 	t_healing.loadFromFile("Data/Sprites/Magic/heal_animation.png");
 	t_skeletonEffect.loadFromFile("Data/Sprites/Magic/create_skeleton.png");
 	t_teleport.loadFromFile("Data/Sprites/Magic/teleport.png");
@@ -317,12 +320,15 @@ void TextureLoading::LoadTextures()
 	t_blockInventoryTexture_leather.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/leather_inventory.png");
 	t_blockInventoryTexture_leatherarmour.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/leather_armour_inventory.png");
 	t_blockInventoryTexture_leatherhelmet.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/leather_helmet_inventory.png");
+	t_blockInventoryTexture_bone.loadFromFile("Data/Sprites/Inventory/Inventory_pictures/bone_inventory.png");
 	t_spellInventoryTexture_fireball.loadFromFile("Data/Sprites/Magic/spell_fireball.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_heal.loadFromFile("Data/Sprites/Magic/spell_heal.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_ice.loadFromFile("Data/Sprites/Magic/spell_ice.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_alchemy.loadFromFile("Data/Sprites/Magic/spell_alchemy.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_light.loadFromFile("Data/Sprites/Magic/spell_light.png", IntRect(0, 0, 97, 97));
 	t_spellInventoryTexture_manashield.loadFromFile("Data/Sprites/Magic/spell_manashield.png", IntRect(0, 0, 97, 97));
+	t_spellInventoryTexture_poisoncloud.loadFromFile("Data/Sprites/Magic/spell_poison.png", IntRect(0, 0, 97, 97));
+	t_spellInventoryTexture_teleport.loadFromFile("Data/Sprites/Magic/spell_teleport.png", IntRect(0, 0, 97, 97));
 
 	t_blockLittleTexture_dirt.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(86, 2, 40, 40));
 	t_blockLittleTexture_stone.loadFromFile("Data/Sprites/Objects/LittleItems/little_items.png", IntRect(464, 2, 40, 40));
@@ -396,6 +402,7 @@ void TextureLoading::LoadTextures()
 	t_blockLittleTexture_leather.loadFromFile("Data/Sprites/Objects/LittleItems/leather_little.png");
 	t_blockLittleTexture_leatherarmour.loadFromFile("Data/Sprites/Objects/LittleItems/leather_armour_little.png");
 	t_blockLittleTexture_leatherhelmet.loadFromFile("Data/Sprites/Objects/LittleItems/leather_helmet_little.png");
+	t_blockLittleTexture_bone.loadFromFile("Data/Sprites/Objects/LittleItems/bone_little.png");
 
 	t_tool_pickaxe.loadFromFile("Data/Sprites/Objects/Tools/Pickaxe_carried.png");
 	t_tool_sword.loadFromFile("Data/Sprites/Objects/Tools/sword_carried.png");

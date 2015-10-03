@@ -11,10 +11,11 @@ class CWorld;
 #include "CharacterInfo.hpp"
 #include "MagicMenu.hpp"
 #include "Beam.hpp"
+#include "Subject.hpp"
 
 
 
-class CPlayer
+class CPlayer : public CSubject
 {
 public:
 	CPlayer();
@@ -32,8 +33,8 @@ public:
 	bool Take(CThing *_thing, int amount);
 	bool Take(int _ID, int _amount);
 	void AddExp(int _exp){m_Attributes.currentExp += _exp;}
-	void AddDrunkness(float _drunkness){ m_StatusEffects[EFFECT_DRUNK].m_fDuration += _drunkness; m_StatusEffects[EFFECT_DRUNK].m_fTimeLeft += _drunkness; }
-	float GetDrunkness(){ return m_StatusEffects[EFFECT_DRUNK].m_fDuration; }
+	void AddDrunkness(float _drunkness){ m_StatuSStatusEffects[EFFECT_DRUNK].m_fDuration += _drunkness; m_StatuSStatusEffects[EFFECT_DRUNK].m_fTimeLeft += _drunkness; }
+	float GetDrunkness(){ return m_StatuSStatusEffects[EFFECT_DRUNK].m_fDuration; }
 	void AddEffect(SConsumableAttributes _attributes);
 	void Heal(int _life);
 	void AddMagicPoints(int _points){ m_pMagicMenu->AddMagicPoints(_points); g_pSignMachine->AddString("Magiepunkt!", 2, GetRect().left - GetRect().width / 2, GetRect().top, Color::Blue); }
@@ -45,6 +46,8 @@ public:
 	int GetMana(){ return m_Attributes.currentMana; }
 	int GetLevel(){ return m_pCharacterInfo->GetLevel(); }
 	int GetClass(){ return m_class; }
+	float GetPoisonSpellDuration(){return m_pMagicMenu->GetPoisonDuration(); }
+	int GetPoisonSpellDamage(){ return m_pMagicMenu->GetPoisonDamage(); }
 	bool AddRecipe(int _ID){return m_pBuildingMenu->NewRecipe(_ID);}
 	list<int> GetNotAvailableRecipesList(){return m_pBuildingMenu->GetNotAvailableRecipes();}
 	IntRect GetRect(){return m_pDwarf->GetRect();}
@@ -53,9 +56,13 @@ public:
 	bool IsLeft(){ return m_turned_left; }                   //is the player turned left?
 	void SubstractMana(int _mana){ m_Attributes.currentMana -= _mana; if (m_Attributes.currentMana < 0){ m_Attributes.currentMana = 0; } } //substracts the amount of mana
 	void DoAlchemy(int _level);   //tries alchemy
+	void Teleport(int _level);       //tries to teleport
 	bool IsInventoryFull(){ return m_pInventory->IsFull(); }
 	void SetMenuOpen(int _menu);
 	CThing* GetCarriedItem(){ return m_pInventory->GetCarriedThing(); }
+
+	int* GetPosXPointer(){ return m_pDwarf->GetPosXPointer(); }
+	int* GetPosYPointer(){ return m_pDwarf->GetPosYPointer(); }
 
 	SToolAttributes GetPlayerAttributes();
 	SPlayerAttributes GetPlayerBasicAttributes(){ return m_Attributes; }
@@ -89,7 +96,7 @@ private:
 		ar & m_Attributes.criticalDamage;
 		ar & m_Attributes.healthRegeneration;
 		ar & m_Attributes.manaRegeneration;
-		ar & m_StatusEffects;
+		ar & m_StatuSStatusEffects;
 		ar & m_ActiveEffects;
 		int x = m_pDwarf->GetRect().left;
 		int y = m_pDwarf->GetRect().top;
@@ -120,7 +127,7 @@ private:
 		ar & m_Attributes.criticalDamage;
 		ar & m_Attributes.healthRegeneration;
 		ar & m_Attributes.manaRegeneration;
-		ar & m_StatusEffects;
+		ar & m_StatuSStatusEffects;
 		ar & m_ActiveEffects;
 		ar & m_loadedPosX;
 		ar & m_loadedPosY;
@@ -144,7 +151,7 @@ private:
 	SHoldingButtons m_PanelMagic;
 	CButton *m_pCloseButton;
 
-	SEffect m_StatusEffects[NUMBER_OF_EFFECTS];
+	SStatusEffect m_StatuSStatusEffects[NUMBER_OF_EFFECTS];
 	VertexArray m_StatusDuration[NUMBER_OF_EFFECTS];
 
 	SPlayerAttributes m_Attributes;                  //the player's atttributes

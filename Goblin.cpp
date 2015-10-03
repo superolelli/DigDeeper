@@ -1,4 +1,5 @@
 #include "Goblin.hpp"
+#include "Effects.hpp"
 #include "World.hpp"
 
 
@@ -11,7 +12,7 @@ void CHumanoid::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_vi
 	if (!_loaded)
 	{
 		if (_specialID == -1)
-			m_ID = rand() % 5 + 2;
+			m_ID = rand() % 8 + 2;
 		else
 			m_ID = _specialID;
 	}
@@ -126,6 +127,7 @@ void CHumanoid::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_vi
 
 		m_left = true;
 		m_Attributes.currentHealth = m_Attributes.maxHealth;
+		m_Attributes.effects.clear();
 		m_chested = true;
 		m_safe = false;
 	}
@@ -573,13 +575,22 @@ vector<SItem> CHumanoid::GetLoot()
 	vector<SItem> loot;
 	loot.clear();
 
-	//add slime
-	SItem slime;
-	slime.amount = 1;
+	//add item
+	SItem item;
+	item.amount = 1;
 	CItem* thing = new CItem;
-	thing->Init(SLIME);
-	slime.thing = thing;
-	loot.push_back(slime);
+
+	if (m_ID >= NORMALGOBLIN && m_ID <= MAGEGOBLIN)
+	{
+		thing->Init(SLIME);
+	}
+	else if (m_ID >= SKELETON && m_ID <= SKELETONRUNNER)
+	{
+		thing->Init(BONE);
+	}
+
+	item.thing = thing;
+	loot.push_back(item);
 
 	//maybe add dagger
 	if (m_ID == WARRIORGOBLIN && rand()%10 == 0)
@@ -732,30 +743,17 @@ void CHumanoid::ThrowFireball()
 
 void CHumanoid::Explode()
 {
-	SProjectile projectile;
+	g_pEffects->AddEffect(EXPLOSION, m_pGoblin->GetRect().left, m_pGoblin->GetRect().top, NULL, NULL);
 
-	//add a projectile
+
 	CSprite *sprite = new CSprite;
 	sprite->Load(&g_pTextures->t_explosion, 5, 100, 100);
 	sprite->SetPos(m_pGoblin->GetRect().left , m_pGoblin->GetRect().top);
 
-	projectile.m_ID = EXPLOSION;
-	projectile.m_Damage = 30;
-	projectile.m_fFlown = 0.0f;
-	projectile.m_flightLength = 0;
-	projectile.m_fromPlayer = false;
-	projectile.m_fYVel = 0.0f;
-	projectile.m_fXVel = 0;
-	projectile.m_Sprite = sprite;
-	projectile.m_fAnimState = 0;
-
-	g_pProjectiles->NewProjectile(projectile);
-
-
 	//check if it hits player
 	if (m_pPlayer->GetRect().intersects(sprite->GetRect()))
 	{
-		m_pPlayer->DoDamage(projectile.m_Damage - (projectile.m_Damage * (m_pPlayer->GetPlayerAttributes().armour / 100)));
+		m_pPlayer->DoDamage(30 - (30 * (m_pPlayer->GetPlayerAttributes().armour / 100)));
 
 		//throw player
 		if (m_pPlayer->GetRect().left < sprite->GetRect().left)
@@ -763,6 +761,8 @@ void CHumanoid::Explode()
 		else
 			m_pPlayer->ThrowPlayer(false, 200);
 	}
+
+	SAFE_DELETE(sprite);
 }
 
 

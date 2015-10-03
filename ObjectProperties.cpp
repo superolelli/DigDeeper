@@ -24,6 +24,7 @@ void PropertyLoading::LoadProperties()
 		atb.speed = v.second.get("<xmlattr>.speed", 0);
 		atb.strength = v.second.get("<xmlattr>.strength", 0);
 		atb.exp = v.second.get("<xmlattr>.exp", 0);
+		atb.effects.clear();
 		
 		m_NpcProperties[v.second.get("<xmlattr>.ID", 0)] = atb;
 	}

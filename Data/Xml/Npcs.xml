@@ -60,29 +60,9 @@
     exp ="24"
  ></magegoblin>
 
-  <!-- Ogre -->
-  <ogre
-    ID ="7"
-    health ="100"
-    strength ="40"
-    speed ="130"
-    armour ="4"
-    exp ="57"
- ></ogre>
-
-  <!-- Keykeeper -->
-  <keykeeper
-    ID ="8"
-    health ="100"
-    strength ="10"
-    speed ="150"
-    armour ="0"
-    exp ="35"
- ></keykeeper>
-
   <!-- Skeleton -->
   <skeleton
-    ID ="9"
+    ID ="7"
     health ="30"
     strength ="5"
     speed ="150"
@@ -92,7 +72,7 @@
 
   <!-- Skeletonwarrior -->
   <skeletonwarrior
-    ID ="10"
+    ID ="8"
     health ="35"
     strength ="7"
     speed ="150"
@@ -102,7 +82,7 @@
 
   <!-- Skeletonrunner -->
   <skeletonrunner
-    ID ="11"
+    ID ="9"
     health ="1"
     strength ="0"
     speed ="190"
@@ -112,12 +92,32 @@
 
   <!-- Bunny -->
   <bunny
-    ID ="12"
+    ID ="10"
     health ="10"
     strength ="0"
     speed ="120"
     armour ="0"
     exp ="5"
  ></bunny>
+
+  <!-- Ogre -->
+  <ogre
+    ID ="11"
+    health ="100"
+    strength ="40"
+    speed ="130"
+    armour ="4"
+    exp ="57"
+ ></ogre>
+
+  <!-- Keykeeper -->
+  <keykeeper
+    ID ="12"
+    health ="100"
+    strength ="10"
+    speed ="150"
+    armour ="0"
+    exp ="35"
+ ></keykeeper>
   
 </npcs>

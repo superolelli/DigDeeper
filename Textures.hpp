@@ -131,13 +131,14 @@ public:
 
 	Texture t_magicMenu;                            //the magic menu
 	Texture t_buttonPlus;
-	Texture t_spell[6];                             //the buttons for the spells in the menu
+	Texture t_spell[8];                             //the buttons for the spells in the menu
 	Texture t_fireballLeft;
 	Texture t_fireballRight;
 	Texture t_explosion;
 	Texture t_poisonballLeft;
 	Texture t_poisonballRight;
 	Texture t_poisonExplosion;
+	Texture t_poisonExplosionBig;
 	Texture t_healing;
 	Texture t_skeletonEffect;
 	Texture t_teleport;
@@ -319,12 +320,15 @@ public:
 	Texture t_blockInventoryTexture_leather;
 	Texture t_blockInventoryTexture_leatherarmour;
 	Texture t_blockInventoryTexture_leatherhelmet;
+	Texture t_blockInventoryTexture_bone;
 	Texture t_spellInventoryTexture_fireball;
 	Texture t_spellInventoryTexture_heal;
 	Texture t_spellInventoryTexture_ice;
 	Texture t_spellInventoryTexture_alchemy;
 	Texture t_spellInventoryTexture_light;
 	Texture t_spellInventoryTexture_manashield;
+	Texture t_spellInventoryTexture_poisoncloud;
+	Texture t_spellInventoryTexture_teleport;
 
 	//the little item pictures of the things
 	Texture t_blockLittleTexture_dirt;
@@ -399,6 +403,7 @@ public:
 	Texture t_blockLittleTexture_leather;
 	Texture t_blockLittleTexture_leatherarmour;
 	Texture t_blockLittleTexture_leatherhelmet;
+	Texture t_blockLittleTexture_bone;
 
 
 	//the "carried" texture of the tools

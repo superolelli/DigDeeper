@@ -48,6 +48,7 @@ void CAnimatedAnimal::Init(int _x, int _y, CWorld *_world, CPlayer *_player, Vie
 
 		m_left = true;
 		m_Attributes.currentHealth = m_Attributes.maxHealth;
+		m_Attributes.effects.clear();
 	}
 }
 
@@ -97,6 +98,7 @@ bool CAnimatedAnimal::CheckNpc()
 		if (CheckCollision())
 		{
 			m_fXVel = 0;
+			NewPointToGo();
 		}
 
 		//checks the movement in y-direction

@@ -423,24 +423,24 @@ void CCharacterInfo::AddSkill(int _skill)
 		}break;
 	case BREAKINGSPEED:
 		{
-			m_pAttributes->breakingSpeed += 0.2f;
+			m_pAttributes->breakingSpeed += 0.5f;
 		}break;
     case HEALTH:
 		{
-			m_pAttributes->maxHealth += 20;
-			m_pAttributes->currentHealth += 20;
+			m_pAttributes->maxHealth += 10;
+			m_pAttributes->currentHealth += 10;
 		}break;
 	case STRENGTH:
 		{
-			m_pAttributes->strength += 2;
+			m_pAttributes->strength += 1;
 		}break;
 	case ARMOUR:
 		{
-			m_pAttributes->armour += 1;
+			m_pAttributes->armour += 3;
 		}break;
 	case LUCK:
 		{
-			m_pAttributes->luck += 1;
+			m_pAttributes->luck += 10;
 		}break;
 	case MANA:
 		{
@@ -449,23 +449,23 @@ void CCharacterInfo::AddSkill(int _skill)
 		}break;
 	case HEALTHREGENERATION:
 		{
-			m_pAttributes->healthRegeneration += 3;
+			m_pAttributes->healthRegeneration += 1;
 		}break;
 	case MANAREGENERATION:
 		{
-			m_pAttributes->manaRegeneration += 3;
+			m_pAttributes->manaRegeneration += 2;
 		}break;
 	case CRITICALCHANCE:
 		{
-			m_pAttributes->criticalChance += 2;
+			m_pAttributes->criticalChance += 5;
 		}break;
 	case CRITICALDAMAGE:
 		{
-			m_pAttributes->criticalDamage += 2;
+			m_pAttributes->criticalDamage += 10;
 		}break;
 	case MAGICPOINTS:
 	{
-		m_pPlayer->AddMagicPoints(2);
+		m_pPlayer->AddMagicPoints(1);
 	}break;
 	case RECIPESKILL:
 		{

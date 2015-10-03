@@ -26,8 +26,10 @@ public:
 	int GetID(){return m_ID;}
 	int GetState(){return m_State;}
 	void SetFrozen(float _frozenTime);
-	void PlayHitSound(){ m_hitSound.play(); }
 	void SetSafe(bool _safe){ m_safe = _safe; }
+	void AddEffect(SNpcEffect _effect){m_Attributes.effects.push_back(_effect);}
+	void PoisonNpc(int _strength, float _duration);
+	void CheckEffects();
 
 	bool m_wasHit;                          //was the npc hit?
 	bool m_safe;
@@ -44,6 +46,11 @@ protected:
 		ar & m_yPos;
 		ar & m_Attributes.currentHealth;
 		ar & m_safe;
+
+		if (version > 0)
+			ar & m_Attributes.effects;
+		else
+			m_Attributes.effects.clear();
 	}
 
 	//finds the shortest path to a destination
@@ -56,8 +63,7 @@ protected:
 	int m_yPos; 
 
 	float m_fFrozenTimer;
-
-	Sound m_hitSound;
+	float m_fSecondsTimer;
 
 	CWorld *m_pWorld;                         //a pointer to the world
 	CPlayer *m_pPlayer;

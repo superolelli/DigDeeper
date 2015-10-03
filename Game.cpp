@@ -62,6 +62,7 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 
 	//Inits the npc machine
 	m_NpcMachine.Init(m_pWorld, m_pPlayer, &m_View);
+	m_NpcMachine.AddObserver(&m_SoundEngine);
 
 	if(_attributes.WorldSize == SMALL)
 		m_pWorld->Init(100, 54, &m_View, &m_NpcMachine, m_Settings.m_fast_light, _loaded);
@@ -73,12 +74,13 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	//Inits the player
 	m_pPlayer->Init(700, 300, m_pWorld, &m_View, _attributes.PlayerClass, m_Settings.m_inventory_numbers, m_Settings.m_beam_numbers);
 
-	if(!_loaded)
+	/*if(!_loaded)
 	{
 		m_NpcMachine.AddNpc(GOBLIN, 1500, 100, false);
-	}
+	}*/
 
 	g_pProjectiles->Init(m_pWorld, m_pPlayer, &m_NpcMachine);
+	g_pEffects->Init(m_pWorld, m_pPlayer, &m_NpcMachine);
 
 	m_pPauseMenu = new CSprite;
 	m_pPauseMenu->Load(&g_pTextures->t_pauseMenu);
@@ -137,6 +139,7 @@ void CGame::Quit()
 	SAFE_DELETE(m_pSaveButton);
 	SAFE_DELETE(m_pQuitButton);
 
+	m_NpcMachine.RemoveObserver(&m_SoundEngine);
 	m_NpcMachine.Quit();
 
 	g_pSound->m_musicGame[m_music].stop();
@@ -144,6 +147,7 @@ void CGame::Quit()
 	g_pProfiler->Quit();
 
 	g_pProjectiles->Quit();
+	g_pEffects->Quit();
 
 	//Sets the default view
 	g_pFramework->GetRenderWindow()->setView(g_pFramework->GetRenderWindow()->getDefaultView());
@@ -213,6 +217,7 @@ void CGame::Run()
 		}
 
 		CheckMusic();
+		m_SoundEngine.CheckAllSounds();
 
 
 		if (m_zoom == 1)
@@ -241,6 +246,7 @@ void CGame::Run()
 
 
 		g_pProjectiles->CheckProjectiles();
+		g_pEffects->CheckEffects();
 
 
 		RenderBackground();
@@ -255,6 +261,7 @@ void CGame::Run()
 		m_NpcMachine.RenderAllNpcs();
 
 		g_pProjectiles->Render();
+		g_pEffects->Render();
 
 		//renders darkness and light
 		m_pWorld->RenderLight();

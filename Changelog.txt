@@ -1661,6 +1661,43 @@ ZUKÜNFITGE ÄNDERUNGEN:
 22.09.2015
 
 - Bombenskelette können nun selten Schwefel oder Salpeter droppen
+- Skelette spawnen nun auch Nachts an der Oberfläche und im Kerker
+- Werte der Skills beim Level-Up geändert
 - Bugfix: Goblins steckten oft in der Decke fest, wenn man sie in 1 Block hohen Gängen schlug
+
+--------------------------------------------------------
+23.09.2015
+
+- Knochen hinzugefügt
+- Skelette droppen nun Knochen
+
+--------------------------------------------------------
+24.09.2015
+
+- Effektemaschine begonnen neu zu schreiben: Ist schon sehr viel übersichtlicher und einfacher (aber noch nicht ganz fertig)
+
+--------------------------------------------------------
+27.09.2015
+
+- Bugfix: Fehler in der Generierung des Schlüsselwächterraums behoben, der das Spiel abstürzen ließ
+- Effektmaschine fertiggestellt
+
+--------------------------------------------------------
+28.09.2015
+
+- Teleportzauber für den Spieler hinzugefügt
+- Bugfix: Kaninchen liefen unendlich lang gegen Wände, wenn diese im Weg standen
+
+--------------------------------------------------------
+01.10.2015
+
+- Npcs können nun vergiftet werden
+- Giftwolkenzauberspruch hinzugefügt
+
+--------------------------------------------------------
+03.10.2015
+
+- Soundengine implementiert (nur die Engine, d.h. es gibt noch keine Sounds. Diese können nun
+  aber sehr einfach hinzugefügt werden)
 
 --------------------------------------------------------

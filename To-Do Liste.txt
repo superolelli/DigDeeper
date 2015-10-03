@@ -5,3 +5,5 @@
 - Erfolgemenü einbauen
 
 - Übersetzung des Spiels (v.a. in Englisch) ermöglichen
+- Individuelle Tastenbelegung ermöglichen
+- Esc sollte zuerst immer die Menüs schließen

@@ -9,8 +9,10 @@
 #include "NpcMachine.hpp"
 #include "Profiler.hpp"
 #include "Projectiles.hpp"
+#include "Effects.hpp"
 #include "StringInput.hpp"
 #include "HelpPage.hpp"
+#include "SoundEngine.hpp"
 
 
 class CGame
@@ -54,6 +56,7 @@ private:
 	CWorld *m_pWorld;                       //the world
 	CPlayer *m_pPlayer;                      //the player
 	CNpcMachine m_NpcMachine;                //the npc machine
+	CSoundengine m_SoundEngine;              //the sound engine
 
 	void CheckFps();                    //prints the fps
 	void RenderBackground();           //renders the background

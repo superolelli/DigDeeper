@@ -309,6 +309,12 @@ void CItem::Init(int _ID, bool _loaded)
 		if (!_loaded)
 			m_Name = "Lederkappe";
 	}break;
+	case(BONE) :
+	{
+		m_pInventorySprite->Load(&g_pTextures->t_blockInventoryTexture_bone);
+		if (!_loaded)
+			m_Name = "Knochen";
+	}break;
 	case(SPELL) :
 	{
 		if (_loaded)
@@ -513,6 +519,16 @@ void CItem::InitSpell()
 	case(MANASHIELD) :
 		m_pInventorySprite->Load(&g_pTextures->t_spellInventoryTexture_manashield);
 		m_Name = "Manaschild";
+		break;
+
+	case(POISONCLOUD) :
+		m_pInventorySprite->Load(&g_pTextures->t_spellInventoryTexture_poisoncloud);
+		m_Name = "Giftwolke";
+		break;
+
+	case(TELEPORT) :
+		m_pInventorySprite->Load(&g_pTextures->t_spellInventoryTexture_teleport);
+		m_Name = "Teleport";
 		break;
 
 	default:

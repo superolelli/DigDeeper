@@ -1,5 +1,5 @@
 #include "World.hpp"
-
+#include "Effects.hpp"
 
 
 CWorld::CWorld()
@@ -148,7 +148,7 @@ void CWorld::GenerateKeyKeeperRoom()
 	int xPos, yPos, xSize, ySize;
 
 	//get the position and size
-	xPos = rand() % m_BlocksX - 13;
+	xPos = rand() % (m_BlocksX - 13);
 	yPos = rand() % (m_BlocksY / 2 - 25) + 10;
 	xSize = rand() % 4 + 8;
 	ySize = rand() % 3 + 5;
@@ -2209,23 +2209,7 @@ bool CWorld::CheckPlaceables(IntRect _playerRect, CPlayer *_player)
 							//if the placeable was rubbish show animation
 							case(RUBBISH) :
 							{
-								SProjectile projectile;
-
-								//add a projectile
-								CSprite *sprite = new CSprite;
-
-								sprite->Load(&g_pTextures->t_rubbishAnimation, 5, 150, 150);
-								sprite->SetPos(x * 100 - 25, y * 100 - 50);
-
-								projectile.m_ID = RUBBISHANIMATION;
-								projectile.m_Damage = 0;
-								projectile.m_fFlown = 0.0f;
-								projectile.m_flightLength = 0;
-								projectile.m_fromPlayer = true;
-								projectile.m_fYVel = 0.0f;
-								projectile.m_Sprite = sprite;
-								projectile.m_fAnimState = 0;
-								g_pProjectiles->NewProjectile(projectile);
+								g_pEffects->AddEffect(RUBBISHEFFECT, x * 100 - 25, y * 100 - 50, NULL, NULL);
 							}break;
 
 						
@@ -2450,25 +2434,7 @@ void CWorld::AddLittleItem(int _ID, int _x, int _y, int _amount)
 				item.SetVel(Vector2f(0, -150.0f));
 				m_LittleItemList.push_back(item);
 
-				SProjectile projectile;
-
-				//add a projectile
-				CSprite *sprite = new CSprite;
-
-				sprite->Load(&g_pTextures->t_dynamiteAnimation, 5, 100, 50);
-				sprite->SetPos(_x, _y);
-
-				projectile.m_ID = DYNAMITEEFFECT;
-				projectile.m_Damage = 0;
-				projectile.m_fFlown = 5.0f;   //time
-				projectile.m_flightLength = 0;
-				projectile.m_fromPlayer = false;
-				projectile.m_fYVel = 0.0f;
-				projectile.m_Sprite = sprite;
-				projectile.m_fAnimState = 0;
-				projectile.m_xPos = m_LittleItemList.back().GetXPos();
-				projectile.m_yPos = m_LittleItemList.back().GetYPos();
-				g_pProjectiles->NewProjectile(projectile);
+				g_pEffects->AddEffect(DYNAMITEEFFECT, item.GetRect().left, item.GetRect().top, m_LittleItemList.back().GetXPos(), m_LittleItemList.back().GetYPos());
 
 				i++;
 				continue;
@@ -3137,7 +3103,7 @@ void CWorld::FillChestRandomly(int _chestID)
 				CThing *thing = NULL;
 
 				//if thing is an item
-				if(randomNumber > PIBREAK && randomNumber < 75)
+				if(randomNumber > PIBREAK && randomNumber < 76)
 				{
 					thing = new CItem;
 					((CItem*)thing)->Init(randomNumber);	
@@ -3429,28 +3395,42 @@ bool CWorld::CheckForBarrier(IntRect _living, bool _left)
 	int x = _living.left / 100;
 	int y = (_living.top + _living.height/2) / 100;
 
-	if (_living.height > 120)
-		y++;
+	int maximum = 1;
 
-	if (_left)
+	//if living thing is big: check more than one block
+	if (_living.height > 120)
 	{
-		if (x - 1 >= 0 && y < m_BlocksY)
-		{
-			if (m_pBlocks[x - 1][y] == NULL || m_pBlocks[x - 1][y]->IsPassable())
-			{
-				return false;
-			}
-		}
+		maximum = 2;
+		y = ((_living.top + _living.height / 2) - 25) / 100;
 	}
-	else
+
+	
+
+	for (int i = 0; i < maximum; i++)
 	{
-		if (x + 1 < m_BlocksX && y < m_BlocksY)
+		if (_left)
 		{
-			if (m_pBlocks[x + 1][y] == NULL || m_pBlocks[x + 1][y]->IsPassable())
+			if (x - 1 >= 0 && y < m_BlocksY)
 			{
-				return false;
+				if (m_pBlocks[x - 1][y] == NULL || m_pBlocks[x - 1][y]->IsPassable())
+				{
+					return false;
+				}
 			}
 		}
+		else
+		{
+			if (x + 1 < m_BlocksX && y < m_BlocksY)
+			{
+				if (m_pBlocks[x + 1][y] == NULL || m_pBlocks[x + 1][y]->IsPassable())
+				{
+					return false;
+				}
+			}
+		}
+
+
+		y++;
 	}
 
 	return true;
@@ -3470,7 +3450,7 @@ bool CWorld::isBlockPassable(int _x, int _y)
 			return true;
 	}
 
-	return true;
+	return false;
 }
 
 
@@ -3573,25 +3553,7 @@ void CWorld::DoAlchemy(int _level)
 		m_pBlocks[x][y]->SetPos(x * 100, y * 100);
 	}
 
-		//show alchemy animation
-		SProjectile projectile;
-
-		//add a projectile
-		CSprite *sprite = new CSprite;
-
-		sprite->Load(&g_pTextures->t_alchemy, 5, 100, 100);
-		sprite->SetPos(x*100, y*100);
-
-		projectile.m_ID = ALCHEMYANIMATION;
-		projectile.m_Damage = 0;
-		projectile.m_fFlown = 0.0f;
-		projectile.m_flightLength = 0;
-		projectile.m_fromPlayer = true;
-		projectile.m_fYVel = 0.0f;
-		projectile.m_Sprite = sprite;
-		projectile.m_fAnimState = 0;
-		g_pProjectiles->NewProjectile(projectile);
-	
+	g_pEffects->AddEffect(ALCHEMYEFFECT, x * 100, y * 100, NULL, NULL);
 }
 
 

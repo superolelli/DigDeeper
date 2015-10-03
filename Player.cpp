@@ -40,7 +40,7 @@ CPlayer::~CPlayer()
 
 	for (int i = 0; i < NUMBER_OF_EFFECTS; i++)
 	{
-		SAFE_DELETE(m_StatusEffects[i].m_Sprite);
+		SAFE_DELETE(m_StatuSStatusEffects[i].m_Sprite);
 	}
 
 	m_ActiveEffects.clear();
@@ -103,10 +103,10 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 
 	for (int i = 0; i < NUMBER_OF_EFFECTS; i++)
 	{
-		m_StatusEffects[i].m_Sprite = new CSprite;
-		m_StatusEffects[i].m_Sprite->Load(&g_pTextures->t_status[i]);
-		m_StatusEffects[i].m_fDuration = 0.0f;
-		m_StatusEffects[i].m_fTimeLeft = 0.0f;
+		m_StatuSStatusEffects[i].m_Sprite = new CSprite;
+		m_StatuSStatusEffects[i].m_Sprite->Load(&g_pTextures->t_status[i]);
+		m_StatuSStatusEffects[i].m_fDuration = 0.0f;
+		m_StatuSStatusEffects[i].m_fTimeLeft = 0.0f;
 
 		m_StatusDuration[i].setPrimitiveType(sf::TrianglesFan);
 		m_StatusDuration[i].resize(361);
@@ -332,8 +332,8 @@ void CPlayer::InitLoaded(int _x, int _y, CWorld *_world, View *_view, bool _inve
 
 	for (int i = 0; i < NUMBER_OF_EFFECTS; i++)
 	{
-		m_StatusEffects[i].m_Sprite = new CSprite;
-		m_StatusEffects[i].m_Sprite->Load(&g_pTextures->t_status[i]);
+		m_StatuSStatusEffects[i].m_Sprite = new CSprite;
+		m_StatuSStatusEffects[i].m_Sprite->Load(&g_pTextures->t_status[i]);
 
 		m_StatusDuration[i].setPrimitiveType(sf::TrianglesFan);
 		m_StatusDuration[i].resize(361);
@@ -492,7 +492,7 @@ void CPlayer::CheckXMovement()
 	if (abs(m_SideSpeed) < 50)
 	{
 		//if the left key is pressed
-		if (((Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A)) && m_StatusEffects[EFFECT_DRUNK].m_fDuration <= 5.0f) || (m_StatusEffects[EFFECT_DRUNK].m_fDuration > 5.0f && (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))))
+		if (((Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A)) && m_StatuSStatusEffects[EFFECT_DRUNK].m_fDuration <= 5.0f) || (m_StatuSStatusEffects[EFFECT_DRUNK].m_fDuration > 5.0f && (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D))))
 		{
 			//m_turned_left = true;
 
@@ -519,7 +519,7 @@ void CPlayer::CheckXMovement()
 
 		}
 		//if the right key is pressed
-		else if (((Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D)) && m_StatusEffects[EFFECT_DRUNK].m_fDuration <= 5.0f) || (m_StatusEffects[EFFECT_DRUNK].m_fDuration> 5.0f && (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))))
+		else if (((Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D)) && m_StatuSStatusEffects[EFFECT_DRUNK].m_fDuration <= 5.0f) || (m_StatuSStatusEffects[EFFECT_DRUNK].m_fDuration> 5.0f && (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::A))))
 		{
 			//m_turned_left = false;
 
@@ -804,9 +804,9 @@ void CPlayer::RenderInventory()
 	int y = 95;
 	for (int i = 0; i < NUMBER_OF_EFFECTS; i++)
 	{
-		if (m_StatusEffects[i].m_fDuration > 0.0f)
+		if (m_StatuSStatusEffects[i].m_fDuration > 0.0f)
 		{
-			m_StatusDuration[i].resize((m_StatusEffects[i].m_fTimeLeft / m_StatusEffects[i].m_fDuration) * 361);
+			m_StatusDuration[i].resize((m_StatuSStatusEffects[i].m_fTimeLeft / m_StatuSStatusEffects[i].m_fDuration) * 361);
 
 			m_StatusDuration[i][0].position = Vector2f(x + 35, y + 35);
 
@@ -819,15 +819,15 @@ void CPlayer::RenderInventory()
 			
 			g_pFramework->GetRenderWindow()->draw(m_StatusDuration[i]);
 
-			m_StatusEffects[i].m_Sprite->SetPos(x,y);
-			m_StatusEffects[i].m_Sprite->Render(g_pFramework->GetRenderWindow());
-			m_StatusEffects[i].m_fTimeLeft -= g_pTimer->GetElapsedTime().asSeconds();
+			m_StatuSStatusEffects[i].m_Sprite->SetPos(x,y);
+			m_StatuSStatusEffects[i].m_Sprite->Render(g_pFramework->GetRenderWindow());
+			m_StatuSStatusEffects[i].m_fTimeLeft -= g_pTimer->GetElapsedTime().asSeconds();
 
 
-			if (m_StatusEffects[i].m_fTimeLeft < 0)
+			if (m_StatuSStatusEffects[i].m_fTimeLeft < 0)
 			{
-				m_StatusEffects[i].m_fDuration = 0;
-				m_StatusEffects[i].m_fTimeLeft = 0;
+				m_StatuSStatusEffects[i].m_fDuration = 0;
+				m_StatuSStatusEffects[i].m_fTimeLeft = 0;
 			}
 
 			x += 80;
@@ -1217,6 +1217,30 @@ void CPlayer::DoAlchemy(int _level)
 
 
 
+void CPlayer::Teleport(int _level)
+{
+	for (int i = _level; i > 0; i--)
+	{
+		if (m_turned_left)
+		{
+			if (m_pWorld->isBlockPassable(GetRect().left / 100 - i, GetRect().top / 100))
+			{
+				SetPos((GetRect().left/100) *100 - i * 100 + 10, GetRect().top);
+				return;
+			}
+		}
+		else
+		{
+			if (m_pWorld->isBlockPassable(GetRect().left / 100 + i, GetRect().top / 100))
+			{
+				SetPos((GetRect().left / 100) * 100 + i * 100 + 10, GetRect().top);
+				return;
+			}
+		}
+	}
+}
+
+
 
 
 void CPlayer::AddEffect(SConsumableAttributes _attributes)
@@ -1247,62 +1271,62 @@ void CPlayer::AddEffect(SConsumableAttributes _attributes)
 	{
 		if (_attributes.armour != 0)
 		{
-			m_StatusEffects[EFFECT_ARMOUR].m_fTimeLeft += _attributes.duration;
-			m_StatusEffects[EFFECT_ARMOUR].m_fDuration = m_StatusEffects[EFFECT_ARMOUR].m_fTimeLeft;
+			m_StatuSStatusEffects[EFFECT_ARMOUR].m_fTimeLeft += _attributes.duration;
+			m_StatuSStatusEffects[EFFECT_ARMOUR].m_fDuration = m_StatuSStatusEffects[EFFECT_ARMOUR].m_fTimeLeft;
 		}
 
 		if (_attributes.breaking_speed != 0)
 		{
-			m_StatusEffects[EFFECT_BREAKINGSPEED].m_fTimeLeft += _attributes.duration;
-			m_StatusEffects[EFFECT_BREAKINGSPEED].m_fDuration = m_StatusEffects[EFFECT_BREAKINGSPEED].m_fTimeLeft;
+			m_StatuSStatusEffects[EFFECT_BREAKINGSPEED].m_fTimeLeft += _attributes.duration;
+			m_StatuSStatusEffects[EFFECT_BREAKINGSPEED].m_fDuration = m_StatuSStatusEffects[EFFECT_BREAKINGSPEED].m_fTimeLeft;
 		}
 
 		if (_attributes.luck != 0)
 		{
-			m_StatusEffects[EFFECT_LUCK].m_fTimeLeft += _attributes.duration;
-			m_StatusEffects[EFFECT_LUCK].m_fDuration = m_StatusEffects[EFFECT_LUCK].m_fTimeLeft;
+			m_StatuSStatusEffects[EFFECT_LUCK].m_fTimeLeft += _attributes.duration;
+			m_StatuSStatusEffects[EFFECT_LUCK].m_fDuration = m_StatuSStatusEffects[EFFECT_LUCK].m_fTimeLeft;
 		}
 
 		if (_attributes.healthRegeneration != 0)
 		{
-			m_StatusEffects[EFFECT_HEALTHREGENERATION].m_fTimeLeft += _attributes.duration;
-			m_StatusEffects[EFFECT_HEALTHREGENERATION].m_fDuration = m_StatusEffects[EFFECT_HEALTHREGENERATION].m_fTimeLeft;
+			m_StatuSStatusEffects[EFFECT_HEALTHREGENERATION].m_fTimeLeft += _attributes.duration;
+			m_StatuSStatusEffects[EFFECT_HEALTHREGENERATION].m_fDuration = m_StatuSStatusEffects[EFFECT_HEALTHREGENERATION].m_fTimeLeft;
 		}
 
 		if (_attributes.manaRegeneration != 0)
 		{
-			m_StatusEffects[EFFECT_MANAREGENERATION].m_fTimeLeft += _attributes.duration;
-			m_StatusEffects[EFFECT_MANAREGENERATION].m_fDuration = m_StatusEffects[EFFECT_MANAREGENERATION].m_fTimeLeft;
+			m_StatuSStatusEffects[EFFECT_MANAREGENERATION].m_fTimeLeft += _attributes.duration;
+			m_StatuSStatusEffects[EFFECT_MANAREGENERATION].m_fDuration = m_StatuSStatusEffects[EFFECT_MANAREGENERATION].m_fTimeLeft;
 		}
 
 		if (_attributes.speed != 0)
 		{
-			m_StatusEffects[EFFECT_SPEED].m_fTimeLeft += _attributes.duration;
-			m_StatusEffects[EFFECT_SPEED].m_fDuration = m_StatusEffects[EFFECT_SPEED].m_fTimeLeft;
+			m_StatuSStatusEffects[EFFECT_SPEED].m_fTimeLeft += _attributes.duration;
+			m_StatuSStatusEffects[EFFECT_SPEED].m_fDuration = m_StatuSStatusEffects[EFFECT_SPEED].m_fTimeLeft;
 		}
 
 		if (_attributes.strength != 0)
 		{
-			m_StatusEffects[EFFECT_STRENGTH].m_fTimeLeft += _attributes.duration;
-			m_StatusEffects[EFFECT_STRENGTH].m_fDuration = m_StatusEffects[EFFECT_STRENGTH].m_fTimeLeft;
+			m_StatuSStatusEffects[EFFECT_STRENGTH].m_fTimeLeft += _attributes.duration;
+			m_StatuSStatusEffects[EFFECT_STRENGTH].m_fDuration = m_StatuSStatusEffects[EFFECT_STRENGTH].m_fTimeLeft;
 		}
 
 		if (_attributes.criticalChance != 0)
 		{
-			m_StatusEffects[EFFECT_CRITICALCHANCE].m_fTimeLeft += _attributes.duration;
-			m_StatusEffects[EFFECT_CRITICALCHANCE].m_fDuration = m_StatusEffects[EFFECT_CRITICALCHANCE].m_fTimeLeft;
+			m_StatuSStatusEffects[EFFECT_CRITICALCHANCE].m_fTimeLeft += _attributes.duration;
+			m_StatuSStatusEffects[EFFECT_CRITICALCHANCE].m_fDuration = m_StatuSStatusEffects[EFFECT_CRITICALCHANCE].m_fTimeLeft;
 		}
 
 		if (_attributes.criticalDamage != 0)
 		{
-			m_StatusEffects[EFFECT_CRITICALDAMAGE].m_fTimeLeft += _attributes.duration;
-			m_StatusEffects[EFFECT_CRITICALDAMAGE].m_fDuration = m_StatusEffects[EFFECT_CRITICALDAMAGE].m_fTimeLeft;
+			m_StatuSStatusEffects[EFFECT_CRITICALDAMAGE].m_fTimeLeft += _attributes.duration;
+			m_StatuSStatusEffects[EFFECT_CRITICALDAMAGE].m_fDuration = m_StatuSStatusEffects[EFFECT_CRITICALDAMAGE].m_fTimeLeft;
 		}
 
 		if (_attributes.poison != 0)
 		{
-			m_StatusEffects[EFFECT_POISON].m_fTimeLeft += _attributes.duration;
-			m_StatusEffects[EFFECT_POISON].m_fDuration = m_StatusEffects[EFFECT_POISON].m_fTimeLeft;
+			m_StatuSStatusEffects[EFFECT_POISON].m_fTimeLeft += _attributes.duration;
+			m_StatuSStatusEffects[EFFECT_POISON].m_fDuration = m_StatuSStatusEffects[EFFECT_POISON].m_fTimeLeft;
 		}
 	}
 }

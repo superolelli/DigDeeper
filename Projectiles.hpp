@@ -7,6 +7,7 @@
 #include "World.hpp"
 #include "LightMachine.hpp"
 
+
 class CNpcMachine;
 
 

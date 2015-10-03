@@ -57,6 +57,8 @@ public:
 
 	IntRect GetRect();
 	Vector2i GetHandPos(bool _left);
+	int* GetPosXPointer(){return &m_Rect.left;}
+	int* GetPosYPointer(){ return &m_Rect.top; }
 
 private:
 	CSprite *m_pBody;               //the body sprite

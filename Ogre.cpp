@@ -1,6 +1,6 @@
 #include "Ogre.hpp"
 #include "World.hpp"
-
+#include "Effects.hpp"
 
 void COgre::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, int _specialID, bool _loaded)
 {
@@ -59,6 +59,7 @@ void COgre::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, 
 		m_left = true;
 		m_safe = false;
 		m_Attributes.currentHealth = m_Attributes.maxHealth;
+		m_Attributes.effects.clear();
 	}
 }
 
@@ -531,44 +532,34 @@ IntRect COgre::GetWeaponRect()
 	{
 	case(0) :
 		return IntRect(m_pOgre->GetHandPos(m_left).x, m_pOgre->GetHandPos(m_left).y + 156, 138, 58);
-		cout << "Got weapon rect" << endl;
 		break;
 	case(1):
 		return IntRect(m_pOgre->GetHandPos(m_left).x + 4, m_pOgre->GetHandPos(m_left).y + 96, 120, 58);
-		cout << "Got weapon rect" << endl;
 		break;
 	case(2):
 		return IntRect(m_pOgre->GetHandPos(m_left).x + 49, m_pOgre->GetHandPos(m_left).y + 85, 71, 106);
-		cout << "Got weapon rect" << endl;
 		break;
 	case(3):
 		return IntRect(m_pOgre->GetHandPos(m_left).x + 109, m_pOgre->GetHandPos(m_left).y + 4, 49, 123);
-		cout << "Got weapon rect" << endl;
 		break;
 	case(4):
 		return IntRect(m_pOgre->GetHandPos(m_left).x + 172, m_pOgre->GetHandPos(m_left).y + 82, 71, 67);
-		cout << "Got weapon rect" << endl;
 		break;
 	case(5):
 		return IntRect(m_pOgre->GetRect().left + 9, m_pOgre->GetHandPos(m_left).y + 82, 71, 67);
-		cout << "Got weapon rect" << endl;
 		break;
 	case(6) :
 		return IntRect(m_pOgre->GetRect().left + 93, m_pOgre->GetHandPos(m_left).y + 4, 49, 123);
-		cout << "Got weapon rect" << endl;
 		break;
 	case(7) :
 		return IntRect(m_pOgre->GetRect().left + 145, m_pOgre->GetHandPos(m_left).y + 85, 71, 106);
-		cout << "Got weapon rect" << endl;
 		break;
 	case(8) :
 		return IntRect(m_pOgre->GetRect().left + 125, m_pOgre->GetHandPos(m_left).y + 96, 120, 58);
-		cout << "Got weapon rect" << endl;
 		break;
 	case(9) :
 	case(10):
 		return IntRect(m_pOgre->GetRect().left + 112, m_pOgre->GetHandPos(m_left).y + 156, 138, 58);
-		cout << "Got weapon rect" << endl;
 		break;
 	}
 }
@@ -578,25 +569,8 @@ IntRect COgre::GetWeaponRect()
 
 void COgre::AddDust()
 {
-	SProjectile projectile;
-
-	//add a projectile
-	CSprite *sprite = new CSprite;
-
-	sprite->Load(&g_pTextures->t_ground_hit, 5, 100, 100);
-
 	if (m_left)
-		sprite->SetPos(m_pOgre->GetRect().left - 105, m_pOgre->GetRect().top + 80);
+		g_pEffects->AddEffect(DUSTEFFECT, m_pOgre->GetRect().left - 105, m_pOgre->GetRect().top + 80, NULL, NULL);
 	else
-		sprite->SetPos(m_pOgre->GetRect().left + 105, m_pOgre->GetRect().top + 80);
-
-	projectile.m_ID = DUSTANIMATION;
-	projectile.m_Damage = 0;
-	projectile.m_fFlown = 0.0f;
-	projectile.m_flightLength = 0;
-	projectile.m_fromPlayer = false;
-	projectile.m_fYVel = 0.0f;
-	projectile.m_Sprite = sprite;
-	projectile.m_fAnimState = 0;
-	g_pProjectiles->NewProjectile(projectile);
+		g_pEffects->AddEffect(DUSTEFFECT, m_pOgre->GetRect().left + 105, m_pOgre->GetRect().top + 80, NULL, NULL);
 }

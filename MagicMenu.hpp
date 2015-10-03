@@ -27,6 +27,9 @@ public:
 	//adds magic points
 	void AddMagicPoints(int _points){ m_MagicPoints += _points; }
 
+	float GetPoisonDuration(){ return (float)m_SpellLevel[POISONCLOUD] * 2; }
+	int GetPoisonDamage(){ return (int)((m_SpellLevel[POISONCLOUD] + 1) / 2); }
+
 
 private:
 	friend class boost::serialization::access;

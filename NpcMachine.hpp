@@ -12,7 +12,7 @@
 
 class CWorld;
 
-class CNpcMachine
+class CNpcMachine : public CSubject
 {
 public:
 	CNpcMachine();
@@ -24,7 +24,7 @@ public:
 	void CheckAllNpcs();
 
 	//checks if a npc was hit by a projectile
-	bool CheckProjectile(SProjectile *_projectile);
+	bool CheckProjectileOrEffect(CSprite *_sprite, int _damage, int _ID);
 
 	//Renders all npcs
 	void RenderAllNpcs();

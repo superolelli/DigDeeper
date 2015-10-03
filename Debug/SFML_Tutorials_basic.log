@@ -1,21 +1,8 @@
-﻿Der Buildvorgang wurde am 22.09.2015 11:17:57 gestartet.
+﻿Der Buildvorgang wurde am 27.09.2015 15:25:52 gestartet.
      1>Projekt "F:\Dig Deeper rewritten\DigDeeper\SFML_Tutorials_basic.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
-         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Goblin.cpp
-         Goblin.cpp
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(114): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(121): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(209): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(210): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(213): warning C4244: 'Argument': Konvertierung von 'int' in 'float', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(234): warning C4244: '-=': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(236): warning C4244: '+=': Konvertierung von 'float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(332): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(333): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(334): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(335): warning C4244: '=': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(345): warning C4244: 'Argument': Konvertierung von 'const float' in 'int', möglicher Datenverlust
-     1>f:\dig deeper rewritten\digdeeper\goblin.cpp(639): warning C4305: '=': Verkürzung von 'double' in 'float'
+         F:\Visual Studio\VC\bin\CL.exe /c /I"C:\Users\Ole\Desktop\SFML-2.3\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Projectiles.cpp
+         Projectiles.cpp
        Link:
          F:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Ole\Desktop\SFML-2.3\lib" "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-network-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Dig Deeper rewritten\DigDeeper\Debug\Dig Deeper rewritten.lib" /MACHINE:X86 Debug\AnimatedAnimal.obj
          Debug\Beam.obj
@@ -27,6 +14,7 @@
          Debug\Chest.obj
          Debug\Consumable.obj
          Debug\CookingBook.obj
+         Debug\Effects.obj
          Debug\Equipment.obj
          Debug\Framework.obj
          Debug\Furnance.obj
@@ -73,4 +61,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:02.26
+Verstrichene Zeit 00:00:02.29

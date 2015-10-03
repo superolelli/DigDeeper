@@ -131,7 +131,7 @@ void CNpcMachine::CheckAllNpcs()
 			}
 
 
-	
+			(*i)->CheckEffects();
 
 
 			//if the arm changed direction the npc is hittable
@@ -180,52 +180,48 @@ void CNpcMachine::CheckAllNpcs()
 						(*i)->SetFrozen(0.0f);
 
 						//play the hit sound
-						(*i)->PlayHitSound();
+						notify(O_PLAYER, O_HIT, O_GOBLIN);
 
 						//throw the npc if hitted
 						if (m_pPlayer->GetRect().left > (*i)->GetRect().left)
 							(*i)->ThrowNpc(true, 300);
 						else
 							(*i)->ThrowNpc(false, 300);
-
-
-
-						//shows the damage
-
-
-						//if the npc died: delete it 
-						if ((*i)->GetAttributes()->currentHealth <= 0)
-						{
-							//give loot
-							vector<SItem> loot = (*i)->GetLoot();
-							for (int a = 0; a != loot.size(); a++)
-							{
-								//if thing is tool or equipment: save attributes
-								if (loot[a].thing->getID() > CTBREAK)
-									m_pWorld->AddLittleItem(loot[a].thing, (*i)->GetRect().left, (*i)->GetRect().top);
-								else
-								{
-									m_pWorld->AddLittleItem(loot[a].thing->getID(), (*i)->GetRect().left, (*i)->GetRect().top, loot[a].amount);
-									SAFE_DELETE(loot[a].thing);
-								}
-							}
-
-							//adds the experience
-							m_pPlayer->AddExp((*i)->GetAttributes()->exp);
-
-							if ((*i)->GetID() == SKELETONRUNNER)
-								((CHumanoid*)(*i))->Explode();
-
-							(*i)->Quit();
-							SAFE_DELETE((*i));
-							i = m_Npcs.erase(i);
-							continue;
-						}
 					}
 				}
 			}
 			else
 				(*i)->m_wasHit = false;
+
+
+			//if the npc died: delete it 
+			if ((*i)->GetAttributes()->currentHealth <= 0)
+			{
+				//give loot
+				vector<SItem> loot = (*i)->GetLoot();
+				for (int a = 0; a != loot.size(); a++)
+				{
+					//if thing is tool or equipment: save attributes
+					if (loot[a].thing->getID() > CTBREAK)
+						m_pWorld->AddLittleItem(loot[a].thing, (*i)->GetRect().left, (*i)->GetRect().top);
+					else
+					{
+						m_pWorld->AddLittleItem(loot[a].thing->getID(), (*i)->GetRect().left, (*i)->GetRect().top, loot[a].amount);
+						SAFE_DELETE(loot[a].thing);
+					}
+				}
+
+				//adds the experience
+				m_pPlayer->AddExp((*i)->GetAttributes()->exp);
+
+				if ((*i)->GetID() == SKELETONRUNNER)
+					((CHumanoid*)(*i))->Explode();
+
+				(*i)->Quit();
+				SAFE_DELETE((*i));
+				i = m_Npcs.erase(i);
+				continue;
+			}
 
 
 			//if the npc despawned: delete it
@@ -313,8 +309,8 @@ void CNpcMachine::SpawnNpcs()
 					}
 					else if (newNPC == 1)
 					{
-						//spawn new npc
-						AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
+						//spawn new goblin
+						AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y, false, rand()%5 +2);
 					}
 					else
 					{
@@ -328,7 +324,7 @@ void CNpcMachine::SpawnNpcs()
 				}
 				else
 				{
-					//spawn new goblin
+					//spawn new random humanoid
 					AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
 
 					//get new spawn time
@@ -339,7 +335,7 @@ void CNpcMachine::SpawnNpcs()
 			else if (m_pView->getCenter().y < (m_pWorld->GetDimensions().y * 100) / 2)
 			{
 				//spawn new goblin
-				AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
+				AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y, false, rand()%5 +2);
 
 				//get new spawn time
 				m_spawnTime = rand() % 80 + 20;
@@ -348,7 +344,7 @@ void CNpcMachine::SpawnNpcs()
 			else if (m_pView->getCenter().y < (m_pWorld->GetDimensions().y * 100) - 15)
 			{
 				//spawn new goblin
-				AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y);
+				AddNpc(GOBLIN, spawnPlaces[newPlace].x + 50, spawnPlaces[newPlace].y, false, rand() % 5 + 2);
 
 				//get new spawn time
 				m_spawnTime = rand() % 40 + 10;
@@ -372,7 +368,7 @@ void CNpcMachine::SpawnNpcs()
 
 
 
-bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
+bool CNpcMachine::CheckProjectileOrEffect(CSprite *_sprite, int _damage, int _ID)
 {
 	stringstream stream;
 
@@ -380,10 +376,17 @@ bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
 	for (i = m_Npcs.begin(); i != m_Npcs.end();)
 	{
 		//if projectile hits npcs: do damage
-		if (_projectile->m_Sprite->GetRect().intersects((*i)->GetRect()) && _projectile->m_Damage > 0)
+		if (_sprite->GetRect().intersects((*i)->GetRect()) && _damage > 0)
 		{
+			if (_ID == POISONEFFECT)
+			{
+				(*i)->PoisonNpc(_damage, m_pPlayer->GetPoisonSpellDuration());
+				i++;
+				continue;
+			}
+
 			//calculate the damage
-			int damage = _projectile->m_Damage - ((float)_projectile->m_Damage * ((float)(*i)->GetAttributes()->armour / 100.0f));
+			int damage = _damage - ((float)_damage * ((float)(*i)->GetAttributes()->armour / 100.0f));
 
 			stream.str("");
 
@@ -396,7 +399,7 @@ bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
 			(*i)->GetAttributes()->currentHealth -= damage;
 
 			//plays the hit sound
-			(*i)->PlayHitSound();
+			notify(O_PLAYER, O_HIT, O_GOBLIN);
 
 			//throw the npc if hitted
 			if (m_pPlayer->GetRect().left > (*i)->GetRect().left)
@@ -405,8 +408,8 @@ bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
 				(*i)->ThrowNpc(false, 200);
 
 			//if projectile was iceball: freeze npc
-			if (_projectile->m_ID == ICEBALLPROJECTILE)
-				(*i)->SetFrozen(_projectile->m_Damage*0.5f);
+			if (_ID == ICEBALLPROJECTILE)
+				(*i)->SetFrozen(_damage*0.5f);
 
 			//if the npc died: delete it 
 			if ((*i)->GetAttributes()->currentHealth <= 0)
@@ -446,7 +449,6 @@ bool CNpcMachine::CheckProjectile(SProjectile *_projectile)
 
 	return false;
 }
-
 
 
 

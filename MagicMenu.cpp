@@ -1,5 +1,6 @@
 #include "MagicMenu.hpp"
 #include "Projectiles.hpp"
+#include "Effects.hpp"
 
 
 CMagicMenu::CMagicMenu()
@@ -43,10 +44,12 @@ void CMagicMenu::Init(CInventory *_inventory, CPlayer *_player, bool _loaded)
 	//set position of the spells
 	m_Spells[FIREBALL].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 41, m_pMagicMenu->GetRect().top + 91);
 	m_Spells[ICE].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 186, m_pMagicMenu->GetRect().top + 91);
+	m_Spells[POISONCLOUD].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 41, m_pMagicMenu->GetRect().top + 221);
 	m_Spells[HEAL].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 374, m_pMagicMenu->GetRect().top + 91);
 	m_Spells[MANASHIELD].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 519, m_pMagicMenu->GetRect().top + 91);
 	m_Spells[ALCHEMY].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 707, m_pMagicMenu->GetRect().top + 91);
 	m_Spells[LIGHT].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 852, m_pMagicMenu->GetRect().top + 91);
+	m_Spells[TELEPORT].m_Sprite->SetPos(m_pMagicMenu->GetRect().left + 707, m_pMagicMenu->GetRect().top + 221);
 
 
 	m_text.setFont(g_pTextures->f_coolsville);
@@ -241,30 +244,24 @@ void CMagicMenu::CastSpell(int _ID)
 			}
 		}break;
 
+		case(POISONCLOUD) :
+		{
+			if (m_pPlayer->GetMana() >= m_SpellLevel[POISONCLOUD] * 5)
+			{
+				g_pEffects->AddEffect(POISONEFFECT, m_pPlayer->GetRect().left - 60, m_pPlayer->GetRect().top, NULL, NULL);
+
+				//substract mana
+				m_pPlayer->SubstractMana(m_SpellLevel[POISONCLOUD] * 5);
+			}
+		}break;
+
 		case(HEAL) :
 		{
 			if (m_pPlayer->GetMana() >= m_SpellLevel[HEAL] * 10)
 			{
 				m_pPlayer->Heal(m_SpellLevel[HEAL] * 10);
 
-
-				SProjectile projectile;
-
-				//add a projectile
-				CSprite *sprite = new CSprite;
-
-				sprite->Load(&g_pTextures->t_healing, 5, 100, 100);
-				sprite->SetPos(m_pPlayer->GetRect().left - 30, m_pPlayer->GetRect().top);
-
-				projectile.m_ID = HEALING;
-				projectile.m_Damage = 0;
-				projectile.m_fFlown = 0.0f;
-				projectile.m_flightLength = 0;
-				projectile.m_fromPlayer = true;
-				projectile.m_fYVel = 0.0f;
-				projectile.m_Sprite = sprite;
-				projectile.m_fAnimState = 0;
-				g_pProjectiles->NewProjectile(projectile);
+				g_pEffects->AddEffect(HEALEFFECT, m_pPlayer->GetRect().left - 30, m_pPlayer->GetRect().top, m_pPlayer->GetPosXPointer(), m_pPlayer->GetPosYPointer());
 
 				//substract mana
 				m_pPlayer->SubstractMana(m_SpellLevel[HEAL] * 10);
@@ -275,23 +272,7 @@ void CMagicMenu::CastSpell(int _ID)
 		{
 			if (m_pPlayer->GetMana() >= m_pPlayer->GetPlayerAttributes().maxMana * ((float)m_SpellLevel[MANASHIELD] * 0.03))
 			{
-				SProjectile projectile;
-
-				//add a projectile
-				CSprite *sprite = new CSprite;
-
-				sprite->Load(&g_pTextures->t_manashield);
-				sprite->SetPos(m_pPlayer->GetRect().left - 30, m_pPlayer->GetRect().top);
-
-				projectile.m_ID = MANASHIELDPROJECTILE;
-				projectile.m_Damage = 0;
-				projectile.m_fFlown = m_SpellLevel[MANASHIELD] * 5;   //stands for the duration
-				projectile.m_flightLength = 0;
-				projectile.m_fromPlayer = true;
-				projectile.m_fYVel = 0.0f;
-				projectile.m_Sprite = sprite;
-				projectile.m_fAnimState = -1;
-				g_pProjectiles->NewProjectile(projectile);
+				g_pEffects->AddEffect(MANASHIELDEFFECT, m_pPlayer->GetRect().left - 30, m_pPlayer->GetRect().top, m_pPlayer->GetPosXPointer(), m_pPlayer->GetPosYPointer(), m_SpellLevel[MANASHIELD] * 5);
 
 				SConsumableAttributes effect;
 				effect.armour = m_pPlayer->GetPlayerAttributes().maxMana * (m_SpellLevel[MANASHIELD] * 0.05);
@@ -330,29 +311,46 @@ void CMagicMenu::CastSpell(int _ID)
 
 		case(LIGHT) :
 		{
-			SProjectile projectile;
+			if (m_pPlayer->GetMana() >= m_SpellLevel[LIGHT] * 3)
+			{
+				SProjectile projectile;
 
-			//add a projectile
-			CSprite *sprite = new CSprite;
+				//add a projectile
+				CSprite *sprite = new CSprite;
 
-			sprite->Load(&g_pTextures->t_lightsphere);
-			
-			sprite->SetPos(m_pPlayer->GetWeaponRect().left - sprite->GetRect().left / 2, m_pPlayer->GetRect().top);
+				sprite->Load(&g_pTextures->t_lightsphere);
 
-			projectile.m_ID = LIGHTSPHERE;
-			projectile.m_Damage = 0;
-			projectile.m_fFlown = 5.0f * m_SpellLevel[LIGHT];            //stands for duration
-			projectile.m_flightLength = 50 * m_SpellLevel[LIGHT];          //stands for radius
-			projectile.m_fromPlayer = true;
-			projectile.m_fXVel = 0;
-			projectile.m_fYVel = 0.0f;
-			projectile.m_Sprite = sprite;
-			projectile.m_fAnimState = -1;
+				sprite->SetPos(m_pPlayer->GetWeaponRect().left - sprite->GetRect().left / 2, m_pPlayer->GetRect().top);
 
-			g_pProjectiles->NewProjectile(projectile);
+				projectile.m_ID = LIGHTSPHERE;
+				projectile.m_Damage = 0;
+				projectile.m_fFlown = 5.0f * m_SpellLevel[LIGHT];            //stands for duration
+				projectile.m_flightLength = 50 * m_SpellLevel[LIGHT];          //stands for radius
+				projectile.m_fromPlayer = true;
+				projectile.m_fXVel = 0;
+				projectile.m_fYVel = 0.0f;
+				projectile.m_Sprite = sprite;
+				projectile.m_fAnimState = -1;
 
-			//substract mana
-			m_pPlayer->SubstractMana(m_SpellLevel[LIGHT] * 3);
+				g_pProjectiles->NewProjectile(projectile);
+
+				//substract mana
+				m_pPlayer->SubstractMana(m_SpellLevel[LIGHT] * 3);
+			}
+
+		}break;
+
+		case(TELEPORT) :
+		{
+			if (m_pPlayer->GetMana() >= m_SpellLevel[TELEPORT] * 5)
+			{
+				m_pPlayer->Teleport(m_SpellLevel[TELEPORT]);
+
+				g_pEffects->AddEffect(TELEPORT, m_pPlayer->GetRect().left, m_pPlayer->GetRect().top, NULL, NULL);
+
+				//substract mana
+				m_pPlayer->SubstractMana(m_SpellLevel[TELEPORT] * 5);
+			}
 
 		}break;
 	}
@@ -417,6 +415,33 @@ string CMagicMenu::GetTooltip(int _spellID)
 			tooltip << "Schaden: " << (m_SpellLevel[ICE] + 1) * 1 << endl;
 			tooltip << "Einfrierdauer: " << (m_SpellLevel[ICE] + 1) * 0.5 << endl;
 			tooltip << "Manakosten: " << (m_SpellLevel[ICE] + 1) * 5;
+		}
+	}break;
+	case(POISONCLOUD) :
+	{
+		tooltip << "Eine Giftwolke, die Gegner im Umkreis vergiftet!" << endl << endl;
+
+		if (m_SpellLevel[POISONCLOUD] == 0)
+		{
+			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+		}
+		else
+		{
+			tooltip << "Vergiftungsstufe: " << (int)(m_SpellLevel[POISONCLOUD] * +1)/2 << endl;
+			tooltip << "Vergiftungsdauer: " << m_SpellLevel[POISONCLOUD] * 2 << endl;
+			tooltip << "Manakosten: " << m_SpellLevel[POISONCLOUD] * 5 << endl << endl;
+		}
+
+		if (m_SpellLevel[POISONCLOUD] == 10)
+		{
+			tooltip << "Zauber ist auf der höchsten Stufe!";
+		}
+		else
+		{
+			tooltip << "Auf der nächsten Stufe: " << endl;
+			tooltip << "Vergiftungsstufe: " << ((int)(m_SpellLevel[POISONCLOUD]+2)/2) << endl;
+			tooltip << "Vergiftungsdauer: " << (m_SpellLevel[POISONCLOUD] + 1) * 2 << endl;
+			tooltip << "Manakosten: " << (m_SpellLevel[POISONCLOUD] + 1) * 5;
 		}
 	}break;
 	case(HEAL) :
@@ -523,7 +548,33 @@ string CMagicMenu::GetTooltip(int _spellID)
 			tooltip << "Auf der nächsten Stufe: " << endl;
 			tooltip << "Lichtradius: " << (m_SpellLevel[LIGHT]+1) * 50 << endl;
 			tooltip << "Dauer: " << (m_SpellLevel[LIGHT] +1)* 5 << endl;
-			tooltip << "Manakosten: " << (m_SpellLevel[FIREBALL] + 1) * 5;
+			tooltip << "Manakosten: " << (m_SpellLevel[LIGHT] + 1) * 5;
+		}
+	}break;
+	case(TELEPORT) :
+	{
+
+		tooltip << "Teleportiert dich in Blickrichtung." << endl << endl;
+
+		if (m_SpellLevel[TELEPORT] == 0)
+		{
+			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+		}
+		else
+		{
+			tooltip << "Weite: " << m_SpellLevel[TELEPORT] * 100 << endl;
+			tooltip << "Manakosten: " << m_SpellLevel[TELEPORT] * 5 << endl << endl;
+		}
+
+		if (m_SpellLevel[TELEPORT] == 10)
+		{
+			tooltip << "Zauber ist auf der höchsten Stufe!";
+		}
+		else
+		{
+			tooltip << "Auf der nächsten Stufe: " << endl;
+			tooltip << "Weite: " << (m_SpellLevel[TELEPORT] + 1) * 100 << endl;
+			tooltip << "Manakosten: " << (m_SpellLevel[TELEPORT] + 1) * 5;
 		}
 	}break;
 	default:

@@ -5,8 +5,7 @@
 CNpc::CNpc()
 {
 	m_wasHit = false;
-	m_hitSound.setBuffer(g_pSound->m_hit1);
-	m_hitSound.setVolume(30);
+	m_fSecondsTimer = 0;
 }
 
 
@@ -332,4 +331,56 @@ void CNpc::SetFrozen(float _frozenTime)
 
 	if (m_fFrozenTimer > 0)
 		m_State = FROZEN;
+}
+
+
+
+void CNpc::CheckEffects()
+{
+	list<SNpcEffect>::iterator i;
+	int poison = 0;
+	stringstream stream("");
+
+	m_fSecondsTimer -= g_pTimer->GetElapsedTime().asSeconds();
+
+	if (m_fSecondsTimer <= 0)
+		m_fSecondsTimer = 1;
+
+	//run through all effects
+	for (i = m_Attributes.effects.begin(); i != m_Attributes.effects.end(); i++)
+	{
+		//reduce the duration
+		i->duration -= g_pTimer->GetElapsedTime().asSeconds();
+
+		//check for poison
+		if (i->poison > 0)
+			poison += i->poison;
+
+		//delete effect, if it is finished
+		if (i->duration <= 0)
+			i = m_Attributes.effects.erase(i);
+	}
+
+
+	//check if the npc is poisoned
+	if (poison > 0 && m_fSecondsTimer == 1)
+	{
+		m_Attributes.currentHealth -= poison;
+		stream << poison;
+		g_pSignMachine->AddString(stream.str(), 1, GetRect().left, GetRect().top);
+	}
+}
+
+
+
+void CNpc::PoisonNpc(int _strength, float _duration)
+{
+	SNpcEffect effect;
+	effect.armour = 0;
+	effect.speed = 0;
+	effect.strength = 0;
+	effect.poison = _strength;
+	effect.duration = _duration;
+
+	AddEffect(effect);
 }

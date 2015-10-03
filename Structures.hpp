@@ -46,6 +46,27 @@ struct SPlayerState
 };
 
 
+struct SNpcEffect
+{
+	int armour;
+	int strength;
+	int speed;
+	int poison;
+	float duration;
+
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		ar & armour;
+		ar & strength;
+		ar & speed;
+		ar & poison;
+		ar & duration;
+	}
+};
+
+BOOST_CLASS_VERSION(SNpcEffect, 0)
+
 
 struct SNpcAttributes
 {
@@ -55,7 +76,11 @@ struct SNpcAttributes
 	int strength;
 	int speed;
 	int exp;
+	list<SNpcEffect> effects;
 };
+
+
+
 
 
 struct SToolAttributes
@@ -354,13 +379,29 @@ struct SProjectile
 	float m_fXVel;
 	float m_fYVel;
 	float m_fAnimState;
-	int *m_xPos;
-	int *m_yPos;
 };
 
 
-
 struct SEffect
+{
+	CSprite *m_Sprite;
+	int m_ID;
+	int m_type;
+	float m_fDuration;
+	int m_lightRadius;
+	float m_fAnimState;
+	int m_animSpeed;
+	int m_frameNumber;
+	int m_xDifference;
+	int m_yDifference;
+	int m_xPos;
+	int m_yPos;
+	int *m_movingXPos;
+	int *m_movingYPos;
+};
+
+
+struct SStatusEffect
 {
 	CSprite *m_Sprite;
 	float m_fDuration;

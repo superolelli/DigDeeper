@@ -48,6 +48,7 @@ void CBee::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, i
 
 		m_left = true;
 		m_Attributes.currentHealth = m_Attributes.maxHealth;
+		m_Attributes.effects.clear();
 	}
 }
 

@@ -1,5 +1,6 @@
 #include "Keykeeper.hpp"
 #include "World.hpp"
+#include "Effects.hpp"
 
 
 void CKeyKeeper::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_view, int _specialID, bool _loaded)
@@ -62,6 +63,7 @@ void CKeyKeeper::Init(int _x, int _y, CWorld *_world, CPlayer *_player, View *_v
 
 		m_left = true;
 		m_Attributes.currentHealth = m_Attributes.maxHealth;
+		m_Attributes.effects.clear();
 		m_safe = false;
 	}
 }
@@ -653,28 +655,10 @@ void CKeyKeeper::CreateSkeleton()
 			return;
 	}
 
-	m_pWorld->AddNpc(GOBLIN, x, y, false, rand()%3+ 9);
+	m_pWorld->AddNpc(GOBLIN, x, y, false, rand()%3+ 7);
 
 
-	SProjectile projectile;
-
-	//add a projectile
-	CSprite *sprite = new CSprite;
-
-	sprite->Load(&g_pTextures->t_skeletonEffect, 5, 100, 100);
-	sprite->SetPos(x, y);
-
-	projectile.m_ID = SMOKEEFFECT;
-	projectile.m_Damage = 0;
-	projectile.m_fFlown = 0.0f;
-	projectile.m_flightLength = 0;
-	projectile.m_fromPlayer = false;
-	projectile.m_fYVel = 0.0f;
-	projectile.m_fXVel = 0.0f;
-	projectile.m_Sprite = sprite;
-	projectile.m_fAnimState = 0;
-
-	g_pProjectiles->NewProjectile(projectile);
+	g_pEffects->AddEffect(CREATEEFFECT, x, y, NULL, NULL);
 }
 
 
@@ -698,25 +682,7 @@ void CKeyKeeper::Teleport()
 		{
 			m_pKeyKeeper->SetPos(x, m_pKeyKeeper->GetRect().top);
 
-			SProjectile projectile;
-
-			//add a projectile
-			CSprite *sprite = new CSprite;
-
-			sprite->Load(&g_pTextures->t_teleport, 5, 100, 100);
-			sprite->SetPos(x, m_pKeyKeeper->GetRect().top);
-
-			projectile.m_ID = SMOKEEFFECT;
-			projectile.m_Damage = 0;
-			projectile.m_fFlown = 0.0f;
-			projectile.m_flightLength = 0;
-			projectile.m_fromPlayer = false;
-			projectile.m_fYVel = 0.0f;
-			projectile.m_fXVel = 0.0f;
-			projectile.m_Sprite = sprite;
-			projectile.m_fAnimState = 0;
-
-			g_pProjectiles->NewProjectile(projectile);
+			g_pEffects->AddEffect(TELEPORTEFFECT, x, m_pKeyKeeper->GetRect().top, NULL, NULL);
 
 			return;
 		}
