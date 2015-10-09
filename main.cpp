@@ -17,6 +17,25 @@ void load_textures(bool *is_loading)
 	g_pProperties->LoadProperties();
 	g_pSinCosLookup->CalculateLookupTable();
 
+	//get the language
+	int language = GERMAN;
+	SSettings Settings;
+	char* var = getenv("APPDATA");
+	boost::filesystem::path Path;
+	Path = var;
+	Path.append("/Dig Deeper/Settings.stt");
+
+	if (boost::filesystem::exists(Path))
+	{
+		ifstream Input(Path.string());
+		Input.read((char *)&Settings, sizeof(Settings));
+		Input.close();
+
+		language = Settings.m_language;
+	}
+
+	g_pStringContainer->LoadStrings(language);
+
 	*is_loading = false;
 	
 }

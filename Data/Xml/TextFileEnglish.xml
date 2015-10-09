@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+
+<stringtable>
+
+  <!--Character Info-->
+  <string value="Leben" ID="0"/>
+  <string value="Lebensregeneration" ID="1"/>
+  <string value="Rüstung" ID="2"/>
+  <string value="Stärke" ID="3"/>
+  <string value="Kritische Chance" ID="4"/>
+  <string value="Kritischer Schaden" ID="5"/>
+  <string value="Glück" ID="6"/>
+  <string value="Abbaugeschwindigkeit" ID="7"/>
+  <string value="Geschwindigkeit" ID="8"/>
+  <string value="Mana" ID="9"/>
+  <string value="Manaregeneration" ID="10"/>
+
+  <!--Level Up-->
+  <string value="Level Up!" ID="11"/>
+
+  <!--Buttons-->
+
+  <!--Tooltips-->
+
+  <!--Building-->
+
+  <!--Things-->
+  <string value ="Pickaxe (Iron)" ID="100"/>
+  <string value ="Ironsword" ID="101"/>
+  <string value ="Woodstaff" ID="102"/>
+
+</stringtable>

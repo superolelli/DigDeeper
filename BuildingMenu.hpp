@@ -99,8 +99,6 @@ private:
 	Text m_text;                            //the text to display
 	Text m_message; 
 
-	Sound m_variousSounds;                  //for playing sounds
-
 	float m_textTime;                          //how long was the text shown already?
 	int m_scroll_number;                       //how far has the user scrolled down
 

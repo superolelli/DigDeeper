@@ -37,6 +37,8 @@ void CMagicMenu::Init(CInventory *_inventory, CPlayer *_player, bool _loaded)
 		m_Spells[i].m_Sprite = new CSprite;
 		m_Spells[i].m_Sprite->Load(&g_pTextures->t_spell[i], 2, 97, 97);
 
+		m_Cooldown[i] = 0;
+
 		if (!_loaded)
 			m_SpellLevel[i] = 0;
 	}
@@ -85,7 +87,6 @@ void CMagicMenu::Render()
 
 	if (is_open)
 	{
-		g_pFramework->WriteToLog(INFO, "Magicmenu is open");
 		m_pMagicMenu->Render(g_pFramework->GetRenderWindow());
 
 		//render the magic points
@@ -159,6 +160,17 @@ void CMagicMenu::Render()
 			g_pFramework->GetRenderWindow()->draw(m_text);
 		}
 	}
+
+
+	//manage the cooldown
+	for (int i = 0; i < AMOUNTOFSPELLS; i++)
+	{
+		m_Cooldown[i] -= g_pTimer->GetElapsedTime().asSeconds();
+
+		if (m_Cooldown[i] <= 0)
+			m_Cooldown[i] = 0;
+	}
+	
 }
 
 
@@ -166,8 +178,11 @@ void CMagicMenu::Render()
 
 void CMagicMenu::CastSpell(int _ID)
 {
-	switch (_ID)
+	//if the spell is ready
+	if (m_Cooldown[_ID] <= 0)
 	{
+		switch (_ID)
+		{
 		case(FIREBALL) :
 		{
 			if (m_pPlayer->GetMana() >= m_SpellLevel[FIREBALL] * 5)
@@ -187,9 +202,9 @@ void CMagicMenu::CastSpell(int _ID)
 					projectile.m_fXVel = 200;
 					sprite->Load(&g_pTextures->t_fireballRight);
 				}
-				
+
 				sprite->SetPos(m_pPlayer->GetWeaponRect().left - sprite->GetRect().left / 2, m_pPlayer->GetWeaponRect().top - sprite->GetRect().top / 2);
-	
+
 				projectile.m_ID = FIREBALLPROJECTILE;
 				projectile.m_Damage = m_SpellLevel[FIREBALL] * 3;
 				projectile.m_fFlown = 0.0f;
@@ -353,6 +368,10 @@ void CMagicMenu::CastSpell(int _ID)
 			}
 
 		}break;
+		}
+
+
+		m_Cooldown[_ID] = 1;
 	}
 }
 
@@ -362,6 +381,7 @@ void CMagicMenu::CastSpell(int _ID)
 string CMagicMenu::GetTooltip(int _spellID)
 {
 	stringstream tooltip;
+ 
 
 	switch (_spellID)
 	{
@@ -498,7 +518,7 @@ string CMagicMenu::GetTooltip(int _spellID)
 	}break;
 	case(ALCHEMY) :
 	{
-		tooltip << "Der Alchemiezauber wandelt einen Block\nin einen Block ähnlicher Wertigkeit um." << endl << endl;
+		tooltip << g_pStringContainer->m_Strings[STRING_MAGIC_ALCHEMY_DESCRIPTION] << endl << endl;
 
 		if (m_SpellLevel[ALCHEMY] == 0)
 		{

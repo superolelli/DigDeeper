@@ -31,6 +31,7 @@
 #include "KeyStates.hpp"
 #include "Filelogger.hpp"
 #include "SinCosLookup.hpp"
+#include "StringContainer.hpp"
 
 using namespace std;
 using namespace sf;

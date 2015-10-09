@@ -2,6 +2,8 @@
 #define CONSTANTS_HPP
 
 
+const int VERSION = 0;
+
 
 #pragma region Eventtypes
 const int MOUSE_LEFT_UP = 1;
@@ -9,6 +11,14 @@ const int MOUSE_RIGHT_UP = 2;
 const int MOUSE_LEFT_DOWN = 3;
 const int MOUSE_RIGHT_DOWN = 4;
 const int E_UP = 5;
+#pragma endregion
+
+
+#pragma region Languages
+
+const int ENGLISH = 0;
+const int GERMAN = 1;
+
 #pragma endregion
 
 
@@ -147,6 +157,7 @@ const int O_HIT = 1;
 
 #pragma region Observer objects
 
+const int O_NULL = 0;
 const int O_PLAYER = 1;
 const int O_GOBLIN = 2;
 
@@ -317,6 +328,17 @@ const int LOCALEFFECT_ONCE = 1;
 const int LOCALEFFECT_LOOP = 2;
 const int MOVINGEFFECT_ONCE = 3;
 const int MOVINGEFFECT_LOOP = 4;
+
+#pragma endregion
+
+
+
+
+#pragma region Achievements
+
+const int NUMBER_OF_ACHIEVEMENTS = 1;
+
+const int KILLED_1 = 0;
 
 #pragma endregion
 

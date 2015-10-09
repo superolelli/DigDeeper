@@ -1701,3 +1701,37 @@ ZUKÜNFITGE ÄNDERUNGEN:
   aber sehr einfach hinzugefügt werden)
 
 --------------------------------------------------------
+04.10.2015
+
+- Wählt man einen Zauber aus der Inventarleiste per Zahlentaste aus, wird dieser nun sofort
+  ausgeführt und nicht ausgewählt
+- Jeder Zauber hat nun einen Cooldown von einer Sekunde (Cooldown wird nicht angezeigt)
+
+---------------------------------------------------------
+05.10.2015
+
+- Es wurde begonnen einen Text-Loader zu schreiben, der aus einer XML-File alle Textdateien
+  ausliest, je nachdem welche Sprache eingestellt ist
+
+---------------------------------------------------------
+04.10.2015
+
+- Der Text-Loader wurde fertiggestellt, es müssen aber noch alle Texte eingespeist werden
+
+---------------------------------------------------------
+08.10.2015
+
+- Truhengoblins droppen nun manchmal eine Truhe
+
+---------------------------------------------------------
+09.10.2015
+
+- Bugfix: Umlaute wurden bei Texten, die mit dem Text-Loader geladen wurden nicht richtig
+          angezeigt
+
+-> Es sind einige Änderungen intern nötig, da viele Texte direkt auf der Grafik zu finden
+   sind. Diese müssen nun aber erst nachträglich gerendert werden, damit die Sprache nicht
+   von vornherein festgelegt ist. Ich werde nun nach und nach die Texte einspeisen und die
+   entsprechenden Änderungen vornehmen.
+
+---------------------------------------------------------

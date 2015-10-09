@@ -612,6 +612,15 @@ vector<SItem> CHumanoid::GetLoot()
 		magicpoint.thing = thing2;
 		loot.push_back(magicpoint);
 	}
+	else if (m_ID == CHESTGOBLIN && rand() % 10 == 0)
+	{
+		SItem chest;
+		chest.amount = 1;
+		CPlaceable* thing2 = new CPlaceable;
+		thing2->Init(CHEST);
+		chest.thing = thing2;
+		loot.push_back(chest);
+	}
 	//maybe add sulfur or salpeter
 	else if (m_ID == SKELETONRUNNER && rand() % 10 == 0)
 	{

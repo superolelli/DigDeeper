@@ -959,9 +959,13 @@ void CInventory::Render(IntRect &_playerRect)
 		}
 	}
 
+
+
+	int lastCarriedObject = CarriedObjectFramePos;
+
 	//sets the beam frame and renders it
 	//if the player has pressed a num key: set the frame
-	if(Keyboard::isKeyPressed(Keyboard::Num1))
+	if (Keyboard::isKeyPressed(Keyboard::Num1))
 		CarriedObjectFramePos = 0;
 	else if(Keyboard::isKeyPressed(Keyboard::Num2))
 		CarriedObjectFramePos = 1;
@@ -981,6 +985,19 @@ void CInventory::Render(IntRect &_playerRect)
 		CarriedObjectFramePos = 8;
 	else if(Keyboard::isKeyPressed(Keyboard::Num0))
 		CarriedObjectFramePos = 9;
+
+
+	//if the player wants to do an instant spell: do it
+	if (GetCarriedThing() != NULL && GetCarriedThing()->getID() == SPELL && lastCarriedObject != CarriedObjectFramePos)
+	{
+		CItem *instantSpell;
+		instantSpell = (CItem*)(GetCarriedThing());
+
+		//cast the spell
+		m_pPlayer->CastSpell(instantSpell->GetSpecialID());
+		CarriedObjectFramePos = lastCarriedObject;
+	}
+
 	
 	//if the player scrolled the mouse wheel: move the frame
 	CarriedObjectFramePos -= g_pFramework->keyStates.mouseWheelMovement;

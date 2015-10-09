@@ -87,6 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AchievementMenu.cpp" />
     <ClCompile Include="AnimatedAnimal.cpp" />
     <ClCompile Include="Beam.cpp" />
     <ClCompile Include="Bee.cpp" />
@@ -135,6 +136,7 @@
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundEngine.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="StringContainer.cpp" />
     <ClCompile Include="StringInput.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Textures.cpp" />
@@ -143,6 +145,7 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AchievementMenu.hpp" />
     <ClInclude Include="AnimatedAnimal.hpp" />
     <ClInclude Include="Beam.hpp" />
     <ClInclude Include="Bee.hpp" />
@@ -195,6 +198,7 @@
     <ClInclude Include="Sound.hpp" />
     <ClInclude Include="SoundEngine.hpp" />
     <ClInclude Include="Sprite.hpp" />
+    <ClInclude Include="StringContainer.hpp" />
     <ClInclude Include="StringInput.hpp" />
     <ClInclude Include="Structures.hpp" />
     <ClInclude Include="Subject.hpp" />

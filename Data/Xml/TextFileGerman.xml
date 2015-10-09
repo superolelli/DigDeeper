@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<stringtable>
+  
+    <!--Character Info-->
+    <string value="Leben" ID="0"/>
+    <string value="Lebensregeneration" ID="1"/>
+    <string value="Rüstung" ID="2"/>
+    <string value="Stärke" ID="3"/>
+    <string value="Kritische Chance" ID="4"/>
+    <string value="Kritischer Schaden" ID="5"/>
+    <string value="Glück" ID="6"/>
+    <string value="Abbaugeschwindigkeit" ID="7"/>
+    <string value="Geschwindigkeit" ID="8"/>
+    <string value="Mana" ID="9"/>
+    <string value="Manaregeneration" ID="10"/>
+  
+    <!--Level Up-->
+    <string value="Stufe aufgestiegen!" ID="11"/>
+    <string value="Robuste Haut" ID="12"/>
+    <string value="Eine zähe Haut, die den Zwerg&#xA;widerstandsfähiger macht.&#xA;+3 Rüstung" ID="13"/>
+    <string value="Lange Fingernägel" ID ="14"/>
+    <string value="Lange Fingernägel bewirken, dass&#xA;der Zwerg schneller graben kann.&#xA;+0,5 Abbaugeschwindigkeit" ID="15"/>
+    <string value="Kritische Chance" ID =" 16"/>
+    <string value="Erhöht deine Chance einen&#xA;kritischen Treffer zu landen.&#xA;+5 Kritische Chance" ID ="17"/>
+    <string value="Kritischer Schaden" ID="18"/>
+    <string value="Erhöht deinen Schaden bei einem&#xA;kritischen Treffer.&#xA;+10% Kritischer Schaden" ID="19"/>
+    <string value="Jungbrunnen" ID="20"/>
+    <string value="Ein Schluck aus dem Jungbrunnen&#xA;lässt dich länger leben.&#xA;+10 Maximales Leben" ID="21"/>
+    <string value="Regneration" ID="22"/>
+    <string value="Regnerier dein verlorenes&#xA;Leben schneller.&#xA;+1 Lebensregeneration" ID="23"/>
+    <string value="Schornsteinfegerzwerg" ID="24"/>
+    <string value="Indem du deine Schornsteinfeger-&#xA;ausbildung fortsetzt, erhöht sich&#xA;selbstverständlich dein Glück.&#xA;+10 Glück" ID="25"/>
+    <string value="Magiepunkte" ID="26"/>
+    <string value="Du erhälst einen Magiepunkt, mit&#xA;dem du Zauber erlernen oder&#xA;verbessern kannst.&#xA;+1 Magiepunkt" ID="27"/>
+    <string value="Mana" ID="28"/>
+    <string value="Keine Ahnung, woher man Mana&#xA;bekommt. Hier hast du welches.&#xA;+10 Mana" ID="29"/>
+    <string value="Magische Macht" ID="30"/>
+    <string value="Regenerier dein verlorenes&#xA;Mana schneller.&#xA;+2 Manaregeneration" ID="31"/>
+    <string value="Fortschritt" ID="32"/>
+    <string value="Durch Forschung erhälst du ein&#xA;zufälliges Rezept.&#xA;Heureka!" ID="33"/>
+    <string value="Flinker Flitzer" ID="34"/>
+    <string value="Dieses Training lässt deine Zwerg&#xA;flinker flitzen als je zuvor.&#xA;+10 Geschwindigkeit" ID="35"/>
+    <string value="Hartes Training" ID="36"/>
+    <string value="Hartes Training verhilft deinem&#xA;Zwerg zu mehr Stärke.&#xA;+1 Stärke" ID="37"/>
+  
+    
+    <!--Buttons-->
+  
+    <!--Tooltips-->
+    <string value="Der Alchemiezauber wandelt einen Block&#xA;in einen Block ähnlicher Wertigkeit um." ID="50"/>
+  
+    <!--Building-->
+
+    <!--Things-->
+    <string value ="Spitzhacke (Eisen)" ID="100"/>
+    <string value ="Eisenschwert" ID="101"/>
+    <string value ="Holzstab" ID="102"/>
+
+</stringtable>

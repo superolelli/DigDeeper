@@ -55,9 +55,11 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	}
 	else
 	{
+		m_Settings.m_version = VERSION;
 		m_Settings.m_beam_numbers = false;
 		m_Settings.m_inventory_numbers = false;
-		m_Settings.m_fast_light = true;
+		m_Settings.m_fast_light = false;
+		m_Settings.m_language = GERMAN;
 	}
 
 	//Inits the npc machine

@@ -138,13 +138,15 @@ void CBuildingMenu::InitRecipe(SBuildingItem *_recipe)
 		case(PICKAXE):
 			{
 				_recipe->Name = "Spitzhacke (Eisen)";
+				//_recipe->Name = g_pStringContainer->m_Strings[STRING_IRONPICKAXE];
 				_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_pickaxe);
 				_recipe->resources[WOODSTAFF] = 2;
 				_recipe->resources[IRON] = 1;
 			}break;
 		case(SWORD):
 			{
-				_recipe->Name = "Eisenschwert";
+				_recipe->Name = "Schwert";
+				//_recipe->Name = g_pStringContainer->m_Strings[STRING_IRONSWORD];
 				_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_sword);
 				_recipe->resources[WOODSTAFF] = 1;
 				_recipe->resources[IRON] = 3;
@@ -152,6 +154,7 @@ void CBuildingMenu::InitRecipe(SBuildingItem *_recipe)
 		case(WOODSTAFF):
 			{
 				_recipe->Name = "Holzstab";
+				//_recipe->Name = g_pStringContainer->m_Strings[STRING_WOODSTAFF];
 				_recipe->m_pInfoSprite->Load(&g_pTextures->t_buildingInfo_woodstaff);
 				_recipe->resources[WOOD] = 1;
 				_recipe->amountOfProducts = 2;
@@ -531,13 +534,6 @@ void CBuildingMenu::Render()
 						CTool *thing = new CTool;
 						thing->InitToolRandomly(m_chosenItem.ID);
 						m_pInventory->Take(thing, m_chosenItem.amountOfProducts);
-
-						//if tool is a sword: play sound
-						if (m_chosenItem.ID == SWORD)
-						{
-							m_variousSounds.setBuffer(g_pSound->m_metalSliding);
-							m_variousSounds.play();
-						}
 					}
 					//if the thing is equipment
 					else

@@ -177,6 +177,12 @@
     <ClCompile Include="Subject.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="AchievementMenu.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="StringContainer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.hpp">
@@ -357,6 +363,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Subject.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="AchievementMenu.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="StringContainer.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

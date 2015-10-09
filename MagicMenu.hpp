@@ -59,6 +59,7 @@ private:
 	CSprite *m_pMagicMenu;
 	SHoldingButtons m_Spells[AMOUNTOFSPELLS];
 	int m_SpellLevel[AMOUNTOFSPELLS];
+	float m_Cooldown[AMOUNTOFSPELLS];
 
 	Text m_text;                            //the text to display
 	Text m_levelText;

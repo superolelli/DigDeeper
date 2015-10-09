@@ -431,9 +431,11 @@ struct SHighscore
 
 struct SSettings
 {
+	int m_version;
 	bool m_beam_numbers;
 	bool m_inventory_numbers;
 	bool m_fast_light;
+	int m_language;
 };
 
 

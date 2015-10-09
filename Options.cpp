@@ -101,7 +101,10 @@ void COptions::RenderButtons()
 
 	if (m_pAchievementsButton->Render(m_ButtonEventtype))
 	{
-		
+		CAchievementMenu Achievements;
+		Achievements.Init();
+		Achievements.Run();
+		Achievements.Quit();
 	}
 
 
