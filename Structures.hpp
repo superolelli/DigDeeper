@@ -431,12 +431,35 @@ struct SHighscore
 
 struct SSettings
 {
-	int m_version;
 	bool m_beam_numbers;
 	bool m_inventory_numbers;
 	bool m_fast_light;
 	int m_language;
+	bool m_showTime;
+
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		if (version > 0)
+		{
+			ar & m_beam_numbers;
+			ar & m_inventory_numbers;
+			ar & m_fast_light;
+			ar & m_language;
+			ar & m_showTime;
+		}
+		else
+		{
+			m_beam_numbers = false;
+			m_inventory_numbers = false;
+			m_fast_light = false;
+			m_language = GERMAN;
+			m_showTime = true;
+		}
+	}
 };
+
+BOOST_CLASS_VERSION(SSettings, 1)
 
 
 

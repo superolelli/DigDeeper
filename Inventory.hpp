@@ -274,7 +274,7 @@ private:
 	bool show_beam_numbers;
 
 
-
+	stringstream GetTooltip(CThing* _thing);
 	void CheckEvents();
 
 };

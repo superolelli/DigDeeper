@@ -14,47 +14,126 @@
     <string value="Geschwindigkeit" ID="8"/>
     <string value="Mana" ID="9"/>
     <string value="Manaregeneration" ID="10"/>
+    <string value="Licht" ID ="11"/>
   
     <!--Level Up-->
-    <string value="Stufe aufgestiegen!" ID="11"/>
-    <string value="Robuste Haut" ID="12"/>
-    <string value="Eine zähe Haut, die den Zwerg&#xA;widerstandsfähiger macht.&#xA;+3 Rüstung" ID="13"/>
-    <string value="Lange Fingernägel" ID ="14"/>
-    <string value="Lange Fingernägel bewirken, dass&#xA;der Zwerg schneller graben kann.&#xA;+0,5 Abbaugeschwindigkeit" ID="15"/>
-    <string value="Kritische Chance" ID =" 16"/>
-    <string value="Erhöht deine Chance einen&#xA;kritischen Treffer zu landen.&#xA;+5 Kritische Chance" ID ="17"/>
-    <string value="Kritischer Schaden" ID="18"/>
-    <string value="Erhöht deinen Schaden bei einem&#xA;kritischen Treffer.&#xA;+10% Kritischer Schaden" ID="19"/>
-    <string value="Jungbrunnen" ID="20"/>
-    <string value="Ein Schluck aus dem Jungbrunnen&#xA;lässt dich länger leben.&#xA;+10 Maximales Leben" ID="21"/>
-    <string value="Regneration" ID="22"/>
-    <string value="Regnerier dein verlorenes&#xA;Leben schneller.&#xA;+1 Lebensregeneration" ID="23"/>
-    <string value="Schornsteinfegerzwerg" ID="24"/>
-    <string value="Indem du deine Schornsteinfeger-&#xA;ausbildung fortsetzt, erhöht sich&#xA;selbstverständlich dein Glück.&#xA;+10 Glück" ID="25"/>
-    <string value="Magiepunkte" ID="26"/>
-    <string value="Du erhälst einen Magiepunkt, mit&#xA;dem du Zauber erlernen oder&#xA;verbessern kannst.&#xA;+1 Magiepunkt" ID="27"/>
-    <string value="Mana" ID="28"/>
-    <string value="Keine Ahnung, woher man Mana&#xA;bekommt. Hier hast du welches.&#xA;+10 Mana" ID="29"/>
-    <string value="Magische Macht" ID="30"/>
-    <string value="Regenerier dein verlorenes&#xA;Mana schneller.&#xA;+2 Manaregeneration" ID="31"/>
-    <string value="Fortschritt" ID="32"/>
-    <string value="Durch Forschung erhälst du ein&#xA;zufälliges Rezept.&#xA;Heureka!" ID="33"/>
-    <string value="Flinker Flitzer" ID="34"/>
-    <string value="Dieses Training lässt deine Zwerg&#xA;flinker flitzen als je zuvor.&#xA;+10 Geschwindigkeit" ID="35"/>
-    <string value="Hartes Training" ID="36"/>
-    <string value="Hartes Training verhilft deinem&#xA;Zwerg zu mehr Stärke.&#xA;+1 Stärke" ID="37"/>
+    <string value="Stufe aufgestiegen!" ID="12"/>
+    <string value="Robuste Haut" ID="13"/>
+    <string value="Eine zähe Haut, die den Zwerg&#xA;widerstandsfähiger macht.&#xA;+3 Rüstung" ID="14"/>
+    <string value="Lange Fingernägel" ID ="15"/>
+    <string value="Lange Fingernägel bewirken, dass&#xA;der Zwerg schneller graben kann.&#xA;+0,5 Abbaugeschwindigkeit" ID="16"/>
+    <string value="Kritische Chance" ID =" 17"/>
+    <string value="Erhöht deine Chance einen&#xA;kritischen Treffer zu landen.&#xA;+5 Kritische Chance" ID ="18"/>
+    <string value="Kritischer Schaden" ID="19"/>
+    <string value="Erhöht deinen Schaden bei einem&#xA;kritischen Treffer.&#xA;+10% Kritischer Schaden" ID="20"/>
+    <string value="Jungbrunnen" ID="21"/>
+    <string value="Ein Schluck aus dem Jungbrunnen&#xA;lässt dich länger leben.&#xA;+10 Maximales Leben" ID="22"/>
+    <string value="Regneration" ID="23"/>
+    <string value="Regnerier dein verlorenes&#xA;Leben schneller.&#xA;+1 Lebensregeneration" ID="24"/>
+    <string value="Schornsteinfegerzwerg" ID="25"/>
+    <string value="Indem du deine Schornsteinfeger-&#xA;ausbildung fortsetzt, erhöht sich&#xA;selbstverständlich dein Glück.&#xA;+10 Glück" ID="26"/>
+    <string value="Magiepunkte" ID="27"/>
+    <string value="Du erhälst einen Magiepunkt, mit&#xA;dem du Zauber erlernen oder&#xA;verbessern kannst.&#xA;+1 Magiepunkt" ID="28"/>
+    <string value="Mana" ID="29"/>
+    <string value="Keine Ahnung, woher man Mana&#xA;bekommt. Hier hast du welches.&#xA;+10 Mana" ID="30"/>
+    <string value="Magische Macht" ID="31"/>
+    <string value="Regenerier dein verlorenes&#xA;Mana schneller.&#xA;+2 Manaregeneration" ID="32"/>
+    <string value="Fortschritt" ID="33"/>
+    <string value="Durch Forschung erhälst du ein&#xA;zufälliges Rezept.&#xA;Heureka!" ID="34"/>
+    <string value="Flinker Flitzer" ID="35"/>
+    <string value="Dieses Training lässt deine Zwerg&#xA;flinker flitzen als je zuvor.&#xA;+10 Geschwindigkeit" ID="36"/>
+    <string value="Hartes Training" ID="37"/>
+    <string value="Hartes Training verhilft deinem&#xA;Zwerg zu mehr Stärke.&#xA;+1 Stärke" ID="38"/>
   
-    
+    <!--Tooltips Konsumierbares-->
+    <string value="(konsumierbar)" ID="43"/>
+    <string value="Dauer" ID="44"/>
+  
+    <!--Equipment Namen-->
+    <string value=" des Schutzes" ID="45"/>
+    <string value=" des Erdreiches" ID="46"/>
+    <string value=" der Zerstörung" ID="47"/>
+    <string value=" der Vitalität" ID="48"/>
+    <string value=" des Flitzers" ID="49"/>
+    <string value=" des Schornsteinfegers" ID="50"/>
+    <string value=" des Magiers" ID="51"/>
+    <string value=" der Regeneration" ID="52"/>
+    <string value=" der arkanen Macht" ID="53"/>
+    <string value=" des Zufalls" ID="54"/>
+    <string value=" des Vernichtens" ID="55"/>
+    <string value=" der Erleuchtung" ID="56"/>
+  
+    <!--Highscore-->
+    <string value="Gib deinen Namen ein:" ID ="60"/>
+    <string value="Niemand" ID="61"/>
+    <string value="Minuten" ID="62"/>
+    <string value="Kein Highscore vorhanden!" ID="63"/>
+    <string value="Erreichtes Level:" ID ="64"/>
+    <string value="Startklasse:" ID ="65"/>
+
+    <!--Startklassen-->
+    <string value="Minenarbeiter" ID="70"/>
+    <string value="Bauarbeiter" ID="71"/>
+    <string value="Krieger" ID="72"/>
+    <string value="Magier" ID="73"/>
+    <string value="Cheater" ID="74"/>
+  
+    <!--Neue Welt-->
+    <string value="Neue Welt" ID="77"/>
+  
+    <!--Tooltips Magie-->
+    <string value="Dieser Zauber wurde noch nicht erlernt!" ID="80"/>
+    <string value="Zauber ist auf der höchsten Stufe!" ID="81"/>
+    <string value="Auf der nächsten Stufe:" ID="82"/>
+    <string value="Schaden" ID="83"/>
+    <string value="Manakosten" ID="84"/>
+
+    <string value="Feuerball" ID="85"/>
+    <string value="Der gute alte Feuerball." ID="86"/>
+    <string value="Eispfeil" ID="87"/>
+    <string value="Der Eispfeil friert Gegner ein!" ID="88"/>
+    <string value="Einfrierdauer:" ID="89"/>
+    <string value="Giftwolke" ID="90"/>
+    <string value="Eine Giftwolke, die Gegner im Umkreis vergiftet!" ID="91"/>
+    <string value="Vergiftungsstufe" ID="92"/>
+    <string value="Vergiftungsdauer" ID="93"/>
+
+    <!--Neue Angriffszauber hier einfügen...-->
+  
+    <string value="Heilung" ID="103"/>
+    <string value="Ein Heilzauber, der dir sofort Leben auffüllt." ID="104"/>
+    <string value="Lebenspunkte:" ID="105"/>
+    <string value="Manaschild" ID="106"/>
+    <string value="Das Manaschild wandelt einen Prozentsatz&#xA; deines maximalen Manas in Rüstung um." ID="107"/>
+  
+    <!--Neue Verteidigungszauber hier einfügen...-->
+
+    <string value="Alchemie" ID="121"/>
+    <string value="Der Alchemiezauber wandelt einen Block&#xA;in einen Block ähnlicher Wertigkeit um." ID="122"/>
+    <string value="Chance auf Block höherer Wertigkeit:" ID="123"/>
+    <string value="Chance auf Block niedrigerer Wertigkeit:" ID="124"/>
+    <string value="Lichtsphäre" ID="125"/>
+    <string value="Eine Lichtkugel, die dir folgt. Juhu!" ID="126"/>
+    <string value="Lichtradius:" ID =" 127"/>
+    <string value="Teleport" ID="128"/>
+    <string value="Teleportiert dich in Blickrichtung." ID="129"/>
+    <string value="Weite:" ID="130"/>
+
+    <!--Neue allgemeine Zauber hier einfügen...-->
+  
+    <!--Inventarpanel-->
+    <string value="Inventar" ID="145"/>
+    <string value="Bauen" ID="146"/>
+    <string value="Attribute" ID="147"/>
+    <string value="Magie" ID="148"/>
+
     <!--Buttons-->
-  
-    <!--Tooltips-->
-    <string value="Der Alchemiezauber wandelt einen Block&#xA;in einen Block ähnlicher Wertigkeit um." ID="50"/>
   
     <!--Building-->
 
     <!--Things-->
-    <string value ="Spitzhacke (Eisen)" ID="100"/>
-    <string value ="Eisenschwert" ID="101"/>
-    <string value ="Holzstab" ID="102"/>
+    <string value ="Spitzhacke (Eisen)" ID="200"/>
+    <string value ="Eisenschwert" ID="201"/>
+    <string value ="Holzstab" ID="202"/>
 
 </stringtable>

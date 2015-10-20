@@ -31,21 +31,26 @@ void CSettings::Init()
 	char* var = getenv("APPDATA");
 	boost::filesystem::path Path;
 	Path = var;
-	Path.append("/Dig Deeper/Settings.stt");
+	Path.append("/Dig Deeper/Settings_02.stt");
 
 	if (boost::filesystem::exists(Path))
 	{
-		ifstream Input(Path.string());
+		/*ifstream Input(Path.string());
 		Input.read((char *)&m_Settings, sizeof(m_Settings));
-		Input.close();
+		Input.close();*/
+
+		ifstream inputFile(Path.string(), ios::binary);
+		binary_iarchive settingsArchive(inputFile);
+		settingsArchive >> m_Settings;
+		inputFile.close();
 	}
 	else
 	{
-		m_Settings.m_version = VERSION;
 		m_Settings.m_beam_numbers = false;
 		m_Settings.m_inventory_numbers = false;
 		m_Settings.m_fast_light = false;
 		m_Settings.m_language = GERMAN;
+		m_Settings.m_showTime = true;
 	}
 
 	//Load the buttons
@@ -119,11 +124,17 @@ void CSettings::Run()
 	//	ofstream Output("Data/Settings.stt");
 	char* var = getenv("APPDATA");
 	string Path = var;
-	Path.append("/Dig Deeper/Settings.stt");
+	Path.append("/Dig Deeper/Settings_02.stt");
 
-	ofstream Output(Path);
+	/*ofstream Output(Path);
 	Output.write((char *)&m_Settings, sizeof(m_Settings));
-	Output.close();
+	Output.close();*/
+
+	ofstream outputFile(Path, ios::binary);
+	outputFile.clear();
+	binary_oarchive settingsArchive(outputFile);
+	settingsArchive << m_Settings;
+	outputFile.close();
 
 }
 

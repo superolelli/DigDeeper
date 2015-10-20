@@ -13,7 +13,7 @@ public:
 	~CEquipment();
 
 	//inits the equipment
-	void InitEquipment(int _ID, bool _loaded = false);
+	void InitEquipment(int _ID, bool _loaded = false, bool _inited = false);
 	
 	//inits the equipment with additional random values
 	void InitEquipmentRandomly(int _ID);
@@ -60,9 +60,6 @@ private:
 	}
 	BOOST_SERIALIZATION_SPLIT_MEMBER();
 
-
-
-	void InitRing();
 
 	CSprite *m_pCarriedEquipmentSprite;                //the sprite shown, when the tool is carried
 	SToolAttributes m_Attributes;                   //the attributes of the tool

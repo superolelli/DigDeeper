@@ -446,30 +446,30 @@ void CPlayerEquipment::SetTooltip(CThing *_thing)
 	rarity = equipment->GetRarity();
 
 	//show the additional attributes
-	if(equipment->GetAttributes().armour != 0)
-		m_stream << "\nRüstung: " << equipment->GetAttributes().armour;
-	if(equipment->GetAttributes().breaking_speed != 0)
-		m_stream << "\nAbbaugeschwindigkeit: " << equipment->GetAttributes().breaking_speed;
-	if(equipment->GetAttributes().luck != 0)
-		m_stream << "\nGlück: " << equipment->GetAttributes().luck;
-	if(equipment->GetAttributes().maxHealth != 0)
-		m_stream << "\nLeben " << equipment->GetAttributes().maxHealth;
+	if (equipment->GetAttributes().armour != 0)
+		m_stream << "\n" << g_pStringContainer->m_Strings[STRING_ARMOUR] << ": " << equipment->GetAttributes().armour;
+	if (equipment->GetAttributes().breaking_speed != 0)
+		m_stream << "\n" << g_pStringContainer->m_Strings[STRING_BREAKINGSPEED] << ": " << equipment->GetAttributes().breaking_speed;
+	if (equipment->GetAttributes().luck != 0)
+		m_stream << "\n" << g_pStringContainer->m_Strings[STRING_LUCK] << ": " << equipment->GetAttributes().luck;
+	if (equipment->GetAttributes().maxHealth != 0)
+		m_stream << "\n" << g_pStringContainer->m_Strings[STRING_HEALTH] << ": " << equipment->GetAttributes().maxHealth;
 	if (equipment->GetAttributes().healthRegeneration != 0)
-		m_stream << "\nLebensregeneration " << equipment->GetAttributes().healthRegeneration;
-	if(equipment->GetAttributes().maxMana != 0)
-		m_stream << "\nMana " << equipment->GetAttributes().maxMana;
+		m_stream << "\n" << g_pStringContainer->m_Strings[STRING_HEALTHREGENERATION] << ": " << equipment->GetAttributes().healthRegeneration;
+	if (equipment->GetAttributes().maxMana != 0)
+		m_stream << "\n" << g_pStringContainer->m_Strings[STRING_MANA] << ": " << equipment->GetAttributes().maxMana;
 	if (equipment->GetAttributes().manaRegeneration != 0)
-		m_stream << "\nManaregeneration " << equipment->GetAttributes().manaRegeneration;
-	if(equipment->GetAttributes().speed != 0)
-		m_stream << "\nGeschwindigkeit " << equipment->GetAttributes().speed;
-	if(equipment->GetAttributes().strength != 0)
-		m_stream << "\nStärke " << equipment->GetAttributes().strength;
+		m_stream << "\n" << g_pStringContainer->m_Strings[STRING_MANAREGENERATION] << ": " << equipment->GetAttributes().manaRegeneration;
+	if (equipment->GetAttributes().speed != 0)
+		m_stream << "\n" << g_pStringContainer->m_Strings[STRING_SPEED] << ": " << equipment->GetAttributes().speed;
+	if (equipment->GetAttributes().strength != 0)
+		m_stream << "\n" << g_pStringContainer->m_Strings[STRING_STRENGTH] << ": " << equipment->GetAttributes().strength;
 	if (equipment->GetAttributes().criticalChance != 0)
-		m_stream << "\nKritische Chance " << equipment->GetAttributes().criticalChance;
+		m_stream << "\n" << g_pStringContainer->m_Strings[STRING_CRITICALCHANCE] << ": " << equipment->GetAttributes().criticalChance;
 	if (equipment->GetAttributes().criticalDamage != 0)
-		m_stream << "\nKritischer Schaden " << equipment->GetAttributes().criticalDamage;
+		m_stream << "\n" << g_pStringContainer->m_Strings[STRING_CRITICALDAMAGE] << ": " << equipment->GetAttributes().criticalDamage;
 	if (equipment->GetAttributes().light != 0)
-		m_stream << "\nLicht: " << equipment->GetAttributes().light;
+		m_stream << "\n" << g_pStringContainer->m_Strings[STRING_LIGHT] << ": " << equipment->GetAttributes().light;
 
 		//sets the color
 	switch(rarity)

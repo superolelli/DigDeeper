@@ -33,7 +33,7 @@ CEquipment::~CEquipment()
 
 
 
-void CEquipment::InitEquipment(int _ID, bool _loaded)
+void CEquipment::InitEquipment(int _ID, bool _loaded, bool _inited)
 {
 	Init(_ID, _loaded);
 	
@@ -124,7 +124,9 @@ void CEquipment::InitEquipment(int _ID, bool _loaded)
 			{
 				m_EquipID = HAND;
 				m_rarity = 1;
-				InitRing();
+
+				if (!_inited)
+					InitEquipmentRandomly(_ID);
 			}
 		}break;
 	}
@@ -134,11 +136,7 @@ void CEquipment::InitEquipment(int _ID, bool _loaded)
 
 void CEquipment::InitEquipmentRandomly(int _ID)
 {
-	InitEquipment(_ID);
-
-	//because the ring automatically is initialized randomly: end the function
-	if(_ID == IRONRING || _ID == ARCANUSRING || _ID == VERYRARERING)
-		return;
+	InitEquipment(_ID, false, true);
 
 	//get a rarity
 	int number = rand()%1000;
@@ -155,10 +153,23 @@ void CEquipment::InitEquipmentRandomly(int _ID)
 		m_rarity = 1;
 
 
-	//add the skills
-	for(int i = 1; i < m_rarity; i++)
+	int i = 1;
+
+	if (_ID == IRONRING)
+		i = 0;
+	else if (_ID == ARCANUSRING)
+		i = -2;
+	else if (_ID == VERYRARERING)
 	{
-		number = rand()%11 + 1;
+		i = 0;
+		m_rarity = 5;
+	}
+
+
+	//add the skills
+	for(i; i < m_rarity; i++)
+	{
+		number = rand()%12 + 1;
 
 		switch(number)
 		{
@@ -166,67 +177,73 @@ void CEquipment::InitEquipmentRandomly(int _ID)
 			{
 				m_Attributes.armour += rand()%3 + 1;
 				if(i == 1)
-					m_Name.append(" des Schutzes");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_ARMOUR]);
 			}break;
 		case BREAKINGSPEED:
 			{
 				m_Attributes.breaking_speed += (float)(rand()%5 +1) /10;
 				if(i == 1)
-					m_Name.append(" des Erdreiches");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_BREAKINGSPEED]);
 			}break;
 		case STRENGTH:
 			{
 				m_Attributes.strength += 1;
 				if(i == 1)
-					m_Name.append(" der Zerstörung");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_STRENGTH]);
 			}break;
 		case HEALTH:
 			{
 				m_Attributes.maxHealth += rand()%10 +1;
 				if(i == 1)
-					m_Name.append(" der Vitalität");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_HEALTH]);
 			}break;
 		case SPEED:
 			{
 				m_Attributes.speed += rand()%10 +1;
 				if(i == 1)
-					m_Name.append(" des Flitzers");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_SPEED]);
 			}break;
 		case LUCK:
 			{
 				m_Attributes.luck += rand()%10 +1;
 				if(i == 1)
-					m_Name.append(" des Schornsteinfegers");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_LUCK]);
 			}break;
 		case MANA:
 			{
 				m_Attributes.maxMana += rand()%10 +1;
 				if(i == 1)
-					m_Name.append(" des Magiers");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_MANA]);
 			}break;
 		case HEALTHREGENERATION:
 			{
 				m_Attributes.healthRegeneration += 1;
 				if (i == 1)
-					m_Name.append(" der Regeneration");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_HEALTHREGENERATION]);
 			}break;
 			case MANAREGENERATION:
 			{
 				m_Attributes.manaRegeneration += rand() % 2 + 1;
 				if (i == 1)
-					m_Name.append(" der arkanen Macht");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_MANAREGENERATION]);
 			}break;
 			case CRITICALCHANCE:
 			{
 				m_Attributes.criticalChance += rand() % 5 + 1;
 				if (i == 1)
-					m_Name.append(" des Zufalls");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_CRITICALCHANCE]);
 			}break;
 			case CRITICALDAMAGE:
 			{
 				m_Attributes.criticalDamage += rand() % 10 + 1;
 				if (i == 1)
-					m_Name.append(" des Vernichtens");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_CRITICALDAMAGE]);
+			}break;
+			case 12:
+			{
+				m_Attributes.light += rand() % 100 + 50;
+				if (i == 1)
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_LIGHT]);
 			}break;
 		default:
 			{
@@ -237,116 +254,6 @@ void CEquipment::InitEquipmentRandomly(int _ID)
 }
 
 
-//inits a ring randomly
-void CEquipment::InitRing()
-{
-		//get a rarity
-	int number = rand()%1000;
-
-	if (number < 5)
-		m_rarity = 5;
-	else if (number < 20)
-		m_rarity = 4;
-	else if (number < 50)
-		m_rarity = 3;
-	else if (number < 100)
-		m_rarity = 2;
-	else
-		m_rarity = 1;
-
-
-	int i;
-
-	if(m_ID == IRONRING)
-		i = 0;
-	else if(m_ID == ARCANUSRING)
-		i = -2;
-	else if(m_ID == VERYRARERING)
-	{
-		i = 0;
-		m_rarity = 5;
-	}
-
-	//add the skills
-	for(i; i < m_rarity; i++)
-	{
-		number = rand()%11 + 1;
-
-		switch(number)
-		{
-		case ARMOUR:
-			{
-				m_Attributes.armour += rand()%3 + 1;
-				if(i == 1 && m_ID != VERYRARERING)
-					m_Name.append(" des Schutzes");
-			}break;
-		case BREAKINGSPEED:
-			{
-				m_Attributes.breaking_speed += (float)(rand()%5 +1) /10;
-				if(i == 1 && m_ID != VERYRARERING)
-					m_Name.append(" des Erdreiches");
-			}break;
-		case STRENGTH:
-			{
-				m_Attributes.strength += 1;
-				if(i == 1 && m_ID != VERYRARERING)
-					m_Name.append(" der Zerstörung");
-			}break;
-		case HEALTH:
-			{
-				m_Attributes.maxHealth += rand()%10 +1;
-				if(i == 1 && m_ID != VERYRARERING)
-					m_Name.append(" der Vitalität");
-			}break;
-		case SPEED:
-			{
-				m_Attributes.speed += rand()%10 +1;
-				if(i == 1 && m_ID != VERYRARERING)
-					m_Name.append(" des Flitzers");
-			}break;
-		case LUCK:
-			{
-				m_Attributes.luck += rand()%10 +1;
-				if(i == 1 && m_ID != VERYRARERING)
-					m_Name.append(" des Schornsteinfegers");
-			}break;
-		case MANA:
-			{
-				m_Attributes.maxMana += rand()%10 +1;
-				if(i == 1 && m_ID != VERYRARERING)
-					m_Name.append(" des Magiers");
-			}break;
-		case HEALTHREGENERATION:
-			{
-				m_Attributes.healthRegeneration += 1;
-				if (i == 1 && m_ID != VERYRARERING)
-					m_Name.append(" der Regeneration");
-			}break;
-		case MANAREGENERATION:
-			{
-				m_Attributes.manaRegeneration += rand() % 2 + 1;
-				if (i == 1 && m_ID != VERYRARERING)
-					m_Name.append(" der arkanen Macht");
-			}break;
-		case CRITICALCHANCE:
-			{
-				m_Attributes.criticalChance += rand() % 5 + 1;
-				if (i == 1 && m_ID != VERYRARERING)
-					m_Name.append(" des Zufalls");
-			}break;
-		case CRITICALDAMAGE:
-		{
-			m_Attributes.criticalDamage += rand() % 10 + 1;
-			if (i == 1 && m_ID != VERYRARERING)
-				m_Name.append(" des Vernichtens");
-		}break;
-		default:
-			{
-				 
-			}
-		}
-	}
-}
 
 void CEquipment::RenderEquipment(int _x, int _y, float _frameNumber)
 {

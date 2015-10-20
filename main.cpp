@@ -23,16 +23,22 @@ void load_textures(bool *is_loading)
 	char* var = getenv("APPDATA");
 	boost::filesystem::path Path;
 	Path = var;
-	Path.append("/Dig Deeper/Settings.stt");
+	Path.append("/Dig Deeper/Settings_02.stt");
 
 	if (boost::filesystem::exists(Path))
 	{
-		ifstream Input(Path.string());
+		/*ifstream Input(Path.string());
 		Input.read((char *)&Settings, sizeof(Settings));
-		Input.close();
+		Input.close();*/
+
+		ifstream inputFile(Path.string(), ios::binary);
+		binary_iarchive settingsArchive(inputFile);
+		settingsArchive >> Settings;
+		inputFile.close();
 
 		language = Settings.m_language;
 	}
+
 
 	g_pStringContainer->LoadStrings(language);
 

@@ -38,7 +38,7 @@ void CSoundengine::CheckAllSounds()
 {
 	list<Sound*>::iterator i;
 
-	for (i = m_soundList.begin(); i != m_soundList.end(); i++)
+	for (i = m_soundList.begin(); i != m_soundList.end();)
 	{
 		if ((**i).getStatus() == Sound::Stopped)
 		{
@@ -46,5 +46,7 @@ void CSoundengine::CheckAllSounds()
 			i = m_soundList.erase(i);
 			continue;
 		}
+
+		i++;
 	}
 }

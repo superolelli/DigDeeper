@@ -124,6 +124,7 @@ public:
 	Texture t_newSkillCriticalDamage;
 	Texture t_newSkillMagicPoints;
 	Texture t_newSkillRecipe;
+	Texture t_newSkillClear;
 
 	Texture t_furnanceMenu;                                //the melting menu
 	Texture t_cauldronMenu;                                 //the cooking menu
@@ -470,6 +471,7 @@ public:
 	Font f_coolsville;
 	Font f_ltromatic;
 	Font f_cents18; 
+	Font f_plantc;
 };
 
 

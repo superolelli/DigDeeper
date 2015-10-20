@@ -183,6 +183,9 @@
     <ClCompile Include="StringContainer.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Minimap.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.hpp">
@@ -369,6 +372,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="StringContainer.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Minimap.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

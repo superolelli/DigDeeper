@@ -8,6 +8,14 @@
 
 class CPlayer;
 
+
+struct SkillButton
+{
+	CButton *button;
+	string title;
+	string description;
+};
+
 class CCharacterInfo
 {
 public:
@@ -51,15 +59,17 @@ private:
 	void CheckForLevelUp();
 	void LevelUp();
 	void AddSkill(int _skill);
-	CButton* RandomSkill(int _skillNumber);
+	SkillButton RandomSkill(int _skillNumber);
 
 	CSprite *m_pCharacterWindow;                       //the character info
 	CSprite *m_pLevelUp;                               //the levelUp window
 
-	CButton *m_pFirstSkill;                            //the first skill button
-	CButton *m_pSecondSkill;                           //the second skill button
-	CButton *m_pThirdSkill;                            //the third skill button
-	CButton *m_pFourthSkill;                           //the fourth skill button
+	//CButton *m_pFirstSkill;                            //the first skill button
+	//CButton *m_pSecondSkill;                           //the second skill button
+	//CButton *m_pThirdSkill;                            //the third skill button
+	//CButton *m_pFourthSkill;                           //the fourth skill button
+
+	SkillButton m_SkillButtons[4];
 
 	CButton *m_pLevelUpButton;                         //the level up button
 
@@ -67,8 +77,9 @@ private:
 	SToolAttributes *m_pModifications;
 	CPlayer *m_pPlayer;
 
-	Font m_font;                                       //the font
 	Text m_text;                                       //the text to display
+	Text m_title;
+	Text m_description;
 
 	int m_playerLevel;                         //the player's level
 

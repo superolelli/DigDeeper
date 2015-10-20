@@ -24,6 +24,7 @@ public:
 	void TakeThing(SItem _item);   //takes an item
 	SItem Take(SItem _item);     //takes an item of the inventory
 	vector<SItem> GetContent();     //returns the content of the chest
+	stringstream GetTooltip(CThing *_thing);
 
 
 

@@ -1735,3 +1735,31 @@ ZUKÜNFITGE ÄNDERUNGEN:
    entsprechenden Änderungen vornehmen.
 
 ---------------------------------------------------------
+11.10.2015
+
+- Die Texte beim auswählen des Skills beim Level-Up werden nun gesondert gerendert
+  -> Übersetzung ist hier nun möglich
+
+---------------------------------------------------------
+12.10.2015
+
+- Der Text im Charakterfenster wird nun gesondert gerendert ->Übersetzung möglich
+- Der Tooltip-Text von Items im Inventar oder der Truhe wird nun gesondert gerendert ->Übersetzung möglich
+- Die Namensgebung bei seltenem Equipment kann nun auch übersetzt werden
+
+---------------------------------------------------------
+15.10.2015
+
+- Alles was mit dem Anzeigen und Eintragen des Highscores zu tun hat kann nun übersetzt werden
+
+---------------------------------------------------------
+18.10.2015
+
+- Das Magiemenü kann nun übersetzt werden
+
+---------------------------------------------------------
+19.10.2015
+
+- Die vergangene Zeit wird nun angezeigt
+
+---------------------------------------------------------

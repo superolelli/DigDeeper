@@ -6,8 +6,6 @@ void CCookingBook::Quit()
 {
 	SAFE_DELETE(m_pNextPageLeft);
 	SAFE_DELETE(m_pNextPageRight);
-
-	g_pFramework->WriteToLog(INFO, "Deleted Cookingbook");
 }
 
 

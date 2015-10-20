@@ -221,6 +221,8 @@ void CPlayer::Init(int _x, int _y, CWorld *_world, View *_view, int _class, bool
 		m_Attributes.currentMana = 300;
 		m_Attributes.manaRegeneration = 5;
 		m_Attributes.breakingSpeed = 5;
+
+		AddExp(20);
 	}
 
 

@@ -102,7 +102,7 @@ void TextureLoading::LoadTextures()
 	t_arrowDown.loadFromFile("Data/Sprites/Building/arrow_down.png");
 	t_buildThingBackground.loadFromFile("Data/Sprites/Building/building_menu_background_things.png");
 
-	t_skillPage.loadFromFile("Data/Sprites/Skills/character_info2.png");
+	t_skillPage.loadFromFile("Data/Sprites/Skills/character_info3.png");
 	t_levelUp.loadFromFile("Data/Sprites/Skills/levelUp.png");
 	t_levelUp_button.loadFromFile("Data/Sprites/Skills/levelUp_button.png");
 	t_newSkillSpeed.loadFromFile("Data/Sprites/Skills/levelUp_speed.png");
@@ -118,6 +118,7 @@ void TextureLoading::LoadTextures()
 	t_newSkillCriticalDamage.loadFromFile("Data/Sprites/Skills/levelUp_criticalDamage.png");
 	t_newSkillMagicPoints.loadFromFile("Data/Sprites/Skills/levelUp_magicPoints.png");
 	t_newSkillRecipe.loadFromFile("Data/Sprites/Skills/levelUp_recipe.png");
+	t_newSkillClear.loadFromFile("Data/Sprites/Skills/levelUp_clear.png");
 
 	t_furnanceMenu.loadFromFile("Data/Sprites/Inventory/furnance_menu2.png");
 	t_cauldronMenu.loadFromFile("Data/Sprites/Inventory/cooking_menu.png");
@@ -466,4 +467,5 @@ void TextureLoading::LoadTextures()
 	f_coolsville.loadFromFile("Data/Fonts/coolsville.ttf");
 	f_ltromatic.loadFromFile("Data/Fonts/ltromatic.ttf");
 	f_cents18.loadFromFile("Data/Fonts/18cents.ttf");
+	f_plantc.loadFromFile("Data/Fonts/plantc.ttf");
 }

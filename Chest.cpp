@@ -109,132 +109,7 @@ void CChest::Render()
 				//if needed set tooltip
 				if(m_chest[x][y].thing->GetInventorySprite()->GetRect().contains(Mouse::getPosition()) && !Mouse::isButtonPressed(Mouse::Left))
 				{
-					number.str("");
-					number << m_chest[x][y].thing->GetName();
-
-					//if it is a tool or equipment: show possible rarity and additional attributes
-					if(m_chest[x][y].thing->getID() > ICBREAK)
-					{
-						int rarity = 1;
-
-						//if it is equipment:
-						if(m_chest[x][y].thing->getID() > TEBREAK)
-						{
-							CEquipment *equipment = (CEquipment*)m_chest[x][y].thing;
-							rarity = equipment->GetRarity();
-
-							//show the additional attributes
-							if(equipment->GetAttributes().armour != 0)
-								number << "\nRüstung: " << equipment->GetAttributes().armour;
-							if(equipment->GetAttributes().breaking_speed != 0)
-								number << "\nAbbaugeschwindigkeit: " << equipment->GetAttributes().breaking_speed;
-							if(equipment->GetAttributes().luck != 0)
-								number << "\nGlück: " << equipment->GetAttributes().luck;
-							if(equipment->GetAttributes().maxHealth != 0)
-								number << "\nLeben " << equipment->GetAttributes().maxHealth;
-							if (equipment->GetAttributes().healthRegeneration != 0)
-								number << "\nLebensregeneration " << equipment->GetAttributes().healthRegeneration;
-							if(equipment->GetAttributes().maxMana != 0)
-								number << "\nMana " << equipment->GetAttributes().maxMana;
-							if (equipment->GetAttributes().manaRegeneration != 0)
-								number << "\nManaregeneration " << equipment->GetAttributes().manaRegeneration;
-							if(equipment->GetAttributes().speed != 0)
-								number << "\nGeschwindigkeit " << equipment->GetAttributes().speed;
-							if(equipment->GetAttributes().strength != 0)
-								number << "\nStärke " << equipment->GetAttributes().strength;
-							if (equipment->GetAttributes().criticalChance != 0)
-								number << "\nKritische Chance " << equipment->GetAttributes().criticalChance;
-							if (equipment->GetAttributes().criticalDamage != 0)
-								number << "\nKritischer Schaden " << equipment->GetAttributes().criticalDamage;
-							if (equipment->GetAttributes().light != 0)
-								number << "\nLicht: " << equipment->GetAttributes().light;
-						}
-						//if it is a tool
-						else if (m_chest[x][y].thing->getID() > CTBREAK)
-						{
-							CTool *tool = (CTool*)m_chest[x][y].thing;
-							rarity = tool->GetRarity();
-							
-							if(tool->GetAttributes().armour != 0)
-								number << "\nRüstung: " << tool->GetAttributes().armour;
-							if(tool->GetAttributes().breaking_speed != 0)
-								number << "\nAbbaugeschwindigkeit: " << tool->GetAttributes().breaking_speed;
-							if(tool->GetAttributes().luck != 0)
-								number << "\nGlück: " << tool->GetAttributes().luck;
-							if(tool->GetAttributes().maxHealth != 0)
-								number << "\nLeben " << tool->GetAttributes().maxHealth;
-							if (tool->GetAttributes().healthRegeneration != 0)
-								number << "\nLebensregeneration " << tool->GetAttributes().healthRegeneration;
-							if(tool->GetAttributes().maxMana != 0)
-								number << "\nMana " << tool->GetAttributes().maxMana;
-							if (tool->GetAttributes().manaRegeneration != 0)
-								number << "\nManaregeneration " << tool->GetAttributes().manaRegeneration;
-							if(tool->GetAttributes().speed != 0)
-								number << "\nGeschwindigkeit " << tool->GetAttributes().speed;
-							if(tool->GetAttributes().strength != 0)
-								number << "\nStärke " << tool->GetAttributes().strength;
-							if (tool->GetAttributes().criticalChance != 0)
-								number << "\nKritische Chance " << tool->GetAttributes().criticalChance;
-							if (tool->GetAttributes().criticalDamage != 0)
-								number << "\nKritischer Schaden " << tool->GetAttributes().criticalDamage;
-							if (tool->GetAttributes().light != 0)
-								number << "\nLicht: " << tool->GetAttributes().light;
-						}
-						else
-						{
-							CConsumable *con = (CConsumable*)m_chest[x][y].thing;
-
-							number << " (konsumierbar)";
-
-							if (con->GetAttributes().armour != 0)
-								number << "\nRüstung: " << con->GetAttributes().armour;
-							if (con->GetAttributes().breaking_speed != 0)
-								number << "\nAbbaugeschwindigkeit: " << con->GetAttributes().breaking_speed;
-							if (con->GetAttributes().luck != 0)
-								number << "\nGlück: " << con->GetAttributes().luck;
-							if (con->GetAttributes().health != 0)
-								number << "\nLeben: " << con->GetAttributes().health;
-							if (con->GetAttributes().healthRegeneration != 0)
-								number << "\nLebensregeneration: " << con->GetAttributes().healthRegeneration;
-							if (con->GetAttributes().mana != 0)
-								number << "\nMana: " << con->GetAttributes().mana;
-							if (con->GetAttributes().manaRegeneration != 0)
-								number << "\nManaregeneration: " << con->GetAttributes().manaRegeneration;
-							if (con->GetAttributes().speed != 0)
-								number << "\nGeschwindigkeit: " << con->GetAttributes().speed;
-							if (con->GetAttributes().strength != 0)
-								number << "\nStärke: " << con->GetAttributes().strength;
-							if (con->GetAttributes().criticalChance != 0)
-								number << "\nKritische Chance: " << con->GetAttributes().criticalChance;
-							if (con->GetAttributes().criticalDamage != 0)
-								number << "\nKritischer Schaden: " << con->GetAttributes().criticalDamage;
-
-							number << "\nDauer: " << con->GetAttributes().duration;
-						}
-
-						//sets the color
-						switch(rarity)
-						{
-						case(2):
-							m_tooltipText.setColor(Color::Magenta);
-							break;
-						case(3):
-							m_tooltipText.setColor(Color::Red);
-							break;
-						case(4):
-							m_tooltipText.setColor(Color::Blue);
-							break;
-						case(5):
-							m_tooltipText.setColor(Color::Cyan);
-							break;
-						default:
-							m_tooltipText.setColor(Color::Yellow);
-						}
-					}
-					else
-						m_tooltipText.setColor(Color::Yellow);
-
-					m_tooltipText.setString(number.str().c_str());
+					m_tooltipText.setString(GetTooltip(m_chest[x][y].thing).str().c_str());
 					m_tooltipText.setPosition((float)(Mouse::getPosition().x + 13), float(Mouse::getPosition().y));
 
 					FloatRect backgroundRect = m_tooltipText.getLocalBounds();
@@ -364,4 +239,114 @@ vector<SItem> CChest::GetContent()
 		}
 	}
 	return items;
+}
+
+
+
+
+stringstream CChest::GetTooltip(CThing *_thing)
+{
+	stringstream number;
+	SToolAttributes attributes;
+	int rarity = 1;
+	
+	number.str("");
+	number << _thing->GetName();
+
+	if (_thing->getID() > ICBREAK)
+	{
+		//if it is a tool or equipment: show possible rarity and additional attributes
+		if (_thing->getID() > CTBREAK)
+		{
+			//if it is equipment:
+			if (_thing->getID() > TEBREAK)
+			{
+				attributes = ((CEquipment*)_thing)->GetAttributes();
+				rarity = ((CEquipment*)(_thing))->GetRarity();
+			}
+			else if (_thing->getID() > CTBREAK)
+			{
+				attributes = ((CTool*)_thing)->GetAttributes();
+				rarity = ((CTool*)(_thing))->GetRarity();
+			}
+
+			//show the additional attributes
+			if (attributes.armour != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_ARMOUR] << ": " << attributes.armour;
+			if (attributes.breaking_speed != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_BREAKINGSPEED] << ": " << attributes.breaking_speed;
+			if (attributes.luck != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_LUCK] << ": " << attributes.luck;
+			if (attributes.maxHealth != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_HEALTH] << ": " << attributes.maxHealth;
+			if (attributes.healthRegeneration != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_HEALTHREGENERATION] << ": " << attributes.healthRegeneration;
+			if (attributes.maxMana != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_MANA] << ": " << attributes.maxMana;
+			if (attributes.manaRegeneration != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_MANAREGENERATION] << ": " << attributes.manaRegeneration;
+			if (attributes.speed != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_SPEED] << ": " << attributes.speed;
+			if (attributes.strength != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_STRENGTH] << ": " << attributes.strength;
+			if (attributes.criticalChance != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_CRITICALCHANCE] << ": " << attributes.criticalChance;
+			if (attributes.criticalDamage != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_CRITICALDAMAGE] << ": " << attributes.criticalDamage;
+			if (attributes.light != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_LIGHT] << ": " << attributes.light;
+		}
+		else
+		{
+			CConsumable *con = (CConsumable*)_thing;
+
+			number << " " << g_pStringContainer->m_Strings[STRING_CONSUMABLE];
+
+			if (con->GetAttributes().armour != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_ARMOUR] << ": " << con->GetAttributes().armour;
+			if (con->GetAttributes().breaking_speed != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_BREAKINGSPEED] << ": " << con->GetAttributes().breaking_speed;
+			if (con->GetAttributes().luck != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_LUCK] << ": " << con->GetAttributes().luck;
+			if (con->GetAttributes().health != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_HEALTH] << ": " << con->GetAttributes().health;
+			if (con->GetAttributes().healthRegeneration != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_HEALTHREGENERATION] << ": " << con->GetAttributes().healthRegeneration;
+			if (con->GetAttributes().mana != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_MANA] << ": " << con->GetAttributes().mana;
+			if (con->GetAttributes().manaRegeneration != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_MANAREGENERATION] << ": " << con->GetAttributes().manaRegeneration;
+			if (con->GetAttributes().speed != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_SPEED] << ": " << con->GetAttributes().speed;
+			if (con->GetAttributes().strength != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_STRENGTH] << ": " << con->GetAttributes().strength;
+			if (con->GetAttributes().criticalChance != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_CRITICALCHANCE] << ": " << con->GetAttributes().criticalChance;
+			if (con->GetAttributes().criticalDamage != 0)
+				number << "\n" << g_pStringContainer->m_Strings[STRING_CRITICALDAMAGE] << ": " << con->GetAttributes().criticalDamage;
+
+			number << "\n" << g_pStringContainer->m_Strings[STRING_DURATION] << ": " << con->GetAttributes().duration;
+		}
+	}
+
+	//sets the color
+	switch (rarity)
+	{
+	case(2) :
+		m_tooltipText.setColor(Color::Magenta);
+		break;
+	case(3) :
+		m_tooltipText.setColor(Color::Red);
+		break;
+	case(4) :
+		m_tooltipText.setColor(Color::Blue);
+		break;
+	case(5) :
+		m_tooltipText.setColor(Color::Cyan);
+		break;
+	default:
+		m_tooltipText.setColor(Color::Yellow);
+	}
+
+	return number;
 }

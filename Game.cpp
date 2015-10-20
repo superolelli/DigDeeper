@@ -45,21 +45,26 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	char* var = getenv("APPDATA");
 	boost::filesystem::path Path;
 	Path = var;
-	Path.append("/Dig Deeper/Settings.stt");
+	Path.append("/Dig Deeper/Settings_02.stt");
 
 	if (boost::filesystem::exists(Path))
 	{
-		ifstream Input(Path.string());
+		/*ifstream Input(Path.string());
 		Input.read((char *)&m_Settings, sizeof(m_Settings));
-		Input.close();
+		Input.close();*/
+
+		ifstream inputFile(Path.string(), ios::binary);
+		binary_iarchive settingsArchive(inputFile);
+		settingsArchive >> m_Settings;
+		inputFile.close();
 	}
 	else
 	{
-		m_Settings.m_version = VERSION;
 		m_Settings.m_beam_numbers = false;
 		m_Settings.m_inventory_numbers = false;
 		m_Settings.m_fast_light = false;
 		m_Settings.m_language = GERMAN;
+		m_Settings.m_showTime = true;
 	}
 
 	//Inits the npc machine
@@ -103,6 +108,12 @@ void CGame::Init(SNewWorldAttributes _attributes, bool _loaded)
 	m_seconds = 0;
 
 	m_TimeRunning = 0;
+	m_timeText.setFont(g_pTextures->f_coolsville);
+	m_timeText.setColor(Color::Yellow);
+	m_timeText.setCharacterSize(28);
+
+	m_timeTextBackground.setFillColor(Color::Black);
+	
 
 	//select the first music
 	m_music = rand()%10;
@@ -275,6 +286,12 @@ void CGame::Run()
 
 		//Sets the default view for rendering the panels
 		g_pFramework->GetRenderWindow()->setView(g_pFramework->GetRenderWindow()->getDefaultView());
+
+
+		//shows the elapsed time on the screen
+		if (m_Settings.m_showTime)
+			ShowElapsedTime();
+		
 
 		m_pPlayer->RenderInventory();
 
@@ -588,6 +605,31 @@ void CGame::Zoom()
 
 
 
+void CGame::ShowElapsedTime()
+{
+	int minutes, seconds;
+
+	minutes = (int)m_TimeRunning / 60;
+	seconds = (int)m_TimeRunning;
+
+	stringstream stream("");
+	stream << minutes << ":" << seconds;
+	m_timeText.setString(stream.str());
+	m_timeText.setPosition((int)(g_pFramework->GetRenderWindow()->getSize().x / 2 - m_timeText.getGlobalBounds().width / 2), 10);
+
+	//m_timeTextBackground.setSize(Vector2f(200, 40));
+	//m_timeTextBackground.setPosition(g_pFramework->GetWindow()->getSize().x/2 - 100, 10);
+
+	m_timeTextBackground.setSize(Vector2f((int)m_timeText.getGlobalBounds().width + 4, 30));
+	m_timeTextBackground.setPosition(g_pFramework->GetWindow()->getSize().x/2 - m_timeText.getGlobalBounds().width/2 -2, 12);
+
+	g_pFramework->GetRenderWindow()->draw(m_timeTextBackground);
+	g_pFramework->GetRenderWindow()->draw(m_timeText);
+}
+
+
+
+
 void CGame::SaveGame()
 {
 	//creates a new directory if needed
@@ -732,7 +774,7 @@ void CGame::SaveHighscore()
 		text.setFont(g_pTextures->f_coolsville);
 		text.setCharacterSize(35);
 		text.setColor(Color(200, 0, 0));
-		text.setString("Gib deinen Namen ein:");
+		text.setString(g_pStringContainer->m_Strings[STRING_WRITE_YOUR_NAME]);
 		text.setPosition(g_pFramework->GetWindow()->getSize().x / 2 - text.getGlobalBounds().width / 2, 100);
 
 		bool quit = false;
@@ -811,7 +853,7 @@ void CGame::ClearHighscore()
 		highscore[i].m_class = -1;
 		highscore[i].m_timeNeeded = 10000;
 		highscore[i].m_level = 0;
-		highscore[i].m_name = "Niemand";
+		highscore[i].m_name = g_pStringContainer->m_Strings[STRING_NOBODY];
 
 		highscore[i].m_attributes.armour = 0;
 		highscore[i].m_attributes.breakingSpeed = 0;

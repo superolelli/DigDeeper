@@ -387,218 +387,218 @@ string CMagicMenu::GetTooltip(int _spellID)
 	{
 	case(FIREBALL) :
 	{
-		tooltip << "Der gute alte Feuerball." << endl << endl;
+		tooltip << g_pStringContainer->m_Strings[STRING_FIREBALL_DESCRIPTION] << endl << endl;
 
 		if (m_SpellLevel[FIREBALL] == 0)
 		{
-			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_NOT_LEARNED] << endl << endl;
 		}
 		else
 		{
-			tooltip << "Schaden: " << m_SpellLevel[FIREBALL] * 3 << endl;
-			tooltip << "Manakosten: " << m_SpellLevel[FIREBALL] * 5 << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_DAMAGE] << " " << m_SpellLevel[FIREBALL] * 3 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] <<" " << m_SpellLevel[FIREBALL] * 5 << endl << endl;
 		}
 
 		if (m_SpellLevel[FIREBALL] == 10)
 		{
-			tooltip << "Zauber ist auf der höchsten Stufe!";
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_HIGHEST_LEVEL];
 		}
 		else
 		{
-			tooltip << "Auf der nächsten Stufe: " << endl;
-			tooltip << "Schaden: " << (m_SpellLevel[FIREBALL] + 1) * 3 << endl;
-			tooltip << "Manakosten: " << (m_SpellLevel[FIREBALL] + 1) * 5;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_NEXT_LEVEL] << " " << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_DAMAGE] << " " << (m_SpellLevel[FIREBALL]+1) * 3 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << (m_SpellLevel[FIREBALL]+1) * 5;
 		}
 	}break;
 	case(ICE) :
 	{
-		tooltip << "Der Eispfeil friert Gegner ein!" << endl << endl;
+		tooltip << g_pStringContainer->m_Strings[STRING_ICEBALL_DESCRIPTION] << endl << endl;
 
 		if (m_SpellLevel[ICE] == 0)
 		{
-			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_NOT_LEARNED] << " " << endl << endl;
 		}
 		else
 		{
-			tooltip << "Schaden: " << m_SpellLevel[ICE] * 1 << endl;
-			tooltip << "Einfrierdauer: " << m_SpellLevel[ICE] * 0.5 << endl;
-			tooltip << "Manakosten: " << m_SpellLevel[ICE] * 5 << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_DAMAGE] << " " << m_SpellLevel[ICE] * 1 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_FROZEN_TIME] << " " << m_SpellLevel[ICE] * 0.5 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << m_SpellLevel[ICE] * 5 << endl << endl;
 		}
 
 		if (m_SpellLevel[ICE] == 10)
 		{
-			tooltip << "Zauber ist auf der höchsten Stufe!";
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_HIGHEST_LEVEL];
 		}
 		else
 		{
-			tooltip << "Auf der nächsten Stufe: " << endl;
-			tooltip << "Schaden: " << (m_SpellLevel[ICE] + 1) * 1 << endl;
-			tooltip << "Einfrierdauer: " << (m_SpellLevel[ICE] + 1) * 0.5 << endl;
-			tooltip << "Manakosten: " << (m_SpellLevel[ICE] + 1) * 5;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_NEXT_LEVEL] << " " << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_DAMAGE] << " " << (m_SpellLevel[ICE] + 1) * 1 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_FROZEN_TIME] << " " << (m_SpellLevel[ICE] + 1) * 0.5 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << (m_SpellLevel[ICE] + 1) * 5;
 		}
 	}break;
 	case(POISONCLOUD) :
 	{
-		tooltip << "Eine Giftwolke, die Gegner im Umkreis vergiftet!" << endl << endl;
+		tooltip << g_pStringContainer->m_Strings[STRING_POISONCLOUD_DESCRIPTION] << endl << endl;
 
 		if (m_SpellLevel[POISONCLOUD] == 0)
 		{
-			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_NOT_LEARNED] << " " << endl << endl;
 		}
 		else
 		{
-			tooltip << "Vergiftungsstufe: " << (int)(m_SpellLevel[POISONCLOUD] * +1)/2 << endl;
-			tooltip << "Vergiftungsdauer: " << m_SpellLevel[POISONCLOUD] * 2 << endl;
-			tooltip << "Manakosten: " << m_SpellLevel[POISONCLOUD] * 5 << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_POISON_LEVEL] << " " << (int)(m_SpellLevel[POISONCLOUD] * +1)/2 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_POISON_DURATION] << " " << m_SpellLevel[POISONCLOUD] * 2 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << m_SpellLevel[POISONCLOUD] * 5 << endl << endl;
 		}
 
 		if (m_SpellLevel[POISONCLOUD] == 10)
 		{
-			tooltip << "Zauber ist auf der höchsten Stufe!";
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_HIGHEST_LEVEL];
 		}
 		else
 		{
-			tooltip << "Auf der nächsten Stufe: " << endl;
-			tooltip << "Vergiftungsstufe: " << ((int)(m_SpellLevel[POISONCLOUD]+2)/2) << endl;
-			tooltip << "Vergiftungsdauer: " << (m_SpellLevel[POISONCLOUD] + 1) * 2 << endl;
-			tooltip << "Manakosten: " << (m_SpellLevel[POISONCLOUD] + 1) * 5;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_NEXT_LEVEL] << " " << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_POISON_LEVEL] << " " << ((int)(m_SpellLevel[POISONCLOUD] + 2) / 2) << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_POISON_DURATION] << " " << (m_SpellLevel[POISONCLOUD] + 1) * 2 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << (m_SpellLevel[POISONCLOUD] + 1) * 5;
 		}
 	}break;
 	case(HEAL) :
 	{
-		tooltip << "Ein Heilzauber, der dir sofort Leben auffüllt." << endl << endl;
+		tooltip << g_pStringContainer->m_Strings[STRING_HEAL_DESCRIPTION] << endl << endl;
 
 		if (m_SpellLevel[HEAL] == 0)
 		{
-			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_NOT_LEARNED] << " " << endl << endl;
 		}
 		else
 		{
-			tooltip << "Lebenspunkte: " << m_SpellLevel[HEAL] * 10 << endl;
-			tooltip << "Manakosten: " << m_SpellLevel[HEAL] * 10 << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_HEALTHPOINTS] << " " << m_SpellLevel[HEAL] * 10 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << m_SpellLevel[HEAL] * 10 << endl << endl;
 		}
 
 		if (m_SpellLevel[HEAL] == 10)
 		{
-			tooltip << "Zauber ist auf der höchsten Stufe!";
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_HIGHEST_LEVEL];
 		}
 		else
 		{
-			tooltip << "Auf der nächsten Stufe: " << endl;
-			tooltip << "Lebenspunkte: " << (m_SpellLevel[HEAL] + 1) * 10 << endl;
-			tooltip << "Manakosten: " << (m_SpellLevel[HEAL] + 1) * 10;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_NEXT_LEVEL] << " " << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_HEALTHPOINTS] << " " << (m_SpellLevel[HEAL] + 1) * 10 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << (m_SpellLevel[HEAL] + 1) * 10;
 		}
 	}break;
 	case(MANASHIELD) :
 	{
-		tooltip << "Das Manaschild wandelt einen Prozentsatz deines maximalen Manas in Rüstung um." << endl << endl;
+		tooltip << g_pStringContainer->m_Strings[STRING_MANASHIELD_DESCRIPTION] << endl << endl;
 
 		if (m_SpellLevel[MANASHIELD] == 0)
 		{
-			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_NOT_LEARNED] << " " << endl << endl;
 		}
 		else
 		{
-			tooltip << "Rüstung: " << m_pPlayer->GetPlayerAttributes().maxMana * (float)(m_SpellLevel[MANASHIELD] * 0.05) << endl;
-			tooltip << "Dauer: " << m_SpellLevel[MANASHIELD] * 5 << endl;
-			tooltip << "Manakosten: " << m_pPlayer->GetPlayerAttributes().maxMana * (float)(m_SpellLevel[MANASHIELD] * 0.03) << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_ARMOUR] << ": " << m_pPlayer->GetPlayerAttributes().maxMana * (float)(m_SpellLevel[MANASHIELD] * 0.05) << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_DURATION] << ": " << m_SpellLevel[MANASHIELD] * 5 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << m_pPlayer->GetPlayerAttributes().maxMana * (float)(m_SpellLevel[MANASHIELD] * 0.03) << endl << endl;
 		}
 
 		if (m_SpellLevel[MANASHIELD] == 10)
 		{
-			tooltip << "Zauber ist auf der höchsten Stufe!";
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_HIGHEST_LEVEL];
 		}
 		else
 		{
-			tooltip << "Auf der nächsten Stufe: " << endl;
-			tooltip << "Rüstung: " << m_pPlayer->GetPlayerAttributes().maxMana * (float)((m_SpellLevel[MANASHIELD]+1) * 0.05) << endl;
-			tooltip << "Dauer: " << (m_SpellLevel[MANASHIELD]+1) * 5 << endl;
-			tooltip << "Manakosten: " << m_pPlayer->GetPlayerAttributes().maxMana * (float)((m_SpellLevel[MANASHIELD]+1) * 0.03);
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_NEXT_LEVEL] << " " << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_ARMOUR] << ": " << m_pPlayer->GetPlayerAttributes().maxMana * (float)((m_SpellLevel[MANASHIELD] + 1) * 0.05) << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_DURATION] << ": " << (m_SpellLevel[MANASHIELD] + 1) * 5 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << m_pPlayer->GetPlayerAttributes().maxMana * (float)((m_SpellLevel[MANASHIELD] + 1) * 0.03);
 		}
 	}break;
 	case(ALCHEMY) :
 	{
-		tooltip << g_pStringContainer->m_Strings[STRING_MAGIC_ALCHEMY_DESCRIPTION] << endl << endl;
+		tooltip << g_pStringContainer->m_Strings[STRING_ALCHEMY_DESCRIPTION] << endl << endl;
 
 		if (m_SpellLevel[ALCHEMY] == 0)
 		{
-			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_NOT_LEARNED] << " " << endl << endl;
 		}
 		else
 		{
-			tooltip << "Chance auf Block höherer Wertigkeit: " << m_SpellLevel[ALCHEMY] * 1 << "%" << endl;
-			tooltip << "Chance auf Block niedrigerer Wertigkeit: 5%" << endl;
-			tooltip << "Manakosten: " << m_SpellLevel[ALCHEMY] * 5 << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_CHANCE_FOR_HIGHER_BLOCK] << " " << m_SpellLevel[ALCHEMY] * 1 << "%" << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_CHANCE_FOR_LOWER_BLOCK] << " 5%" << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << m_SpellLevel[ALCHEMY] * 5 << endl << endl;
 		}
 
 		if (m_SpellLevel[ALCHEMY] == 10)
 		{
-			tooltip << "Zauber ist auf der höchsten Stufe!";
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_HIGHEST_LEVEL];
 		}
 		else
 		{
-			tooltip << "Auf der nächsten Stufe: " << endl;
-			tooltip << "Chance auf Block höherer Wertigkeit: " << (m_SpellLevel[ALCHEMY]+1) * 1 << "%" << endl;
-			tooltip << "Chance auf Block niedrigerer Wertigkeit: 5%" << endl;
-			tooltip << "Manakosten: " << (m_SpellLevel[ALCHEMY] + 1) * 5;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_NEXT_LEVEL] << " " << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_CHANCE_FOR_HIGHER_BLOCK] << " " << (m_SpellLevel[ALCHEMY] + 1) * 1 << "%" << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_CHANCE_FOR_LOWER_BLOCK] << " 5%" << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << (m_SpellLevel[ALCHEMY] + 1) * 5;
 		}
 	}break;
 	case(LIGHT) :
 	{
 
-		tooltip << "Eine Lichtkugel, die dir folgt. Juhu!" << endl << endl;
+		tooltip << g_pStringContainer->m_Strings[STRING_LIGHTSPELL_DESCRIPTION] << endl << endl;
 
 		if (m_SpellLevel[LIGHT] == 0)
 		{
-			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_NOT_LEARNED] << " " << endl << endl;
 		}
 		else
 		{
-			tooltip << "Lichtradius: " << m_SpellLevel[LIGHT] * 50 << endl;
-			tooltip << "Dauer: " << m_SpellLevel[LIGHT] * 5 << endl;
-			tooltip << "Manakosten: " << m_SpellLevel[LIGHT] * 5 << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_LIGHTRADIUS] << " " << m_SpellLevel[LIGHT] * 50 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_DURATION] << ": " << m_SpellLevel[LIGHT] * 5 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << m_SpellLevel[LIGHT] * 5 << endl << endl;
 		}
 
 		if (m_SpellLevel[LIGHT] == 10)
 		{
-			tooltip << "Zauber ist auf der höchsten Stufe!";
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_HIGHEST_LEVEL];
 		}
 		else
 		{
-			tooltip << "Auf der nächsten Stufe: " << endl;
-			tooltip << "Lichtradius: " << (m_SpellLevel[LIGHT]+1) * 50 << endl;
-			tooltip << "Dauer: " << (m_SpellLevel[LIGHT] +1)* 5 << endl;
-			tooltip << "Manakosten: " << (m_SpellLevel[LIGHT] + 1) * 5;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_NEXT_LEVEL] << " " << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_LIGHTRADIUS] << " " << (m_SpellLevel[LIGHT] + 1) * 50 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_DURATION] << ": " << (m_SpellLevel[LIGHT] + 1) * 5 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << (m_SpellLevel[LIGHT] + 1) * 5;
 		}
 	}break;
 	case(TELEPORT) :
 	{
 
-		tooltip << "Teleportiert dich in Blickrichtung." << endl << endl;
+		tooltip << g_pStringContainer->m_Strings[STRING_TELEPORT_DESCRIPTION] << endl << endl;
 
 		if (m_SpellLevel[TELEPORT] == 0)
 		{
-			tooltip << "Dieser Zauber wurde noch nicht erlernt!" << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_NOT_LEARNED] << " " << endl << endl;
 		}
 		else
 		{
-			tooltip << "Weite: " << m_SpellLevel[TELEPORT] * 100 << endl;
-			tooltip << "Manakosten: " << m_SpellLevel[TELEPORT] * 5 << endl << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_WIDTH] << " " << m_SpellLevel[TELEPORT] * 100 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << m_SpellLevel[TELEPORT] * 5 << endl << endl;
 		}
 
 		if (m_SpellLevel[TELEPORT] == 10)
 		{
-			tooltip << "Zauber ist auf der höchsten Stufe!";
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_HIGHEST_LEVEL];
 		}
 		else
 		{
-			tooltip << "Auf der nächsten Stufe: " << endl;
-			tooltip << "Weite: " << (m_SpellLevel[TELEPORT] + 1) * 100 << endl;
-			tooltip << "Manakosten: " << (m_SpellLevel[TELEPORT] + 1) * 5;
+			tooltip << g_pStringContainer->m_Strings[STRING_SPELL_ON_NEXT_LEVEL] << " " << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_WIDTH] << " " << (m_SpellLevel[TELEPORT] + 1) * 100 << endl;
+			tooltip << g_pStringContainer->m_Strings[STRING_MANACOSTS] << " " << (m_SpellLevel[TELEPORT] + 1) * 5;
 		}
 	}break;
 	default:
-		tooltip << "Kein Tooltip!";
+		tooltip << "---";
 	}
 
 

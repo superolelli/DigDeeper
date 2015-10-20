@@ -79,96 +79,102 @@ void CTool::InitToolRandomly(int _ID)
 	InitTool(_ID);
 
 	//get a rarity
-	int number = rand()%1000;
+	int number = rand() % 1000;
 
-	if(number < 5)
+	if (number < 5)
 		m_rarity = 5;
-	else if(number < 20)
+	else if (number < 20)
 		m_rarity = 4;
-	else if(number < 50)
+	else if (number < 50)
 		m_rarity = 3;
-	else if(number < 100)
+	else if (number < 100)
 		m_rarity = 2;
 	else
 		m_rarity = 1;
 
 
 	//add the skills
-	for(int i = 1; i < m_rarity; i++)
+	for (int i = 0; i < m_rarity; i++)
 	{
-		number = rand()%NUMBER_OF_SKILLS + 1;
+		number = rand() % 12 + 1;
 
-		switch(number)
+		switch (number)
 		{
-		case ARMOUR:
+			case ARMOUR:
 			{
-				m_Attributes.armour += rand()%3 + 1;
-				if(i == 1)
-					m_Name.append(" des Schutzes");
+				m_Attributes.armour += rand() % 3 + 1;
+				if (i == 1)
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_ARMOUR]);
 			}break;
-		case BREAKINGSPEED:
+			case BREAKINGSPEED:
 			{
-				m_Attributes.breaking_speed += (float)(rand()%5 +1) /10;
-				if(i == 1)
-					m_Name.append(" des Erdreichs");
+				m_Attributes.breaking_speed += (float)(rand() % 5 + 1) / 10;
+				if (i == 1)
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_BREAKINGSPEED]);
 			}break;
-		case STRENGTH:
+			case STRENGTH:
 			{
 				m_Attributes.strength += 1;
-				if(i == 1)
-					m_Name.append(" der Zerstörung");
+				if (i == 1)
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_STRENGTH]);
 			}break;
-		case HEALTH:
+			case HEALTH:
 			{
-				m_Attributes.maxHealth += rand()%10 +1;
-				if(i == 1)
-					m_Name.append(" der Vitalität");
+				m_Attributes.maxHealth += rand() % 10 + 1;
+				if (i == 1)
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_HEALTH]);
 			}break;
-		case SPEED:
+			case SPEED:
 			{
-				m_Attributes.speed += rand()%10 +1;
-				if(i == 1)
-					m_Name.append(" des Flitzers");
+				m_Attributes.speed += rand() % 10 + 1;
+				if (i == 1)
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_SPEED]);
 			}break;
-		case LUCK:
+			case LUCK:
 			{
-				m_Attributes.luck += rand()%10 +1;
-				if(i == 1)
-					m_Name.append(" des Schornsteinfegers");
+				m_Attributes.luck += rand() % 10 + 1;
+				if (i == 1)
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_LUCK]);
 			}break;
-		case MANA:
+			case MANA:
 			{
-				m_Attributes.maxMana += rand()%10 +1;
-				if(i == 1)
-					m_Name.append(" des Magiers");
+				m_Attributes.maxMana += rand() % 10 + 1;
+				if (i == 1)
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_MANA]);
 			}break;
-		case HEALTHREGENERATION:
+			case HEALTHREGENERATION:
 			{
 				m_Attributes.healthRegeneration += 1;
 				if (i == 1)
-					m_Name.append(" der Regeneration");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_HEALTHREGENERATION]);
 			}break;
-		case MANAREGENERATION:
+			case MANAREGENERATION:
 			{
 				m_Attributes.manaRegeneration += rand() % 2 + 1;
 				if (i == 1)
-					m_Name.append(" der arkanen Macht");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_MANAREGENERATION]);
 			}break;
-		case CRITICALCHANCE:
+			case CRITICALCHANCE:
 			{
 				m_Attributes.criticalChance += rand() % 5 + 1;
 				if (i == 1)
-					m_Name.append(" des Zufalls");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_CRITICALCHANCE]);
 			}break;
-		case CRITICALDAMAGE:
+			case CRITICALDAMAGE:
 			{
 				m_Attributes.criticalDamage += rand() % 10 + 1;
 				if (i == 1)
-					m_Name.append(" des Vernichtens");
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_CRITICALDAMAGE]);
 			}break;
-		default:
+			case 12:
 			{
-				 
+				m_Attributes.light += rand() % 100 + 50;
+				if (i == 1)
+					m_Name.append(g_pStringContainer->m_Strings[STRING_OF_LIGHT]);
+			}break;
+			default:
+			{
+
 			}
 		}
 	}

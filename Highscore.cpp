@@ -74,7 +74,7 @@ void CHighscore::Run()
 	for (int i = 0; i < 10; i++)
 	{
 
-		stream << roundf(m_highscore[i].m_timeNeeded / 60) << " Minuten" << "     " << m_highscore[i].m_name;
+		stream << roundf(m_highscore[i].m_timeNeeded / 60) << " " << g_pStringContainer->m_Strings[STRING_MINUTES] << "     " << m_highscore[i].m_name;
 
 		m_highscoreText[i].setString(stream.str());
 		stream.str("");
@@ -140,7 +140,7 @@ void CHighscore::RenderHighscore()
 		//draw the highscore list
 		for (int i = 0; i < 10; i++)
 		{
-			m_highscoreText[i].setPosition(g_pFramework->GetWindow()->getSize().x / 2 - m_highscoreText[i].getGlobalBounds().width / 2, y);
+			m_highscoreText[i].setPosition((int)(g_pFramework->GetWindow()->getSize().x / 2 - m_highscoreText[i].getGlobalBounds().width / 2), y);
 
 			rect.setPosition(m_highscoreText[i].getGlobalBounds().left -10, m_highscoreText[i].getGlobalBounds().top-10);
 			rect.setSize(Vector2f(m_highscoreText[i].getGlobalBounds().width +20, m_highscoreText[i].getGlobalBounds().height+20));
@@ -164,7 +164,7 @@ void CHighscore::RenderHighscore()
 		//if no highscore exists
 		if (m_highscore[m_mode].m_level == 0)
 		{
-			Stream << "Kein Highscore vorhanden!" << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_NO_HIGHSCORE] << endl;
 			text.setString(Stream.str());
 			text.setPosition(g_pFramework->GetWindow()->getSize().x / 2 - text.getGlobalBounds().width / 2, g_pFramework->GetWindow()->getSize().y / 2 - text.getGlobalBounds().height / 2);
 
@@ -194,24 +194,25 @@ void CHighscore::RenderHighscore()
 			//draw class and level
 			Stream.str("");
 
-			Stream << "Erreichtes Level: " << m_highscore[m_mode].m_level << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_LEVEL_REACHED] <<" " << m_highscore[m_mode].m_level << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_STARTCLASS] << " ";
 
 			switch (m_highscore[m_mode].m_class)
 			{
 			case(MINER) :
-				Stream << "Startklasse: Minenarbeiter" << endl;
+				Stream << g_pStringContainer->m_Strings[STRING_MINER] << endl;
 				break;
 			case(BUILDER) :
-				Stream << "Startklasse: Bauarbeiter" << endl;
+				Stream << g_pStringContainer->m_Strings[STRING_BUILDER] << endl;
 				break;
 			case(WARRIOR) :
-				Stream << "Startklasse: Krieger" << endl;
+				Stream << g_pStringContainer->m_Strings[STRING_WARRIOR] << endl;
 				break;
 			case(MAGE) :
-				Stream << "Startklasse: Magier" << endl;
+				Stream << g_pStringContainer->m_Strings[STRING_MAGE] << endl;
 				break;
 			default:
-				Stream << "Startklasse: Cheater" << endl << endl;
+				Stream << g_pStringContainer->m_Strings[STRING_CHEATER] << endl << endl;
 				break;
 			}
 
@@ -228,17 +229,17 @@ void CHighscore::RenderHighscore()
 
 			//draw attributes
 			Stream.str("");
-			Stream << "Leben:                          " << m_highscore[m_mode].m_attributes.maxHealth << endl;
-			Stream << "Lebensregeneration:      " << m_highscore[m_mode].m_attributes.healthRegeneration << endl;
-			Stream << "Mana:                             " << m_highscore[m_mode].m_attributes.maxMana << endl;
-			Stream << "Manaregeneration:         " << m_highscore[m_mode].m_attributes.manaRegeneration << endl;
-			Stream << "Rüstung:                         " << m_highscore[m_mode].m_attributes.armour << endl;
-			Stream << "Stärke:                            " << m_highscore[m_mode].m_attributes.strength << endl;
-			Stream << "Kritische Chance:          " << m_highscore[m_mode].m_attributes.criticalChance << endl;
-			Stream << "Kritischer Schaden:       " << m_highscore[m_mode].m_attributes.criticalDamage << endl;
-			Stream << "Glück:                             " << m_highscore[m_mode].m_attributes.luck << endl;
-			Stream << "Abbaugeschwindigkeit: " << m_highscore[m_mode].m_attributes.breakingSpeed << endl;
-			Stream << "Geschwindigkeit:          " << m_highscore[m_mode].m_attributes.speed << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_HEALTH] <<":                          " << m_highscore[m_mode].m_attributes.maxHealth << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_HEALTHREGENERATION] <<":      " << m_highscore[m_mode].m_attributes.healthRegeneration << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_MANA] <<":                             " << m_highscore[m_mode].m_attributes.maxMana << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_MANAREGENERATION] <<":         " << m_highscore[m_mode].m_attributes.manaRegeneration << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_ARMOUR] <<":                         " << m_highscore[m_mode].m_attributes.armour << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_STRENGTH] <<":                            " << m_highscore[m_mode].m_attributes.strength << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_CRITICALCHANCE] <<":          " << m_highscore[m_mode].m_attributes.criticalChance << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_CRITICALDAMAGE] <<":       " << m_highscore[m_mode].m_attributes.criticalDamage << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_LUCK] <<":                             " << m_highscore[m_mode].m_attributes.luck << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_BREAKINGSPEED] <<": " << m_highscore[m_mode].m_attributes.breakingSpeed << endl;
+			Stream << g_pStringContainer->m_Strings[STRING_SPEED] <<":          " << m_highscore[m_mode].m_attributes.speed << endl;
 
 			text.setPosition(g_pFramework->GetWindow()->getSize().x / 2 - text.getGlobalBounds().width / 2, text.getGlobalBounds().top + text.getGlobalBounds().height);
 			text.setFont(g_pTextures->f_cents18);
@@ -270,7 +271,7 @@ void CHighscore::clearHighscore()
 	{
 		m_highscore[i].m_class = -1;
 		m_highscore[i].m_level = 0;
-		m_highscore[i].m_name = "Niemand";
+		m_highscore[i].m_name = g_pStringContainer->m_Strings[STRING_NOBODY];
 		m_highscore[i].m_timeNeeded = 1000000;
 
 		m_highscore[i].m_attributes.armour = 0;
@@ -305,7 +306,7 @@ void CHighscore::clearHighscore()
 
 	for (int i = 0; i < 10; i++)
 	{
-		stream << roundf(m_highscore[i].m_timeNeeded/60) << " Minuten" << "     " << m_highscore[i].m_name;
+		stream << roundf(m_highscore[i].m_timeNeeded/60) << " " << g_pStringContainer->m_Strings[STRING_MINUTES] << "     " << m_highscore[i].m_name;
 		m_highscoreText[i].setString(stream.str());
 		stream.str("");
 	}

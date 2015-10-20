@@ -8,10 +8,8 @@ CCharacterInfo::CCharacterInfo()
 {
 	m_pCharacterWindow = NULL;
 	m_pLevelUp = NULL;
-	m_pFirstSkill = NULL;
-	m_pSecondSkill = NULL;
-	m_pThirdSkill = NULL;
-	m_pFourthSkill = NULL;
+	for (int i = 0; i < 4; i++)
+		m_SkillButtons[i].button = 0;
 	m_pLevelUpButton = NULL;
 	m_pPlayer = NULL;
 }
@@ -23,11 +21,10 @@ CCharacterInfo::~CCharacterInfo()
 {
 	SAFE_DELETE(m_pCharacterWindow);
 	SAFE_DELETE(m_pLevelUp);
-	SAFE_DELETE(m_pFirstSkill);
-	SAFE_DELETE(m_pSecondSkill);
-	SAFE_DELETE(m_pThirdSkill);
-	SAFE_DELETE(m_pFourthSkill);
 	SAFE_DELETE(m_pLevelUpButton);
+
+	for (int i = 0; i < 4; i++)
+		SAFE_DELETE(m_SkillButtons[i].button);
 }
 
 
@@ -51,10 +48,17 @@ void CCharacterInfo::Init(SPlayerAttributes *_attributes, SToolAttributes *_modi
 	m_pLevelUpButton->Load(&g_pTextures->t_levelUp_button, g_pFramework->GetWindow()->getSize().x - 100, 20, 1);
 
 	//loads the font and applies it to the text
-	m_font.loadFromFile("Data/Fonts/18cents.ttf");
-	m_text.setFont(m_font);
+	m_text.setFont(g_pTextures->f_cents18);
 	m_text.setCharacterSize(30);
 	m_text.setColor(Color::Black);
+
+	m_title.setFont(g_pTextures->f_plantc);
+	m_title.setCharacterSize(28);
+	m_title.setColor(Color::Black);
+
+	m_description.setFont(g_pTextures->f_plantc);
+	m_description.setCharacterSize(18);
+	m_description.setColor(Color::Black);
 
 	m_levelUpTime = 0.0f;
 
@@ -111,6 +115,10 @@ void CCharacterInfo::Render()
 		m_text.setCharacterSize(30);
 
 		//show the health
+		m_text.setString(g_pStringContainer->m_Strings[STRING_HEALTH]);
+		m_text.setPosition((int)(m_pCharacterWindow->GetRect().left + 10), (int)(m_pCharacterWindow->GetRect().top + 99));
+		g_pFramework->GetRenderWindow()->draw(m_text);
+
 		stream.str("");
 		stream << m_pModifications->maxHealth;
 		m_text.setString(stream.str());
@@ -118,6 +126,10 @@ void CCharacterInfo::Render()
 		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the healthregeneration
+		m_text.setString(g_pStringContainer->m_Strings[STRING_HEALTHREGENERATION]);
+		m_text.setPosition((int)(m_pCharacterWindow->GetRect().left + 10), (int)(m_pCharacterWindow->GetRect().top + 126));
+		g_pFramework->GetRenderWindow()->draw(m_text);
+
 		stream.str("");
 		stream << m_pModifications->healthRegeneration;
 		m_text.setString(stream.str());
@@ -125,6 +137,10 @@ void CCharacterInfo::Render()
 		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the armour
+		m_text.setString(g_pStringContainer->m_Strings[STRING_ARMOUR]);
+		m_text.setPosition((int)(m_pCharacterWindow->GetRect().left + 10), (int)(m_pCharacterWindow->GetRect().top + 158));
+		g_pFramework->GetRenderWindow()->draw(m_text);
+
 		stream.str("");
 		stream << m_pModifications->armour;
 		m_text.setString(stream.str());
@@ -132,6 +148,10 @@ void CCharacterInfo::Render()
 		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the strength
+		m_text.setString(g_pStringContainer->m_Strings[STRING_STRENGTH]);
+		m_text.setPosition((int)(m_pCharacterWindow->GetRect().left + 10), (int)(m_pCharacterWindow->GetRect().top + 228));
+		g_pFramework->GetRenderWindow()->draw(m_text);
+
 		stream.str("");
 		stream << m_pModifications->strength;
 		m_text.setString(stream.str());
@@ -139,6 +159,10 @@ void CCharacterInfo::Render()
 		g_pFramework->GetRenderWindow()->draw(m_text);
 		
 		//show the critical chance
+		m_text.setString(g_pStringContainer->m_Strings[STRING_CRITICALCHANCE]);
+		m_text.setPosition((int)(m_pCharacterWindow->GetRect().left + 10), (int)(m_pCharacterWindow->GetRect().top + 254));
+		g_pFramework->GetRenderWindow()->draw(m_text);
+
 		stream.str("");
 		stream << m_pModifications->criticalChance;
 		m_text.setString(stream.str());
@@ -146,6 +170,10 @@ void CCharacterInfo::Render()
 		g_pFramework->GetRenderWindow()->draw(m_text);
 		
 		//show the critical damage
+		m_text.setString(g_pStringContainer->m_Strings[STRING_CRITICALDAMAGE]);
+		m_text.setPosition((int)(m_pCharacterWindow->GetRect().left + 10), (int)(m_pCharacterWindow->GetRect().top + 287));
+		g_pFramework->GetRenderWindow()->draw(m_text);
+
 		stream.str("");
 		stream << m_pModifications->criticalDamage;
 		m_text.setString(stream.str());
@@ -153,6 +181,10 @@ void CCharacterInfo::Render()
 		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the luck
+		m_text.setString(g_pStringContainer->m_Strings[STRING_LUCK]);
+		m_text.setPosition((int)(m_pCharacterWindow->GetRect().left + 10), (int)(m_pCharacterWindow->GetRect().top +352));
+		g_pFramework->GetRenderWindow()->draw(m_text);
+
 		stream.str("");
 		stream << m_pModifications->luck;
 		m_text.setString(stream.str());
@@ -160,6 +192,10 @@ void CCharacterInfo::Render()
 		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the breakingSpeed
+		m_text.setString(g_pStringContainer->m_Strings[STRING_BREAKINGSPEED]);
+		m_text.setPosition((int)(m_pCharacterWindow->GetRect().left + 10), (int)(m_pCharacterWindow->GetRect().top + 380));
+		g_pFramework->GetRenderWindow()->draw(m_text);
+
 		stream.str("");
 		stream << m_pModifications->breaking_speed;
 		m_text.setString(stream.str());
@@ -167,6 +203,10 @@ void CCharacterInfo::Render()
 		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the speed
+		m_text.setString(g_pStringContainer->m_Strings[STRING_SPEED]);
+		m_text.setPosition((int)(m_pCharacterWindow->GetRect().left + 10), (int)(m_pCharacterWindow->GetRect().top + 412));
+		g_pFramework->GetRenderWindow()->draw(m_text);
+
 		stream.str("");
 		stream << m_pModifications->speed;
 		m_text.setString(stream.str());
@@ -174,6 +214,10 @@ void CCharacterInfo::Render()
 		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the mana
+		m_text.setString(g_pStringContainer->m_Strings[STRING_MANA]);
+		m_text.setPosition((int)(m_pCharacterWindow->GetRect().left + 380), (int)(m_pCharacterWindow->GetRect().top + 100));
+		g_pFramework->GetRenderWindow()->draw(m_text);
+
 		stream.str("");
 		stream << m_pModifications->maxMana;
 		m_text.setString(stream.str());
@@ -181,6 +225,10 @@ void CCharacterInfo::Render()
 		g_pFramework->GetRenderWindow()->draw(m_text);
 
 		//show the manaregeneration
+		m_text.setString(g_pStringContainer->m_Strings[STRING_MANAREGENERATION]);
+		m_text.setPosition((int)(m_pCharacterWindow->GetRect().left + 380), (int)(m_pCharacterWindow->GetRect().top + 125));
+		g_pFramework->GetRenderWindow()->draw(m_text);
+
 		stream.str("");
 		stream << m_pModifications->manaRegeneration;
 		m_text.setString(stream.str());
@@ -254,30 +302,29 @@ void CCharacterInfo::CheckForLevelUp()
 
 	if (m_levelUpCounter > 0 && choosing_skill == false)
 	{
-		//clears the buttons
-		SAFE_DELETE(m_pFirstSkill);
-		SAFE_DELETE(m_pSecondSkill);
-		SAFE_DELETE(m_pThirdSkill);
-		SAFE_DELETE(m_pFourthSkill);
+		for (int i = 0; i < 4; i++)
+			SAFE_DELETE(m_SkillButtons[i].button);
 
 		//loads new buttons
 		if (m_pPlayer->GetNotAvailableRecipesList().size() > 0)
 		{
-			m_pFirstSkill = new CButton;
-			m_pFirstSkill->Load(&g_pTextures->t_newSkillRecipe, 0, 0, 1);
-			Skills[1] = RECIPESKILL;
+			m_SkillButtons[0].button = new CButton;
+			m_SkillButtons[0].button->Load(&g_pTextures->t_newSkillClear, 0, 0, 1);
+			m_SkillButtons[0].title = g_pStringContainer->m_Strings[STRING_SKILL_RECIPE_TITLE];
+			m_SkillButtons[0].description = g_pStringContainer->m_Strings[STRING_SKILL_RECIPE_DESCRIPTION];
+			Skills[0] = RECIPESKILL;
 		}
 		else
-			m_pFirstSkill = RandomSkill(0);
+			m_SkillButtons[0] = RandomSkill(0);
 
-		m_pSecondSkill = RandomSkill(1);
-		m_pThirdSkill = RandomSkill(2);
-		m_pFourthSkill = RandomSkill(3);
 
-		m_pFirstSkill->SetPos(m_pLevelUp->GetRect().left, m_pLevelUp->GetRect().top + 50);
-		m_pSecondSkill->SetPos(m_pLevelUp->GetRect().left + 300, m_pLevelUp->GetRect().top + 50);
-		m_pThirdSkill->SetPos(m_pLevelUp->GetRect().left, m_pLevelUp->GetRect().top + 250);
-		m_pFourthSkill->SetPos(m_pLevelUp->GetRect().left + 300, m_pLevelUp->GetRect().top + 250);
+		for (int i = 1; i < 4; i++)
+			m_SkillButtons[i] = RandomSkill(i);
+
+		m_SkillButtons[0].button->SetPos(m_pLevelUp->GetRect().left, m_pLevelUp->GetRect().top + 50);
+		m_SkillButtons[1].button->SetPos(m_pLevelUp->GetRect().left + 300, m_pLevelUp->GetRect().top + 50);
+		m_SkillButtons[2].button->SetPos(m_pLevelUp->GetRect().left, m_pLevelUp->GetRect().top + 250);
+		m_SkillButtons[3].button->SetPos(m_pLevelUp->GetRect().left + 300, m_pLevelUp->GetRect().top + 250);
 
 	}
 }
@@ -304,39 +351,34 @@ void CCharacterInfo::LevelUp()
 	//render the window and the buttons
 	m_pLevelUp->Render(g_pFramework->GetRenderWindow());
 
-	if(m_pFirstSkill->Render(eventtype))
-	{
-		choosing_skill = false;
-		m_levelUpCounter--;
-		AddSkill(Skills[0]);
-	}
 
-	if(m_pSecondSkill->Render(eventtype))
+	for (int i = 0; i < 4; i++)
 	{
-		choosing_skill = false;
-		m_levelUpCounter--;
-		AddSkill(Skills[1]);
-	}
+		//render the button
+		if (m_SkillButtons[i].button->Render(eventtype))
+		{
+			choosing_skill = false;
+			m_levelUpCounter--;
+			AddSkill(Skills[i]);
+		}
 
-	if(m_pThirdSkill->Render(eventtype))
-	{
-		choosing_skill = false;
-		m_levelUpCounter--;
-		AddSkill(Skills[2]);
-	}
+		//render the text
+		m_title.setString(m_SkillButtons[i].title);
+		m_title.setPosition((int)(m_SkillButtons[i].button->GetRect().left + (m_SkillButtons[i].button->GetRect().width - m_title.getGlobalBounds().width)/2), (int)(m_SkillButtons[i].button->GetRect().top +5));
+		g_pFramework->GetRenderWindow()->draw(m_title);
 
-	if(m_pFourthSkill->Render(eventtype))
-	{
-		choosing_skill = false;
-		m_levelUpCounter--;
-		AddSkill(Skills[3]);
+		m_description.setString(m_SkillButtons[i].description);
+		m_description.setPosition((int)(m_SkillButtons[i].button->GetRect().left + (m_SkillButtons[i].button->GetRect().width - m_description.getGlobalBounds().width) / 2), (int)(m_SkillButtons[i].button->GetRect().top + m_SkillButtons[i].button->GetRect().height - m_description.getGlobalBounds().height)-20);
+		g_pFramework->GetRenderWindow()->draw(m_description);
+
 	}
 }
 
 
 //returns a random skill
-CButton* CCharacterInfo::RandomSkill(int _skillNumber)
+SkillButton CCharacterInfo::RandomSkill(int _skillNumber)
 {
+	SkillButton skillButton;
 	CButton *newButton = new CButton;
 
 	int number = -1;
@@ -353,51 +395,75 @@ CButton* CCharacterInfo::RandomSkill(int _skillNumber)
 	{
 	case SPEED:
 		{
-				newButton->Load(&g_pTextures->t_newSkillSpeed, 0, 0, 1);
+				//newButton->Load(&g_pTextures->t_newSkillSpeed, 0, 0, 1);
+				skillButton.title = g_pStringContainer->m_Strings[STRING_SKILL_SPEED_TITLE];
+				skillButton.description = g_pStringContainer->m_Strings[STRING_SKILL_SPEED_DESCRIPTION];
 		}break;
 	case BREAKINGSPEED:
 		{
-				newButton->Load(&g_pTextures->t_newSkillBreakingSpeed, 0, 0, 1);
+				//newButton->Load(&g_pTextures->t_newSkillBreakingSpeed, 0, 0, 1);
+				skillButton.title = g_pStringContainer->m_Strings[STRING_SKILL_BREAKINGSPEED_TITLE];
+				skillButton.description = g_pStringContainer->m_Strings[STRING_SKILL_BREAKINGSPEED_DESCRIPTION];
 		}break;
 	case HEALTH:
 		{
-				newButton->Load(&g_pTextures->t_newSkillHealth, 0, 0, 1);
+				//newButton->Load(&g_pTextures->t_newSkillHealth, 0, 0, 1);
+				skillButton.title = g_pStringContainer->m_Strings[STRING_SKILL_HEALTH_TITLE];
+				skillButton.description = g_pStringContainer->m_Strings[STRING_SKILL_HEALTH_DESCRIPTION];
 		}break;
 	case STRENGTH:
 		{
-				newButton->Load(&g_pTextures->t_newSkillStrength, 0, 0, 1);
+				//newButton->Load(&g_pTextures->t_newSkillStrength, 0, 0, 1);
+				skillButton.title = g_pStringContainer->m_Strings[STRING_SKILL_STRENGTH_TITLE];
+				skillButton.description = g_pStringContainer->m_Strings[STRING_SKILL_STRENGTH_DESCRIPTION];
 		}break;
 	case ARMOUR:
 		{
-				newButton->Load(&g_pTextures->t_newSkillArmour, 0, 0, 1);
+				//newButton->Load(&g_pTextures->t_newSkillArmour, 0, 0, 1);
+				skillButton.title = g_pStringContainer->m_Strings[STRING_SKILL_ARMOUR_TITLE];
+				skillButton.description = g_pStringContainer->m_Strings[STRING_SKILL_ARMOUR_DESCRIPTION];
 		}break;
 	case LUCK:
 		{
-				newButton->Load(&g_pTextures->t_newSkillLuck, 0, 0, 1);
+				//newButton->Load(&g_pTextures->t_newSkillLuck, 0, 0, 1);
+				skillButton.title = g_pStringContainer->m_Strings[STRING_SKILL_LUCK_TITLE];
+				skillButton.description = g_pStringContainer->m_Strings[STRING_SKILL_LUCK_DESCRIPTION];
 		}break;
 	case MANA:
 		{
-				newButton->Load(&g_pTextures->t_newSkillMana, 0, 0, 1);
+				//newButton->Load(&g_pTextures->t_newSkillMana, 0, 0, 1);
+				skillButton.title = g_pStringContainer->m_Strings[STRING_SKILL_MANA_TITLE];
+				skillButton.description = g_pStringContainer->m_Strings[STRING_SKILL_MANA_DESCRIPTION];
 		}break;
 	case HEALTHREGENERATION:
 		{
-			newButton->Load(&g_pTextures->t_newSkillHealthRegeneration, 0, 0, 1);
+			//newButton->Load(&g_pTextures->t_newSkillHealthRegeneration, 0, 0, 1);
+			skillButton.title = g_pStringContainer->m_Strings[STRING_SKILL_HEALTHREGENERATION_TITLE];
+			skillButton.description = g_pStringContainer->m_Strings[STRING_SKILL_HEALTHREGENERATION_DESCRIPTION];
 		}break;
 	case MANAREGENERATION:
 		{
-			newButton->Load(&g_pTextures->t_newSkillManaRegeneration, 0, 0, 1);
+			//newButton->Load(&g_pTextures->t_newSkillManaRegeneration, 0, 0, 1);
+			skillButton.title = g_pStringContainer->m_Strings[STRING_SKILL_MANAREGENERATION_TITLE];
+			skillButton.description = g_pStringContainer->m_Strings[STRING_SKILL_MANAREGENERATION_DESCRIPTION];
 		}break;
 	case CRITICALCHANCE:
 		{
-			newButton->Load(&g_pTextures->t_newSkillCriticalChance, 0, 0, 1);
+			//newButton->Load(&g_pTextures->t_newSkillCriticalChance, 0, 0, 1);
+			skillButton.title = g_pStringContainer->m_Strings[STRING_SKILL_CRITICALCHANCE_TITLE];
+			skillButton.description = g_pStringContainer->m_Strings[STRING_SKILL_CRITICALCHANCE_DESCRIPTION];
 		}break;
 	case CRITICALDAMAGE:
 		{
-			newButton->Load(&g_pTextures->t_newSkillCriticalDamage, 0, 0, 1);
+			//newButton->Load(&g_pTextures->t_newSkillCriticalDamage, 0, 0, 1);
+			skillButton.title = g_pStringContainer->m_Strings[STRING_SKILL_CRITICALDAMAGE_TITLE];
+			skillButton.description = g_pStringContainer->m_Strings[STRING_SKILL_CRITICALDAMAGE_DESCRIPTION];
 		}break;
 	case MAGICPOINTS:
 	{
-		newButton->Load(&g_pTextures->t_newSkillMagicPoints, 0, 0, 1);
+		//newButton->Load(&g_pTextures->t_newSkillMagicPoints, 0, 0, 1);
+		skillButton.title = g_pStringContainer->m_Strings[STRING_SKILL_MAGICPOINT_TITLE];
+		skillButton.description = g_pStringContainer->m_Strings[STRING_SKILL_MAGICPOINT_DESCRIPTION];
 	}break;
 	default:
 		{
@@ -405,9 +471,11 @@ CButton* CCharacterInfo::RandomSkill(int _skillNumber)
 		}break;
 	};
 
+	newButton->Load(&g_pTextures->t_newSkillClear, 0, 0, 1);
+	skillButton.button = newButton;
 	Skills[_skillNumber] = number;
 
-	return newButton;
+	return skillButton;
 }
 
 

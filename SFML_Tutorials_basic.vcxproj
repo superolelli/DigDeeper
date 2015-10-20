@@ -117,6 +117,7 @@
     <ClCompile Include="MagicMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Minimap.cpp" />
     <ClCompile Include="NewGame.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="NpcMachine.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Highscore.hpp" />
     <ClInclude Include="Keykeeper.hpp" />
     <ClInclude Include="MagicMenu.hpp" />
+    <ClInclude Include="Minimap.hpp" />
     <ClInclude Include="ObjectProperties.hpp" />
     <ClInclude Include="Observer.hpp" />
     <ClInclude Include="Ogre.hpp" />

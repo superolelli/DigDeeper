@@ -58,6 +58,9 @@ private:
 	CNpcMachine m_NpcMachine;                //the npc machine
 	CSoundengine m_SoundEngine;              //the sound engine
 
+	Text m_timeText;
+	RectangleShape m_timeTextBackground;
+
 	void CheckFps();                    //prints the fps
 	void RenderBackground();           //renders the background
 	void CheckView();                    //updates the view
@@ -67,7 +70,7 @@ private:
 	void SaveHighscore();
 	void ClearHighscore();
 	void Zoom();
-
+	void ShowElapsedTime();
 
 
 };

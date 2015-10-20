@@ -78,7 +78,7 @@ void CNewGame::Init()
 
 	m_font.loadFromFile("Data/Fonts/ltromatic.ttf");
 	m_GameName.Init(m_font, 30, g_pFramework->GetRenderWindow()->getSize().x/2, g_pFramework->GetRenderWindow()->getSize().y/8, Color(230, 220, 0));
-	m_GameName.SetString("Neue Welt");
+	m_GameName.SetString(g_pStringContainer->m_Strings[STRING_NEW_WORLD]);
 
 	m_class = 0;
 	m_worldSize = 0;
