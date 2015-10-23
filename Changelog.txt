@@ -1763,3 +1763,8 @@ ZUKÜNFITGE ÄNDERUNGEN:
 - Die vergangene Zeit wird nun angezeigt
 
 ---------------------------------------------------------
+21.10.2015
+
+- Es wurde begonnen eine Minimap zu implementieren
+
+---------------------------------------------------------
